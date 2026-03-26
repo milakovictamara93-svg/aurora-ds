@@ -1,0 +1,25 @@
+// Reusable Aurora sparkle-star icon
+// Exact path extracted from Figma node 1:441 (Shape Stroke, node 6:9878)
+// Use this component everywhere the Aurora logo icon appears — never approximate or substitute
+
+export default function AuroraIcon({
+  className = 'w-8 h-8',
+}: {
+  className?: string
+}) {
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      className={`transition-[transform,color] duration-500 ease-in-out group-hover:rotate-[360deg] group-hover:text-[#2295FF] ${className}`}
+      fill="currentColor"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M100 43.75C84.2967 43.75 73.6672 39.8284 66.9194 33.0806C60.176 26.3372 56.2551 15.7172 56.25 0.0308284C56.25 0.0205546 56.25 0.0102787 56.25 5.46392e-07L43.75 0C43.75 0.0102727 43.75 0.0205443 43.75 0.0308148C43.7449 15.7172 39.824 26.3372 33.0806 33.0806C26.3327 39.8284 15.7033 43.75 5.46392e-07 43.75L0 56.25C15.7033 56.25 26.3327 60.1716 33.0806 66.9194C39.8253 73.6641 43.7464 84.2869 43.75 99.9782C43.75 99.9854 43.75 99.9927 43.75 100H56.25C56.25 99.9927 56.25 99.9855 56.25 99.9782C56.2536 84.2869 60.1747 73.6641 66.9194 66.9194C73.6672 60.1716 84.2967 56.25 100 56.25V43.75ZM69.353 50C65.1364 47.8836 61.3645 45.2034 58.0806 41.9194C54.7966 38.6355 52.1164 34.8636 50 30.647C47.8836 34.8636 45.2033 38.6355 41.9194 41.9194C38.6355 45.2034 34.8636 47.8836 30.647 50C34.8636 52.1164 38.6355 54.7967 41.9194 58.0806C45.2033 61.3645 47.8836 65.1364 50 69.353C52.1164 65.1364 54.7966 61.3645 58.0806 58.0806C61.3645 54.7967 65.1364 52.1164 69.353 50Z"
+      />
+    </svg>
+  )
+}

@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "mcp__figma__get_metadata",
+      "mcp__figma__use_figma",
+      "mcp__figma__get_design_context",
+      "mcp__figma__get_screenshot",
+      "Bash(npx tsc:*)",
+      "Bash(python3 -c \"import sys,json; [print\\(json.loads\\(l\\).get\\(''''role'''',''''?''''\\), str\\(json.loads\\(l\\)\\)[:300]\\) for l in sys.stdin]\")",
+      "mcp__figma__generate_figma_design",
+      "Bash(open \"http://localhost:3000#figmacapture=9c17d531-6116-40a3-b96f-c4f6ee404265&figmaendpoint=https%3A%2F%2Fmcp.figma.com%2Fmcp%2Fcapture%2F9c17d531-6116-40a3-b96f-c4f6ee404265%2Fsubmit&figmadelay=1000\")",
+      "Bash(open \"http://localhost:3000/components/buttons#figmacapture=deebbeb8-fc68-47cc-91e0-1e58ed707440&figmaendpoint=https%3A%2F%2Fmcp.figma.com%2Fmcp%2Fcapture%2Fdeebbeb8-fc68-47cc-91e0-1e58ed707440%2Fsubmit&figmadelay=1000\")",
+      "mcp__figma__search_design_system",
+      "Bash(npm run:*)",
+      "Bash(curl -s http://localhost:3001/)",
+      "Bash(node:*)",
+      "mcp__claude_ai_Figma__get_metadata",
+      "mcp__claude_ai_Figma__get_design_context",
+      "mcp__claude_ai_Figma__get_screenshot",
+      "Bash(curl -sL \"https://www.figma.com/api/mcp/asset/28b31eb0-27ca-4760-8c97-8138b782d6e9\" -o /Users/tamaramilakovic/Desktop/scaler-design-system/public/aurora-icon.png)",
+      "mcp__claude_ai_Figma__use_figma",
+      "WebFetch(domain:m3.material.io)",
+      "WebFetch(domain:atlassian.design)",
+      "WebSearch",
+      "Bash(npx next:*)",
+      "Bash(ls /Users/tamaramilakovic/Desktop/scaler-design-system/*.mov)",
+      "Bash(grep -h \"href:.*label:\" /Users/tamaramilakovic/Desktop/scaler-design-system/app/components/*/page.tsx)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(pkill -f \"next-server\")"
+    ]
+  }
+}

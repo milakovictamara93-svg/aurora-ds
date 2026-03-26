@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design Tokens ─── */
+:root {
+  /* Brand */
+  --brand-sky-500: #2295FF;
+  --brand-emerald-300: #43F9C2;
+  --brand-blue-600: #1258F8;
+
+  /* Grey */
+  --grey-0: #FFFFFF;
+  --grey-50: #F7F8F8;
+  --grey-100: #EDEEF1;
+  --grey-200: #D7DAE0;
+  --grey-300: #B4BAC5;
+  --grey-400: #8C96A4;
+  --grey-500: #6D788A;
+  --grey-600: #505867;
+  --grey-700: #484F5C;
+  --grey-800: #3E434E;
+  --grey-900: #1F2430;
+  --grey-950: #111827;
+
+  /* Semantic */
+  --color-error: #F87171;
+  --color-warning: #FB7D3C;
+  --color-success: #22C55E;
+  --color-ai: #653FFF;
+
+  /* Surfaces */
+  --bg-primary: var(--grey-0);
+  --bg-secondary: var(--grey-50);
+  --bg-tertiary: var(--grey-100);
+  --text-primary: var(--grey-900);
+  --text-secondary: var(--grey-600);
+  --text-muted: var(--grey-400);
+  --border-default: var(--grey-200);
+  --border-strong: var(--grey-300);
+
+  /* Sidebar */
+  --sidebar-width: 240px;
+  --topnav-height: 60px;
+}
+
+.dark {
+  --bg-primary: var(--grey-950);
+  --bg-secondary: var(--grey-900);
+  --bg-tertiary: var(--grey-800);
+  --text-primary: var(--grey-50);
+  --text-secondary: var(--grey-300);
+  --text-muted: var(--grey-500);
+  --border-default: var(--grey-800);
+  --border-strong: var(--grey-700);
+}
+
+/* ─── Base ─── */
+@layer base {
+  html {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 145%;
+    letter-spacing: 0.015em;
+  }
+
+  h1 { font-size: 28px; line-height: 140%; font-weight: 700; }
+  h2 { font-size: 24px; line-height: 140%; font-weight: 600; }
+  h3 { font-size: 20px; line-height: 140%; font-weight: 600; }
+  h4 { font-size: 18px; line-height: 140%; font-weight: 600; }
+
+  * { box-sizing: border-box; }
+}
+
+/* ─── Utilities ─── */
+@layer utilities {
+  .text-token-primary { color: var(--text-primary); }
+  .text-token-secondary { color: var(--text-secondary); }
+  .text-token-muted { color: var(--text-muted); }
+  .bg-token-primary { background-color: var(--bg-primary); }
+  .bg-token-secondary { background-color: var(--bg-secondary); }
+  .bg-token-tertiary { background-color: var(--bg-tertiary); }
+  .border-token { border-color: var(--border-default); }
+  .border-token-strong { border-color: var(--border-strong); }
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--grey-200); border-radius: 3px; }
+.dark ::-webkit-scrollbar-thumb { background: var(--grey-700); }
+
+/* ─── Code blocks ─── */
+pre, code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 13px;
+}
+
+/* ─── Page background — subtle dot grid (matches Figma landing page texture) ─── */
+.page-grid-bg {
+  background-image: radial-gradient(circle, rgba(180, 186, 197, 0.55) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.dark .page-grid-bg {
+  background-image: radial-gradient(circle, rgba(63, 70, 84, 0.55) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ─── Related section grid background ─── */
+.related-grid-bg {
+  background-color: #f7f8f8;
+  background-image:
+    linear-gradient(#e5e7eb 1px, transparent 1px),
+    linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.dark .related-grid-bg {
+  background-color: #0D1117;
+  background-image:
+    linear-gradient(#1F2430 1px, transparent 1px),
+    linear-gradient(90deg, #1F2430 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ─── Focus ring ─── */
+:focus-visible {
+  outline: 2px solid var(--brand-sky-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
