@@ -1,6 +1,6 @@
 'use client'
 
-import PageHeader from '@/components/ui/PageHeader'
+import PageHeader from '@/app/components-lib/ui/PageHeader'
 
 const chartColors = [
   { name: 'Energy', token: '--energy-500', hex: '#FF455F', bg: 'bg-energy-500', label: 'Series 1' },

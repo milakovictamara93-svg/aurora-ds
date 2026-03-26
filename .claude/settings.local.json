@@ -30,7 +30,8 @@
       "Bash(pkill -f \"next-server\")",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(find:*)"
     ]
   }
 }

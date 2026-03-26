@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ArrowRightIcon } from '@heroicons/react/20/solid'
-import AppLayout from '@/components/layout/AppLayout'
-import VideoCard from '@/components/ui/VideoCard'
+import AppLayout from '@/app/components-lib/layout/AppLayout'
+import VideoCard from '@/app/components-lib/ui/VideoCard'
 
 // ── Figma building-block assets (light-blue geometric shapes) ─────────────────
 // These decorate the three section cards. URLs expire in 7 days from generation.

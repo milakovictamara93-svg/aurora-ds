@@ -1,4 +1,4 @@
-import AuroraIcon from '@/components/ui/AuroraIcon'
+import AuroraIcon from '@/app/components-lib/ui/AuroraIcon'
 
 // Aurora footer — "Aurora" wordmark + sparkle icon
 // Matches Figma node 2:9855

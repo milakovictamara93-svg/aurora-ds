@@ -1,5 +1,5 @@
 import AppSidebar from './AppSidebar'
-import Footer from '@/components/ui/Footer'
+import Footer from '@/app/components-lib/ui/Footer'
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (

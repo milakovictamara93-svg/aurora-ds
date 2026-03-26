@@ -1,13 +1,13 @@
 'use client'
 
-import PageHeader from '@/components/ui/PageHeader'
+import PageHeader from '@/app/components-lib/ui/PageHeader'
 import {
   ComponentTabs, TabBar, TabPanel,
   Section, SpecTable, ColorRow,
   DoCard, DontCard, A11yRow, KeyRow,
   Preview, Annotation,
   UseList, DontUseList, VariantRow, VariantTable, RelatedComponents, PageContent,
-} from '@/components/ui/ComponentTabs'
+} from '@/app/components-lib/ui/ComponentTabs'
 
 // ─── Card primitives ──────────────────────────────────────────────────────────
 function Card({ variant = 'flat', children }: { variant?: 'flat' | 'elevated'; children: React.ReactNode }) {

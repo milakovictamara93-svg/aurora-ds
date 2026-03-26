@@ -1,6 +1,6 @@
 'use client'
 
-import PageHeader from '@/components/ui/PageHeader'
+import PageHeader from '@/app/components-lib/ui/PageHeader'
 
 function SkeletonLine({ w = 'w-full', h = 'h-4' }: { w?: string; h?: string }) {
   return <div className={`${w} ${h} rounded bg-grey-200 dark:bg-grey-700 animate-pulse`} />

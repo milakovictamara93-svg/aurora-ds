@@ -1,4 +1,4 @@
-import PageHeader from '@/components/ui/PageHeader'
+import PageHeader from '@/app/components-lib/ui/PageHeader'
 import { DocumentIcon, CloudArrowUpIcon, ExclamationCircleIcon, MagnifyingGlassIcon, FolderOpenIcon, LockClosedIcon } from '@heroicons/react/24/outline'
 
 interface EmptyStateProps {

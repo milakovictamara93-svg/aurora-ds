@@ -1,14 +1,14 @@
 'use client'
 
 import React from 'react'
-import PageHeader from '@/components/ui/PageHeader'
+import PageHeader from '@/app/components-lib/ui/PageHeader'
 import {
   ComponentTabs, TabBar, TabPanel,
   Section, SpecTable, ColorRow,
   DoCard, DontCard, A11yRow, KeyRow,
   Preview, Annotation,
   UseList, DontUseList, RelatedComponents, PageContent,
-} from '@/components/ui/ComponentTabs'
+} from '@/app/components-lib/ui/ComponentTabs'
 
 type ToastVariant = 'success' | 'error' | 'warning' | 'info' | 'missing-info' | 'default'
 

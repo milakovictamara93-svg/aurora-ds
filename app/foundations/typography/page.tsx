@@ -1,5 +1,5 @@
-import PageHeader from '@/components/ui/PageHeader'
-import CodeBlock from '@/components/ui/CodeBlock'
+import PageHeader from '@/app/components-lib/ui/PageHeader'
+import CodeBlock from '@/app/components-lib/ui/CodeBlock'
 
 const typeStyles = [
   {

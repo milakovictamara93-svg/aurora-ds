@@ -1,4 +1,4 @@
-import PageHeader from '@/components/ui/PageHeader'
+import PageHeader from '@/app/components-lib/ui/PageHeader'
 
 const radii = [
   { value: '2px', label: 'sm', usage: 'Tags, badges, chips', class: 'rounded-sm' },

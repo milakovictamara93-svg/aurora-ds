@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import PageHeader from '@/components/ui/PageHeader'
+import PageHeader from '@/app/components-lib/ui/PageHeader'
 
 const contrastPairs = [
   { fg: '#FFFFFF', bg: '#1258F8', fgName: 'White', bgName: 'Blue 600', ratio: '7.1:1', aa: true, aaa: true, use: 'Primary button text' },

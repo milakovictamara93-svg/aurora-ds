@@ -1,6 +1,6 @@
 'use client'
 
-import ColorSwatch from '@/components/ui/ColorSwatch'
+import ColorSwatch from '@/app/components-lib/ui/ColorSwatch'
 
 const previewColors = [
   // Brand

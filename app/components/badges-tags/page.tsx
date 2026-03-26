@@ -1,13 +1,13 @@
 'use client'
 
-import PageHeader from '@/components/ui/PageHeader'
+import PageHeader from '@/app/components-lib/ui/PageHeader'
 import {
   ComponentTabs, TabBar, TabPanel,
   Section, SpecTable, ColorRow,
   DoCard, DontCard, A11yRow,
   Preview, Annotation,
   UseList, DontUseList, VariantRow, VariantTable, RelatedComponents, PageContent,
-} from '@/components/ui/ComponentTabs'
+} from '@/app/components-lib/ui/ComponentTabs'
 
 function Badge({ variant = 'default', style = 'filled', children }: { variant?: 'default' | 'success' | 'error' | 'warning' | 'missing-info' | 'info' | 'ai' | 'energy' | 'water' | 'ghg' | 'waste' | 'disabled'; style?: 'filled' | 'outline'; children: React.ReactNode }) {
   const filled: Record<string, string> = {

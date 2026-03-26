@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import clsx from 'clsx'
-import AuroraIcon from '@/components/ui/AuroraIcon'
+import AuroraIcon from '@/app/components-lib/ui/AuroraIcon'
 
 // ── Nav data ─────────────────────────────────────────────────────────────────
 
