@@ -27,7 +27,10 @@
       "Bash(ls /Users/tamaramilakovic/Desktop/scaler-design-system/*.mov)",
       "Bash(grep -h \"href:.*label:\" /Users/tamaramilakovic/Desktop/scaler-design-system/app/components/*/page.tsx)",
       "Bash(pkill -f \"next dev\")",
-      "Bash(pkill -f \"next-server\")"
+      "Bash(pkill -f \"next-server\")",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   }
 }

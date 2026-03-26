@@ -530,27 +530,27 @@ export default function ControlsPage() {
               <Preview label="All checkbox states">
                 <div className="flex flex-wrap items-center gap-8">
                   <div className="flex flex-col items-center gap-2">
-                    <Checkbox state="unchecked" size={20} />
+                    <Checkbox staticState="unchecked" size={20} />
                     <span className="text-xs text-[#505867] dark:text-[#9CA3AF]">Unchecked</span>
                   </div>
                   <div className="flex flex-col items-center gap-2">
-                    <Checkbox state="unchecked" controlState="hover" size={20} />
+                    <Checkbox staticState="unchecked" controlState="hover" size={20} />
                     <span className="text-xs text-[#505867] dark:text-[#9CA3AF]">Hover</span>
                   </div>
                   <div className="flex flex-col items-center gap-2">
-                    <Checkbox state="checked" size={20} />
+                    <Checkbox staticState="checked" size={20} />
                     <span className="text-xs text-[#505867] dark:text-[#9CA3AF]">Checked</span>
                   </div>
                   <div className="flex flex-col items-center gap-2">
-                    <Checkbox state="indeterminate" size={20} />
+                    <Checkbox staticState="indeterminate" size={20} />
                     <span className="text-xs text-[#505867] dark:text-[#9CA3AF]">Indeterminate</span>
                   </div>
                   <div className="flex flex-col items-center gap-2">
-                    <Checkbox state="unchecked" controlState="disabled" size={20} />
+                    <Checkbox staticState="unchecked" controlState="disabled" size={20} />
                     <span className="text-xs text-[#505867] dark:text-[#9CA3AF]">Disabled</span>
                   </div>
                   <div className="flex flex-col items-center gap-2">
-                    <Checkbox state="checked" controlState="disabled" size={20} />
+                    <Checkbox staticState="checked" controlState="disabled" size={20} />
                     <span className="text-xs text-[#505867] dark:text-[#9CA3AF]">Checked disabled</span>
                   </div>
                 </div>
