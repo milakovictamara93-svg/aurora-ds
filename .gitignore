@@ -1,3 +1,7 @@
 node_modules/
 .next/
 *.tsbuildinfo
+*.mov
+*.mp4
+public/transforming-shapes.mov
+transforming\ shapes.mov
