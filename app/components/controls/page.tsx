@@ -257,23 +257,21 @@ export default function ControlsPage() {
               </p>
             </div>
 
-            <div className="mb-8">
-              <h3 className="text-[15px] font-semibold text-[#1F2430] dark:text-white mb-3">When to use a checkbox</h3>
+            <Section title="When to use">
               <UseList items={[
                 <><strong className="font-semibold text-[#1F2430] dark:text-white">Multiple selection</strong> — when users can pick more than one option independently (e.g., selecting ESG categories to include in a report).</>,
                 <><strong className="font-semibold text-[#1F2430] dark:text-white">Boolean settings</strong> — for a single on/off preference where the action is clear without a label change (e.g., "Accept terms and conditions").</>,
                 <><strong className="font-semibold text-[#1F2430] dark:text-white">Indeterminate state</strong> — use on "select all" parent checkboxes when only some child items are checked. Reflects a mixed selection, not an error.</>,
               ]} />
-            </div>
+            </Section>
 
-            <div className="mb-8">
-              <h3 className="text-[15px] font-semibold text-[#1F2430] dark:text-white mb-3">When not to use a checkbox</h3>
+            <Section title="When not to use">
               <DontUseList items={[
                 'Don\'t use checkboxes when only one option can be selected at a time (e.g., choosing a reporting period: Monthly, Quarterly, or Annually). Use a radio group — it makes mutual exclusivity immediately clear.',
                 'Don\'t use a checkbox for a standalone on/off setting that takes immediate effect. A toggle switch communicates live state more clearly and sets the right expectation that the change happens instantly.',
                 'Don\'t use the indeterminate state on a regular list item. Reserve it exclusively for "select all" parent controls that aggregate the state of child checkboxes.',
               ]} />
-            </div>
+            </Section>
 
             <div className="mb-8">
               <h3 className="text-[15px] font-semibold text-[#1F2430] dark:text-white mb-3">Variants</h3>
@@ -350,23 +348,21 @@ export default function ControlsPage() {
               </p>
             </div>
 
-            <div className="mb-8">
-              <h3 className="text-[15px] font-semibold text-[#1F2430] dark:text-white mb-3">When to use a radio button</h3>
+            <Section title="When to use">
               <UseList items={[
                 <><strong className="font-semibold text-[#1F2430] dark:text-white">Mutually exclusive choices</strong> — when selecting one option must automatically deselect all others (e.g., choosing a single reporting period).</>,
                 <><strong className="font-semibold text-[#1F2430] dark:text-white">2–5 visible options</strong> — when the full list should be visible at once so users can compare before choosing. For longer lists, use a dropdown.</>,
                 <><strong className="font-semibold text-[#1F2430] dark:text-white">Default selection required</strong> — when one option must always be selected (unlike checkboxes, a radio group should always have one option active).</>,
               ]} />
-            </div>
+            </Section>
 
-            <div className="mb-8">
-              <h3 className="text-[15px] font-semibold text-[#1F2430] dark:text-white mb-3">When not to use a radio button</h3>
+            <Section title="When not to use">
               <DontUseList items={[
                 'Don\'t use radio buttons when the user needs to select multiple options simultaneously — use checkboxes instead. Radio buttons enforce single selection by design.',
                 'Don\'t use radio buttons for more than 5–6 options. A long vertical radio list is hard to scan — use a dropdown/select component to keep the form compact.',
                 'Don\'t use a single standalone radio button. A solo radio can never be deselected, which traps the user. Use a checkbox for a single binary choice.',
               ]} />
-            </div>
+            </Section>
 
             <div className="mb-8">
               <h3 className="text-[15px] font-semibold text-[#1F2430] dark:text-white mb-3">Variants</h3>
@@ -442,23 +438,21 @@ export default function ControlsPage() {
               </p>
             </div>
 
-            <div className="mb-8">
-              <h3 className="text-[15px] font-semibold text-[#1F2430] dark:text-white mb-3">When to use a toggle</h3>
+            <Section title="When to use">
               <UseList items={[
                 <><strong className="font-semibold text-[#1F2430] dark:text-white">Immediate binary settings</strong> — when the change takes effect the moment the user flips it, with no save step (e.g., dark mode, enabling email notifications).</>,
                 <><strong className="font-semibold text-[#1F2430] dark:text-white">Feature flags per record</strong> — enabling or disabling a module or feature for a specific building, user, or account in a settings list.</>,
                 <><strong className="font-semibold text-[#1F2430] dark:text-white">Dashboard layer visibility</strong> — showing or hiding a chart series, data overlay, or map layer without leaving the current view.</>,
               ]} />
-            </div>
+            </Section>
 
-            <div className="mb-8">
-              <h3 className="text-[15px] font-semibold text-[#1F2430] dark:text-white mb-3">When not to use a toggle</h3>
+            <Section title="When not to use">
               <DontUseList items={[
                 'Don\'t use a toggle when the change doesn\'t take effect immediately. If the user still needs to click "Save" to apply the change, use a checkbox inside a form instead — a toggle implies instant effect and will confuse users who flip it and see nothing happen.',
                 'Don\'t use a toggle to choose between more than two states. Toggles are strictly binary (on/off). If you need three or more options (e.g., Low / Medium / High), use a radio group or segmented control.',
                 'Don\'t replace a checkbox group with individual toggles. A list of 10 toggles is visually heavy. Use checkboxes when the settings are part of a form that\'s submitted together.',
               ]} />
-            </div>
+            </Section>
 
             <div className="mb-8">
               <h3 className="text-[15px] font-semibold text-[#1F2430] dark:text-white mb-3">Variants</h3>

@@ -518,8 +518,8 @@ export function RelatedComponents({
   items: { href: string; label: string; description: string }[]
 }) {
   return (
-    <section className="rounded-[8px] overflow-hidden related-grid-bg">
-      <div className="p-8">
+    <section className="rounded-[8px] overflow-hidden">
+      <div className="py-8">
         <h2 className="text-[24px] font-semibold text-[#111827] dark:text-white mb-8 leading-[1.4]">
           Related
         </h2>

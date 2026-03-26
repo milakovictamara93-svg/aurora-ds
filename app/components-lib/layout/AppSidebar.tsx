@@ -23,7 +23,7 @@ const FOUNDATIONS: NavGroup = {
   id: 'foundations',
   label: 'Foundations',
   items: [
-    { href: '/foundations/colors',          label: 'Colors',            available: false },
+    { href: '/foundations/colors',          label: 'Colors' },
     { href: '/foundations/typography',      label: 'Typography',        available: false },
     { href: '/foundations/spacing',         label: 'Spacing',           available: false },
     { href: '/foundations/icons',           label: 'Icons',             available: false },
@@ -57,7 +57,7 @@ const COMPONENT_GROUPS: NavGroup[] = [
       { href: '/components/tables',      label: 'Table',        available: false },
       { href: '/components/cards',       label: 'Card',         available: false },
       { href: '/components/data-points', label: 'Data points',  available: false },
-      { href: '/components/badges-tags', label: 'Badges & Tags', available: false },
+      { href: '/components/badges-tags', label: 'Tags & Indicators', available: true },
     ],
   },
   {

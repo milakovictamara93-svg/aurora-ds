@@ -4,12 +4,51 @@
 
 /* ─── Design Tokens ─── */
 :root {
-  /* Brand */
+  /* ── Brand aliases ── */
   --brand-sky-500: #2295FF;
   --brand-emerald-300: #43F9C2;
   --brand-blue-600: #1258F8;
 
-  /* Grey */
+  /* ── Blue (Primary) ── */
+  --blue-50: #EEF6FF;
+  --blue-100: #D9EAFF;
+  --blue-200: #BBDAFF;
+  --blue-300: #8CC4FF;
+  --blue-400: #56A3FF;
+  --blue-500: #2F7DFF;
+  --blue-600: #1258F8;
+  --blue-700: #1146E4;
+  --blue-800: #143AB9;
+  --blue-900: #173691;
+  --blue-950: #132258;
+
+  /* ── Sky (Brand) ── */
+  --sky-50: #EEF8FF;
+  --sky-100: #D9EFFF;
+  --sky-200: #BCE4FF;
+  --sky-300: #8ED5FF;
+  --sky-400: #59BBFF;
+  --sky-500: #2295FF;
+  --sky-600: #1B7EF5;
+  --sky-700: #1467E1;
+  --sky-800: #1752B6;
+  --sky-900: #19488F;
+  --sky-950: #142C57;
+
+  /* ── Emerald (Brand) ── */
+  --emerald-50: #E9FFF7;
+  --emerald-100: #CBFFEA;
+  --emerald-200: #9BFFDA;
+  --emerald-300: #43F9C2;
+  --emerald-400: #1BECB4;
+  --emerald-500: #00D39E;
+  --emerald-600: #00AC82;
+  --emerald-700: #008A6C;
+  --emerald-800: #006D56;
+  --emerald-900: #005948;
+  --emerald-950: #00332A;
+
+  /* ── Grey (Neutrals) ── */
   --grey-0: #FFFFFF;
   --grey-50: #F7F8F8;
   --grey-100: #EDEEF1;
@@ -23,7 +62,72 @@
   --grey-900: #1F2430;
   --grey-950: #111827;
 
-  /* Semantic */
+  /* ── Error ── */
+  --error-50: #FEF2F2;
+  --error-100: #FEE2E2;
+  --error-200: #FECACA;
+  --error-300: #FCA5A5;
+  --error-400: #F87171;
+  --error-500: #EF4444;
+  --error-600: #DC2626;
+  --error-700: #B91C1C;
+  --error-800: #991B1B;
+  --error-900: #7F1D1D;
+  --error-950: #450A0A;
+
+  /* ── Warning (orange) ── */
+  --warning-50: #FFF3ED;
+  --warning-100: #FFE3D5;
+  --warning-200: #FEC7AA;
+  --warning-300: #FDA374;
+  --warning-400: #FB7D3C;
+  --warning-500: #F96416;
+  --warning-600: #EA580C;
+  --warning-700: #C24A0C;
+  --warning-800: #9A4112;
+  --warning-900: #7C3612;
+  --warning-950: #431C07;
+
+  /* ── Missing info (amber) ── */
+  --missing-info-50: #FEF9E8;
+  --missing-info-100: #FEF0C3;
+  --missing-info-200: #FFEAA8;
+  --missing-info-300: #FDD147;
+  --missing-info-400: #FAC219;
+  --missing-info-500: #EAB308;
+  --missing-info-600: #CA9A04;
+  --missing-info-700: #A17C07;
+  --missing-info-800: #85680E;
+  --missing-info-900: #715A12;
+  --missing-info-950: #423306;
+
+  /* ── Success ── */
+  --success-50: #F0FDF5;
+  --success-100: #DCFCE8;
+  --success-200: #BBF7D1;
+  --success-300: #86EFAD;
+  --success-400: #4ADE81;
+  --success-500: #22C55E;
+  --success-600: #16A34A;
+  --success-700: #15803C;
+  --success-800: #166533;
+  --success-900: #14532B;
+  --success-950: #052E14;
+
+  /* ── AI ── */
+  --ai-50: #F4F2FF;
+  --ai-100: #EAE8FF;
+  --ai-200: #D6D4FF;
+  --ai-300: #BAB1FF;
+  --ai-400: #9785FF;
+  --ai-500: #653FFF;
+  --ai-600: #6430F7;
+  --ai-700: #561EE3;
+  --ai-800: #4718BF;
+  --ai-900: #3C169C;
+  --ai-950: #230B6A;
+
+  /* ── Semantic aliases ── */
   --color-error: #F87171;
   --color-warning: #FB7D3C;
   --color-success: #22C55E;
@@ -112,22 +216,6 @@ pre, code {
 .dark .page-grid-bg {
   background-image: radial-gradient(circle, rgba(63, 70, 84, 0.55) 1px, transparent 1px);
   background-size: 24px 24px;
-}
-
-/* ─── Related section grid background ─── */
-.related-grid-bg {
-  background-color: #f7f8f8;
-  background-image:
-    linear-gradient(#e5e7eb 1px, transparent 1px),
-    linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
-  background-size: 32px 32px;
-}
-.dark .related-grid-bg {
-  background-color: #0D1117;
-  background-image:
-    linear-gradient(#1F2430 1px, transparent 1px),
-    linear-gradient(90deg, #1F2430 1px, transparent 1px);
-  background-size: 32px 32px;
 }
 
 /* ─── Focus ring ─── */

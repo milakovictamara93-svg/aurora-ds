@@ -1,321 +1,338 @@
 'use client'
 
 import PageHeader from '@/app/components-lib/ui/PageHeader'
+import Tag from '@/app/components-lib/ui/Tag'
+import Indicator from '@/app/components-lib/ui/Indicator'
+import type { TagSystem } from '@/app/components-lib/ui/Tag'
+import type { IndicatorSystem } from '@/app/components-lib/ui/Indicator'
 import {
   ComponentTabs, TabBar, TabPanel,
-  Section, SpecTable, ColorRow,
-  DoCard, DontCard, A11yRow,
+  Section, SpecTable,
+  A11yRow,
   Preview, Annotation,
-  UseList, DontUseList, VariantRow, VariantTable, RelatedComponents, PageContent,
+  UseList, DontUseList, RelatedComponents, PageContent,
 } from '@/app/components-lib/ui/ComponentTabs'
 
-function Badge({ variant = 'default', style = 'filled', children }: { variant?: 'default' | 'success' | 'error' | 'warning' | 'missing-info' | 'info' | 'ai' | 'energy' | 'water' | 'ghg' | 'waste' | 'disabled'; style?: 'filled' | 'outline'; children: React.ReactNode }) {
-  const filled: Record<string, string> = {
-    default:      'bg-[#D9EAFF] text-[#173691]',
-    success:      'bg-[#DCFCE7] text-[#166534] dark:bg-[#16a34a]/20 dark:text-[#4ade80]',
-    error:        'bg-[#FEE2E2] text-[#991B1B] dark:bg-[#dc2626]/20 dark:text-[#f87171]',
-    warning:      'bg-[#FEF3C7] text-[#92400E] dark:bg-[#d97706]/20 dark:text-[#fbbf24]',
-    'missing-info': 'bg-[#FEF3C7] text-[#92400E] dark:bg-[#d97706]/20 dark:text-[#fbbf24]',
-    info:         'bg-[#DBEAFE] text-[#1E40AF]',
-    ai:           'bg-[#653FFF]/10 text-[#653FFF]',
-    energy:       'bg-[#F59E0B]/10 text-[#F59E0B]',
-    water:        'bg-[#06B6D4]/10 text-[#06B6D4]',
-    ghg:          'bg-[#10B981]/10 text-[#10B981]',
-    waste:        'bg-[#8B5CF6]/10 text-[#8B5CF6]',
-    disabled:     'bg-[#D7DAE0]/40 text-[#8C96A4]',
-  }
-  const outline: Record<string, string> = {
-    default:      'border border-[#173691] text-[#173691] bg-transparent',
-    success:      'border border-[#16a34a] text-[#16a34a] bg-transparent',
-    error:        'border border-[#dc2626] text-[#dc2626] bg-transparent',
-    warning:      'border border-[#d97706] text-[#d97706] bg-transparent',
-    'missing-info': 'border border-[#d97706] text-[#d97706] bg-transparent',
-    info:         'border border-[#1E40AF] text-[#1E40AF] bg-transparent',
-    ai:           'border border-[#653FFF] text-[#653FFF] bg-transparent',
-    energy:       'border border-[#F59E0B] text-[#F59E0B] bg-transparent',
-    water:        'border border-[#06B6D4] text-[#06B6D4] bg-transparent',
-    ghg:          'border border-[#10B981] text-[#10B981] bg-transparent',
-    waste:        'border border-[#8B5CF6] text-[#8B5CF6] bg-transparent',
-    disabled:     'border border-[#8C96A4] text-[#8C96A4] bg-transparent',
-  }
-  const styles = style === 'outline' ? outline : filled
-  return (
-    <span className={`inline-flex items-center px-2 h-5 rounded-[2px] text-xs font-medium ${styles[variant] ?? styles.default}`}>
-      {children}
-    </span>
-  )
-}
+const ALL_SYSTEMS: TagSystem[] = ['default', 'disabled', 'error', 'warning', 'missing-info', 'success']
+const ALL_IND_SYSTEMS: IndicatorSystem[] = ['default', 'disabled', 'error', 'warning', 'missing-info', 'success']
 
 export default function BadgesTagsPage() {
   return (
     <div>
       <PageHeader
-        title="Badges & Tags"
-        description="Compact labels for status, category, and metadata. Semantic color variants for ESG data contexts."
+        title="Tags & Indicators"
+        description="Tags for interactive filter chips and multi-select values. Indicators for status dots and count badges."
         badge="Components"
       />
 
       <ComponentTabs>
         <TabBar />
 
-        {/* ── USAGE ─────────────────────────────────────────────────────────── */}
+        {/* ── USAGE ───────────────────────────────────────────────────────── */}
         <TabPanel id="usage">
           <PageContent>
+
+            {/* Tags */}
             <Section title="When to use">
               <UseList items={[
-                <><strong className="font-semibold text-[#1F2430] dark:text-white">Status labels</strong> — communicate the state of a record inline in a table, card, or list item (Verified, Pending, Draft).</>,
-                <><strong className="font-semibold text-[#1F2430] dark:text-white">ESG category indicators</strong> — tag data entries with their aspect type using the designated ESG spectrum colors.</>,
-                <><strong className="font-semibold text-[#1F2430] dark:text-white">Count badges</strong> — show totals or notification counts alongside a label, e.g., "Buildings 12".</>,
-                <>Use the <strong className="font-semibold text-[#1F2430] dark:text-white">AI variant</strong> to mark content generated or assisted by AI features (Purple 653FFF).</>,
+                <><strong className="font-semibold text-[#1F2430] dark:text-white">Filter chips</strong> — show active filters in a filter bar; user removes each with the × button.</>,
+                <><strong className="font-semibold text-[#1F2430] dark:text-white">Multi-select values</strong> — display selected options inside an input (assigned users, categories).</>,
+                <><strong className="font-semibold text-[#1F2430] dark:text-white">Count context</strong> — the circular indicator inside the tag gives a numeric count alongside the label.</>,
               ]} />
             </Section>
 
             <Section title="When not to use">
               <DontUseList items={[
-                "Don't use badges as interactive buttons or links — they are read-only labels.",
-                "Don't use more than two or three badges per row. Overuse dilutes their meaning.",
-                "Don't rely on color alone to convey status — always include a text label inside the badge.",
+                "Don't use tags as read-only status labels — use an Indicator dot instead.",
+                "Don't stack more than one row of tags without a scroll or collapse affordance.",
               ]} />
             </Section>
 
-            <Section title="Variants">
-              <VariantTable>
-                <VariantRow
-                  preview={<Badge variant="default">Default</Badge>}
-                  name="Default"
-                  description="Neutral state. Use for metadata with no semantic meaning."
-                />
-                <VariantRow
-                  preview={<Badge variant="success">Verified</Badge>}
-                  name="Success"
-                  description="Positive or complete state. Maps to --color-success (#22C55E)."
-                />
-                <VariantRow
-                  preview={<Badge variant="error">Failed</Badge>}
-                  name="Error"
-                  description="Error or blocked state. Maps to --color-error (#F87171)."
-                />
-                <VariantRow
-                  preview={<Badge variant="warning">Pending</Badge>}
-                  name="Warning"
-                  description="Needs attention or in progress. Maps to --color-warning (#FB7D3C)."
-                />
-                <VariantRow
-                  preview={<Badge variant="info">Draft</Badge>}
-                  name="Info"
-                  description="Informational or neutral-active state. Maps to --brand-sky-500 (#2295FF)."
-                />
-                <VariantRow
-                  preview={<Badge variant="ai">AI generated</Badge>}
-                  name="AI"
-                  description="Marks AI-assisted content. Maps to --color-ai (#653FFF)."
-                />
-                <VariantRow
-                  preview={<Badge variant="energy">Energy</Badge>}
-                  name="Energy"
-                  description="ESG energy aspect. Amber spectrum."
-                />
-                <VariantRow
-                  preview={<Badge variant="water">Water</Badge>}
-                  name="Water"
-                  description="ESG water aspect. Cyan spectrum."
-                />
-                <VariantRow
-                  preview={<Badge variant="ghg">GHG</Badge>}
-                  name="GHG"
-                  description="ESG greenhouse gas emissions aspect. Emerald spectrum."
-                />
-                <VariantRow
-                  preview={<Badge variant="waste">Waste</Badge>}
-                  name="Waste"
-                  description="ESG waste aspect. Violet spectrum."
-                  last
-                />
-              </VariantTable>
-            </Section>
+            <Section title="Tags — styles">
+              <div className="space-y-6">
+                {/* Filled */}
+                <div>
+                  <p className="text-xs font-medium text-[#505867] dark:text-[#9CA3AF] mb-3 uppercase tracking-wider">Filled</p>
+                  <Preview label="All systems, medium">
+                    <div className="flex flex-wrap gap-2">
+                      {ALL_SYSTEMS.map(s => (
+                        <Tag key={s} system={s} style="filled" size="medium" label={s === 'missing-info' ? 'Missing info' : s.charAt(0).toUpperCase() + s.slice(1)} count="12" />
+                      ))}
+                    </div>
+                  </Preview>
+                  <Preview label="All systems, small">
+                    <div className="flex flex-wrap gap-2">
+                      {ALL_SYSTEMS.map(s => (
+                        <Tag key={s} system={s} style="filled" size="small" label={s === 'missing-info' ? 'Missing info' : s.charAt(0).toUpperCase() + s.slice(1)} count="12" />
+                      ))}
+                    </div>
+                  </Preview>
+                </div>
 
-            <Section title="Do / Don't">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <DoCard>
-                  <div className="flex gap-2 flex-wrap mb-3">
-                    <Badge variant="success">Verified</Badge>
-                    <Badge variant="warning">Pending review</Badge>
-                    <Badge variant="error">Rejected</Badge>
-                  </div>
-                  <p>Use sentence case. Keep labels short — one or two words. Use semantic variants to match meaning.</p>
-                </DoCard>
-                <DontCard>
-                  <div className="flex gap-2 flex-wrap mb-3">
-                    <Badge variant="success">CLICK TO APPROVE</Badge>
-                    <Badge variant="info">ACTION REQUIRED NOW</Badge>
-                  </div>
-                  <p>Don't use all caps, don't write call-to-action copy inside a badge. Badges are not buttons.</p>
-                </DontCard>
-                <DoCard>
-                  <div className="flex gap-2 flex-wrap mb-3">
-                    <Badge variant="energy">Energy</Badge>
-                    <Badge variant="ghg">GHG emissions</Badge>
-                    <Badge variant="water">Water</Badge>
-                  </div>
-                  <p>Always use the designated ESG aspect color for each category — don't substitute generic semantic colors.</p>
-                </DoCard>
-                <DontCard>
-                  <div className="flex gap-2 flex-wrap mb-3">
-                    <Badge variant="success">Energy</Badge>
-                    <Badge variant="error">Water</Badge>
-                  </div>
-                  <p>Don't use success/error colors for ESG aspect labels — they imply a status judgment rather than a category.</p>
-                </DontCard>
+                {/* Outline */}
+                <div>
+                  <p className="text-xs font-medium text-[#505867] dark:text-[#9CA3AF] mb-3 uppercase tracking-wider">Outline</p>
+                  <Preview label="All systems, medium">
+                    <div className="flex flex-wrap gap-2">
+                      {ALL_SYSTEMS.map(s => (
+                        <Tag key={s} system={s} style="outline" size="medium" label={s === 'missing-info' ? 'Missing info' : s.charAt(0).toUpperCase() + s.slice(1)} count="12" />
+                      ))}
+                    </div>
+                  </Preview>
+                  <Preview label="All systems, small">
+                    <div className="flex flex-wrap gap-2">
+                      {ALL_SYSTEMS.map(s => (
+                        <Tag key={s} system={s} style="outline" size="small" label={s === 'missing-info' ? 'Missing info' : s.charAt(0).toUpperCase() + s.slice(1)} count="12" />
+                      ))}
+                    </div>
+                  </Preview>
+                </div>
+
+                {/* Projected */}
+                <div>
+                  <p className="text-xs font-medium text-[#505867] dark:text-[#9CA3AF] mb-3 uppercase tracking-wider">Projected</p>
+                  <Preview label="All systems, medium">
+                    <div className="flex flex-wrap gap-2">
+                      {ALL_SYSTEMS.map(s => (
+                        <Tag key={s} system={s} style="projected" size="medium" label={s === 'missing-info' ? 'Missing info' : s.charAt(0).toUpperCase() + s.slice(1)} count="12" />
+                      ))}
+                    </div>
+                  </Preview>
+                  <Preview label="All systems, small">
+                    <div className="flex flex-wrap gap-2">
+                      {ALL_SYSTEMS.map(s => (
+                        <Tag key={s} system={s} style="projected" size="small" label={s === 'missing-info' ? 'Missing info' : s.charAt(0).toUpperCase() + s.slice(1)} count="12" />
+                      ))}
+                    </div>
+                  </Preview>
+                </div>
               </div>
             </Section>
 
+            {/* Indicators */}
+            <Section title="When to use">
+              <UseList items={[
+                <><strong className="font-semibold text-[#1F2430] dark:text-white">Dot</strong> — status-only signal on list items, table rows, or nav entries. No number needed.</>,
+                <><strong className="font-semibold text-[#1F2430] dark:text-white">Number</strong> — unread count badge on icons, avatar stacks, or tab labels.</>,
+              ]} />
+            </Section>
+
+            <Section title="When not to use">
+              <DontUseList items={[
+                "Need a full inline label? Use a Tag instead.",
+                "Don't use color alone — pair dots with a tooltip or visually hidden label.",
+              ]} />
+            </Section>
+
+            <Section title="Indicators — number">
+              <Preview label="Filled and outline, all systems">
+                <div className="flex flex-wrap items-center gap-4">
+                  {ALL_IND_SYSTEMS.map(s => (
+                    <div key={s} className="flex items-center gap-2">
+                      <Indicator variant="number" system={s} style="filled" label="##" />
+                      <Indicator variant="number" system={s} style="outline" label="##" />
+                    </div>
+                  ))}
+                </div>
+              </Preview>
+              <Annotation>Height: 16px · px: 4px · border-radius: full · font: 10px/500 · tracking: 0.15px</Annotation>
+            </Section>
+
+            <Section title="Indicators — dot">
+              <Preview label="Small (4px) and medium (8px), all systems">
+                <div className="flex flex-wrap items-center gap-6">
+                  {ALL_IND_SYSTEMS.map(s => (
+                    <div key={s} className="flex items-center gap-3">
+                      <Indicator variant="dot" system={s} size="small" />
+                      <Indicator variant="dot" system={s} size="medium" />
+                    </div>
+                  ))}
+                </div>
+              </Preview>
+              <Annotation>Small: 4×4px · Medium: 8×8px · border-radius: full</Annotation>
+            </Section>
+
             <RelatedComponents items={[
-              { href: '/components/tables', label: 'Tables', description: 'Status badges are most commonly used inside table cells.' },
-              { href: '/components/cards', label: 'Cards', description: 'Cards use badges in the header to show category or status.' },
-              { href: '/patterns/esg-data', label: 'ESG data patterns', description: 'Full guidance on ESG aspect color usage across the UI.' },
+              { href: '/components/tables',  label: 'Tables', description: 'Indicators appear in table rows to signal row-level status.' },
+              { href: '/components/inputs',  label: 'Inputs', description: 'Tags are used inside multi-select inputs to show selected values.' },
+              { href: '/patterns/esg-data',  label: 'ESG data', description: 'Full guidance on ESG aspect color usage across the UI.' },
             ]} />
           </PageContent>
         </TabPanel>
 
-        {/* ── STYLE ─────────────────────────────────────────────────────────── */}
+        {/* ── STYLE ───────────────────────────────────────────────────────── */}
         <TabPanel id="style">
           <PageContent>
-            <Section title="Anatomy">
-              <Preview label="Badge anatomy">
-                <Badge variant="success">Verified</Badge>
-                <Badge variant="warning">Pending</Badge>
-                <Badge variant="ai">AI generated</Badge>
-                <Badge variant="energy">Energy</Badge>
+
+            <Section title="Tag — anatomy">
+              <Preview label="label + number indicator + × remove">
+                <div className="flex flex-wrap gap-3">
+                  <Tag system="default"  style="filled"    size="medium" label="Buildings" count="24" />
+                  <Tag system="success"  style="outline"   size="medium" label="Verified"  count="7"  />
+                  <Tag system="error"    style="projected" size="medium" label="Failed"     count="2"  />
+                  <Tag system="default"  style="filled"    size="small"  label="Small"      count="5"  />
+                </div>
               </Preview>
               <p className="text-sm text-[#505867] dark:text-[#9CA3AF] mt-3">
-                A badge is a single inline element: colored background tint + matching text. No icons, no borders — the background communicates the variant.
+                Three parts: text label · Number indicator (Indicator component) · × remove button. Filled = light tint, no border. Outline = white bg, solid border. Projected = very light tint, dashed border.
               </p>
             </Section>
 
-            <Section title="Spacing & sizing">
+            <Section title="Tag — spacing & sizing">
               <SpecTable rows={[
-                { property: 'Height',        value: 'auto (content)',     token: '—' },
-                { property: 'Padding (x)',   value: '8px',                token: 'px-2' },
-                { property: 'Padding (y)',   value: '2px',                token: 'py-0.5' },
-                { property: 'Border radius', value: '4px',                token: 'rounded' },
-                { property: 'Font size',     value: '12px',               token: 'text-xs' },
-                { property: 'Font weight',   value: '500 (medium)',        token: 'font-medium' },
+                { property: 'Height (medium)',      value: '28px',               token: 'h-[28px]' },
+                { property: 'Height (small)',        value: '20px',               token: 'h-[20px]' },
+                { property: 'Padding x (medium)',    value: '12px',               token: 'px-3' },
+                { property: 'Padding x (small)',     value: '8px',                token: 'px-2' },
+                { property: 'Gap between parts',     value: '4px',                token: 'gap-1' },
+                { property: 'Border radius',         value: '9999px (full pill)', token: 'rounded-full' },
+                { property: 'Font size (medium)',     value: '14px / 500',         token: 'text-[14px] font-medium' },
+                { property: 'Font size (small)',      value: '12px / 500',         token: 'text-[12px] font-medium' },
+                { property: 'Letter spacing (medium)', value: '0.21px',           token: 'tracking-[0.21px]' },
+                { property: 'Letter spacing (small)',  value: '0.18px',           token: 'tracking-[0.18px]' },
+                { property: 'Trailing icon (medium)', value: '20×20px',           token: 'w-5 h-5' },
+                { property: 'Trailing icon (small)',  value: '16×16px',           token: 'w-4 h-4' },
               ]} />
             </Section>
 
-            <Section title="Colors">
-              <ColorRow label="Default background" hex="#EDEEF1" role="Grey 100 — neutral metadata" />
-              <ColorRow label="Success"            hex="#22C55E" role="10% opacity fill, matching text" border />
-              <ColorRow label="Error"              hex="#F87171" role="10% opacity fill, matching text" border />
-              <ColorRow label="Warning"            hex="#FB7D3C" role="10% opacity fill, matching text" border />
-              <ColorRow label="Info"               hex="#2295FF" role="10% opacity fill, matching text" border />
-              <ColorRow label="AI"                 hex="#653FFF" role="10% opacity fill, matching text" border />
-              <ColorRow label="Energy (ESG)"       hex="#F59E0B" role="Amber — ESG energy category" border />
-              <ColorRow label="Water (ESG)"        hex="#06B6D4" role="Cyan — ESG water category" border />
-              <ColorRow label="GHG (ESG)"          hex="#10B981" role="Emerald — ESG emissions category" border />
-              <ColorRow label="Waste (ESG)"        hex="#8B5CF6" role="Violet — ESG waste category" border />
+            <Section title="Indicator — anatomy">
+              <Preview label="Number (filled + outline) and dot (small + medium)">
+                <div className="flex items-center gap-6">
+                  <div className="flex flex-col items-center gap-2">
+                    <Indicator variant="number" system="default" style="filled" label="12" />
+                    <span className="text-xs text-[#505867] dark:text-[#9CA3AF]">Number filled</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-2">
+                    <Indicator variant="number" system="error" style="outline" label="3" />
+                    <span className="text-xs text-[#505867] dark:text-[#9CA3AF]">Number outline</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-2">
+                    <Indicator variant="dot" system="success" size="medium" />
+                    <span className="text-xs text-[#505867] dark:text-[#9CA3AF]">Dot medium</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-2">
+                    <Indicator variant="dot" system="warning" size="small" />
+                    <span className="text-xs text-[#505867] dark:text-[#9CA3AF]">Dot small</span>
+                  </div>
+                </div>
+              </Preview>
             </Section>
+
+            <Section title="Indicator — spacing & sizing">
+              <SpecTable rows={[
+                { property: 'Number height',          value: '16px',     token: 'h-4' },
+                { property: 'Number padding x',       value: '4px',      token: 'px-1' },
+                { property: 'Number font',             value: '10px/500', token: 'text-[10px] font-medium' },
+                { property: 'Number letter spacing',   value: '0.15px',   token: 'tracking-[0.15px]' },
+                { property: 'Number border radius',    value: '9999px',   token: 'rounded-full' },
+                { property: 'Dot small',               value: '4×4px',    token: 'w-1 h-1' },
+                { property: 'Dot medium',              value: '8×8px',    token: 'w-2 h-2' },
+              ]} />
+            </Section>
+
           </PageContent>
         </TabPanel>
 
-        {/* ── CODE ──────────────────────────────────────────────────────────── */}
+        {/* ── CODE ────────────────────────────────────────────────────────── */}
         <TabPanel id="code">
           <PageContent>
-            <Section title="Semantic badge">
+
+            <Section title="Tag — filled">
               <Preview label="Live preview">
-                <Badge variant="success">Verified</Badge>
-                <Badge variant="error">Failed</Badge>
-                <Badge variant="warning">Pending</Badge>
-                <Badge variant="info">Draft</Badge>
+                <Tag system="default" style="filled" size="medium" label="Buildings" count="24" />
+                <Tag system="success" style="filled" size="medium" label="Verified"  count="7"  />
+                <Tag system="error"   style="filled" size="medium" label="Failed"    count="2"  />
               </Preview>
               <pre className="mt-4 bg-[#0D1117] text-[#E2E8F0] text-sm font-mono rounded-lg p-4 overflow-x-auto leading-relaxed">
-{`{/* Success badge */}
-<span className="inline-flex items-center px-2 py-0.5 rounded
-                 text-xs font-medium bg-[#22C55E]/10 text-[#22C55E]">
-  Verified
-</span>
+{`import Tag from '@/app/components-lib/ui/Tag'
 
-{/* Error badge */}
-<span className="inline-flex items-center px-2 py-0.5 rounded
-                 text-xs font-medium bg-[#F87171]/10 text-[#F87171]">
-  Failed
-</span>
-
-{/* Warning badge */}
-<span className="inline-flex items-center px-2 py-0.5 rounded
-                 text-xs font-medium bg-[#FB7D3C]/10 text-[#FB7D3C]">
-  Pending
-</span>`}
+<Tag system="default" style="filled" size="medium" label="Buildings" count={24} />
+<Tag system="success" style="filled" size="medium" label="Verified"  count={7} />
+<Tag system="error"   style="filled" size="small"  label="Failed"    count={2} />`}
               </pre>
             </Section>
 
-            <Section title="ESG aspect badge">
+            <Section title="Tag — outline">
               <Preview label="Live preview">
-                <Badge variant="energy">Energy</Badge>
-                <Badge variant="water">Water</Badge>
-                <Badge variant="ghg">GHG</Badge>
-                <Badge variant="waste">Waste</Badge>
+                <Tag system="default" style="outline" size="medium" label="Default"  count="12" />
+                <Tag system="warning" style="outline" size="medium" label="Warning"  count="5"  />
               </Preview>
               <pre className="mt-4 bg-[#0D1117] text-[#E2E8F0] text-sm font-mono rounded-lg p-4 overflow-x-auto leading-relaxed">
-{`{/* Energy */}
-<span className="inline-flex items-center px-2 py-0.5 rounded
-                 text-xs font-medium bg-[#F59E0B]/10 text-[#F59E0B]">
-  Energy
-</span>
-
-{/* Water */}
-<span className="inline-flex items-center px-2 py-0.5 rounded
-                 text-xs font-medium bg-[#06B6D4]/10 text-[#06B6D4]">
-  Water
-</span>
-
-{/* GHG emissions */}
-<span className="inline-flex items-center px-2 py-0.5 rounded
-                 text-xs font-medium bg-[#10B981]/10 text-[#10B981]">
-  GHG
-</span>`}
+{`<Tag system="default" style="outline" size="medium" label="Default" count={12} />
+<Tag system="warning" style="outline" size="medium" label="Warning" count={5} />`}
               </pre>
             </Section>
 
-            <Section title="AI badge">
+            <Section title="Tag — projected">
               <Preview label="Live preview">
-                <Badge variant="ai">AI generated</Badge>
+                <Tag system="default"       style="projected" size="medium" label="Default"      count="12" />
+                <Tag system="missing-info"  style="projected" size="medium" label="Missing info" count="3"  />
               </Preview>
               <pre className="mt-4 bg-[#0D1117] text-[#E2E8F0] text-sm font-mono rounded-lg p-4 overflow-x-auto leading-relaxed">
-{`<span className="inline-flex items-center px-2 py-0.5 rounded
-                 text-xs font-medium bg-[#653FFF]/10 text-[#653FFF]">
-  AI generated
-</span>`}
+{`<Tag system="default"      style="projected" size="medium" label="Default"      count={12} />
+<Tag system="missing-info" style="projected" size="medium" label="Missing info" count={3} />`}
               </pre>
-              <Annotation>The AI variant uses Purple 653FFF — always label AI-generated content explicitly per the brand voice guidelines.</Annotation>
             </Section>
+
+            <Section title="Indicator — number">
+              <Preview label="Live preview">
+                <Indicator variant="number" system="default" style="filled"  label="9" />
+                <Indicator variant="number" system="error"   style="filled"  label="3" />
+                <Indicator variant="number" system="default" style="outline" label="9" />
+              </Preview>
+              <pre className="mt-4 bg-[#0D1117] text-[#E2E8F0] text-sm font-mono rounded-lg p-4 overflow-x-auto leading-relaxed">
+{`import Indicator from '@/app/components-lib/ui/Indicator'
+
+{/* Filled */}
+<Indicator variant="number" system="default" style="filled" label={9} />
+
+{/* Outline */}
+<Indicator variant="number" system="default" style="outline" label={9} />`}
+              </pre>
+            </Section>
+
+            <Section title="Indicator — dot">
+              <Preview label="Live preview">
+                <div className="flex items-center gap-4">
+                  <Indicator variant="dot" system="default" size="medium" />
+                  <Indicator variant="dot" system="error"   size="medium" />
+                  <Indicator variant="dot" system="success" size="small"  />
+                </div>
+              </Preview>
+              <pre className="mt-4 bg-[#0D1117] text-[#E2E8F0] text-sm font-mono rounded-lg p-4 overflow-x-auto leading-relaxed">
+{`{/* Medium dot */}
+<Indicator variant="dot" system="default" size="medium" />
+
+{/* Small dot */}
+<Indicator variant="dot" system="error" size="small" />`}
+              </pre>
+            </Section>
+
           </PageContent>
         </TabPanel>
 
-        {/* ── ACCESSIBILITY ─────────────────────────────────────────────────── */}
+        {/* ── ACCESSIBILITY ────────────────────────────────────────────────── */}
         <TabPanel id="accessibility">
           <PageContent>
             <Section title="ARIA requirements">
               <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#111827]">
-                <A11yRow check="aria-label">Use <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">aria-label</code> when the badge label alone doesn't convey enough context — for example, a standalone "12" count badge should read <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">aria-label="12 buildings"</code>.</A11yRow>
-                <A11yRow check="color independence">Never rely on badge color alone to communicate status. The text label inside the badge is the accessible name — always include it.</A11yRow>
-                <A11yRow check="role">Badges are non-interactive and render as <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">&lt;span&gt;</code> elements. Do not add click handlers — use a button if interaction is needed.</A11yRow>
-                <A11yRow check="contrast">Badge text must meet 4.5:1 contrast against the tinted background. All semantic variant colors in this system pass AA at the 10% opacity fill level.</A11yRow>
+                <A11yRow check="Tag remove button">
+                  Each tag's × button must have <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">aria-label="Remove [label]"</code> so screen readers announce what will be removed.
+                </A11yRow>
+                <A11yRow check="Indicator dot">
+                  A dot conveys status visually only — add a visually hidden <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">sr-only</code> span or <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">aria-label</code> on the parent describing the status.
+                </A11yRow>
+                <A11yRow check="Indicator number">
+                  Number indicators showing unread counts should be wrapped in a parent with <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">aria-label="X unread"</code>.
+                </A11yRow>
+                <A11yRow check="Disabled tags">
+                  Disabled tags set <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">disabled</code> on the button and prevent <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">onClick</code> from firing.
+                </A11yRow>
               </div>
-            </Section>
-
-            <Section title="Contrast">
-              <SpecTable rows={[
-                { property: 'Success text on tint',  value: '#22C55E on white', token: '3.2:1 — use sparingly in dense contexts' },
-                { property: 'Error text on tint',    value: '#F87171 on white', token: '3.6:1 — pair with label for clarity' },
-                { property: 'Warning text on tint',  value: '#FB7D3C on white', token: '3.1:1 — icon + label recommended' },
-                { property: 'Default text',          value: '#505867 on #EDEEF1', token: '7.4:1 ✓ AA' },
-                { property: 'AI text on tint',       value: '#653FFF on white', token: '6.9:1 ✓ AA' },
-              ]} />
-              <Annotation>Where icon-only badges are unavoidable, add a visually hidden text description using sr-only.</Annotation>
             </Section>
           </PageContent>
         </TabPanel>
+
       </ComponentTabs>
     </div>
   )
