@@ -146,7 +146,7 @@ export function ColorRow({ label, hex, role, border }: { label: string; hex: str
 // Figma: green border #16a34a, header bg #f0fdf5, body bg white, check-circle icon
 export function DoCard({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-[8px] border border-[#16a34a] dark:border-[#16a34a]/40 bg-[#f0fdf5] dark:bg-[#052e14]/30 overflow-hidden">
+    <div className="rounded-[8px] border border-[#16a34a] dark:border-[#16a34a]/40 bg-white dark:bg-[#0D1117] overflow-hidden">
       <div className="flex items-center gap-2 h-[38px] pl-4 bg-[#f0fdf5] dark:bg-[#052e14]/50 border-b border-[#16a34a] dark:border-[#16a34a]/40">
         {/* HeroIcons solid check-circle */}
         <svg className="w-6 h-6 text-[#16a34a] dark:text-[#4ade80] shrink-0" viewBox="0 0 24 24" fill="currentColor">

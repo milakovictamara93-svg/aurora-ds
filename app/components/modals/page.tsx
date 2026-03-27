@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 import PageHeader from '@/app/components-lib/ui/PageHeader'
 import Modal from '@/app/components-lib/ui/Modal'
 import {
@@ -38,7 +39,9 @@ function ModalShell({
           <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mt-0.5">{subtitle}</p>
         </div>
         {!isDrawer && (
-          <div className="w-5 h-5 flex items-center justify-center text-[#505867] dark:text-[#9CA3AF] text-[12px]">×</div>
+          <div className="w-6 h-6 flex items-center justify-center text-[#505867] dark:text-[#9CA3AF]">
+            <XMarkIcon className="w-5 h-5" />
+          </div>
         )}
       </div>
 
@@ -106,6 +109,64 @@ export default function ModalsPage() {
                 "Don't nest modals — only one modal should be visible at a time.",
                 "Don't use modals for content the user might need to reference repeatedly — keep it in the page.",
               ]} />
+            </Section>
+
+            <Section title="How to choose a type">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {[
+                  {
+                    type: 'Standard',
+                    width: '880px · centered',
+                    when: 'Use when the user needs to complete a task or review content that requires focus — forms, editing details, reviewing long information. Large enough for rich content without leaving the page.',
+                    examples: ['Edit building details', 'Upload or review a file', 'Configure settings'],
+                    color: 'border-blue-200 dark:border-blue-900',
+                    badge: 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300',
+                  },
+                  {
+                    type: 'Confirmation',
+                    width: '480px · centered',
+                    when: 'Use only for irreversible or destructive actions that need explicit user consent. Keep it short — one question, one consequence statement, two buttons.',
+                    examples: ['Delete a record', 'Submit a report', 'Remove a team member'],
+                    color: 'border-error-200 dark:border-error-900',
+                    badge: 'bg-error-50 text-error-700 dark:bg-error-950/40 dark:text-error-300',
+                  },
+                  {
+                    type: 'Full-screen',
+                    width: 'Fills viewport',
+                    when: 'Use for complex workflows or editors where the user needs maximum space and shouldn\'t be distracted by the page behind. Reserve this for genuinely immersive tasks.',
+                    examples: ['Rich text / data editor', 'Multi-step onboarding flow', 'Full report builder'],
+                    color: 'border-[#9785FF]/40 dark:border-[#9785FF]/30',
+                    badge: 'bg-[#EDE9FE] text-[#4C1D95] dark:bg-[#2e1065]/40 dark:text-[#c4b5fd]',
+                  },
+                  {
+                    type: 'Drawer',
+                    width: '480px · slides from right',
+                    when: 'Use for supplementary context — details, filters, or side panels that complement the current page without fully blocking it. The user can reference the page through the overlay.',
+                    examples: ['Building details side panel', 'Filter controls', 'Activity log'],
+                    color: 'border-[#EDEEF1] dark:border-[#1F2430]',
+                    badge: 'bg-[#F7F8F8] text-[#505867] dark:bg-[#1F2430] dark:text-[#9CA3AF]',
+                  },
+                ].map(({ type, width, when, examples, color, badge }) => (
+                  <div key={type} className={`rounded-lg border ${color} bg-white dark:bg-[#0D1117] p-4 flex flex-col gap-3`}>
+                    <div className="flex items-center justify-between">
+                      <p className="text-[14px] font-semibold text-[#111827] dark:text-white">{type}</p>
+                      <span className={`text-[11px] font-medium px-2 py-0.5 rounded ${badge}`}>{width}</span>
+                    </div>
+                    <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-[150%]">{when}</p>
+                    <div>
+                      <p className="text-[11px] font-semibold text-[#9CA3AF] dark:text-[#6B7280] uppercase tracking-wide mb-1.5">Common uses</p>
+                      <ul className="flex flex-col gap-1">
+                        {examples.map(ex => (
+                          <li key={ex} className="flex items-center gap-2 text-[12px] text-[#505867] dark:text-[#9CA3AF]">
+                            <span className="w-1 h-1 rounded-full bg-[#D7DAE0] dark:bg-[#374151] shrink-0" />
+                            {ex}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </Section>
 
             {/* Live demo buttons */}
