@@ -353,175 +353,330 @@ export function StatesTable({
 // ── RelatedComponents preview registry ────────────────────────────────────────
 const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
   '/components/buttons': (
-    <div className="flex flex-col gap-1.5">
-      <div className="h-7 flex items-center justify-center rounded bg-[#1258F8] px-3">
-        <span className="text-[11px] font-semibold text-white">Primary</span>
+    <div className="flex flex-col gap-2">
+      {/* Primary */}
+      <div className="h-8 flex items-center justify-center gap-1.5 rounded bg-[#1258F8] px-4">
+        <span className="text-[12px] font-semibold text-white">Save changes</span>
       </div>
-      <div className="h-7 flex items-center justify-center rounded border border-[#1258F8] px-3">
-        <span className="text-[11px] font-semibold text-[#1258F8]">Secondary</span>
+      {/* Secondary */}
+      <div className="h-8 flex items-center justify-center gap-1.5 rounded border border-[#1258F8] px-4">
+        <span className="text-[12px] font-semibold text-[#1258F8]">Export</span>
       </div>
-      <div className="h-7 flex items-center justify-center rounded border border-[#D7DAE0] dark:border-[#374151] px-3">
-        <span className="text-[11px] font-semibold text-[#505867] dark:text-[#9CA3AF]">Tertiary</span>
+      {/* Tertiary */}
+      <div className="h-8 flex items-center justify-center gap-1.5 rounded border border-[#D7DAE0] dark:border-[#374151] px-4">
+        <span className="text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF]">Cancel</span>
       </div>
     </div>
   ),
   '/components/inputs': (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
+      {/* Default with value */}
       <div className="flex flex-col gap-1">
-        <span className="text-[10px] font-medium text-[#1F2430] dark:text-white">Label</span>
-        <div className="h-7 flex items-center px-2.5 rounded border border-[#D7DAE0] dark:border-[#374151] bg-white dark:bg-[#0D1117]">
-          <span className="text-[11px] text-[#1F2430] dark:text-white">Value</span>
+        <span className="text-[10px] font-semibold text-[#1F2430] dark:text-white">Building name</span>
+        <div className="h-8 flex items-center px-2.5 rounded border border-[#1258F8] bg-white dark:bg-[#0D1117] ring-2 ring-[#1258F8]/20">
+          <span className="text-[11px] text-[#1F2430] dark:text-white">Scaler HQ</span>
         </div>
+        <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">Enter a unique identifier</span>
       </div>
+      {/* Error state */}
       <div className="flex flex-col gap-1">
-        <span className="text-[10px] font-medium text-[#1F2430] dark:text-white">Email</span>
-        <div className="h-7 flex items-center px-2.5 rounded border border-[#D7DAE0] dark:border-[#374151] bg-white dark:bg-[#0D1117]">
-          <span className="text-[11px] text-[#8C96A4]">placeholder@email.com</span>
+        <span className="text-[10px] font-semibold text-[#1F2430] dark:text-white">Email address</span>
+        <div className="h-8 flex items-center px-2.5 rounded border border-[#EF4444] bg-white dark:bg-[#0D1117]">
+          <span className="text-[11px] text-[#8C96A4]">name@example</span>
         </div>
+        <span className="text-[10px] text-[#EF4444]">Enter a valid email address</span>
+      </div>
+    </div>
+  ),
+  '/components/controls': (
+    <div className="flex flex-col gap-2.5">
+      {/* Toggle on */}
+      <div className="flex items-center gap-2">
+        <div className="w-8 h-4 rounded-full bg-[#1258F8] relative shrink-0">
+          <span className="absolute top-[1px] right-[1.5px] bottom-[1px] w-[14px] rounded-full bg-white shadow-sm" />
+        </div>
+        <span className="text-[11px] text-[#1F2430] dark:text-white">Notifications on</span>
+      </div>
+      {/* Checkbox checked */}
+      <div className="flex items-center gap-2">
+        <span className="inline-flex items-center justify-center w-4 h-4 rounded-[2px] bg-[#1258F8] border-[1.5px] border-[#1258F8] shrink-0">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+            <path d="M2 5L4 7.5L8.5 2.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </span>
+        <span className="text-[11px] text-[#1F2430] dark:text-white">Accept terms</span>
+      </div>
+      {/* Radio selected */}
+      <div className="flex items-center gap-2">
+        <span className="inline-flex items-center justify-center w-4 h-4 rounded-full border-2 border-[#1258F8] bg-white dark:bg-[#111827] shrink-0">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#1258F8]" />
+        </span>
+        <span className="text-[11px] text-[#1F2430] dark:text-white">Monthly billing</span>
+      </div>
+      {/* Toggle off */}
+      <div className="flex items-center gap-2">
+        <div className="w-8 h-4 rounded-full bg-[#D7DAE0] dark:bg-[#374151] relative shrink-0">
+          <span className="absolute top-[1px] left-[1.5px] bottom-[1px] w-[14px] rounded-full bg-white shadow-sm" />
+        </div>
+        <span className="text-[11px] text-[#505867] dark:text-[#9CA3AF]">Dark mode off</span>
       </div>
     </div>
   ),
   '/components/badges-tags': (
-    <div className="flex flex-wrap gap-1.5">
-      {([
-        { label: 'Default', bg: '#D9EAFF', fg: '#173691' },
-        { label: 'Success', bg: '#DCFCE7', fg: '#166534' },
-        { label: 'Error',   bg: '#FEE2E2', fg: '#991B1B' },
-        { label: 'Warning', bg: '#FFEDD5', fg: '#9A3412' },
-        { label: 'AI',      bg: '#EDE9FE', fg: '#4C1D95' },
-      ] as {label:string;bg:string;fg:string}[]).map(({ label, bg, fg }) => (
-        <span key={label} className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold" style={{ background: bg, color: fg }}>
-          {label}
-        </span>
-      ))}
+    <div className="flex flex-col gap-2">
+      {/* Tags row */}
+      <div className="flex flex-wrap gap-1.5">
+        {([
+          { label: 'Default', bg: '#D9EAFF', fg: '#173691' },
+          { label: 'Success', bg: '#DCFCE7', fg: '#166534' },
+          { label: 'Error',   bg: '#FEE2E2', fg: '#991B1B' },
+        ] as {label:string;bg:string;fg:string}[]).map(({ label, bg, fg }) => (
+          <span key={label} className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold" style={{ background: bg, color: fg }}>
+            {label}
+          </span>
+        ))}
+      </div>
+      {/* Indicator dots row */}
+      <div className="flex flex-wrap gap-1.5">
+        {([
+          { label: 'Active',   bg: '#DCFCE7', fg: '#166534', dot: '#22C55E' },
+          { label: 'Warning',  bg: '#FFEDD5', fg: '#9A3412', dot: '#F97316' },
+          { label: 'AI',       bg: '#EDE9FE', fg: '#4C1D95', dot: '#653FFF' },
+        ] as {label:string;bg:string;fg:string;dot:string}[]).map(({ label, bg, fg, dot }) => (
+          <span key={label} className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold" style={{ background: bg, color: fg }}>
+            <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: dot }} />
+            {label}
+          </span>
+        ))}
+      </div>
     </div>
   ),
   '/components/cards': (
-    <div className="rounded-md border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] overflow-hidden">
-      <div className="px-3 py-2 border-b border-[#EDEEF1] dark:border-[#1F2430] flex items-center justify-between">
-        <span className="text-[11px] font-semibold text-[#111827] dark:text-white">Card title</span>
-        <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold bg-[#DCFCE7] text-[#166534]">Active</span>
+    <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] overflow-hidden shadow-sm">
+      <div className="px-3 py-2.5 border-b border-[#EDEEF1] dark:border-[#1F2430] flex items-center justify-between">
+        <span className="text-[12px] font-semibold text-[#111827] dark:text-white">Scaler HQ</span>
+        <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-semibold bg-[#DCFCE7] text-[#166534]">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E]" />
+          Active
+        </span>
       </div>
-      <div className="px-3 py-2">
-        <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">Card body content goes here.</span>
+      <div className="px-3 py-2 flex flex-col gap-1">
+        <div className="flex justify-between">
+          <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">Score</span>
+          <span className="text-[10px] font-semibold text-[#111827] dark:text-white">92 / 100</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">Last updated</span>
+          <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">Today</span>
+        </div>
       </div>
     </div>
   ),
   '/components/tables': (
-    <div className="rounded-md border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
-      <div className="grid grid-cols-3 bg-[#F7F8F8] dark:bg-[#1F2430] px-2 py-1.5 border-b border-[#EDEEF1] dark:border-[#1F2430]">
-        {['Name', 'Status', 'Score'].map(h => (
-          <span key={h} className="text-[9px] font-semibold text-[#505867] dark:text-[#9CA3AF] uppercase tracking-wide">{h}</span>
+    <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
+      <div className="grid grid-cols-3 bg-[#F7F8F8] dark:bg-[#1F2430] px-3 py-1.5 border-b border-[#EDEEF1] dark:border-[#1F2430]">
+        {['Building', 'Status', 'Score'].map(h => (
+          <span key={h} className="text-[9px] font-bold text-[#505867] dark:text-[#9CA3AF] uppercase tracking-wide">{h}</span>
         ))}
       </div>
-      {[['Scaler HQ', 'Active', '92'], ['Tower B', 'Pending', '74']].map(([name, status, score]) => (
-        <div key={name} className="grid grid-cols-3 px-2 py-1.5 border-b border-[#EDEEF1] dark:border-[#1F2430] last:border-0">
-          <span className="text-[10px] text-[#111827] dark:text-white">{name}</span>
-          <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">{status}</span>
+      {[
+        { name: 'Scaler HQ',  status: 'Active',  statusBg: '#DCFCE7', statusFg: '#166534', score: '92' },
+        { name: 'Tower B',    status: 'Pending',  statusBg: '#FFEDD5', statusFg: '#9A3412', score: '74' },
+        { name: 'West Wing',  status: 'Inactive', statusBg: '#F1F2F4', statusFg: '#505867', score: '—'  },
+      ].map(({ name, status, statusBg, statusFg, score }) => (
+        <div key={name} className="grid grid-cols-3 items-center px-3 py-1.5 border-b border-[#EDEEF1] dark:border-[#1F2430] last:border-0">
+          <span className="text-[10px] font-medium text-[#111827] dark:text-white">{name}</span>
+          <span className="inline-flex w-fit items-center px-1.5 py-0.5 rounded text-[9px] font-semibold" style={{ background: statusBg, color: statusFg }}>{status}</span>
           <span className="text-[10px] text-[#111827] dark:text-white">{score}</span>
         </div>
       ))}
     </div>
   ),
   '/components/modals': (
-    <div className="rounded-md border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] overflow-hidden shadow-sm">
-      <div className="px-3 py-2 border-b border-[#EDEEF1] dark:border-[#1F2430]">
-        <span className="text-[11px] font-semibold text-[#111827] dark:text-white">Confirm action</span>
-      </div>
-      <div className="px-3 py-2">
-        <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">Are you sure you want to proceed?</span>
-      </div>
-      <div className="px-3 py-2 flex gap-2 justify-end border-t border-[#EDEEF1] dark:border-[#1F2430]">
-        <div className="h-5 px-2 flex items-center rounded border border-[#D7DAE0] dark:border-[#374151]">
-          <span className="text-[9px] font-medium text-[#505867] dark:text-[#9CA3AF]">Cancel</span>
+    <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] overflow-hidden shadow-level-3">
+      {/* Header */}
+      <div className="flex items-center justify-between px-4 pt-4 pb-3 border-b border-[#EDEEF1] dark:border-[#1F2430]">
+        <div>
+          <p className="text-[12px] font-bold text-[#111827] dark:text-white">Delete building?</p>
+          <p className="text-[10px] text-[#505867] dark:text-[#9CA3AF] mt-0.5">This action cannot be undone.</p>
         </div>
-        <div className="h-5 px-2 flex items-center rounded bg-[#1258F8]">
-          <span className="text-[9px] font-medium text-white">Confirm</span>
+        <div className="w-5 h-5 flex items-center justify-center text-[#505867] dark:text-[#9CA3AF]">
+          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+        </div>
+      </div>
+      {/* Body */}
+      <div className="px-4 py-3">
+        <p className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">All associated ESG data will be permanently removed from your account.</p>
+      </div>
+      {/* Footer */}
+      <div className="flex items-center justify-between px-4 py-3 border-t border-[#EDEEF1] dark:border-[#1F2430]">
+        <span className="text-[10px] font-medium text-[#EF4444]">Delete</span>
+        <div className="flex items-center gap-1.5">
+          <div className="h-6 px-2.5 flex items-center rounded border border-[#D7DAE0] dark:border-[#374151]">
+            <span className="text-[10px] font-medium text-[#111827] dark:text-white">Cancel</span>
+          </div>
+          <div className="h-6 px-2.5 flex items-center rounded bg-[#1258F8]">
+            <span className="text-[10px] font-medium text-white">Confirm</span>
+          </div>
         </div>
       </div>
     </div>
   ),
   '/components/banner': (
     <div className="flex flex-col gap-1.5">
-      {([
-        { bg: '#FEF2F2', border: '#FECACA', icon: '●', iconColor: '#EF4444', label: 'Error banner message' },
-        { bg: '#F0FDF5', border: '#BBF7D1', icon: '●', iconColor: '#22C55E', label: 'Success — action completed' },
-        { bg: '#EEF6FF', border: '#BBDAFF', icon: '●', iconColor: '#2F7DFF', label: 'Default information banner' },
-      ] as {bg:string;border:string;icon:string;iconColor:string;label:string}[]).map(({ bg, border, icon, iconColor, label }) => (
-        <div key={label} className="flex items-center gap-1.5 px-2 py-1 rounded border text-[10px]" style={{ background: bg, borderColor: border }}>
-          <span style={{ color: iconColor }}>{icon}</span>
-          <span className="text-[#1F2430] dark:text-[#111827]">{label}</span>
+      {/* System banner — error, 40px */}
+      <div className="flex items-center gap-2 px-3 h-10 rounded border" style={{ background: '#FEF2F2', borderColor: '#FECACA' }}>
+        <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="#EF4444">
+          <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clipRule="evenodd" />
+        </svg>
+        <span className="text-[11px] font-medium flex-1" style={{ color: '#7F1D1D' }}>Connection error — retry required</span>
+        <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+      </div>
+      {/* Regular banner — success, with description */}
+      <div className="flex items-start gap-2 px-3 py-2 rounded border" style={{ background: '#F0FDF5', borderColor: '#BBF7D0' }}>
+        <svg className="w-4 h-4 shrink-0 mt-px" viewBox="0 0 24 24" fill="#22C55E">
+          <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
+        </svg>
+        <div className="flex-1 min-w-0">
+          <p className="text-[11px] font-semibold" style={{ color: '#14532D' }}>Report submitted</p>
+          <p className="text-[10px] mt-0.5" style={{ color: '#166534' }}>Your ESG data has been saved.</p>
         </div>
-      ))}
+        <svg className="w-3.5 h-3.5 shrink-0 mt-px" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+      </div>
     </div>
   ),
   '/components/toasts': (
     <div className="flex flex-col gap-1.5">
-      {([
-        { bg: '#F0FDF5', border: '#86EFAD', iconColor: '#22C55E', label: 'Changes saved successfully.' },
-        { bg: '#FEF2F2', border: '#FCA5A5', iconColor: '#EF4444', label: 'Something went wrong.' },
-        { bg: '#EEF6FF', border: '#8CC4FF', iconColor: '#2F7DFF', label: 'Export is processing.' },
-      ] as {bg:string;border:string;iconColor:string;label:string}[]).map(({ bg, border, iconColor, label }) => (
-        <div key={label} className="flex items-center gap-1.5 px-2 py-1.5 rounded border text-[10px]" style={{ background: bg, borderColor: border }}>
-          <span style={{ color: iconColor }} className="font-bold shrink-0">●</span>
-          <span className="text-[#111827] font-medium">{label}</span>
+      {/* Success toast */}
+      <div className="flex items-start gap-2 px-3 py-2.5 rounded-lg border shadow-sm" style={{ background: '#F0FDF5', borderColor: '#86EFAC' }}>
+        <svg className="w-4 h-4 shrink-0 mt-px" viewBox="0 0 24 24" fill="#22C55E">
+          <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
+        </svg>
+        <div className="flex-1">
+          <p className="text-[11px] font-semibold" style={{ color: '#14532D' }}>Changes saved</p>
+          <p className="text-[10px] mt-0.5" style={{ color: '#166534' }}>Your data has been updated.</p>
         </div>
-      ))}
+        <svg className="w-3.5 h-3.5 shrink-0 mt-px" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+      </div>
+      {/* Error toast */}
+      <div className="flex items-start gap-2 px-3 py-2.5 rounded-lg border shadow-sm" style={{ background: '#FEF2F2', borderColor: '#FCA5A5' }}>
+        <svg className="w-4 h-4 shrink-0 mt-px" viewBox="0 0 24 24" fill="#EF4444">
+          <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clipRule="evenodd" />
+        </svg>
+        <div className="flex-1">
+          <p className="text-[11px] font-semibold" style={{ color: '#7F1D1D' }}>Something went wrong</p>
+          <p className="text-[10px] mt-0.5" style={{ color: '#991B1B' }}>Please try again.</p>
+        </div>
+        <svg className="w-3.5 h-3.5 shrink-0 mt-px" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+      </div>
     </div>
   ),
   '/components/navigation': (
     <div className="flex flex-col gap-0.5">
-      {['Overview', 'Components', 'Patterns', 'Foundations'].map((item, i) => (
-        <div key={item} className={`px-2 py-1.5 rounded text-[10px] font-medium ${i === 1 ? 'bg-[#D9EAFF] text-[#1258F8]' : 'text-[#505867] dark:text-[#9CA3AF]'}`}>
-          {item}
-        </div>
-      ))}
+      <div className="px-2 py-1.5 rounded text-[10px] font-medium text-[#505867] dark:text-[#9CA3AF]">Overview</div>
+      <div className="px-2 py-1.5 rounded bg-[#D9EAFF] text-[10px] font-semibold text-[#1258F8]">Components</div>
+      <div className="px-2 py-1.5 rounded text-[10px] font-medium text-[#505867] dark:text-[#9CA3AF]">Patterns</div>
+      <div className="px-2 py-1.5 rounded text-[10px] font-medium text-[#505867] dark:text-[#9CA3AF]">Foundations</div>
+    </div>
+  ),
+  '/components/button-group': (
+    <div className="flex flex-col gap-2">
+      <div className="flex rounded border border-[#D7DAE0] dark:border-[#374151] overflow-hidden w-fit">
+        {['Day', 'Week', 'Month'].map((label, i) => (
+          <div
+            key={label}
+            className={`h-8 px-3 flex items-center text-[11px] font-semibold border-r border-[#D7DAE0] dark:border-[#374151] last:border-0 ${i === 1 ? 'bg-[#1258F8] text-white' : 'text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-[#111827]'}`}
+          >
+            {label}
+          </div>
+        ))}
+      </div>
+      <div className="flex gap-1.5">
+        {(['Export', 'Share', 'Archive'] as const).map((label, i) => (
+          <div key={label} className={`h-7 px-2.5 flex items-center rounded text-[10px] font-semibold border ${i === 0 ? 'bg-[#1258F8] text-white border-[#1258F8]' : 'text-[#505867] dark:text-[#9CA3AF] border-[#D7DAE0] dark:border-[#374151] bg-white dark:bg-[#111827]'}`}>
+            {label}
+          </div>
+        ))}
+      </div>
     </div>
   ),
   '/foundations/typography': (
-    <div className="flex flex-col gap-1">
-      <span className="text-[18px] font-bold text-[#111827] dark:text-white leading-tight">Heading</span>
-      <span className="text-[13px] font-semibold text-[#111827] dark:text-white">Subheading</span>
-      <span className="text-[11px] text-[#505867] dark:text-[#9CA3AF]">Body text — 16px / 145%</span>
-      <span className="text-[10px] text-[#8C96A4]">Caption — 12px</span>
+    <div className="flex flex-col gap-1.5">
+      <span className="text-[18px] font-bold text-[#111827] dark:text-white leading-tight">Display heading</span>
+      <span className="text-[14px] font-semibold text-[#111827] dark:text-white">Section subheading</span>
+      <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">Body — 16px, 145% line-height, Manrope</span>
+      <span className="text-[10px] text-[#8C96A4] tracking-wide">CAPTION · LABEL · 12PX</span>
     </div>
   ),
   '/patterns/esg-data': (
-    <div className="flex flex-wrap gap-1.5">
-      {([
-        { label: 'Energy',  bg: '#FFE2E4', fg: '#C80831' },
-        { label: 'GHG',     bg: '#FFD188', fg: '#B73306' },
-        { label: 'Water',   bg: '#A5F5FC', fg: '#0E7790' },
-        { label: 'Waste',   bg: '#BEDCCD', fg: '#285446' },
-      ] as {label:string;bg:string;fg:string}[]).map(({ label, bg, fg }) => (
-        <span key={label} className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold" style={{ background: bg, color: fg }}>
-          {label}
-        </span>
-      ))}
+    <div className="flex flex-col gap-1.5">
+      <div className="flex flex-wrap gap-1">
+        {([
+          { label: 'Energy', bg: '#FFE2E4', fg: '#C80831' },
+          { label: 'GHG',    bg: '#FFD188', fg: '#B73306' },
+          { label: 'Water',  bg: '#A5F5FC', fg: '#0E7790' },
+          { label: 'Waste',  bg: '#BEDCCD', fg: '#285446' },
+        ] as {label:string;bg:string;fg:string}[]).map(({ label, bg, fg }) => (
+          <span key={label} className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold" style={{ background: bg, color: fg }}>
+            {label}
+          </span>
+        ))}
+      </div>
+      {/* Mini data bar chart */}
+      <div className="flex items-end gap-1 h-10 mt-1">
+        {[60, 85, 45, 70, 92, 55].map((h, i) => (
+          <div key={i} className="flex-1 rounded-t" style={{ height: `${h}%`, background: i % 2 === 0 ? '#2295FF' : '#D9EAFF' }} />
+        ))}
+      </div>
     </div>
   ),
   '/patterns/empty-states': (
-    <div className="flex flex-col items-center gap-1.5 py-1">
-      <div className="w-8 h-8 rounded-full bg-[#F7F8F8] dark:bg-[#1F2430] flex items-center justify-center">
-        <div className="w-4 h-4 rounded border-2 border-[#D7DAE0] dark:border-[#374151]" />
+    <div className="flex flex-col items-center gap-2 py-2">
+      <div className="w-10 h-10 rounded-full bg-[#F7F8F8] dark:bg-[#1F2430] flex items-center justify-center">
+        <svg className="w-5 h-5 text-[#D7DAE0] dark:text-[#374151]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776" />
+        </svg>
       </div>
-      <span className="text-[10px] font-medium text-[#111827] dark:text-white">No data yet</span>
-      <span className="text-[9px] text-[#8C96A4] text-center">Add your first item to get started.</span>
+      <span className="text-[11px] font-semibold text-[#111827] dark:text-white">No data yet</span>
+      <span className="text-[10px] text-[#8C96A4] text-center leading-tight">Add your first item<br/>to get started.</span>
+      <div className="h-6 px-3 flex items-center rounded bg-[#1258F8] mt-0.5">
+        <span className="text-[10px] font-semibold text-white">Add item</span>
+      </div>
     </div>
   ),
   '/patterns/accessibility': (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-2">
+      {/* Contrast example */}
       <div className="flex items-center gap-1.5">
-        <div className="w-2.5 h-2.5 rounded-full bg-[#22C55E]" />
-        <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">AA 4.5:1 contrast</span>
+        <div className="w-5 h-5 rounded flex items-center justify-center bg-[#111827]">
+          <span className="text-[8px] font-bold text-white">Aa</span>
+        </div>
+        <div className="flex-1 h-1.5 rounded-full bg-[#EDEEF1] dark:bg-[#1F2430]">
+          <div className="h-1.5 rounded-full bg-[#22C55E] w-[90%]" />
+        </div>
+        <span className="text-[9px] font-semibold text-[#22C55E]">AAA</span>
       </div>
+      {/* Focus ring */}
       <div className="flex items-center gap-1.5">
-        <div className="w-2.5 h-2.5 rounded-full bg-[#2295FF]" />
+        <div className="w-5 h-5 rounded border-2 border-[#1258F8] ring-2 ring-[#1258F8]/30 bg-white dark:bg-[#111827]" />
         <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">Focus ring visible</span>
       </div>
+      {/* Keyboard */}
       <div className="flex items-center gap-1.5">
-        <div className="w-2.5 h-2.5 rounded-full bg-[#653FFF]" />
-        <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">Keyboard navigable</span>
+        <span className="inline-flex items-center px-1.5 py-0.5 rounded border border-[#D7DAE0] dark:border-[#374151] bg-[#F7F8F8] dark:bg-[#1F2430]">
+          <span className="text-[9px] font-mono text-[#505867] dark:text-[#9CA3AF]">Tab</span>
+        </span>
+        <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">Keyboard nav</span>
       </div>
     </div>
   ),
