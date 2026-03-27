@@ -441,6 +441,20 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
       </div>
     </div>
   ),
+  '/components/banner': (
+    <div className="flex flex-col gap-1.5">
+      {([
+        { bg: '#FEF2F2', border: '#FECACA', icon: '●', iconColor: '#EF4444', label: 'Error banner message' },
+        { bg: '#F0FDF5', border: '#BBF7D1', icon: '●', iconColor: '#22C55E', label: 'Success — action completed' },
+        { bg: '#EEF6FF', border: '#BBDAFF', icon: '●', iconColor: '#2F7DFF', label: 'Default information banner' },
+      ] as {bg:string;border:string;icon:string;iconColor:string;label:string}[]).map(({ bg, border, icon, iconColor, label }) => (
+        <div key={label} className="flex items-center gap-1.5 px-2 py-1 rounded border text-[10px]" style={{ background: bg, borderColor: border }}>
+          <span style={{ color: iconColor }}>{icon}</span>
+          <span className="text-[#1F2430] dark:text-[#111827]">{label}</span>
+        </div>
+      ))}
+    </div>
+  ),
   '/components/toasts': (
     <div className="flex flex-col gap-1.5">
       <div className="flex items-start gap-2 px-3 py-2 rounded-md bg-[#111827] dark:bg-[#1F2430]">

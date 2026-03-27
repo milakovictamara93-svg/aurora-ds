@@ -66,7 +66,7 @@ const COMPONENT_GROUPS: NavGroup[] = [
     items: [
       { href: '/components/toasts', label: 'Toast',  available: false },
       { href: '/components/modals', label: 'Modal',  available: false },
-      { href: '/components/banner', label: 'Banner', available: false },
+      { href: '/components/banner', label: 'Banner' },
     ],
   },
   {
