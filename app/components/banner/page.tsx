@@ -227,7 +227,7 @@ export default function BannerPage() {
               <SpecTable rows={[
                 { property: 'Error',        value: 'XCircleIcon · bg-error-50 · border-error-200',               token: 'variant="error"' },
                 { property: 'Warning',      value: 'ExclamationCircleIcon · bg-warning-50 · border-warning-200', token: 'variant="warning"' },
-                { property: 'Missing info', value: 'ExclamationTriangleIcon · bg-warning-50 · border-warning-200', token: 'variant="missing-info"' },
+                { property: 'Missing info', value: 'ExclamationTriangleIcon · bg-missing-info-50 · border-missing-info-200', token: 'variant="missing-info"' },
                 { property: 'Success',      value: 'CheckCircleIcon · bg-success-50 · border-success-200',       token: 'variant="success"' },
                 { property: 'Default',      value: 'InformationCircleIcon · bg-blue-50 · border-blue-200',       token: 'variant="default"' },
               ]} />
