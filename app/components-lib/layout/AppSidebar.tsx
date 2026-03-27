@@ -27,7 +27,7 @@ const FOUNDATIONS: NavGroup = {
     { href: '/foundations/typography',      label: 'Typography' },
     { href: '/foundations/spacing',         label: 'Spacing' },
     { href: '/foundations/icons',           label: 'Icons' },
-    { href: '/foundations/borders-shadows', label: 'Borders & Shadows', available: false },
+    { href: '/foundations/borders-shadows', label: 'Borders & Shadows' },
   ],
 }
 
