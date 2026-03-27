@@ -1,3 +1,4 @@
+import { CheckIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import PageHeader from '@/app/components-lib/ui/PageHeader'
 
 // ── Type scale data (source of truth — mirrors Figma node 22:8058) ────────────
@@ -247,23 +248,23 @@ export default function TypographyPage() {
                 <p className="text-[11px] uppercase tracking-widest font-semibold text-token-muted mb-3">By element</p>
                 <ul className="space-y-2.5 text-sm text-token-secondary">
                   <li className="flex items-start gap-2.5">
-                    <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
+                    <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
                     <span><strong className="text-token-primary font-semibold">Navigation</strong> (side nav, top nav, tabs) — Title Case</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
+                    <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
                     <span><strong className="text-token-primary font-semibold">Titles, headings, descriptions, body text</strong> — Sentence case</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
+                    <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
                     <span><strong className="text-token-primary font-semibold">CTAs and buttons</strong> — Sentence case (e.g., "Save changes", not "Save Changes")</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
+                    <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
                     <span><strong className="text-token-primary font-semibold">Acronyms</strong> — uppercase only when widely recognised (e.g., NABERS, ESG, GHG)</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
+                    <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
                     <span><strong className="text-token-primary font-semibold">Caption style</strong> — uppercase via CSS text-transform, never typed in caps</span>
                   </li>
                 </ul>
@@ -272,19 +273,19 @@ export default function TypographyPage() {
                 <p className="text-[11px] uppercase tracking-widest font-semibold text-token-muted mb-3">What to avoid</p>
                 <ul className="space-y-2.5 text-sm text-token-secondary">
                   <li className="flex items-start gap-2.5">
-                    <span className="text-error-600 font-bold shrink-0 w-5 mt-px">✗</span>
+                    <XMarkIcon className="w-4 h-4 text-error-600 shrink-0 mt-px" />
                     <span>All caps for body text or headings — reduces readability</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <span className="text-error-600 font-bold shrink-0 w-5 mt-px">✗</span>
+                    <XMarkIcon className="w-4 h-4 text-error-600 shrink-0 mt-px" />
                     <span>Title case for body copy or button labels</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <span className="text-error-600 font-bold shrink-0 w-5 mt-px">✗</span>
+                    <XMarkIcon className="w-4 h-4 text-error-600 shrink-0 mt-px" />
                     <span>Italics — not part of the type system</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <span className="text-error-600 font-bold shrink-0 w-5 mt-px">✗</span>
+                    <XMarkIcon className="w-4 h-4 text-error-600 shrink-0 mt-px" />
                     <span>Underlines for emphasis — reserved for links only</span>
                   </li>
                 </ul>
@@ -313,19 +314,19 @@ export default function TypographyPage() {
             <h3 className="text-[14px] font-semibold text-token-primary mb-4">Emphasis & hierarchy</h3>
             <ul className="space-y-2.5 text-sm text-token-secondary">
               <li className="flex items-start gap-2.5">
-                <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
+                <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
                 <span><strong className="text-token-primary font-semibold">Bold only</strong> for emphasis — never italic, never underline</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
+                <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
                 <span>Minimum body text size: <strong className="text-token-primary font-semibold">16px</strong> (Paragraph Medium)</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
+                <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
                 <span>Default body text colour: <strong className="text-token-primary font-semibold">Grey 600 (#505867)</strong></span>
               </li>
               <li className="flex items-start gap-2.5">
-                <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
+                <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
                 <span>WCAG AA minimum: <strong className="text-token-primary font-semibold">4.5:1</strong> contrast for body text, <strong className="text-token-primary font-semibold">3:1</strong> for large text</span>
               </li>
             </ul>

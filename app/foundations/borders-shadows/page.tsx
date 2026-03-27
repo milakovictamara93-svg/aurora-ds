@@ -1,3 +1,4 @@
+import { CheckIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import PageHeader from '@/app/components-lib/ui/PageHeader'
 
 // ── Border radius scale (mirrors tailwind.config.ts) ─────────────────────────
@@ -151,19 +152,19 @@ export default function BordersShadowsPage() {
             <h3 className="text-[14px] font-semibold text-token-primary mb-4">Border radius rules</h3>
             <ul className="space-y-2.5 text-sm text-token-secondary">
               <li className="flex items-start gap-2.5">
-                <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
+                <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
                 <span>Always pick the nearest value from the approved scale: 2px, 4px, 6px, 8px, 12px, 16px, 9999px</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
+                <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
                 <span>Use <code className="font-mono text-xs bg-token-secondary px-1 py-0.5 rounded">rounded-full</code> only for circular shapes — avatars, pill badges, toggle tracks</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <span className="text-error-600 font-bold shrink-0 w-5 mt-px">✗</span>
+                <XMarkIcon className="w-4 h-4 text-error-600 shrink-0 mt-px" />
                 <span>Never use arbitrary values like <code className="font-mono text-xs bg-token-secondary px-1 py-0.5 rounded">rounded-[3px]</code> or <code className="font-mono text-xs bg-token-secondary px-1 py-0.5 rounded">rounded-[5px]</code></span>
               </li>
               <li className="flex items-start gap-2.5">
-                <span className="text-error-600 font-bold shrink-0 w-5 mt-px">✗</span>
+                <XMarkIcon className="w-4 h-4 text-error-600 shrink-0 mt-px" />
                 <span>Never mix different radius values within the same component — all four corners must use the same token</span>
               </li>
             </ul>
@@ -173,23 +174,23 @@ export default function BordersShadowsPage() {
             <h3 className="text-[14px] font-semibold text-token-primary mb-4">Shadow rules</h3>
             <ul className="space-y-2.5 text-sm text-token-secondary">
               <li className="flex items-start gap-2.5">
-                <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
+                <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
                 <span>Use the lowest level that communicates the right depth — prefer Level 1–2 for most UI surfaces</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
+                <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
                 <span>Increase elevation on interaction — e.g. a card can lift from Level 2 to Level 3 on hover</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <span className="text-error-600 font-bold shrink-0 w-5 mt-px">✗</span>
+                <XMarkIcon className="w-4 h-4 text-error-600 shrink-0 mt-px" />
                 <span>Never write custom box-shadow values — always use a level token</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <span className="text-error-600 font-bold shrink-0 w-5 mt-px">✗</span>
+                <XMarkIcon className="w-4 h-4 text-error-600 shrink-0 mt-px" />
                 <span>Never use colored or inset shadows — elevation shadows are greyscale only</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <span className="text-error-600 font-bold shrink-0 w-5 mt-px">✗</span>
+                <XMarkIcon className="w-4 h-4 text-error-600 shrink-0 mt-px" />
                 <span>Avoid shadows in dark mode surfaces — use borders or background contrast instead</span>
               </li>
             </ul>

@@ -1,3 +1,4 @@
+import { CheckIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import PageHeader from '@/app/components-lib/ui/PageHeader'
 
 // ── Spacing scale (source of truth — mirrors Figma node 46:39706) ─────────────
@@ -108,15 +109,15 @@ export default function SpacingPage() {
             <h3 className="text-[14px] font-semibold text-token-primary mb-4">What to avoid</h3>
             <ul className="space-y-2.5 text-sm text-token-secondary">
               <li className="flex items-start gap-2.5">
-                <span className="text-error-600 font-bold shrink-0 w-5 mt-px">✗</span>
+                <XMarkIcon className="w-4 h-4 text-error-600 shrink-0 mt-px" />
                 <span>Any value not in the scale — 3px, 5px, 7px, 10px, 15px, etc. are not valid</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <span className="text-error-600 font-bold shrink-0 w-5 mt-px">✗</span>
+                <XMarkIcon className="w-4 h-4 text-error-600 shrink-0 mt-px" />
                 <span>Arbitrary pixel values in code — always reference a scale token (e.g. <code className="font-mono text-xs bg-token-secondary px-1 py-0.5 rounded">p-4</code> not <code className="font-mono text-xs bg-token-secondary px-1 py-0.5 rounded">p-[15px]</code>)</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <span className="text-error-600 font-bold shrink-0 w-5 mt-px">✗</span>
+                <XMarkIcon className="w-4 h-4 text-error-600 shrink-0 mt-px" />
                 <span>Border radius values outside the approved set — use 4px, 8px, 12px, 16px only (no 3px, 5px, etc.)</span>
               </li>
             </ul>
