@@ -24,9 +24,9 @@ const FOUNDATIONS: NavGroup = {
   label: 'Foundations',
   items: [
     { href: '/foundations/colors',          label: 'Colors' },
-    { href: '/foundations/typography',      label: 'Typography',        available: false },
-    { href: '/foundations/spacing',         label: 'Spacing',           available: false },
-    { href: '/foundations/icons',           label: 'Icons',             available: false },
+    { href: '/foundations/typography',      label: 'Typography' },
+    { href: '/foundations/spacing',         label: 'Spacing' },
+    { href: '/foundations/icons',           label: 'Icons' },
     { href: '/foundations/borders-shadows', label: 'Borders & Shadows', available: false },
   ],
 }

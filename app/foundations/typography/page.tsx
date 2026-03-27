@@ -1,176 +1,338 @@
 import PageHeader from '@/app/components-lib/ui/PageHeader'
-import CodeBlock from '@/app/components-lib/ui/CodeBlock'
 
-const typeStyles = [
+// ── Type scale data (source of truth — mirrors Figma node 22:8058) ────────────
+
+const HEADING_WEIGHTS = [
+  { label: 'Regular',  class: 'font-normal',   value: 400 },
+  { label: 'Medium',   class: 'font-medium',    value: 500 },
+  { label: 'SemiBold', class: 'font-semibold',  value: 600 },
+  { label: 'Bold',     class: 'font-bold',      value: 700 },
+]
+
+const PARAGRAPH_WEIGHTS = [
+  { label: 'Regular', class: 'font-normal',  value: 400 },
+  { label: 'Medium',  class: 'font-medium',  value: 500 },
+  { label: 'Bold',    class: 'font-bold',    value: 700 },
+]
+
+const HEADINGS = [
   {
-    label: 'H1 — Display',
-    size: 28, lh: '140%', ls: '0', weight: '700 (Bold)',
-    className: 'text-3xl font-bold',
-    sample: 'Sustainable reporting for the built environment.',
-    usage: 'Page titles, hero headlines, modal titles',
-    token: 'text-3xl font-bold',
+    name: 'Heading 1',
+    token: 'text-3xl',
+    size: 28,
+    lineHeight: '140%',
+    letterSpacing: '0%',
+    paraSpacing: '0px',
+    tailwind: 'text-[28px] leading-[140%]',
+    sample: 'Heading H1',
   },
   {
-    label: 'H2 — Section heading',
-    size: 24, lh: '140%', ls: '0', weight: '600 (SemiBold)',
-    className: 'text-2xl font-semibold',
-    sample: 'ESG data overview',
-    usage: 'Section headers, card group titles',
-    token: 'text-2xl font-semibold',
+    name: 'Heading 2',
+    token: 'text-2xl',
+    size: 24,
+    lineHeight: '140%',
+    letterSpacing: '0%',
+    paraSpacing: '0px',
+    tailwind: 'text-[24px] leading-[140%]',
+    sample: 'Heading H2',
   },
   {
-    label: 'H3 — Subsection',
-    size: 20, lh: '140%', ls: '0', weight: '600 (SemiBold)',
-    className: 'text-xl font-semibold',
-    sample: 'Energy consumption metrics',
-    usage: 'Subsection headers, sidebar section labels',
-    token: 'text-xl font-semibold',
-  },
-  {
-    label: 'Body XL',
-    size: 21, lh: '145%', ls: '1.5%', weight: '400 (Regular)',
-    className: 'text-xl',
-    sample: 'Track your sustainability performance across all ESG categories with real-time data.',
-    usage: 'Lead paragraphs, feature descriptions',
+    name: 'Heading 3',
     token: 'text-xl',
+    size: 20,
+    lineHeight: '140%',
+    letterSpacing: '0%',
+    paraSpacing: '0px',
+    tailwind: 'text-[20px] leading-[140%]',
+    sample: 'Heading H3',
+  },
+]
+
+const PARAGRAPHS = [
+  {
+    name: 'Paragraph XLarge',
+    token: 'text-xl',
+    size: 21,
+    lineHeight: '145%',
+    letterSpacing: '1.5%',
+    paraSpacing: '0px',
+    tailwind: 'text-[21px] leading-[145%] tracking-[0.015em]',
+    sample: 'Create a design playbook that outlines the department\'s expectations, best practices.',
   },
   {
-    label: 'Body L',
-    size: 18, lh: '145%', ls: '1.5%', weight: '400 (Regular)',
-    className: 'text-lg',
-    sample: 'Monitor energy usage, GHG emissions, water consumption, and waste generation in a single dashboard.',
-    usage: 'Secondary body text, callouts',
+    name: 'Paragraph Large',
     token: 'text-lg',
+    size: 18,
+    lineHeight: '145%',
+    letterSpacing: '1.5%',
+    paraSpacing: '0px',
+    tailwind: 'text-[18px] leading-[145%] tracking-[0.015em]',
+    sample: 'Create a design playbook that outlines the department\'s expectations, best practices.',
   },
   {
-    label: 'Body M — Default',
-    size: 16, lh: '145%', ls: '1.5%', weight: '400 (Regular)',
-    className: 'text-base',
-    sample: 'Upload your ESG data, review collected information, and generate audit-ready reports with a single click. All data is encrypted at rest and in transit.',
-    usage: 'Default body text, descriptions, help text',
+    name: 'Paragraph Medium',
     token: 'text-base',
+    size: 16,
+    lineHeight: '145%',
+    letterSpacing: '1.5%',
+    paraSpacing: '0px',
+    tailwind: 'text-[16px] leading-[145%] tracking-[0.015em]',
+    sample: 'Create a design playbook that outlines the department\'s expectations, best practices.',
   },
   {
-    label: 'Body S',
-    size: 14, lh: '145%', ls: '1.5%', weight: '400 (Regular)',
-    className: 'text-sm',
-    sample: 'Last updated 14 March 2026 · 3 data sources connected · NABERS certified · Reporting period: FY2025',
-    usage: 'Secondary information, metadata, captions',
+    name: 'Paragraph Small',
     token: 'text-sm',
+    size: 14,
+    lineHeight: '145%',
+    letterSpacing: '1.5%',
+    paraSpacing: '0px',
+    tailwind: 'text-[14px] leading-[145%] tracking-[0.015em]',
+    sample: 'Create a design playbook that outlines the department\'s expectations, best practices.',
   },
   {
-    label: 'Body XS',
-    size: 12, lh: '145%', ls: '1.5%', weight: '400 (Regular)',
-    className: 'text-xs',
-    sample: 'Data verified by auditor on 1 March 2026. Reference number: SCL-2025-00142.',
-    usage: 'Fine print, legal text, timestamps',
+    name: 'Paragraph XSmall',
     token: 'text-xs',
+    size: 12,
+    lineHeight: '145%',
+    letterSpacing: '1.5%',
+    paraSpacing: '0px',
+    tailwind: 'text-[12px] leading-[145%] tracking-[0.015em]',
+    sample: 'Create a design playbook that outlines the department\'s expectations, best practices.',
   },
   {
-    label: 'Caption',
-    size: 12, lh: '120%', ls: '16%', weight: '500 (Medium)',
-    className: 'text-xs font-medium tracking-widest uppercase',
-    sample: 'DATA SOURCE · VERIFIED · Q4 2025',
-    usage: 'Labels, category names, table headers',
-    token: 'text-xs font-medium tracking-widest uppercase',
+    name: 'Paragraph XXSmall',
+    token: 'text-[11px]',
+    size: 11,
+    lineHeight: '145%',
+    letterSpacing: '0%',
+    paraSpacing: '0px',
+    tailwind: 'text-[11px] leading-[145%]',
+    sample: 'Create a design playbook that outlines the department\'s expectations, best practices.',
+  },
+  {
+    name: 'Paragraph Caption',
+    token: 'text-sm',
+    size: 14,
+    lineHeight: '100%',
+    letterSpacing: '16%',
+    paraSpacing: '0px',
+    tailwind: 'text-[14px] leading-[100%] tracking-[0.16em] uppercase',
+    sample: 'Create a design playbook that outlines the department\'s expectations, best practices.',
+    uppercase: true,
   },
 ]
 
-const weightRows = [
-  { label: 'Regular', weight: 400, class: 'font-normal' },
-  { label: 'Medium', weight: 500, class: 'font-medium' },
-  { label: 'SemiBold', weight: 600, class: 'font-semibold' },
-  { label: 'Bold', weight: 700, class: 'font-bold' },
-]
+// ── Spec pill ─────────────────────────────────────────────────────────────────
 
-const importCode = `import { Manrope } from 'next/font/google'
+function SpecRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex flex-col gap-0.5">
+      <span className="text-[10px] uppercase tracking-widest font-semibold text-token-muted">{label}</span>
+      <span className="text-[13px] text-token-secondary">{value}</span>
+    </div>
+  )
+}
 
-const manrope = Manrope({
-  subsets: ['latin'],
-  variable: '--font-manrope',
-  weight: ['400', '500', '600', '700'],
-})
-
-// Apply to <body>
-<body className={\`\${manrope.variable} font-sans\`}>`
+// ── Page ─────────────────────────────────────────────────────────────────────
 
 export default function TypographyPage() {
   return (
     <div>
       <PageHeader
         title="Typography"
-        description="Manrope is the sole typeface across all Scaler interfaces. The full type scale — rendered at real sizes below."
+        description="Inter is the sole typeface across all Aurora interfaces. All sizes, weights, and spacing values below are the single source of truth — pulled directly from Figma."
         badge="Foundations"
       />
 
-      {/* Font info */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-        <div className="p-6 rounded-xl border border-token bg-token-primary">
-          <h2 className="text-base font-semibold text-token-primary mb-3">Font family</h2>
-          <p className="text-3xl font-bold text-token-primary mb-1">Inter</p>
-          <p className="text-sm text-token-secondary mb-3">Sans-serif · Variable font · Google Fonts</p>
-          <div className="flex flex-wrap gap-2">
-            {weightRows.map(r => (
-              <span key={r.weight} className={`text-sm ${r.class} text-token-secondary`}>
-                {r.weight} {r.label}
-              </span>
-            ))}
-          </div>
+      {/* ── Headings ─────────────────────────────────────────────────────── */}
+      <section className="mt-12">
+        <div className="mb-6">
+          <h2 className="text-[24px] leading-[140%] font-semibold text-token-primary">Headings</h2>
+          <p className="text-sm text-token-secondary mt-1">
+            Three heading levels — each available in Regular, Medium, SemiBold, and Bold.
+            Letter spacing is always 0% for headings.
+          </p>
         </div>
-        <div className="p-6 rounded-xl border border-token bg-token-primary">
-          <h2 className="text-base font-semibold text-token-primary mb-3">Rules</h2>
-          <ul className="space-y-1.5 text-sm text-token-secondary">
-            <li>→ Minimum body size: <strong className="text-token-primary">16px</strong></li>
-            <li>→ Body line height: <strong className="text-token-primary">145%</strong></li>
-            <li>→ Heading line height: <strong className="text-token-primary">140%</strong></li>
-            <li>→ Letter spacing (body): <strong className="text-token-primary">1.5%</strong></li>
-            <li>→ <strong className="text-token-primary">Sentence case</strong> everywhere — no all caps, no italics</li>
-            <li>→ <strong className="text-token-primary">Bold only</strong> for emphasis — no underlines</li>
-          </ul>
-        </div>
-      </div>
 
-      {/* Type scale */}
-      <h2 className="text-xl font-semibold text-token-primary mb-4">Type scale</h2>
-      <div className="divide-y divide-token rounded-xl border border-token overflow-hidden bg-token-primary mb-10">
-        {typeStyles.map(({ label, size, lh, ls, weight, className, sample, usage, token }) => (
-          <div key={label} className="p-6">
-            <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
-              <div>
-                <p className="text-xs font-semibold text-token-muted">{label}</p>
-                <p className="text-xs text-token-muted mt-0.5">
-                  {size}px · {lh} line height · {ls} letter-spacing · {weight}
-                </p>
+        <div className="divide-y divide-token rounded-xl border border-token overflow-hidden bg-token-primary">
+          {HEADINGS.map(h => (
+            <div key={h.name} className="p-6 flex flex-col gap-5">
+              {/* Specs */}
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div>
+                  <p className="text-[13px] font-semibold text-token-primary">{h.name}</p>
+                  <div className="flex flex-wrap gap-5 mt-2">
+                    <SpecRow label="Font" value="Inter" />
+                    <SpecRow label="Size" value={`${h.size}px`} />
+                    <SpecRow label="Line height" value={h.lineHeight} />
+                    <SpecRow label="Letter spacing" value={h.letterSpacing} />
+                    <SpecRow label="Para spacing" value={h.paraSpacing} />
+                    <SpecRow label="Weights" value="Regular · Medium · SemiBold · Bold" />
+                  </div>
+                </div>
+                <code className="text-[11px] font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30 px-2 py-1 rounded shrink-0">
+                  {h.tailwind}
+                </code>
               </div>
-              <code className="text-xs font-mono text-sky-600 bg-sky-50 dark:bg-sky-950/40 px-2 py-1 rounded">
-                {token}
-              </code>
+              {/* Weight previews */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {HEADING_WEIGHTS.map(w => (
+                  <div key={w.value} className="rounded-lg border border-token bg-token-secondary p-4">
+                    <p className={`${h.tailwind} ${w.class} text-token-primary`}>{h.sample}</p>
+                    <p className="text-[11px] text-token-muted mt-2">{w.label} · {w.value}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-            <p className={`${className} text-token-primary mb-2`}>{sample}</p>
-            <p className="text-xs text-token-muted">Used for: {usage}</p>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </section>
 
-      {/* Weight showcase */}
-      <h2 className="text-xl font-semibold text-token-primary mb-4">Weight showcase</h2>
-      <div className="divide-y divide-token rounded-xl border border-token overflow-hidden bg-token-primary mb-10">
-        {weightRows.map(({ label, weight, class: cls }) => (
-          <div key={weight} className="flex items-center gap-6 p-6">
-            <div className="w-24 shrink-0">
-              <p className="text-xs font-semibold text-token-muted">{label}</p>
-              <p className="text-xs text-token-muted">{weight}</p>
+      {/* ── Paragraphs ───────────────────────────────────────────────────── */}
+      <section className="mt-12">
+        <div className="mb-6">
+          <h2 className="text-[24px] leading-[140%] font-semibold text-token-primary">Paragraphs</h2>
+          <p className="text-sm text-token-secondary mt-1">
+            Seven paragraph scales from XLarge (21px) down to Caption (14px). Body text uses 1.5% letter spacing and 145% line height throughout.
+          </p>
+        </div>
+
+        <div className="divide-y divide-token rounded-xl border border-token overflow-hidden bg-token-primary">
+          {PARAGRAPHS.map(p => (
+            <div key={p.name} className="p-6 flex flex-col gap-5">
+              {/* Specs */}
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div>
+                  <p className="text-[13px] font-semibold text-token-primary">{p.name}</p>
+                  <div className="flex flex-wrap gap-5 mt-2">
+                    <SpecRow label="Font" value="Inter" />
+                    <SpecRow label="Size" value={`${p.size}px`} />
+                    <SpecRow label="Line height" value={p.lineHeight} />
+                    <SpecRow label="Letter spacing" value={p.letterSpacing} />
+                    <SpecRow label="Para spacing" value={p.paraSpacing} />
+                    <SpecRow label="Weights" value="Regular · Medium · Bold" />
+                  </div>
+                </div>
+                <code className="text-[11px] font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30 px-2 py-1 rounded shrink-0">
+                  {p.tailwind}
+                </code>
+              </div>
+              {/* Weight previews */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {PARAGRAPH_WEIGHTS.map(w => (
+                  <div key={w.value} className="rounded-lg border border-token bg-token-secondary p-4">
+                    <p className={`${p.tailwind} ${w.class} text-token-primary`}>{p.sample}</p>
+                    <p className="text-[11px] text-token-muted mt-2">{w.label} · {w.value}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-            <p className={`text-xl ${cls} text-token-primary`}>
-              The quick brown fox jumps over the lazy dog.
-            </p>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </section>
 
-      {/* Implementation */}
-      <h2 className="text-xl font-semibold text-token-primary mb-4">Implementation</h2>
-      <CodeBlock code={importCode} language="tsx" title="Loading Manrope in Next.js" />
+      {/* ── Rules ────────────────────────────────────────────────────────── */}
+      <section className="mt-12">
+        <div className="mb-6">
+          <h2 className="text-[24px] leading-[140%] font-semibold text-token-primary">Rules</h2>
+        </div>
+
+        <div className="divide-y divide-token rounded-xl border border-token overflow-hidden bg-token-primary">
+
+          {/* Capitalization */}
+          <div className="p-6">
+            <h3 className="text-[14px] font-semibold text-token-primary mb-4">Capitalization</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <p className="text-[11px] uppercase tracking-widest font-semibold text-token-muted mb-3">By element</p>
+                <ul className="space-y-2.5 text-sm text-token-secondary">
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-[13px] text-token-muted shrink-0 w-5 mt-px">→</span>
+                    <span><strong className="text-token-primary font-semibold">Navigation</strong> (side nav, top nav, tabs) — Title Case</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-[13px] text-token-muted shrink-0 w-5 mt-px">→</span>
+                    <span><strong className="text-token-primary font-semibold">Titles, headings, descriptions, body text</strong> — Sentence case</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-[13px] text-token-muted shrink-0 w-5 mt-px">→</span>
+                    <span><strong className="text-token-primary font-semibold">CTAs and buttons</strong> — Sentence case (e.g., "Save changes", not "Save Changes")</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-[13px] text-token-muted shrink-0 w-5 mt-px">→</span>
+                    <span><strong className="text-token-primary font-semibold">Acronyms</strong> — uppercase only when widely recognised (e.g., NABERS, ESG, GHG)</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-[13px] text-token-muted shrink-0 w-5 mt-px">→</span>
+                    <span><strong className="text-token-primary font-semibold">Caption style</strong> — uppercase via CSS text-transform, never typed in caps</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <p className="text-[11px] uppercase tracking-widest font-semibold text-token-muted mb-3">What to avoid</p>
+                <ul className="space-y-2.5 text-sm text-token-secondary">
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-error-600 font-bold shrink-0 w-5 mt-px">✗</span>
+                    <span>All caps for body text or headings — reduces readability</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-error-600 font-bold shrink-0 w-5 mt-px">✗</span>
+                    <span>Title case for body copy or button labels</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-error-600 font-bold shrink-0 w-5 mt-px">✗</span>
+                    <span>Italics — not part of the type system</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-error-600 font-bold shrink-0 w-5 mt-px">✗</span>
+                    <span>Underlines for emphasis — reserved for links only</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Examples */}
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="rounded-lg border border-success-200 dark:border-success-900 bg-success-50 dark:bg-success-950/30 p-4">
+                <p className="text-[10px] uppercase tracking-widest font-semibold text-success-700 dark:text-success-500 mb-2">Do</p>
+                <p className="text-sm text-token-primary font-medium mb-1">Save changes</p>
+                <p className="text-sm text-token-primary mb-1">Review your ESG data before submitting.</p>
+                <p className="text-sm text-token-primary">Energy · GHG · Water</p>
+              </div>
+              <div className="rounded-lg border border-error-200 dark:border-error-900 bg-error-50 dark:bg-error-950/30 p-4">
+                <p className="text-[10px] uppercase tracking-widest font-semibold text-error-700 dark:text-error-500 mb-2">Don&apos;t</p>
+                <p className="text-sm text-token-primary font-medium mb-1">Save Changes</p>
+                <p className="text-sm text-token-primary mb-1">REVIEW YOUR ESG DATA BEFORE SUBMITTING.</p>
+                <p className="text-sm text-token-primary italic">Energy · GHG · Water</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Emphasis */}
+          <div className="p-6">
+            <h3 className="text-[14px] font-semibold text-token-primary mb-4">Emphasis & hierarchy</h3>
+            <ul className="space-y-2.5 text-sm text-token-secondary">
+              <li className="flex items-start gap-2.5">
+                <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
+                <span><strong className="text-token-primary font-semibold">Bold only</strong> for emphasis — never italic, never underline</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
+                <span>Minimum body text size: <strong className="text-token-primary font-semibold">16px</strong> (Paragraph Medium)</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
+                <span>Default body text colour: <strong className="text-token-primary font-semibold">Grey 600 (#505867)</strong></span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
+                <span>WCAG AA minimum: <strong className="text-token-primary font-semibold">4.5:1</strong> contrast for body text, <strong className="text-token-primary font-semibold">3:1</strong> for large text</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
     </div>
   )
 }

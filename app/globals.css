@@ -199,7 +199,7 @@
 /* ─── Scrollbar ─── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--grey-200); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--grey-200); border-radius: 4px; }
 .dark ::-webkit-scrollbar-thumb { background: var(--grey-700); }
 
 /* ─── Code blocks ─── */

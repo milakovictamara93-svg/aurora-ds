@@ -1,101 +1,128 @@
 import PageHeader from '@/app/components-lib/ui/PageHeader'
 
-const spacingScale = [
-  { value: 4, unit: 1, label: '4px', usage: 'Icon gaps, tight element spacing' },
-  { value: 8, unit: 2, label: '8px', usage: 'Icon-to-label, compact internal padding' },
-  { value: 12, unit: 3, label: '12px', usage: 'Small component padding' },
-  { value: 16, unit: 4, label: '16px', usage: 'Default component padding, form inputs' },
-  { value: 20, unit: 5, label: '20px', usage: 'Medium gaps, list items' },
-  { value: 24, unit: 6, label: '24px', usage: 'Card padding, section gaps' },
-  { value: 32, unit: 8, label: '32px', usage: 'Large section spacing' },
-  { value: 40, unit: 10, label: '40px', usage: 'Page section gaps' },
-  { value: 48, unit: 12, label: '48px', usage: 'Major section separators' },
-  { value: 64, unit: 16, label: '64px', usage: 'Page layout spacing' },
-  { value: 80, unit: 20, label: '80px', usage: 'Large breakpoint spacing' },
-  { value: 96, unit: 24, label: '96px', usage: 'Hero/feature sections' },
+// ── Spacing scale (source of truth — mirrors Figma node 46:39706) ─────────────
+// Base unit: 4px. Every value is a multiple of 4. No exceptions.
+
+const SCALE = [
+  { name: '1',  size: 4   },
+  { name: '2',  size: 8   },
+  { name: '3',  size: 12  },
+  { name: '4',  size: 16  },
+  { name: '5',  size: 20  },
+  { name: '6',  size: 24  },
+  { name: '8',  size: 32  },
+  { name: '10', size: 40  },
+  { name: '12', size: 48  },
+  { name: '16', size: 64  },
+  { name: '20', size: 80  },
+  { name: '24', size: 96  },
+  { name: '32', size: 128 },
 ]
 
-const breakpoints = [
-  { name: 'Mobile', range: '375px – 767px', cols: '4 columns', gutter: '16px', margin: '16px' },
-  { name: 'Tablet', range: '768px – 1023px', cols: '8 columns', gutter: '16px', margin: '16px' },
-  { name: 'Desktop', range: '1024px+', cols: '12 columns', gutter: '24px', margin: '24px' },
-  { name: 'Wide', range: '1440px+', cols: '12 columns', gutter: '24px', margin: '24px' },
-]
+// Max bar width in px (128px maps to this)
+const MAX_BAR = 320
 
 export default function SpacingPage() {
   return (
     <div>
       <PageHeader
-        title="Spacing"
-        description="All spacing uses a 4px base unit. Every value in the system is a multiple of 4."
+        title="Spacings"
+        description="All spacing uses a 4px base unit. Every gap, padding, and margin across the entire system must be a multiple of 4 — no exceptions."
         badge="Foundations"
       />
 
-      {/* Scale */}
-      <h2 className="text-xl font-semibold text-token-primary mb-4">Spacing scale</h2>
-      <div className="space-y-2 mb-12">
-        {spacingScale.map(({ value, unit, label, usage }) => (
-          <div key={value} className="flex items-center gap-4 p-4 rounded-lg border border-token bg-token-primary">
-            <div className="w-16 shrink-0 text-right">
-              <span className="text-sm font-mono font-semibold text-token-primary">{label}</span>
-              <p className="text-xs text-token-muted">{unit}u</p>
-            </div>
-            <div
-              className="bg-sky-400 rounded shrink-0"
-              style={{ width: `${Math.min(value * 4, 384)}px`, height: '16px' }}
-            />
-            <p className="text-sm text-token-secondary">{usage}</p>
+      {/* ── Scale table ───────────────────────────────────────────────────── */}
+      <div className="mt-12">
+        <div className="rounded-xl border border-token overflow-hidden bg-token-primary">
+          {/* Header */}
+          <div className="grid grid-cols-[80px_100px_1fr] gap-4 px-6 py-3 border-b border-token bg-token-secondary">
+            <span className="text-[11px] uppercase tracking-widest font-semibold text-token-muted">Name</span>
+            <span className="text-[11px] uppercase tracking-widest font-semibold text-token-muted">Size</span>
+            <span className="text-[11px] uppercase tracking-widest font-semibold text-token-muted">Visual</span>
           </div>
-        ))}
+
+          {/* Rows */}
+          <div className="divide-y divide-token">
+            {SCALE.map(({ name, size }) => {
+              const barWidth = Math.round((size / 128) * MAX_BAR)
+              return (
+                <div key={name} className="grid grid-cols-[80px_100px_1fr] gap-4 items-center px-6 py-4">
+                  <span className="text-[14px] font-medium text-token-primary">{name}</span>
+                  <span className="text-[14px] font-mono text-token-secondary">{size}px</span>
+                  <div
+                    className="bg-blue-200 dark:bg-blue-900 rounded"
+                    style={{ width: `${Math.max(barWidth, 4)}px`, height: `${Math.min(size, 24)}px` }}
+                  />
+                </div>
+              )
+            })}
+          </div>
+        </div>
       </div>
 
-      {/* Rules */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-        {[
-          { title: 'Component padding', values: ['8px', '12px', '16px', '24px'], desc: 'Internal component padding' },
-          { title: 'Section gaps', values: ['24px', '32px', '40px'], desc: 'Between component groups' },
-          { title: 'Card padding', values: ['24px'], desc: 'Default card content padding' },
-        ].map(({ title, values, desc }) => (
-          <div key={title} className="p-6 rounded-xl border border-token bg-token-primary">
-            <h3 className="text-base font-semibold text-token-primary mb-1">{title}</h3>
-            <p className="text-xs text-token-muted mb-3">{desc}</p>
+      {/* ── Rules ─────────────────────────────────────────────────────────── */}
+      <section className="mt-12">
+        <div className="mb-6">
+          <h2 className="text-[24px] leading-[140%] font-semibold text-token-primary">Rules</h2>
+        </div>
+
+        <div className="divide-y divide-token rounded-xl border border-token overflow-hidden bg-token-primary">
+          <div className="p-6">
+            <h3 className="text-[14px] font-semibold text-token-primary mb-4">Base unit</h3>
+            <p className="text-sm text-token-secondary mb-4">
+              All spacing, padding, margin, gap, and layout values must be a multiple of <strong className="text-token-primary font-semibold">4px</strong>. This applies to every element across the entire system — components, layouts, icons, and typography.
+            </p>
             <div className="flex flex-wrap gap-2">
-              {values.map(v => (
-                <span key={v} className="text-sm font-mono font-semibold px-2.5 py-1 rounded bg-sky-50 text-sky-700 dark:bg-sky-950/50 dark:text-sky-300">
-                  {v}
+              {SCALE.map(({ size }) => (
+                <span key={size} className="text-[13px] font-mono font-medium px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300">
+                  {size}px
                 </span>
               ))}
             </div>
           </div>
-        ))}
-      </div>
 
-      {/* Grid */}
-      <h2 className="text-xl font-semibold text-token-primary mb-4">Grid system & breakpoints</h2>
-      <div className="overflow-x-auto rounded-xl border border-token">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="bg-token-secondary border-b border-token">
-              <th className="text-left px-4 py-3 text-xs font-semibold text-token-muted uppercase tracking-widest">Breakpoint</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-token-muted uppercase tracking-widest">Range</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-token-muted uppercase tracking-widest">Columns</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-token-muted uppercase tracking-widest">Gutter</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-token-muted uppercase tracking-widest">Margin</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-token bg-token-primary">
-            {breakpoints.map(({ name, range, cols, gutter, margin }) => (
-              <tr key={name} className="hover:bg-token-secondary transition-colors">
-                <td className="px-4 py-3 font-semibold text-token-primary">{name}</td>
-                <td className="px-4 py-3 font-mono text-token-secondary">{range}</td>
-                <td className="px-4 py-3 text-token-secondary">{cols}</td>
-                <td className="px-4 py-3 font-mono text-token-secondary">{gutter}</td>
-                <td className="px-4 py-3 font-mono text-token-secondary">{margin}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          <div className="p-6">
+            <h3 className="text-[14px] font-semibold text-token-primary mb-4">Common applications</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {[
+                { label: 'Component padding', values: ['8px', '12px', '16px', '24px'], note: 'Internal padding inside components' },
+                { label: 'Section gaps',      values: ['24px', '32px', '40px', '48px'], note: 'Between groups of components' },
+                { label: 'Page layout',       values: ['48px', '64px', '80px', '96px'], note: 'Major page-level spacing' },
+              ].map(({ label, values, note }) => (
+                <div key={label}>
+                  <p className="text-[13px] font-semibold text-token-primary mb-1">{label}</p>
+                  <p className="text-[12px] text-token-muted mb-3">{note}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {values.map(v => (
+                      <span key={v} className="text-[12px] font-mono font-medium px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300">
+                        {v}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="p-6">
+            <h3 className="text-[14px] font-semibold text-token-primary mb-4">What to avoid</h3>
+            <ul className="space-y-2.5 text-sm text-token-secondary">
+              <li className="flex items-start gap-2.5">
+                <span className="text-error-600 font-bold shrink-0 w-5 mt-px">✗</span>
+                <span>Any value not in the scale — 3px, 5px, 7px, 10px, 15px, etc. are not valid</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <span className="text-error-600 font-bold shrink-0 w-5 mt-px">✗</span>
+                <span>Arbitrary pixel values in code — always reference a scale token (e.g. <code className="font-mono text-xs bg-token-secondary px-1 py-0.5 rounded">p-4</code> not <code className="font-mono text-xs bg-token-secondary px-1 py-0.5 rounded">p-[15px]</code>)</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <span className="text-error-600 font-bold shrink-0 w-5 mt-px">✗</span>
+                <span>Border radius values outside the approved set — use 4px, 8px, 12px, 16px only (no 3px, 5px, etc.)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }
