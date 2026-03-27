@@ -64,7 +64,7 @@ const COMPONENT_GROUPS: NavGroup[] = [
     id: 'feedback',
     label: 'Feedback',
     items: [
-      { href: '/components/toasts', label: 'Toast',  available: false },
+      { href: '/components/toasts', label: 'Toast' },
       { href: '/components/modals', label: 'Modal',  available: false },
       { href: '/components/banner', label: 'Banner' },
     ],

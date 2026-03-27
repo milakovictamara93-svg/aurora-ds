@@ -457,14 +457,16 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
   ),
   '/components/toasts': (
     <div className="flex flex-col gap-1.5">
-      <div className="flex items-start gap-2 px-3 py-2 rounded-md bg-[#111827] dark:bg-[#1F2430]">
-        <div className="w-1.5 h-1.5 rounded-full bg-[#22C55E] mt-1 shrink-0" />
-        <span className="text-[10px] text-white">Changes saved successfully.</span>
-      </div>
-      <div className="flex items-start gap-2 px-3 py-2 rounded-md bg-[#111827] dark:bg-[#1F2430]">
-        <div className="w-1.5 h-1.5 rounded-full bg-[#F87171] mt-1 shrink-0" />
-        <span className="text-[10px] text-white">Something went wrong.</span>
-      </div>
+      {([
+        { bg: '#F0FDF5', border: '#86EFAD', iconColor: '#22C55E', label: 'Changes saved successfully.' },
+        { bg: '#FEF2F2', border: '#FCA5A5', iconColor: '#EF4444', label: 'Something went wrong.' },
+        { bg: '#EEF6FF', border: '#8CC4FF', iconColor: '#2F7DFF', label: 'Export is processing.' },
+      ] as {bg:string;border:string;iconColor:string;label:string}[]).map(({ bg, border, iconColor, label }) => (
+        <div key={label} className="flex items-center gap-1.5 px-2 py-1.5 rounded border text-[10px]" style={{ background: bg, borderColor: border }}>
+          <span style={{ color: iconColor }} className="font-bold shrink-0">●</span>
+          <span className="text-[#111827] font-medium">{label}</span>
+        </div>
+      ))}
     </div>
   ),
   '/components/navigation': (
