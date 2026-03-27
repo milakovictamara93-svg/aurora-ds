@@ -247,23 +247,23 @@ export default function TypographyPage() {
                 <p className="text-[11px] uppercase tracking-widest font-semibold text-token-muted mb-3">By element</p>
                 <ul className="space-y-2.5 text-sm text-token-secondary">
                   <li className="flex items-start gap-2.5">
-                    <span className="text-[13px] text-token-muted shrink-0 w-5 mt-px">→</span>
+                    <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
                     <span><strong className="text-token-primary font-semibold">Navigation</strong> (side nav, top nav, tabs) — Title Case</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <span className="text-[13px] text-token-muted shrink-0 w-5 mt-px">→</span>
+                    <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
                     <span><strong className="text-token-primary font-semibold">Titles, headings, descriptions, body text</strong> — Sentence case</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <span className="text-[13px] text-token-muted shrink-0 w-5 mt-px">→</span>
+                    <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
                     <span><strong className="text-token-primary font-semibold">CTAs and buttons</strong> — Sentence case (e.g., "Save changes", not "Save Changes")</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <span className="text-[13px] text-token-muted shrink-0 w-5 mt-px">→</span>
+                    <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
                     <span><strong className="text-token-primary font-semibold">Acronyms</strong> — uppercase only when widely recognised (e.g., NABERS, ESG, GHG)</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <span className="text-[13px] text-token-muted shrink-0 w-5 mt-px">→</span>
+                    <span className="text-success-600 font-bold shrink-0 w-5 mt-px">✓</span>
                     <span><strong className="text-token-primary font-semibold">Caption style</strong> — uppercase via CSS text-transform, never typed in caps</span>
                   </li>
                 </ul>
