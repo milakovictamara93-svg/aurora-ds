@@ -62,7 +62,7 @@ export function TabBar({ tabs = ['usage', 'style', 'code', 'accessibility'] }: {
 export function TabPanel({ id, children }: { id: string; children: React.ReactNode }) {
   const { active } = useContext(TabCtx)
   if (active !== id) return null
-  return <div>{children}</div>
+  return <div className="pt-8">{children}</div>
 }
 
 // ── PageContent ────────────────────────────────────────────────────────────────
