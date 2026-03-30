@@ -581,6 +581,46 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
       </div>
     </div>
   ),
+  '/components/tabs': (
+    <div className="flex flex-col gap-3">
+      {/* Primary tabs */}
+      <div>
+        <p className="text-[9px] font-bold uppercase tracking-wide text-[#9CA3AF] dark:text-[#505867] mb-1.5">Primary</p>
+        <div className="flex items-end border-b border-[#EDEEF1] dark:border-[#1F2430]">
+          {['Energy', 'GHG', 'Water'].map((label, i) => (
+            <div
+              key={label}
+              className={`px-2.5 h-7 flex items-center text-[11px] font-medium rounded-tl rounded-tr whitespace-nowrap ${
+                i === 0
+                  ? 'bg-white dark:bg-[#111827] text-[#111827] dark:text-white -mb-px border border-[#EDEEF1] dark:border-[#1F2430] border-b-white dark:border-b-[#111827]'
+                  : 'text-[#505867] dark:text-[#9CA3AF]'
+              }`}
+            >
+              {label}
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* Secondary tabs */}
+      <div>
+        <p className="text-[9px] font-bold uppercase tracking-wide text-[#9CA3AF] dark:text-[#505867] mb-1.5">Secondary</p>
+        <div className="flex items-center">
+          {['YoY', 'MoM', 'YTD', 'Custom'].map((label, i) => (
+            <div
+              key={label}
+              className={`px-2.5 h-7 flex items-center text-[11px] font-medium rounded-tl rounded-tr border-b-2 whitespace-nowrap ${
+                i === 0
+                  ? 'border-[#1258F8] text-[#111827] dark:text-white'
+                  : 'border-[#D7DAE0] dark:border-[#374151] text-[#505867] dark:text-[#9CA3AF]'
+              }`}
+            >
+              {label}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  ),
   '/components/navigation': (
     <div className="flex flex-col gap-0.5">
       <div className="px-2 py-1.5 rounded text-[10px] font-medium text-[#505867] dark:text-[#9CA3AF]">Overview</div>
