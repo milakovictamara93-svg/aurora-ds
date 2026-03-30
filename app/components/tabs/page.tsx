@@ -12,7 +12,7 @@ import {
   Section, SpecTable, A11yRow, KeyRow,
   Preview, Annotation,
   UseList, DontUseList, DoCard, DontCard,
-  RelatedComponents, PageContent,
+  RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 
 // ── Demo data ─────────────────────────────────────────────────────────────────
@@ -79,15 +79,14 @@ export default function TabsPage() {
   const [secondaryNoIcon,  setSecondaryNoIcon]  = useState('q1')
 
   return (
-    <PageContent>
+    <div>
       <PageHeader
         title="Tabs"
         description="Horizontal navigation for switching between related views without leaving the current page."
         badge="Components"
       />
 
-      <div className="mt-12">
-        <ComponentTabs>
+      <ComponentTabs>
           <TabBar />
 
           {/* ── USAGE ── */}
@@ -532,7 +531,6 @@ const [active, setActive] = useState('energy')
           </TabPanel>
 
         </ComponentTabs>
-      </div>
-    </PageContent>
+    </div>
   )
 }
