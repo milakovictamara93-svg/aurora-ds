@@ -5,20 +5,30 @@ import clsx from 'clsx'
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
+/**
+ * Pointer position matches Figma: the arrow appears at the named corner of
+ * the tooltip panel, and one corner radius is removed there.
+ *
+ * top-left    → tooltip below trigger, arrow at top-left  corner
+ * top-right   → tooltip below trigger, arrow at top-right corner
+ * bottom-left → tooltip above trigger, arrow at bottom-left corner
+ * bottom-right→ tooltip above trigger, arrow at bottom-right corner
+ * no-pointer  → tooltip above trigger, centered, no arrow
+ */
 export type TooltipPlacement =
-  | 'top'        | 'top-start'    | 'top-end'
-  | 'bottom'     | 'bottom-start' | 'bottom-end'
-  | 'left'       | 'right'
+  | 'top-left'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-right'
+  | 'no-pointer'
 
 export interface TooltipProps {
   /** Short plain-text tooltip content */
   content: React.ReactNode
   /** Optional bold title rendered above the content */
   title?: string
-  /** Which side of the trigger the tooltip appears on */
+  /** Pointer corner position (default: bottom-left — appears above trigger) */
   placement?: TooltipPlacement
-  /** Show the directional arrow caret (default true) */
-  showArrow?: boolean
   /** The element that triggers the tooltip */
   children: React.ReactElement
   /** Force the tooltip open — useful for documentation previews */
@@ -27,30 +37,35 @@ export interface TooltipProps {
   className?: string
 }
 
-// ── Positioning maps ───────────────────────────────────────────────────────────
+// ── Positioning ────────────────────────────────────────────────────────────────
 
+// Where the panel appears relative to the trigger
 const PANEL: Record<TooltipPlacement, string> = {
-  'top':           'bottom-full left-1/2 -translate-x-1/2 mb-2',
-  'top-start':     'bottom-full left-0 mb-2',
-  'top-end':       'bottom-full right-0 mb-2',
-  'bottom':        'top-full left-1/2 -translate-x-1/2 mt-2',
-  'bottom-start':  'top-full left-0 mt-2',
-  'bottom-end':    'top-full right-0 mt-2',
-  'left':          'right-full top-1/2 -translate-y-1/2 mr-2',
-  'right':         'left-full top-1/2 -translate-y-1/2 ml-2',
+  'top-left':    'top-full mt-2 left-0',
+  'top-right':   'top-full mt-2 right-0',
+  'bottom-left': 'bottom-full mb-2 left-0',
+  'bottom-right':'bottom-full mb-2 right-0',
+  'no-pointer':  'bottom-full mb-2 left-1/2 -translate-x-1/2',
 }
 
-// Arrow is a 10×10 rotated square.
-// We show only the two borders that face outward (toward the trigger).
+// Which corner is sharp (the corner where the pointer attaches has no radius)
+const RADIUS: Record<TooltipPlacement, string> = {
+  'top-left':    'rounded-br-lg rounded-bl-lg rounded-tr-lg',  // no top-left
+  'top-right':   'rounded-bl-lg rounded-br-lg rounded-tl-lg',  // no top-right
+  'bottom-left': 'rounded-tl-lg rounded-tr-lg rounded-br-lg',  // no bottom-left
+  'bottom-right':'rounded-tl-lg rounded-tr-lg rounded-bl-lg',  // no bottom-right
+  'no-pointer':  'rounded-lg',
+}
+
+// Arrow: rotated square positioned at the matching corner
+// Arrow points UP (tooltip below): border-t border-l
+// Arrow points DOWN (tooltip above): border-b border-r
 const ARROW: Record<TooltipPlacement, string> = {
-  'top':           'bottom-[-5px] left-1/2 -translate-x-1/2 border-b border-r',
-  'top-start':     'bottom-[-5px] left-3                     border-b border-r',
-  'top-end':       'bottom-[-5px] right-3                    border-b border-r',
-  'bottom':        'top-[-5px]    left-1/2 -translate-x-1/2  border-t border-l',
-  'bottom-start':  'top-[-5px]    left-3                     border-t border-l',
-  'bottom-end':    'top-[-5px]    right-3                    border-t border-l',
-  'left':          'right-[-5px]  top-1/2 -translate-y-1/2   border-t border-r',
-  'right':         'left-[-5px]   top-1/2 -translate-y-1/2   border-b border-l',
+  'top-left':    'top-[-5px] left-2 border-t border-l',
+  'top-right':   'top-[-5px] right-2 border-t border-l',
+  'bottom-left': 'bottom-[-5px] left-2 border-b border-r',
+  'bottom-right':'bottom-[-5px] right-2 border-b border-r',
+  'no-pointer':  '',
 }
 
 // ── Component ──────────────────────────────────────────────────────────────────
@@ -58,8 +73,7 @@ const ARROW: Record<TooltipPlacement, string> = {
 export default function Tooltip({
   content,
   title,
-  placement   = 'top',
-  showArrow   = true,
+  placement   = 'bottom-left',
   children,
   open        = false,
   className,
@@ -77,7 +91,7 @@ export default function Tooltip({
       onFocus={() => setHover(true)}
       onBlur={() => setHover(false)}
     >
-      {/* Trigger — aria-describedby links it to the tooltip */}
+      {/* Trigger */}
       <span aria-describedby={visible ? id : undefined}>
         {children}
       </span>
@@ -89,35 +103,42 @@ export default function Tooltip({
           role="tooltip"
           className={clsx(
             'absolute z-50 pointer-events-none',
-            'max-w-[240px] w-max',
-            'bg-white dark:bg-[#111827]',
+            'w-max max-w-[240px]',
+            // Background + border
+            'bg-white dark:bg-[#1F2430]',
             'border border-[#D7DAE0] dark:border-[#374151]',
-            'rounded-lg shadow-level-2',
-            'px-4 py-3',
+            // Subtle shadow matching Figma Drop shadow/200
+            'shadow-[0px_1px_4px_0px_rgba(12,12,13,0.10),0px_1px_4px_0px_rgba(12,12,13,0.05)]',
+            // Padding
+            'p-4',
+            // Rounded corners — one corner removed at pointer position
+            RADIUS[placement],
+            // Panel placement
             PANEL[placement],
             className
           )}
         >
-          {/* Arrow caret */}
-          {showArrow && (
+          {/* Arrow caret — rotated square at the pointer corner */}
+          {placement !== 'no-pointer' && (
             <span
               aria-hidden="true"
               className={clsx(
                 'absolute w-[10px] h-[10px] rotate-45',
-                'bg-white dark:bg-[#111827]',
+                'bg-white dark:bg-[#1F2430]',
                 'border-[#D7DAE0] dark:border-[#374151]',
                 ARROW[placement]
               )}
             />
           )}
 
-          {/* Content */}
+          {/* Title */}
           {title && (
-            <p className="text-[14px] font-semibold text-[#111827] dark:text-white leading-snug mb-1">
+            <p className="text-[14px] font-semibold text-[#111827] dark:text-white leading-[1.45] tracking-[0.21px] mb-1">
               {title}
             </p>
           )}
-          <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45]">
+          {/* Body */}
+          <p className="text-[12px] font-normal text-[#505867] dark:text-[#9CA3AF] leading-[1.45] tracking-[0.18px]">
             {content}
           </p>
         </div>

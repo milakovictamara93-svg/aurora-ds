@@ -84,9 +84,10 @@ const COMPONENT_GROUPS: NavGroup[] = [
     id: 'loading',
     label: 'Loading & progress',
     items: [
-      { href: '/components/skeleton',       label: 'Skeleton',        available: false },
-      { href: '/components/progress-steps', label: 'Progress steps',  available: false },
-      { href: '/components/spinner',        label: 'Spinner',         available: false },
+      { href: '/components/spinner',        label: 'Spinner' },
+      { href: '/components/loading-bar',    label: 'Loading bar' },
+      { href: '/components/skeleton',       label: 'Skeleton' },
+      { href: '/components/progress-steps', label: 'Progress steps' },
     ],
   },
 ]
@@ -194,7 +195,13 @@ function NavSection({
 
 // ── Sidebar ───────────────────────────────────────────────────────────────────
 
-export default function AppSidebar() {
+export default function AppSidebar({
+  mobileOpen = false,
+  onMobileClose,
+}: {
+  mobileOpen?: boolean
+  onMobileClose?: () => void
+}) {
   const pathname = usePathname()
   const [dark, setDark] = useState(false)
   const [open, setOpen] = useState<Record<string, boolean>>(() => initialOpen(pathname))
@@ -227,7 +234,23 @@ export default function AppSidebar() {
   }
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-[264px] z-30 px-3 py-4 hidden lg:flex flex-col">
+    <>
+      {/* Backdrop — mobile only, shown when drawer is open */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 z-30 lg:hidden"
+          onClick={onMobileClose}
+          aria-hidden="true"
+        />
+      )}
+
+    <aside className={clsx(
+        'fixed left-0 top-0 h-screen w-[264px] z-40 px-3 py-4 flex flex-col transition-transform duration-300 ease-in-out',
+        // Desktop: always visible
+        'lg:translate-x-0',
+        // Mobile: slide in/out
+        mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+      )}>
       {/* Sidebar panel */}
       <div className="bg-white dark:bg-[#0D1117] rounded-[8px] h-full flex flex-col overflow-hidden">
 
@@ -300,5 +323,6 @@ export default function AppSidebar() {
 
       </div>
     </aside>
+    </>
   )
 }

@@ -4,10 +4,10 @@ import { useState } from 'react'
 import {
   InformationCircleIcon,
   QuestionMarkCircleIcon,
-  ExclamationTriangleIcon,
 } from '@heroicons/react/20/solid'
 import PageHeader from '@/app/components-lib/ui/PageHeader'
 import Tooltip from '@/app/components-lib/ui/Tooltip'
+import type { TooltipPlacement } from '@/app/components-lib/ui/Tooltip'
 import {
   ComponentTabs, TabBar, TabPanel,
   Section, SpecTable, A11yRow, KeyRow,
@@ -18,10 +18,14 @@ import {
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
+const PLACEMENTS: TooltipPlacement[] = [
+  'top-left', 'top-right',
+  'bottom-left', 'bottom-right',
+  'no-pointer',
+]
+
 export default function TooltipPage() {
-  const [placement, setPlacement] = useState<
-    'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end' | 'left' | 'right'
-  >('top')
+  const [placement, setPlacement] = useState<TooltipPlacement>('bottom-left')
 
   return (
     <div>
@@ -42,18 +46,18 @@ export default function TooltipPage() {
               Wrap any interactive element with <code className="bg-[#F7F8F8] dark:bg-[#1F2430] px-1.5 py-0.5 rounded text-[13px] text-[#111827] dark:text-white">&lt;Tooltip&gt;</code> to give it a floating label. The tooltip appears on hover and keyboard focus.
             </p>
             <Preview>
-              <div className="flex flex-wrap items-center justify-center gap-8">
-                <Tooltip content="This action is irreversible" placement="top">
+              <div className="flex flex-wrap items-center justify-center gap-16 py-10">
+                <Tooltip content="This action is irreversible" placement="bottom-left" open>
                   <button className="h-8 px-4 rounded bg-[#1258F8] text-white text-[13px] font-semibold hover:bg-[#0F44D0] transition-colors">
                     Delete all
                   </button>
                 </Tooltip>
-                <Tooltip content="View your profile, preferences, and sign out" placement="top">
+                <Tooltip content="View your profile, preferences, and sign out" placement="bottom-left" open>
                   <button className="w-8 h-8 rounded-full bg-[#1258F8] flex items-center justify-center text-white text-[12px] font-bold hover:bg-[#0F44D0] transition-colors">
                     TM
                   </button>
                 </Tooltip>
-                <Tooltip content="More information about this metric" placement="top">
+                <Tooltip content="More information about this metric" placement="bottom-left" open>
                   <button className="flex items-center justify-center w-5 h-5 text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white transition-colors">
                     <InformationCircleIcon className="w-5 h-5" />
                   </button>
@@ -64,14 +68,14 @@ export default function TooltipPage() {
 
           <Section title="With title">
             <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
-              Add a <code className="bg-[#F7F8F8] dark:bg-[#1F2430] px-1.5 py-0.5 rounded text-[13px] text-[#111827] dark:text-white">title</code> prop when you need a bold heading above the description — useful for complex explanations or glossary terms.
+              Add a <code className="bg-[#F7F8F8] dark:bg-[#1F2430] px-1.5 py-0.5 rounded text-[13px] text-[#111827] dark:text-white">title</code> prop when you need a bold heading above the description.
             </p>
             <Preview>
-              <div className="flex flex-wrap items-center justify-center gap-12 py-8">
+              <div className="flex flex-wrap items-center justify-center gap-16 py-10">
                 <Tooltip
                   title="Scope 1 emissions"
                   content="Direct greenhouse gas emissions from sources owned or controlled by the company."
-                  placement="top"
+                  placement="bottom-left"
                   open
                 >
                   <button className="h-8 px-3 rounded border border-[#D7DAE0] dark:border-[#374151] text-[13px] text-[#505867] dark:text-[#9CA3AF] flex items-center gap-1.5">
@@ -82,7 +86,7 @@ export default function TooltipPage() {
                 <Tooltip
                   title="Intensity ratio"
                   content="Emissions per unit of economic output — typically kgCO₂e per m² or per revenue."
-                  placement="top"
+                  placement="bottom-right"
                   open
                 >
                   <button className="h-8 px-3 rounded border border-[#D7DAE0] dark:border-[#374151] text-[13px] text-[#505867] dark:text-[#9CA3AF] flex items-center gap-1.5">
@@ -94,62 +98,19 @@ export default function TooltipPage() {
             </Preview>
           </Section>
 
-          <Section title="Placement">
+          <Section title="Pointer position">
             <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
-              Eight placement options — four sides, each with start/end alignment variants for top and bottom. Click a placement to preview it.
+              The pointer attaches to a corner of the tooltip panel and that corner loses its border radius. Select a position to preview it.
             </p>
             <Preview>
               <div className="flex flex-col items-center gap-6 py-4">
-                {/* Placement grid */}
-                <div className="grid grid-cols-3 gap-2 w-full max-w-[320px]">
-                  {/* Row 1: top variants */}
-                  {(['top-start', 'top', 'top-end'] as const).map(p => (
+                {/* Placement buttons */}
+                <div className="flex flex-wrap justify-center gap-2">
+                  {PLACEMENTS.map(p => (
                     <button
                       key={p}
                       onClick={() => setPlacement(p)}
-                      className={`h-7 rounded text-[11px] font-medium transition-colors ${
-                        placement === p
-                          ? 'bg-[#1258F8] text-white'
-                          : 'border border-[#D7DAE0] dark:border-[#374151] text-[#505867] dark:text-[#9CA3AF] hover:border-[#8C96A4]'
-                      }`}
-                    >
-                      {p}
-                    </button>
-                  ))}
-                  {/* Row 2: left / trigger / right */}
-                  {(['left', null, 'right'] as const).map((p, i) =>
-                    p === null ? (
-                      <div key="center" className="flex items-center justify-center">
-                        <Tooltip
-                          content="Tooltip content here"
-                          placement={placement}
-                          open
-                        >
-                          <div className="h-9 w-20 rounded bg-[#F7F8F8] dark:bg-[#1F2430] border border-[#EDEEF1] dark:border-[#374151] flex items-center justify-center text-[11px] text-[#505867] dark:text-[#9CA3AF]">
-                            trigger
-                          </div>
-                        </Tooltip>
-                      </div>
-                    ) : (
-                      <button
-                        key={p}
-                        onClick={() => setPlacement(p)}
-                        className={`h-7 rounded text-[11px] font-medium transition-colors ${
-                          placement === p
-                            ? 'bg-[#1258F8] text-white'
-                            : 'border border-[#D7DAE0] dark:border-[#374151] text-[#505867] dark:text-[#9CA3AF] hover:border-[#8C96A4]'
-                        }`}
-                      >
-                        {p}
-                      </button>
-                    )
-                  )}
-                  {/* Row 3: bottom variants */}
-                  {(['bottom-start', 'bottom', 'bottom-end'] as const).map(p => (
-                    <button
-                      key={p}
-                      onClick={() => setPlacement(p)}
-                      className={`h-7 rounded text-[11px] font-medium transition-colors ${
+                      className={`h-7 px-3 rounded text-[11px] font-medium transition-colors ${
                         placement === p
                           ? 'bg-[#1258F8] text-white'
                           : 'border border-[#D7DAE0] dark:border-[#374151] text-[#505867] dark:text-[#9CA3AF] hover:border-[#8C96A4]'
@@ -159,21 +120,26 @@ export default function TooltipPage() {
                     </button>
                   ))}
                 </div>
-                <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF]">
-                  Current: <span className="font-semibold text-[#111827] dark:text-white">{placement}</span>
-                </p>
+                {/* Live preview */}
+                <div className="flex items-center justify-center py-12">
+                  <Tooltip content="Tooltip content here" placement={placement} open>
+                    <div className="h-9 w-24 rounded bg-[#F7F8F8] dark:bg-[#1F2430] border border-[#EDEEF1] dark:border-[#374151] flex items-center justify-center text-[11px] text-[#505867] dark:text-[#9CA3AF]">
+                      trigger
+                    </div>
+                  </Tooltip>
+                </div>
               </div>
             </Preview>
           </Section>
 
-          <Section title="Without arrow">
+          <Section title="No pointer">
             <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
-              Set <code className="bg-[#F7F8F8] dark:bg-[#1F2430] px-1.5 py-0.5 rounded text-[13px] text-[#111827] dark:text-white">showArrow={'{false}'}</code> when the tooltip is tightly coupled to a toolbar or when the relationship is already visually obvious.
+              Set <code className="bg-[#F7F8F8] dark:bg-[#1F2430] px-1.5 py-0.5 rounded text-[13px] text-[#111827] dark:text-white">placement=&quot;no-pointer&quot;</code> when the tooltip is tightly coupled to a toolbar or when the relationship is already visually obvious.
             </p>
             <Preview>
               <div className="flex flex-wrap items-center justify-center gap-6 py-4">
                 {['Bold', 'Italic', 'Underline', 'Link'].map(label => (
-                  <Tooltip key={label} content={label} showArrow={false} placement="top">
+                  <Tooltip key={label} content={label} placement="no-pointer">
                     <button className="w-8 h-8 rounded border border-[#D7DAE0] dark:border-[#374151] flex items-center justify-center text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors">
                       {label[0]}
                     </button>
@@ -207,11 +173,7 @@ export default function TooltipPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <DoCard>
                 <div className="mb-3 flex items-center justify-center py-4">
-                  <Tooltip
-                    content="Download as CSV"
-                    placement="top"
-                    open
-                  >
+                  <Tooltip content="Download as CSV" placement="bottom-left" open>
                     <button className="w-9 h-9 rounded border border-[#D7DAE0] dark:border-[#374151] flex items-center justify-center text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-[#111827]">
                       <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
@@ -226,8 +188,8 @@ export default function TooltipPage() {
                 <div className="mb-3 flex items-center justify-center py-2">
                   <Tooltip
                     title="Energy intensity"
-                    content="This metric helps you understand your energy usage per unit of floor area. It is calculated by dividing total energy consumption by the gross leasable area of your portfolio. Values above your sector average may indicate inefficiency."
-                    placement="top"
+                    content="This metric helps you understand your energy usage per unit of floor area. It is calculated by dividing total energy consumption by the gross leasable area of your portfolio."
+                    placement="bottom-left"
                     open
                   >
                     <button className="w-9 h-9 rounded border border-[#D7DAE0] dark:border-[#374151] flex items-center justify-center text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-[#111827]">
@@ -248,15 +210,15 @@ export default function TooltipPage() {
           <Section title="Anatomy">
             <Preview>
               <div className="flex flex-col items-center gap-10 py-8">
-                {/* Labelled anatomy */}
-                <div className="relative flex flex-col items-center gap-2">
-                  <div className="relative max-w-[200px] bg-white dark:bg-[#111827] border border-[#D7DAE0] dark:border-[#374151] rounded-lg shadow-lg px-4 py-3">
-                    {/* Arrow */}
+                <div className="relative flex flex-col items-start gap-3">
+                  {/* Tooltip panel */}
+                  <div className="relative max-w-[240px] bg-white dark:bg-[#1F2430] border border-[#D7DAE0] dark:border-[#374151] rounded-tl-none rounded-tr-lg rounded-br-lg rounded-bl-lg shadow-[0px_1px_4px_0px_rgba(12,12,13,0.10)] p-4">
+                    {/* Arrow at top-left */}
                     <span
                       aria-hidden="true"
-                      className="absolute bottom-[-5px] left-1/2 -translate-x-1/2 w-[10px] h-[10px] rotate-45 bg-white dark:bg-[#111827] border-b border-r border-[#D7DAE0] dark:border-[#374151]"
+                      className="absolute top-[-5px] left-2 w-[10px] h-[10px] rotate-45 bg-white dark:bg-[#1F2430] border-t border-l border-[#D7DAE0] dark:border-[#374151]"
                     />
-                    <p className="text-[14px] font-semibold text-[#111827] dark:text-white leading-snug mb-1">Title</p>
+                    <p className="text-[14px] font-semibold text-[#111827] dark:text-white leading-[1.45] mb-1">Title</p>
                     <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45]">Description content goes here</p>
                   </div>
                   <div className="flex items-center justify-center w-24 h-8 rounded bg-[#F7F8F8] dark:bg-[#1F2430] border border-[#EDEEF1] dark:border-[#374151] text-[11px] text-[#505867] dark:text-[#9CA3AF]">
@@ -264,12 +226,11 @@ export default function TooltipPage() {
                   </div>
                 </div>
 
-                {/* Annotations */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full max-w-[480px]">
-                  <Annotation>Panel — white bg, border, rounded-lg, shadow-level-2</Annotation>
+                  <Annotation>Panel — white bg, border-grey-200, shadow-200</Annotation>
+                  <Annotation>Sharp corner — corner radius removed at pointer position</Annotation>
                   <Annotation>Title — 14px semibold, grey-950</Annotation>
-                  <Annotation>Description — 12px regular, grey-600</Annotation>
-                  <Annotation>Arrow — 10×10px rotated square, 2 visible borders</Annotation>
+                  <Annotation>Body — 12px regular, grey-600</Annotation>
                 </div>
               </div>
             </Preview>
@@ -277,49 +238,46 @@ export default function TooltipPage() {
 
           <Section title="Specs">
             <SpecTable rows={[
-              { property: 'Max width',           value: '240px',                     token: 'max-w-[240px]' },
-              { property: 'Padding',             value: '12px top/bottom · 16px left/right', token: 'px-4 py-3' },
-              { property: 'Background',          value: 'white / grey-950',          token: 'bg-white dark:bg-[#111827]' },
-              { property: 'Border',              value: '1px grey-200 / grey-700',   token: 'border-[#D7DAE0] dark:border-[#374151]' },
-              { property: 'Border radius',       value: '8px',                       token: 'rounded-lg' },
-              { property: 'Shadow',              value: 'shadow-level-2',            token: 'shadow-level-2' },
-              { property: 'Title font',          value: '14px · semibold',           token: 'text-[14px] font-semibold' },
-              { property: 'Title color',         value: 'grey-950',                  token: 'text-[#111827]' },
-              { property: 'Description font',    value: '12px · regular',            token: 'text-[12px]' },
-              { property: 'Description color',   value: 'grey-600',                  token: 'text-[#505867]' },
-              { property: 'Line height',         value: '1.45',                      token: 'leading-[1.45]' },
-              { property: 'Arrow size',          value: '10×10px rotated 45°',       token: 'w-[10px] h-[10px] rotate-45' },
-              { property: 'Arrow offset',        value: '−5px (half arrow size)',    token: 'bottom-[-5px]' },
-              { property: 'Panel offset',        value: '8px from trigger',          token: 'mb-2 / mt-2 / mr-2 / ml-2' },
-              { property: 'z-index',             value: '50',                        token: 'z-50' },
+              { property: 'Max width',         value: '240px',                           token: 'max-w-[240px]' },
+              { property: 'Padding',           value: '16px all sides',                  token: 'p-4' },
+              { property: 'Background',        value: 'white / grey-800',                token: 'bg-white dark:bg-[#1F2430]' },
+              { property: 'Border',            value: '1px grey-200 / grey-700',         token: 'border border-[#D7DAE0]' },
+              { property: 'Border radius',     value: '8px — minus the pointer corner',  token: 'rounded-lg (3 of 4 corners)' },
+              { property: 'Shadow',            value: '0 1px 4px rgba(12,12,13,0.10)',   token: 'shadow-[0px_1px_4px_...]' },
+              { property: 'Title font',        value: '14px · semibold',                 token: 'text-[14px] font-semibold' },
+              { property: 'Title color',       value: 'grey-950',                        token: 'text-[#111827]' },
+              { property: 'Body font',         value: '12px · regular',                  token: 'text-[12px] font-normal' },
+              { property: 'Body color',        value: 'grey-600',                        token: 'text-[#505867]' },
+              { property: 'Line height',       value: '1.45',                            token: 'leading-[1.45]' },
+              { property: 'Letter spacing',    value: '0.18px body · 0.21px title',      token: 'tracking-[0.18px]' },
+              { property: 'Arrow size',        value: '10×10px rotated 45°',             token: 'w-[10px] h-[10px] rotate-45' },
+              { property: 'Arrow offset',      value: '−5px (half arrow height)',        token: 'top-[-5px] / bottom-[-5px]' },
+              { property: 'Panel offset',      value: '8px from trigger',                token: 'mt-2 / mb-2' },
             ]} />
           </Section>
 
-          <Section title="Placement guide">
+          <Section title="Pointer position guide">
             <div className="overflow-x-auto rounded-lg border border-[#EDEEF1] dark:border-[#1F2430]">
               <table className="w-full text-[13px]">
                 <thead className="bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
                   <tr>
-                    {['Placement', 'Arrow position', 'Panel anchor', 'Use when'].map(h => (
+                    {['Position', 'Arrow at', 'Panel placement', 'Use when'].map(h => (
                       <th key={h} className="text-left px-4 py-2.5 font-semibold text-[#505867] dark:text-[#6B7280] text-[11px] uppercase tracking-wide">{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#EDEEF1] dark:divide-[#1F2430] bg-white dark:bg-[#111827]">
                   {[
-                    ['top',          'Bottom center', 'Centered above trigger',      'Default — most common'],
-                    ['top-start',    'Bottom left',   'Left-aligned above trigger',  'Trigger near left viewport edge'],
-                    ['top-end',      'Bottom right',  'Right-aligned above trigger', 'Trigger near right viewport edge'],
-                    ['bottom',       'Top center',    'Centered below trigger',      'When viewport space above is limited'],
-                    ['bottom-start', 'Top left',      'Left-aligned below trigger',  'Toolbar or table header icons'],
-                    ['bottom-end',   'Top right',     'Right-aligned below trigger', 'Right-side toolbar icons'],
-                    ['left',         'Right center',  'Left of trigger, vertically centered', 'Inline icons in dense layouts'],
-                    ['right',        'Left center',   'Right of trigger, vertically centered', 'Labels for left-edge icons'],
-                  ].map(([placement, arrow, anchor, use]) => (
-                    <tr key={placement}>
-                      <td className="px-4 py-2.5 font-mono text-[12px] text-[#111827] dark:text-white">{placement}</td>
+                    ['top-left',     'Top-left corner',     'Below trigger, left-aligned',  'Trigger near left edge'],
+                    ['top-right',    'Top-right corner',    'Below trigger, right-aligned', 'Trigger near right edge'],
+                    ['bottom-left',  'Bottom-left corner',  'Above trigger, left-aligned',  'Default — most common'],
+                    ['bottom-right', 'Bottom-right corner', 'Above trigger, right-aligned', 'Trigger near right edge'],
+                    ['no-pointer',   'None',                'Above trigger, centered',      'Toolbar or icon groups'],
+                  ].map(([pos, arrow, panel, use]) => (
+                    <tr key={pos}>
+                      <td className="px-4 py-2.5 font-mono text-[12px] text-[#111827] dark:text-white">{pos}</td>
                       <td className="px-4 py-2.5 text-[#505867] dark:text-[#9CA3AF]">{arrow}</td>
-                      <td className="px-4 py-2.5 text-[#505867] dark:text-[#9CA3AF]">{anchor}</td>
+                      <td className="px-4 py-2.5 text-[#505867] dark:text-[#9CA3AF]">{panel}</td>
                       <td className="px-4 py-2.5 text-[#505867] dark:text-[#9CA3AF]">{use}</td>
                     </tr>
                   ))}
@@ -341,13 +299,12 @@ export default function TooltipPage() {
 
           <Section title="Props">
             <SpecTable rows={[
-              { property: 'content',    value: 'React.ReactNode',   token: 'required — tooltip body text' },
-              { property: 'children',   value: 'React.ReactElement', token: 'required — the trigger element' },
-              { property: 'title',      value: 'string',            token: 'optional — bold heading above content' },
-              { property: 'placement',  value: 'TooltipPlacement',  token: 'defaults to "top"' },
-              { property: 'showArrow',  value: 'boolean',           token: 'defaults to true' },
-              { property: 'open',       value: 'boolean',           token: 'force visible — for docs/previews' },
-              { property: 'className',  value: 'string',            token: 'optional — extra classes on the panel' },
+              { property: 'content',   value: 'React.ReactNode',    token: 'required — tooltip body text' },
+              { property: 'children',  value: 'React.ReactElement', token: 'required — the trigger element' },
+              { property: 'title',     value: 'string',             token: 'optional — bold heading above content' },
+              { property: 'placement', value: 'TooltipPlacement',   token: 'defaults to "bottom-left"' },
+              { property: 'open',      value: 'boolean',            token: 'force visible — for docs/previews' },
+              { property: 'className', value: 'string',             token: 'optional — extra classes on the panel' },
             ]} />
           </Section>
 
@@ -359,12 +316,12 @@ export default function TooltipPage() {
             </pre>
           </Section>
 
-          <Section title="With title and placement">
+          <Section title="With title">
             <pre className="bg-[#F7F8F8] dark:bg-[#1F2430] rounded-lg px-4 py-3 text-[13px] text-[#111827] dark:text-white overflow-x-auto">
               <code>{`<Tooltip
   title="Scope 1 emissions"
   content="Direct GHG emissions from sources owned by the company."
-  placement="bottom-start"
+  placement="bottom-right"
 >
   <button className="...">
     <QuestionMarkCircleIcon className="w-4 h-4" />
@@ -374,10 +331,10 @@ export default function TooltipPage() {
             </pre>
           </Section>
 
-          <Section title="Toolbar (no arrow)">
+          <Section title="No pointer (toolbar)">
             <pre className="bg-[#F7F8F8] dark:bg-[#1F2430] rounded-lg px-4 py-3 text-[13px] text-[#111827] dark:text-white overflow-x-auto">
               <code>{`{['Bold', 'Italic', 'Underline'].map(label => (
-  <Tooltip key={label} content={label} showArrow={false} placement="top">
+  <Tooltip key={label} content={label} placement="no-pointer">
     <button className="w-8 h-8 rounded border ...">
       {label[0]}
     </button>
@@ -389,9 +346,11 @@ export default function TooltipPage() {
           <Section title="Type reference">
             <pre className="bg-[#F7F8F8] dark:bg-[#1F2430] rounded-lg px-4 py-3 text-[13px] text-[#111827] dark:text-white overflow-x-auto">
               <code>{`type TooltipPlacement =
-  | 'top'        | 'top-start'    | 'top-end'
-  | 'bottom'     | 'bottom-start' | 'bottom-end'
-  | 'left'       | 'right'`}</code>
+  | 'top-left'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-right'
+  | 'no-pointer'`}</code>
             </pre>
           </Section>
 
@@ -403,17 +362,17 @@ export default function TooltipPage() {
           <Section title="ARIA roles">
             <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
               <A11yRow check='role="tooltip"'>Applied to the floating panel element</A11yRow>
-              <A11yRow check="aria-describedby">Set on the trigger element pointing to the tooltip&apos;s id — only present when the tooltip is visible</A11yRow>
-              <A11yRow check="useId()">React&apos;s useId hook ensures a stable, unique id for each tooltip instance</A11yRow>
-              <A11yRow check="pointer-events-none">Tooltip panel never intercepts mouse events — only the trigger is interactive</A11yRow>
-              <A11yRow check="aria-hidden on arrow">The decorative arrow caret is hidden from assistive technology</A11yRow>
+              <A11yRow check="aria-describedby">Set on the trigger pointing to the tooltip&apos;s id — only when visible</A11yRow>
+              <A11yRow check="useId()">React&apos;s useId hook ensures a stable, unique id per instance</A11yRow>
+              <A11yRow check="pointer-events-none">Panel never intercepts mouse events — only the trigger is interactive</A11yRow>
+              <A11yRow check="aria-hidden on arrow">Decorative arrow is hidden from assistive technology</A11yRow>
             </div>
           </Section>
 
           <Section title="Keyboard interaction">
             <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
-              <KeyRow keys={['Tab']} action="Move focus to the trigger element — tooltip becomes visible" />
-              <KeyRow keys={['Tab', 'Shift + Tab']} action="Move focus away from the trigger — tooltip dismisses" />
+              <KeyRow keys={['Tab']} action="Move focus to the trigger — tooltip becomes visible" />
+              <KeyRow keys={['Tab', 'Shift + Tab']} action="Move focus away — tooltip dismisses" />
               <KeyRow keys={['Esc']} action="Should dismiss the tooltip — implement via onKeyDown on the trigger if needed" />
             </div>
           </Section>
