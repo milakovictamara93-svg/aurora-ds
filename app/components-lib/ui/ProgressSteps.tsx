@@ -16,42 +16,35 @@ export interface Step {
 }
 
 // ── Step icon ─────────────────────────────────────────────────────────────────
-// Figma specs:
-//  incomplete   → 16px circle, border-2 #D7DAE0
-//  in-progress  → 16px circle, border-2 #1258F8, inner dot #1258F8
-//  complete     → 16px circle, bg #1258F8, white checkmark 9.6px
-//  disabled     → 16px circle, border-2 #EDEEF1
-//  error        → 16px circle, bg #F87171, white exclamation
-
 function StepIcon({ state }: { state: StepState }) {
   const base = 'shrink-0 w-4 h-4 rounded-full flex items-center justify-center'
 
   if (state === 'complete') {
     return (
-      <div className={clsx(base, 'bg-[#1258F8]')}>
+      <div className={clsx(base, 'bg-blue-600')}>
         <CheckIcon className="w-2.5 h-2.5 text-white" />
       </div>
     )
   }
   if (state === 'in-progress') {
     return (
-      <div className={clsx(base, 'border-2 border-[#1258F8]')}>
-        <div className="w-[6px] h-[6px] rounded-full bg-[#1258F8]" />
+      <div className={clsx(base, 'border-2 border-blue-600')}>
+        <div className="w-[6px] h-[6px] rounded-full bg-blue-600" />
       </div>
     )
   }
   if (state === 'error') {
     return (
-      <div className={clsx(base, 'bg-[#F87171]')}>
+      <div className={clsx(base, 'bg-error-400')}>
         <ExclamationTriangleIcon className="w-2.5 h-2.5 text-white" />
       </div>
     )
   }
   if (state === 'disabled') {
-    return <div className={clsx(base, 'border-2 border-[#EDEEF1] dark:border-[#374151]')} />
+    return <div className={clsx(base, 'border-2 border-grey-100 dark:border-grey-800')} />
   }
   // incomplete
-  return <div className={clsx(base, 'border-2 border-[#D7DAE0] dark:border-[#4B5563]')} />
+  return <div className={clsx(base, 'border-2 border-grey-200 dark:border-grey-700')} />
 }
 
 // ── Connector line ────────────────────────────────────────────────────────────
@@ -60,7 +53,7 @@ function HConnector({ complete }: { complete: boolean }) {
     <div
       className={clsx(
         'flex-1 h-1 min-w-0',
-        complete ? 'bg-[#1258F8]' : 'bg-[#D7DAE0] dark:bg-[#374151]'
+        complete ? 'bg-blue-600' : 'bg-grey-200 dark:bg-grey-800'
       )}
     />
   )
@@ -71,18 +64,18 @@ function StepText({ step }: { step: Step }) {
   return (
     <div className="flex flex-col gap-[4px]">
       {step.sublabel && (
-        <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45] tracking-[0.18px]">
+        <p className="text-xs text-grey-600 dark:text-grey-400">
           {step.sublabel}
         </p>
       )}
       <p
         className={clsx(
-          'text-[14px] font-medium leading-[1.45] tracking-[0.21px]',
+          'text-sm font-medium',
           step.state === 'disabled'
-            ? 'text-[#C4C9D4] dark:text-[#4B5563]'
+            ? 'text-grey-300 dark:text-grey-700'
             : step.state === 'error'
-            ? 'text-[#F87171]'
-            : 'text-[#111827] dark:text-white'
+            ? 'text-error-400'
+            : 'text-grey-950 dark:text-white'
         )}
       >
         {step.label}
@@ -116,7 +109,7 @@ export default function ProgressSteps({
                   <div
                     className={clsx(
                       'w-0.5 flex-1 min-h-[32px] mt-1',
-                      step.state === 'complete' ? 'bg-[#1258F8]' : 'bg-[#D7DAE0] dark:bg-[#374151]'
+                      step.state === 'complete' ? 'bg-blue-600' : 'bg-grey-200 dark:bg-grey-800'
                     )}
                   />
                 )}

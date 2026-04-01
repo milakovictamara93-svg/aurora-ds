@@ -28,16 +28,16 @@ export default function LoadingBar({
       aria-valuemax={100}
       className={clsx(
         'relative overflow-hidden rounded-[4px]',
-        'bg-[#EDEEF1] dark:bg-[#1F2430]',
+        'bg-grey-100 dark:bg-grey-900',
         size === 'md' ? 'h-2' : 'h-1',
         className
       )}
     >
       {indeterminate ? (
-        <div className="absolute top-0 bottom-0 w-2/5 bg-[#1258F8] rounded-[4px] animate-loading-bar" />
+        <div className="absolute top-0 bottom-0 w-2/5 bg-blue-600 rounded-[4px] animate-loading-bar" />
       ) : (
         <div
-          className="h-full bg-[#1258F8] rounded-[4px] transition-all duration-500 ease-out"
+          className="h-full bg-blue-600 rounded-[4px] transition-all duration-500 ease-out"
           style={{ width: `${Math.min(100, Math.max(0, value))}%` }}
         />
       )}

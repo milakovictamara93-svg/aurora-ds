@@ -26,13 +26,13 @@ export interface NonLinearStep {
 
 // ── State accent color map ────────────────────────────────────────────────────
 const ACCENT: Record<NonLinearStepState, string> = {
-  'incomplete':          'border-[#D7DAE0] dark:border-[#374151]',
-  'in-progress':         'border-[#1258F8]',
-  'complete':            'border-[#22C55E]',
-  'disabled':            'border-[#EDEEF1] dark:border-[#1F2430]',
-  'error':               'border-[#F87171]',
-  'review-not-started':  'border-[#FB7D3C]',
-  'review-in-progress':  'border-[#FB7D3C]',
+  'incomplete':          'border-grey-200 dark:border-grey-800',
+  'in-progress':         'border-blue-600',
+  'complete':            'border-success-500',
+  'disabled':            'border-grey-100 dark:border-grey-900',
+  'error':               'border-error-400',
+  'review-not-started':  'border-warning-400',
+  'review-in-progress':  'border-warning-400',
 }
 
 // ── Step icon ─────────────────────────────────────────────────────────────────
@@ -41,40 +41,40 @@ function NLStepIcon({ state }: { state: NonLinearStepState }) {
 
   if (state === 'complete') {
     return (
-      <div className={clsx(base, 'bg-[#22C55E]')}>
+      <div className={clsx(base, 'bg-success-500')}>
         <CheckIcon className="w-2.5 h-2.5 text-white" />
       </div>
     )
   }
   if (state === 'in-progress') {
     return (
-      <div className={clsx(base, 'border-2 border-[#1258F8]')}>
-        <div className="w-[6px] h-[6px] rounded-full bg-[#1258F8]" />
+      <div className={clsx(base, 'border-2 border-blue-600')}>
+        <div className="w-[6px] h-[6px] rounded-full bg-blue-600" />
       </div>
     )
   }
   if (state === 'error') {
     return (
-      <div className={clsx(base, 'bg-[#F87171]')}>
+      <div className={clsx(base, 'bg-error-400')}>
         <ExclamationTriangleIcon className="w-2.5 h-2.5 text-white" />
       </div>
     )
   }
   if (state === 'review-in-progress') {
     return (
-      <div className={clsx(base, 'border-2 border-[#FB7D3C]')}>
-        <div className="w-[6px] h-[6px] rounded-full bg-[#FB7D3C]" />
+      <div className={clsx(base, 'border-2 border-warning-400')}>
+        <div className="w-[6px] h-[6px] rounded-full bg-warning-400" />
       </div>
     )
   }
   if (state === 'review-not-started') {
-    return <div className={clsx(base, 'border-2 border-[#FB7D3C]')} />
+    return <div className={clsx(base, 'border-2 border-warning-400')} />
   }
   if (state === 'disabled') {
-    return <div className={clsx(base, 'border-2 border-[#EDEEF1] dark:border-[#374151]')} />
+    return <div className={clsx(base, 'border-2 border-grey-100 dark:border-grey-800')} />
   }
   // incomplete
-  return <div className={clsx(base, 'border-2 border-[#D7DAE0] dark:border-[#4B5563]')} />
+  return <div className={clsx(base, 'border-2 border-grey-200 dark:border-grey-700')} />
 }
 
 // ── Text block ────────────────────────────────────────────────────────────────
@@ -82,21 +82,21 @@ function NLStepText({ step }: { step: NonLinearStep }) {
   return (
     <div className="flex flex-col gap-[4px]">
       {step.sublabel && (
-        <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45] tracking-[0.18px]">
+        <p className="text-xs text-grey-600 dark:text-grey-400">
           {step.sublabel}
         </p>
       )}
       <p
         className={clsx(
-          'text-[14px] leading-[1.45] tracking-[0.21px]',
+          'text-sm',
           step.active ? 'font-medium' : 'font-normal',
           step.state === 'disabled'
-            ? 'text-[#C4C9D4] dark:text-[#4B5563]'
+            ? 'text-grey-300 dark:text-grey-700'
             : step.state === 'error'
-            ? 'text-[#F87171]'
+            ? 'text-error-400'
             : step.active
-            ? 'text-[#111827] dark:text-white'
-            : 'text-[#505867] dark:text-[#9CA3AF]'
+            ? 'text-grey-950 dark:text-white'
+            : 'text-grey-600 dark:text-grey-400'
         )}
       >
         {step.label}

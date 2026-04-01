@@ -29,7 +29,7 @@ export default function Skeleton({
       aria-hidden="true"
       className={clsx(
         'relative overflow-hidden',
-        'bg-[rgba(109,120,138,0.2)] dark:bg-white/10',
+        'bg-grey-500/20 dark:bg-white/10',
         animation === 'pulse' && 'animate-aurora-pulse',
         className
       )}
@@ -42,7 +42,7 @@ export default function Skeleton({
       {animation === 'wave' && (
         <div
           aria-hidden="true"
-          className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-[rgba(215,218,224,0.5)] to-transparent animate-shimmer dark:via-white/10"
+          className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-grey-200/50 to-transparent animate-shimmer dark:via-white/10"
         />
       )}
     </div>

@@ -26,8 +26,8 @@ export default function Spinner({
       aria-label="Loading"
       className={clsx(
         'rounded-full animate-spin shrink-0',
-        'border-[#D7DAE0] dark:border-white/20',
-        'border-t-[#1258F8] dark:border-t-[#2295FF]',
+        'border-grey-200 dark:border-white/20',
+        'border-t-blue-600 dark:border-t-sky-500',
         SIZES[size],
         className
       )}
