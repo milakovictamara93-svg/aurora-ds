@@ -76,15 +76,17 @@ const config: Config = {
           400: '#F87171', 500: '#EF4444', 600: '#DC2626', 700: '#B91C1C',
           800: '#991B1B', 900: '#7F1D1D', 950: '#450A0A',
         },
+        // Figma: Primitive/Yellow — semantic "Warning"
         'warning': {
+          50: '#FEF9E8', 100: '#FEF0C3', 200: '#FFEAA8', 300: '#FDD147',
+          400: '#FAC215', 500: '#EAB308', 600: '#CA9A04', 700: '#A17C07',
+          800: '#85680E', 900: '#715A12', 950: '#423306',
+        },
+        // Figma: Primitive/Orange — semantic "Missing info"
+        'missing-info': {
           50: '#FFF3ED', 100: '#FFE3D5', 200: '#FEC7AA', 300: '#FDA374',
           400: '#FB7D3C', 500: '#F96416', 600: '#EA580C', 700: '#C24A0C',
           800: '#9A4112', 900: '#7C3612', 950: '#431C07',
-        },
-        'missing-info': {
-          50: '#FEF9E8', 100: '#FEF0C3', 200: '#FFEAA8', 300: '#FDD147',
-          400: '#FAC219', 500: '#EAB308', 600: '#CA9A04', 700: '#A17C07',
-          800: '#85680E', 900: '#715A12', 950: '#423306',
         },
         'success': {
           50: '#F0FDF5', 100: '#DCFCE8', 200: '#BBF7D1', 300: '#86EFAD',

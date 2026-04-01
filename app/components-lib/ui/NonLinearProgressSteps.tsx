@@ -31,8 +31,8 @@ const ACCENT: Record<NonLinearStepState, string> = {
   'complete':            'border-success-500',
   'disabled':            'border-grey-100 dark:border-grey-900',
   'error':               'border-error-400',
-  'review-not-started':  'border-warning-400',
-  'review-in-progress':  'border-warning-400',
+  'review-not-started':  'border-missing-info-500',
+  'review-in-progress':  'border-missing-info-500',
 }
 
 // ── Step icon ─────────────────────────────────────────────────────────────────
@@ -62,13 +62,13 @@ function NLStepIcon({ state }: { state: NonLinearStepState }) {
   }
   if (state === 'review-in-progress') {
     return (
-      <div className={clsx(base, 'border-2 border-warning-400')}>
-        <div className="w-[6px] h-[6px] rounded-full bg-warning-400" />
+      <div className={clsx(base, 'border-2 border-missing-info-500')}>
+        <div className="w-[6px] h-[6px] rounded-full bg-missing-info-500" />
       </div>
     )
   }
   if (state === 'review-not-started') {
-    return <div className={clsx(base, 'border-2 border-warning-400')} />
+    return <div className={clsx(base, 'border-2 border-missing-info-500')} />
   }
   if (state === 'disabled') {
     return <div className={clsx(base, 'border-2 border-grey-100 dark:border-grey-800')} />

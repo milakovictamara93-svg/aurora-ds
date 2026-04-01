@@ -6,10 +6,6 @@
 // Sizes:   medium (h-28px, 14px text) · small (h-20px, 12px text)
 // States:  default · hover
 //
-// Color mapping (component system → foundation token):
-//   "warning"      system → missing-info palette (amber, #CA9A04 base)
-//   "missing-info" system → warning palette     (orange, #F96416 base)
-
 import Indicator from './Indicator'
 import type { IndicatorSystem } from './Indicator'
 
@@ -21,8 +17,8 @@ const FILLED: Record<TagSystem, { bg: string; hover: string; text: string }> = {
   default:       { bg: 'bg-blue-100',         hover: 'hover:bg-blue-200',         text: 'text-blue-900' },
   disabled:      { bg: 'bg-grey-100',         hover: 'hover:bg-grey-300',         text: 'text-grey-400' },
   error:         { bg: 'bg-error-100',        hover: 'hover:bg-error-200',        text: 'text-error-900' },
-  warning:       { bg: 'bg-missing-info-100', hover: 'hover:bg-missing-info-200', text: 'text-missing-info-900' },
-  'missing-info':{ bg: 'bg-warning-100',      hover: 'hover:bg-warning-200',      text: 'text-warning-800' },
+  warning:       { bg: 'bg-warning-100',      hover: 'hover:bg-warning-200',      text: 'text-warning-900' },
+  'missing-info':{ bg: 'bg-missing-info-100', hover: 'hover:bg-missing-info-200', text: 'text-missing-info-900' },
   success:       { bg: 'bg-success-100',      hover: 'hover:bg-success-200',      text: 'text-success-900' },
 }
 
@@ -31,8 +27,8 @@ const OUTLINE: Record<TagSystem, { border: string; text: string }> = {
   default:       { border: 'border-blue-600',         text: 'text-blue-900' },
   disabled:      { border: 'border-grey-400',         text: 'text-grey-400' },
   error:         { border: 'border-error-600',        text: 'text-error-700' },
-  warning:       { border: 'border-missing-info-600', text: 'text-missing-info-700' },
-  'missing-info':{ border: 'border-warning-500',      text: 'text-warning-600' },
+  warning:       { border: 'border-warning-600',      text: 'text-warning-700' },
+  'missing-info':{ border: 'border-missing-info-600', text: 'text-missing-info-700' },
   success:       { border: 'border-success-600',      text: 'text-success-700' },
 }
 
@@ -41,8 +37,8 @@ const PROJECTED: Record<TagSystem, { bg: string; hover: string; border: string; 
   default:       { bg: 'bg-blue-50',         hover: 'hover:bg-blue-100',         border: 'border-blue-600',         text: 'text-blue-900' },
   disabled:      { bg: 'bg-grey-100',        hover: 'hover:bg-grey-100',         border: 'border-grey-200',         text: 'text-grey-400' },
   error:         { bg: 'bg-error-50',        hover: 'hover:bg-error-100',        border: 'border-error-800',        text: 'text-error-900' },
-  warning:       { bg: 'bg-missing-info-50', hover: 'hover:bg-missing-info-100', border: 'border-missing-info-800', text: 'text-missing-info-900' },
-  'missing-info':{ bg: 'bg-warning-50',      hover: 'hover:bg-warning-100',      border: 'border-warning-700',      text: 'text-warning-800' },
+  warning:       { bg: 'bg-warning-50',      hover: 'hover:bg-warning-100',      border: 'border-warning-800',      text: 'text-warning-900' },
+  'missing-info':{ bg: 'bg-missing-info-50', hover: 'hover:bg-missing-info-100', border: 'border-missing-info-800', text: 'text-missing-info-900' },
   success:       { bg: 'bg-success-50',      hover: 'hover:bg-success-100',      border: 'border-success-800',      text: 'text-success-900' },
 }
 

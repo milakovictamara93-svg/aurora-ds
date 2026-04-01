@@ -75,31 +75,31 @@
   --error-900: #7F1D1D;
   --error-950: #450A0A;
 
-  /* ── Warning (orange) ── */
-  --warning-50: #FFF3ED;
-  --warning-100: #FFE3D5;
-  --warning-200: #FEC7AA;
-  --warning-300: #FDA374;
-  --warning-400: #FB7D3C;
-  --warning-500: #F96416;
-  --warning-600: #EA580C;
-  --warning-700: #C24A0C;
-  --warning-800: #9A4112;
-  --warning-900: #7C3612;
-  --warning-950: #431C07;
+  /* ── Warning (yellow — Figma: Primitive/Yellow) ── */
+  --warning-50: #FEF9E8;
+  --warning-100: #FEF0C3;
+  --warning-200: #FFEAA8;
+  --warning-300: #FDD147;
+  --warning-400: #FAC215;
+  --warning-500: #EAB308;
+  --warning-600: #CA9A04;
+  --warning-700: #A17C07;
+  --warning-800: #85680E;
+  --warning-900: #715A12;
+  --warning-950: #423306;
 
-  /* ── Missing info (amber) ── */
-  --missing-info-50: #FEF9E8;
-  --missing-info-100: #FEF0C3;
-  --missing-info-200: #FFEAA8;
-  --missing-info-300: #FDD147;
-  --missing-info-400: #FAC219;
-  --missing-info-500: #EAB308;
-  --missing-info-600: #CA9A04;
-  --missing-info-700: #A17C07;
-  --missing-info-800: #85680E;
-  --missing-info-900: #715A12;
-  --missing-info-950: #423306;
+  /* ── Missing info (orange — Figma: Primitive/Orange) ── */
+  --missing-info-50: #FFF3ED;
+  --missing-info-100: #FFE3D5;
+  --missing-info-200: #FEC7AA;
+  --missing-info-300: #FDA374;
+  --missing-info-400: #FB7D3C;
+  --missing-info-500: #F96416;
+  --missing-info-600: #EA580C;
+  --missing-info-700: #C24A0C;
+  --missing-info-800: #9A4112;
+  --missing-info-900: #7C3612;
+  --missing-info-950: #431C07;
 
   /* ── Success ── */
   --success-50: #F0FDF5;
@@ -127,11 +127,11 @@
   --ai-900: #3C169C;
   --ai-950: #230B6A;
 
-  /* ── Semantic aliases ── */
-  --color-error: #F87171;
-  --color-warning: #FB7D3C;
-  --color-success: #22C55E;
-  --color-ai: #653FFF;
+  /* ── Semantic aliases (matches Figma semantic layer) ── */
+  --color-error: #DC2626;    /* error-600 · Text/Error/Core · Border/Error/Default */
+  --color-warning: #EAB308;  /* warning-500 · Text/Warning/Core (yellow) */
+  --color-success: #16A34A;  /* success-600 · Text/Success/Core · Border/Success/Default */
+  --color-ai: #6430F7;       /* ai-600 */
 
   /* Surfaces */
   --bg-primary: var(--grey-0);
