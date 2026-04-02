@@ -316,6 +316,97 @@ export default function ColorsPage() {
         </div>
       </div>
 
+      {/* Semantic tokens */}
+      <div className="mb-14">
+        <div className="mb-6">
+          <h2 className="text-2xl font-semibold text-token-primary">Semantic tokens</h2>
+          <p className="text-sm text-token-secondary mt-1">
+            Use these in components — they map to the correct Figma semantic layer values and update globally when the theme changes.
+          </p>
+        </div>
+
+        {[
+          {
+            state: 'Error',
+            rows: [
+              { token: '--color-error-fill',        hex: '#DC2626', usage: 'Icon fills, solid state backgrounds' },
+              { token: '--color-error-text',         hex: '#DC2626', usage: 'Body text, inline icons' },
+              { token: '--color-error-text-strong',  hex: '#B91C1C', usage: 'Labels, headings' },
+              { token: '--color-error-border',       hex: '#DC2626', usage: 'Component borders' },
+              { token: '--color-error-bg',           hex: '#FEF2F2', usage: 'Subtle surface (secondary)' },
+              { token: '--color-error-bg-default',   hex: '#FEE2E2', usage: 'Default surface' },
+            ],
+          },
+          {
+            state: 'Success',
+            rows: [
+              { token: '--color-success-fill',        hex: '#16A34A', usage: 'Icon fills, solid state backgrounds' },
+              { token: '--color-success-text',         hex: '#16A34A', usage: 'Body text, inline icons' },
+              { token: '--color-success-text-strong',  hex: '#15803C', usage: 'Labels, headings' },
+              { token: '--color-success-border',       hex: '#16A34A', usage: 'Component borders' },
+              { token: '--color-success-bg',           hex: '#F0FDF5', usage: 'Subtle surface (secondary)' },
+              { token: '--color-success-bg-default',   hex: '#DCFCE8', usage: 'Default surface' },
+            ],
+          },
+          {
+            state: 'Warning',
+            rows: [
+              { token: '--color-warning-fill',        hex: '#CA9A04', usage: 'Icon fills, solid state backgrounds' },
+              { token: '--color-warning-text',         hex: '#EAB308', usage: 'Body text, inline icons' },
+              { token: '--color-warning-text-strong',  hex: '#A17C07', usage: 'Labels, headings' },
+              { token: '--color-warning-border',       hex: '#CA9A04', usage: 'Component borders' },
+              { token: '--color-warning-bg',           hex: '#FEF9E8', usage: 'Subtle surface (secondary)' },
+              { token: '--color-warning-bg-default',   hex: '#FEF0C3', usage: 'Default surface' },
+            ],
+          },
+          {
+            state: 'Missing info',
+            rows: [
+              { token: '--color-missing-info-fill',        hex: '#F96416', usage: 'Icon fills, solid state backgrounds' },
+              { token: '--color-missing-info-text',         hex: '#F96416', usage: 'Body text, inline icons' },
+              { token: '--color-missing-info-text-strong',  hex: '#EA580C', usage: 'Labels, headings' },
+              { token: '--color-missing-info-border',       hex: '#F96416', usage: 'Component borders' },
+              { token: '--color-missing-info-bg',           hex: '#FFF3ED', usage: 'Subtle surface (secondary)' },
+              { token: '--color-missing-info-bg-default',   hex: '#FFE3D5', usage: 'Default surface' },
+            ],
+          },
+        ].map(group => (
+          <div key={group.state} className="mb-8">
+            <h3 className="text-sm font-semibold text-token-secondary uppercase tracking-widest mb-3">{group.state}</h3>
+            <div className="rounded-xl border border-token overflow-hidden">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-token-secondary border-b border-token">
+                    <th className="text-left px-4 py-2.5 font-medium text-token-secondary w-64">Token</th>
+                    <th className="text-left px-4 py-2.5 font-medium text-token-secondary w-32">Value</th>
+                    <th className="text-left px-4 py-2.5 font-medium text-token-secondary">Usage</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-token bg-token-primary">
+                  {group.rows.map(row => (
+                    <tr key={row.token} className="hover:bg-token-secondary transition-colors">
+                      <td className="px-4 py-2.5">
+                        <div className="flex items-center gap-2">
+                          <span
+                            className="w-4 h-4 rounded-sm border border-token shrink-0"
+                            style={{ backgroundColor: row.hex }}
+                          />
+                          <code className="font-mono text-xs text-sky-600 dark:text-sky-400">{row.token}</code>
+                        </div>
+                      </td>
+                      <td className="px-4 py-2.5">
+                        <code className="font-mono text-xs text-token-secondary">{row.hex}</code>
+                      </td>
+                      <td className="px-4 py-2.5 text-token-secondary">{row.usage}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+      </div>
+
       {/* Palette sections */}
       <div className="space-y-14">
         {SECTIONS.map(section => (

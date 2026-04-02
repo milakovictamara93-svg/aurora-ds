@@ -35,7 +35,7 @@ function StepIcon({ state }: { state: StepState }) {
   }
   if (state === 'error') {
     return (
-      <div className={clsx(base, 'bg-error-400')}>
+      <div className={clsx(base, 'bg-error-600')}>
         <ExclamationTriangleIcon className="w-2.5 h-2.5 text-white" />
       </div>
     )
@@ -74,7 +74,7 @@ function StepText({ step }: { step: Step }) {
           step.state === 'disabled'
             ? 'text-grey-300 dark:text-grey-700'
             : step.state === 'error'
-            ? 'text-error-400'
+            ? 'text-error-600'
             : 'text-grey-950 dark:text-white'
         )}
       >

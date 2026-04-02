@@ -28,9 +28,9 @@ export interface NonLinearStep {
 const ACCENT: Record<NonLinearStepState, string> = {
   'incomplete':          'border-grey-200 dark:border-grey-800',
   'in-progress':         'border-blue-600',
-  'complete':            'border-success-500',
+  'complete':            'border-success-600',
   'disabled':            'border-grey-100 dark:border-grey-900',
-  'error':               'border-error-400',
+  'error':               'border-error-600',
   'review-not-started':  'border-missing-info-500',
   'review-in-progress':  'border-missing-info-500',
 }
@@ -41,7 +41,7 @@ function NLStepIcon({ state }: { state: NonLinearStepState }) {
 
   if (state === 'complete') {
     return (
-      <div className={clsx(base, 'bg-success-500')}>
+      <div className={clsx(base, 'bg-success-600')}>
         <CheckIcon className="w-2.5 h-2.5 text-white" />
       </div>
     )
@@ -55,7 +55,7 @@ function NLStepIcon({ state }: { state: NonLinearStepState }) {
   }
   if (state === 'error') {
     return (
-      <div className={clsx(base, 'bg-error-400')}>
+      <div className={clsx(base, 'bg-error-600')}>
         <ExclamationTriangleIcon className="w-2.5 h-2.5 text-white" />
       </div>
     )
@@ -93,7 +93,7 @@ function NLStepText({ step }: { step: NonLinearStep }) {
           step.state === 'disabled'
             ? 'text-grey-300 dark:text-grey-700'
             : step.state === 'error'
-            ? 'text-error-400'
+            ? 'text-error-600'
             : step.active
             ? 'text-grey-950 dark:text-white'
             : 'text-grey-600 dark:text-grey-400'

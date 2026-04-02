@@ -33,14 +33,14 @@ const HIGH: Record<ToastVariant, { bg: string; border: string; icon: string; lab
   error: {
     bg:     'bg-error-50 dark:bg-error-950/40',
     border: 'border-error-300 dark:border-error-700',
-    icon:   'text-error-500 dark:text-error-400',
+    icon:   'text-error-600 dark:text-error-300',
     label:  'text-error-900 dark:text-error-100',
     desc:   'text-error-700 dark:text-error-300',
   },
   warning: {
     bg:     'bg-warning-50 dark:bg-warning-950/40',
     border: 'border-warning-300 dark:border-warning-700',
-    icon:   'text-warning-500 dark:text-warning-400',
+    icon:   'text-warning-600 dark:text-warning-400',
     label:  'text-warning-900 dark:text-warning-100',
     desc:   'text-warning-700 dark:text-warning-300',
   },
@@ -54,7 +54,7 @@ const HIGH: Record<ToastVariant, { bg: string; border: string; icon: string; lab
   success: {
     bg:     'bg-success-50 dark:bg-success-950/40',
     border: 'border-success-300 dark:border-success-700',
-    icon:   'text-success-500 dark:text-success-400',
+    icon:   'text-success-600 dark:text-success-300',
     label:  'text-success-900 dark:text-success-100',
     desc:   'text-success-700 dark:text-success-300',
   },
@@ -68,10 +68,10 @@ const HIGH: Record<ToastVariant, { bg: string; border: string; icon: string; lab
 }
 
 const LOW: Record<ToastVariant, { icon: string }> = {
-  error:          { icon: 'text-error-500 dark:text-error-400' },
-  warning:        { icon: 'text-warning-500 dark:text-warning-400' },
+  error:          { icon: 'text-error-600 dark:text-error-300' },
+  warning:        { icon: 'text-warning-600 dark:text-warning-400' },
   'missing-info': { icon: 'text-missing-info-500 dark:text-missing-info-400' },
-  success:        { icon: 'text-success-500 dark:text-success-400' },
+  success:        { icon: 'text-success-600 dark:text-success-300' },
   default:        { icon: 'text-blue-500 dark:text-blue-400' },
 }
 
