@@ -3,38 +3,95 @@ import { ArrowRightIcon } from '@heroicons/react/20/solid'
 import AppLayout from '@/app/components-lib/layout/AppLayout'
 import VideoCard from '@/app/components-lib/ui/VideoCard'
 
-// ── Figma building-block assets (light-blue geometric shapes) ─────────────────
-// These decorate the three section cards. URLs expire in 7 days from generation.
-const BB1 = 'https://www.figma.com/api/mcp/asset/ac49f527-7869-4c0a-93ff-6c6f4a9694dc'
-const BB2 = 'https://www.figma.com/api/mcp/asset/fd698b92-3b69-4a5f-a428-b7cc642a74d6'
-const BB3 = 'https://www.figma.com/api/mcp/asset/84728999-2d0a-495c-a507-679d9b86af0b'
-const BB4 = 'https://www.figma.com/api/mcp/asset/42d528db-ac45-4013-881f-a9cbdac04d37'
-const BB5 = 'https://www.figma.com/api/mcp/asset/025481b8-4020-4cf6-b021-861556c823fa'
-const BB6 = 'https://www.figma.com/api/mcp/asset/c4c4d98b-498c-4601-b803-3221295d2149'
+// ── Inline SVG geometric building-block shapes ────────────────────────────────
+// Permanent replacements — no expiry.
+
+// Tall portrait blocks (66×132)
+function TallA() {
+  return (
+    <svg width="66" height="132" viewBox="0 0 66 132" fill="none">
+      <rect width="66" height="66" fill="#DBEAFE"/>
+      <rect y="66" width="66" height="66" fill="#2295FF" opacity="0.45"/>
+      <rect x="12" y="12" width="42" height="42" rx="3" fill="#2295FF" opacity="0.3"/>
+    </svg>
+  )
+}
+function TallB() {
+  return (
+    <svg width="66" height="132" viewBox="0 0 66 132" fill="none">
+      <rect width="66" height="132" fill="#EFF6FF"/>
+      <rect x="0" y="33" width="66" height="66" fill="#93C5FD" opacity="0.55"/>
+      <rect x="12" y="45" width="42" height="42" rx="3" fill="#1258F8" opacity="0.25"/>
+    </svg>
+  )
+}
+function TallC() {
+  return (
+    <svg width="66" height="132" viewBox="0 0 66 132" fill="none">
+      <rect width="66" height="66" fill="#D1FAE5"/>
+      <rect y="66" width="66" height="66" fill="#43F9C2" opacity="0.4"/>
+      <rect x="12" y="12" width="42" height="42" rx="3" fill="#10B981" opacity="0.25"/>
+    </svg>
+  )
+}
+
+// Wide square blocks (132×132)
+function WideA() {
+  return (
+    <svg width="132" height="132" viewBox="0 0 132 132" fill="none">
+      <rect width="66" height="66" fill="#2295FF" opacity="0.25"/>
+      <rect x="66" width="66" height="66" fill="#BFDBFE"/>
+      <rect y="66" width="66" height="66" fill="#BFDBFE"/>
+      <rect x="66" y="66" width="66" height="66" fill="#1258F8" opacity="0.3"/>
+      <rect x="22" y="22" width="88" height="88" rx="4" fill="none" stroke="#2295FF" strokeWidth="1.5" opacity="0.35"/>
+    </svg>
+  )
+}
+function WideB() {
+  return (
+    <svg width="132" height="132" viewBox="0 0 132 132" fill="none">
+      <rect width="66" height="66" fill="#EFF6FF"/>
+      <rect x="66" width="66" height="66" fill="#1258F8" opacity="0.2"/>
+      <rect y="66" width="66" height="66" fill="#43F9C2" opacity="0.2"/>
+      <rect x="66" y="66" width="66" height="66" fill="#DBEAFE"/>
+      <circle cx="66" cy="66" r="30" fill="none" stroke="#2295FF" strokeWidth="1.5" opacity="0.4"/>
+    </svg>
+  )
+}
+function WideC() {
+  return (
+    <svg width="132" height="132" viewBox="0 0 132 132" fill="none">
+      <rect width="66" height="66" fill="#43F9C2" opacity="0.25"/>
+      <rect x="66" width="66" height="66" fill="#D1FAE5"/>
+      <rect y="66" width="66" height="66" fill="#A7F3D0"/>
+      <rect x="66" y="66" width="66" height="66" fill="#10B981" opacity="0.2"/>
+      <rect x="22" y="22" width="88" height="88" rx="4" fill="none" stroke="#10B981" strokeWidth="1.5" opacity="0.3"/>
+    </svg>
+  )
+}
 
 // ── Section card building-block configs ───────────────────────────────────────
-//   Each item: { src, w (px), transform }
-type BBItem = { src: string; w: number; tf?: string }
+type BBItem = { el: React.ReactNode; w: number; tf?: string }
 
 const FOUNDATIONS_BLOCKS: BBItem[] = [
-  { src: BB2, w: 132, tf: 'rotate(-90deg)' },
-  { src: BB1, w: 66,  tf: 'scaleX(-1)' },
-  { src: BB1, w: 66,  tf: 'scaleX(-1)' },
+  { el: <WideA />, w: 132, tf: 'rotate(-90deg)' },
+  { el: <TallA />, w: 66,  tf: 'scaleX(-1)' },
+  { el: <TallA />, w: 66,  tf: 'scaleX(-1)' },
 ]
 
 const COMPONENTS_BLOCKS: BBItem[] = [
-  { src: BB3, w: 66,  tf: 'scaleX(-1)' },
-  { src: BB4, w: 132, tf: 'rotate(-90deg)' },
-  { src: BB3, w: 66,  tf: 'scaleX(-1)' },
+  { el: <TallB />, w: 66,  tf: 'scaleX(-1)' },
+  { el: <WideB />, w: 132, tf: 'rotate(-90deg)' },
+  { el: <TallB />, w: 66,  tf: 'scaleX(-1)' },
 ]
 
 const PATTERNS_BLOCKS: BBItem[] = [
-  { src: BB5, w: 66,  tf: 'scaleX(-1)' },
-  { src: BB5, w: 66,  tf: 'scaleX(-1)' },
-  { src: BB6, w: 132, tf: 'rotate(-90deg)' },
+  { el: <TallC />, w: 66,  tf: 'scaleX(-1)' },
+  { el: <TallC />, w: 66,  tf: 'scaleX(-1)' },
+  { el: <WideC />, w: 132, tf: 'rotate(-90deg)' },
 ]
 
-// ── Small helper: building-block image strip ──────────────────────────────────
+// ── Small helper: building-block strip ───────────────────────────────────────
 function BlockStrip({ items }: { items: BBItem[] }) {
   return (
     <div className="absolute left-0 top-0 flex items-start h-[132px] transition-all duration-500 ease-in-out group-hover:left-full group-hover:-translate-x-full">
@@ -44,8 +101,7 @@ function BlockStrip({ items }: { items: BBItem[] }) {
           className="shrink-0 h-[132px]"
           style={{ width: item.w, transform: item.tf }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={item.src} alt="" className="w-full h-full object-fill" />
+          {item.el}
         </div>
       ))}
     </div>
