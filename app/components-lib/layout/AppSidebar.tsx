@@ -64,7 +64,7 @@ const COMPONENT_GROUPS: NavGroup[] = [
     items: [
       { href: '/components/tables',      label: 'Table',        available: false },
       { href: '/components/cards',       label: 'Card',         available: true },
-      { href: '/components/data-points', label: 'Data points',  available: false },
+      { href: '/components/data-points', label: 'Data points',  available: true },
       { href: '/components/badges-tags', label: 'Tags & Indicators', available: true },
     ],
   },
