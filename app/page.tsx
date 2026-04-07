@@ -3,69 +3,62 @@ import { ArrowRightIcon } from '@heroicons/react/20/solid'
 import AppLayout from '@/app/components-lib/layout/AppLayout'
 import VideoCard from '@/app/components-lib/ui/VideoCard'
 
-// ── Inline SVG geometric building-block shapes ────────────────────────────────
-// Permanent replacements — no expiry.
+// ── Exact Figma building-block shapes (paths from Figma export, brand color applied) ──
+const BRAND = '#2295FF'
 
-// Tall portrait blocks (66×132)
-function TallA() {
+// BB1 — 125×250 portrait, one chamfered-corner shape
+function BB1Svg() {
   return (
-    <svg width="66" height="132" viewBox="0 0 66 132" fill="none">
-      <rect width="66" height="66" fill="#DBEAFE"/>
-      <rect y="66" width="66" height="66" fill="#2295FF" opacity="0.45"/>
-      <rect x="12" y="12" width="42" height="42" rx="3" fill="#2295FF" opacity="0.3"/>
-    </svg>
-  )
-}
-function TallB() {
-  return (
-    <svg width="66" height="132" viewBox="0 0 66 132" fill="none">
-      <rect width="66" height="132" fill="#EFF6FF"/>
-      <rect x="0" y="33" width="66" height="66" fill="#93C5FD" opacity="0.55"/>
-      <rect x="12" y="45" width="42" height="42" rx="3" fill="#1258F8" opacity="0.25"/>
-    </svg>
-  )
-}
-function TallC() {
-  return (
-    <svg width="66" height="132" viewBox="0 0 66 132" fill="none">
-      <rect width="66" height="66" fill="#D1FAE5"/>
-      <rect y="66" width="66" height="66" fill="#43F9C2" opacity="0.4"/>
-      <rect x="12" y="12" width="42" height="42" rx="3" fill="#10B981" opacity="0.25"/>
+    <svg width="125" height="250" viewBox="0 0 125 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M41.6527 0L1.40071e-05 41.6527V249.916H83.3055L124.958 208.264V0H41.6527Z" fill={BRAND}/>
     </svg>
   )
 }
 
-// Wide square blocks (132×132)
-function WideA() {
+// BB2 — 250×250 square, one chamfered-corner shape
+function BB2Svg() {
   return (
-    <svg width="132" height="132" viewBox="0 0 132 132" fill="none">
-      <rect width="66" height="66" fill="#2295FF" opacity="0.25"/>
-      <rect x="66" width="66" height="66" fill="#BFDBFE"/>
-      <rect y="66" width="66" height="66" fill="#BFDBFE"/>
-      <rect x="66" y="66" width="66" height="66" fill="#1258F8" opacity="0.3"/>
-      <rect x="22" y="22" width="88" height="88" rx="4" fill="none" stroke="#2295FF" strokeWidth="1.5" opacity="0.35"/>
+    <svg width="250" height="250" viewBox="0 0 250 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 41.6528L41.6527 2.80142e-05L249.916 2.80142e-05L249.916 208.264L208.264 249.916H0L0 41.6528Z" fill={BRAND}/>
     </svg>
   )
 }
-function WideB() {
+
+// BB3 — 250×250, two-part shape
+function BB3Svg() {
   return (
-    <svg width="132" height="132" viewBox="0 0 132 132" fill="none">
-      <rect width="66" height="66" fill="#EFF6FF"/>
-      <rect x="66" width="66" height="66" fill="#1258F8" opacity="0.2"/>
-      <rect y="66" width="66" height="66" fill="#43F9C2" opacity="0.2"/>
-      <rect x="66" y="66" width="66" height="66" fill="#DBEAFE"/>
-      <circle cx="66" cy="66" r="30" fill="none" stroke="#2295FF" strokeWidth="1.5" opacity="0.4"/>
+    <svg width="250" height="250" viewBox="0 0 250 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M124.999 249.997H62.5L0 187.497V0H124.998L124.999 249.997Z" fill={BRAND}/>
+      <path d="M250 62.5H249.997V249.997H125.003L125.002 0H187.5L250 62.5Z" fill={BRAND}/>
     </svg>
   )
 }
-function WideC() {
+
+// BB4 — 168×84 wide landscape, one chamfered shape
+function BB4Svg() {
   return (
-    <svg width="132" height="132" viewBox="0 0 132 132" fill="none">
-      <rect width="66" height="66" fill="#43F9C2" opacity="0.25"/>
-      <rect x="66" width="66" height="66" fill="#D1FAE5"/>
-      <rect y="66" width="66" height="66" fill="#A7F3D0"/>
-      <rect x="66" y="66" width="66" height="66" fill="#10B981" opacity="0.2"/>
-      <rect x="22" y="22" width="88" height="88" rx="4" fill="none" stroke="#10B981" strokeWidth="1.5" opacity="0.3"/>
+    <svg width="168" height="84" viewBox="0 0 168 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M167.988 41.9971L167.989 83.9951H41.9971L0.000976562 41.998L0 0H125.992L167.988 41.9971Z" fill={BRAND}/>
+    </svg>
+  )
+}
+
+// BB5 — 168×126, two-part shape
+function BB5Svg() {
+  return (
+    <svg width="168" height="126" viewBox="0 0 168 126" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M83.9951 125.992H41.9971L0.000976562 83.9951L0 0H83.9951V125.992Z" fill={BRAND}/>
+      <path d="M125.995 0.000976562L167.992 41.998H167.989V125.992H83.998L83.9971 0L125.995 0.000976562Z" fill={BRAND}/>
+    </svg>
+  )
+}
+
+// BB6 — 84×168 tall, two-part shape
+function BB6Svg() {
+  return (
+    <svg width="84" height="168" viewBox="0 0 84 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M83.9951 125.992L41.998 167.989L0 167.99V83.9951H83.9951V125.992Z" fill={BRAND}/>
+      <path d="M83.9951 83.9922H0V41.9941H0.00390625L41.9971 0.000976562L83.9951 0V83.9922Z" fill={BRAND}/>
     </svg>
   )
 }
@@ -74,21 +67,21 @@ function WideC() {
 type BBItem = { el: React.ReactNode; w: number; tf?: string }
 
 const FOUNDATIONS_BLOCKS: BBItem[] = [
-  { el: <WideA />, w: 132, tf: 'rotate(-90deg)' },
-  { el: <TallA />, w: 66,  tf: 'scaleX(-1)' },
-  { el: <TallA />, w: 66,  tf: 'scaleX(-1)' },
+  { el: <BB2Svg />, w: 132, tf: 'rotate(-90deg)' },
+  { el: <BB1Svg />, w: 66,  tf: 'scaleX(-1)' },
+  { el: <BB1Svg />, w: 66,  tf: 'scaleX(-1)' },
 ]
 
 const COMPONENTS_BLOCKS: BBItem[] = [
-  { el: <TallB />, w: 66,  tf: 'scaleX(-1)' },
-  { el: <WideB />, w: 132, tf: 'rotate(-90deg)' },
-  { el: <TallB />, w: 66,  tf: 'scaleX(-1)' },
+  { el: <BB3Svg />, w: 66,  tf: 'scaleX(-1)' },
+  { el: <BB4Svg />, w: 132, tf: 'rotate(-90deg)' },
+  { el: <BB3Svg />, w: 66,  tf: 'scaleX(-1)' },
 ]
 
 const PATTERNS_BLOCKS: BBItem[] = [
-  { el: <TallC />, w: 66,  tf: 'scaleX(-1)' },
-  { el: <TallC />, w: 66,  tf: 'scaleX(-1)' },
-  { el: <WideC />, w: 132, tf: 'rotate(-90deg)' },
+  { el: <BB5Svg />, w: 66,  tf: 'scaleX(-1)' },
+  { el: <BB5Svg />, w: 66,  tf: 'scaleX(-1)' },
+  { el: <BB6Svg />, w: 132, tf: 'rotate(-90deg)' },
 ]
 
 // ── Small helper: building-block strip ───────────────────────────────────────
