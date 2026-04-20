@@ -62,11 +62,11 @@ const COMPONENT_GROUPS: NavGroup[] = [
     id: 'data-display',
     label: 'Data display',
     items: [
-      { href: '/components/tables',      label: 'Table',        available: false },
-      { href: '/components/cards',       label: 'Card',         available: true },
-      { href: '/components/data-points', label: 'Data points',  available: true },
-      { href: '/components/badges-tags', label: 'Tags & Indicators', available: true },
-      { href: '/components/accordion',   label: 'Accordion',    available: true },
+      { href: '/components/tables',      label: 'Table',             available: false },
+      { href: '/components/cards',       label: 'Card' },
+      { href: '/components/data-points', label: 'Data points' },
+      { href: '/components/badges-tags', label: 'Tags & Indicators' },
+      { href: '/components/accordion',   label: 'Accordion' },
     ],
   },
   {
@@ -162,7 +162,7 @@ function NavSection({
       <div
         className={clsx(
           'overflow-hidden transition-all duration-200 ease-in-out',
-          open ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
+          open ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'
         )}
       >
         <div className={clsx('flex flex-col gap-0.5 py-0.5', indent ? 'pl-2' : 'pl-1')}>
