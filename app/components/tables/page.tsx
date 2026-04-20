@@ -1,275 +1,315 @@
 'use client'
 
+import { useState } from 'react'
 import PageHeader from '@/app/components-lib/ui/PageHeader'
+import Table, { ColumnDef, BadgeVariant } from '@/app/components-lib/ui/Table'
 import {
   ComponentTabs, TabBar, TabPanel,
-  Section, SpecTable, ColorRow,
-  DoCard, DontCard, A11yRow, KeyRow,
+  Section, SpecTable, A11yRow, KeyRow,
   Preview, Annotation,
-  UseList, DontUseList, RelatedComponents, PageContent,
+  UseList, DontUseList, DoCard, DontCard,
+  RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 
-// ── Inline demo components ─────────────────────────────────────────────────────
+// ── Demo data ─────────────────────────────────────────────────────────────────
 
-function TableDemo() {
-  const rows = [
-    { building: 'Scaler HQ', type: 'Office', emissions: '142 tCO₂e', status: 'Active' },
-    { building: 'Warehouse A', type: 'Industrial', emissions: '87 tCO₂e', status: 'Active' },
-    { building: 'Retail Unit 3', type: 'Retail', emissions: '23 tCO₂e', status: 'Inactive' },
-  ]
-  return (
-    <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden w-full">
-      <table className="w-full text-sm border-collapse">
-        <thead className="bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
-          <tr>
-            {['Building', 'Type', 'Emissions', 'Status'].map(h => (
-              <th key={h} className="text-left px-4 py-2 text-sm font-medium text-[#505867] dark:text-[#6B7280] whitespace-nowrap">{h}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-[#EDEEF1] dark:divide-[#1F2430] bg-white dark:bg-[#111827]">
-          {rows.map((row, i) => (
-            <tr key={i} className={`transition-colors ${i === 1 ? 'bg-[#EFF6FF] dark:bg-[#1258F8]/10' : 'hover:bg-[#F7F8F8] dark:hover:bg-[#0D1117]/40'}`}>
-              <td className="px-4 py-2 text-sm font-medium text-[#111827] dark:text-white">{row.building}</td>
-              <td className="px-4 py-2 text-sm text-[#505867] dark:text-[#9CA3AF]">{row.type}</td>
-              <td className="px-4 py-2 text-sm text-[#505867] dark:text-[#9CA3AF]">{row.emissions}</td>
-              <td className="px-4 py-2">
-                <span className={`inline-flex items-center h-5 px-2 rounded-full text-xs font-medium ${row.status === 'Active' ? 'bg-[#DCFCE7] text-[#166534] dark:bg-[#22C55E]/20 dark:text-[#22C55E]' : 'bg-[#D7DAE0]/40 text-[#8C96A4]'}`}>{row.status}</span>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )
+interface Building {
+  id: number
+  name: string
+  location: string
+  type: string
+  status: 'Active' | 'Pending' | 'Inactive' | 'Review'
+  energy: string
+  intensity: string
+  nabers: string
+  manager: string
 }
 
-function EmptyTable() {
-  return (
-    <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
-      <table className="w-full text-sm">
-        <thead className="bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
-          <tr>
-            {['Building', 'Type', 'Emissions'].map(h => (
-              <th key={h} className="text-left px-4 py-2 text-sm font-medium text-[#505867] dark:text-[#6B7280]">{h}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className="bg-white dark:bg-[#111827]">
-          <tr>
-            <td colSpan={3} className="px-4 py-12 text-center">
-              <p className="text-sm font-medium text-[#1F2430] dark:text-white mb-1">No buildings found</p>
-              <p className="text-xs text-[#505867] dark:text-[#6B7280]">Add a building to start tracking emissions data.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  )
+const BUILDINGS: Building[] = [
+  { id: 1,  name: 'Scaler HQ',         location: 'Sydney',    type: 'Office',     status: 'Active',   energy: '1,240 MWh', intensity: '82 kWh/m²',  nabers: '5.5 Stars', manager: 'A. Nguyen' },
+  { id: 2,  name: 'Meridian Tower',    location: 'Melbourne', type: 'Office',     status: 'Active',   energy: '2,810 MWh', intensity: '108 kWh/m²', nabers: '4.5 Stars', manager: 'B. Chen' },
+  { id: 3,  name: 'West End Plaza',    location: 'Brisbane',  type: 'Retail',     status: 'Pending',  energy: '640 MWh',   intensity: '71 kWh/m²',  nabers: '—',         manager: 'C. Park' },
+  { id: 4,  name: 'Harbor View',       location: 'Perth',     type: 'Mixed',      status: 'Active',   energy: '3,100 MWh', intensity: '124 kWh/m²', nabers: '4.0 Stars', manager: 'D. Patel' },
+  { id: 5,  name: 'Central Square',    location: 'Adelaide',  type: 'Office',     status: 'Inactive', energy: '—',         intensity: '—',           nabers: '3.0 Stars', manager: 'E. Smith' },
+  { id: 6,  name: 'North Point',       location: 'Sydney',    type: 'Industrial', status: 'Active',   energy: '4,420 MWh', intensity: '148 kWh/m²', nabers: '—',         manager: 'F. Lee' },
+  { id: 7,  name: 'Southgate',         location: 'Canberra',  type: 'Office',     status: 'Review',   energy: '980 MWh',   intensity: '91 kWh/m²',  nabers: '4.5 Stars', manager: 'G. Wilson' },
+  { id: 8,  name: 'Riverside Complex', location: 'Hobart',    type: 'Mixed',      status: 'Active',   energy: '760 MWh',   intensity: '68 kWh/m²',  nabers: '5.0 Stars', manager: 'H. Brown' },
+  { id: 9,  name: 'City Gate',         location: 'Darwin',    type: 'Retail',     status: 'Pending',  energy: '320 MWh',   intensity: '55 kWh/m²',  nabers: '—',         manager: 'I. Taylor' },
+  { id: 10, name: 'Pinnacle Park',     location: 'Melbourne', type: 'Office',     status: 'Active',   energy: '2,100 MWh', intensity: '99 kWh/m²',  nabers: '5.0 Stars', manager: 'J. Moore' },
+  { id: 11, name: 'Eastern Hub',       location: 'Sydney',    type: 'Industrial', status: 'Active',   energy: '5,800 MWh', intensity: '162 kWh/m²', nabers: '—',         manager: 'K. Davis' },
+  { id: 12, name: 'Horizon Centre',    location: 'Brisbane',  type: 'Office',     status: 'Inactive', energy: '—',         intensity: '—',           nabers: '3.5 Stars', manager: 'L. Evans' },
+]
+
+const STATUS_BADGE: Record<Building['status'], BadgeVariant> = {
+  Active:   'green',
+  Pending:  'yellow',
+  Inactive: 'grey',
+  Review:   'purple',
 }
 
-// ── Code snippets ──────────────────────────────────────────────────────────────
+// ── Column definitions ────────────────────────────────────────────────────────
 
-const tableSnippet = `<div className="rounded-lg border border-[#EDEEF1] overflow-hidden w-full">
-  <table className="w-full text-sm border-collapse">
-    <thead className="bg-[#F7F8F8] border-b border-[#EDEEF1]">
-      <tr>
-        <th scope="col"
-          className="text-left px-4 py-2.5 text-xs font-semibold
-                     text-[#505867] uppercase tracking-wider">
-          Building
-        </th>
-        {/* repeat for each column */}
-      </tr>
-    </thead>
-    <tbody className="divide-y divide-[#EDEEF1] bg-white">
-      {rows.map((row, i) => (
-        <tr key={i}
-          className="transition-colors hover:bg-[#F7F8F8]
-                     aria-selected:bg-[#EFF6FF]">
-          <td className="px-4 py-3 font-medium text-[#1F2430]">
-            {row.building}
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>`
+const FULL_COLS: ColumnDef<Building>[] = [
+  {
+    key: 'name', label: 'Building', sortable: true, width: 'min-w-[160px]',
+    type: 'text-details',
+    accessor: r => r.name,
+    accessorSecondary: r => r.location,
+  },
+  { key: 'type',    label: 'Type',    sortable: true },
+  {
+    key: 'status', label: 'Status', sortable: true, type: 'badge',
+    accessor: r => r.status,
+    badgeVariant: r => STATUS_BADGE[r.status],
+  },
+  {
+    key: 'energy', label: 'Energy', sortable: true, align: 'right', width: 'min-w-[110px]',
+    accessor: r => r.energy,
+  },
+  {
+    key: 'intensity', label: 'Intensity', sortable: true, align: 'right', width: 'min-w-[120px]',
+    type: 'text-suffix',
+    accessor: r => r.intensity === '—' ? '—' : r.intensity.split(' ')[0],
+    accessorSecondary: r => r.intensity.includes('kWh') ? 'kWh/m²' : '',
+  },
+  { key: 'nabers',   label: 'NABERS',  sortable: true, width: 'min-w-[100px]' },
+  { key: 'manager',  label: 'Manager', sortable: true, width: 'min-w-[110px]' },
+  { key: '_toolbar', label: '',        type: 'toolbar', width: 'w-24' },
+]
 
-const emptySnippet = `<tbody>
-  <tr>
-    <td colSpan={columnCount} className="px-4 py-12 text-center">
-      <p className="text-sm font-medium text-[#1F2430] mb-1">
-        No buildings found
-      </p>
-      <p className="text-xs text-[#505867]">
-        Add a building to start tracking emissions data.
-      </p>
-    </td>
-  </tr>
-</tbody>`
+const SIMPLE_COLS: ColumnDef<Building>[] = [
+  { key: 'name',     label: 'Building', sortable: true },
+  { key: 'location', label: 'Location', sortable: true },
+  { key: 'type',     label: 'Type',     sortable: true },
+  {
+    key: 'status', label: 'Status', type: 'badge',
+    accessor: r => r.status,
+    badgeVariant: r => STATUS_BADGE[r.status],
+  },
+  { key: 'energy', label: 'Energy', align: 'right' },
+]
 
-// ── Page ───────────────────────────────────────────────────────────────────────
+// ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function TablesPage() {
+  const [selected, setSelected] = useState<(string | number)[]>([])
+
   return (
     <div>
       <PageHeader
-        title="Tables"
-        description="Data tables for structured information with sticky headers, sortable columns, and row states."
+        title="Table"
+        description="Displays structured data in rows and columns. Supports sorting, row selection, pagination, inline actions, and skeleton loading."
         badge="Components"
       />
 
       <ComponentTabs>
         <TabBar />
 
-        {/* ── USAGE ─────────────────────────────────────────────────────────── */}
+        {/* ── USAGE ── */}
         <TabPanel id="usage">
-          <PageContent>
-            <Section title="When to use">
+
+          <Section title="Default">
+            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
+              Sortable columns, badge cells, text+details, text+suffix, and hover-reveal toolbar actions.
+            </p>
+            <Preview>
+              <Table columns={FULL_COLS} data={BUILDINGS.slice(0, 6)} label="Buildings" />
+            </Preview>
+          </Section>
+
+          <Section title="With selection and action bar">
+            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
+              Enable <code className="font-mono text-[13px] text-[#1258F8]">selectable</code> to add checkboxes. When rows are selected a floating action bar appears below the table.
+            </p>
+            <Preview>
+              <Table
+                columns={SIMPLE_COLS}
+                data={BUILDINGS.slice(0, 6)}
+                selectable
+                selectedIds={selected}
+                onSelectionChange={setSelected}
+                actions={[
+                  { label: 'Export',  onClick: () => {} },
+                  { label: 'Archive', onClick: () => {} },
+                  { label: 'Delete',  onClick: () => {} },
+                ]}
+                label="Buildings with selection"
+              />
+            </Preview>
+            <Annotation>Select rows to trigger the floating action bar. Use "Select all" to extend selection to all records.</Annotation>
+          </Section>
+
+          <Section title="With pagination">
+            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
+              Set <code className="font-mono text-[13px] text-[#1258F8]">pagination</code> to add a footer with page controls and a per-page size selector.
+            </p>
+            <Preview>
+              <Table
+                columns={SIMPLE_COLS}
+                data={BUILDINGS}
+                pagination
+                pageSize={5}
+                pageSizeOptions={[5, 10, 25]}
+                label="Buildings paginated"
+              />
+            </Preview>
+          </Section>
+
+          <Section title="Loading state">
+            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
+              Set <code className="font-mono text-[13px] text-[#1258F8]">loading</code> to render animated skeleton rows while data is fetched.
+            </p>
+            <Preview>
+              <Table columns={SIMPLE_COLS} data={[]} loading skeletonRows={5} label="Loading" />
+            </Preview>
+          </Section>
+
+          <Section title="Empty state">
+            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
+              When <code className="font-mono text-[13px] text-[#1258F8]">data</code> is empty the table shows a centered empty state with title and description.
+            </p>
+            <Preview>
+              <Table
+                columns={SIMPLE_COLS}
+                data={[]}
+                emptyTitle="No buildings found"
+                emptyDescription="Try adjusting your search or filter criteria."
+                label="Empty table"
+              />
+            </Preview>
+          </Section>
+
+          <div className="grid md:grid-cols-2 gap-4 mt-2">
+            <DoCard>
               <UseList items={[
-                <><strong className="font-semibold text-[#1F2430] dark:text-white">Structured data sets</strong> — when users need to scan, compare, or act on multiple records at once.</>,
-                <><strong className="font-semibold text-[#1F2430] dark:text-white">Comparing rows</strong> — when column alignment makes relationships between values immediately scannable.</>,
-                <><strong className="font-semibold text-[#1F2430] dark:text-white">Sortable data</strong> — when users need to reorder records by a column (emissions, date, status).</>,
+                'Structured datasets with multiple comparable attributes',
+                'ESG data — buildings, meters, certifications, surveys',
+                'Admin views, audit logs, data exports',
+                'When users need to sort, filter, or bulk-act on rows',
               ]} />
-            </Section>
-
-            <Section title="When not to use">
+            </DoCard>
+            <DontCard>
               <DontUseList items={[
-                "Don't use a table for a single item — use a detail card or a description list instead.",
-                "Don't use a table to display a form. Forms have a distinct layout and interaction model.",
+                'Small datasets that fit better in cards or a list',
+                'Single-column content — use a plain list',
+                'Deeply nested hierarchies — use a tree view',
+                'As a substitute for a form layout',
               ]} />
-            </Section>
+            </DontCard>
+          </div>
 
-            <Section title="Default state">
-              <Preview label="Table with hover and selected row">
-                <TableDemo />
-              </Preview>
-              <Annotation>Row 2 shows the selected/highlighted state (#EFF6FF). All other rows respond to hover.</Annotation>
-            </Section>
+        </TabPanel>
 
-            <Section title="Empty state">
-              <Preview label="No data">
-                <EmptyTable />
-              </Preview>
-              <Annotation>Always render the header row in the empty state so users understand the table's schema.</Annotation>
-            </Section>
+        {/* ── SPECS ── */}
+        <TabPanel id="specs">
 
-            <Section title="Do / Don't">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <DoCard>
-                  <p className="font-semibold text-[#1F2430] dark:text-white mb-1">Align numeric columns right</p>
-                  <p>Right-align numbers and monospaced values so decimal points and magnitudes stack visually — making scanning fast.</p>
-                </DoCard>
-                <DontCard>
-                  <p className="font-semibold text-[#1F2430] dark:text-white mb-1">Don't left-align all columns uniformly</p>
-                  <p>Left-aligning numbers removes their natural alignment axis. Values like "1,240" and "87" become hard to compare at a glance.</p>
-                </DontCard>
-                <DoCard>
-                  <p className="font-semibold text-[#1F2430] dark:text-white mb-1">Keep row density consistent at 48px</p>
-                  <p>Use 16px vertical padding per cell. This ensures touch targets meet 44px minimum and text never feels cramped.</p>
-                </DoCard>
-                <DontCard>
-                  <p className="font-semibold text-[#1F2430] dark:text-white mb-1">Don't mix dense and spacious rows</p>
-                  <p>Inconsistent row heights break the visual rhythm and make it harder to track rows across wide tables.</p>
-                </DontCard>
-              </div>
-            </Section>
-
-            <RelatedComponents items={[
-              { href: '/components/badges-tags', label: 'Badges & Tags', description: 'Use for status cells — Verified, Pending, Active.' },
-              { href: '/components/cards', label: 'Cards', description: 'Alternative for single-record display rather than a table row.' },
+          <Section title="Props">
+            <SpecTable rows={[
+              { property: 'columns',           value: 'ColumnDef<T>[]',         token: 'required — column definitions' },
+              { property: 'data',              value: 'T[] (must have id)',      token: 'required — row records' },
+              { property: 'selectable',        value: 'boolean',                token: 'default false — adds checkboxes' },
+              { property: 'selectedIds',       value: '(string | number)[]',    token: 'controlled selection state' },
+              { property: 'onSelectionChange', value: '(ids) => void',          token: 'fires on selection change' },
+              { property: 'actions',           value: 'TableAction[]',          token: 'floating action bar items ({ label, onClick })' },
+              { property: 'pagination',        value: 'boolean',                token: 'default false' },
+              { property: 'pageSize',          value: 'number',                 token: 'default 10' },
+              { property: 'pageSizeOptions',   value: 'number[]',               token: 'default [10, 25, 50]' },
+              { property: 'loading',           value: 'boolean',                token: 'default false — skeleton rows' },
+              { property: 'skeletonRows',      value: 'number',                 token: 'default 8' },
+              { property: 'emptyTitle',        value: 'string',                 token: "default 'No data'" },
+              { property: 'emptyDescription',  value: 'string',                 token: 'shown below empty title' },
+              { property: 'label',             value: 'string',                 token: 'aria-label for the table element' },
             ]} />
-          </PageContent>
+          </Section>
+
+          <Section title="ColumnDef shape">
+            <SpecTable rows={[
+              { property: 'key',               value: 'string',                                   token: 'required — unique id / data key' },
+              { property: 'label',             value: 'string',                                   token: 'required — header text' },
+              { property: 'type',              value: '"text" | "text-suffix" | "text-details" | "badge" | "toolbar" | "actions" | "custom"', token: 'default "text"' },
+              { property: 'sortable',          value: 'boolean',                                  token: 'click header to sort asc → desc → off' },
+              { property: 'width',             value: 'string',                                   token: 'Tailwind class e.g. "min-w-[120px]"' },
+              { property: 'align',             value: '"left" | "right" | "center"',              token: 'default "left"' },
+              { property: 'accessor',          value: '(row: T) => ReactNode',                    token: 'custom primary value' },
+              { property: 'accessorSecondary', value: '(row: T) => string',                       token: 'suffix text or details line' },
+              { property: 'badgeVariant',      value: '(row: T) => BadgeVariant',                 token: 'resolves badge colour per row' },
+              { property: 'render',            value: '(row: T) => ReactNode',                    token: 'full custom renderer for actions/custom cells' },
+            ]} />
+          </Section>
+
+          <Section title="Cell types">
+            <SpecTable rows={[
+              { property: 'text',         value: 'Plain truncated text',                              token: 'default' },
+              { property: 'text-suffix',  value: 'Primary value + smaller muted suffix',              token: 'e.g. "82" + "kWh/m²"' },
+              { property: 'text-details', value: 'Stacked primary + smaller muted second line',       token: 'e.g. building name + city' },
+              { property: 'badge',        value: 'Colour pill — blue/green/red/yellow/grey/purple',   token: 'use badgeVariant resolver' },
+              { property: 'toolbar',      value: 'Edit / Delete / More — appear on row hover only',   token: 'no config needed' },
+              { property: 'actions',      value: 'Custom buttons or links',                           token: 'use render prop' },
+              { property: 'custom',       value: 'Arbitrary React node',                              token: 'use render prop' },
+            ]} />
+          </Section>
+
+          <Section title="Spacing & sizing">
+            <SpecTable rows={[
+              { property: 'Row height (single)',   value: '32px',                    token: 'py-2.5 px-3' },
+              { property: 'Header height',         value: '32px',                    token: 'py-2.5 px-3' },
+              { property: 'Header font',           value: '11px · semibold · caps',  token: 'text-[11px] font-semibold tracking-wide uppercase' },
+              { property: 'Cell font',             value: '13px · regular',          token: 'text-[13px]' },
+              { property: 'Pagination bar',        value: '40px',                    token: 'py-2.5' },
+              { property: 'Border radius',         value: '8px',                     token: 'rounded-lg' },
+            ]} />
+          </Section>
+
+          <Section title="Colors">
+            <SpecTable rows={[
+              { property: 'Header bg',         value: '#F7F8F8 · #0D1117 (dark)',   token: 'grey-50' },
+              { property: 'Header text',       value: '#505867 · #9CA3AF (dark)',   token: 'grey-600' },
+              { property: 'Row bg',            value: '#FFFFFF · #0D1117 (dark)',   token: 'white' },
+              { property: 'Row hover',         value: '#F7F8F8 · white/3 (dark)',   token: 'grey-50' },
+              { property: 'Row selected',      value: '#EEF6FF · white/5 (dark)',   token: 'blue-50' },
+              { property: 'Row divider',       value: '#EDEEF1 · #1F2430 (dark)',   token: 'grey-100' },
+              { property: 'Sort icon active',  value: '#1258F8',                    token: 'blue-600' },
+              { property: 'Skeleton bar',      value: '#EDEEF1 · #1F2430 (dark)',   token: 'grey-100' },
+              { property: 'Active page btn',   value: '#1258F8 bg · white text',    token: 'blue-600' },
+            ]} />
+          </Section>
+
         </TabPanel>
 
-        {/* ── STYLE ─────────────────────────────────────────────────────────── */}
-        <TabPanel id="style">
-          <PageContent>
-            <Section title="Sizing & spacing">
-              <SpecTable rows={[
-                { property: 'Header height',    value: '40px',           token: 'py-2.5' },
-                { property: 'Row height',       value: '48px',           token: 'py-3' },
-                { property: 'Cell padding',     value: '16px horizontal',token: 'px-4' },
-                { property: 'Header font size', value: '12px / 600',     token: 'text-xs font-semibold' },
-                { property: 'Cell font size',   value: '14px / 400',     token: 'text-sm' },
-                { property: 'Border radius',    value: '8px',            token: 'rounded-lg' },
-              ]} />
-            </Section>
-
-            <Section title="Colors">
-              <ColorRow label="Header background" hex="#F7F8F8" role="Grey 50 — separates header from data rows" />
-              <ColorRow label="Hover background" hex="#F7F8F8" role="Grey 50 — subtle row hover" border />
-              <ColorRow label="Selected row" hex="#EFF6FF" role="Blue 50 — selected / highlighted row" border />
-              <ColorRow label="Row divider" hex="#EDEEF1" role="Grey 100 — horizontal rule between rows" border />
-              <ColorRow label="Table border" hex="#EDEEF1" role="Grey 100 — outer container border" border />
-            </Section>
-          </PageContent>
-        </TabPanel>
-
-        {/* ── CODE ──────────────────────────────────────────────────────────── */}
-        <TabPanel id="code">
-          <PageContent>
-            <Section title="Standard table">
-              <Preview label="Live preview">
-                <TableDemo />
-              </Preview>
-              <pre className="mt-4 bg-[#0D1117] text-[#E2E8F0] text-sm font-mono rounded-lg p-4 overflow-x-auto leading-relaxed whitespace-pre">
-                {tableSnippet}
-              </pre>
-            </Section>
-
-            <Section title="Empty state">
-              <Preview label="Live preview">
-                <EmptyTable />
-              </Preview>
-              <pre className="mt-4 bg-[#0D1117] text-[#E2E8F0] text-sm font-mono rounded-lg p-4 overflow-x-auto leading-relaxed whitespace-pre">
-                {emptySnippet}
-              </pre>
-            </Section>
-          </PageContent>
-        </TabPanel>
-
-        {/* ── ACCESSIBILITY ─────────────────────────────────────────────────── */}
+        {/* ── ACCESSIBILITY ── */}
         <TabPanel id="accessibility">
-          <PageContent>
-            <Section title="ARIA requirements">
-              <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#111827]">
-                <A11yRow check='scope="col"'>
-                  Add <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">scope="col"</code> to every <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">&lt;th&gt;</code> element so assistive technology can associate header cells with data cells across rows.
-                </A11yRow>
-                <A11yRow check='role="grid"'>
-                  Use <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">role="grid"</code> on the <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">&lt;table&gt;</code> when rows are interactive (selectable or clickable) to signal a composite widget to screen readers.
-                </A11yRow>
-                <A11yRow check="aria-sort">
-                  On sortable column headers, set <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">aria-sort="ascending"</code> or <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">"descending"</code> to reflect the active sort order. Use <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">"none"</code> for unsorted columns.
-                </A11yRow>
-                <A11yRow check="aria-selected">
-                  Set <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">aria-selected="true"</code> on <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">&lt;tr&gt;</code> elements when row selection is supported. Pair with a visible selected background (#EFF6FF).
-                </A11yRow>
-              </div>
-            </Section>
 
-            <Section title="Keyboard navigation">
-              <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#111827]">
-                <KeyRow keys={['Tab']} action="Move focus between interactive elements: column sort buttons, checkboxes, row action menus." />
-                <KeyRow keys={['Enter']} action="Activate a focused sort button or open a row's detail view." />
-                <KeyRow keys={['Space']} action="Toggle checkbox selection on the focused row." />
-                <KeyRow keys={['↑', '↓']} action="Navigate between rows when the table has role='grid' and row focus management is implemented." />
-              </div>
-            </Section>
+          <Section title="ARIA & semantics">
+            <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
+              <A11yRow check="<table>">Native HTML table — screen readers announce row/column counts automatically</A11yRow>
+              <A11yRow check="aria-label">Set via the label prop — identifies the table to assistive technology</A11yRow>
+              <A11yRow check='scope="col"'>Applied to every {'<th>'} — links header to its column for screen readers</A11yRow>
+              <A11yRow check="aria-sort">Set on sortable headers — announces ascending, descending, or none</A11yRow>
+              <A11yRow check="aria-current=page">Applied to the active pagination button</A11yRow>
+              <A11yRow check="Checkbox labels">Each row checkbox has a unique aria-label; header checkbox is labelled "Select all rows"</A11yRow>
+              <A11yRow check="Indeterminate">Header checkbox uses the indeterminate state when only some rows are selected</A11yRow>
+            </div>
+          </Section>
 
-            <Section title="Contrast">
-              <SpecTable rows={[
-                { property: 'Header text on Grey 50',   value: '#505867 on #F7F8F8', token: '4.9:1 ✓ AA' },
-                { property: 'Cell text on white',       value: '#1F2430 on #FFFFFF',  token: '15.3:1 ✓ AAA' },
-                { property: 'Muted cell on white',      value: '#505867 on #FFFFFF',  token: '7.0:1 ✓ AA' },
-                { property: 'Active badge on green/10', value: '#22C55E on #DCFCE7',  token: '3.0:1 — use bold text' },
-              ]} />
-            </Section>
-          </PageContent>
+          <Section title="Keyboard interaction">
+            <div className="flex flex-col gap-2">
+              <KeyRow keys={['Tab']}            action="Move focus between checkboxes, sort headers, and pagination controls" />
+              <KeyRow keys={['Enter', 'Space']} action="Toggle checkbox, activate sort header, change page" />
+              <KeyRow keys={['←', '→']}         action="Navigate between pagination page buttons" />
+            </div>
+          </Section>
+
         </TabPanel>
+
       </ComponentTabs>
+
+      <RelatedComponents
+        items={[
+          { href: '/components/badges-tags',    label: 'Tags & Indicators', description: 'Badge component used in status cells' },
+          { href: '/components/inputs/search',  label: 'Search input',      description: 'Pair with a table for filterable data' },
+          { href: '/components/modals',         label: 'Modal',             description: 'For edit/confirm actions triggered from rows' },
+        ]}
+      />
     </div>
   )
 }

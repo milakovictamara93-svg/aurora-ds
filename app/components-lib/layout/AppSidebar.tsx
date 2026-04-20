@@ -63,7 +63,7 @@ const COMPONENT_GROUPS: NavGroup[] = [
     id: 'data-display',
     label: 'Data display',
     items: [
-      { href: '/components/tables',      label: 'Table',             available: false },
+      { href: '/components/tables',      label: 'Table' },
       { href: '/components/cards',       label: 'Card' },
       { href: '/components/data-points', label: 'Data points' },
       { href: '/components/badges-tags', label: 'Tags & Indicators' },
