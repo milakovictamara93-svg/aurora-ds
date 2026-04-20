@@ -103,9 +103,8 @@ export default function Modal({
       >
         {/* Header */}
         <div className={[
-          'flex items-start justify-between shrink-0',
-          isFullscreen ? 'px-6 py-4 border-b border-[#EDEEF1] dark:border-[#1F2430]' : 'px-6 pt-5 pb-4',
-          !isConfirm ? 'border-b border-[#EDEEF1] dark:border-[#1F2430]' : '',
+          'flex items-start justify-between shrink-0 border-b border-[#EDEEF1] dark:border-[#1F2430]',
+          isFullscreen ? 'px-6 py-4' : 'px-6 pt-5 pb-4',
         ].join(' ')}>
           <div className="flex flex-col gap-0.5">
             {/* Drawer close icon sits above title */}

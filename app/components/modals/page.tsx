@@ -30,7 +30,7 @@ function ModalShell({
   return (
     <div className={`${width} bg-white dark:bg-[#111827] rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] shadow-level-3 overflow-hidden`}>
       {/* Header */}
-      <div className={`flex items-start justify-between px-6 pt-5 pb-4 ${!isConfirm ? 'border-b border-[#EDEEF1] dark:border-[#1F2430]' : ''}`}>
+      <div className="flex items-start justify-between px-6 pt-5 pb-4 border-b border-[#EDEEF1] dark:border-[#1F2430]">
         <div>
           {isDrawer && (
             <div className="mb-3 w-5 h-5 text-[#505867] dark:text-[#9CA3AF] text-[13px] font-mono">|→</div>

@@ -79,9 +79,9 @@ function AccordionPanel({
             : variant === 'filled'
             ? 'bg-[#F7F8F8] dark:bg-white/5 hover:bg-[#EDEEF1] dark:hover:bg-white/10'
             : 'hover:bg-[#F7F8F8] dark:hover:bg-white/5',
-          // round bottom only when closed for default variant
-          variant === 'default' && !isOpen && 'rounded-b-lg',
-          variant === 'default' && isOpen  && 'rounded-b-none',
+          // round bottom only when closed
+          (variant === 'default' || variant === 'filled') && !isOpen && 'rounded-b-lg',
+          (variant === 'default' || variant === 'filled') && isOpen  && 'rounded-b-none',
         )}
       >
         {Icon && (
@@ -112,7 +112,8 @@ function AccordionPanel({
           className={clsx(
             'text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed',
             contentPx, contentPb,
-            variant === 'default' && 'pt-1',
+            (variant === 'default' || variant === 'filled') && 'pt-1',
+            variant === 'filled' && 'bg-[#EEF6FF] dark:bg-white/5 rounded-b-lg',
           )}
         >
           {item.content}
