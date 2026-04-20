@@ -448,7 +448,7 @@ export default function Table<T extends { id: string | number }>({
                     scope="col"
                     className={clsx(
                       'px-3 py-2.5 border-b border-[#EDEEF1] dark:border-[#1F2430]',
-                      'text-[11px] font-semibold text-[#505867] dark:text-[#9CA3AF] uppercase tracking-wide whitespace-nowrap',
+                      'text-[11px] font-semibold text-[#505867] dark:text-[#9CA3AF] whitespace-nowrap',
                       col.width,
                       col.align === 'right'  && 'text-right',
                       col.align === 'center' && 'text-center',
