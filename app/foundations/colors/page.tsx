@@ -1,7 +1,7 @@
 import PageHeader from '@/app/components-lib/ui/PageHeader'
 import ColorSwatch from '@/app/components-lib/ui/ColorSwatch'
 
-interface ColorDef { name: string; hex: string; token: string; textColor?: 'light' | 'dark' }
+interface ColorDef { name: string; hex: string; token: string; textColor?: 'light' | 'dark'; base?: boolean }
 interface PaletteSection {
   id: string
   heading: string
