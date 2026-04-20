@@ -12,12 +12,23 @@ import {
   EllipsisHorizontalIcon,
 } from '@heroicons/react/20/solid'
 import clsx from 'clsx'
+import Tag from './Tag'
+import type { IndicatorSystem } from './Indicator'
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
 export type SortDirection = 'asc' | 'desc' | null
 
 export type BadgeVariant = 'blue' | 'green' | 'red' | 'yellow' | 'grey' | 'purple'
+
+const BADGE_TO_SYSTEM: Record<BadgeVariant, IndicatorSystem> = {
+  blue:   'default',
+  green:  'success',
+  red:    'error',
+  yellow: 'warning',
+  grey:   'disabled',
+  purple: 'missing-info',
+}
 
 export type CellType =
   | 'text'
@@ -79,28 +90,6 @@ export interface TableProps<T extends { id: string | number }> {
   /** Table label for a11y */
   label?: string
   className?: string
-}
-
-// ── Badge ─────────────────────────────────────────────────────────────────────
-
-const BADGE_STYLES: Record<BadgeVariant, string> = {
-  blue:   'bg-[#DBEAFE] text-[#1D4ED8]',
-  green:  'bg-[#DCFCE7] text-[#15803D]',
-  red:    'bg-[#FEE2E2] text-[#DC2626]',
-  yellow: 'bg-[#FEF9C3] text-[#CA8A04]',
-  grey:   'bg-[#F3F4F6] text-[#374151]',
-  purple: 'bg-[#EDE9FE] text-[#6D28D9]',
-}
-
-function Badge({ label, variant = 'grey' }: { label: React.ReactNode; variant?: BadgeVariant }) {
-  return (
-    <span className={clsx(
-      'inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium leading-none whitespace-nowrap',
-      BADGE_STYLES[variant]
-    )}>
-      {label}
-    </span>
-  )
 }
 
 // ── Sort icon ─────────────────────────────────────────────────────────────────
@@ -311,7 +300,15 @@ function Cell<T extends { id: string | number }>({
     }
     case 'badge': {
       const variant = col.badgeVariant?.(row) ?? 'grey'
-      return <Badge label={value} variant={variant} />
+      return (
+        <Tag
+          label={String(value ?? '')}
+          system={BADGE_TO_SYSTEM[variant]}
+          size="small"
+          showCount={false}
+          showRemove={false}
+        />
+      )
     }
     case 'toolbar': {
       return (

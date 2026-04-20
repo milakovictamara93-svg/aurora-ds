@@ -1,5 +1,7 @@
 'use client'
 
+import Tag from './Tag'
+
 // Hero background from Figma — dark starfield texture + blue hard-light overlay.
 // Asset URL valid for 7 days; replace with /hero-bg.png in /public for production.
 const HERO_BG = 'https://www.figma.com/api/mcp/asset/4da0ef12-f470-47d0-96d2-663d84231f70'
@@ -44,12 +46,7 @@ export default function PageHeader({ title, description, badge }: PageHeaderProp
       {/* Badge / breadcrumb pill — sits at bottom of hero */}
       {badge && (
         <div className="relative">
-          <span
-            className="inline-flex items-center px-3 rounded-full font-medium text-[#173691] bg-[#d9eaff]"
-            style={{ fontSize: '14px', height: '28px', letterSpacing: '0.21px' }}
-          >
-            {badge}
-          </span>
+          <Tag label={badge} showCount={false} showRemove={false} />
         </div>
       )}
     </div>
