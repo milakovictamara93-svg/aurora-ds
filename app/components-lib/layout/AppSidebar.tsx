@@ -56,6 +56,7 @@ const COMPONENT_GROUPS: NavGroup[] = [
       { href: '/components/inputs/checkbox',          label: 'Checkbox' },
       { href: '/components/inputs/radio',             label: 'Radio' },
       { href: '/components/inputs/toggle',            label: 'Toggle' },
+      { href: '/components/slider',                   label: 'Slider' },
     ],
   },
   {
