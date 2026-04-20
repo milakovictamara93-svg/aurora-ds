@@ -405,7 +405,10 @@ export default function Table<T extends { id: string | number }>({
 
   function toggleAll() {
     if (allVisibleSelected) setSelected(selectedIds.filter(id => !visible.some(r => r.id === id)))
-    else setSelected([...new Set([...selectedIds, ...visible.map(r => r.id)])])
+    else {
+      const merged = [...selectedIds, ...visible.map(r => r.id)]
+      setSelected(merged.filter((id, idx) => merged.indexOf(id) === idx))
+    }
   }
 
   function toggleRow(id: string | number) {
