@@ -22,10 +22,10 @@ const previewColors = [
   { name: 'ESG Risk 500', hex: '#0DBC82', token: '--esg-risk-500' },
   { name: 'Waste 400', hex: '#65A289', token: '--waste-400' },
   // Semantic
-  { name: 'Error 400', hex: '#F87171', token: '--color-error' },
-  { name: 'Warning 400', hex: '#FB7D3C', token: '--color-warning' },
-  { name: 'Success 500', hex: '#22C55E', token: '--color-success' },
-  { name: 'AI 500', hex: '#653FFF', token: '--color-ai' },
+  { name: 'Error 600', hex: '#DC2626', token: '--color-error' },
+  { name: 'Warning 500', hex: '#EAB308', token: '--color-warning' },
+  { name: 'Success 600', hex: '#16A34A', token: '--color-success' },
+  { name: 'AI 600', hex: '#6430F7', token: '--color-ai' },
 ]
 
 export default function ColorSwatchPreview() {

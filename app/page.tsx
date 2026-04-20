@@ -3,52 +3,39 @@ import { ArrowRightIcon } from '@heroicons/react/20/solid'
 import AppLayout from '@/app/components-lib/layout/AppLayout'
 import VideoCard from '@/app/components-lib/ui/VideoCard'
 
-// ── Figma building-block assets (light-blue geometric shapes) ─────────────────
-// These decorate the three section cards. URLs expire in 7 days from generation.
-const BB1 = 'https://www.figma.com/api/mcp/asset/ac49f527-7869-4c0a-93ff-6c6f4a9694dc'
-const BB2 = 'https://www.figma.com/api/mcp/asset/fd698b92-3b69-4a5f-a428-b7cc642a74d6'
-const BB3 = 'https://www.figma.com/api/mcp/asset/84728999-2d0a-495c-a507-679d9b86af0b'
-const BB4 = 'https://www.figma.com/api/mcp/asset/42d528db-ac45-4013-881f-a9cbdac04d37'
-const BB5 = 'https://www.figma.com/api/mcp/asset/025481b8-4020-4cf6-b021-861556c823fa'
-const BB6 = 'https://www.figma.com/api/mcp/asset/c4c4d98b-498c-4601-b803-3221295d2149'
+// ── Exact Figma building-block shapes (SVG paths exported directly from Aurora DS Figma file)
+// Colors and paths are permanent — no expiry.
 
-// ── Section card building-block configs ───────────────────────────────────────
-//   Each item: { src, w (px), transform }
-type BBItem = { src: string; w: number; tf?: string }
-
-const FOUNDATIONS_BLOCKS: BBItem[] = [
-  { src: BB2, w: 132, tf: 'rotate(-90deg)' },
-  { src: BB1, w: 66,  tf: 'scaleX(-1)' },
-  { src: BB1, w: 66,  tf: 'scaleX(-1)' },
-]
-
-const COMPONENTS_BLOCKS: BBItem[] = [
-  { src: BB3, w: 66,  tf: 'scaleX(-1)' },
-  { src: BB4, w: 132, tf: 'rotate(-90deg)' },
-  { src: BB3, w: 66,  tf: 'scaleX(-1)' },
-]
-
-const PATTERNS_BLOCKS: BBItem[] = [
-  { src: BB5, w: 66,  tf: 'scaleX(-1)' },
-  { src: BB5, w: 66,  tf: 'scaleX(-1)' },
-  { src: BB6, w: 132, tf: 'rotate(-90deg)' },
-]
-
-// ── Small helper: building-block image strip ──────────────────────────────────
-function BlockStrip({ items }: { items: BBItem[] }) {
+// Foundations strip — #D9EAFF (light blue), 264×132
+function FoundationsIcons() {
   return (
-    <div className="absolute left-0 top-0 flex items-start h-[132px] transition-all duration-500 ease-in-out group-hover:left-full group-hover:-translate-x-full">
-      {items.map((item, i) => (
-        <div
-          key={i}
-          className="shrink-0 h-[132px]"
-          style={{ width: item.w, transform: item.tf }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={item.src} alt="" className="w-full h-full object-fill" />
-        </div>
-      ))}
-    </div>
+    <svg width="264" height="132" viewBox="0 0 264 132" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 21.9779L22 -0.02211H132V109.978L110 131.978H0L0 21.9779Z" fill="#D9EAFF"/>
+      <path d="M154 -0.0220947L132 21.9779V131.978H176L198 109.978V-0.0220947H154Z" fill="#D9EAFF"/>
+      <path d="M220 -0.0220947L198 21.9779V131.978H242L264 109.978V-0.0220947H220Z" fill="#D9EAFF"/>
+    </svg>
+  )
+}
+
+// Components strip — #BBDAFF (medium blue), 264×132
+function ComponentsIcons() {
+  return (
+    <svg width="264" height="132" viewBox="0 0 264 132" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22 -0.0220947L-7.62939e-06 21.9779V131.978H44L66 109.978V-0.0220947H22Z" fill="#BBDAFF"/>
+      <path d="M66 21.9779L88 -0.02211H198V109.978L176 131.978H66V21.9779Z" fill="#BBDAFF"/>
+      <path d="M220 -0.0220947L198 21.9779V131.978H242L264 109.978V-0.0220947H220Z" fill="#BBDAFF"/>
+    </svg>
+  )
+}
+
+// Patterns strip — #8CC4FF (stronger blue), 264×132
+function PatternsIcons() {
+  return (
+    <svg width="264" height="132" viewBox="0 0 264 132" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22 -0.0220947L-7.62939e-06 21.9779V131.978H44L66 109.978V-0.0220947H22Z" fill="#8CC4FF"/>
+      <path d="M88 -0.0220947L66 21.9779V131.978H110L132 109.978V-0.0220947H88Z" fill="#8CC4FF"/>
+      <path d="M132 21.9779L154 -0.02211H264V109.978L242 131.978H132V21.9779Z" fill="#8CC4FF"/>
+    </svg>
   )
 }
 
@@ -153,7 +140,9 @@ export default function HomePage() {
               Foundations
             </p>
             <div className="flex-1 relative w-full overflow-hidden min-h-0">
-              <BlockStrip items={FOUNDATIONS_BLOCKS} />
+              <div className="absolute left-0 top-0 transition-all duration-500 ease-in-out group-hover:left-full group-hover:-translate-x-full">
+                <FoundationsIcons />
+              </div>
             </div>
           </div>
         </Link>
@@ -168,7 +157,9 @@ export default function HomePage() {
               Components
             </p>
             <div className="flex-1 relative w-full overflow-hidden min-h-0">
-              <BlockStrip items={COMPONENTS_BLOCKS} />
+              <div className="absolute left-0 top-0 transition-all duration-500 ease-in-out group-hover:left-full group-hover:-translate-x-full">
+                <ComponentsIcons />
+              </div>
             </div>
           </div>
         </Link>
@@ -183,7 +174,9 @@ export default function HomePage() {
               Patterns
             </p>
             <div className="flex-1 relative w-full overflow-hidden min-h-0">
-              <BlockStrip items={PATTERNS_BLOCKS} />
+              <div className="absolute left-0 top-0 transition-all duration-500 ease-in-out group-hover:left-full group-hover:-translate-x-full">
+                <PatternsIcons />
+              </div>
             </div>
           </div>
         </Link>

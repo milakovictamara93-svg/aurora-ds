@@ -1,7 +1,7 @@
 import PageHeader from '@/app/components-lib/ui/PageHeader'
 import ColorSwatch from '@/app/components-lib/ui/ColorSwatch'
 
-interface ColorDef { name: string; hex: string; token: string; textColor?: 'light' | 'dark' }
+interface ColorDef { name: string; hex: string; token: string; textColor?: 'light' | 'dark'; base?: boolean }
 interface PaletteSection {
   id: string
   heading: string
@@ -49,7 +49,7 @@ const SECTIONS: PaletteSection[] = [
           { name: 'Energy 200', hex: '#FFCACF', token: '--energy-200' },
           { name: 'Energy 300', hex: '#FF9FA8', token: '--energy-300' },
           { name: 'Energy 400', hex: '#FF697A', token: '--energy-400' },
-          { name: 'Energy 500', hex: '#FF455F', token: '--energy-500', textColor: 'light' },
+          { name: 'Energy 500', hex: '#FF455F', token: '--energy-500', textColor: 'light', base: true },
           { name: 'Energy 600', hex: '#ED113A', token: '--energy-600', textColor: 'light' },
           { name: 'Energy 700', hex: '#C80831', token: '--energy-700', textColor: 'light' },
           { name: 'Energy 800', hex: '#A80930', token: '--energy-800', textColor: 'light' },
@@ -63,7 +63,7 @@ const SECTIONS: PaletteSection[] = [
           { name: 'GHG 50',  hex: '#FFF7EB', token: '--ghg-50' },
           { name: 'GHG 100', hex: '#FFEAC6', token: '--ghg-100' },
           { name: 'GHG 200', hex: '#FFD188', token: '--ghg-200' },
-          { name: 'GHG 300', hex: '#FFB246', token: '--ghg-300' },
+          { name: 'GHG 300', hex: '#FFB246', token: '--ghg-300', base: true },
           { name: 'GHG 400', hex: '#FF9820', token: '--ghg-400' },
           { name: 'GHG 500', hex: '#F97307', token: '--ghg-500', textColor: 'light' },
           { name: 'GHG 600', hex: '#DD4F02', token: '--ghg-600', textColor: 'light' },
@@ -80,7 +80,7 @@ const SECTIONS: PaletteSection[] = [
           { name: 'Water 100', hex: '#CFFBFE', token: '--water-100' },
           { name: 'Water 200', hex: '#A5F5FC', token: '--water-200' },
           { name: 'Water 300', hex: '#67EBF9', token: '--water-300' },
-          { name: 'Water 400', hex: '#1FD7EE', token: '--water-400' },
+          { name: 'Water 400', hex: '#1FD7EE', token: '--water-400', base: true },
           { name: 'Water 500', hex: '#06BAD4', token: '--water-500', textColor: 'light' },
           { name: 'Water 600', hex: '#0895B2', token: '--water-600', textColor: 'light' },
           { name: 'Water 700', hex: '#0E7790', token: '--water-700', textColor: 'light' },
@@ -99,7 +99,7 @@ const SECTIONS: PaletteSection[] = [
           { name: 'Cert 400', hex: '#70A2EA', token: '--certifications-400' },
           { name: 'Cert 500', hex: '#4E81E3', token: '--certifications-500', textColor: 'light' },
           { name: 'Cert 600', hex: '#3964D7', token: '--certifications-600', textColor: 'light' },
-          { name: 'Cert 700', hex: '#2F4FC0', token: '--certifications-700', textColor: 'light' },
+          { name: 'Cert 700', hex: '#2F4FC0', token: '--certifications-700', textColor: 'light', base: true },
           { name: 'Cert 800', hex: '#2D43A0', token: '--certifications-800', textColor: 'light' },
           { name: 'Cert 900', hex: '#293B7F', token: '--certifications-900', textColor: 'light' },
           { name: 'Cert 950', hex: '#1D264E', token: '--certifications-950', textColor: 'light' },
@@ -114,7 +114,7 @@ const SECTIONS: PaletteSection[] = [
           { name: 'Eng 300', hex: '#F8C479', token: '--engagement-300' },
           { name: 'Eng 400', hex: '#F4A043', token: '--engagement-400' },
           { name: 'Eng 500', hex: '#F1841E', token: '--engagement-500', textColor: 'light' },
-          { name: 'Eng 600', hex: '#D76513', token: '--engagement-600', textColor: 'light' },
+          { name: 'Eng 600', hex: '#D76513', token: '--engagement-600', textColor: 'light', base: true },
           { name: 'Eng 700', hex: '#BB5113', token: '--engagement-700', textColor: 'light' },
           { name: 'Eng 800', hex: '#954017', token: '--engagement-800', textColor: 'light' },
           { name: 'Eng 900', hex: '#783616', token: '--engagement-900', textColor: 'light' },
@@ -128,7 +128,7 @@ const SECTIONS: PaletteSection[] = [
           { name: 'Risk 100', hex: '#D0FBE5', token: '--esg-risk-100' },
           { name: 'Risk 200', hex: '#A6F4D0', token: '--esg-risk-200' },
           { name: 'Risk 300', hex: '#6CE9B7', token: '--esg-risk-300' },
-          { name: 'Risk 400', hex: '#39D79D', token: '--esg-risk-400' },
+          { name: 'Risk 400', hex: '#39D79D', token: '--esg-risk-400', base: true },
           { name: 'Risk 500', hex: '#0DBC82', token: '--esg-risk-500', textColor: 'light' },
           { name: 'Risk 600', hex: '#03986A', token: '--esg-risk-600', textColor: 'light' },
           { name: 'Risk 700', hex: '#027A58', token: '--esg-risk-700', textColor: 'light' },
@@ -179,33 +179,33 @@ const SECTIONS: PaletteSection[] = [
       {
         title: 'Warning',
         colors: [
-          { name: 'Warning 50',  hex: '#FFF3ED', token: '--warning-50' },
-          { name: 'Warning 100', hex: '#FFE3D5', token: '--warning-100' },
-          { name: 'Warning 200', hex: '#FEC7AA', token: '--warning-200' },
-          { name: 'Warning 300', hex: '#FDA374', token: '--warning-300' },
-          { name: 'Warning 400', hex: '#FB7D3C', token: '--warning-400' },
-          { name: 'Warning 500', hex: '#F96416', token: '--warning-500', textColor: 'light' },
-          { name: 'Warning 600', hex: '#EA580C', token: '--warning-600', textColor: 'light' },
-          { name: 'Warning 700', hex: '#C24A0C', token: '--warning-700', textColor: 'light' },
-          { name: 'Warning 800', hex: '#9A4112', token: '--warning-800', textColor: 'light' },
-          { name: 'Warning 900', hex: '#7C3612', token: '--warning-900', textColor: 'light' },
-          { name: 'Warning 950', hex: '#431C07', token: '--warning-950', textColor: 'light' },
+          { name: 'Warning 50',  hex: '#FEF9E8', token: '--warning-50' },
+          { name: 'Warning 100', hex: '#FEF0C3', token: '--warning-100' },
+          { name: 'Warning 200', hex: '#FFEAA8', token: '--warning-200' },
+          { name: 'Warning 300', hex: '#FDD147', token: '--warning-300' },
+          { name: 'Warning 400', hex: '#FAC215', token: '--warning-400' },
+          { name: 'Warning 500', hex: '#EAB308', token: '--warning-500', textColor: 'light' },
+          { name: 'Warning 600', hex: '#CA9A04', token: '--warning-600', textColor: 'light' },
+          { name: 'Warning 700', hex: '#A17C07', token: '--warning-700', textColor: 'light' },
+          { name: 'Warning 800', hex: '#85680E', token: '--warning-800', textColor: 'light' },
+          { name: 'Warning 900', hex: '#715A12', token: '--warning-900', textColor: 'light' },
+          { name: 'Warning 950', hex: '#423306', token: '--warning-950', textColor: 'light' },
         ],
       },
       {
         title: 'Missing info',
         colors: [
-          { name: 'Missing info 50',  hex: '#FEF9E8', token: '--missing-info-50' },
-          { name: 'Missing info 100', hex: '#FEF0C3', token: '--missing-info-100' },
-          { name: 'Missing info 200', hex: '#FFEAA8', token: '--missing-info-200' },
-          { name: 'Missing info 300', hex: '#FDD147', token: '--missing-info-300' },
-          { name: 'Missing info 400', hex: '#FAC219', token: '--missing-info-400' },
-          { name: 'Missing info 500', hex: '#EAB308', token: '--missing-info-500', textColor: 'light' },
-          { name: 'Missing info 600', hex: '#CA9A04', token: '--missing-info-600', textColor: 'light' },
-          { name: 'Missing info 700', hex: '#A17C07', token: '--missing-info-700', textColor: 'light' },
-          { name: 'Missing info 800', hex: '#85680E', token: '--missing-info-800', textColor: 'light' },
-          { name: 'Missing info 900', hex: '#715A12', token: '--missing-info-900', textColor: 'light' },
-          { name: 'Missing info 950', hex: '#423306', token: '--missing-info-950', textColor: 'light' },
+          { name: 'Missing info 50',  hex: '#FFF3ED', token: '--missing-info-50' },
+          { name: 'Missing info 100', hex: '#FFE3D5', token: '--missing-info-100' },
+          { name: 'Missing info 200', hex: '#FEC7AA', token: '--missing-info-200' },
+          { name: 'Missing info 300', hex: '#FDA374', token: '--missing-info-300' },
+          { name: 'Missing info 400', hex: '#FB7D3C', token: '--missing-info-400' },
+          { name: 'Missing info 500', hex: '#F96416', token: '--missing-info-500', textColor: 'light' },
+          { name: 'Missing info 600', hex: '#EA580C', token: '--missing-info-600', textColor: 'light' },
+          { name: 'Missing info 700', hex: '#C24A0C', token: '--missing-info-700', textColor: 'light' },
+          { name: 'Missing info 800', hex: '#9A4112', token: '--missing-info-800', textColor: 'light' },
+          { name: 'Missing info 900', hex: '#7C3612', token: '--missing-info-900', textColor: 'light' },
+          { name: 'Missing info 950', hex: '#431C07', token: '--missing-info-950', textColor: 'light' },
         ],
       },
       {
@@ -316,6 +316,132 @@ export default function ColorsPage() {
         </div>
       </div>
 
+      {/* Semantic tokens */}
+      <div className="mb-14">
+        <div className="mb-6">
+          <h2 className="text-2xl font-semibold text-token-primary">Semantic tokens</h2>
+          <p className="text-sm text-token-secondary mt-1">
+            Use these in components — they map to the correct Figma semantic layer values and update globally when the theme changes.
+          </p>
+        </div>
+
+        {[
+          {
+            state: 'Error',
+            rows: [
+              { token: '--color-error-fill',        hex: '#DC2626', usage: 'Icon fills, solid state backgrounds' },
+              { token: '--color-error-text',         hex: '#DC2626', usage: 'Body text, inline icons' },
+              { token: '--color-error-text-strong',  hex: '#B91C1C', usage: 'Labels, headings' },
+              { token: '--color-error-border',       hex: '#DC2626', usage: 'Component borders' },
+              { token: '--color-error-bg',           hex: '#FEF2F2', usage: 'Subtle surface (secondary)' },
+              { token: '--color-error-bg-default',   hex: '#FEE2E2', usage: 'Default surface' },
+            ],
+          },
+          {
+            state: 'Success',
+            rows: [
+              { token: '--color-success-fill',        hex: '#16A34A', usage: 'Icon fills, solid state backgrounds' },
+              { token: '--color-success-text',         hex: '#16A34A', usage: 'Body text, inline icons' },
+              { token: '--color-success-text-strong',  hex: '#15803C', usage: 'Labels, headings' },
+              { token: '--color-success-border',       hex: '#16A34A', usage: 'Component borders' },
+              { token: '--color-success-bg',           hex: '#F0FDF5', usage: 'Subtle surface (secondary)' },
+              { token: '--color-success-bg-default',   hex: '#DCFCE8', usage: 'Default surface' },
+            ],
+          },
+          {
+            state: 'Warning',
+            rows: [
+              { token: '--color-warning-fill',        hex: '#CA9A04', usage: 'Icon fills, solid state backgrounds' },
+              { token: '--color-warning-text',         hex: '#EAB308', usage: 'Body text, inline icons' },
+              { token: '--color-warning-text-strong',  hex: '#A17C07', usage: 'Labels, headings' },
+              { token: '--color-warning-border',       hex: '#CA9A04', usage: 'Component borders' },
+              { token: '--color-warning-bg',           hex: '#FEF9E8', usage: 'Subtle surface (secondary)' },
+              { token: '--color-warning-bg-default',   hex: '#FEF0C3', usage: 'Default surface' },
+            ],
+          },
+          {
+            state: 'Missing info',
+            rows: [
+              { token: '--color-missing-info-fill',        hex: '#F96416', usage: 'Icon fills, solid state backgrounds' },
+              { token: '--color-missing-info-text',         hex: '#F96416', usage: 'Body text, inline icons' },
+              { token: '--color-missing-info-text-strong',  hex: '#EA580C', usage: 'Labels, headings' },
+              { token: '--color-missing-info-border',       hex: '#F96416', usage: 'Component borders' },
+              { token: '--color-missing-info-bg',           hex: '#FFF3ED', usage: 'Subtle surface (secondary)' },
+              { token: '--color-missing-info-bg-default',   hex: '#FFE3D5', usage: 'Default surface' },
+            ],
+          },
+        ].map(group => (
+          <div key={group.state} className="mb-8">
+            <h3 className="text-sm font-semibold text-token-secondary uppercase tracking-widest mb-3">{group.state}</h3>
+            <div className="rounded-xl border border-token overflow-hidden">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-token-secondary border-b border-token">
+                    <th className="text-left px-4 py-2.5 font-medium text-token-secondary w-64">Token</th>
+                    <th className="text-left px-4 py-2.5 font-medium text-token-secondary w-32">Value</th>
+                    <th className="text-left px-4 py-2.5 font-medium text-token-secondary">Usage</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-token bg-token-primary">
+                  {group.rows.map(row => (
+                    <tr key={row.token} className="hover:bg-token-secondary transition-colors">
+                      <td className="px-4 py-2.5">
+                        <div className="flex items-center gap-2">
+                          <span
+                            className="w-4 h-4 rounded-sm border border-token shrink-0"
+                            style={{ backgroundColor: row.hex }}
+                          />
+                          <code className="font-mono text-xs text-sky-600 dark:text-sky-400">{row.token}</code>
+                        </div>
+                      </td>
+                      <td className="px-4 py-2.5">
+                        <code className="font-mono text-xs text-token-secondary">{row.hex}</code>
+                      </td>
+                      <td className="px-4 py-2.5 text-token-secondary">{row.usage}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* ESG Aspect colors */}
+      <div className="mb-14">
+        <div className="mb-6">
+          <h2 className="text-2xl font-semibold text-token-primary">ESG Aspect colors</h2>
+          <p className="text-sm text-token-secondary mt-1">
+            Each ESG data category has a dedicated color spectrum. Always use the correct spectrum — never substitute or repurpose across categories.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3">
+          {[
+            { aspect: 'Energy',            hex: '#FF455F', token: '--energy-500',         textColor: 'light' as const, usage: 'Energy consumption & intensity data' },
+            { aspect: 'GHG',               hex: '#FFB246', token: '--ghg-300',            textColor: 'dark'  as const, usage: 'Greenhouse gas emissions & scopes' },
+            { aspect: 'Water',             hex: '#1FD7EE', token: '--water-400',           textColor: 'dark'  as const, usage: 'Water consumption & withdrawal' },
+            { aspect: 'Certifications',    hex: '#2F4FC0', token: '--certifications-700',  textColor: 'light' as const, usage: 'Green building certifications' },
+            { aspect: 'Tenant engagement', hex: '#D76513', token: '--engagement-600',      textColor: 'light' as const, usage: 'Tenant surveys & engagement scores' },
+            { aspect: 'ESG Risk',          hex: '#39D79D', token: '--esg-risk-400',        textColor: 'dark'  as const, usage: 'Portfolio ESG risk ratings' },
+            { aspect: 'Waste',             hex: '#65A289', token: '--waste-400',           textColor: 'light' as const, usage: 'Waste generation & diversion rates' },
+          ].map(({ aspect, hex, token, textColor, usage }) => (
+            <div key={aspect} className="flex flex-col gap-2">
+              <ColorSwatch
+                name={aspect}
+                hex={hex}
+                token={token}
+                textColor={textColor}
+                base
+                size="lg"
+                showWCAG={false}
+              />
+              <p className="text-xs text-token-muted leading-snug px-1">{usage}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Palette sections */}
       <div className="space-y-14">
         {SECTIONS.map(section => (
@@ -339,6 +465,7 @@ export default function ColorsPage() {
                         hex={c.hex}
                         token={c.token}
                         textColor={c.textColor}
+                        base={c.base}
                         showWCAG={false}
                       />
                     ))}

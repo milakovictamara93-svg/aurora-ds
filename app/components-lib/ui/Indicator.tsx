@@ -5,10 +5,6 @@
 // Styles:  filled (solid bg) · outline (tinted bg)
 // Sizes:   small (number only: 16px) | small/medium (dot only: 4px/8px)
 //
-// Color mapping (component system → foundation token):
-//   "warning"      system → missing-info palette (amber, #CA9A04 base)
-//   "missing-info" system → warning palette      (orange, #F96416 base)
-
 export type IndicatorSystem =
   | 'default'
   | 'disabled'
@@ -22,8 +18,8 @@ const NUMBER_FILLED_BG: Record<IndicatorSystem, string> = {
   default:       'bg-blue-600',
   disabled:      'bg-grey-500',
   error:         'bg-error-600',
-  warning:       'bg-missing-info-600',
-  'missing-info':'bg-warning-500',
+  warning:       'bg-warning-600',
+  'missing-info':'bg-missing-info-500',
   success:       'bg-success-600',
 }
 
@@ -32,16 +28,16 @@ const NUMBER_OUTLINE_BG: Record<IndicatorSystem, string> = {
   default:       'bg-blue-100',
   disabled:      'bg-grey-100',
   error:         'bg-error-100',
-  warning:       'bg-missing-info-100',
-  'missing-info':'bg-warning-100',
+  warning:       'bg-warning-100',
+  'missing-info':'bg-missing-info-100',
   success:       'bg-success-100',
 }
 const NUMBER_OUTLINE_TEXT: Record<IndicatorSystem, string> = {
   default:       'text-blue-900',
   disabled:      'text-grey-400',
   error:         'text-error-900',
-  warning:       'text-missing-info-900',
-  'missing-info':'text-warning-800',
+  warning:       'text-warning-900',
+  'missing-info':'text-missing-info-900',
   success:       'text-success-900',
 }
 
@@ -50,8 +46,8 @@ const DOT_BG: Record<IndicatorSystem, string> = {
   default:       'bg-blue-600',
   disabled:      'bg-grey-500',
   error:         'bg-error-600',
-  warning:       'bg-missing-info-600',
-  'missing-info':'bg-warning-500',
+  warning:       'bg-warning-600',
+  'missing-info':'bg-missing-info-500',
   success:       'bg-success-600',
 }
 

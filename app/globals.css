@@ -75,31 +75,31 @@
   --error-900: #7F1D1D;
   --error-950: #450A0A;
 
-  /* ── Warning (orange) ── */
-  --warning-50: #FFF3ED;
-  --warning-100: #FFE3D5;
-  --warning-200: #FEC7AA;
-  --warning-300: #FDA374;
-  --warning-400: #FB7D3C;
-  --warning-500: #F96416;
-  --warning-600: #EA580C;
-  --warning-700: #C24A0C;
-  --warning-800: #9A4112;
-  --warning-900: #7C3612;
-  --warning-950: #431C07;
+  /* ── Warning (yellow — Figma: Primitive/Yellow) ── */
+  --warning-50: #FEF9E8;
+  --warning-100: #FEF0C3;
+  --warning-200: #FFEAA8;
+  --warning-300: #FDD147;
+  --warning-400: #FAC215;
+  --warning-500: #EAB308;
+  --warning-600: #CA9A04;
+  --warning-700: #A17C07;
+  --warning-800: #85680E;
+  --warning-900: #715A12;
+  --warning-950: #423306;
 
-  /* ── Missing info (amber) ── */
-  --missing-info-50: #FEF9E8;
-  --missing-info-100: #FEF0C3;
-  --missing-info-200: #FFEAA8;
-  --missing-info-300: #FDD147;
-  --missing-info-400: #FAC219;
-  --missing-info-500: #EAB308;
-  --missing-info-600: #CA9A04;
-  --missing-info-700: #A17C07;
-  --missing-info-800: #85680E;
-  --missing-info-900: #715A12;
-  --missing-info-950: #423306;
+  /* ── Missing info (orange — Figma: Primitive/Orange) ── */
+  --missing-info-50: #FFF3ED;
+  --missing-info-100: #FFE3D5;
+  --missing-info-200: #FEC7AA;
+  --missing-info-300: #FDA374;
+  --missing-info-400: #FB7D3C;
+  --missing-info-500: #F96416;
+  --missing-info-600: #EA580C;
+  --missing-info-700: #C24A0C;
+  --missing-info-800: #9A4112;
+  --missing-info-900: #7C3612;
+  --missing-info-950: #431C07;
 
   /* ── Success ── */
   --success-50: #F0FDF5;
@@ -127,11 +127,46 @@
   --ai-900: #3C169C;
   --ai-950: #230B6A;
 
-  /* ── Semantic aliases ── */
-  --color-error: #F87171;
-  --color-warning: #FB7D3C;
-  --color-success: #22C55E;
-  --color-ai: #653FFF;
+  /* ── Semantic state tokens (mirrors Figma Colors / Semantic layer) ── */
+  /* Rule: use these vars in components, not raw numbered scales          */
+
+  /* Error — Primitive/Red */
+  --color-error-fill:        #DC2626;  /* error-600  · Background/Error/Inverse Default */
+  --color-error-text:        #DC2626;  /* error-600  · Text/Error/Core                 */
+  --color-error-text-strong: #B91C1C;  /* error-700  · Text/Error/Primary              */
+  --color-error-border:      #DC2626;  /* error-600  · Border/Error/Default            */
+  --color-error-bg:          #FEF2F2;  /* error-50   · Background/Error/Secondary      */
+  --color-error-bg-default:  #FEE2E2;  /* error-100  · Background/Error/Default        */
+
+  /* Success — Primitive/Green */
+  --color-success-fill:        #16A34A;  /* success-600 · Background/Success/Inverse Default */
+  --color-success-text:        #16A34A;  /* success-600 · Text/Success/Core                  */
+  --color-success-text-strong: #15803C;  /* success-700 · Text/Success/Primary               */
+  --color-success-border:      #16A34A;  /* success-600 · Border/Success/Default             */
+  --color-success-bg:          #F0FDF5;  /* success-50  · Background/Success/Secondary       */
+  --color-success-bg-default:  #DCFCE8;  /* success-100 · Background/Success/Default         */
+
+  /* Warning — Primitive/Yellow */
+  --color-warning-fill:        #CA9A04;  /* warning-600 · Background/Warning/Inverse Default */
+  --color-warning-text:        #EAB308;  /* warning-500 · Text/Warning/Core                  */
+  --color-warning-text-strong: #A17C07;  /* warning-700 · Text/Warning/Primary               */
+  --color-warning-border:      #CA9A04;  /* warning-600 · Border/Warning/Default             */
+  --color-warning-bg:          #FEF9E8;  /* warning-50  · Background/Warning/Secondary       */
+  --color-warning-bg-default:  #FEF0C3;  /* warning-100 · Background/Warning/Default         */
+
+  /* Missing info — Primitive/Orange */
+  --color-missing-info-fill:        #F96416;  /* missing-info-500 · Background/Missing info/Inverse Default */
+  --color-missing-info-text:        #F96416;  /* missing-info-500 · Text/Missing info/Core                  */
+  --color-missing-info-text-strong: #EA580C;  /* missing-info-600 · Text/Missing info/Primary               */
+  --color-missing-info-border:      #F96416;  /* missing-info-500 · Border/Missing info/Default             */
+  --color-missing-info-bg:          #FFF3ED;  /* missing-info-50  · Background/Missing info/Secondary       */
+  --color-missing-info-bg-default:  #FFE3D5;  /* missing-info-100 · Background/Missing info/Default         */
+
+  /* Shorthand aliases (kept for legacy) */
+  --color-error:       var(--color-error-fill);
+  --color-warning:     var(--color-warning-text);
+  --color-success:     var(--color-success-fill);
+  --color-ai:          #6430F7;
 
   /* Surfaces */
   --bg-primary: var(--grey-0);
@@ -224,3 +259,22 @@ pre, code {
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* ─── Loading & progress animations ─── */
+@keyframes aurora-shimmer {
+  from { transform: translateX(-150%) skewX(-12deg); }
+  to   { transform: translateX(350%)  skewX(-12deg); }
+}
+@keyframes aurora-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+@keyframes aurora-loading-bar {
+  0%   { left: -40%; width: 40%; }
+  60%  { left: 60%;  width: 60%; }
+  100% { left: 120%; width: 40%; }
+}
+
+.animate-shimmer     { animation: aurora-shimmer 1.6s ease-in-out infinite; }
+.animate-aurora-pulse { animation: aurora-pulse   1.4s ease-in-out infinite; }
+.animate-loading-bar  { animation: aurora-loading-bar 1.6s ease-in-out infinite; }

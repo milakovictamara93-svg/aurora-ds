@@ -472,6 +472,31 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
       </div>
     </div>
   ),
+  '/components/data-points': (
+    <div className="flex flex-col gap-3">
+      {/* DataTrend positive */}
+      <div className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#F0FDF4] border border-[#BBF7D0]">
+        <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#DCFCE7] flex-shrink-0">
+          <svg className="w-3 h-3 text-[#16A34A]" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clipRule="evenodd" /></svg>
+        </span>
+        <span className="text-[13px] font-bold text-[#16A34A]">+12.4%</span>
+      </div>
+      {/* DataArrow indicator spectrum */}
+      <div className="flex gap-1">
+        {['#22C55E','#4ADE80','#EAB308','#F97316','#EF4444','#D1D5DB'].map((bg, i) => (
+          <span key={i} className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: bg }}>
+            <svg className="w-3 h-3 text-white" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L11 6.414V16a1 1 0 11-2 0V6.414L7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3z" clipRule="evenodd" /></svg>
+          </span>
+        ))}
+      </div>
+      {/* DataCompletion */}
+      <div className="flex items-baseline gap-1.5">
+        <span className="text-[18px] font-bold" style={{ color: '#EA580C' }}>68%</span>
+        <span className="text-[10px] text-[#505867]">Complete</span>
+        <span className="inline-flex items-center h-4 px-1.5 rounded-full text-[9px] font-medium" style={{ background: '#FEF2F2', color: '#B91C1C' }}>2 Alerts</span>
+      </div>
+    </div>
+  ),
   '/components/tables': (
     <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
       <div className="grid grid-cols-3 bg-[#F7F8F8] dark:bg-[#1F2430] px-3 py-1.5 border-b border-[#EDEEF1] dark:border-[#1F2430]">
