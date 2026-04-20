@@ -66,7 +66,6 @@ const COMPONENT_GROUPS: NavGroup[] = [
       { href: '/components/cards',       label: 'Card' },
       { href: '/components/data-points', label: 'Data points' },
       { href: '/components/badges-tags', label: 'Tags & Indicators' },
-      { href: '/components/accordion',   label: 'Accordion' },
     ],
   },
   {
@@ -86,6 +85,7 @@ const COMPONENT_GROUPS: NavGroup[] = [
       { href: '/components/navigation',   label: 'Top nav',     available: false },
       { href: '/components/sidebar',      label: 'Sidebar',     available: false },
       { href: '/components/tabs',         label: 'Tabs' },
+      { href: '/components/accordion',    label: 'Accordion' },
       { href: '/components/breadcrumbs',  label: 'Breadcrumbs', available: false },
     ],
   },
