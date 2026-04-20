@@ -11,6 +11,7 @@ interface ColorSwatchProps {
   textColor?: 'light' | 'dark'
   size?: 'sm' | 'md' | 'lg'
   showWCAG?: boolean
+  base?: boolean
 }
 
 function getContrastRatio(hex: string): { onWhite: number; onBlack: number } {
@@ -34,7 +35,7 @@ function WCAGBadge({ ratio, label }: { ratio: number; label: string }) {
   )
 }
 
-export default function ColorSwatch({ name, hex, token, textColor, size = 'md', showWCAG }: ColorSwatchProps) {
+export default function ColorSwatch({ name, hex, token, textColor, size = 'md', showWCAG, base }: ColorSwatchProps) {
   const [copied, setCopied] = useState(false)
 
   async function copy(text: string) {
@@ -64,6 +65,16 @@ export default function ColorSwatch({ name, hex, token, textColor, size = 'md', 
         aria-label={`Copy ${name} hex ${hex}`}
         title={`Click to copy ${hex}`}
       >
+        {base && (
+          <span className={clsx(
+            'absolute top-2 left-2 text-[10px] font-semibold px-1.5 py-0.5 rounded',
+            autoText === 'light'
+              ? 'bg-white/20 text-white'
+              : 'bg-black/10 text-grey-900'
+          )}>
+            Base
+          </span>
+        )}
         <span className={clsx(
           'absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity',
           autoText === 'light' ? 'text-white' : 'text-grey-900'

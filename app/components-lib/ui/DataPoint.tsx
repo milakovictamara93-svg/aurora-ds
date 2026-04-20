@@ -6,9 +6,10 @@ import {
   ArrowTrendingDownIcon,
   ArrowUpRightIcon,
   ArrowDownRightIcon,
+  ArrowRightIcon,
   MinusIcon,
-  ArrowUpIcon,
-  ArrowDownIcon,
+  BellIcon,
+  ChevronRightIcon,
 } from '@heroicons/react/20/solid'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -55,6 +56,7 @@ export interface DataConsumptionProps {
 
 export interface DataCompletionProps {
   percentage: number
+  count?: number
   label?: string
   alerts?: number
   className?: string
@@ -68,106 +70,81 @@ export interface DataProgressProps {
   className?: string
 }
 
-// ── Class lookup tables (complete strings — no interpolation for Tailwind JIT) ─
+// ── DataArrow lookup tables ────────────────────────────────────────────────────
+// Exact Figma hex values. Pill = rounded-full coloured bg; for "medium" there
+// is no pill (white/transparent), just the icon in colour.
 
-const INDICATOR_CLASSES: Record<DataArrowIndicatorState, { pill: string; icon: string; label: string }> = {
-  'very-low':  { pill: 'bg-success-500',       icon: 'text-white', label: 'Very low' },
-  'low':       { pill: 'bg-success-400',       icon: 'text-white', label: 'Low' },
-  'medium':    { pill: 'bg-warning-500',       icon: 'text-white', label: 'Medium' },
-  'high':      { pill: 'bg-missing-info-500',  icon: 'text-white', label: 'High' },
-  'very-high': { pill: 'bg-error-500',         icon: 'text-white', label: 'Very high' },
-  'n-a':       { pill: 'bg-grey-200 dark:bg-grey-700', icon: 'text-grey-600 dark:text-grey-300', label: 'N/A' },
+type ArrowCls = {
+  pill: string        // bg + rounded — empty string = no pill
+  icon: string        // text colour class
+  darkPill?: string   // optional dark-mode override
+  label: string
 }
 
-const CONSUMPTION_CLASSES: Record<DataArrowConsumptionState, { pill: string; icon: string; label: string }> = {
-  'positive-high': { pill: 'bg-missing-info-500', icon: 'text-white',                       label: 'Positive high' },
-  'positive-low':  { pill: 'bg-missing-info-200', icon: 'text-missing-info-800',             label: 'Positive low' },
-  'negative-high': { pill: 'bg-missing-info-400', icon: 'text-white',                       label: 'Negative high' },
-  'negative-low':  { pill: 'bg-missing-info-100', icon: 'text-missing-info-700',             label: 'Negative low' },
+const INDICATOR_CLASSES: Record<DataArrowIndicatorState, ArrowCls> = {
+  'very-low':  { pill: 'bg-[#bbf7d1] rounded-full',  icon: 'text-[#14532b]',  darkPill: 'dark:bg-green-900',  label: 'Very low'  },
+  'low':       { pill: 'bg-[#f0fdf5] rounded-full',  icon: 'text-[#16a34a]',  darkPill: 'dark:bg-green-950',  label: 'Low'       },
+  'medium':    { pill: '',                            icon: 'text-[#ea580c]',                                   label: 'Medium'    },
+  'high':      { pill: 'bg-[#fef2f2] rounded-full',  icon: 'text-[#b91c1c]',  darkPill: 'dark:bg-red-950',    label: 'High'      },
+  'very-high': { pill: 'bg-[#fecaca] rounded-full',  icon: 'text-[#7f1d1d]',  darkPill: 'dark:bg-red-900',    label: 'Very high' },
+  'n-a':       { pill: 'bg-[#edeef1] rounded-full',  icon: 'text-[#505867]',  darkPill: 'dark:bg-grey-800',   label: 'N/A'       },
 }
 
-const TREND_CLASSES: Record<'positive' | 'negative', { text: string; bg: string; border: string; iconBg: string }> = {
-  positive: {
-    text:    'text-success-600',
-    bg:      'bg-success-50 dark:bg-success-950',
-    border:  'border-success-200 dark:border-success-800',
-    iconBg:  'bg-success-100 dark:bg-success-900',
-  },
-  negative: {
-    text:    'text-error-500',
-    bg:      'bg-error-50 dark:bg-error-950',
-    border:  'border-error-200 dark:border-error-800',
-    iconBg:  'bg-error-100 dark:bg-error-900',
-  },
+const CONSUMPTION_CLASSES: Record<DataArrowConsumptionState, ArrowCls> = {
+  'positive-high': { pill: 'bg-[#fee2e2] rounded-full', icon: 'text-[#dc2626]', darkPill: 'dark:bg-red-950',    label: 'Positive high' },
+  'positive-low':  { pill: 'bg-[#ffe3d5] rounded-full', icon: 'text-[#f96416]', darkPill: 'dark:bg-orange-950', label: 'Positive low'  },
+  'negative-high': { pill: 'bg-[#fee2e2] rounded-full', icon: 'text-[#dc2626]', darkPill: 'dark:bg-red-950',    label: 'Negative high' },
+  'negative-low':  { pill: 'bg-[#ffe3d5] rounded-full', icon: 'text-[#f96416]', darkPill: 'dark:bg-orange-950', label: 'Negative low'  },
 }
-
-const CONSUMPTION_VALUE_CLASSES: Record<DataArrowConsumptionState, string> = {
-  'positive-high': 'text-missing-info-700',
-  'positive-low':  'text-missing-info-500',
-  'negative-high': 'text-missing-info-700',
-  'negative-low':  'text-missing-info-500',
-}
-
-// ── DataArrow ─────────────────────────────────────────────────────────────────
 
 function indicatorIcon(state: DataArrowIndicatorState) {
   switch (state) {
     case 'very-low':
-    case 'low':
-      return <ArrowDownIcon className="w-full h-full" />
-    case 'medium':
-      return <MinusIcon className="w-full h-full" />
+    case 'low':       return <ArrowDownRightIcon className="w-full h-full" />
+    case 'medium':    return <ArrowRightIcon      className="w-full h-full" />
     case 'high':
-    case 'very-high':
-      return <ArrowUpIcon className="w-full h-full" />
-    case 'n-a':
-      return <MinusIcon className="w-full h-full" />
+    case 'very-high': return <ArrowUpRightIcon    className="w-full h-full" />
+    case 'n-a':       return <MinusIcon           className="w-full h-full" />
   }
 }
 
 function consumptionIcon(state: DataArrowConsumptionState) {
   return state.startsWith('positive')
-    ? <ArrowUpRightIcon className="w-full h-full" />
+    ? <ArrowUpRightIcon   className="w-full h-full" />
     : <ArrowDownRightIcon className="w-full h-full" />
 }
 
+// ── DataArrow ─────────────────────────────────────────────────────────────────
+
 export function DataArrow({ type, state, size = 'md', className }: DataArrowProps) {
-  const sizeClasses = size === 'sm' ? 'w-4 h-4' : 'w-5 h-5'
+  const sizeClasses     = size === 'sm' ? 'w-4 h-4'     : 'w-5 h-5'
   const iconSizeClasses = size === 'sm' ? 'w-2.5 h-2.5' : 'w-3 h-3'
 
-  let pillClass: string
-  let iconClass: string
-  let srLabel: string
-  let iconEl: React.ReactNode
+  const cls = type === 'indicator'
+    ? INDICATOR_CLASSES[state as DataArrowIndicatorState]
+    : CONSUMPTION_CLASSES[state as DataArrowConsumptionState]
 
-  if (type === 'indicator') {
-    const s = state as DataArrowIndicatorState
-    const cls = INDICATOR_CLASSES[s]
-    pillClass = cls.pill
-    iconClass = cls.icon
-    srLabel = `${cls.label} risk indicator`
-    iconEl = indicatorIcon(s)
-  } else {
-    const s = state as DataArrowConsumptionState
-    const cls = CONSUMPTION_CLASSES[s]
-    pillClass = cls.pill
-    iconClass = cls.icon
-    srLabel = `${cls.label} consumption`
-    iconEl = consumptionIcon(s)
-  }
+  const srLabel = type === 'indicator'
+    ? `${cls.label} risk indicator`
+    : `${cls.label} consumption`
+
+  const iconEl = type === 'indicator'
+    ? indicatorIcon(state as DataArrowIndicatorState)
+    : consumptionIcon(state as DataArrowConsumptionState)
 
   return (
     <span
       role="img"
       aria-label={srLabel}
       className={clsx(
-        'inline-flex items-center justify-center rounded-full flex-shrink-0',
+        'inline-flex items-center justify-center flex-shrink-0',
         sizeClasses,
-        pillClass,
+        cls.pill,
+        cls.darkPill,
         className,
       )}
     >
-      <span className={clsx(iconSizeClasses, iconClass)} aria-hidden>
+      <span className={clsx(iconSizeClasses, cls.icon)} aria-hidden>
         {iconEl}
       </span>
       <span className="sr-only">{srLabel}</span>
@@ -176,6 +153,13 @@ export function DataArrow({ type, state, size = 'md', className }: DataArrowProp
 }
 
 // ── DataTrend ─────────────────────────────────────────────────────────────────
+// Compact inline: number text (#111827) + % in grey (#505867) + 16 px pill.
+// Color lives ONLY in the pill — values are always dark.
+
+const TREND_PILL: Record<'positive' | 'negative', { bg: string; icon: string }> = {
+  positive: { bg: 'bg-[#f0fdf5] dark:bg-green-950',  icon: 'text-[#16a34a] dark:text-green-400' },
+  negative: { bg: 'bg-[#fef2f2] dark:bg-red-950',    icon: 'text-[#dc2626] dark:text-red-400'   },
+}
 
 export function DataTrend({
   state,
@@ -184,93 +168,136 @@ export function DataTrend({
   label,
   className,
 }: DataTrendProps) {
-  const cls = TREND_CLASSES[state]
-  const TrendIcon = state === 'positive' ? ArrowTrendingUpIcon : ArrowTrendingDownIcon
+  const cls  = TREND_PILL[state]
+  const Icon = state === 'positive' ? ArrowTrendingUpIcon : ArrowTrendingDownIcon
 
-  if (layout === 'trend-first') {
-    return (
-      <div className={clsx('inline-flex items-center gap-2 px-3 py-2 rounded-lg border', cls.bg, cls.border, className)}>
-        <span className={clsx('inline-flex items-center justify-center w-6 h-6 rounded-full flex-shrink-0', cls.iconBg)}>
-          <TrendIcon className={clsx('w-4 h-4', cls.text)} aria-hidden />
-        </span>
-        <div className="flex flex-col min-w-0">
-          <span className={clsx('text-base font-bold leading-tight', cls.text)}>{value}</span>
-          {label && <span className="text-xs text-grey-500 dark:text-grey-400 leading-tight">{label}</span>}
-        </div>
-      </div>
-    )
-  }
+  // Separate numeric part from trailing %
+  const hasPercent = value.endsWith('%')
+  const numPart    = hasPercent ? value.slice(0, -1) : value
 
-  // numbers-first (default)
+  const arrowPill = (
+    <span className={clsx('inline-flex items-center justify-center w-4 h-4 rounded-full flex-shrink-0', cls.bg)}>
+      <Icon className={clsx('w-2.5 h-2.5', cls.icon)} aria-hidden />
+    </span>
+  )
+
+  const numbersEl = (
+    <span className="inline-flex items-baseline leading-none">
+      <span className="text-[10px] font-medium text-grey-950 dark:text-white">{numPart}</span>
+      {hasPercent && <span className="text-[10px] font-normal text-grey-600 dark:text-grey-400">%</span>}
+      {label && <span className="ml-1 text-[10px] font-normal text-grey-500 dark:text-grey-400">{label}</span>}
+    </span>
+  )
+
   return (
-    <div className={clsx('inline-flex flex-col items-start gap-1.5 px-3 py-2.5 rounded-lg border', cls.bg, cls.border, className)}>
-      <span className={clsx('text-[26px] font-bold leading-none tracking-tight', cls.text)}>{value}</span>
-      <div className="flex items-center gap-1.5">
-        <span className={clsx('inline-flex items-center justify-center w-5 h-5 rounded-full flex-shrink-0', cls.iconBg)}>
-          <TrendIcon className={clsx('w-3.5 h-3.5', cls.text)} aria-hidden />
-        </span>
-        {label && <span className="text-xs text-grey-500 dark:text-grey-400">{label}</span>}
-      </div>
-    </div>
+    <span className={clsx('inline-flex items-center gap-1', className)}>
+      {layout === 'trend-first' ? <>{arrowPill}{numbersEl}</> : <>{numbersEl}{arrowPill}</>}
+    </span>
   )
 }
 
 // ── DataConsumption ───────────────────────────────────────────────────────────
+// Compact: 16 px arrow pill + value text in dark (#111827) + optional label.
+// Color is ONLY in the pill arrow, not the value text.
 
 export function DataConsumption({ state, value, label, className }: DataConsumptionProps) {
   return (
-    <div className={clsx('inline-flex items-center gap-2', className)}>
-      <DataArrow type="consumption" state={state} size="md" />
-      <div className="flex flex-col leading-tight">
-        <span className={clsx('text-sm font-semibold', CONSUMPTION_VALUE_CLASSES[state])}>
-          {value}
-        </span>
-        {label && <span className="text-xs text-grey-500 dark:text-grey-400">{label}</span>}
-      </div>
-    </div>
-  )
-}
-
-// ── AlertsBadge (shared) ───────────────────────────────────────────────────────
-
-function AlertsBadge({ count }: { count: number }) {
-  return (
-    <span className="inline-flex items-center gap-1 h-5 px-2 rounded-full bg-error-50 dark:bg-error-950 text-error-700 dark:text-error-400 text-[11px] font-medium leading-none">
-      {count} {count === 1 ? 'Alert' : 'Alerts'}
+    <span className={clsx('inline-flex items-center gap-1.5', className)}>
+      <DataArrow type="consumption" state={state} size="sm" />
+      <span className="flex flex-col leading-tight">
+        <span className="text-xs font-medium text-grey-950 dark:text-white">{value}</span>
+        {label && <span className="text-[10px] text-grey-500 dark:text-grey-400">{label}</span>}
+      </span>
     </span>
   )
 }
 
 // ── DataCompletion ────────────────────────────────────────────────────────────
+// Tag pill (rounded-full, orange bg) + optional count badge + trailing chevron.
+// Below: description + alerts line (grey when no alerts, blue when active).
 
-export function DataCompletion({ percentage, label, alerts, className }: DataCompletionProps) {
-  const pctText = percentage >= 100 ? 'text-success-600 dark:text-success-400' : 'text-missing-info-600 dark:text-missing-info-400'
+export function DataCompletion({ percentage, count, label, alerts, className }: DataCompletionProps) {
+  const complete = percentage >= 100
+
+  const tagBg   = complete ? 'bg-[#f0fdf5] dark:bg-green-950'  : 'bg-[#ffe3d5] dark:bg-orange-950'
+  const tagText = complete ? 'text-[#14532b] dark:text-green-400' : 'text-[#9a4112] dark:text-orange-300'
+  const badgeBg = complete ? 'bg-[#16a34a]'                     : 'bg-[#f96416]'
+
+  const hasAlerts  = alerts != null && alerts > 0
+  const alertColor = hasAlerts
+    ? 'text-[#1258f8] dark:text-blue-400'
+    : 'text-[#8c96a4] dark:text-grey-500'
 
   return (
     <div className={clsx('inline-flex flex-col gap-1', className)}>
-      <span className={clsx('text-[28px] font-bold leading-none tracking-tight', pctText)}>
-        {percentage}%
+      {/* Tag pill */}
+      <span className={clsx('inline-flex items-center gap-1 h-5 px-2 rounded-full self-start', tagBg, tagText)}>
+        <span className="text-[11px] font-medium">{percentage}%</span>
+        {count != null && (
+          <span className={clsx(
+            'inline-flex items-center justify-center h-4 min-w-[18px] px-1 rounded-full',
+            'text-white text-[10px] font-medium leading-none',
+            badgeBg,
+          )}>
+            {count}
+          </span>
+        )}
+        <ChevronRightIcon className="w-2.5 h-2.5 text-[#505867] dark:text-grey-400 flex-shrink-0" aria-hidden />
       </span>
-      {label && <span className="text-sm text-grey-600 dark:text-grey-400">{label}</span>}
-      {alerts != null && alerts > 0 && <AlertsBadge count={alerts} />}
+
+      {/* Description */}
+      {label && (
+        <span className="text-[10px] text-grey-950 dark:text-grey-200 leading-tight">{label}</span>
+      )}
+
+      {/* Alerts — always rendered; grey when none, blue when active */}
+      {alerts !== undefined && (
+        <span className={clsx('inline-flex items-center gap-1 text-[10px] leading-tight', alertColor)}>
+          <BellIcon className="w-3 h-3 flex-shrink-0" aria-hidden />
+          {hasAlerts ? `${alerts} ${alerts === 1 ? 'Alert' : 'Alerts'}` : 'No alerts'}
+        </span>
+      )}
     </div>
   )
 }
 
 // ── DataProgress ──────────────────────────────────────────────────────────────
+// Compact fraction (#111827, 14 px) + optional 4 px alert dot + description.
+// Fraction is ALWAYS dark — no color change at 100%.
 
 export function DataProgress({ current, total, label, alerts, className }: DataProgressProps) {
-  const progressText = current >= total
-    ? 'text-success-600 dark:text-success-400'
-    : 'text-missing-info-600 dark:text-missing-info-400'
+  const complete  = current >= total
+  const hasAlerts = !complete && alerts != null && alerts > 0
+  const alertColor = hasAlerts
+    ? 'text-[#1258f8] dark:text-blue-400'
+    : 'text-[#8c96a4] dark:text-grey-500'
 
   return (
-    <div className={clsx('inline-flex flex-col gap-1', className)}>
-      <span className={clsx('text-[28px] font-bold leading-none tracking-tight', progressText)}>
-        {current}<span className="text-grey-300 dark:text-grey-600 font-normal">/</span>{total}
-      </span>
-      {label && <span className="text-sm text-grey-600 dark:text-grey-400">{label}</span>}
-      {alerts != null && alerts > 0 && <AlertsBadge count={alerts} />}
+    <div className={clsx('inline-flex flex-col gap-0.5', className)}>
+      {/* Fraction row */}
+      <div className="flex items-center gap-1.5">
+        <span className="text-sm font-medium text-grey-950 dark:text-white leading-none">
+          {current}
+          <span className="text-grey-400 dark:text-grey-500 font-normal">/</span>
+          {total}
+        </span>
+        {hasAlerts && (
+          <span className="w-1 h-1 rounded-full bg-[#f96416] flex-shrink-0" aria-hidden />
+        )}
+      </div>
+
+      {/* Description */}
+      {label && (
+        <span className="text-[10px] text-grey-950 dark:text-grey-200 leading-tight">{label}</span>
+      )}
+
+      {/* Alerts — always rendered if prop passed */}
+      {alerts !== undefined && (
+        <span className={clsx('inline-flex items-center gap-1 text-[10px] leading-tight', alertColor)}>
+          <BellIcon className="w-3 h-3 flex-shrink-0" aria-hidden />
+          {hasAlerts ? `${alerts} ${alerts === 1 ? 'Alert' : 'Alerts'}` : 'No alerts'}
+        </span>
+      )}
     </div>
   )
 }

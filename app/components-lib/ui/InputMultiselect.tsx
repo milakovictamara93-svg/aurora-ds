@@ -1,11 +1,11 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useId } from 'react'
 import clsx from 'clsx'
 import {
   ChevronDownIcon,
-  XMarkIcon,
   CheckIcon,
+  XMarkIcon,
   ExclamationCircleIcon,
   ExclamationTriangleIcon,
   CheckCircleIcon,
@@ -13,13 +13,13 @@ import {
 import type { InputState, InputLayout } from './InputText'
 
 // ── Types ──────────────────────────────────────────────────────────────────────
-// Figma: Input/Multiselect — node 212:10568
-// Dropdown that allows multiple options to be selected simultaneously.
-// Selected options appear as chips/pills inside the trigger.
+// Figma: Dropdown / multiselect menu item — 16 px checkbox, 24 px item height.
+// Trigger matches Input/Text visual; selected options appear as removable chips.
 
 export interface MultiselectOption {
   value: string
   label: string
+  disabled?: boolean
 }
 
 export interface InputMultiselectProps {
@@ -34,37 +34,48 @@ export interface InputMultiselectProps {
   layout?: InputLayout
   onChange?: (values: string[]) => void
   id?: string
+  className?: string
 }
 
-function triggerClasses(state: InputMultiselectProps['state'], open: boolean) {
+// ── Trigger border/ring ────────────────────────────────────────────────────────
+
+function triggerClasses(
+  state: InputMultiselectProps['state'],
+  open: boolean,
+) {
   const base = clsx(
-    'w-full min-h-[32px] px-3 py-1.5 text-sm outline-none transition-colors rounded',
+    'w-full min-h-[32px] pl-3 pr-9 py-1 text-sm outline-none transition-colors rounded',
     'bg-white dark:bg-grey-950 flex items-center gap-1.5 flex-wrap cursor-pointer',
   )
   switch (state) {
     case 'error':
-      return clsx(base, 'border border-error-600 focus:ring-2 focus:ring-error-600/20')
+      return clsx(base, 'border border-error-600')
     case 'warning':
-      return clsx(base, 'border border-missing-info-500 focus:ring-2 focus:ring-missing-info-500/20')
+      return clsx(base, 'border border-missing-info-500')
     case 'success':
-      return clsx(base, 'border border-success-600 focus:ring-2 focus:ring-success-600/20')
+      return clsx(base, 'border border-success-600')
     case 'disabled':
-      return clsx(base, 'border border-grey-200 dark:border-grey-800 bg-grey-50 dark:bg-grey-900 cursor-not-allowed')
+      return clsx(base, 'border border-[#d7dae0] dark:border-grey-800 bg-[#edeef1] dark:bg-grey-900 cursor-not-allowed')
     default:
-      return clsx(base,
+      return clsx(
+        base,
         open
-          ? 'border border-blue-600 ring-2 ring-blue-600/20'
-          : 'border border-grey-200 dark:border-grey-800 hover:border-grey-300 dark:hover:border-grey-700',
+          ? 'border border-[#1258f8] ring-2 ring-[#1258f8]/20'
+          : 'border border-[#d7dae0] dark:border-grey-700 hover:border-[#b4bac5] dark:hover:border-grey-600',
       )
   }
 }
 
-function TrailingIcon({ state }: { state: InputMultiselectProps['state'] }) {
-  if (state === 'error')   return <ExclamationCircleIcon className="w-4 h-4 text-error-600 shrink-0" />
-  if (state === 'warning') return <ExclamationTriangleIcon className="w-4 h-4 text-missing-info-500 shrink-0" />
-  if (state === 'success') return <CheckCircleIcon className="w-4 h-4 text-success-600 shrink-0" />
-  return <ChevronDownIcon className="w-4 h-4 text-grey-400 shrink-0" />
+function helperColor(state: InputMultiselectProps['state']) {
+  switch (state) {
+    case 'error':   return 'text-error-600'
+    case 'warning': return 'text-missing-info-500'
+    case 'success': return 'text-success-600'
+    default:        return 'text-[#8c96a4] dark:text-grey-500'
+  }
 }
+
+// ── Component ──────────────────────────────────────────────────────────────────
 
 export default function InputMultiselect({
   label,
@@ -73,131 +84,161 @@ export default function InputMultiselect({
   options,
   value: controlledValue,
   defaultValue = [],
-  placeholder = 'Select options…',
+  placeholder = 'Select…',
   state = 'default',
   layout = 'stacked',
   onChange,
-  id,
+  id: externalId,
+  className,
 }: InputMultiselectProps) {
-  const [open, setOpen] = useState(false)
-  const [internalValue, setInternalValue] = useState<string[]>(defaultValue)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const autoId = useId()
+  const id = externalId ?? autoId
 
-  const selected = controlledValue ?? internalValue
+  const [open, setOpen]         = useState(false)
+  const [internal, setInternal] = useState<string[]>(defaultValue)
+  const containerRef            = useRef<HTMLDivElement>(null)
+
+  const resolvedState   = state
+  const selected        = controlledValue ?? internal
+  const selectedOptions = options.filter(o => selected.includes(o.value))
 
   function toggle(val: string) {
-    if (state === 'disabled') return
+    if (resolvedState === 'disabled') return
     const next = selected.includes(val)
       ? selected.filter(v => v !== val)
       : [...selected, val]
-    setInternalValue(next)
+    setInternal(next)
     onChange?.(next)
   }
 
   function remove(val: string, e: React.MouseEvent) {
     e.stopPropagation()
+    if (resolvedState === 'disabled') return
     const next = selected.filter(v => v !== val)
-    setInternalValue(next)
+    setInternal(next)
     onChange?.(next)
   }
 
-  // Close on outside click
   useEffect(() => {
-    function handler(e: MouseEvent) {
+    function onDown(e: MouseEvent) {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
         setOpen(false)
       }
     }
-    document.addEventListener('mousedown', handler)
-    return () => document.removeEventListener('mousedown', handler)
+    document.addEventListener('mousedown', onDown)
+    return () => document.removeEventListener('mousedown', onDown)
   }, [])
 
-  const selectedLabels = options.filter(o => selected.includes(o.value))
-
-  function helperColor() {
-    switch (state) {
-      case 'error':   return 'text-error-600'
-      case 'warning': return 'text-missing-info-500'
-      case 'success': return 'text-success-600'
-      default:        return 'text-grey-400 dark:text-grey-500'
-    }
-  }
+  const trailingIcon = (
+    resolvedState === 'error'   ? <ExclamationCircleIcon  className="w-4 h-4 text-error-600" />
+    : resolvedState === 'warning' ? <ExclamationTriangleIcon className="w-4 h-4 text-missing-info-500" />
+    : resolvedState === 'success' ? <CheckCircleIcon        className="w-4 h-4 text-success-600" />
+    : <ChevronDownIcon className={clsx('w-4 h-4 text-[#505867] dark:text-grey-400 transition-transform duration-150', open && 'rotate-180')} />
+  )
 
   const control = (
-    <div className="relative" ref={containerRef}>
+    <div className={clsx('relative', className)} ref={containerRef}>
+      {/* Trigger */}
       <button
         type="button"
         id={id}
-        disabled={state === 'disabled'}
-        aria-haspopup="listbox"
+        role="combobox"
         aria-expanded={open}
-        onClick={() => state !== 'disabled' && setOpen(o => !o)}
-        className={clsx(triggerClasses(state, open), 'pr-8')}
+        aria-haspopup="listbox"
+        aria-controls={open ? `${id}-listbox` : undefined}
+        aria-describedby={helperText ? `${id}-helper` : undefined}
+        disabled={resolvedState === 'disabled'}
+        onClick={() => resolvedState !== 'disabled' && setOpen(o => !o)}
+        className={clsx(triggerClasses(resolvedState, open), 'pr-9')}
       >
-        {selectedLabels.length === 0 ? (
-          <span className="text-grey-400 dark:text-grey-500">{placeholder}</span>
+        {selectedOptions.length === 0 ? (
+          <span className="text-[#8c96a4] dark:text-grey-500 text-sm">{placeholder}</span>
         ) : (
-          selectedLabels.map(opt => (
+          selectedOptions.map(opt => (
             <span
               key={opt.value}
-              className="inline-flex items-center gap-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-1.5 py-0.5 rounded"
+              className="inline-flex items-center gap-0.5 bg-[#d9eaff] dark:bg-blue-900/30 text-[#1258f8] dark:text-blue-300 text-xs font-medium px-1.5 py-0.5 rounded"
             >
               {opt.label}
-              {state !== 'disabled' && (
+              {resolvedState !== 'disabled' && (
                 <XMarkIcon
-                  className="w-3 h-3 cursor-pointer hover:text-blue-900"
+                  className="w-3 h-3 cursor-pointer hover:text-blue-900 dark:hover:text-blue-100"
                   onClick={e => remove(opt.value, e)}
+                  aria-label={`Remove ${opt.label}`}
                 />
               )}
             </span>
           ))
         )}
-        <span className="absolute right-2.5 top-1/2 -translate-y-1/2">
-          <TrailingIcon state={state} />
+        <span className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
+          {trailingIcon}
         </span>
       </button>
 
+      {/* Menu */}
       {open && (
-        <div className="absolute z-50 mt-1 w-full bg-white dark:bg-grey-900 border border-grey-200 dark:border-grey-700 rounded shadow-lg max-h-56 overflow-y-auto">
+        <ul
+          id={`${id}-listbox`}
+          role="listbox"
+          aria-multiselectable="true"
+          aria-label={label}
+          className={clsx(
+            'absolute z-50 mt-1 w-full overflow-y-auto',
+            'bg-white dark:bg-grey-900',
+            'border border-[#d7dae0] dark:border-grey-700 rounded shadow-md',
+            'max-h-56 py-1',
+          )}
+        >
           {options.map(opt => {
-            const isSelected = selected.includes(opt.value)
+            const isChecked = selected.includes(opt.value)
             return (
-              <button
+              <li
                 key={opt.value}
-                type="button"
-                onClick={() => toggle(opt.value)}
+                role="option"
+                aria-selected={isChecked}
+                aria-disabled={opt.disabled}
+                onClick={() => !opt.disabled && toggle(opt.value)}
                 className={clsx(
-                  'w-full flex items-center gap-2.5 px-3 py-2 text-sm text-left transition-colors',
-                  isSelected
-                    ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300'
-                    : 'text-grey-950 dark:text-white hover:bg-grey-50 dark:hover:bg-grey-800'
+                  'flex items-center gap-2 px-2 h-6 text-xs cursor-pointer select-none transition-colors',
+                  opt.disabled
+                    ? 'bg-[#edeef1] dark:bg-grey-800 text-[#8c96a4] cursor-not-allowed'
+                    : 'text-grey-950 dark:text-white hover:bg-[#f7f8f8] dark:hover:bg-grey-800',
                 )}
               >
-                <span className={clsx(
-                  'w-4 h-4 rounded border flex items-center justify-center shrink-0',
-                  isSelected
-                    ? 'bg-blue-600 border-blue-600'
-                    : 'border-grey-300 dark:border-grey-600'
-                )}>
-                  {isSelected && <CheckIcon className="w-3 h-3 text-white" />}
+                {/* Figma: 16×16 checkbox, br=4 */}
+                <span
+                  className={clsx(
+                    'w-4 h-4 rounded flex items-center justify-center shrink-0 border transition-colors',
+                    opt.disabled
+                      ? 'border-[#d7dae0] bg-[#edeef1] dark:border-grey-600 dark:bg-grey-800'
+                      : isChecked
+                      ? 'bg-[#1258f8] border-[#1258f8]'
+                      : 'bg-white dark:bg-grey-950 border-[#d7dae0] dark:border-grey-600',
+                  )}
+                  aria-hidden
+                >
+                  {isChecked && <CheckIcon className="w-2.5 h-2.5 text-white" />}
                 </span>
-                {opt.label}
-              </button>
+                <span className="flex-1 truncate">{opt.label}</span>
+              </li>
             )
           })}
-        </div>
+        </ul>
       )}
     </div>
   )
 
   const labelEl = label && (
     <label htmlFor={id} className="text-sm font-medium text-grey-950 dark:text-white shrink-0">
-      {label}{required && <span className="text-error-600 ml-0.5">*</span>}
+      {label}
+      {required && <span className="text-error-600 ml-0.5">*</span>}
     </label>
   )
 
   const helperEl = helperText && (
-    <p className={clsx('text-xs', helperColor())}>{helperText}</p>
+    <p id={`${id}-helper`} className={clsx('text-xs', helperColor(resolvedState))}>
+      {helperText}
+    </p>
   )
 
   if (layout === 'inline') {

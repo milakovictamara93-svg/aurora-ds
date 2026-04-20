@@ -11,11 +11,11 @@ import {
 import InputMultiselect from '@/app/components-lib/ui/InputMultiselect'
 
 const FRAMEWORK_OPTIONS = [
-  { value: 'gri', label: 'GRI Standards' },
-  { value: 'tcfd', label: 'TCFD' },
-  { value: 'sasb', label: 'SASB' },
-  { value: 'cdp', label: 'CDP' },
-  { value: 'iso', label: 'ISO 14001' },
+  { value: 'gri',  label: 'GRI Standards' },
+  { value: 'tcfd', label: 'TCFD'          },
+  { value: 'sasb', label: 'SASB'          },
+  { value: 'cdp',  label: 'CDP'           },
+  { value: 'iso',  label: 'ISO 14001'     },
 ]
 
 const SCOPE_OPTIONS = [
@@ -24,17 +24,12 @@ const SCOPE_OPTIONS = [
   { value: 's3', label: 'Scope 3' },
 ]
 
-function Card({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="rounded-lg border border-grey-100 dark:border-grey-800 overflow-hidden">
-      <div className="px-3 py-2 bg-grey-50 dark:bg-grey-900 border-b border-grey-100 dark:border-grey-800 text-xs font-semibold text-grey-600 dark:text-grey-400">{label}</div>
-      <div className="p-4 bg-white dark:bg-grey-950">{children}</div>
-    </div>
-  )
-}
-
 function Code({ children }: { children: string }) {
-  return <pre className="mt-4 bg-grey-950 text-grey-100 text-sm font-mono rounded-lg p-4 overflow-x-auto leading-relaxed whitespace-pre">{children}</pre>
+  return (
+    <pre className="mt-4 bg-grey-950 text-grey-100 text-sm font-mono rounded-lg p-4 overflow-x-auto leading-relaxed whitespace-pre">
+      {children}
+    </pre>
+  )
 }
 
 export default function MultiselectPage() {
@@ -42,102 +37,135 @@ export default function MultiselectPage() {
     <div>
       <PageHeader
         title="Multiselect"
-        description="Dropdown that allows multiple options to be selected simultaneously. Selected items appear as removable chips inside the trigger."
+        description="Dropdown that allows multiple options to be selected simultaneously. Each option has a checkbox; selected items appear as removable chips in the trigger."
         badge="Components"
       />
       <ComponentTabs>
         <TabBar />
 
+        {/* ── USAGE ───────────────────────────────────────────────────────── */}
         <TabPanel id="usage">
           <PageContent>
+
             <Section title="States">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Card label="Default (click to open)">
-                  <InputMultiselect id="ms1" label="ESG frameworks" placeholder="Select frameworks…" options={FRAMEWORK_OPTIONS} />
-                </Card>
-                <Card label="Filled (2 selected)">
-                  <InputMultiselect id="ms2" label="Emission scopes" defaultValue={['s1', 's2']} options={SCOPE_OPTIONS} />
-                </Card>
-                <Card label="Error">
-                  <InputMultiselect id="ms3" label="Required frameworks" state="error" helperText="Select at least one framework." placeholder="Select…" options={FRAMEWORK_OPTIONS} />
-                </Card>
-                <Card label="Warning">
-                  <InputMultiselect id="ms4" label="Data sources" state="warning" helperText="Some sources have unverified data." defaultValue={['gri']} options={FRAMEWORK_OPTIONS} />
-                </Card>
-                <Card label="Success">
-                  <InputMultiselect id="ms5" label="Emission scopes" state="success" helperText="All required scopes selected." defaultValue={['s1', 's2', 's3']} options={SCOPE_OPTIONS} />
-                </Card>
-                <Card label="Disabled">
-                  <InputMultiselect id="ms6" label="Frameworks" state="disabled" defaultValue={['gri', 'tcfd']} options={FRAMEWORK_OPTIONS} />
-                </Card>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <Preview label="Default — empty">
+                  <InputMultiselect id="m1" label="ESG frameworks" placeholder="Select frameworks…" options={FRAMEWORK_OPTIONS} />
+                </Preview>
+                <Preview label="With selections">
+                  <InputMultiselect id="m2" label="GHG scopes" options={SCOPE_OPTIONS} defaultValue={['s1', 's2']} />
+                </Preview>
+                <Preview label="With helper text">
+                  <InputMultiselect id="m3" label="Reporting frameworks" helperText="Select all that apply to this report." placeholder="Select frameworks…" options={FRAMEWORK_OPTIONS} />
+                </Preview>
+                <Preview label="Error">
+                  <InputMultiselect id="m4" label="GHG scopes" state="error" helperText="At least one scope must be selected." placeholder="Select scopes…" options={SCOPE_OPTIONS} />
+                </Preview>
+                <Preview label="Warning">
+                  <InputMultiselect id="m5" label="Data sources" state="warning" helperText="Some sources have unverified data." placeholder="Select sources…" options={FRAMEWORK_OPTIONS} />
+                </Preview>
+                <Preview label="Success">
+                  <InputMultiselect id="m6" label="GHG scopes" state="success" helperText="All scopes confirmed." options={SCOPE_OPTIONS} defaultValue={['s1', 's2', 's3']} />
+                </Preview>
+                <Preview label="Required">
+                  <InputMultiselect id="m7" label="Reporting frameworks" required placeholder="Select frameworks…" options={FRAMEWORK_OPTIONS} />
+                </Preview>
               </div>
-              <Annotation>Click a card to open the dropdown. Selected options appear as chips — click × to remove individual items.</Annotation>
             </Section>
 
             <Section title="Layouts">
-              <Card label="Inline layout">
-                <div className="flex flex-col gap-4 max-w-lg">
+              <Preview label="Inline layout">
+                <div className="flex flex-col gap-4 w-full max-w-md">
                   <InputMultiselect id="il1" label="Frameworks" layout="inline" placeholder="Select…" options={FRAMEWORK_OPTIONS} />
+                  <InputMultiselect id="il2" label="Scopes"     layout="inline" placeholder="Select…" options={SCOPE_OPTIONS} helperText="Select all applicable scopes." />
                 </div>
-              </Card>
+              </Preview>
             </Section>
 
             <Section title="When to use">
               <UseList items={[
-                'When the user needs to select more than one option from a finite list.',
-                'Filtering by multiple categories simultaneously (frameworks, scopes, asset types).',
-                'When options are known upfront and the list is short enough to scan without search.',
+                'Selecting multiple options from a list — frameworks, scopes, categories, tags.',
+                'When users need to combine filters: "Show Scope 1 + Scope 2 + Scope 3."',
+                'When the full list of options is known and finite.',
+                'When selected items should remain visible as chips so users can review and remove them.',
               ]} />
             </Section>
 
             <Section title="When not to use">
               <DontUseList items={[
-                "Don't use when only one option can be chosen — use Select or Radio.",
-                "Don't use for >10 options that require search — use Search multiselect instead.",
-                "Don't use when all options should always be toggled — use a group of Checkboxes.",
-                "Don't use when the selected items need to be ordered or ranked.",
+                "Don't use when only one option can be selected — use Select.",
+                "Don't use for more than 10 options without search — use Search multiselect.",
+                "Don't use when the user needs to type a custom value — use Tag input.",
               ]} />
             </Section>
 
             <Section title="Do / Don't">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <DoCard>
-                  <div className="mb-3"><InputMultiselect id="do1" label="Emission scopes" placeholder="Select scopes to include…" options={SCOPE_OPTIONS} /></div>
-                  <p>Use a descriptive placeholder that explains what the user is selecting.</p>
+                  <div className="mb-4">
+                    <InputMultiselect id="do1" label="GHG scopes" options={SCOPE_OPTIONS} defaultValue={['s1']} />
+                  </div>
+                  <p>Pre-select a sensible default when one is almost always required — users can deselect if needed.</p>
                 </DoCard>
                 <DontCard>
-                  <div className="mb-3"><InputMultiselect id="dont1" label="Scopes" placeholder="Select…" options={SCOPE_OPTIONS} /></div>
-                  <p>Don't use generic placeholders — the user needs context to make the right selection.</p>
+                  <div className="mb-4">
+                    <InputMultiselect id="dont1" label="GHG scopes" options={SCOPE_OPTIONS} defaultValue={['s1','s2','s3']} />
+                  </div>
+                  <p>Don't pre-select all options — it implies everything is required and makes deliberate omission feel like an error.</p>
                 </DontCard>
               </div>
             </Section>
 
             <RelatedComponents items={[
-              { href: '/components/inputs/select', label: 'Select', description: 'Single option from a fixed list.' },
-              { href: '/components/inputs/search-multiselect', label: 'Search multiselect', description: 'Search + multi-select for large lists.' },
-              { href: '/components/inputs/checkbox', label: 'Checkbox', description: 'Always-visible options for ≤6 items.' },
+              { href: '/components/inputs/select',             label: 'Select',             description: 'Single option selection.'             },
+              { href: '/components/inputs/search-multiselect', label: 'Search multiselect', description: 'Search + select from large lists.'     },
+              { href: '/components/inputs/tag',                label: 'Tag input',          description: 'Free-form custom value entry as tags.' },
             ]} />
           </PageContent>
         </TabPanel>
 
+        {/* ── STYLE ───────────────────────────────────────────────────────── */}
         <TabPanel id="style">
           <PageContent>
             <Section title="Anatomy">
-              <Preview label="Trigger · Chips · Dropdown list · Checkboxes">
-                <InputMultiselect id="a1" label="Frameworks" defaultValue={['gri', 'tcfd']} options={FRAMEWORK_OPTIONS} />
+              <Preview label="Label · Trigger with chips · Chevron · Menu with checkboxes">
+                <InputMultiselect id="a1" label="GHG scopes" options={SCOPE_OPTIONS} defaultValue={['s1']} />
               </Preview>
+              <Annotation>Trigger matches InputText visually. Selected items render as blue chips inside the trigger with an × to remove. Menu items use 16 px checkboxes (br=4) — same style as the standalone Checkbox component.</Annotation>
             </Section>
-            <Section title="Chip colors">
-              <ColorRow label="Chip background"  hex="#DBEAFE" role="blue-100 — selected option chip" />
-              <ColorRow label="Chip text"        hex="#1D4ED8" role="blue-700" border />
-              <ColorRow label="Checkbox checked" hex="#1258F8" role="blue-600" border />
+
+            <Section title="Sizing">
+              <SpecTable rows={[
+                { property: 'Trigger min-height',  value: '32 px (min-h-[32px])',    token: 'Grows with chips' },
+                { property: 'Trigger padding',     value: '12 px left, 36 px right', token: 'pl-3 pr-9' },
+                { property: 'Trigger radius',      value: '4 px (rounded)',          token: '—' },
+                { property: 'Chip height',         value: '20 px (py-0.5)',          token: 'Inline with text' },
+                { property: 'Chip radius',         value: '4 px (rounded)',          token: '—' },
+                { property: 'Menu item height',    value: '24 px (h-6)',             token: 'Figma: 24 px' },
+                { property: 'Menu item padding',   value: '8 px horizontal (px-2)',  token: '—' },
+                { property: 'Menu item text',      value: '12 px / 400 (text-xs)',   token: 'Figma: 12 px w400' },
+                { property: 'Checkbox size',       value: '16×16 px (w-4 h-4)',      token: 'Figma: br=4' },
+                { property: 'Check icon',          value: '10 px (w-2.5 h-2.5)',     token: 'White on blue-600' },
+              ]} />
+            </Section>
+
+            <Section title="Colors">
+              <ColorRow label="Trigger border — default"   hex="#D7DAE0" role="grey-200" />
+              <ColorRow label="Trigger border — open"      hex="#1258F8" role="blue-600 — focus ring" border />
+              <ColorRow label="Chip background"            hex="#D9EAFF" role="sky-100 — matches selected item" border />
+              <ColorRow label="Chip text"                  hex="#1258F8" role="blue-600" border />
+              <ColorRow label="Checkbox — checked bg"      hex="#1258F8" role="blue-600" border />
+              <ColorRow label="Checkbox — unchecked border" hex="#D7DAE0" role="grey-200" border />
+              <ColorRow label="Menu item — hover bg"       hex="#F7F8F8" role="grey-50" border />
+              <ColorRow label="Menu item — disabled bg"    hex="#EDEEF1" role="grey-100" border />
             </Section>
           </PageContent>
         </TabPanel>
 
+        {/* ── CODE ────────────────────────────────────────────────────────── */}
         <TabPanel id="code">
           <PageContent>
-            <Section title="Controlled">
+            <Section title="Basic multiselect">
               <Preview label="Live preview">
                 <InputMultiselect id="c1" label="ESG frameworks" placeholder="Select frameworks…" options={FRAMEWORK_OPTIONS} />
               </Preview>
@@ -149,49 +177,62 @@ export default function MultiselectPage() {
   placeholder="Select frameworks…"
   options={[
     { value: 'gri',  label: 'GRI Standards' },
-    { value: 'tcfd', label: 'TCFD' },
-    { value: 'sasb', label: 'SASB' },
+    { value: 'tcfd', label: 'TCFD'          },
+    { value: 'sasb', label: 'SASB'          },
   ]}
-  onChange={values => console.log(values)}
 />`}</Code>
             </Section>
+
+            <Section title="Controlled">
+              <Code>{`const [values, setValues] = useState<string[]>([])
+
+<InputMultiselect
+  id="controlled"
+  label="GHG scopes"
+  value={values}
+  onChange={setValues}
+  options={SCOPE_OPTIONS}
+/>`}</Code>
+            </Section>
+
             <Section title="Props">
               <SpecTable rows={[
-                { property: 'label',        value: 'string',                                                            token: 'Optional' },
-                { property: 'required',     value: 'boolean',                                                           token: 'Adds * marker' },
-                { property: 'helperText',   value: 'string',                                                            token: 'Below control' },
-                { property: 'options',      value: 'Array<{ value, label }>',                                           token: 'Required' },
-                { property: 'value',        value: 'string[]',                                                          token: 'Controlled' },
-                { property: 'defaultValue', value: 'string[]',                                                          token: '[]' },
-                { property: 'placeholder',  value: 'string',                                                            token: 'Select options…' },
-                { property: 'state',        value: "'default' | 'error' | 'warning' | 'success' | 'disabled'",         token: 'default' },
-                { property: 'layout',       value: "'stacked' | 'inline'",                                              token: 'stacked' },
-                { property: 'onChange',     value: '(values: string[]) => void',                                        token: 'Optional' },
+                { property: 'label',        value: 'string',                                                    token: 'Optional' },
+                { property: 'required',     value: 'boolean',                                                   token: 'Adds * marker' },
+                { property: 'helperText',   value: 'string',                                                    token: 'Below trigger' },
+                { property: 'options',      value: 'Array<{ value, label, disabled? }>',                        token: 'Required' },
+                { property: 'placeholder',  value: 'string',                                                    token: 'Default: "Select…"' },
+                { property: 'value',        value: 'string[]',                                                  token: 'Controlled selected values' },
+                { property: 'defaultValue', value: 'string[]',                                                  token: 'Uncontrolled initial values' },
+                { property: 'onChange',     value: '(values: string[]) => void',                                token: 'Called on every change' },
+                { property: 'state',        value: "'default' | 'error' | 'warning' | 'success' | 'disabled'", token: 'Default: "default"' },
+                { property: 'layout',       value: "'stacked' | 'inline'",                                      token: 'Default: "stacked"' },
               ]} />
             </Section>
           </PageContent>
         </TabPanel>
 
+        {/* ── ACCESSIBILITY ───────────────────────────────────────────────── */}
         <TabPanel id="accessibility">
           <PageContent>
             <Section title="Keyboard">
               <div className="rounded-lg border border-grey-100 dark:border-grey-800 overflow-hidden bg-white dark:bg-grey-950">
-                <KeyRow keys={['Tab']}         action="Focus the trigger button." />
-                <KeyRow keys={['Enter/Space']} action="Open/close the dropdown." />
-                <KeyRow keys={['Tab']}         action="Navigate option buttons within the dropdown." />
-                <KeyRow keys={['Enter/Space']} action="Toggle the focused option." />
-                <KeyRow keys={['Escape']}      action="Close the dropdown." />
+                <KeyRow keys={['Tab']}           action="Move focus to the trigger." />
+                <KeyRow keys={['Space', 'Enter']} action="Toggle the dropdown open/closed." />
+                <KeyRow keys={['Escape']}         action="Close the menu without changing selections." />
+                <KeyRow keys={['Click']}          action="Toggle an option's checked state." />
               </div>
             </Section>
             <Section title="ARIA">
               <div className="rounded-lg border border-grey-100 dark:border-grey-800 overflow-hidden bg-white dark:bg-grey-950">
-                <A11yRow check="aria-haspopup">Trigger has aria-haspopup="listbox".</A11yRow>
-                <A11yRow check="aria-expanded">Reflects open/closed state.</A11yRow>
-                <A11yRow check="Chip remove button">Should have aria-label="Remove [option name]" for screen readers.</A11yRow>
+                <A11yRow check="role=combobox">Trigger has <code className="text-xs font-mono bg-grey-50 dark:bg-grey-900 px-1 py-0.5 rounded">role=&quot;combobox&quot;</code>, <code className="text-xs font-mono bg-grey-50 dark:bg-grey-900 px-1 py-0.5 rounded">aria-expanded</code>, and <code className="text-xs font-mono bg-grey-50 dark:bg-grey-900 px-1 py-0.5 rounded">aria-haspopup=&quot;listbox&quot;</code>.</A11yRow>
+                <A11yRow check="aria-multiselectable">Menu carries <code className="text-xs font-mono bg-grey-50 dark:bg-grey-900 px-1 py-0.5 rounded">aria-multiselectable=&quot;true&quot;</code> so screen readers announce multi-select capability.</A11yRow>
+                <A11yRow check="chip remove">Each chip × button has an <code className="text-xs font-mono bg-grey-50 dark:bg-grey-900 px-1 py-0.5 rounded">aria-label=&quot;Remove [label]&quot;</code> for screen reader users.</A11yRow>
               </div>
             </Section>
           </PageContent>
         </TabPanel>
+
       </ComponentTabs>
     </div>
   )

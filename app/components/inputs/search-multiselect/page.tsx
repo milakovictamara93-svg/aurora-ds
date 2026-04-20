@@ -21,15 +21,6 @@ const BUILDING_OPTIONS = [
   { value: 'b8', label: 'Skyline Retail Precinct' },
 ]
 
-function Card({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="rounded-lg border border-grey-100 dark:border-grey-800 overflow-hidden">
-      <div className="px-3 py-2 bg-grey-50 dark:bg-grey-900 border-b border-grey-100 dark:border-grey-800 text-xs font-semibold text-grey-600 dark:text-grey-400">{label}</div>
-      <div className="p-4 bg-white dark:bg-grey-950">{children}</div>
-    </div>
-  )
-}
-
 function Code({ children }: { children: string }) {
   return <pre className="mt-4 bg-grey-950 text-grey-100 text-sm font-mono rounded-lg p-4 overflow-x-auto leading-relaxed whitespace-pre">{children}</pre>
 }
@@ -48,35 +39,35 @@ export default function SearchMultiselectPage() {
         <TabPanel id="usage">
           <PageContent>
             <Section title="States">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Card label="Default — type to filter">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <Preview label="Default — type to filter">
                   <InputSearchMultiselect id="sm1" label="Buildings" placeholder="Search buildings…" options={BUILDING_OPTIONS} />
-                </Card>
-                <Card label="Filled (2 selected)">
+                </Preview>
+                <Preview label="Filled (2 selected)">
                   <InputSearchMultiselect id="sm2" label="Buildings" defaultValue={['b1', 'b3']} options={BUILDING_OPTIONS} />
-                </Card>
-                <Card label="Loading">
+                </Preview>
+                <Preview label="Loading">
                   <InputSearchMultiselect id="sm3" label="Buildings" state="loading" placeholder="Loading…" options={[]} helperText="Fetching results…" />
-                </Card>
-                <Card label="Error">
+                </Preview>
+                <Preview label="Error">
                   <InputSearchMultiselect id="sm4" label="Buildings" state="error" helperText="Select at least one building." placeholder="Search buildings…" options={BUILDING_OPTIONS} />
-                </Card>
-                <Card label="Warning">
+                </Preview>
+                <Preview label="Warning">
                   <InputSearchMultiselect id="sm5" label="Buildings" state="warning" helperText="Some buildings have incomplete data." defaultValue={['b2']} options={BUILDING_OPTIONS} />
-                </Card>
-                <Card label="Disabled">
+                </Preview>
+                <Preview label="Disabled">
                   <InputSearchMultiselect id="sm6" label="Buildings" state="disabled" defaultValue={['b1', 'b3']} options={BUILDING_OPTIONS} />
-                </Card>
+                </Preview>
               </div>
-              <Annotation>Type "inn" in the Default card to see the list filter to "Innovation Campus Block A/B".</Annotation>
+              <Annotation>Type "inn" in the Default preview to see the list filter to "Innovation Campus Block A/B".</Annotation>
             </Section>
 
             <Section title="Layouts">
-              <Card label="Inline layout">
+              <Preview label="Inline layout">
                 <div className="flex flex-col gap-4 max-w-xl">
                   <InputSearchMultiselect id="il1" label="Buildings" layout="inline" placeholder="Search…" options={BUILDING_OPTIONS} />
                 </div>
-              </Card>
+              </Preview>
             </Section>
 
             <Section title="When to use">

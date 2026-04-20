@@ -49,7 +49,7 @@ const SECTIONS: PaletteSection[] = [
           { name: 'Energy 200', hex: '#FFCACF', token: '--energy-200' },
           { name: 'Energy 300', hex: '#FF9FA8', token: '--energy-300' },
           { name: 'Energy 400', hex: '#FF697A', token: '--energy-400' },
-          { name: 'Energy 500', hex: '#FF455F', token: '--energy-500', textColor: 'light' },
+          { name: 'Energy 500', hex: '#FF455F', token: '--energy-500', textColor: 'light', base: true },
           { name: 'Energy 600', hex: '#ED113A', token: '--energy-600', textColor: 'light' },
           { name: 'Energy 700', hex: '#C80831', token: '--energy-700', textColor: 'light' },
           { name: 'Energy 800', hex: '#A80930', token: '--energy-800', textColor: 'light' },
@@ -63,7 +63,7 @@ const SECTIONS: PaletteSection[] = [
           { name: 'GHG 50',  hex: '#FFF7EB', token: '--ghg-50' },
           { name: 'GHG 100', hex: '#FFEAC6', token: '--ghg-100' },
           { name: 'GHG 200', hex: '#FFD188', token: '--ghg-200' },
-          { name: 'GHG 300', hex: '#FFB246', token: '--ghg-300' },
+          { name: 'GHG 300', hex: '#FFB246', token: '--ghg-300', base: true },
           { name: 'GHG 400', hex: '#FF9820', token: '--ghg-400' },
           { name: 'GHG 500', hex: '#F97307', token: '--ghg-500', textColor: 'light' },
           { name: 'GHG 600', hex: '#DD4F02', token: '--ghg-600', textColor: 'light' },
@@ -80,7 +80,7 @@ const SECTIONS: PaletteSection[] = [
           { name: 'Water 100', hex: '#CFFBFE', token: '--water-100' },
           { name: 'Water 200', hex: '#A5F5FC', token: '--water-200' },
           { name: 'Water 300', hex: '#67EBF9', token: '--water-300' },
-          { name: 'Water 400', hex: '#1FD7EE', token: '--water-400' },
+          { name: 'Water 400', hex: '#1FD7EE', token: '--water-400', base: true },
           { name: 'Water 500', hex: '#06BAD4', token: '--water-500', textColor: 'light' },
           { name: 'Water 600', hex: '#0895B2', token: '--water-600', textColor: 'light' },
           { name: 'Water 700', hex: '#0E7790', token: '--water-700', textColor: 'light' },
@@ -99,7 +99,7 @@ const SECTIONS: PaletteSection[] = [
           { name: 'Cert 400', hex: '#70A2EA', token: '--certifications-400' },
           { name: 'Cert 500', hex: '#4E81E3', token: '--certifications-500', textColor: 'light' },
           { name: 'Cert 600', hex: '#3964D7', token: '--certifications-600', textColor: 'light' },
-          { name: 'Cert 700', hex: '#2F4FC0', token: '--certifications-700', textColor: 'light' },
+          { name: 'Cert 700', hex: '#2F4FC0', token: '--certifications-700', textColor: 'light', base: true },
           { name: 'Cert 800', hex: '#2D43A0', token: '--certifications-800', textColor: 'light' },
           { name: 'Cert 900', hex: '#293B7F', token: '--certifications-900', textColor: 'light' },
           { name: 'Cert 950', hex: '#1D264E', token: '--certifications-950', textColor: 'light' },
@@ -114,7 +114,7 @@ const SECTIONS: PaletteSection[] = [
           { name: 'Eng 300', hex: '#F8C479', token: '--engagement-300' },
           { name: 'Eng 400', hex: '#F4A043', token: '--engagement-400' },
           { name: 'Eng 500', hex: '#F1841E', token: '--engagement-500', textColor: 'light' },
-          { name: 'Eng 600', hex: '#D76513', token: '--engagement-600', textColor: 'light' },
+          { name: 'Eng 600', hex: '#D76513', token: '--engagement-600', textColor: 'light', base: true },
           { name: 'Eng 700', hex: '#BB5113', token: '--engagement-700', textColor: 'light' },
           { name: 'Eng 800', hex: '#954017', token: '--engagement-800', textColor: 'light' },
           { name: 'Eng 900', hex: '#783616', token: '--engagement-900', textColor: 'light' },
@@ -128,7 +128,7 @@ const SECTIONS: PaletteSection[] = [
           { name: 'Risk 100', hex: '#D0FBE5', token: '--esg-risk-100' },
           { name: 'Risk 200', hex: '#A6F4D0', token: '--esg-risk-200' },
           { name: 'Risk 300', hex: '#6CE9B7', token: '--esg-risk-300' },
-          { name: 'Risk 400', hex: '#39D79D', token: '--esg-risk-400' },
+          { name: 'Risk 400', hex: '#39D79D', token: '--esg-risk-400', base: true },
           { name: 'Risk 500', hex: '#0DBC82', token: '--esg-risk-500', textColor: 'light' },
           { name: 'Risk 600', hex: '#03986A', token: '--esg-risk-600', textColor: 'light' },
           { name: 'Risk 700', hex: '#027A58', token: '--esg-risk-700', textColor: 'light' },
@@ -407,6 +407,41 @@ export default function ColorsPage() {
         ))}
       </div>
 
+      {/* ESG Aspect colors */}
+      <div className="mb-14">
+        <div className="mb-6">
+          <h2 className="text-2xl font-semibold text-token-primary">ESG Aspect colors</h2>
+          <p className="text-sm text-token-secondary mt-1">
+            Each ESG data category has a dedicated color spectrum. Always use the correct spectrum — never substitute or repurpose across categories.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3">
+          {[
+            { aspect: 'Energy',            hex: '#FF455F', token: '--energy-500',         textColor: 'light' as const, usage: 'Energy consumption & intensity data' },
+            { aspect: 'GHG',               hex: '#FFB246', token: '--ghg-300',            textColor: 'dark'  as const, usage: 'Greenhouse gas emissions & scopes' },
+            { aspect: 'Water',             hex: '#1FD7EE', token: '--water-400',           textColor: 'dark'  as const, usage: 'Water consumption & withdrawal' },
+            { aspect: 'Certifications',    hex: '#2F4FC0', token: '--certifications-700',  textColor: 'light' as const, usage: 'Green building certifications' },
+            { aspect: 'Tenant engagement', hex: '#D76513', token: '--engagement-600',      textColor: 'light' as const, usage: 'Tenant surveys & engagement scores' },
+            { aspect: 'ESG Risk',          hex: '#39D79D', token: '--esg-risk-400',        textColor: 'dark'  as const, usage: 'Portfolio ESG risk ratings' },
+            { aspect: 'Waste',             hex: '#65A289', token: '--waste-400',           textColor: 'light' as const, usage: 'Waste generation & diversion rates' },
+          ].map(({ aspect, hex, token, textColor, usage }) => (
+            <div key={aspect} className="flex flex-col gap-2">
+              <ColorSwatch
+                name={aspect}
+                hex={hex}
+                token={token}
+                textColor={textColor}
+                base
+                size="lg"
+                showWCAG={false}
+              />
+              <p className="text-xs text-token-muted leading-snug px-1">{usage}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Palette sections */}
       <div className="space-y-14">
         {SECTIONS.map(section => (
@@ -430,6 +465,7 @@ export default function ColorsPage() {
                         hex={c.hex}
                         token={c.token}
                         textColor={c.textColor}
+                        base={c.base}
                         showWCAG={false}
                       />
                     ))}

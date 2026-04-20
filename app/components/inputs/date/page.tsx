@@ -10,15 +10,6 @@ import {
 } from '@/app/components-lib/ui/ComponentTabs'
 import InputDate from '@/app/components-lib/ui/InputDate'
 
-function Card({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="rounded-lg border border-grey-100 dark:border-grey-800 overflow-hidden">
-      <div className="px-3 py-2 bg-grey-50 dark:bg-grey-900 border-b border-grey-100 dark:border-grey-800 text-xs font-semibold text-grey-600 dark:text-grey-400">{label}</div>
-      <div className="p-4 bg-white dark:bg-grey-950">{children}</div>
-    </div>
-  )
-}
-
 function Code({ children }: { children: string }) {
   return <pre className="mt-4 bg-grey-950 text-grey-100 text-sm font-mono rounded-lg p-4 overflow-x-auto leading-relaxed whitespace-pre">{children}</pre>
 }
@@ -27,8 +18,8 @@ export default function DateInputPage() {
   return (
     <div>
       <PageHeader
-        title="Date input"
-        description="Single date selection using the native browser date picker. Styled with a leading calendar icon to signal the field type clearly."
+        title="Date range"
+        description="A single trigger that opens a date range picker. The left panel lists preset shortcuts; the right panel has a month calendar for custom selection. Save and Cancel buttons confirm or discard the pending range."
         badge="Components"
       />
       <ComponentTabs>
@@ -37,90 +28,80 @@ export default function DateInputPage() {
         <TabPanel id="usage">
           <PageContent>
             <Section title="States">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Card label="Default">
-                  <InputDate id="d1" label="Report start date" required />
-                </Card>
-                <Card label="Filled">
-                  <InputDate id="d2" label="Audit date" defaultValue="2024-06-30" />
-                </Card>
-                <Card label="With helper text">
-                  <InputDate id="d3" label="Audit date" helperText="Must fall within the reporting period." />
-                </Card>
-                <Card label="Error">
-                  <InputDate id="d4" label="End date" state="error" helperText="End date must be after the start date." />
-                </Card>
-                <Card label="Warning">
-                  <InputDate id="d5" label="Data collection date" state="warning" defaultValue="2024-01-01" helperText="This date is outside the usual reporting window." />
-                </Card>
-                <Card label="Success">
-                  <InputDate id="d6" label="Verification date" state="success" defaultValue="2024-03-31" helperText="Date confirmed." />
-                </Card>
-                <Card label="Disabled">
-                  <InputDate id="d7" label="Lock date" disabled defaultValue="2024-12-31" />
-                </Card>
-                <Card label="Required">
-                  <InputDate id="d8" label="Reporting period start" required helperText="First day of the reporting year." />
-                </Card>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <Preview label="Default — empty">
+                  <InputDate id="d1" label="Reporting period" required />
+                </Preview>
+                <Preview label="With a committed range">
+                  <InputDate id="d2" label="Reporting period" defaultValue={{ start: '2024-01-01', end: '2024-03-31' }} />
+                </Preview>
+                <Preview label="With helper text">
+                  <InputDate id="d3" label="Audit period" helperText="Must fall within the current financial year." />
+                </Preview>
+                <Preview label="Error">
+                  <InputDate id="d4" label="Reporting period" state="error" helperText="Please select a valid date range." />
+                </Preview>
+                <Preview label="Warning">
+                  <InputDate id="d5" label="Data collection period" state="warning" helperText="This range spans multiple reporting years." />
+                </Preview>
+                <Preview label="Success">
+                  <InputDate id="d6" label="Verification period" state="success" defaultValue={{ start: '2024-01-01', end: '2024-12-31' }} helperText="Period confirmed." />
+                </Preview>
+                <Preview label="Disabled">
+                  <InputDate id="d7" label="Lock period" disabled defaultValue={{ start: '2024-01-01', end: '2024-12-31' }} />
+                </Preview>
+                <Preview label="Required">
+                  <InputDate id="d8" label="Reporting period" required helperText="Full financial year required." />
+                </Preview>
               </div>
             </Section>
 
             <Section title="Layouts">
-              <Card label="Inline layout">
-                <div className="flex flex-col gap-4 max-w-lg">
-                  <InputDate id="il1" label="Start date" layout="inline" />
-                  <InputDate id="il2" label="End date" layout="inline" state="error" helperText="Must be after start date." />
+              <Preview label="Inline layout">
+                <div className="flex flex-col gap-4 w-full max-w-lg">
+                  <InputDate id="il1" label="Period" layout="inline" />
+                  <InputDate id="il2" label="Audit range" layout="inline" state="error" helperText="Must be after the start date." />
                 </div>
-              </Card>
-            </Section>
-
-            <Section title="Date range pattern">
-              <Annotation>Use two separate Date inputs side by side for date ranges. Label them clearly as "Start date" and "End date".</Annotation>
-              <Card label="Date range — two inputs">
-                <div className="grid grid-cols-2 gap-4 max-w-sm">
-                  <InputDate id="r1" label="Start date" required />
-                  <InputDate id="r2" label="End date" required />
-                </div>
-              </Card>
+              </Preview>
             </Section>
 
             <Section title="When to use">
               <UseList items={[
-                'Selecting a single calendar date — report start/end, audit date, review date.',
-                'When the date is a specific day (not just a year or month).',
-                'Paired in groups of two to define a date range (start + end).',
-                'When the browser\'s native date picker is sufficient (no custom calendar needed).',
+                'Filtering data by a time period — report ranges, audit windows, comparison periods.',
+                'When preset shortcuts (Last 7 days, Last month, Current year) help users pick quickly.',
+                'Any ESG dashboard filter that spans a start and end date.',
+                'When both dates must be confirmed together before applying.',
               ]} />
             </Section>
 
             <Section title="When not to use">
               <DontUseList items={[
+                "Don't use for a single date — use a standalone date input or Select.",
                 "Don't use for year-only or month-only selection — use a Select instead.",
-                "Don't use when the user needs to see a visual calendar for context — consider a custom date picker component.",
-                "Don't use a single date input for ranges — use two clearly labelled date inputs.",
-                "Don't use for relative dates like 'in 30 days' — use a Select or Text input.",
+                "Don't use for relative durations like 'in 30 days' — use a Select or Text input.",
               ]} />
             </Section>
 
             <Section title="Do / Don't">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <DoCard>
-                  <div className="mb-3 grid grid-cols-2 gap-3">
-                    <InputDate id="do1" label="Start date" required />
-                    <InputDate id="do2" label="End date" required />
+                  <div className="mb-3">
+                    <InputDate id="do1" label="Reporting period" required defaultValue={{ start: '2024-01-01', end: '2024-03-31' }} />
                   </div>
-                  <p>Use two clearly labelled date inputs for date ranges.</p>
+                  <p>Label the field clearly so users understand the range that is expected.</p>
                 </DoCard>
                 <DontCard>
-                  <div className="mb-3"><InputDate id="dont1" label="Date range" /></div>
-                  <p>Don't use a single date input and expect the user to enter a range manually.</p>
+                  <div className="mb-3">
+                    <InputDate id="dont1" label="Date" />
+                  </div>
+                  <p>Don't use a vague label — users should know whether they're picking a report period, audit range, etc.</p>
                 </DontCard>
               </div>
             </Section>
 
             <RelatedComponents items={[
-              { href: '/components/inputs/text', label: 'Text input', description: 'For year-only or month-year inputs.' },
-              { href: '/components/inputs/select', label: 'Select', description: 'For choosing from a defined list of dates or periods.' },
+              { href: '/components/inputs/text',   label: 'Text input', description: 'For year-only or month-year inputs.' },
+              { href: '/components/inputs/select', label: 'Select',     description: 'For choosing from a defined list of periods.' },
             ]} />
           </PageContent>
         </TabPanel>
@@ -128,62 +109,92 @@ export default function DateInputPage() {
         <TabPanel id="style">
           <PageContent>
             <Section title="Anatomy">
-              <Preview label="Calendar icon · Native date input · State indicator">
-                <div className="flex flex-col gap-4 max-w-xs">
-                  <InputDate id="a1" label="Label" />
-                  <InputDate id="a2" label="Label" state="error" helperText="Error message" />
-                </div>
+              <Preview label="Calendar icon · Trigger · Clear × · Popover with presets + calendar + actions">
+                <InputDate id="a1" label="Reporting period" defaultValue={{ start: '2024-01-01', end: '2024-03-31' }} />
               </Preview>
-              <Annotation>The calendar icon is a visual cue only. The native browser date picker opens when the user clicks the input area to the right of the icon.</Annotation>
+              <Annotation>Trigger is 32 px tall with a leading calendar icon. When a range is committed a × clears it. The popover shows preset shortcuts (left, 192 px) and a calendar grid (right, 264 px). Selected range cells have a sky-100 (#d9eaff) background; start/end dates have a blue-600 fill. Save is only enabled when both dates are selected.</Annotation>
             </Section>
+
             <Section title="Sizing">
               <SpecTable rows={[
-                { property: 'Height',       value: '32px (h-8)',    token: '—' },
-                { property: 'Left padding', value: '32px (pl-8)',   token: 'Accommodates calendar icon' },
-                { property: 'Right padding',value: '12px (pr-3)',   token: '—' },
-                { property: 'Icon size',    value: '16px (w-4 h-4)', token: '—' },
+                { property: 'Trigger height',       value: '32 px (h-8)',           token: 'Matches InputText' },
+                { property: 'Trigger left padding',  value: '32 px (pl-8)',          token: 'Clears calendar icon' },
+                { property: 'Calendar icon',         value: '16 px (w-4 h-4)',       token: '—' },
+                { property: 'Preset item height',    value: '32 px (h-8)',           token: '—' },
+                { property: 'Preset panel width',    value: '192 px (w-48)',         token: '—' },
+                { property: 'Calendar panel width',  value: '264 px',               token: '—' },
+                { property: 'Date cell',             value: '32 × 32 px (w-8 h-8)', token: 'Figma: br=4' },
+                { property: 'Day header text',       value: '11 px / 500',           token: 'Mo Tu We Th Fr Sa Su' },
+                { property: 'Date cell text',        value: '12 px (text-xs)',        token: '—' },
+                { property: 'Action button height',  value: '28 px (h-7)',           token: 'Save / Cancel' },
               ]} />
             </Section>
+
             <Section title="Colors">
-              <ColorRow label="Calendar icon — default" hex="#8C96A4" role="grey-400" />
-              <ColorRow label="Calendar icon — disabled" hex="#B4BAC5" role="grey-300" border />
-              <ColorRow label="Border — error"           hex="#DC2626" role="error-600" border />
+              <ColorRow label="Trigger border — default"     hex="#D7DAE0" role="grey-200 — matches InputText" />
+              <ColorRow label="Trigger border — open"        hex="#1258F8" role="blue-600 focus ring" border />
+              <ColorRow label="Calendar icon / placeholder"  hex="#8C96A4" role="grey-400" border />
+              <ColorRow label="Range start / end cell"       hex="#1258F8" role="blue-600 filled" border />
+              <ColorRow label="In-range cell bg"             hex="#D9EAFF" role="sky-100" border />
+              <ColorRow label="Today outline"                hex="#1258F8" role="blue-600 border" border />
+              <ColorRow label="Preset selected bg"           hex="#D9EAFF" role="sky-100" border />
+              <ColorRow label="Hover bg"                     hex="#F7F8F8" role="grey-50" border />
+              <ColorRow label="Other-month text"             hex="#8C96A4" role="grey-400" border />
             </Section>
           </PageContent>
         </TabPanel>
 
         <TabPanel id="code">
           <PageContent>
-            <Section title="Basic date input">
-              <Preview label="Live preview"><InputDate id="c1" label="Report start date" required /></Preview>
+            <Section title="Basic usage">
+              <Preview label="Live preview">
+                <InputDate id="c1" label="Reporting period" required />
+              </Preview>
               <Code>{`import InputDate from '@/components-lib/ui/InputDate'
 
 <InputDate
-  id="start-date"
-  label="Report start date"
+  id="period"
+  label="Reporting period"
   required
 />`}</Code>
             </Section>
-            <Section title="Date range">
-              <Preview label="Live preview">
-                <div className="grid grid-cols-2 gap-4 max-w-sm">
-                  <InputDate id="c2" label="Start date" required />
-                  <InputDate id="c3" label="End date" required />
-                </div>
-              </Preview>
-              <Code>{`<div className="grid grid-cols-2 gap-4">
-  <InputDate id="start" label="Start date" required />
-  <InputDate id="end"   label="End date"   required />
-</div>`}</Code>
+
+            <Section title="Controlled">
+              <Code>{`import { useState } from 'react'
+import InputDate, { DateRange } from '@/components-lib/ui/InputDate'
+
+const [range, setRange] = useState<DateRange | null>(null)
+
+<InputDate
+  id="period"
+  label="Reporting period"
+  value={range}
+  onChange={setRange}
+/>`}</Code>
             </Section>
+
+            <Section title="With a default range">
+              <Preview label="Live preview">
+                <InputDate id="c2" label="Reporting period" defaultValue={{ start: '2024-01-01', end: '2024-03-31' }} />
+              </Preview>
+              <Code>{`<InputDate
+  id="q1"
+  label="Reporting period"
+  defaultValue={{ start: '2024-01-01', end: '2024-03-31' }}
+/>`}</Code>
+            </Section>
+
             <Section title="Props">
               <SpecTable rows={[
-                { property: 'label',      value: 'string',                                                          token: 'Optional' },
-                { property: 'required',   value: 'boolean',                                                         token: 'Adds * marker' },
-                { property: 'helperText', value: 'string',                                                          token: 'Below input' },
-                { property: 'state',      value: "'default' | 'error' | 'warning' | 'success' | 'disabled'",       token: 'default' },
-                { property: 'layout',     value: "'stacked' | 'inline'",                                            token: 'stacked' },
-                { property: '...rest',    value: 'HTMLInputElement attrs',                                           token: 'Forwarded' },
+                { property: 'label',        value: 'string',                                                    token: 'Optional' },
+                { property: 'required',     value: 'boolean',                                                   token: 'Adds * marker' },
+                { property: 'helperText',   value: 'string',                                                    token: 'Below trigger' },
+                { property: 'value',        value: 'DateRange | null',                                          token: 'Controlled — { start, end } YYYY-MM-DD' },
+                { property: 'defaultValue', value: 'DateRange',                                                 token: 'Uncontrolled initial range' },
+                { property: 'onChange',     value: '(value: DateRange | null) => void',                         token: 'Called on Save' },
+                { property: 'state',        value: "'default' | 'error' | 'warning' | 'success' | 'disabled'", token: 'Default: "default"' },
+                { property: 'layout',       value: "'stacked' | 'inline'",                                      token: 'Default: "stacked"' },
+                { property: 'disabled',     value: 'boolean',                                                   token: 'Shorthand for state="disabled"' },
               ]} />
             </Section>
           </PageContent>
@@ -193,18 +204,20 @@ export default function DateInputPage() {
           <PageContent>
             <Section title="Keyboard">
               <div className="rounded-lg border border-grey-100 dark:border-grey-800 overflow-hidden bg-white dark:bg-grey-950">
-                <KeyRow keys={['Tab']}         action="Focus the date input." />
-                <KeyRow keys={['Enter/Space']} action="Open the native date picker." />
-                <KeyRow keys={['↑ / ↓']}       action="Increment/decrement the focused date segment." />
-                <KeyRow keys={['← / →']}       action="Move between day, month, year segments." />
+                <KeyRow keys={['Tab']}           action="Focus the date range trigger." />
+                <KeyRow keys={['Enter', 'Space']} action="Open / close the calendar popover." />
+                <KeyRow keys={['Tab']}           action="Move between presets, month nav buttons, date cells, and action buttons inside the popover." />
+                <KeyRow keys={['Enter']}         action="Select a date cell, preset, or action button." />
+                <KeyRow keys={['Escape']}        action="Close the popover without saving (same as Cancel)." />
               </div>
             </Section>
             <Section title="ARIA">
               <div className="rounded-lg border border-grey-100 dark:border-grey-800 overflow-hidden bg-white dark:bg-grey-950">
-                <A11yRow check="type='date'">Announces as a date input to screen readers with full keyboard support built in.</A11yRow>
-                <A11yRow check="Calendar icon">Marked pointer-events-none and aria-hidden — purely decorative.</A11yRow>
-                <A11yRow check="aria-invalid">Applied automatically in error state.</A11yRow>
-                <A11yRow check="min / max">Use min and max attributes to constrain the valid date range. Browsers will block out-of-range dates natively.</A11yRow>
+                <A11yRow check="role=dialog">Calendar popover carries <code className="text-xs font-mono bg-grey-50 dark:bg-grey-900 px-1 py-0.5 rounded">role=&quot;dialog&quot;</code> and <code className="text-xs font-mono bg-grey-50 dark:bg-grey-900 px-1 py-0.5 rounded">aria-label=&quot;Date range picker&quot;</code>.</A11yRow>
+                <A11yRow check="aria-expanded">Trigger has <code className="text-xs font-mono bg-grey-50 dark:bg-grey-900 px-1 py-0.5 rounded">aria-expanded</code> reflecting open state.</A11yRow>
+                <A11yRow check="aria-pressed">Each date cell has <code className="text-xs font-mono bg-grey-50 dark:bg-grey-900 px-1 py-0.5 rounded">aria-pressed</code> when it is the start or end of the selected range.</A11yRow>
+                <A11yRow check="aria-label on cells">Each date cell announces the full date — "15 June 2024" — via <code className="text-xs font-mono bg-grey-50 dark:bg-grey-900 px-1 py-0.5 rounded">aria-label</code>.</A11yRow>
+                <A11yRow check="Save disabled">Save button has <code className="text-xs font-mono bg-grey-50 dark:bg-grey-900 px-1 py-0.5 rounded">disabled</code> until both start and end dates are selected, preventing incomplete submissions.</A11yRow>
               </div>
             </Section>
           </PageContent>
