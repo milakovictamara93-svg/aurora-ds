@@ -3,7 +3,10 @@
 import { useState, useId } from 'react'
 import { XMarkIcon } from '@heroicons/react/20/solid'
 import clsx from 'clsx'
-import type { TooltipPlacement } from './Tooltip'
+export type AdvancedTooltipPlacement =
+  | 'top' | 'top-start' | 'top-end'
+  | 'bottom' | 'bottom-start' | 'bottom-end'
+  | 'left' | 'right'
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -47,7 +50,7 @@ export interface AdvancedTooltipProps {
   /** Called when the close button is clicked */
   onClose?: () => void
   /** Which side of the trigger the tooltip appears on */
-  placement?: TooltipPlacement
+  placement?: AdvancedTooltipPlacement
   /** Force the tooltip open — useful for documentation previews */
   open?: boolean
   /** The element that triggers the tooltip */
@@ -58,7 +61,7 @@ export interface AdvancedTooltipProps {
 
 // ── Positioning maps (mirrors Tooltip.tsx) ─────────────────────────────────────
 
-const PANEL: Record<TooltipPlacement, string> = {
+const PANEL: Record<AdvancedTooltipPlacement, string> = {
   'top':           'bottom-full left-1/2 -translate-x-1/2 mb-2',
   'top-start':     'bottom-full left-0 mb-2',
   'top-end':       'bottom-full right-0 mb-2',
@@ -69,7 +72,7 @@ const PANEL: Record<TooltipPlacement, string> = {
   'right':         'left-full top-1/2 -translate-y-1/2 ml-2',
 }
 
-const ARROW: Record<TooltipPlacement, string> = {
+const ARROW: Record<AdvancedTooltipPlacement, string> = {
   'top':           'bottom-[-5px] left-1/2 -translate-x-1/2 border-b border-r',
   'top-start':     'bottom-[-5px] left-3                     border-b border-r',
   'top-end':       'bottom-[-5px] right-3                    border-b border-r',
