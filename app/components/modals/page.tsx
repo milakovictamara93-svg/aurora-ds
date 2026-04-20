@@ -30,7 +30,7 @@ function ModalShell({
   return (
     <div className={`${width} bg-white dark:bg-[#111827] rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] shadow-level-3 overflow-hidden`}>
       {/* Header */}
-      <div className="flex items-start justify-between px-6 pt-5 pb-4 border-b border-[#EDEEF1] dark:border-[#1F2430]">
+      <div className="flex items-start justify-between px-6 pt-5 pb-4">
         <div>
           {isDrawer && (
             <div className="mb-3 w-5 h-5 text-[#505867] dark:text-[#9CA3AF] text-[13px] font-mono">|→</div>
@@ -58,7 +58,7 @@ function ModalShell({
       )}
 
       {/* Footer */}
-      <div className="flex items-center justify-between px-6 py-4 border-t border-[#EDEEF1] dark:border-[#1F2430]">
+      <div className="flex items-center justify-between px-6 py-4">
         <span className="text-[13px] font-medium text-error-600">Button</span>
         <div className="flex items-center gap-2">
           <div className="h-8 px-3 flex items-center rounded border border-[#D7DAE0] dark:border-[#374151]">

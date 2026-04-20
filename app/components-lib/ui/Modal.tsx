@@ -103,7 +103,7 @@ export default function Modal({
       >
         {/* Header */}
         <div className={[
-          'flex items-start justify-between shrink-0 border-b border-[#EDEEF1] dark:border-[#1F2430]',
+          'flex items-start justify-between shrink-0',
           isFullscreen ? 'px-6 py-4' : 'px-6 pt-5 pb-4',
         ].join(' ')}>
           <div className="flex flex-col gap-0.5">
@@ -155,7 +155,7 @@ export default function Modal({
         )}
 
         {/* Footer */}
-        <div className="shrink-0 flex items-center justify-between px-6 py-4 border-t border-[#EDEEF1] dark:border-[#1F2430]">
+        <div className="shrink-0 flex items-center justify-between px-6 py-4">
           {/* Destructive left */}
           <div>
             {destructiveLabel && (
