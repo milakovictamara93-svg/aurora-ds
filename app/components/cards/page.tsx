@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import PageHeader from '@/app/components-lib/ui/PageHeader'
 import {
   ComponentTabs, TabBar, TabPanel,
@@ -91,6 +92,207 @@ function Code({ children }: { children: string }) {
     <pre className="mt-4 bg-grey-950 text-grey-100 text-sm font-mono rounded-lg p-4 overflow-x-auto leading-relaxed whitespace-pre">
       {children}
     </pre>
+  )
+}
+
+// ── Asset card drill-down demo ────────────────────────────────────────────────
+
+const DRILL_ASSETS = [
+  {
+    id: '1', name: '180 George St',  address: 'Sydney · Office',   eui: 142,
+    metrics: [
+      { label: 'EUI (actual)',      value: '142 kWh/m²/yr' },
+      { label: 'EUI (target)',      value: '130 kWh/m²/yr' },
+      { label: 'Total consumption', value: '2,613 MWh' },
+      { label: 'Gross floor area',  value: '18,400 m²' },
+    ],
+    quality: [
+      { label: 'Data Readiness',   pct: 88,    status: 'error'   as const, onImprove: () => {} },
+      { label: 'Data Coverage',    pct: 80.91, status: 'warning' as const, onImprove: () => {} },
+      { label: 'Data Reliability', pct: 60,    status: 'warning' as const, onImprove: () => {} },
+    ],
+    bar: [
+      { color: '#d76513', pct: 16 }, { color: '#22C55E', pct: 25 },
+      { color: '#ffb246', pct: 25 }, { color: '#ed113a', pct: 19 }, { color: '#2295FF', pct: 15 },
+    ],
+  },
+  {
+    id: '2', name: '1 Bligh St',     address: 'Sydney · Office',   eui: 168,
+    metrics: [
+      { label: 'EUI (actual)',      value: '168 kWh/m²/yr' },
+      { label: 'EUI (target)',      value: '145 kWh/m²/yr' },
+      { label: 'Total consumption', value: '1,764 MWh' },
+      { label: 'Gross floor area',  value: '10,500 m²' },
+    ],
+    quality: [
+      { label: 'Data Readiness',   pct: 72, status: 'warning' as const, onImprove: () => {} },
+      { label: 'Data Coverage',    pct: 65, status: 'warning' as const, onImprove: () => {} },
+      { label: 'Data Reliability', pct: 50, status: 'error'   as const, onImprove: () => {} },
+    ],
+    bar: [
+      { color: '#d76513', pct: 20 }, { color: '#22C55E', pct: 18 },
+      { color: '#ffb246', pct: 30 }, { color: '#ed113a', pct: 22 }, { color: '#2295FF', pct: 10 },
+    ],
+  },
+  {
+    id: '3', name: 'Collins Square', address: 'Melbourne · Office', eui: 124,
+    metrics: [
+      { label: 'EUI (actual)',      value: '124 kWh/m²/yr' },
+      { label: 'EUI (target)',      value: '120 kWh/m²/yr' },
+      { label: 'Total consumption', value: '3,100 MWh' },
+      { label: 'Gross floor area',  value: '25,000 m²' },
+    ],
+    quality: [
+      { label: 'Data Readiness',   pct: 95, status: 'success' as const },
+      { label: 'Data Coverage',    pct: 91, status: 'success' as const },
+      { label: 'Data Reliability', pct: 88, status: 'success' as const },
+    ],
+    bar: [
+      { color: '#d76513', pct: 10 }, { color: '#22C55E', pct: 35 },
+      { color: '#ffb246', pct: 20 }, { color: '#ed113a', pct: 15 }, { color: '#2295FF', pct: 20 },
+    ],
+  },
+  {
+    id: '4', name: '333 George St',  address: 'Sydney · Retail',    eui: 195,
+    metrics: [
+      { label: 'EUI (actual)',      value: '195 kWh/m²/yr' },
+      { label: 'EUI (target)',      value: '160 kWh/m²/yr' },
+      { label: 'Total consumption', value: '4,290 MWh' },
+      { label: 'Gross floor area',  value: '22,000 m²' },
+    ],
+    quality: [
+      { label: 'Data Readiness',   pct: 55, status: 'error'   as const, onImprove: () => {} },
+      { label: 'Data Coverage',    pct: 48, status: 'error'   as const, onImprove: () => {} },
+      { label: 'Data Reliability', pct: 70, status: 'warning' as const, onImprove: () => {} },
+    ],
+    bar: [
+      { color: '#d76513', pct: 30 }, { color: '#22C55E', pct: 10 },
+      { color: '#ffb246', pct: 15 }, { color: '#ed113a', pct: 35 }, { color: '#2295FF', pct: 10 },
+    ],
+  },
+  {
+    id: '5', name: '60 Martin Pl',   address: 'Sydney · Office',    eui: 110,
+    metrics: [
+      { label: 'EUI (actual)',      value: '110 kWh/m²/yr' },
+      { label: 'EUI (target)',      value: '100 kWh/m²/yr' },
+      { label: 'Total consumption', value: '990 MWh' },
+      { label: 'Gross floor area',  value: '9,000 m²' },
+    ],
+    quality: [
+      { label: 'Data Readiness',   pct: 98, status: 'success' as const },
+      { label: 'Data Coverage',    pct: 95, status: 'success' as const },
+      { label: 'Data Reliability', pct: 92, status: 'success' as const },
+    ],
+    bar: [
+      { color: '#d76513', pct: 8 },  { color: '#22C55E', pct: 40 },
+      { color: '#ffb246', pct: 18 }, { color: '#ed113a', pct: 12 }, { color: '#2295FF', pct: 22 },
+    ],
+  },
+  {
+    id: '6', name: '8 Chifley Sq',   address: 'Sydney · Office',    eui: 138,
+    metrics: [
+      { label: 'EUI (actual)',      value: '138 kWh/m²/yr' },
+      { label: 'EUI (target)',      value: '125 kWh/m²/yr' },
+      { label: 'Total consumption', value: '1,518 MWh' },
+      { label: 'Gross floor area',  value: '11,000 m²' },
+    ],
+    quality: [
+      { label: 'Data Readiness',   pct: 82, status: 'warning' as const, onImprove: () => {} },
+      { label: 'Data Coverage',    pct: 78, status: 'warning' as const, onImprove: () => {} },
+      { label: 'Data Reliability', pct: 85, status: 'success' as const },
+    ],
+    bar: [
+      { color: '#d76513', pct: 14 }, { color: '#22C55E', pct: 28 },
+      { color: '#ffb246', pct: 22 }, { color: '#ed113a', pct: 18 }, { color: '#2295FF', pct: 18 },
+    ],
+  },
+]
+
+const MAX_EUI = 220
+
+function DrilldownDemo() {
+  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const asset = DRILL_ASSETS.find(a => a.id === selectedId) ?? null
+
+  return (
+    <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] overflow-hidden">
+      {/* Header */}
+      <div className="flex items-center justify-between px-4 py-3 border-b border-[#EDEEF1] dark:border-[#1F2430]">
+        <div className="flex items-baseline gap-2">
+          <span className="text-[14px] font-semibold text-[#111827] dark:text-white">Energy use intensity</span>
+          <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF]">kWh/m²/yr</span>
+        </div>
+        <div className="flex items-center gap-3 text-[11px] text-[#505867] dark:text-[#9CA3AF]">
+          <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-sm bg-[#1258F8]" />Energy use intensity</div>
+          <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-sm bg-[#9CA3AF]" />Missing</div>
+        </div>
+      </div>
+
+      {/* Body */}
+      <div className="flex p-4 min-h-[280px]">
+        {/* Asset card panel */}
+        <div className={['shrink-0 overflow-hidden transition-all duration-300 ease-in-out', asset ? 'w-[240px] mr-4 opacity-100' : 'w-0 opacity-0'].join(' ')}>
+          {asset && (
+            <AssetCard
+              name={asset.name}
+              address={asset.address}
+              metrics={asset.metrics}
+              quality={asset.quality}
+              bar={asset.bar}
+              footerLabel="See asset details"
+              onFooterClick={() => {}}
+              onClose={() => setSelectedId(null)}
+            />
+          )}
+        </div>
+
+        {/* Chart */}
+        <div className="flex-1 min-w-0 flex flex-col justify-between">
+          <div className="flex gap-2 h-44">
+            <div className="flex flex-col justify-between pb-5 text-[10px] text-[#9CA3AF] text-right w-8 shrink-0">
+              <span>200</span><span>150</span><span>100</span><span>50</span><span>0</span>
+            </div>
+            <div className="flex-1 relative">
+              {[0, 0.25, 0.5, 0.75, 1].map((f, i) => (
+                <div key={i} className="absolute left-0 right-0 border-t border-dashed border-[#EDEEF1] dark:border-[#1F2430]" style={{ bottom: `${f * 100}%` }} />
+              ))}
+              <div className="absolute inset-0 flex items-end gap-1 pb-5">
+                {DRILL_ASSETS.map((a) => {
+                  const isSelected = selectedId === a.id
+                  const isDimmed   = selectedId !== null && !isSelected
+                  return (
+                    <button
+                      key={a.id}
+                      type="button"
+                      onClick={() => setSelectedId(prev => prev === a.id ? null : a.id)}
+                      aria-pressed={isSelected}
+                      aria-label={`${a.name}: ${a.eui} kWh/m²/yr`}
+                      className={['flex-1 rounded-t-sm transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1258F8]', isSelected ? 'bg-[#FF455F]' : 'bg-[#1258F8]', isDimmed ? 'opacity-30' : 'opacity-100 hover:opacity-80'].join(' ')}
+                      style={{ height: `${(a.eui / MAX_EUI) * 100}%` }}
+                    />
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+          <div className="flex gap-1 pl-10 mt-1">
+            {DRILL_ASSETS.map((a) => (
+              <div key={a.id} className="flex-1 text-center">
+                <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF] leading-tight block truncate px-0.5">
+                  {a.name.replace(' St', '').replace(' Sq', '').replace(' Pl', '')}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="px-4 pb-3">
+        <p className="text-[11px] text-[#9CA3AF] dark:text-[#505867]">
+          {selectedId ? 'Click the same bar again or × to deselect.' : '↑ Click any bar to reveal that asset\'s card.'}
+        </p>
+      </div>
+    </div>
   )
 }
 
@@ -317,6 +519,33 @@ export default function CardsPage() {
                     className="w-72"
                   />
                 </PreviewBox>
+              </div>
+            </Section>
+
+            {/* ── Drill-down interaction ───────────────────────────────────── */}
+            <Section title="Asset card — drill-down interaction">
+              <UseList items={[
+                'Place the AssetCard panel to the left of the chart when a bar or data point is clicked.',
+                'The chart reflows to fill the remaining space — no page navigation needed.',
+                'Clicking the same bar again, or pressing ×, dismisses the card and restores full-width.',
+              ]} />
+              <div className="mt-4">
+                <DrilldownDemo />
+              </div>
+              <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {[
+                  { step: '1', title: 'Default state',  body: 'Full-width chart. All bars use the metric color.' },
+                  { step: '2', title: 'Bar clicked',    body: 'AssetCard slides in (240 px). Selected bar highlights; others dim to 30%.' },
+                  { step: '3', title: 'Card dismissed', body: 'User presses × or re-clicks the bar. Card slides out, chart restores.' },
+                ].map(({ step, title, body }) => (
+                  <div key={step} className="flex gap-3 p-4 rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-[#F7F8F8] dark:bg-[#0D1117]">
+                    <span className="w-5 h-5 rounded-full bg-[#1258F8] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">{step}</span>
+                    <div>
+                      <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-0.5">{title}</p>
+                      <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45]">{body}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </Section>
 
