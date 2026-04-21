@@ -14,6 +14,7 @@ import {
   FormCard,
   DataVizCard,
   OverviewCard,
+  AssetCard,
 } from '@/app/components-lib/ui/Card'
 
 // ── Helper components for slot content ───────────────────────────────────────
@@ -99,7 +100,7 @@ export default function CardsPage() {
     <div>
       <PageHeader
         title="Cards"
-        description="Surface containers that group related content into scannable units. Five families: Simple, Standard, Form, Data viz, and Overview."
+        description="Surface containers that group related content into scannable units. Six families: Simple, Standard, Form, Data viz, Overview, and Asset."
         badge="Components"
       />
 
@@ -258,6 +259,64 @@ export default function CardsPage() {
                   statusLabel="Incomplete"
                   defaultExpanded={false}
                 />
+              </div>
+            </Section>
+
+            {/* ── Asset card ───────────────────────────────────────────────── */}
+            <Section title="Asset card">
+              <UseList items={[
+                'ESG-specific pattern for showing a single asset\'s key metrics inline.',
+                'Name + address header, key-value metric rows, optional data quality section with status tags and Improve actions.',
+                'Optional stacked bar and full-width CTA button at the bottom.',
+              ]} />
+              <div className="mt-4">
+                <PreviewBox label="Performance details variant">
+                  <AssetCard
+                    name="180 George St"
+                    address="Sydney · Office"
+                    metrics={[
+                      { label: 'EUI (actual)',          value: '142 kWh/m²/yr' },
+                      { label: 'EUI (estimated)',       value: '138 kWh/m²/yr' },
+                      { label: 'Property type',        value: 'Office' },
+                      { label: 'Gross floor area',     value: '18,400 m²' },
+                      { label: 'Total consumption',    value: '2,613 MWh' },
+                    ]}
+                    footerLabel="See asset details"
+                    onFooterClick={() => {}}
+                    onClose={() => {}}
+                    className="w-72"
+                  />
+                </PreviewBox>
+              </div>
+              <div className="mt-4">
+                <PreviewBox label="Data quality variant">
+                  <AssetCard
+                    name="1 Bligh St"
+                    address="Sydney · Office"
+                    metrics={[
+                      { label: 'Total gross floor area', value: <>12,400 <span className="text-[#505867] font-normal">m²</span></> },
+                      { label: 'Energy use intensity',   value: <>142 <span className="text-[#505867] font-normal">kWh/m²/yr</span></> },
+                      { label: 'Total consumption',      value: <>1,764 <span className="text-[#505867] font-normal">MWh</span></> },
+                      { label: 'Meters & Consumption',   value: '4 / 6' },
+                    ]}
+                    quality={[
+                      { label: 'Data Readiness', pct: 88,    status: 'error',   onImprove: () => {} },
+                      { label: 'Data Coverage',  pct: 80.91, status: 'warning', onImprove: () => {} },
+                      { label: 'Data Reliability', pct: 60,  status: 'warning', onImprove: () => {} },
+                    ]}
+                    bar={[
+                      { color: '#d76513', pct: 16 },
+                      { color: '#22C55E', pct: 25 },
+                      { color: '#ffb246', pct: 25 },
+                      { color: '#ed113a', pct: 19 },
+                      { color: '#2295FF', pct: 15 },
+                    ]}
+                    footerLabel="See asset details"
+                    onFooterClick={() => {}}
+                    onClose={() => {}}
+                    className="w-72"
+                  />
+                </PreviewBox>
               </div>
             </Section>
 

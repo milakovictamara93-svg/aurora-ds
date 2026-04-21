@@ -2,8 +2,9 @@
 
 import { useState } from 'react'
 import clsx from 'clsx'
-import { EllipsisVerticalIcon, ChevronUpIcon, ChevronDownIcon, MapPinIcon, BuildingOffice2Icon, PencilSquareIcon } from '@heroicons/react/16/solid'
+import { EllipsisVerticalIcon, ChevronUpIcon, ChevronDownIcon, MapPinIcon, BuildingOffice2Icon, XMarkIcon, ArrowUpRightIcon } from '@heroicons/react/16/solid'
 import AuroraIcon from '@/app/components-lib/ui/AuroraIcon'
+import Tag from '@/app/components-lib/ui/Tag'
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 // Figma: Card — node 1384:17076
@@ -411,6 +412,165 @@ export function OverviewCard({
           )}
         </div>
       )}
+    </div>
+  )
+}
+
+// ── Card / Asset ──────────────────────────────────────────────────────────────
+// ESG asset detail card: name + address header, key-value metrics,
+// optional data quality section (tags + Improve links), stacked bar, CTA.
+
+export type AssetQualityStatus = 'success' | 'warning' | 'error'
+
+export interface AssetMetricRow {
+  label: string
+  value: React.ReactNode
+}
+
+export interface AssetQualityRow {
+  label: string
+  pct: number
+  status: AssetQualityStatus
+  onImprove?: () => void
+}
+
+export interface AssetBarSegment {
+  /** Hex colour string e.g. '#ed113a' */
+  color: string
+  /** Width as 0–100 percentage of the total bar */
+  pct: number
+}
+
+export interface AssetCardProps {
+  name: string
+  address?: string
+  metrics?: AssetMetricRow[]
+  quality?: AssetQualityRow[]
+  /** Stacked bar segments — should sum to 100 */
+  bar?: AssetBarSegment[]
+  footerLabel?: string
+  onFooterClick?: () => void
+  onClose?: () => void
+  className?: string
+}
+
+const QUALITY_TO_SYSTEM: Record<AssetQualityStatus, 'success' | 'warning' | 'error'> = {
+  success: 'success',
+  warning: 'warning',
+  error:   'error',
+}
+
+export function AssetCard({
+  name,
+  address,
+  metrics = [],
+  quality = [],
+  bar,
+  footerLabel = 'See asset details',
+  onFooterClick,
+  onClose,
+  className,
+}: AssetCardProps) {
+  return (
+    <div className={clsx(
+      'bg-white dark:bg-[#111827] rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] flex flex-col',
+      className,
+    )}>
+      {/* Header */}
+      <div className="flex items-start justify-between px-4 pt-4 pb-0 gap-3">
+        <div className="flex flex-col gap-0.5 min-w-0">
+          <span className="text-[16px] font-semibold text-[#111827] dark:text-white leading-[1.4] truncate">
+            {name}
+          </span>
+          {address && (
+            <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45] tracking-[0.18px]">
+              {address}
+            </span>
+          )}
+        </div>
+        {onClose && (
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="shrink-0 mt-0.5 text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white transition-colors"
+          >
+            <XMarkIcon className="w-4 h-4" />
+          </button>
+        )}
+      </div>
+
+      {/* Metrics */}
+      {metrics.length > 0 && (
+        <div className="flex flex-col gap-2 px-4 pt-3">
+          {metrics.map((row, i) => (
+            <div key={i} className="flex items-center justify-between text-[12px]">
+              <span className="text-[#505867] dark:text-[#9CA3AF] leading-[1.45]">{row.label}</span>
+              <span className="font-medium text-[#111827] dark:text-white leading-[1.45]">{row.value}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Data quality section */}
+      {quality.length > 0 && (
+        <>
+          <div className="mx-4 mt-3 border-t border-[#EDEEF1] dark:border-[#1F2430]" />
+          <div className="flex flex-col gap-2 px-4 pt-3">
+            {quality.map((row, i) => (
+              <div key={i} className="flex items-center justify-between text-[12px]">
+                <span className="text-[#505867] dark:text-[#9CA3AF] leading-[1.45]">{row.label}</span>
+                <div className="flex items-center gap-2">
+                  <Tag
+                    label={`${row.pct}%`}
+                    system={QUALITY_TO_SYSTEM[row.status]}
+                    size="small"
+                    style="filled"
+                    showCount={false}
+                    showRemove={false}
+                  />
+                  {row.onImprove && (
+                    <button
+                      type="button"
+                      onClick={row.onImprove}
+                      className="text-[12px] font-medium text-[#1258F8] dark:text-[#2295FF] underline hover:no-underline transition-all"
+                    >
+                      Improve
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      {/* Stacked bar */}
+      {bar && bar.length > 0 && (
+        <div className="px-4 pt-3">
+          <div className="h-3 rounded flex overflow-hidden bg-[#F7F8F8] dark:bg-[#1F2430]">
+            {bar.map((seg, i) => (
+              <div
+                key={i}
+                style={{ width: `${seg.pct}%`, backgroundColor: seg.color }}
+                className={clsx(i === 0 && 'rounded-l', i === bar.length - 1 && 'rounded-r')}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Footer CTA */}
+      <div className="px-4 pt-3 pb-4">
+        <button
+          type="button"
+          onClick={onFooterClick}
+          className="w-full h-6 flex items-center justify-center gap-1 bg-[#1258F8] hover:bg-blue-700 text-white text-[12px] font-medium rounded transition-colors"
+        >
+          {footerLabel}
+          <ArrowUpRightIcon className="w-3.5 h-3.5" />
+        </button>
+      </div>
     </div>
   )
 }

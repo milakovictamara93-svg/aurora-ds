@@ -442,7 +442,23 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
     </div>
   ),
   '/components/cards': (
-    <SimpleCard title="Scaler HQ" subtitle="Sydney · Office" />
+    <div className="flex flex-col gap-2 w-full">
+      <SimpleCard title="Scaler HQ" subtitle="Sydney · Office" />
+      <div className="flex flex-col gap-1.5 text-[11px] bg-white dark:bg-[#111827] rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] px-3 py-2.5">
+        <div className="flex items-center justify-between font-semibold text-[#111827] dark:text-white text-[12px]">
+          <span>180 George St</span>
+          <Tag label="88%" system="error" style="filled" size="small" showCount={false} showRemove={false} />
+        </div>
+        <div className="flex items-center justify-between text-[#505867] dark:text-[#9CA3AF]">
+          <span>Energy use intensity</span><span className="font-medium text-[#111827] dark:text-white">142 kWh/m²</span>
+        </div>
+        <div className="h-2 rounded flex overflow-hidden mt-1">
+          {[['#d76513',16],['#22C55E',25],['#ffb246',25],['#ed113a',19],['#2295FF',15]].map(([c,w],i)=>(
+            <div key={i} style={{width:`${w}%`,backgroundColor:String(c)}} />
+          ))}
+        </div>
+      </div>
+    </div>
   ),
   '/components/data-points': (
     <div className="flex flex-col gap-3">
