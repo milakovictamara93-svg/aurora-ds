@@ -272,7 +272,7 @@ function ChartDrilldownDemo() {
         </div>
         <div className="flex items-center gap-3 text-[11px] text-[#505867] dark:text-[#9CA3AF]">
           <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-sm bg-[#FF455F]" />Energy use intensity
+            <span className="w-2 h-2 rounded-sm bg-[#1258F8]" />Energy use intensity
           </div>
           <div className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-sm bg-[#9CA3AF]" />Missing
@@ -342,7 +342,7 @@ function ChartDrilldownDemo() {
                       aria-label={`${a.name}: ${a.eui} kWh/m²/yr`}
                       className={[
                         'flex-1 rounded-t-sm transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1258F8]',
-                        isSelected ? 'bg-[#1258F8]' : 'bg-[#FF455F]',
+                        isSelected ? 'bg-[#FF455F]' : 'bg-[#1258F8]',
                         isDimmed    ? 'opacity-30' : 'opacity-100 hover:opacity-80',
                       ].join(' ')}
                       style={{ height: `${(a.eui / MAX_EUI) * 100}%` }}
