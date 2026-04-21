@@ -42,7 +42,7 @@ export function TabBar({ tabs = ['usage', 'style', 'code', 'accessibility'] }: {
   // Outer div handles horizontal scroll; inner div owns the bottom border so
   // the tabs' -mb-[2px] trick isn't clipped by overflow-x:auto
   return (
-    <div className="mt-12 overflow-x-auto">
+    <div className="mt-8 overflow-x-auto">
       <div className="flex border-b-2 border-[#D7DAE0] dark:border-[#1F2430] min-w-max">
         {tabs.map(t => (
           <button
