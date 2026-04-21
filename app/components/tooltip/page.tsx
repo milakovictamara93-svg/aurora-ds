@@ -8,6 +8,8 @@ import {
 import PageHeader from '@/app/components-lib/ui/PageHeader'
 import Tooltip from '@/app/components-lib/ui/Tooltip'
 import type { TooltipPlacement } from '@/app/components-lib/ui/Tooltip'
+import AdvancedTooltip from '@/app/components-lib/ui/AdvancedTooltip'
+import type { AdvancedTooltipPlacement } from '@/app/components-lib/ui/AdvancedTooltip'
 import {
   ComponentTabs, TabBar, TabPanel,
   Section, SpecTable, A11yRow, KeyRow,
@@ -24,8 +26,15 @@ const PLACEMENTS: TooltipPlacement[] = [
   'no-pointer',
 ]
 
+const ADV_PLACEMENTS: AdvancedTooltipPlacement[] = [
+  'top', 'top-start', 'top-end',
+  'bottom', 'bottom-start', 'bottom-end',
+  'left', 'right',
+]
+
 export default function TooltipPage() {
   const [placement, setPlacement] = useState<TooltipPlacement>('bottom-left')
+  const [advPlacement, setAdvPlacement] = useState<AdvancedTooltipPlacement>('bottom-start')
 
   return (
     <div>
@@ -145,6 +154,168 @@ export default function TooltipPage() {
                     </button>
                   </Tooltip>
                 ))}
+              </div>
+            </Preview>
+          </Section>
+
+          {/* ── Advanced Tooltip ── */}
+          <Section title="Advanced tooltip — text section">
+            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
+              Use <code className="bg-[#F7F8F8] dark:bg-[#1F2430] px-1.5 py-0.5 rounded text-[13px] text-[#111827] dark:text-white">&lt;AdvancedTooltip&gt;</code> when you need richer content: titles, multi-section layout, action buttons, a close control, or expandable sections. Sections are divided by a hairline border.
+            </p>
+            <Preview>
+              <div className="flex flex-wrap items-start justify-center gap-20 py-12">
+                {/* Simple text */}
+                <AdvancedTooltip
+                  open
+                  placement="bottom-start"
+                  sections={[{
+                    type: 'text',
+                    title: 'Scope 1 emissions',
+                    description: 'Direct GHG emissions from sources owned or controlled by the company.',
+                    badge: 'GHG Protocol',
+                  }]}
+                >
+                  <button className="h-8 px-3 rounded border border-[#D7DAE0] dark:border-[#374151] text-[13px] text-[#505867] dark:text-[#9CA3AF] flex items-center gap-1.5">
+                    <QuestionMarkCircleIcon className="w-4 h-4" />
+                    Scope 1
+                  </button>
+                </AdvancedTooltip>
+
+                {/* With close + actions */}
+                <AdvancedTooltip
+                  open
+                  placement="bottom-start"
+                  showClose
+                  primaryAction={{ label: 'Learn more' }}
+                  secondaryAction={{ label: 'Dismiss' }}
+                  sections={[{
+                    type: 'text',
+                    title: 'Energy intensity',
+                    description: 'Total energy consumption divided by gross leasable area — expressed as kWh/m².',
+                  }]}
+                >
+                  <button className="flex items-center justify-center w-5 h-5 text-[#505867] dark:text-[#9CA3AF]">
+                    <InformationCircleIcon className="w-5 h-5" />
+                  </button>
+                </AdvancedTooltip>
+              </div>
+            </Preview>
+          </Section>
+
+          <Section title="Advanced tooltip — data details">
+            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
+              The <code className="bg-[#F7F8F8] dark:bg-[#1F2430] px-1.5 py-0.5 rounded text-[13px] text-[#111827] dark:text-white">details</code> section type renders grouped key-value rows with a blue left-accent on each group header — ideal for chart data points, ESG metrics, and asset breakdowns.
+            </p>
+            <Preview>
+              <div className="flex flex-wrap items-start justify-center gap-20 py-12">
+                <AdvancedTooltip
+                  open
+                  placement="bottom-start"
+                  sections={[{
+                    type: 'details',
+                    title: 'Portfolio energy',
+                    subtitle: 'Jan – Dec 2024',
+                    groups: [
+                      {
+                        label: 'Total',
+                        value: '12,400 MWh',
+                        rows: [
+                          { label: 'Electricity', value: '9,800 MWh' },
+                          { label: 'Natural gas', value: '2,600 MWh' },
+                        ],
+                      },
+                      {
+                        label: 'Intensity',
+                        value: '42.1 kWh/m²',
+                        rows: [
+                          { label: 'vs. benchmark', value: '−8%' },
+                          { label: 'vs. last year', value: '−3%' },
+                        ],
+                      },
+                    ],
+                  }]}
+                >
+                  <button className="h-8 px-3 rounded border border-[#D7DAE0] dark:border-[#374151] text-[13px] text-[#505867] dark:text-[#9CA3AF]">
+                    View data
+                  </button>
+                </AdvancedTooltip>
+              </div>
+            </Preview>
+          </Section>
+
+          <Section title="Advanced tooltip — multi-section + expandable">
+            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
+              Pass multiple sections to stack them with dividers. Set <code className="bg-[#F7F8F8] dark:bg-[#1F2430] px-1.5 py-0.5 rounded text-[13px] text-[#111827] dark:text-white">expandable</code> to show only the first section by default, with a "Show more" toggle in the footer.
+            </p>
+            <Preview>
+              <div className="flex flex-wrap items-start justify-center gap-20 py-12">
+                <AdvancedTooltip
+                  open
+                  placement="bottom-start"
+                  expandable
+                  sections={[
+                    {
+                      type: 'text',
+                      title: 'GRESB score',
+                      description: 'Your portfolio achieved 78/100 in the 2024 GRESB assessment — above the global average of 71.',
+                      badge: 'GRESB 2024',
+                    },
+                    {
+                      type: 'details',
+                      title: 'Score breakdown',
+                      groups: [
+                        { label: 'Management', value: '18/20', rows: [{ label: 'Policy', value: '10/10' }, { label: 'Reporting', value: '8/10' }] },
+                        { label: 'Performance', value: '60/80', rows: [{ label: 'Energy', value: '22/25' }, { label: 'GHG', value: '18/25' }] },
+                      ],
+                    },
+                  ]}
+                >
+                  <button className="h-8 px-3 rounded border border-[#D7DAE0] dark:border-[#374151] text-[13px] text-[#505867] dark:text-[#9CA3AF] flex items-center gap-1.5">
+                    <QuestionMarkCircleIcon className="w-4 h-4" />
+                    GRESB score
+                  </button>
+                </AdvancedTooltip>
+              </div>
+            </Preview>
+          </Section>
+
+          <Section title="Advanced tooltip — placement">
+            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
+              The advanced tooltip supports 8 placements. Select one to preview.
+            </p>
+            <Preview>
+              <div className="flex flex-col items-center gap-6 py-4">
+                <div className="flex flex-wrap justify-center gap-2">
+                  {ADV_PLACEMENTS.map(p => (
+                    <button
+                      key={p}
+                      onClick={() => setAdvPlacement(p)}
+                      className={`h-7 px-3 rounded text-[11px] font-medium transition-colors ${
+                        advPlacement === p
+                          ? 'bg-[#1258F8] text-white'
+                          : 'border border-[#D7DAE0] dark:border-[#374151] text-[#505867] dark:text-[#9CA3AF] hover:border-[#8C96A4]'
+                      }`}
+                    >
+                      {p}
+                    </button>
+                  ))}
+                </div>
+                <div className="flex items-center justify-center py-16">
+                  <AdvancedTooltip
+                    open
+                    placement={advPlacement}
+                    sections={[{
+                      type: 'text',
+                      title: 'Placement preview',
+                      description: `This tooltip is positioned at "${advPlacement}".`,
+                    }]}
+                  >
+                    <div className="h-9 w-24 rounded bg-[#F7F8F8] dark:bg-[#1F2430] border border-[#EDEEF1] dark:border-[#374151] flex items-center justify-center text-[11px] text-[#505867] dark:text-[#9CA3AF]">
+                      trigger
+                    </div>
+                  </AdvancedTooltip>
+                </div>
               </div>
             </Preview>
           </Section>
@@ -351,6 +522,108 @@ export default function TooltipPage() {
   | 'bottom-left'
   | 'bottom-right'
   | 'no-pointer'`}</code>
+            </pre>
+          </Section>
+
+          <Section title="AdvancedTooltip import">
+            <pre className="bg-[#F7F8F8] dark:bg-[#1F2430] rounded-lg px-4 py-3 text-[13px] text-[#111827] dark:text-white overflow-x-auto">
+              <code>{`import AdvancedTooltip from '@/app/components-lib/ui/AdvancedTooltip'`}</code>
+            </pre>
+          </Section>
+
+          <Section title="AdvancedTooltip props">
+            <SpecTable rows={[
+              { property: 'sections',         value: 'AdvancedTooltipSection[]',  token: 'required — one or more content sections' },
+              { property: 'children',         value: 'React.ReactElement',        token: 'required — the trigger element' },
+              { property: 'expandable',       value: 'boolean',                   token: 'show only first section until "Show more" is clicked' },
+              { property: 'primaryAction',    value: '{ label, onClick? }',       token: 'primary button in footer' },
+              { property: 'secondaryAction',  value: '{ label, onClick? }',       token: 'secondary button in footer' },
+              { property: 'showClose',        value: 'boolean',                   token: 'render × button in top-right corner' },
+              { property: 'onClose',          value: '() => void',                token: 'called when × is clicked' },
+              { property: 'placement',        value: 'AdvancedTooltipPlacement',  token: 'defaults to "top"' },
+              { property: 'open',             value: 'boolean',                   token: 'force visible — for docs/previews' },
+              { property: 'className',        value: 'string',                    token: 'extra classes on the panel' },
+            ]} />
+          </Section>
+
+          <Section title="AdvancedTooltip — text section">
+            <pre className="bg-[#F7F8F8] dark:bg-[#1F2430] rounded-lg px-4 py-3 text-[13px] text-[#111827] dark:text-white overflow-x-auto">
+              <code>{`<AdvancedTooltip
+  placement="bottom-start"
+  showClose
+  primaryAction={{ label: 'Learn more', onClick: () => {} }}
+  sections={[{
+    type: 'text',
+    title: 'Scope 1 emissions',
+    description: 'Direct GHG emissions from sources owned by the company.',
+    badge: 'GHG Protocol',
+  }]}
+>
+  <button>
+    <InformationCircleIcon className="w-5 h-5" />
+  </button>
+</AdvancedTooltip>`}</code>
+            </pre>
+          </Section>
+
+          <Section title="AdvancedTooltip — details section">
+            <pre className="bg-[#F7F8F8] dark:bg-[#1F2430] rounded-lg px-4 py-3 text-[13px] text-[#111827] dark:text-white overflow-x-auto">
+              <code>{`<AdvancedTooltip
+  placement="bottom-start"
+  sections={[{
+    type: 'details',
+    title: 'Portfolio energy',
+    subtitle: 'Jan – Dec 2024',
+    groups: [
+      {
+        label: 'Total',
+        value: '12,400 MWh',
+        rows: [
+          { label: 'Electricity', value: '9,800 MWh' },
+          { label: 'Natural gas', value: '2,600 MWh' },
+        ],
+      },
+    ],
+  }]}
+>
+  <button>View data</button>
+</AdvancedTooltip>`}</code>
+            </pre>
+          </Section>
+
+          <Section title="AdvancedTooltip — multi-section expandable">
+            <pre className="bg-[#F7F8F8] dark:bg-[#1F2430] rounded-lg px-4 py-3 text-[13px] text-[#111827] dark:text-white overflow-x-auto">
+              <code>{`<AdvancedTooltip
+  placement="bottom-start"
+  expandable
+  sections={[
+    {
+      type: 'text',
+      title: 'GRESB score',
+      description: 'Portfolio achieved 78/100 — above global average.',
+      badge: 'GRESB 2024',
+    },
+    {
+      type: 'details',
+      title: 'Score breakdown',
+      groups: [
+        { label: 'Management', value: '18/20', rows: [...] },
+        { label: 'Performance', value: '60/80', rows: [...] },
+      ],
+    },
+  ]}
+>
+  <button>GRESB score</button>
+</AdvancedTooltip>`}</code>
+            </pre>
+          </Section>
+
+          <Section title="AdvancedTooltipPlacement type">
+            <pre className="bg-[#F7F8F8] dark:bg-[#1F2430] rounded-lg px-4 py-3 text-[13px] text-[#111827] dark:text-white overflow-x-auto">
+              <code>{`type AdvancedTooltipPlacement =
+  | 'top' | 'top-start' | 'top-end'
+  | 'bottom' | 'bottom-start' | 'bottom-end'
+  | 'left' | 'right'`}</code>
             </pre>
           </Section>
 

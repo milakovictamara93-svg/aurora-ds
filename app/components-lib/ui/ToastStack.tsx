@@ -119,64 +119,67 @@ export function ToastStack({ toasts, queued = 0, onDismiss, onDismissAll }: Toas
 
   return (
     <div
-      className="fixed bottom-6 right-6 z-[9999]"
+      className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end gap-2"
       style={{ width: 320 }}
       aria-label="Notifications"
     >
-      {/* Depth layers — background toasts */}
-      {toasts.slice(1).map((toast, i) => {
-        const depth  = i + 1                          // 1 = one behind top
-        const shrink = depth * 4                      // narrower by 4px each level
-        const offset = depth * 10                     // push down in z-stack
-        const ops    = [0.8, 0.6, 0.4][i] ?? 0.4     // opacity per depth
-        return (
-          <div
-            key={toast.id}
-            aria-hidden="true"
-            style={{
-              position:      'absolute',
-              bottom:        offset,
-              left:          shrink / 2,
-              right:         shrink / 2,
-              opacity:       ops,
-              pointerEvents: 'none',
-              zIndex:        MAX_VISIBLE - depth,
-            }}
-          >
-            <Toast
-              variant={toast.variant}
-              label={toast.label}
-              description={toast.description}
-            />
-          </div>
-        )
-      })}
-
-      {/* Top toast — fully interactive */}
-      {toasts[0] && (
-        <div style={{ position: 'relative', zIndex: MAX_VISIBLE }}>
-          <Toast
-            variant={toasts[0].variant}
-            label={toasts[0].label}
-            description={toasts[0].description}
-            onDismiss={() => onDismiss(toasts[0].id)}
-          />
-        </div>
-      )}
-
-      {/* Dismiss all */}
+      {/* Dismiss all — inside container, above the stack */}
       {showDismissAll && onDismissAll && (
         <button
           onClick={onDismissAll}
-          className="absolute -top-8 right-0 text-[12px] font-medium text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-[#1F2430] border border-[#EDEEF1] dark:border-[#1F2430] rounded-md px-2 py-1 shadow-sm hover:text-[#111827] dark:hover:text-white transition-colors whitespace-nowrap"
+          className="text-[12px] font-medium text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-[#1F2430] border border-[#EDEEF1] dark:border-[#1F2430] rounded-md px-2 py-1 shadow-sm hover:text-[#111827] dark:hover:text-white transition-colors whitespace-nowrap"
         >
           Dismiss all
         </button>
       )}
 
+      {/* Stack wrapper */}
+      <div className="relative w-full">
+        {/* Depth layers — background toasts */}
+        {toasts.slice(1).map((toast, i) => {
+          const depth  = i + 1                          // 1 = one behind top
+          const shrink = depth * 4                      // narrower by 4px each level
+          const offset = depth * 10                     // push down in z-stack
+          const ops    = [0.8, 0.6, 0.4][i] ?? 0.4     // opacity per depth
+          return (
+            <div
+              key={toast.id}
+              aria-hidden="true"
+              style={{
+                position:      'absolute',
+                bottom:        -offset,
+                left:          shrink / 2,
+                right:         shrink / 2,
+                opacity:       ops,
+                pointerEvents: 'none',
+                zIndex:        MAX_VISIBLE - depth,
+              }}
+            >
+              <Toast
+                variant={toast.variant}
+                label={toast.label}
+                description={toast.description}
+              />
+            </div>
+          )
+        })}
+
+        {/* Top toast — fully interactive */}
+        {toasts[0] && (
+          <div style={{ position: 'relative', zIndex: MAX_VISIBLE }}>
+            <Toast
+              variant={toasts[0].variant}
+              label={toasts[0].label}
+              description={toasts[0].description}
+              onDismiss={() => onDismiss(toasts[0].id)}
+            />
+          </div>
+        )}
+      </div>
+
       {/* Queue indicator */}
       {queued > 0 && (
-        <p className="mt-2 text-center text-[11px] text-[#9CA3AF] select-none">
+        <p className="text-center text-[11px] text-[#9CA3AF] select-none">
           +{queued} more queued
         </p>
       )}
@@ -370,58 +373,60 @@ export function ToastStackDemo() {
             <p className="text-[13px] text-[#C4C9D4] dark:text-[#3F4654] select-none">No active toasts — fire one above</p>
           </div>
         ) : (
-          <div className="relative" style={{ height: Math.max(80, toasts.length * 10 + 68) }}>
-            {/* Background depth layers */}
-            {toasts.slice(1).map((toast, i) => {
-              const depth  = i + 1
-              const shrink = depth * 4
-              const offset = -(depth * 10)
-              const ops    = [0.8, 0.6, 0.4][i] ?? 0.4
-              return (
-                <div
-                  key={toast.id}
-                  aria-hidden="true"
-                  style={{
-                    position: 'absolute',
-                    top: -offset,
-                    left: shrink / 2,
-                    right: shrink / 2,
-                    opacity: ops,
-                    pointerEvents: 'none',
-                    zIndex: MAX_VISIBLE - depth,
-                  }}
-                >
-                  <Toast
-                    variant={toast.variant}
-                    label={toast.label}
-                    description={toast.description}
-                  />
-                </div>
-              )
-            })}
-
-            {/* Top toast */}
-            {toasts[0] && (
-              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: MAX_VISIBLE }}>
-                <Toast
-                  variant={toasts[0].variant}
-                  label={toasts[0].label}
-                  description={toasts[0].description}
-                  onDismiss={() => removeToast(toasts[0].id)}
-                />
-              </div>
-            )}
-
-            {/* Dismiss all */}
+          <div className="flex flex-col items-end gap-2">
+            {/* Dismiss all — inside the preview area at top right */}
             {showDismissAll && (
               <button
                 onClick={dismissAll}
-                className="absolute -top-8 right-0 text-[12px] font-medium text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-[#1F2430] border border-[#EDEEF1] dark:border-[#1F2430] rounded-md px-2 py-1 shadow-sm hover:text-[#111827] dark:hover:text-white transition-colors whitespace-nowrap"
-                style={{ zIndex: MAX_VISIBLE + 1 }}
+                className="text-[12px] font-medium text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-[#1F2430] border border-[#EDEEF1] dark:border-[#1F2430] rounded-md px-2 py-1 shadow-sm hover:text-[#111827] dark:hover:text-white transition-colors whitespace-nowrap"
               >
                 Dismiss all
               </button>
             )}
+
+            {/* Depth-stacked toast display */}
+            <div className="relative w-full" style={{ height: Math.max(80, toasts.length * 10 + 68) }}>
+              {/* Background depth layers */}
+              {toasts.slice(1).map((toast, i) => {
+                const depth  = i + 1
+                const shrink = depth * 4
+                const offset = depth * 10
+                const ops    = [0.8, 0.6, 0.4][i] ?? 0.4
+                return (
+                  <div
+                    key={toast.id}
+                    aria-hidden="true"
+                    style={{
+                      position: 'absolute',
+                      top: offset,
+                      left: shrink / 2,
+                      right: shrink / 2,
+                      opacity: ops,
+                      pointerEvents: 'none',
+                      zIndex: MAX_VISIBLE - depth,
+                    }}
+                  >
+                    <Toast
+                      variant={toast.variant}
+                      label={toast.label}
+                      description={toast.description}
+                    />
+                  </div>
+                )
+              })}
+
+              {/* Top toast */}
+              {toasts[0] && (
+                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: MAX_VISIBLE }}>
+                  <Toast
+                    variant={toasts[0].variant}
+                    label={toasts[0].label}
+                    description={toasts[0].description}
+                    onDismiss={() => removeToast(toasts[0].id)}
+                  />
+                </div>
+              )}
+            </div>
           </div>
         )}
       </div>

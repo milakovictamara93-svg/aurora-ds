@@ -6,6 +6,7 @@ import {
   ArrowUpTrayIcon, DocumentIcon, XMarkIcon,
   CheckCircleIcon, ExclamationCircleIcon, ArrowPathIcon,
 } from '@heroicons/react/20/solid'
+import Tag from '@/app/components-lib/ui/Tag'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -218,17 +219,14 @@ const SAMPLE_FILES: BulkFile[] = [
 ]
 
 function StatusBadge({ status, progress }: { status: BulkStatus; progress?: number }) {
-  if (status === 'done') return (
-    <span className="inline-flex items-center gap-1 text-[12px] font-medium text-[#22C55E]">
-      <CheckCircleIcon className="w-3.5 h-3.5" /> Complete
-    </span>
-  )
-  if (status === 'error') return (
-    <span className="inline-flex items-center gap-1 text-[12px] font-medium text-[#F87171]">
-      <ExclamationCircleIcon className="w-3.5 h-3.5" /> Failed
-    </span>
-  )
-  if (status === 'uploading') return (
+  if (status === 'done')
+    return <Tag system="success"  style="filled" size="small" label="Complete"  showCount={false} showRemove={false} />
+  if (status === 'error')
+    return <Tag system="error"    style="filled" size="small" label="Failed"    showCount={false} showRemove={false} />
+  if (status === 'queued')
+    return <Tag system="disabled" style="filled" size="small" label="Queued"    showCount={false} showRemove={false} />
+  // uploading — progress bar (not a badge)
+  return (
     <div className="flex items-center gap-2">
       <div className="w-16 h-1 bg-[#EDEEF1] dark:bg-[#1F2430] rounded-full overflow-hidden">
         <div className="h-full bg-[#1258F8] rounded-full" style={{ width: `${progress ?? 0}%` }} />
@@ -236,7 +234,6 @@ function StatusBadge({ status, progress }: { status: BulkStatus; progress?: numb
       <span className="text-[12px] text-[#1258F8]">{progress}%</span>
     </div>
   )
-  return <span className="text-[12px] text-[#9CA3AF]">Queued</span>
 }
 
 function BulkUploadDemo() {

@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import clsx from 'clsx'
 import AuroraIcon from '@/app/components-lib/ui/AuroraIcon'
+import Tag from '@/app/components-lib/ui/Tag'
 
 // ── Nav data ─────────────────────────────────────────────────────────────────
 
@@ -109,9 +110,10 @@ const PATTERNS: NavGroup = {
     { href: '/patterns/esg-data',           label: 'ESG data',            available: false },
     { href: '/patterns/data-visualization', label: 'Data visualization' },
     { href: '/patterns/drag-drop',          label: 'Drag and drop' },
-    { href: '/patterns/filtering',          label: 'Filtering' },
-    { href: '/patterns/forms',              label: 'Forms' },
-    { href: '/patterns/upload',             label: 'Upload' },
+    { href: '/patterns/filtering',              label: 'Filtering' },
+    { href: '/patterns/column-customization',  label: 'Column customization' },
+    { href: '/patterns/forms',                 label: 'Forms' },
+    { href: '/patterns/upload',                label: 'Upload' },
     { href: '/patterns/empty-states',       label: 'Empty states',        available: false },
     { href: '/patterns/loading-states',     label: 'Loading states',      available: false },
     { href: '/patterns/brand-voice',        label: 'Brand voice',         available: false },
@@ -180,9 +182,7 @@ function NavSection({
                   className="flex items-center justify-between px-2 py-1.5 rounded-md text-[13px] text-[#C4C9D4] dark:text-[#3F4654] cursor-default select-none"
                 >
                   {label}
-                  <span className="text-[10px] font-medium text-[#C4C9D4] dark:text-[#3F4654] bg-[#F7F8F8] dark:bg-[#1F2430] px-1.5 py-0.5 rounded">
-                    soon
-                  </span>
+                  <Tag system="disabled" style="filled" size="small" label="soon" showCount={false} showRemove={false} />
                 </span>
               )
             }
