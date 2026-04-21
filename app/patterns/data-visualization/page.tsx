@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from 'react'
+import { createPortal } from 'react-dom'
 import PageHeader from '@/app/components-lib/ui/PageHeader'
 
 // ── Chart palette ─────────────────────────────────────────────────────────────
@@ -25,33 +27,58 @@ const barData  = [
 const lineData = [18, 32, 27, 45, 38, 52, 60, 55, 68, 74, 66, 80]
 const months   = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
 
+const BAR_SERIES = [
+  { key: 'energy' as const, label: 'Energy', color: '#FF455F' },
+  { key: 'water'  as const, label: 'Water',  color: '#1FD7EE' },
+  { key: 'ghg'    as const, label: 'GHG',    color: '#FFB246' },
+]
+
 function MiniBarChart() {
-  const barColors = ['bg-energy-500', 'bg-water-400', 'bg-ghg-400']
-  const labels    = ['Energy', 'Water', 'GHG']
+  const [tooltip, setTooltip] = useState<{ x: number; y: number; label: string; value: number; color: string } | null>(null)
+
   return (
     <div className="p-6 rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827]">
       <div className="flex items-center justify-between mb-4">
         <p className="text-sm font-semibold text-[#111827] dark:text-white">Quarterly ESG performance</p>
         <div className="flex items-center gap-3">
-          {labels.map((l, i) => (
-            <div key={l} className="flex items-center gap-1.5">
-              <span className={`w-2.5 h-2.5 rounded-sm ${barColors[i]}`} />
-              <span className="text-xs text-[#505867] dark:text-[#9CA3AF]">{l}</span>
+          {BAR_SERIES.map(s => (
+            <div key={s.key} className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-sm" style={{ background: s.color }} />
+              <span className="text-xs text-[#505867] dark:text-[#9CA3AF]">{s.label}</span>
             </div>
           ))}
         </div>
       </div>
-      <div className="flex items-end gap-4 h-40">
+      <div className="relative flex items-end gap-4 h-40">
         {barData.map((d) => (
           <div key={d.label} className="flex-1 flex flex-col items-center gap-1">
             <div className="w-full flex items-end gap-0.5 h-32">
-              <div className="flex-1 bg-energy-500 rounded-t" style={{ height: `${d.energy}%` }} />
-              <div className="flex-1 bg-water-400 rounded-t"  style={{ height: `${d.water}%` }} />
-              <div className="flex-1 bg-ghg-400 rounded-t"    style={{ height: `${d.ghg}%` }} />
+              {BAR_SERIES.map(s => (
+                <div
+                  key={s.key}
+                  className="flex-1 rounded-t transition-opacity duration-100 cursor-default"
+                  style={{ height: `${d[s.key]}%`, background: s.color }}
+                  onMouseEnter={e => {
+                    const r = (e.target as HTMLElement).getBoundingClientRect()
+                    setTooltip({ x: r.left + r.width / 2, y: r.top - 6, label: `${d.label} · ${s.label}`, value: d[s.key], color: s.color })
+                  }}
+                  onMouseLeave={() => setTooltip(null)}
+                />
+              ))}
             </div>
             <span className="text-xs text-[#505867] dark:text-[#9CA3AF]">{d.label}</span>
           </div>
         ))}
+        {tooltip && typeof document !== 'undefined' && createPortal(
+          <div
+            style={{ position: 'fixed', top: tooltip.y - 36, left: tooltip.x, transform: 'translateX(-50%)', zIndex: 9999, pointerEvents: 'none' }}
+            className="bg-[#111827] text-white text-[11px] rounded px-2 py-1 whitespace-nowrap shadow-md flex items-center gap-1.5"
+          >
+            <span className="w-2 h-2 rounded-sm shrink-0" style={{ background: tooltip.color }} />
+            {tooltip.label}: <strong>{tooltip.value}</strong>
+          </div>,
+          document.body,
+        )}
       </div>
     </div>
   )

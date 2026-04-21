@@ -467,10 +467,21 @@ function StackedBar({ bar }: { bar: AssetBarSegment[] }) {
   const [hovered, setHovered]   = useState(false)
   const [rect, setRect]         = useState<DOMRect | null>(null)
   const barRef                  = useRef<HTMLDivElement>(null)
+  const hideTimer               = useRef<ReturnType<typeof setTimeout> | null>(null)
   const hasLabels               = bar.some(s => s.label)
 
-  function handleMouseEnter() {
+  function cancelHide() {
+    if (hideTimer.current) { clearTimeout(hideTimer.current); hideTimer.current = null }
+  }
+
+  function scheduleHide() {
+    cancelHide()
+    hideTimer.current = setTimeout(() => setHovered(false), 120)
+  }
+
+  function handleBarEnter() {
     if (!hasLabels) return
+    cancelHide()
     if (barRef.current) setRect(barRef.current.getBoundingClientRect())
     setHovered(true)
   }
@@ -478,28 +489,18 @@ function StackedBar({ bar }: { bar: AssetBarSegment[] }) {
   const tooltip = hovered && hasLabels && rect && typeof document !== 'undefined'
     ? createPortal(
         <div
-          style={{
-            position: 'fixed',
-            top:   rect.bottom + 6,
-            left:  rect.left,
-            width: rect.width,
-            zIndex: 9999,
-          }}
+          style={{ position: 'fixed', top: rect.bottom + 4, left: rect.left, width: rect.width, zIndex: 9999 }}
           className="bg-white dark:bg-[#111827] border border-[#EDEEF1] dark:border-[#1F2430] rounded-lg shadow-md py-2"
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
+          onMouseEnter={cancelHide}
+          onMouseLeave={scheduleHide}
         >
           {bar.map((seg, i) => seg.label && (
             <div key={i} className="flex items-center justify-between px-3 py-1.5 gap-3">
               <div className="flex items-center gap-2 min-w-0">
                 <span className="shrink-0 w-0.5 h-4 rounded-full" style={{ backgroundColor: seg.color }} />
-                <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45] truncate">
-                  {seg.label}
-                </span>
+                <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45] truncate">{seg.label}</span>
               </div>
-              <span className="text-[12px] font-medium text-[#111827] dark:text-white leading-[1.45] shrink-0">
-                {seg.pct}%
-              </span>
+              <span className="text-[12px] font-medium text-[#111827] dark:text-white leading-[1.45] shrink-0">{seg.pct}%</span>
             </div>
           ))}
         </div>,
@@ -512,8 +513,8 @@ function StackedBar({ bar }: { bar: AssetBarSegment[] }) {
       <div
         ref={barRef}
         className={clsx('h-3 rounded flex overflow-hidden bg-[#F7F8F8] dark:bg-[#1F2430]', hasLabels && 'cursor-pointer')}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={() => setHovered(false)}
+        onMouseEnter={handleBarEnter}
+        onMouseLeave={scheduleHide}
       >
         {bar.map((seg, i) => (
           <div
