@@ -107,7 +107,7 @@ const PATTERNS: NavGroup = {
   label: 'Patterns',
   items: [
     { href: '/patterns/esg-data',           label: 'ESG data',            available: false },
-    { href: '/patterns/data-visualization', label: 'Data visualization',  available: false },
+    { href: '/patterns/data-visualization', label: 'Data visualization' },
     { href: '/patterns/empty-states',       label: 'Empty states',        available: false },
     { href: '/patterns/loading-states',     label: 'Loading states',      available: false },
     { href: '/patterns/brand-voice',        label: 'Brand voice',         available: false },
