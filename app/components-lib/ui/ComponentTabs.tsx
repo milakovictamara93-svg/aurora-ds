@@ -1,6 +1,10 @@
 'use client'
 
 import { useState, createContext, useContext } from 'react'
+import Tag from './Tag'
+import Toast from './Toast'
+import Banner from './Banner'
+import { SimpleCard } from './Card'
 
 // ── Context ───────────────────────────────────────────────────────────────────
 const TabCtx = createContext<{ active: string; set: (t: string) => void }>({
@@ -424,53 +428,20 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
   ),
   '/components/badges-tags': (
     <div className="flex flex-col gap-2">
-      {/* Tags row */}
       <div className="flex flex-wrap gap-1.5">
-        {([
-          { label: 'Default', bg: '#D9EAFF', fg: '#173691' },
-          { label: 'Success', bg: '#DCFCE7', fg: '#166534' },
-          { label: 'Error',   bg: '#FEE2E2', fg: '#991B1B' },
-        ] as {label:string;bg:string;fg:string}[]).map(({ label, bg, fg }) => (
-          <span key={label} className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold" style={{ background: bg, color: fg }}>
-            {label}
-          </span>
-        ))}
+        <Tag label="Default" system="default"  style="filled" size="small" showCount={false} showRemove={false} />
+        <Tag label="Success" system="success"  style="filled" size="small" showCount={false} showRemove={false} />
+        <Tag label="Error"   system="error"    style="filled" size="small" showCount={false} showRemove={false} />
+        <Tag label="Warning" system="warning"  style="filled" size="small" showCount={false} showRemove={false} />
       </div>
-      {/* Indicator dots row */}
       <div className="flex flex-wrap gap-1.5">
-        {([
-          { label: 'Active',   bg: '#DCFCE7', fg: '#166534', dot: '#22C55E' },
-          { label: 'Warning',  bg: '#FFEDD5', fg: '#9A3412', dot: '#F97316' },
-          { label: 'AI',       bg: '#EDE9FE', fg: '#4C1D95', dot: '#653FFF' },
-        ] as {label:string;bg:string;fg:string;dot:string}[]).map(({ label, bg, fg, dot }) => (
-          <span key={label} className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold" style={{ background: bg, color: fg }}>
-            <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: dot }} />
-            {label}
-          </span>
-        ))}
+        <Tag label="Default"  system="default"       style="outline"    size="small" showCount={false} showRemove={false} />
+        <Tag label="Projected" system="missing-info" style="projected"  size="small" showCount={false} showRemove={false} />
       </div>
     </div>
   ),
   '/components/cards': (
-    <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] overflow-hidden shadow-sm">
-      <div className="px-3 py-2.5 border-b border-[#EDEEF1] dark:border-[#1F2430] flex items-center justify-between">
-        <span className="text-[12px] font-semibold text-[#111827] dark:text-white">Scaler HQ</span>
-        <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-semibold bg-[#DCFCE7] text-[#166534]">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E]" />
-          Active
-        </span>
-      </div>
-      <div className="px-3 py-2 flex flex-col gap-1">
-        <div className="flex justify-between">
-          <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">Score</span>
-          <span className="text-[10px] font-semibold text-[#111827] dark:text-white">92 / 100</span>
-        </div>
-        <div className="flex justify-between">
-          <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">Last updated</span>
-          <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">Today</span>
-        </div>
-      </div>
-    </div>
+    <SimpleCard title="Scaler HQ" subtitle="Sydney · Office" />
   ),
   '/components/data-points': (
     <div className="flex flex-col gap-3">
@@ -501,17 +472,21 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
     <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
       <div className="grid grid-cols-3 bg-[#F7F8F8] dark:bg-[#1F2430] px-3 py-1.5 border-b border-[#EDEEF1] dark:border-[#1F2430]">
         {['Building', 'Status', 'Score'].map(h => (
-          <span key={h} className="text-[9px] font-bold text-[#505867] dark:text-[#9CA3AF] uppercase tracking-wide">{h}</span>
+          <span key={h} className="text-[9px] font-semibold text-[#505867] dark:text-[#9CA3AF]">{h}</span>
         ))}
       </div>
-      {[
-        { name: 'Scaler HQ',  status: 'Active',  statusBg: '#DCFCE7', statusFg: '#166534', score: '92' },
-        { name: 'Tower B',    status: 'Pending',  statusBg: '#FFEDD5', statusFg: '#9A3412', score: '74' },
-        { name: 'West Wing',  status: 'Inactive', statusBg: '#F1F2F4', statusFg: '#505867', score: '—'  },
-      ].map(({ name, status, statusBg, statusFg, score }) => (
+      {([
+        { name: 'Scaler HQ', status: 'Active'  as const, score: '92' },
+        { name: 'Tower B',   status: 'Pending' as const, score: '74' },
+        { name: 'West Wing', status: 'Inactive' as const, score: '—' },
+      ]).map(({ name, status, score }) => (
         <div key={name} className="grid grid-cols-3 items-center px-3 py-1.5 border-b border-[#EDEEF1] dark:border-[#1F2430] last:border-0">
           <span className="text-[10px] font-medium text-[#111827] dark:text-white">{name}</span>
-          <span className="inline-flex w-fit items-center px-1.5 py-0.5 rounded text-[9px] font-semibold" style={{ background: statusBg, color: statusFg }}>{status}</span>
+          <Tag
+            label={status}
+            system={status === 'Active' ? 'success' : status === 'Pending' ? 'warning' : 'disabled'}
+            size="small" showCount={false} showRemove={false}
+          />
           <span className="text-[10px] text-[#111827] dark:text-white">{score}</span>
         </div>
       ))}
@@ -520,7 +495,7 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
   '/components/modals': (
     <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] overflow-hidden shadow-level-3">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 pt-4 pb-3 border-b border-[#EDEEF1] dark:border-[#1F2430]">
+      <div className="flex items-center justify-between px-4 pt-4 pb-3">
         <div>
           <p className="text-[12px] font-bold text-[#111827] dark:text-white">Delete building?</p>
           <p className="text-[10px] text-[#505867] dark:text-[#9CA3AF] mt-0.5">This action cannot be undone.</p>
@@ -536,7 +511,7 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
         <p className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">All associated ESG data will be permanently removed from your account.</p>
       </div>
       {/* Footer */}
-      <div className="flex items-center justify-between px-4 py-3 border-t border-[#EDEEF1] dark:border-[#1F2430]">
+      <div className="flex items-center justify-between px-4 py-3">
         <span className="text-[10px] font-medium text-[#EF4444]">Delete</span>
         <div className="flex items-center gap-1.5">
           <div className="h-6 px-2.5 flex items-center rounded border border-[#D7DAE0] dark:border-[#374151]">
@@ -551,59 +526,14 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
   ),
   '/components/banner': (
     <div className="flex flex-col gap-1.5">
-      {/* System banner — error, 40px */}
-      <div className="flex items-center gap-2 px-3 h-10 rounded border" style={{ background: '#FEF2F2', borderColor: '#FECACA' }}>
-        <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="#EF4444">
-          <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clipRule="evenodd" />
-        </svg>
-        <span className="text-[11px] font-medium flex-1" style={{ color: '#7F1D1D' }}>Connection error — retry required</span>
-        <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-        </svg>
-      </div>
-      {/* Regular banner — success, with description */}
-      <div className="flex items-start gap-2 px-3 py-2 rounded border" style={{ background: '#F0FDF5', borderColor: '#BBF7D0' }}>
-        <svg className="w-4 h-4 shrink-0 mt-px" viewBox="0 0 24 24" fill="#22C55E">
-          <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
-        </svg>
-        <div className="flex-1 min-w-0">
-          <p className="text-[11px] font-semibold" style={{ color: '#14532D' }}>Report submitted</p>
-          <p className="text-[10px] mt-0.5" style={{ color: '#166534' }}>Your ESG data has been saved.</p>
-        </div>
-        <svg className="w-3.5 h-3.5 shrink-0 mt-px" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-        </svg>
-      </div>
+      <Banner type="system"  variant="error"   label="Connection error — retry required" />
+      <Banner type="regular" variant="success" label="Report submitted" description="Your ESG data has been saved." />
     </div>
   ),
   '/components/toasts': (
     <div className="flex flex-col gap-1.5">
-      {/* Success toast */}
-      <div className="flex items-start gap-2 px-3 py-2.5 rounded-lg border shadow-sm" style={{ background: '#F0FDF5', borderColor: '#86EFAC' }}>
-        <svg className="w-4 h-4 shrink-0 mt-px" viewBox="0 0 24 24" fill="#22C55E">
-          <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
-        </svg>
-        <div className="flex-1">
-          <p className="text-[11px] font-semibold" style={{ color: '#14532D' }}>Changes saved</p>
-          <p className="text-[10px] mt-0.5" style={{ color: '#166534' }}>Your data has been updated.</p>
-        </div>
-        <svg className="w-3.5 h-3.5 shrink-0 mt-px" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-        </svg>
-      </div>
-      {/* Error toast */}
-      <div className="flex items-start gap-2 px-3 py-2.5 rounded-lg border shadow-sm" style={{ background: '#FEF2F2', borderColor: '#FCA5A5' }}>
-        <svg className="w-4 h-4 shrink-0 mt-px" viewBox="0 0 24 24" fill="#EF4444">
-          <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clipRule="evenodd" />
-        </svg>
-        <div className="flex-1">
-          <p className="text-[11px] font-semibold" style={{ color: '#7F1D1D' }}>Something went wrong</p>
-          <p className="text-[10px] mt-0.5" style={{ color: '#991B1B' }}>Please try again.</p>
-        </div>
-        <svg className="w-3.5 h-3.5 shrink-0 mt-px" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-        </svg>
-      </div>
+      <Toast variant="success" label="Changes saved"        description="Your data has been updated." />
+      <Toast variant="error"   label="Something went wrong" description="Please try again." />
     </div>
   ),
   '/components/tabs': (
