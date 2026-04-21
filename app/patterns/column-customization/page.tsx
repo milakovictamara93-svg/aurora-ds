@@ -113,7 +113,7 @@ function ColumnSection({
 }) {
   return (
     <div className="py-4">
-      <div className="flex items-center justify-between pb-3 border-b border-[#EDEEF1] dark:border-[#1F2430]">
+      <div className="flex items-center justify-between mb-3">
         <p className="text-[14px] font-semibold text-[#111827] dark:text-white">{title}</p>
         <button
           onClick={onClear}
@@ -122,7 +122,7 @@ function ColumnSection({
           Clear
         </button>
       </div>
-      <div className="pt-3">{children}</div>
+      <div>{children}</div>
     </div>
   )
 }
