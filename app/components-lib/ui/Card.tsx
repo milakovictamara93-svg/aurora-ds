@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import clsx from 'clsx'
 import { EllipsisVerticalIcon, ChevronUpIcon, ChevronDownIcon, MapPinIcon, BuildingOffice2Icon, XMarkIcon, ArrowUpRightIcon } from '@heroicons/react/16/solid'
 import AuroraIcon from '@/app/components-lib/ui/AuroraIcon'
@@ -463,14 +464,55 @@ const QUALITY_TO_SYSTEM: Record<AssetQualityStatus, 'success' | 'warning' | 'err
 }
 
 function StackedBar({ bar }: { bar: AssetBarSegment[] }) {
-  const [hovered, setHovered] = useState(false)
-  const hasLabels = bar.some(s => s.label)
+  const [hovered, setHovered]   = useState(false)
+  const [rect, setRect]         = useState<DOMRect | null>(null)
+  const barRef                  = useRef<HTMLDivElement>(null)
+  const hasLabels               = bar.some(s => s.label)
+
+  function handleMouseEnter() {
+    if (!hasLabels) return
+    if (barRef.current) setRect(barRef.current.getBoundingClientRect())
+    setHovered(true)
+  }
+
+  const tooltip = hovered && hasLabels && rect && typeof document !== 'undefined'
+    ? createPortal(
+        <div
+          style={{
+            position: 'fixed',
+            top:   rect.bottom + 6,
+            left:  rect.left,
+            width: rect.width,
+            zIndex: 9999,
+          }}
+          className="bg-white dark:bg-[#111827] border border-[#EDEEF1] dark:border-[#1F2430] rounded-lg shadow-md py-2"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+        >
+          {bar.map((seg, i) => seg.label && (
+            <div key={i} className="flex items-center justify-between px-3 py-1.5 gap-3">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="shrink-0 w-0.5 h-4 rounded-full" style={{ backgroundColor: seg.color }} />
+                <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45] truncate">
+                  {seg.label}
+                </span>
+              </div>
+              <span className="text-[12px] font-medium text-[#111827] dark:text-white leading-[1.45] shrink-0">
+                {seg.pct}%
+              </span>
+            </div>
+          ))}
+        </div>,
+        document.body,
+      )
+    : null
 
   return (
-    <div className="px-4 pt-3 relative">
+    <div className="px-4 pt-3">
       <div
+        ref={barRef}
         className={clsx('h-3 rounded flex overflow-hidden bg-[#F7F8F8] dark:bg-[#1F2430]', hasLabels && 'cursor-pointer')}
-        onMouseEnter={() => hasLabels && setHovered(true)}
+        onMouseEnter={handleMouseEnter}
         onMouseLeave={() => setHovered(false)}
       >
         {bar.map((seg, i) => (
@@ -486,32 +528,7 @@ function StackedBar({ bar }: { bar: AssetBarSegment[] }) {
           />
         ))}
       </div>
-
-      {/* Hover tooltip */}
-      {hasLabels && hovered && (
-        <div
-          className="absolute left-4 right-4 top-[calc(100%-4px)] z-10 bg-white dark:bg-[#111827] border border-[#EDEEF1] dark:border-[#1F2430] rounded-lg shadow-md py-2"
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-        >
-          {bar.map((seg, i) => seg.label && (
-            <div key={i} className="flex items-center justify-between px-3 py-1.5 gap-3">
-              <div className="flex items-center gap-2 min-w-0">
-                <span
-                  className="shrink-0 w-0.5 h-4 rounded-full"
-                  style={{ backgroundColor: seg.color }}
-                />
-                <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45] truncate">
-                  {seg.label}
-                </span>
-              </div>
-              <span className="text-[12px] font-medium text-[#111827] dark:text-white leading-[1.45] shrink-0">
-                {seg.pct}%
-              </span>
-            </div>
-          ))}
-        </div>
-      )}
+      {tooltip}
     </div>
   )
 }
