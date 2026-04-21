@@ -439,6 +439,8 @@ export interface AssetBarSegment {
   color: string
   /** Width as 0–100 percentage of the total bar */
   pct: number
+  /** Optional label shown in the hover tooltip */
+  label?: string
 }
 
 export interface AssetCardProps {
@@ -458,6 +460,60 @@ const QUALITY_TO_SYSTEM: Record<AssetQualityStatus, 'success' | 'warning' | 'err
   success: 'success',
   warning: 'warning',
   error:   'error',
+}
+
+function StackedBar({ bar }: { bar: AssetBarSegment[] }) {
+  const [hovered, setHovered] = useState(false)
+  const hasLabels = bar.some(s => s.label)
+
+  return (
+    <div className="px-4 pt-3 relative">
+      <div
+        className={clsx('h-3 rounded flex overflow-hidden bg-[#F7F8F8] dark:bg-[#1F2430]', hasLabels && 'cursor-pointer')}
+        onMouseEnter={() => hasLabels && setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        {bar.map((seg, i) => (
+          <div
+            key={i}
+            style={{ width: `${seg.pct}%`, backgroundColor: seg.color }}
+            className={clsx(
+              'transition-opacity duration-150',
+              hovered ? 'opacity-70' : 'opacity-100',
+              i === 0 && 'rounded-l',
+              i === bar.length - 1 && 'rounded-r',
+            )}
+          />
+        ))}
+      </div>
+
+      {/* Hover tooltip */}
+      {hasLabels && hovered && (
+        <div
+          className="absolute left-4 right-4 top-[calc(100%-4px)] z-10 bg-white dark:bg-[#111827] border border-[#EDEEF1] dark:border-[#1F2430] rounded-lg shadow-md py-2"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+        >
+          {bar.map((seg, i) => seg.label && (
+            <div key={i} className="flex items-center justify-between px-3 py-1.5 gap-3">
+              <div className="flex items-center gap-2 min-w-0">
+                <span
+                  className="shrink-0 w-0.5 h-4 rounded-full"
+                  style={{ backgroundColor: seg.color }}
+                />
+                <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45] truncate">
+                  {seg.label}
+                </span>
+              </div>
+              <span className="text-[12px] font-medium text-[#111827] dark:text-white leading-[1.45] shrink-0">
+                {seg.pct}%
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
 }
 
 export function AssetCard({
@@ -547,17 +603,7 @@ export function AssetCard({
 
       {/* Stacked bar */}
       {bar && bar.length > 0 && (
-        <div className="px-4 pt-3">
-          <div className="h-3 rounded flex overflow-hidden bg-[#F7F8F8] dark:bg-[#1F2430]">
-            {bar.map((seg, i) => (
-              <div
-                key={i}
-                style={{ width: `${seg.pct}%`, backgroundColor: seg.color }}
-                className={clsx(i === 0 && 'rounded-l', i === bar.length - 1 && 'rounded-r')}
-              />
-            ))}
-          </div>
-        </div>
+        <StackedBar bar={bar} />
       )}
 
       {/* Footer CTA */}

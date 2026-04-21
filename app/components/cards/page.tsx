@@ -112,8 +112,8 @@ const DRILL_ASSETS = [
       { label: 'Data Reliability', pct: 60,    status: 'warning' as const, onImprove: () => {} },
     ],
     bar: [
-      { color: '#d76513', pct: 16 }, { color: '#22C55E', pct: 25 },
-      { color: '#ffb246', pct: 25 }, { color: '#ed113a', pct: 19 }, { color: '#2295FF', pct: 15 },
+      { color: '#d76513', pct: 16, label: 'Smart meters' }, { color: '#22C55E', pct: 25, label: 'Invoices / Conventional meters' },
+      { color: '#ffb246', pct: 25, label: 'Estimation (SJV Cluster)' }, { color: '#ed113a', pct: 19, label: 'Estimation (SJV postal code)' }, { color: '#2295FF', pct: 15, label: 'Estimation (Calculation)' },
     ],
   },
   {
@@ -507,11 +507,11 @@ export default function CardsPage() {
                       { label: 'Data Reliability', pct: 60,  status: 'warning', onImprove: () => {} },
                     ]}
                     bar={[
-                      { color: '#d76513', pct: 16 },
-                      { color: '#22C55E', pct: 25 },
-                      { color: '#ffb246', pct: 25 },
-                      { color: '#ed113a', pct: 19 },
-                      { color: '#2295FF', pct: 15 },
+                      { color: '#d76513', pct: 16, label: 'Smart meters' },
+                      { color: '#22C55E', pct: 25, label: 'Invoices / Conventional meters' },
+                      { color: '#ffb246', pct: 25, label: 'Estimation (SJV Cluster)' },
+                      { color: '#ed113a', pct: 19, label: 'Estimation (SJV postal code)' },
+                      { color: '#2295FF', pct: 15, label: 'Estimation (Calculation)' },
                     ]}
                     footerLabel="See asset details"
                     onFooterClick={() => {}}
