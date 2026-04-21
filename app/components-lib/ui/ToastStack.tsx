@@ -184,6 +184,104 @@ export function ToastStack({ toasts, queued = 0, onDismiss, onDismissAll }: Toas
   )
 }
 
+// ── Toast Group (flat visible column) ─────────────────────────────────────────
+
+export function ToastGroupDemo() {
+  const [toasts, setToasts] = useState<ToastItem[]>([])
+  const timers = useRef<Map<string, ReturnType<typeof setTimeout>>>(new Map())
+
+  const removeToast = useCallback((id: string) => {
+    const t = timers.current.get(id)
+    if (t) { clearTimeout(t); timers.current.delete(id) }
+    setToasts(prev => prev.filter(x => x.id !== id))
+  }, [])
+
+  useEffect(() => {
+    toasts.forEach(toast => {
+      if (timers.current.has(toast.id)) return
+      const ms = DISMISS_MS[toast.variant]
+      if (ms !== null) {
+        const t = setTimeout(() => removeToast(toast.id), ms)
+        timers.current.set(toast.id, t)
+      }
+    })
+  }, [toasts, removeToast])
+
+  const fire = useCallback((item: Omit<ToastItem, 'id'>) => {
+    const id = Math.random().toString(36).slice(2)
+    setToasts(prev => [...prev, { ...item, id }])
+  }, [])
+
+  const dismissAll = useCallback(() => {
+    timers.current.forEach(t => clearTimeout(t))
+    timers.current.clear()
+    setToasts([])
+  }, [])
+
+  const BUTTONS: { label: string; variant: ToastVariant; msg: string; desc?: string }[] = [
+    { label: 'Success',      variant: 'success',       msg: 'Upload successful.',        desc: 'Asset is now available in your library.' },
+    { label: 'Default',      variant: 'default',       msg: 'Processing in background.', desc: 'You\'ll be notified when complete.' },
+    { label: 'Warning',      variant: 'warning',       msg: 'Storage almost full.',      desc: '5 items remaining.' },
+    { label: 'Error',        variant: 'error',         msg: 'Upload failed.',            desc: 'Check your connection and try again.' },
+    { label: 'Missing info', variant: 'missing-info',  msg: 'Required fields missing.',  desc: 'Fill in all required fields.' },
+  ]
+
+  const showDismissAll = toasts.length >= 2
+
+  return (
+    <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
+      {/* Controls */}
+      <div className="px-5 py-4 bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
+        <p className="text-[13px] font-semibold text-[#1F2430] dark:text-white mb-3">Add a toast to the group</p>
+        <div className="flex flex-wrap gap-2">
+          {BUTTONS.map(b => (
+            <button
+              key={b.variant}
+              onClick={() => fire({ variant: b.variant, label: b.msg, description: b.desc })}
+              className="px-3 py-1.5 rounded-md text-[13px] font-medium bg-white dark:bg-[#111827] border border-[#EDEEF1] dark:border-[#1F2430] text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white hover:border-[#D7DAE0] dark:hover:border-[#3F4654] transition-colors"
+            >
+              {b.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Preview area */}
+      <div className="relative bg-white dark:bg-[#111827] min-h-[200px] p-6">
+        {toasts.length === 0 ? (
+          <div className="flex items-center justify-center h-full min-h-[140px]">
+            <p className="text-[13px] text-[#C4C9D4] dark:text-[#3F4654] select-none">No active toasts — add one above</p>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-2">
+            {/* Dismiss all */}
+            {showDismissAll && (
+              <div className="flex justify-end mb-1">
+                <button
+                  onClick={dismissAll}
+                  className="text-[12px] font-medium text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-[#1F2430] border border-[#EDEEF1] dark:border-[#1F2430] rounded-md px-2 py-1 shadow-sm hover:text-[#111827] dark:hover:text-white transition-colors whitespace-nowrap"
+                >
+                  Dismiss all
+                </button>
+              </div>
+            )}
+            {/* Flat column — all toasts fully visible */}
+            {toasts.map(toast => (
+              <Toast
+                key={toast.id}
+                variant={toast.variant}
+                label={toast.label}
+                description={toast.description}
+                onDismiss={() => removeToast(toast.id)}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 // ── Standalone demo stack (no context) ────────────────────────────────────────
 // Used on the documentation page for the interactive preview.
 

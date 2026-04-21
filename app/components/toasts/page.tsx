@@ -2,7 +2,7 @@
 
 import PageHeader from '@/app/components-lib/ui/PageHeader'
 import Toast, { type ToastVariant } from '@/app/components-lib/ui/Toast'
-import { ToastStackDemo } from '@/app/components-lib/ui/ToastStack'
+import { ToastStackDemo, ToastGroupDemo } from '@/app/components-lib/ui/ToastStack'
 import {
   ComponentTabs, TabBar, TabPanel,
   Section, SpecTable, A11yRow, KeyRow,
@@ -49,6 +49,13 @@ export default function ToastsPage() {
               <Annotation>Fire toasts to see the depth-stacking behavior. Max 3 visible at once — extras are queued. Success auto-dismisses in 3 s, default in 4 s, warning in 5 s. Error and missing-info are persistent.</Annotation>
               <div className="mt-4">
                 <ToastStackDemo />
+              </div>
+            </Section>
+
+            <Section title="Toast group — flat list demo">
+              <Annotation>When multiple notifications arrive in quick succession, they expand into a flat visible column — each toast fully readable with its own dismiss button. "Dismiss all" appears when 2 or more are present. No queue limit in group mode.</Annotation>
+              <div className="mt-4">
+                <ToastGroupDemo />
               </div>
             </Section>
 
