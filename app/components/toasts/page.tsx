@@ -2,6 +2,7 @@
 
 import PageHeader from '@/app/components-lib/ui/PageHeader'
 import Toast, { type ToastVariant } from '@/app/components-lib/ui/Toast'
+import { ToastStackDemo } from '@/app/components-lib/ui/ToastStack'
 import {
   ComponentTabs, TabBar, TabPanel,
   Section, SpecTable, A11yRow, KeyRow,
@@ -43,6 +44,13 @@ export default function ToastsPage() {
         {/* ── USAGE ──────────────────────────────────────────────────────── */}
         <TabPanel id="usage">
           <PageContent>
+
+            <Section title="Interactive stacking demo">
+              <Annotation>Fire toasts to see the depth-stacking behavior. Max 3 visible at once — extras are queued. Success auto-dismisses in 3 s, default in 4 s, warning in 5 s. Error and missing-info are persistent.</Annotation>
+              <div className="mt-4">
+                <ToastStackDemo />
+              </div>
+            </Section>
 
             <Section title="When to use">
               <UseList items={[
@@ -193,8 +201,11 @@ export default function ToastsPage() {
                 { property: 'Icon → gap',       value: '12px',               token: 'gap-3' },
                 { property: 'Border radius',    value: '8px',                token: 'rounded-lg' },
                 { property: 'Shadow',           value: 'Level 2',            token: 'shadow-level-2' },
-                { property: 'Position',         value: 'Fixed bottom-right', token: 'fixed bottom-6 right-6' },
-                { property: 'Stack gap',        value: '8px',                token: 'gap-2' },
+                { property: 'Position',           value: 'Fixed bottom-right',  token: 'fixed bottom-6 right-6' },
+                { property: 'Max visible',        value: '3',                   token: 'MAX_VISIBLE = 3' },
+                { property: 'Depth width shrink', value: '4px per level',        token: '±2px left/right per depth' },
+                { property: 'Depth offset',       value: '10px per level',       token: 'translateY per depth' },
+                { property: 'Depth opacity',      value: '80 % / 60 % / 40 %',  token: 'opacity decreases with depth' },
               ]} />
             </Section>
 
@@ -274,18 +285,27 @@ useEffect(() => {
 />`,
                   },
                   {
-                    label: 'Toast stack (bottom-right)',
-                    code: `<div className="fixed bottom-6 right-6 z-[9999] flex flex-col gap-2">
-  {toasts.map(toast => (
-    <Toast
-      key={toast.id}
-      variant={toast.variant}
-      label={toast.label}
-      description={toast.description}
-      onDismiss={() => removeToast(toast.id)}
-    />
-  ))}
-</div>`,
+                    label: 'Toast stack with provider',
+                    code: `import { ToastProvider, useToast } from '@/app/components-lib/ui/ToastStack'
+
+// Wrap your app (or layout) in the provider:
+export default function Layout({ children }) {
+  return <ToastProvider>{children}</ToastProvider>
+}
+
+// Fire toasts from any child component:
+function MyComponent() {
+  const { addToast } = useToast()
+
+  return (
+    <button onClick={() => addToast({
+      variant: 'success',
+      label: 'Changes saved.',
+    })}>
+      Save
+    </button>
+  )
+}`,
                   },
                 ].map(({ label, code }) => (
                   <div key={label}>
