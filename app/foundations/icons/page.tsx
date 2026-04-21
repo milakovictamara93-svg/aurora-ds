@@ -239,9 +239,9 @@ export default function IconsPage() {
       />
 
       {/* ── Hero Icons ───────────────────────────────────────────────────── */}
-      <section className="mt-12">
-        <div className="mb-6">
-          <h2 className="text-[24px] leading-[140%] font-semibold text-token-primary">Hero Icons</h2>
+      <section className="mt-10">
+        <div className="mb-2">
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4]">Hero Icons</h2>
           <p className="text-sm text-token-secondary mt-1">
             Primary icon library — outline style by default, solid only for active or selected states.
           </p>
@@ -296,9 +296,9 @@ export default function IconsPage() {
       </section>
 
       {/* ── Custom Icons ─────────────────────────────────────────────────── */}
-      <section className="mt-12">
-        <div className="mb-6">
-          <h2 className="text-[24px] leading-[140%] font-semibold text-token-primary">Custom Icons</h2>
+      <section className="mt-10">
+        <div className="mb-2">
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4]">Custom Icons</h2>
           <p className="text-sm text-token-secondary mt-1">
             Domain-specific icons for ESG concepts not covered by Hero Icons. Each icon ships in four sizes: micro (16px), mini (20px), outline (24px), solid (24px).
           </p>
@@ -331,9 +331,9 @@ export default function IconsPage() {
       </section>
 
       {/* ── Rules ────────────────────────────────────────────────────────── */}
-      <section className="mt-12">
-        <div className="mb-6">
-          <h2 className="text-[24px] leading-[140%] font-semibold text-token-primary">Rules</h2>
+      <section className="mt-10">
+        <div className="mb-2">
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4]">Rules</h2>
         </div>
         <div className="divide-y divide-token rounded-xl border border-token overflow-hidden bg-token-primary">
           <div className="p-6">

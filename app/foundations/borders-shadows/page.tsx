@@ -61,9 +61,9 @@ export default function BordersShadowsPage() {
       />
 
       {/* ── Border radius ──────────────────────────────────────────────────── */}
-      <section className="mt-12">
-        <div className="mb-6">
-          <h2 className="text-[24px] leading-[140%] font-semibold text-token-primary">Border radius</h2>
+      <section className="mt-10">
+        <div className="mb-2">
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4]">Border radius</h2>
         </div>
 
         <div className="rounded-xl border border-token overflow-hidden bg-token-primary">
@@ -93,9 +93,9 @@ export default function BordersShadowsPage() {
       </section>
 
       {/* ── Shadow elevation ───────────────────────────────────────────────── */}
-      <section className="mt-12">
-        <div className="mb-6">
-          <h2 className="text-[24px] leading-[140%] font-semibold text-token-primary">Shadow scale</h2>
+      <section className="mt-10">
+        <div className="mb-2">
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4]">Shadow scale</h2>
         </div>
 
         <div className="rounded-xl border border-token overflow-hidden bg-token-primary">
@@ -142,9 +142,9 @@ export default function BordersShadowsPage() {
       </section>
 
       {/* ── Rules ──────────────────────────────────────────────────────────── */}
-      <section className="mt-12">
-        <div className="mb-6">
-          <h2 className="text-[24px] leading-[140%] font-semibold text-token-primary">Rules</h2>
+      <section className="mt-10">
+        <div className="mb-2">
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4]">Rules</h2>
         </div>
 
         <div className="divide-y divide-token rounded-xl border border-token overflow-hidden bg-token-primary">

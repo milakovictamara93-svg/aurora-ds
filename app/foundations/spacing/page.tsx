@@ -33,7 +33,7 @@ export default function SpacingPage() {
       />
 
       {/* ── Scale table ───────────────────────────────────────────────────── */}
-      <div className="mt-12">
+      <div className="mt-10">
         <div className="rounded-xl border border-token overflow-hidden bg-token-primary">
           {/* Header */}
           <div className="grid grid-cols-[80px_100px_1fr] gap-4 px-6 py-3 border-b border-token bg-token-secondary">
@@ -62,9 +62,9 @@ export default function SpacingPage() {
       </div>
 
       {/* ── Rules ─────────────────────────────────────────────────────────── */}
-      <section className="mt-12">
-        <div className="mb-6">
-          <h2 className="text-[24px] leading-[140%] font-semibold text-token-primary">Rules</h2>
+      <section className="mt-10">
+        <div className="mb-2">
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4]">Rules</h2>
         </div>
 
         <div className="divide-y divide-token rounded-xl border border-token overflow-hidden bg-token-primary">

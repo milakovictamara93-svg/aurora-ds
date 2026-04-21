@@ -317,8 +317,8 @@ export default function ColorsPage() {
       </div>
 
       {/* Semantic tokens */}
-      <div className="mb-14">
-        <div className="mb-6">
+      <div className="mb-10">
+        <div className="mb-2">
           <h2 className="text-2xl font-semibold text-token-primary">Semantic tokens</h2>
           <p className="text-sm text-token-secondary mt-1">
             Use these in components — they map to the correct Figma semantic layer values and update globally when the theme changes.
@@ -408,8 +408,8 @@ export default function ColorsPage() {
       </div>
 
       {/* ESG Aspect colors */}
-      <div className="mb-14">
-        <div className="mb-6">
+      <div className="mb-10">
+        <div className="mb-2">
           <h2 className="text-2xl font-semibold text-token-primary">ESG Aspect colors</h2>
           <p className="text-sm text-token-secondary mt-1">
             Each ESG data category has a dedicated color spectrum. Always use the correct spectrum — never substitute or repurpose across categories.
@@ -446,7 +446,7 @@ export default function ColorsPage() {
       <div className="space-y-14">
         {SECTIONS.map(section => (
           <section key={section.id}>
-            <div className="mb-6">
+            <div className="mb-2">
               <h2 className="text-2xl font-semibold text-token-primary">{section.heading}</h2>
               <p className="text-sm text-token-secondary mt-1">{section.description}</p>
             </div>

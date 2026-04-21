@@ -146,9 +146,9 @@ export default function TypographyPage() {
       />
 
       {/* ── Headings ─────────────────────────────────────────────────────── */}
-      <section className="mt-12">
-        <div className="mb-6">
-          <h2 className="text-[24px] leading-[140%] font-semibold text-token-primary">Headings</h2>
+      <section className="mt-10">
+        <div className="mb-2">
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4]">Headings</h2>
           <p className="text-sm text-token-secondary mt-1">
             Three heading levels — each available in Regular, Medium, SemiBold, and Bold.
             Letter spacing is always 0% for headings.
@@ -190,9 +190,9 @@ export default function TypographyPage() {
       </section>
 
       {/* ── Paragraphs ───────────────────────────────────────────────────── */}
-      <section className="mt-12">
-        <div className="mb-6">
-          <h2 className="text-[24px] leading-[140%] font-semibold text-token-primary">Paragraphs</h2>
+      <section className="mt-10">
+        <div className="mb-2">
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4]">Paragraphs</h2>
           <p className="text-sm text-token-secondary mt-1">
             Seven paragraph scales from XLarge (21px) down to Caption (14px). Body text uses 1.5% letter spacing and 145% line height throughout.
           </p>
@@ -233,9 +233,9 @@ export default function TypographyPage() {
       </section>
 
       {/* ── Rules ────────────────────────────────────────────────────────── */}
-      <section className="mt-12">
-        <div className="mb-6">
-          <h2 className="text-[24px] leading-[140%] font-semibold text-token-primary">Rules</h2>
+      <section className="mt-10">
+        <div className="mb-2">
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4]">Rules</h2>
         </div>
 
         <div className="divide-y divide-token rounded-xl border border-token overflow-hidden bg-token-primary">
