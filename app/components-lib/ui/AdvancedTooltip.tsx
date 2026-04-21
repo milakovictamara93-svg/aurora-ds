@@ -118,9 +118,10 @@ function DetailsSectionBlock({ section }: { section: DetailsSection }) {
       )}
       <div className="flex flex-col mt-2 gap-2">
         {section.groups.map((group, i) => (
-          <div key={i}>
-            {/* Group header — blue left accent */}
-            <div className="flex items-center justify-between border-l-2 border-[#1258F8] pl-2 py-0.5">
+          /* Blue left accent spans the full group (header + sub-rows) */
+          <div key={i} className="border-l-2 border-[#1258F8] pl-2">
+            {/* Group header */}
+            <div className="flex items-center justify-between py-0.5">
               <span className="text-[13px] font-semibold text-[#111827] dark:text-white">
                 {group.label}
               </span>
@@ -130,7 +131,7 @@ function DetailsSectionBlock({ section }: { section: DetailsSection }) {
             </div>
             {/* Sub-rows */}
             {group.rows.map((row, j) => (
-              <div key={j} className="flex items-center justify-between pl-3 py-0.5">
+              <div key={j} className="flex items-center justify-between pl-1 py-0.5">
                 <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">
                   {row.label}
                 </span>
@@ -255,7 +256,7 @@ export default function AdvancedTooltip({
 
           {/* Footer */}
           {hasFooter && (
-            <div className="border-t border-[#EDEEF1] dark:border-[#374151] px-4 py-3 flex items-center gap-2">
+            <div className="px-4 py-3 flex items-center gap-2">
               {(primaryAction || secondaryAction) && (
                 <>
                   {secondaryAction && (

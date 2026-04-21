@@ -2,8 +2,7 @@
 
 import {
   BoltIcon, BeakerIcon, GlobeAltIcon, ChartBarIcon,
-  QuestionMarkCircleIcon, ShieldCheckIcon, CogIcon,
-  BuildingOfficeIcon, DocumentTextIcon,
+  ShieldCheckIcon, CogIcon, BuildingOfficeIcon, DocumentTextIcon,
 } from '@heroicons/react/24/outline'
 import PageHeader from '@/app/components-lib/ui/PageHeader'
 import Accordion from '@/app/components-lib/ui/Accordion'
@@ -40,7 +39,7 @@ const FAQ_ITEMS = [
   },
 ]
 
-const ICON_ITEMS = [
+const ESG_ITEMS = [
   {
     id: 'energy',
     label: 'Energy',
@@ -91,25 +90,18 @@ const SETTINGS_ITEMS = [
     label: 'Reports',
     icon: DocumentTextIcon,
     content: (
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2">
         <p>Configure automated report generation, recipients, and delivery schedule.</p>
-        <div className="flex flex-col gap-1.5">
+        <div className="flex flex-col gap-1">
           {['GRESB Real Estate', 'TCFD Report', 'Net Zero Progress', 'ESG Summary'].map(r => (
-            <label key={r} className="flex items-center gap-2 text-[13px] cursor-pointer">
+            <label key={r} className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" defaultChecked={r !== 'TCFD Report'} className="accent-[#1258F8] w-3.5 h-3.5" />
-              <span>{r}</span>
+              <span className="text-[13px]">{r}</span>
             </label>
           ))}
         </div>
       </div>
     ),
-  },
-  {
-    id: 'help',
-    label: 'Help & Support',
-    icon: QuestionMarkCircleIcon,
-    content: 'Access the Aurora knowledge base, submit support tickets, and view the platform changelog.',
-    disabled: false,
   },
 ]
 
@@ -139,7 +131,7 @@ export default function AccordionPage() {
     <div>
       <PageHeader
         title="Accordion"
-        description="Vertically stacked sections that expand and collapse to reveal content. Use to progressively disclose information without navigating away."
+        description="Compact collapsible rows that reveal content on demand. Used to progressively disclose grouped information without navigating away."
         badge="Components"
       />
 
@@ -151,176 +143,236 @@ export default function AccordionPage() {
 
           <Section title="Default">
             <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
-              Each item has a trigger row and a collapsible content region. Only one item is open at a time by default.
+              Each item is a 28 px trigger row with a left-side chevron. One item is open at a time by default. Click to toggle.
             </p>
             <Preview>
-              <div className="w-full max-w-2xl mx-auto">
+              <div className="w-full max-w-lg mx-auto py-2">
                 <Accordion items={FAQ_ITEMS} defaultOpen="scope" />
-              </div>
-            </Preview>
-          </Section>
-
-          <Section title="Multiple open">
-            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
-              Set <code className="font-mono text-[13px] text-[#1258F8]">multiple</code> to allow any number of panels to be open simultaneously.
-            </p>
-            <Preview>
-              <div className="w-full max-w-2xl mx-auto">
-                <Accordion items={FAQ_ITEMS} multiple defaultOpen={['scope', 'intensity']} />
               </div>
             </Preview>
           </Section>
 
           <Section title="With icons">
             <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
-              Add an icon to each item to reinforce category identity — particularly useful for ESG aspect lists.
+              Pass an <code className="bg-[#F7F8F8] dark:bg-[#1F2430] px-1.5 py-0.5 rounded text-[13px]">icon</code> prop to render a category indicator between the chevron and the label.
             </p>
             <Preview>
-              <div className="w-full max-w-2xl mx-auto">
-                <Accordion items={ICON_ITEMS} defaultOpen="energy" />
+              <div className="w-full max-w-lg mx-auto py-2">
+                <Accordion items={ESG_ITEMS} defaultOpen="energy" />
               </div>
             </Preview>
           </Section>
 
-          <Section title="Flush variant">
+          <Section title="Multiple open">
             <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
-              Use <code className="font-mono text-[13px] text-[#1258F8]">variant=&quot;flush&quot;</code> inside a card or panel where the outer border already provides containment.
+              Set <code className="bg-[#F7F8F8] dark:bg-[#1F2430] px-1.5 py-0.5 rounded text-[13px]">multiple</code> to allow any number of panels open simultaneously.
             </p>
             <Preview>
-              <div className="w-full max-w-2xl mx-auto border border-[#EDEEF1] dark:border-[#1F2430] rounded-xl bg-white dark:bg-[#111827]">
-                <div className="px-5 py-4 border-b border-[#EDEEF1] dark:border-[#1F2430]">
-                  <p className="text-[14px] font-semibold text-[#111827] dark:text-white">ESG data categories</p>
-                </div>
-                <div className="px-5 py-2">
-                  <Accordion items={ICON_ITEMS} variant="flush" multiple />
-                </div>
-              </div>
-            </Preview>
-          </Section>
-
-          <Section title="Filled variant">
-            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
-              Use <code className="font-mono text-[13px] text-[#1258F8]">variant=&quot;filled&quot;</code> for settings panels or structured forms where the filled trigger adds visual weight.
-            </p>
-            <Preview>
-              <div className="w-full max-w-2xl mx-auto">
-                <Accordion items={SETTINGS_ITEMS} variant="filled" defaultOpen="general" />
-              </div>
-            </Preview>
-          </Section>
-
-          <Section title="Small size">
-            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
-              Use <code className="font-mono text-[13px] text-[#1258F8]">size=&quot;sm&quot;</code> in compact layouts like sidepanels or drawers.
-            </p>
-            <Preview>
-              <div className="w-full max-w-lg mx-auto">
-                <Accordion items={FAQ_ITEMS} size="sm" defaultOpen="scope" />
+              <div className="w-full max-w-lg mx-auto py-2">
+                <Accordion items={FAQ_ITEMS} multiple defaultOpen={['scope', 'intensity']} />
               </div>
             </Preview>
           </Section>
 
           <Section title="Rich content">
             <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
-              Content can be any React node — forms, lists, tables, or nested components.
+              Content can be any React node — forms, checkbox lists, custom components.
             </p>
             <Preview>
-              <div className="w-full max-w-2xl mx-auto">
+              <div className="w-full max-w-lg mx-auto py-2">
                 <Accordion items={SETTINGS_ITEMS} multiple defaultOpen={['reports']} />
+              </div>
+            </Preview>
+          </Section>
+
+          <Section title="Inside a panel">
+            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
+              The accordion sits naturally inside cards, drawers, or sidebars — no border overrides needed.
+            </p>
+            <Preview>
+              <div className="w-full max-w-lg mx-auto">
+                <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] overflow-hidden">
+                  <div className="px-4 py-3 border-b border-[#EDEEF1] dark:border-[#1F2430]">
+                    <p className="text-[13px] font-semibold text-[#111827] dark:text-white">ESG data categories</p>
+                  </div>
+                  <div className="px-3 py-2">
+                    <Accordion items={ESG_ITEMS} multiple />
+                  </div>
+                </div>
               </div>
             </Preview>
           </Section>
 
           <Section title="Disabled item">
             <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
-              Individual items can be disabled. They remain visible but are not interactive.
+              Individual items can be disabled — visible but not interactive.
             </p>
             <Preview>
-              <div className="w-full max-w-2xl mx-auto">
+              <div className="w-full max-w-lg mx-auto py-2">
                 <Accordion items={DISABLED_ITEMS} defaultOpen="active" />
               </div>
             </Preview>
           </Section>
 
-          {/* Do / Don't */}
-          <div className="grid md:grid-cols-2 gap-4 mt-2">
-            <DoCard>
-              <UseList items={[
-                'Progressive disclosure of related but secondary information',
-                'FAQ sections and help content',
-                'Settings panels with many categories',
-                'ESG aspect breakdowns inside a card',
-                'Inside a sidebar or filter panel',
-              ]} />
-            </DoCard>
-            <DontCard>
-              <DontUseList items={[
-                'Primary navigation — use Tabs instead',
-                'Short content that fits inline (≤ 2 lines)',
-                'When all panels should always be visible',
-                'For critical data users need at a glance',
-                'Deeply nested accordions inside accordions',
-              ]} />
-            </DontCard>
-          </div>
-
-        </TabPanel>
-
-        {/* ── SPECS ── */}
-        <TabPanel id="specs">
-
-          <Section title="Props">
-            <SpecTable rows={[
-              { property: 'items',        value: 'AccordionItem[]',              token: 'required — array of accordion items' },
-              { property: 'multiple',     value: 'boolean',                      token: 'default false — allow multiple panels open' },
-              { property: 'defaultOpen',  value: 'string | string[]',            token: 'optional — initially open item id(s)' },
-              { property: 'open',         value: 'string[]',                     token: 'optional — controlled open state' },
-              { property: 'onOpenChange', value: '(ids: string[]) => void',      token: 'optional — fires on open state change' },
-              { property: 'variant',      value: '"default" | "flush" | "filled"', token: 'default "default"' },
-              { property: 'size',         value: '"sm" | "md"',                  token: 'default "md" — trigger row height' },
-              { property: 'className',    value: 'string',                       token: 'optional — extra classes on wrapper' },
+          <Section title="When to use">
+            <UseList items={[
+              'Filter panels and drawers — group filter options by category',
+              'Column customization — group table columns by data domain',
+              'Settings panels with many categories',
+              'ESG aspect breakdowns inside a card or sidebar',
+              'FAQ sections and progressive disclosure of secondary information',
             ]} />
           </Section>
 
-          <Section title="AccordionItem shape">
-            <SpecTable rows={[
-              { property: 'id',       value: 'string',          token: 'required — unique identifier' },
-              { property: 'label',    value: 'string',          token: 'required — trigger row label' },
-              { property: 'content',  value: 'React.ReactNode', token: 'required — collapsible body' },
-              { property: 'icon',     value: 'React.ElementType', token: 'optional — 20px outline Hero Icon' },
-              { property: 'disabled', value: 'boolean',         token: 'default false — prevent toggling' },
+          <Section title="When not to use">
+            <DontUseList items={[
+              'Primary navigation — use Tabs instead',
+              'Short content that fits inline (≤ 2 lines)',
+              'When all panels should always be visible',
+              'Critical data users need at a glance — keep it in view',
             ]} />
           </Section>
 
-          <Section title="Anatomy">
-            <div className="flex flex-col gap-2">
-              <Annotation><strong>Trigger row:</strong> Icon (optional) · Label · Chevron</Annotation>
-              <Annotation><strong>Content region:</strong> Any React node — text, lists, forms, nested components</Annotation>
-              <Annotation><strong>Chevron:</strong> 20px ChevronDownIcon — rotates 180° when open, 200ms ease-in-out</Annotation>
+          <Section title="Do / Don't">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <DoCard>
+                <div className="mb-3 p-3 rounded-lg bg-white dark:bg-[#111827] border border-[#EDEEF1] dark:border-[#1F2430]">
+                  <Accordion items={ESG_ITEMS.slice(0, 3)} defaultOpen="energy" />
+                </div>
+                Use inside a filter drawer to group related options. Labels are concise and scanning is fast.
+              </DoCard>
+              <DontCard>
+                <div className="mb-3 p-3 rounded-lg bg-white dark:bg-[#111827] border border-[#EDEEF1] dark:border-[#1F2430]">
+                  <Accordion
+                    items={[{
+                      id: 'nav',
+                      label: 'Dashboard',
+                      content: (
+                        <div className="flex flex-col gap-1">
+                          {['Overview', 'Analytics', 'Reports', 'Settings'].map(l => (
+                            <button key={l} className="text-left text-[13px] text-[#1258F8] px-1 py-0.5 hover:underline">{l}</button>
+                          ))}
+                        </div>
+                      ),
+                    }]}
+                    defaultOpen="nav"
+                  />
+                </div>
+                Don't use as primary navigation — users expect nav to always be visible.
+              </DontCard>
             </div>
           </Section>
 
-          <Section title="Spacing & sizing">
+        </TabPanel>
+
+        {/* ── STYLE ── */}
+        <TabPanel id="style">
+
+          <Section title="Anatomy">
+            <Preview>
+              <div className="flex flex-col gap-6 items-center py-6">
+                <div className="w-full max-w-sm">
+                  <Accordion items={[{
+                    id: 'a',
+                    label: 'Label',
+                    icon: BoltIcon,
+                    content: 'Content goes here — indented to align with the label.',
+                  }]} defaultOpen="a" />
+                </div>
+                <div className="grid grid-cols-2 gap-3 w-full max-w-sm">
+                  <Annotation>Chevron — 14px, rotates 90° when open</Annotation>
+                  <Annotation>Icon — 16px, optional category indicator</Annotation>
+                  <Annotation>Label — 13px medium, grey-950</Annotation>
+                  <Annotation>Content — indented 20px, 13px regular, grey-600</Annotation>
+                </div>
+              </div>
+            </Preview>
+          </Section>
+
+          <Section title="Specs">
             <SpecTable rows={[
-              { property: 'Trigger padding (md)',            value: '14px top/bottom · 16px left/right', token: 'py-3.5 px-4' },
-              { property: 'Trigger padding (sm)',            value: '10px top/bottom · 16px left/right', token: 'py-2.5 px-4' },
-              { property: 'Content padding',                 value: '16px left/right · 16px bottom',     token: 'px-4 pb-4' },
-              { property: 'Gap between items (default/filled)', value: '8px',                           token: 'gap-2' },
-              { property: 'Gap between items (flush)',       value: '0 — divider line',                  token: 'divide-y' },
-              { property: 'Icon / chevron size',             value: '20px',                              token: 'w-5 h-5' },
+              { property: 'Row height',           value: '28px',                             token: 'h-7' },
+              { property: 'Horizontal padding',   value: '4px',                              token: 'px-1' },
+              { property: 'Chevron',              value: '14×14px ChevronRight, rotates 90°',token: 'w-3.5 h-3.5, rotate-90 when open' },
+              { property: 'Icon',                 value: '16×16px (optional)',               token: 'w-4 h-4' },
+              { property: 'Label',                value: '13px · medium · grey-950',         token: 'text-[13px] font-medium' },
+              { property: 'Content indent',       value: '20px (aligns with label)',         token: 'ml-5' },
+              { property: 'Content text',         value: '13px · regular · grey-600',        token: 'text-[13px]' },
+              { property: 'Content padding',      value: '4px top, 8px bottom',              token: 'pt-1 pb-2' },
+              { property: 'Gap between items',    value: '2px',                              token: 'gap-0.5' },
+              { property: 'Hover bg',             value: 'grey-50',                          token: 'hover:bg-[#F7F8F8]' },
+              { property: 'Animation',            value: '200ms ease-in-out',                token: 'transition-all duration-200' },
             ]} />
           </Section>
 
-          <Section title="Colors">
+        </TabPanel>
+
+        {/* ── CODE ── */}
+        <TabPanel id="code">
+
+          <Section title="Import">
+            <pre className="bg-[#F7F8F8] dark:bg-[#1F2430] rounded-lg px-4 py-3 text-[13px] text-[#111827] dark:text-white overflow-x-auto">
+              <code>{`import Accordion from '@/app/components-lib/ui/Accordion'`}</code>
+            </pre>
+          </Section>
+
+          <Section title="Props">
             <SpecTable rows={[
-              { property: 'Trigger label',         value: '#111827 · white (dark)',      token: 'grey-950' },
-              { property: 'Icon / chevron',        value: '#505867 · #9CA3AF (dark)',    token: 'grey-600' },
-              { property: 'Content text',          value: '#505867 · #9CA3AF (dark)',    token: 'grey-600' },
-              { property: 'Border (default)',      value: '#EDEEF1 · #1F2430 (dark)',    token: 'grey-100 / grey-900' },
-              { property: 'Trigger hover bg',      value: '#F7F8F8 · white/5 (dark)',   token: 'grey-50' },
-              { property: 'Filled active trigger', value: '#EEF6FF · white/5 (dark)',   token: 'blue-50' },
-              { property: 'Focus ring',            value: '#2295FF',                     token: 'sky-500' },
+              { property: 'items',        value: 'AccordionItem[]',          token: 'required' },
+              { property: 'multiple',     value: 'boolean',                  token: 'default false' },
+              { property: 'defaultOpen',  value: 'string | string[]',        token: 'uncontrolled initial open state' },
+              { property: 'open',         value: 'string[]',                 token: 'controlled open state' },
+              { property: 'onOpenChange', value: '(ids: string[]) => void',  token: 'fires on toggle' },
+              { property: 'className',    value: 'string',                   token: 'extra classes on wrapper' },
             ]} />
+          </Section>
+
+          <Section title="AccordionItem">
+            <SpecTable rows={[
+              { property: 'id',       value: 'string',            token: 'required — unique key' },
+              { property: 'label',    value: 'string',            token: 'required — trigger text' },
+              { property: 'content',  value: 'React.ReactNode',   token: 'required — collapsible body' },
+              { property: 'icon',     value: 'React.ElementType', token: 'optional — 16px icon before label' },
+              { property: 'disabled', value: 'boolean',           token: 'default false' },
+            ]} />
+          </Section>
+
+          <Section title="Basic usage">
+            <pre className="bg-[#F7F8F8] dark:bg-[#1F2430] rounded-lg px-4 py-3 text-[13px] text-[#111827] dark:text-white overflow-x-auto">
+              <code>{`<Accordion
+  items={[
+    { id: 'energy', label: 'Energy', content: 'Track energy consumption...' },
+    { id: 'water',  label: 'Water',  content: 'Track water usage...' },
+  ]}
+  defaultOpen="energy"
+/>`}</code>
+            </pre>
+          </Section>
+
+          <Section title="Multiple open + icons">
+            <pre className="bg-[#F7F8F8] dark:bg-[#1F2430] rounded-lg px-4 py-3 text-[13px] text-[#111827] dark:text-white overflow-x-auto">
+              <code>{`import { BoltIcon } from '@heroicons/react/24/outline'
+
+<Accordion
+  multiple
+  defaultOpen={['energy', 'water']}
+  items={[
+    { id: 'energy', label: 'Energy', icon: BoltIcon, content: '...' },
+  ]}
+/>`}</code>
+            </pre>
+          </Section>
+
+          <Section title="Controlled">
+            <pre className="bg-[#F7F8F8] dark:bg-[#1F2430] rounded-lg px-4 py-3 text-[13px] text-[#111827] dark:text-white overflow-x-auto">
+              <code>{`const [openIds, setOpenIds] = useState<string[]>(['energy'])
+
+<Accordion
+  open={openIds}
+  onOpenChange={setOpenIds}
+  items={items}
+/>`}</code>
+            </pre>
           </Section>
 
         </TabPanel>
@@ -328,41 +380,37 @@ export default function AccordionPage() {
         {/* ── ACCESSIBILITY ── */}
         <TabPanel id="accessibility">
 
-          <Section title="ARIA & keyboard">
-            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
-              Follows the WAI-ARIA Accordion pattern. Each trigger has <code className="font-mono text-[13px]">aria-expanded</code> and <code className="font-mono text-[13px]">aria-controls</code> pointing to its content region. Content regions have <code className="font-mono text-[13px]">role=&quot;region&quot;</code> and <code className="font-mono text-[13px]">aria-labelledby</code>.
-            </p>
-
-            <div className="mt-4 rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
+          <Section title="ARIA roles">
+            <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
               <A11yRow check="<button>">Trigger is a native button — keyboard focusable and activatable by default</A11yRow>
-              <A11yRow check="aria-expanded">Set to <code className="font-mono text-xs">true</code> when panel is open, <code className="font-mono text-xs">false</code> when closed</A11yRow>
-              <A11yRow check="aria-controls">Points to the panel region id, linking trigger to its content</A11yRow>
-              <A11yRow check="aria-labelledby">Set on the panel region, pointing back to the trigger id</A11yRow>
-              <A11yRow check="role=region">Applied to every content panel so screen readers announce it as a landmark</A11yRow>
-              <A11yRow check="disabled">Disabled items carry the native <code className="font-mono text-xs">disabled</code> attribute — excluded from tab order</A11yRow>
-              <A11yRow check="Focus ring">2px sky-500 ring with 2px offset — visible in both light and dark mode</A11yRow>
+              <A11yRow check="aria-expanded">Set to true/false on each trigger reflecting its panel state</A11yRow>
+              <A11yRow check="aria-controls">Points to the panel region id</A11yRow>
+              <A11yRow check='role="region"'>Applied to each content panel</A11yRow>
+              <A11yRow check="aria-labelledby">Set on each panel pointing back to its trigger</A11yRow>
+              <A11yRow check="disabled">Native disabled on button — excluded from tab order</A11yRow>
+              <A11yRow check="Focus ring">2px sky-500 ring with 2px offset</A11yRow>
             </div>
           </Section>
 
           <Section title="Keyboard interaction">
-            <div className="flex flex-col gap-2">
-              <KeyRow keys={['Enter', 'Space']} action="Toggle the focused accordion item" />
-              <KeyRow keys={['Tab']}            action="Move focus to the next interactive element" />
-              <KeyRow keys={['Shift', 'Tab']}   action="Move focus to the previous interactive element" />
+            <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
+              <KeyRow keys={['Enter', 'Space']} action="Toggle focused accordion item" />
+              <KeyRow keys={['Tab']} action="Move focus to next interactive element" />
+              <KeyRow keys={['Shift + Tab']} action="Move focus to previous interactive element" />
             </div>
+          </Section>
+
+          <Section title="Related components">
+            <RelatedComponents items={[
+              { href: '/components/tabs',        label: 'Tabs',   description: 'Top-level page navigation' },
+              { href: '/components/modals',      label: 'Modal',  description: 'Overlaid content requiring focus' },
+              { href: '/patterns/filtering',     label: 'Filtering', description: 'Accordions group filter sections in the drawer' },
+            ]} />
           </Section>
 
         </TabPanel>
 
       </ComponentTabs>
-
-      <RelatedComponents
-        items={[
-          { href: '/components/tabs',   label: 'Tabs',   description: 'For top-level page navigation' },
-          { href: '/components/modals', label: 'Modal',  description: 'For overlaid content that needs focus' },
-          { href: '/components/cards',  label: 'Card',   description: 'Flush variant lives inside a card' },
-        ]}
-      />
     </div>
   )
 }

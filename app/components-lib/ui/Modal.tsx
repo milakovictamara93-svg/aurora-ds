@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { XMarkIcon, ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -114,7 +114,7 @@ export default function Modal({
                 aria-label="Close drawer"
                 className="mb-3 w-8 h-8 flex items-center justify-center rounded text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430] transition-colors -ml-1"
               >
-                <ArrowRightOnRectangleIcon className="w-5 h-5" />
+                <XMarkIcon className="w-5 h-5" />
               </button>
             )}
             <h2

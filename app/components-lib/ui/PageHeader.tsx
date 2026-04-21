@@ -14,7 +14,7 @@ interface PageHeaderProps {
 
 export default function PageHeader({ title, description, badge }: PageHeaderProps) {
   return (
-    <div className="relative flex flex-col justify-between gap-6 p-8 rounded-[8px] overflow-hidden" style={{ minHeight: '200px' }}>
+    <div className="relative flex flex-col justify-between p-8 rounded-[8px] overflow-hidden" style={{ height: '200px' }}>
       {/* Figma: image + #1258f8 hard-light overlay */}
       <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8px]">
         <img

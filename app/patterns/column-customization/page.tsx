@@ -382,7 +382,7 @@ export default function ColumnCustomizationPage() {
         badge="Patterns"
       />
 
-      <div className="mt-8 flex flex-col gap-12">
+      <div className="mt-8 flex flex-col gap-10">
 
         <section>
           <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-1">Customize view drawer</h2>

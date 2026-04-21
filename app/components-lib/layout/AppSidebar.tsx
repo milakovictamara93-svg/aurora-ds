@@ -107,17 +107,14 @@ const PATTERNS: NavGroup = {
   id: 'patterns',
   label: 'Patterns',
   items: [
-    { href: '/patterns/esg-data',           label: 'ESG data',            available: false },
-    { href: '/patterns/data-visualization', label: 'Data visualization' },
-    { href: '/patterns/drag-drop',          label: 'Drag and drop' },
-    { href: '/patterns/filtering',              label: 'Filtering' },
+    { href: '/patterns/data-visualization',    label: 'Data visualization' },
+    { href: '/patterns/drag-drop',             label: 'Drag and drop' },
+    { href: '/patterns/filtering',             label: 'Filtering' },
     { href: '/patterns/column-customization',  label: 'Column customization' },
     { href: '/patterns/forms',                 label: 'Forms' },
     { href: '/patterns/upload',                label: 'Upload' },
-    { href: '/patterns/empty-states',       label: 'Empty states',        available: false },
-    { href: '/patterns/loading-states',     label: 'Loading states',      available: false },
-    { href: '/patterns/brand-voice',        label: 'Brand voice',         available: false },
-    { href: '/patterns/accessibility',      label: 'Accessibility',       available: false },
+    { href: '/patterns/empty-states',          label: 'Empty states',   available: false },
+    { href: '/patterns/loading-states',        label: 'Loading states', available: false },
   ],
 }
 

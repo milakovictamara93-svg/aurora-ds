@@ -95,7 +95,7 @@ export function Section({
   return (
     <section className={`mb-10 ${className}`}>
       {title && (
-        <h2 className="text-[20px] font-semibold text-[#1F2430] dark:text-white mb-2 leading-[1.4]">
+        <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">
           {title}
         </h2>
       )}

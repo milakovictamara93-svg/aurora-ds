@@ -73,13 +73,14 @@ interface FilterState {
   assetType:  string
 }
 
+// Empty = no filters applied (no chips shown)
 const DEFAULT_STATE: FilterState = {
   dateMode:   'both',
   dateFrom:   '2024-01-01',
   dateTo:     '2024-12-31',
   area:       '',
-  scoreRange: [20, 100],
-  aspects:    ['Energy', 'Water'],
+  scoreRange: [0, 100],
+  aspects:    [],
   assetType:  'all',
 }
 
@@ -448,7 +449,7 @@ export default function FilteringPage() {
         badge="Patterns"
       />
 
-      <div className="mt-8 flex flex-col gap-12">
+      <div className="mt-8 flex flex-col gap-10">
 
         <section>
           <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-1">Filter bar + drawer</h2>
