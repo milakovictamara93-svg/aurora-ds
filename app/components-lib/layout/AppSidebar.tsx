@@ -87,7 +87,7 @@ const COMPONENT_GROUPS: NavGroup[] = [
       { href: '/components/sidebar',      label: 'Sidebar',     available: false },
       { href: '/components/tabs',         label: 'Tabs' },
       { href: '/components/accordion',    label: 'Accordion' },
-      { href: '/components/breadcrumbs',  label: 'Breadcrumbs', available: false },
+      { href: '/components/breadcrumbs',  label: 'Breadcrumbs' },
     ],
   },
   {

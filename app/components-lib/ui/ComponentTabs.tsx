@@ -5,6 +5,7 @@ import Tag from './Tag'
 import Toast from './Toast'
 import Banner from './Banner'
 import { SimpleCard } from './Card'
+import Breadcrumbs from './Breadcrumbs'
 
 // ── Context ───────────────────────────────────────────────────────────────────
 const TabCtx = createContext<{ active: string; set: (t: string) => void }>({
@@ -665,6 +666,26 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
       <div className="h-6 px-3 flex items-center rounded bg-[#1258F8] mt-0.5">
         <span className="text-[10px] font-semibold text-white">Add item</span>
       </div>
+    </div>
+  ),
+  '/components/breadcrumbs': (
+    <div className="flex flex-col gap-2">
+      <Breadcrumbs
+        items={[
+          { label: 'Home', href: '/' },
+          { label: 'Components', href: '/components' },
+          { label: 'Breadcrumbs' },
+        ]}
+      />
+      <Breadcrumbs
+        items={[
+          { label: 'Home', href: '/' },
+          { label: 'Portfolio', href: '/portfolio' },
+          { label: 'APAC', href: '/portfolio/apac' },
+          { label: '180 George St', href: '/portfolio/apac/180-george' },
+          { label: 'Energy' },
+        ]}
+      />
     </div>
   ),
   '/patterns/accessibility': (
