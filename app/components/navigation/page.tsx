@@ -27,7 +27,7 @@ export default function NavigationPage() {
 
           <Section title="Full navigation shell">
             <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
-              The platform navigation has three layers: an icon rail for top-level sections, an expanded sidebar for sub-pages within the active section, and a top bar with portfolio/asset selectors, search, and reporting year.
+              The platform navigation has three layers: an icon rail for top-level sections, an expanded sidebar for sub-pages within the active section, and a top bar with portfolio/asset selectors and global search.
             </p>
             <Preview>
               <div className="w-full" style={{ height: 420 }}>
@@ -49,7 +49,7 @@ export default function NavigationPage() {
 
           <Section title="Top bar only">
             <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
-              The top bar can be used independently — it provides portfolio/asset context selectors, global search, and reporting year.
+              The top bar can be used independently — it provides company, portfolio, and asset context selectors plus global search.
             </p>
             <Preview>
               <div className="w-full">
@@ -60,9 +60,9 @@ export default function NavigationPage() {
 
           <Section title="When to use">
             <UseList items={[
-              'Icon rail for switching between top-level platform sections (Home, Analytics, Collection)',
+              'Icon rail for switching between top-level sections (Home, Analytics, Collection, Reports)',
               'Expanded sidebar for sub-page navigation within the active section',
-              'Top bar for persistent context: portfolio selector, asset filter, search, reporting year',
+              'Top bar for persistent context: company, portfolio, and asset selectors plus global search',
               'Active state clearly indicated on both rail (blue bg) and sidebar (blue-tinted pill)',
             ]} />
           </Section>

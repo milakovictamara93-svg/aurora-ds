@@ -156,7 +156,7 @@ function ReportingYearPicker({
           <div className="flex justify-end gap-2 px-3 py-2 border-t border-[#EDEEF1] dark:border-[#1F2430]">
             <button
               onClick={apply}
-              className="h-7 px-3 rounded text-[13px] font-medium bg-[#22C55E] text-white hover:bg-[#16A34A] transition-colors"
+              className="h-7 px-3 rounded text-[13px] font-medium bg-[#1258F8] text-white hover:bg-[#1146E4] transition-colors"
             >
               Apply
             </button>
@@ -245,7 +245,7 @@ export default function PageLayout({
             )}
           </div>
           <div className="flex items-center gap-2 shrink-0">
-            <ReportingYearPicker value={year} options={reportingYearOptions} onChange={setYear} />
+            {year && <ReportingYearPicker value={year} options={reportingYearOptions} onChange={setYear} />}
             {actions.map((a, i) => <ActionButton key={i} action={a} />)}
           </div>
         </div>
