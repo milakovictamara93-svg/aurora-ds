@@ -116,10 +116,8 @@ export function ChartCard({
         </button>
       </div>
 
-      {/* Chart slot */}
-      <div className="flex-1 min-h-0">
-        {children}
-      </div>
+      {/* Chart slot — rendered directly, no wrapper that collapses */}
+      {children}
 
       {/* Legend — right aligned */}
       {legend && (
