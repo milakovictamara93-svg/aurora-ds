@@ -90,17 +90,11 @@ export default function DataVisualizationPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-4">
               <p className="text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-3">Trend with projection + benchmark</p>
-              <LineChart points={TREND} comparisonPoints={BENCH} projectionFrom={5} labels={['2018', '2020', '2022', '2024', '2026', '2028', '2030']} />
-              <div className="mt-3">
-                <ChartLegend items={[
-                  { label: 'Actual', color: CHART_COLORS.energy },
-                  { label: 'Benchmark', color: CHART_COLORS.comparison },
-                ]} />
-              </div>
+              <LineChart series={[{ points: TREND, color: CHART_COLORS.energy }, { points: BENCH, color: CHART_COLORS.comparison, dashed: true }]} projectionFrom={5} labels={['2018', '2020', '2022', '2024', '2026', '2028', '2030']} legend={[{ label: 'Actual', color: CHART_COLORS.energy }, { label: 'Benchmark', color: CHART_COLORS.comparison }]} />
             </div>
             <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-4">
               <p className="text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-3">Simple trend</p>
-              <LineChart points={[45, 52, 48, 60, 55, 72, 68, 80, 75, 85]} color="#1258F8" labels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']} />
+              <LineChart series={[{ points: [45, 52, 48, 60, 55, 72, 68, 80, 75, 85], color: '#1258F8' }]} labels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']} />
             </div>
           </div>
         </section>
