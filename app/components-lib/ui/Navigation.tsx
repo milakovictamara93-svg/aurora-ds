@@ -21,9 +21,7 @@ import {
   PresentationChartBarIcon,
 } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
-
-// ── Scaler logo (from Figma) ────────────────────────────────────────────────
-const SCALER_LOGO = 'https://www.figma.com/api/mcp/asset/a8400254-45e3-4ec1-ac4f-f0468e28de61'
+import ScalerLogo from './ScalerLogo'
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -85,7 +83,7 @@ export const PLATFORM_SECTIONS: NavSection[] = [
     id: 'reports',
     label: 'Reports',
     icon: DocumentTextIcon,
-    color: '#8B5CF6',
+    color: '#4A5D4A',
     items: [
       { id: 'rep-overview',   label: 'Overview',   icon: HomeIcon },
       { id: 'rep-templates',  label: 'Templates',  icon: DocumentTextIcon },
@@ -109,7 +107,7 @@ function IconRail({
     <div className="w-[70px] shrink-0 bg-white dark:bg-[#0D1117] border-r border-[#EDEEF1] dark:border-[#1F2430] flex flex-col items-center pt-3 pb-2">
       {/* Scaler logo */}
       <div className="w-8 h-8 mb-4 flex items-center justify-center">
-        <img src={SCALER_LOGO} alt="Scaler" className="w-8 h-8" />
+        <ScalerLogo className="w-7 h-7" color="#111827" />
       </div>
 
       {/* Section icons — each section has its own accent color */}
@@ -174,10 +172,9 @@ function SidePanel({
               onClick={() => onItemChange(item.id)}
               className={clsx(
                 'w-full h-10 flex items-center gap-2 px-2 py-3 rounded text-[12px] font-medium transition-colors text-left tracking-[0.18px]',
-                active
-                  ? 'bg-[#EDEEF1] dark:bg-[#1F2430] text-[#111827] dark:text-white'
-                  : 'text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5'
+                !active && 'text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5'
               )}
+              style={active ? { color: section.color, backgroundColor: `${section.color}15` } : undefined}
             >
               <Icon className="w-5 h-5 shrink-0" />
               <span className="truncate">{item.label}</span>
