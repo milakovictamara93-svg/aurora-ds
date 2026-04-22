@@ -110,7 +110,8 @@ function CircularChart({
             d={arc.d}
             fill={arc.color}
             opacity={arc.opacity}
-            className="cursor-pointer transition-opacity duration-100"
+            className="cursor-pointer"
+            style={{ transition: 'opacity 150ms ease, d 150ms ease' }}
             onMouseEnter={() => setHoverIdx(arc.i)}
             onMouseLeave={() => setHoverIdx(null)}
             onClick={() => setSelectedIdx(selectedIdx === arc.i ? null : arc.i)}
@@ -123,11 +124,20 @@ function CircularChart({
         ))}
       </svg>
 
-      {/* Center text (donut only) */}
-      {type === 'donut' && (centerValue || centerLabel) && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-          {centerValue && <span className="text-[24px] font-semibold text-[#111827] dark:text-white">{centerValue}</span>}
-          {centerLabel && <span className="text-[12px] text-[#9CA3AF]">{centerLabel}</span>}
+      {/* Center text — updates on hover/click */}
+      {(type === 'donut' || type === 'nightingale') && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none transition-all duration-150">
+          {activeIdx !== null ? (
+            <>
+              <span className="text-[24px] font-semibold transition-all duration-150" style={{ color: segments[activeIdx].color }}>{segments[activeIdx].value}</span>
+              <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF]">{segments[activeIdx].label}</span>
+            </>
+          ) : (
+            <>
+              <span className="text-[24px] font-semibold text-[#111827] dark:text-white">{centerValue ?? total}</span>
+              <span className="text-[12px] text-[#9CA3AF]">{centerLabel ?? 'out of ' + total}</span>
+            </>
+          )}
         </div>
       )}
     </div>
