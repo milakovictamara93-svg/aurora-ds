@@ -111,7 +111,7 @@ function CircularChart({
             fill={arc.color}
             opacity={arc.opacity}
             className="cursor-pointer"
-            style={{ transition: 'opacity 150ms ease, d 150ms ease' }}
+            style={{ transition: 'opacity 200ms ease-out' }}
             onMouseEnter={() => setHoverIdx(arc.i)}
             onMouseLeave={() => setHoverIdx(null)}
             onClick={() => setSelectedIdx(selectedIdx === arc.i ? null : arc.i)}
@@ -124,45 +124,43 @@ function CircularChart({
         ))}
       </svg>
 
-      {/* Center text — updates on hover/click */}
-      {(type === 'donut' || type === 'nightingale') && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none transition-all duration-150">
-          {activeIdx !== null ? (
-            <>
-              <span className="text-[24px] font-semibold transition-all duration-150" style={{ color: segments[activeIdx].color }}>{segments[activeIdx].value}</span>
-              <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF]">{segments[activeIdx].label}</span>
-            </>
-          ) : (
-            <>
-              <span className="text-[24px] font-semibold text-[#111827] dark:text-white">{centerValue ?? total}</span>
-              <span className="text-[12px] text-[#9CA3AF]">{centerLabel ?? 'out of ' + total}</span>
-            </>
-          )}
-        </div>
-      )}
+      {/* Center text — shows total by default, active segment on hover/click */}
+      {(type === 'donut' || type === 'nightingale') && (() => {
+        const active = activeIdx !== null ? segments[activeIdx] : null
+        const displayValue = active ? active.value : (centerValue ?? total)
+        const displayLabel = active ? active.label : (centerLabel ?? `out of ${total}`)
+        const displayColor = active ? active.color : '#111827'
+        return (
+          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+            <span className="text-[24px] font-semibold" style={{ color: displayColor, transition: 'color 200ms ease' }}>{displayValue}</span>
+            <span className="text-[12px] text-[#9CA3AF]" style={{ transition: 'opacity 200ms ease' }}>{displayLabel}</span>
+          </div>
+        )
+      })()}
     </div>
   )
 }
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
+// Real ESG aspect scores (out of 100 each, total max = 700)
 const ASPECTS: Segment[] = [
-  { label: 'Energy',         value: 28, color: CHART_COLORS.energy },
-  { label: 'GHG',            value: 5,  color: '#F97316' },
-  { label: 'Certifications', value: 14, color: CHART_COLORS.certifications },
-  { label: 'Waste',          value: 12, color: CHART_COLORS.waste },
-  { label: 'Water',          value: 15, color: CHART_COLORS.water },
-  { label: 'Engagement',     value: 18, color: CHART_COLORS.engagement },
-  { label: 'ESG Risk',       value: 8,  color: CHART_COLORS.esgRisk },
+  { label: 'Energy',         value: 82, color: CHART_COLORS.energy },
+  { label: 'GHG',            value: 68, color: '#F97316' },
+  { label: 'Water',          value: 74, color: CHART_COLORS.water },
+  { label: 'Waste',          value: 56, color: CHART_COLORS.waste },
+  { label: 'Certifications', value: 91, color: CHART_COLORS.certifications },
+  { label: 'Engagement',     value: 45, color: CHART_COLORS.engagement },
+  { label: 'ESG Risk',       value: 38, color: CHART_COLORS.esgRisk },
 ]
 
+// Portfolio composition (number of assets per type)
 const PORTFOLIO: Segment[] = [
-  { label: 'Energy',         value: 30, color: '#FF455F' },
-  { label: 'Engagement',     value: 8,  color: '#39D79D' },
-  { label: 'Waste',          value: 25, color: '#285446' },
-  { label: 'Water',          value: 20, color: '#22D3EE' },
-  { label: 'Certifications', value: 10, color: '#2F4FC0' },
-  { label: 'GHG',            value: 7,  color: '#F97316' },
+  { label: 'Office',       value: 28, color: '#2F4FC0' },
+  { label: 'Residential',  value: 18, color: '#22D3EE' },
+  { label: 'Industrial',   value: 9,  color: '#285446' },
+  { label: 'Retail',       value: 6,  color: '#F97316' },
+  { label: 'Logistics',    value: 3,  color: '#39D79D' },
 ]
 
 // ── Page ──────────────────────────────────────────────────────────────────────
@@ -185,17 +183,17 @@ export default function DonutChartPage() {
           <div className="grid grid-cols-3 gap-4 mb-4">
             <ChartCard label="Default" suffix="">
               <div className="flex justify-center py-2">
-                <CircularChart segments={ASPECTS} type="donut" style="sharp" centerValue="000" centerLabel="out of 000" />
+                <CircularChart segments={ASPECTS} type="donut" style="sharp" />
               </div>
             </ChartCard>
             <ChartCard label="Hover / Active" suffix="interactive">
               <div className="flex justify-center py-2">
-                <CircularChart segments={ASPECTS} type="donut" style="sharp" centerValue="000" centerLabel="out of 000" />
+                <CircularChart segments={ASPECTS} type="donut" style="sharp" />
               </div>
             </ChartCard>
             <ChartCard label="Portfolio" suffix="sharp">
               <div className="flex justify-center py-2">
-                <CircularChart segments={PORTFOLIO} type="donut" style="sharp" centerValue="000" centerLabel="out of 000" />
+                <CircularChart segments={PORTFOLIO} type="donut" style="sharp" />
               </div>
             </ChartCard>
           </div>
@@ -204,12 +202,12 @@ export default function DonutChartPage() {
           <div className="grid grid-cols-3 gap-4">
             <ChartCard label="Default" suffix="rounded">
               <div className="flex justify-center py-2">
-                <CircularChart segments={ASPECTS} type="donut" style="rounded" centerValue="000" centerLabel="out of 000" />
+                <CircularChart segments={ASPECTS} type="donut" style="rounded" />
               </div>
             </ChartCard>
             <ChartCard label="Portfolio" suffix="rounded">
               <div className="flex justify-center py-2">
-                <CircularChart segments={PORTFOLIO} type="donut" style="rounded" centerValue="000" centerLabel="out of 000" />
+                <CircularChart segments={PORTFOLIO} type="donut" style="rounded" />
               </div>
             </ChartCard>
             <ChartCard label="Empty" suffix="">
@@ -252,12 +250,12 @@ export default function DonutChartPage() {
           <div className="grid grid-cols-3 gap-4">
             <ChartCard label="Aspects" suffix="sharp">
               <div className="flex justify-center py-2">
-                <CircularChart segments={ASPECTS} type="nightingale" style="sharp" centerValue="000" centerLabel="out of 000" />
+                <CircularChart segments={ASPECTS} type="nightingale" style="sharp" />
               </div>
             </ChartCard>
             <ChartCard label="Portfolio" suffix="sharp">
               <div className="flex justify-center py-2">
-                <CircularChart segments={PORTFOLIO} type="nightingale" style="sharp" centerValue="000" centerLabel="out of 000" />
+                <CircularChart segments={PORTFOLIO} type="nightingale" style="sharp" />
               </div>
             </ChartCard>
             <ChartCard label="Empty" suffix="">
