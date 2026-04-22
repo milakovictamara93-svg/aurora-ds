@@ -181,7 +181,8 @@ export function ColumnChart({
             <div className="absolute inset-0 flex items-end z-[1]" style={{ gap: 1 }}>
               {data.map((v, i) => {
                 const isMissing = missingFrom !== undefined && i >= missingFrom
-                const pct = max > 0 ? (v / max) * 100 : 0
+                // Missing bars always go to full height
+                const pct = isMissing ? 100 : (max > 0 ? (v / max) * 100 : 0)
                 const isHovered = hoverIdx === i
                 const isSelected = selectedIdx === i
 
@@ -333,8 +334,8 @@ export function ScoreChart({
                 return (
                   <div
                     key={i}
-                    className="cursor-pointer"
-                    style={{ flex: '1 1 0', maxWidth: 6, height: `${pct}%` }}
+                    className="flex-1 cursor-pointer"
+                    style={{ height: `${pct}%` }}
                     onMouseEnter={() => setHoverIdx(i)}
                     onMouseLeave={() => setHoverIdx(null)}
                     onClick={() => onSelect?.(isSelected ? null : i)}

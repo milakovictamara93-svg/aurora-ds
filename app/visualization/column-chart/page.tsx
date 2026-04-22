@@ -12,12 +12,12 @@ const SCORES = [100, 98, 95, 92, 90, 88, 85, 82, 80, 78, 75, 72, 70, 68, 65, 60,
 const YEARS = ['2020', '2021', '2022', '2023', '2024', '2025']
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
-// MoM grouped data: 3 bars per month (current year, last year, year before)
-const MOM_GROUPS = MONTHS.map(() => [
-  Math.round(90 + Math.random() * 50),   // light pink (oldest)
-  Math.round(90 + Math.random() * 50),   // medium blue
-  Math.round(90 + Math.random() * 50),   // dark blue (newest)
-])
+// MoM grouped data: 3 bars per month [2023, 2024, 2025]
+const MOM_GROUPS: [number, number, number][] = [
+  [125, 118, 130], [128, 122, 125], [115, 110, 120], [108, 105, 112],
+  [100, 98, 105],  [95, 92, 98],    [92, 88, 95],    [98, 95, 100],
+  [110, 105, 115], [130, 125, 140], [122, 118, 128], [118, 115, 122],
+]
 
 export default function ColumnChartPage() {
   const [scoreSelected, setScoreSelected] = useState<number | null>(null)
