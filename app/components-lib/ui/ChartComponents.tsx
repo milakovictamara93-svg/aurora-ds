@@ -86,6 +86,49 @@ export function ChartTooltip({
   )
 }
 
+// ── Chart Card (slot wrapper — Figma 57:7458) ──────────────────────────
+
+export function ChartCard({
+  label,
+  suffix,
+  legend,
+  children,
+  className,
+}: {
+  label: string
+  suffix?: string
+  legend?: { label: string; color: string }[]
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <div className={clsx('bg-white dark:bg-[#111827] rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] p-4 flex flex-col', className)}>
+      {/* Header */}
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-baseline gap-1.5">
+          <span className="text-[14px] font-semibold text-[#111827] dark:text-white">{label}</span>
+          {suffix && <span className="text-[14px] text-[#9CA3AF]">{suffix}</span>}
+        </div>
+        <button className="w-5 h-5 flex items-center justify-center text-[#9CA3AF] hover:text-[#505867] transition-colors" title="Info">
+          <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z" clipRule="evenodd" /></svg>
+        </button>
+      </div>
+
+      {/* Chart slot */}
+      <div className="flex-1 min-h-0">
+        {children}
+      </div>
+
+      {/* Legend — right aligned */}
+      {legend && (
+        <div className="mt-3 flex justify-end">
+          <ChartLegend items={legend} />
+        </div>
+      )}
+    </div>
+  )
+}
+
 // ── Column Chart (Figma: 6px bars, 4px top radius, exact state colors) ──
 
 export function ColumnChart({
