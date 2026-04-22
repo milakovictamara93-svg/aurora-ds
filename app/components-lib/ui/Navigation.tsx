@@ -83,11 +83,22 @@ export const PLATFORM_SECTIONS: NavSection[] = [
     id: 'reports',
     label: 'Reports',
     icon: DocumentTextIcon,
-    color: '#4A5D4A',
+    color: '#285446',
     items: [
       { id: 'rep-overview',   label: 'Overview',   icon: HomeIcon },
       { id: 'rep-templates',  label: 'Templates',  icon: DocumentTextIcon },
       { id: 'rep-scheduled',  label: 'Scheduled',  icon: DocumentTextIcon },
+    ],
+  },
+  {
+    id: 'dashboards',
+    label: 'Dashboards',
+    icon: PresentationChartBarIcon,
+    color: '#6430F7',
+    items: [
+      { id: 'dash-overview',  label: 'Overview',    icon: HomeIcon },
+      { id: 'dash-custom',    label: 'Custom',      icon: PresentationChartBarIcon },
+      { id: 'dash-shared',    label: 'Shared',      icon: PresentationChartBarIcon },
     ],
   },
 ]
