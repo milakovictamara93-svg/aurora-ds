@@ -9,7 +9,6 @@ import {
   Cog6ToothIcon,
   UserCircleIcon,
   MagnifyingGlassIcon,
-  CalendarIcon,
   MapIcon,
   BuildingOfficeIcon,
   FolderIcon,
@@ -33,6 +32,8 @@ export interface NavSection {
   id:    string
   label: string
   icon:  React.ElementType
+  /** Accent color for this section's icon rail item */
+  color: string
   items: { id: string; label: string; icon: React.ElementType }[]
 }
 
@@ -43,6 +44,7 @@ export const PLATFORM_SECTIONS: NavSection[] = [
     id: 'home',
     label: 'Home',
     icon: HomeIcon,
+    color: '#F97316',
     items: [
       { id: 'dashboard', label: 'Dashboard', icon: HomeIcon },
     ],
@@ -51,6 +53,7 @@ export const PLATFORM_SECTIONS: NavSection[] = [
     id: 'analytics',
     label: 'Analytics',
     icon: ChartBarIcon,
+    color: '#1258F8',
     items: [
       { id: 'overview',          label: 'Overview',          icon: HomeIcon },
       { id: 'asset-list',        label: 'Asset List',        icon: BuildingOfficeIcon },
@@ -68,6 +71,7 @@ export const PLATFORM_SECTIONS: NavSection[] = [
     id: 'collection',
     label: 'Collection',
     icon: ClipboardDocumentListIcon,
+    color: '#22C55E',
     items: [
       { id: 'col-overview',    label: 'Overview',      icon: HomeIcon },
       { id: 'col-asset-list',  label: 'Asset List',    icon: BuildingOfficeIcon },
@@ -93,14 +97,14 @@ function IconRail({
 }) {
   return (
     <div className="w-14 shrink-0 bg-white dark:bg-[#0D1117] border-r border-[#EDEEF1] dark:border-[#1F2430] flex flex-col items-center py-4 gap-1">
-      {/* Logo */}
-      <div className="w-8 h-8 mb-4 rounded-lg bg-[#1258F8] flex items-center justify-center">
-        <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+      {/* Scaler logo */}
+      <div className="w-8 h-8 mb-4 rounded-lg bg-[#111827] dark:bg-white flex items-center justify-center">
+        <svg className="w-4 h-4 text-white dark:text-[#111827]" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 1L1 5v6l7 4 7-4V5L8 1zm0 2.2L12.5 5.7 8 8.2 3.5 5.7 8 3.2z" />
         </svg>
       </div>
 
-      {/* Section icons */}
+      {/* Section icons — each section has its own accent color */}
       {sections.map(section => {
         const Icon = section.icon
         const active = activeSection === section.id
@@ -110,10 +114,9 @@ function IconRail({
             onClick={() => onSectionChange(section.id)}
             className={clsx(
               'w-10 h-10 rounded-lg flex items-center justify-center transition-colors',
-              active
-                ? 'bg-[#EEF6FF] dark:bg-[#1258F8]/15 text-[#1258F8]'
-                : 'text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5'
+              !active && 'text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5'
             )}
+            style={active ? { color: section.color, backgroundColor: `${section.color}10` } : undefined}
             title={section.label}
           >
             <Icon className="w-5 h-5" />
@@ -164,10 +167,9 @@ function SidePanel({
               onClick={() => onItemChange(item.id)}
               className={clsx(
                 'w-full flex items-center gap-2 px-2 py-1.5 rounded-md text-[13px] transition-colors text-left',
-                active
-                  ? 'bg-[#EEF6FF] dark:bg-[#1258F8]/15 text-[#1258F8] font-medium'
-                  : 'text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5'
+                !active && 'text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5'
               )}
+              style={active ? { color: section.color, backgroundColor: `${section.color}10`, fontWeight: 500 } : undefined}
             >
               <Icon className="w-4 h-4 shrink-0" />
               {item.label}
@@ -216,7 +218,7 @@ export function TopBar({
         </div>
       </div>
 
-      {/* Right: search + year */}
+      {/* Right: search */}
       <div className="flex items-center gap-3">
         <div className="relative">
           <MagnifyingGlassIcon className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#9CA3AF]" />
@@ -226,11 +228,6 @@ export function TopBar({
             className="w-40 pl-8 pr-3 py-1.5 rounded-md border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] text-[13px] text-[#111827] dark:text-white placeholder-[#9CA3AF] focus:outline-none focus:border-[#1258F8] transition-colors"
           />
         </div>
-        <button className="flex items-center gap-1.5 h-8 px-3 rounded-md border border-[#EDEEF1] dark:border-[#1F2430] text-[13px] text-[#505867] dark:text-[#9CA3AF] hover:border-[#D7DAE0] dark:hover:border-[#374151] transition-colors">
-          <CalendarIcon className="w-4 h-4" />
-          Reporting Year 2025
-          <ChevronDownIcon className="w-3 h-3" />
-        </button>
       </div>
     </div>
   )
