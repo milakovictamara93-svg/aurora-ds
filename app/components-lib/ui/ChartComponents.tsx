@@ -338,7 +338,7 @@ export function LineChart({
             {series.map((s, si) => (
               <svg key={si} className="absolute inset-0 w-full z-[2] pointer-events-none" style={{ height: chartH }} preserveAspectRatio="none" viewBox={`0 0 100 ${chartH}`}>
                 <polyline
-                  points={s.points.slice(0, actualEnd).map((v, i) => `${xPct(i)},${yPx(v)}`).join(' ')}
+                  points={(s.dashed ? s.points : s.points.slice(0, actualEnd)).map((v, i) => `${xPct(i)},${yPx(v)}`).join(' ')}
                   fill="none" stroke={s.color}
                   strokeWidth={2} vectorEffect="non-scaling-stroke"
                   strokeDasharray={s.dashed ? '6 4' : undefined}
@@ -391,6 +391,17 @@ export function LineChart({
             {/* Warning dot */}
             {warningIndex !== undefined && series[0] && warningIndex < n && (
               <div className="absolute z-[5] rounded-full pointer-events-none" style={{ left: `${xPct(warningIndex)}%`, top: yPx(series[0].points[warningIndex]), width: 12, height: 12, marginLeft: -6, marginTop: -6, backgroundColor: '#F59E0B', border: '2px solid white' }} />
+            )}
+
+            {/* Tooltip on selected point */}
+            {selectedIdx !== null && selectedIdx < actualEnd && (
+              <div className="absolute z-[6]" style={{ left: `${xPct(selectedIdx)}%`, top: Math.max(0, yPx(series[0].points[selectedIdx]) - 8), transform: 'translateX(-50%)' }}>
+                <ChartTooltip
+                  title={labels?.[selectedIdx] ?? `Point ${selectedIdx + 1}`}
+                  rows={series.filter(s => !s.dashed).map(s => ({ label: 'Value', value: `${s.points[selectedIdx]}` }))}
+                  accentColor={series[0].color}
+                />
+              </div>
             )}
           </div>
 
