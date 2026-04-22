@@ -40,8 +40,22 @@ export default function ColumnChartPage() {
             {/* Slot layout: small + big */}
             <div className="flex gap-4">
               <ChartCard label="Annual" suffix="kWh/m²/y" className="w-[260px] shrink-0">
-                <div className="h-[160px] flex items-center justify-center text-[12px] text-[#C4C9D4] dark:text-[#3F4654] italic">
-                  Line chart — coming soon
+                <div style={{ height: 140 }}>
+                  <div className="flex h-full">
+                    <div className="w-6 shrink-0 flex flex-col justify-between pb-5 text-[10px] text-[#505867] text-right pr-1">
+                      <span>150</span><span>100</span><span>50</span><span>0</span>
+                    </div>
+                    <div className="flex-1 flex items-end gap-px">
+                      {[85, 100, 95, 130, 145, 80].map((v, i) => (
+                        <div key={i} className="flex-1 rounded-t-[3px]" style={{ height: `${(v / 150) * 100}%`, backgroundColor: i < 5 ? CHART_COLORS.energy : CHART_COLORS.barDisabled }} />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex ml-7 mt-1">
+                    {["'20", "'21", "'22", "'23", "'24", "'25"].map(l => (
+                      <div key={l} className="flex-1 text-center text-[10px] text-[#505867]">{l}</div>
+                    ))}
+                  </div>
                 </div>
               </ChartCard>
               <div className="w-px bg-[#EDEEF1] dark:bg-[#1F2430] shrink-0" />
