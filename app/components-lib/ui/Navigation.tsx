@@ -13,10 +13,16 @@ import {
   MagnifyingGlassIcon,
   ChevronDownIcon,
   ListBulletIcon,
+  SparklesIcon,
+  ArrowTrendingUpIcon,
+  BoltIcon,
+  ShieldCheckIcon,
+  MapIcon,
+  PresentationChartBarIcon,
 } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 
-// ── Scaler logo (from Figma node 350:4964) ──────────────────────────────────
+// ── Scaler logo (from Figma) ────────────────────────────────────────────────
 const SCALER_LOGO = 'https://www.figma.com/api/mcp/asset/a8400254-45e3-4ec1-ac4f-f0468e28de61'
 
 // ── Types ──────────────────────────────────────────────────────────────────────
@@ -25,7 +31,7 @@ export interface NavSection {
   id:    string
   label: string
   icon:  React.ElementType
-  /** Accent color shown as bottom-border on the portfolio selector when this section is active */
+  /** Accent color for active state — shown on icon rail bg + portfolio bottom border */
   color: string
   items: { id: string; label: string; icon: React.ElementType }[]
 }
@@ -48,15 +54,16 @@ export const PLATFORM_SECTIONS: NavSection[] = [
     icon: ChartBarIcon,
     color: '#1258F8',
     items: [
-      { id: 'overview',          label: 'Overview',          icon: HomeIcon },
-      { id: 'asset-list',        label: 'Asset List',        icon: ListBulletIcon },
-      { id: 'performance',       label: 'Performance',       icon: ChartBarIcon },
-      { id: 'meters',            label: 'Meters',            icon: CircleStackIcon },
-      { id: 'scores',            label: 'Scores',            icon: DocumentTextIcon },
-      { id: 'regulatory',        label: 'Regulatory',        icon: ArchiveBoxIcon },
-      { id: 'roadmap-analysis',  label: 'Roadmap Analysis',  icon: GlobeEuropeAfricaIcon },
-      { id: 'physical-climate',  label: 'Physical Climate',  icon: GlobeEuropeAfricaIcon },
-      { id: 'dashboards',        label: 'Dashboards',        icon: DocumentTextIcon },
+      { id: 'overview',          label: 'Overview',           icon: HomeIcon },
+      { id: 'asset-list',        label: 'Asset List',         icon: ListBulletIcon },
+      { id: 'performance',       label: 'Performance',        icon: ArrowTrendingUpIcon },
+      { id: 'meters',            label: 'Meters',             icon: BoltIcon },
+      { id: 'scores',            label: 'Scores',             icon: PresentationChartBarIcon },
+      { id: 'regulatory',        label: 'Regulatory',         icon: ShieldCheckIcon },
+      { id: 'roadmap-analysis',  label: 'Roadmap Analysis',   icon: GlobeEuropeAfricaIcon },
+      { id: 'physical-climate',  label: 'Physical Climate',   icon: GlobeEuropeAfricaIcon },
+      { id: 'dashboards',        label: 'Dashboards',         icon: DocumentTextIcon },
+      { id: 'map',               label: 'Map',                icon: MapIcon },
     ],
   },
   {
@@ -72,6 +79,17 @@ export const PLATFORM_SECTIONS: NavSection[] = [
       { id: 'governance',      label: 'Governance',      icon: ArchiveBoxIcon },
       { id: 'roadmaps',        label: 'Roadmaps',        icon: GlobeEuropeAfricaIcon },
       { id: 'targets',         label: 'Targets',         icon: CircleStackIcon },
+    ],
+  },
+  {
+    id: 'reports',
+    label: 'Reports',
+    icon: DocumentTextIcon,
+    color: '#8B5CF6',
+    items: [
+      { id: 'rep-overview',   label: 'Overview',   icon: HomeIcon },
+      { id: 'rep-templates',  label: 'Templates',  icon: DocumentTextIcon },
+      { id: 'rep-scheduled',  label: 'Scheduled',  icon: DocumentTextIcon },
     ],
   },
 ]
@@ -94,7 +112,7 @@ function IconRail({
         <img src={SCALER_LOGO} alt="Scaler" className="w-8 h-8" />
       </div>
 
-      {/* Section icons */}
+      {/* Section icons — each section has its own accent color */}
       <div className="flex flex-col gap-1 px-4">
         {sections.map(section => {
           const Icon = section.icon
@@ -105,10 +123,9 @@ function IconRail({
               onClick={() => onSectionChange(section.id)}
               className={clsx(
                 'w-10 h-10 rounded flex items-center justify-center transition-colors',
-                active
-                  ? 'bg-[#EDEEF1] dark:bg-[#1F2430] text-[#111827] dark:text-white'
-                  : 'text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5'
+                !active && 'text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5'
               )}
+              style={active ? { color: section.color, backgroundColor: `${section.color}15` } : undefined}
               title={section.label}
             >
               <Icon className="w-5 h-5" />
@@ -120,14 +137,12 @@ function IconRail({
       {/* Spacer */}
       <div className="flex-1" />
 
-      {/* Bottom icons */}
-      <div className="flex flex-col gap-1 px-4">
-        <button className="w-10 h-10 rounded flex items-center justify-center text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors" title="Customise">
-          <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path strokeLinecap="round" d="M3 10h1m12 0h1M10 3v1m0 12v1M5.636 5.636l.707.707m7.314 7.314l.707.707M5.636 14.364l.707-.707m7.314-7.314l.707-.707" />
-          </svg>
+      {/* Bottom: AI (Lumi) + divider + Account */}
+      <div className="flex flex-col gap-1 px-4 items-center">
+        <button className="w-10 h-10 rounded flex items-center justify-center text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors" title="Ask Lumi">
+          <SparklesIcon className="w-5 h-5" />
         </button>
-        <div className="h-px bg-[#EDEEF1] dark:bg-[#1F2430] w-full" />
+        <div className="h-px w-10 bg-[#EDEEF1] dark:bg-[#1F2430]" />
         <button className="w-10 h-10 rounded flex items-center justify-center text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors" title="Account">
           <UserCircleIcon className="w-5 h-5" />
         </button>
@@ -149,7 +164,6 @@ function SidePanel({
 }) {
   return (
     <div className="w-[200px] shrink-0 border-r border-[#EDEEF1] dark:border-[#1F2430] flex flex-col">
-      {/* Section name is in the top bar, not here. Just items with top border. */}
       <div className="flex flex-col gap-1 pt-3 px-4 border-t border-[#EDEEF1] dark:border-[#1F2430]">
         {section.items.map(item => {
           const Icon = item.icon
@@ -194,12 +208,10 @@ export function TopBar({
     <div className="h-16 shrink-0 bg-white dark:bg-[#0D1117] flex items-center justify-between px-6 gap-4">
       {/* Left: section name + selectors */}
       <div className="flex items-center gap-6 h-full">
-        {/* Section name */}
         <div className="text-[16px] font-bold text-[#111827] dark:text-white tracking-[0.24px] w-[168px] truncate">
           {sectionLabel}
         </div>
 
-        {/* Selectors row */}
         <div className="flex items-center gap-2 h-full">
           {/* Company */}
           <div className="flex flex-col justify-center h-full pb-px">
@@ -210,7 +222,7 @@ export function TopBar({
             </button>
           </div>
 
-          {/* Portfolio — with section color bottom border */}
+          {/* Portfolio — section accent bottom border */}
           <div className="flex flex-col justify-center h-full pb-px" style={{ borderBottom: `3px solid ${sectionColor}` }}>
             <span className="text-[10px] text-[#8C96A4] tracking-[0.15px] pl-1">Portfolio</span>
             <button className="flex items-center gap-1">
@@ -241,15 +253,13 @@ export function TopBar({
       </div>
 
       {/* Right: search */}
-      <div className="flex items-center">
-        <div className="relative w-[320px]">
-          <MagnifyingGlassIcon className="absolute left-2 top-1/2 -translate-y-1/2 w-5 h-5 text-[#8C96A4]" />
-          <input
-            type="text"
-            placeholder="Search..."
-            className="w-full h-8 pl-8 pr-3 rounded border border-[#D7DAE0] dark:border-[#1F2430] bg-white dark:bg-[#111827] text-[12px] text-[#111827] dark:text-white placeholder-[#8C96A4] focus:outline-none focus:border-[#1258F8] transition-colors tracking-[0.18px]"
-          />
-        </div>
+      <div className="relative w-[320px]">
+        <MagnifyingGlassIcon className="absolute left-2 top-1/2 -translate-y-1/2 w-5 h-5 text-[#8C96A4]" />
+        <input
+          type="text"
+          placeholder="Search..."
+          className="w-full h-8 pl-8 pr-3 rounded border border-[#D7DAE0] dark:border-[#1F2430] bg-white dark:bg-[#111827] text-[12px] text-[#111827] dark:text-white placeholder-[#8C96A4] focus:outline-none focus:border-[#1258F8] transition-colors tracking-[0.18px]"
+        />
       </div>
     </div>
   )
@@ -279,7 +289,6 @@ export default function Navigation({
 
   return (
     <div className="flex flex-col h-full bg-[#F7F8F8] dark:bg-[#111827] rounded-lg overflow-hidden border border-[#EDEEF1] dark:border-[#1F2430]">
-      {/* Body: icon rail + sidebar + top bar + content */}
       <div className="flex flex-1 min-h-0">
         {/* Icon rail */}
         <IconRail
@@ -290,22 +299,18 @@ export default function Navigation({
 
         {/* Right side: top bar + sidebar + content */}
         <div className="flex flex-col flex-1 min-w-0">
-          {/* Top bar */}
           <TopBar
             sectionLabel={currentSection.label}
             sectionColor={currentSection.color}
             portfolio="Global Portfolio"
             badge="87%"
           />
-
-          {/* Sidebar + content */}
           <div className="flex flex-1 min-h-0">
             <SidePanel
               section={currentSection}
               activeItem={activeItem}
               onItemChange={setActiveItem}
             />
-            {/* Content placeholder */}
             <div className="flex-1 p-6 overflow-auto bg-[#F7F8F8] dark:bg-[#0D1117]">
               <p className="text-[20px] font-semibold text-[#111827] dark:text-white mb-1">
                 {currentSection.items.find(i => i.id === activeItem)?.label ?? 'Page'}
