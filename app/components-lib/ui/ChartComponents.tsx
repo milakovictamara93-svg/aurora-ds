@@ -57,11 +57,13 @@ export function ChartTooltip({
   subtitle,
   rows,
   visible = true,
+  accentColor = '#1258F8',
 }: {
   title: string
   subtitle?: string
   rows: { label: string; value: string }[]
   visible?: boolean
+  accentColor?: string
 }) {
   if (!visible) return null
   return (
@@ -71,8 +73,8 @@ export function ChartTooltip({
         {subtitle && <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] tracking-[0.18px]">{subtitle}</p>}
       </div>
       <div className="flex gap-2">
-        {/* Blue accent bar */}
-        <div className="w-0.5 rounded bg-[#1258F8] shrink-0" />
+        {/* Accent bar — matches ESG color */}
+        <div className="w-0.5 rounded shrink-0" style={{ backgroundColor: accentColor }} />
         <div className="flex flex-col gap-1 flex-1">
           {rows.map((row, i) => (
             <div key={i} className="flex items-center justify-between gap-4">
@@ -225,7 +227,7 @@ export function ColumnChart({
               </div>
             )}
 
-            {/* Tooltip on selected bar */}
+            {/* Tooltip on selected bar — accent matches ESG color */}
             {selectedIdx !== null && (
               <div
                 className="absolute z-[4]"
@@ -239,6 +241,7 @@ export function ColumnChart({
                   title={labels?.[Math.floor(selectedIdx / (data.length / (labels?.length ?? 1)))] ?? `Bar ${selectedIdx + 1}`}
                   subtitle="Monthly consumption"
                   rows={[{ label: 'Value', value: `${data[selectedIdx]}` }]}
+                  accentColor={color}
                 />
               </div>
             )}
@@ -305,10 +308,11 @@ export function ScoreChart({
               {[0, 1, 2].map(i => <div key={i} className="h-px bg-[#EDEEF1] dark:bg-[#1F2430]" />)}
             </div>
 
-            <div className="absolute inset-0 flex items-end z-[1]" style={{ gap: '1.5px', paddingLeft: '8px' }}>
+            <div className="absolute inset-0 flex items-end z-[1]" style={{ gap: 1 }}>
               {data.map((v, i) => {
                 const isMissing = missingFrom !== undefined && i >= missingFrom
-                const pct = max > 0 ? (v / max) * 100 : 0
+                // Missing bars always go to the top (100%)
+                const pct = isMissing ? 100 : (max > 0 ? (v / max) * 100 : 0)
                 const isHovered = hoverIdx === i
                 const isSelected = selectedIndex === i
 
