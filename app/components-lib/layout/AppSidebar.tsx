@@ -107,7 +107,6 @@ const PATTERNS: NavGroup = {
   label: 'Patterns',
   items: [
     { href: '/patterns/page-structure',         label: 'Page structure' },
-    { href: '/patterns/data-visualization',    label: 'Data visualization' },
     { href: '/patterns/drag-drop',             label: 'Drag and drop' },
     { href: '/patterns/filtering',             label: 'Filtering' },
     { href: '/patterns/column-customization',  label: 'Column customization' },
@@ -115,6 +114,18 @@ const PATTERNS: NavGroup = {
     { href: '/patterns/upload',                label: 'Upload' },
     { href: '/patterns/empty-states',          label: 'Empty states',   available: false },
     { href: '/patterns/loading-states',        label: 'Loading states', available: false },
+  ],
+}
+
+const VISUALIZATION: NavGroup = {
+  id: 'visualization',
+  label: 'Visualization',
+  items: [
+    { href: '/visualization/column-chart',    label: 'Column chart' },
+    { href: '/visualization/score-chart',     label: 'Score chart' },
+    { href: '/visualization/line-chart',      label: 'Line chart' },
+    { href: '/visualization/donut-chart',     label: 'Donut chart' },
+    { href: '/visualization/overview',        label: 'Overview' },
   ],
 }
 
@@ -129,6 +140,7 @@ function initialOpen(pathname: string): Record<string, boolean> {
   state[FOUNDATIONS.id] = groupContainsPath(FOUNDATIONS, pathname)
   COMPONENT_GROUPS.forEach(g => { state[g.id] = groupContainsPath(g, pathname) })
   state[PATTERNS.id] = groupContainsPath(PATTERNS, pathname)
+  state[VISUALIZATION.id] = groupContainsPath(VISUALIZATION, pathname)
   return state
 }
 
@@ -228,6 +240,7 @@ export default function AppSidebar({
     if (groupContainsPath(FOUNDATIONS, pathname)) updates[FOUNDATIONS.id] = true
     COMPONENT_GROUPS.forEach(g => { if (groupContainsPath(g, pathname)) updates[g.id] = true })
     if (groupContainsPath(PATTERNS, pathname)) updates[PATTERNS.id] = true
+    if (groupContainsPath(VISUALIZATION, pathname)) updates[VISUALIZATION.id] = true
     if (Object.keys(updates).length > 0) {
       setOpen(prev => ({ ...prev, ...updates }))
     }
@@ -313,6 +326,15 @@ export default function AppSidebar({
             group={PATTERNS}
             open={!!open[PATTERNS.id]}
             onToggle={() => toggle(PATTERNS.id)}
+            pathname={pathname}
+          />
+
+          {/* Divider + Visualization */}
+          <div className="my-1.5 border-t border-[#EDEEF1] dark:border-[#1F2430]" />
+          <NavSection
+            group={VISUALIZATION}
+            open={!!open[VISUALIZATION.id]}
+            onToggle={() => toggle(VISUALIZATION.id)}
             pathname={pathname}
           />
 
