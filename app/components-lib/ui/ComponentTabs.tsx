@@ -801,6 +801,91 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
       </div>
     </div>
   ),
+  '/components/inputs/password': (
+    <div className="flex flex-col gap-1 w-full">
+      <span className="text-[10px] font-semibold text-[#111827] dark:text-white">Password</span>
+      <div className="h-7 flex items-center justify-between px-2 rounded border border-[#D7DAE0] dark:border-[#374151] bg-white dark:bg-[#111827]">
+        <span className="text-[10px] text-[#111827] dark:text-white tracking-widest">••••••••</span>
+        <svg className="w-3.5 h-3.5 text-[#9CA3AF]" viewBox="0 0 20 20" fill="currentColor"><path d="M10 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" /><path fillRule="evenodd" d="M.664 10.59a1.651 1.651 0 010-1.186A10.004 10.004 0 0110 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0110 17c-4.257 0-7.893-2.66-9.336-6.41zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" /></svg>
+      </div>
+    </div>
+  ),
+  '/components/inputs/textarea': (
+    <div className="flex flex-col gap-1 w-full">
+      <span className="text-[10px] font-semibold text-[#111827] dark:text-white">Description</span>
+      <div className="h-14 px-2 py-1.5 rounded border border-[#D7DAE0] dark:border-[#374151] bg-white dark:bg-[#111827]">
+        <span className="text-[10px] text-[#111827] dark:text-white leading-relaxed">Building located in the central business district with solar panels...</span>
+      </div>
+    </div>
+  ),
+  '/components/inputs/checkbox': (
+    <div className="flex flex-col gap-1.5">
+      {['Energy data', 'GHG emissions', 'Water usage'].map((label, i) => (
+        <div key={label} className="flex items-center gap-2">
+          <span className={`inline-flex items-center justify-center w-3.5 h-3.5 rounded-[2px] shrink-0 ${i < 2 ? 'bg-[#1258F8] border-[1.5px] border-[#1258F8]' : 'border-[1.5px] border-[#D7DAE0] dark:border-[#505867] bg-white dark:bg-[#111827]'}`}>
+            {i < 2 && <svg width="8" height="8" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7.5L8.5 2.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
+          </span>
+          <span className="text-[10px] text-[#111827] dark:text-white">{label}</span>
+        </div>
+      ))}
+    </div>
+  ),
+  '/components/inputs/radio': (
+    <div className="flex flex-col gap-1.5">
+      {['Monthly', 'Quarterly', 'Annually'].map((label, i) => (
+        <div key={label} className="flex items-center gap-2">
+          <span className={`inline-flex items-center justify-center w-3.5 h-3.5 rounded-full border-[1.5px] shrink-0 ${i === 0 ? 'border-[#1258F8]' : 'border-[#D7DAE0] dark:border-[#505867]'}`}>
+            {i === 0 && <span className="w-1.5 h-1.5 rounded-full bg-[#1258F8]" />}
+          </span>
+          <span className="text-[10px] text-[#111827] dark:text-white">{label}</span>
+        </div>
+      ))}
+    </div>
+  ),
+  '/components/inputs/toggle': (
+    <div className="flex flex-col gap-2">
+      <div className="flex items-center gap-2">
+        <div className="w-7 h-3.5 rounded-full bg-[#1258F8] relative shrink-0">
+          <span className="absolute top-[1px] right-[1px] w-[12px] h-[12px] rounded-full bg-white shadow-sm" />
+        </div>
+        <span className="text-[10px] text-[#111827] dark:text-white">Notifications on</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <div className="w-7 h-3.5 rounded-full bg-[#D7DAE0] dark:bg-[#374151] relative shrink-0">
+          <span className="absolute top-[1px] left-[1px] w-[12px] h-[12px] rounded-full bg-white shadow-sm" />
+        </div>
+        <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">Auto-save off</span>
+      </div>
+    </div>
+  ),
+  '/components/inputs/multiselect': (
+    <div className="flex flex-col gap-1 w-full">
+      <span className="text-[10px] font-semibold text-[#111827] dark:text-white">Aspects</span>
+      <div className="min-h-[28px] flex flex-wrap items-center gap-1 px-1.5 py-1 rounded border border-[#D7DAE0] dark:border-[#374151] bg-white dark:bg-[#111827]">
+        <Tag label="Energy" system="default" style="filled" size="small" showCount={false} showRemove={false} />
+        <Tag label="GHG" system="default" style="filled" size="small" showCount={false} showRemove={false} />
+      </div>
+    </div>
+  ),
+  '/components/inputs/search-multiselect': (
+    <div className="flex flex-col gap-1 w-full">
+      <span className="text-[10px] font-semibold text-[#111827] dark:text-white">Buildings</span>
+      <div className="min-h-[28px] flex flex-wrap items-center gap-1 px-1.5 py-1 rounded border border-[#D7DAE0] dark:border-[#374151] bg-white dark:bg-[#111827]">
+        <Tag label="Scaler HQ" system="default" style="filled" size="small" showCount={false} showRemove={false} />
+        <svg className="w-3 h-3 text-[#9CA3AF] ml-auto" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" /></svg>
+      </div>
+    </div>
+  ),
+  '/components/inputs/tag': (
+    <div className="flex flex-col gap-1 w-full">
+      <span className="text-[10px] font-semibold text-[#111827] dark:text-white">Tags</span>
+      <div className="min-h-[28px] flex flex-wrap items-center gap-1 px-1.5 py-1 rounded border border-[#D7DAE0] dark:border-[#374151] bg-white dark:bg-[#111827]">
+        <Tag label="NABERS" system="default" style="filled" size="small" showCount={false} showRemove={false} />
+        <Tag label="GRESB" system="default" style="filled" size="small" showCount={false} showRemove={false} />
+        <span className="text-[9px] text-[#9CA3AF]">+ add</span>
+      </div>
+    </div>
+  ),
 }
 
 // ── RelatedComponents ─────────────────────────────────────────────────────────
