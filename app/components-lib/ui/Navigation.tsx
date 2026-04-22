@@ -249,6 +249,11 @@ export function TopBar({
             </button>
           </div>
 
+          {/* Slash separator */}
+          <div className="w-[7px] h-[30px] flex items-center justify-center">
+            <div className="w-px h-full bg-[#D7DAE0] dark:bg-[#374151] rotate-[12deg]" />
+          </div>
+
           {/* Portfolio — section accent bottom border */}
           <div className="flex flex-col justify-center h-full pb-px" style={{ borderBottom: `3px solid ${sectionColor}` }}>
             <span className="text-[10px] text-[#8C96A4] tracking-[0.15px] pl-1">Portfolio</span>
