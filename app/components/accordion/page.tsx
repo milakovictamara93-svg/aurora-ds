@@ -6,6 +6,7 @@ import {
 } from '@heroicons/react/24/outline'
 import PageHeader from '@/app/components-lib/ui/PageHeader'
 import Accordion from '@/app/components-lib/ui/Accordion'
+import Checkbox from '@/app/components-lib/ui/Checkbox'
 import {
   ComponentTabs, TabBar, TabPanel,
   Section, SpecTable, A11yRow, KeyRow,
@@ -94,10 +95,7 @@ const SETTINGS_ITEMS = [
         <p>Configure automated report generation, recipients, and delivery schedule.</p>
         <div className="flex flex-col gap-1">
           {['GRESB Real Estate', 'TCFD Report', 'Net Zero Progress', 'ESG Summary'].map(r => (
-            <label key={r} className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" defaultChecked={r !== 'TCFD Report'} className="accent-[#1258F8] w-3.5 h-3.5" />
-              <span className="text-[13px]">{r}</span>
-            </label>
+            <Checkbox key={r} label={r} checked={r !== 'TCFD Report'} />
           ))}
         </div>
       </div>

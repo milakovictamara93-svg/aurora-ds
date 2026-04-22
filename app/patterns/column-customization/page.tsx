@@ -3,7 +3,9 @@
 import { useState, useMemo } from 'react'
 import PageHeader from '@/app/components-lib/ui/PageHeader'
 import Modal from '@/app/components-lib/ui/Modal'
-import { MagnifyingGlassIcon, TableCellsIcon } from '@heroicons/react/20/solid'
+import InputSearch from '@/app/components-lib/ui/InputSearch'
+import Checkbox from '@/app/components-lib/ui/Checkbox'
+import { TableCellsIcon } from '@heroicons/react/20/solid'
 
 // ── Column data ────────────────────────────────────────────────────────────────
 
@@ -181,14 +183,13 @@ function ColumnPanelContent({
     <div>
       {/* Global header row: search + select all */}
       <div className="flex items-center gap-2 mb-1">
-        <div className="relative flex-1">
-          <MagnifyingGlassIcon className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#9CA3AF]" />
-          <input
-            type="text"
+        <div className="flex-1">
+          <InputSearch
             placeholder="Search columns…"
             value={search}
             onChange={e => setSearch(e.target.value)}
-            className="w-full pl-7 pr-3 py-1.5 rounded-md border border-[#D7DAE0] dark:border-[#1F2430] bg-white dark:bg-[#111827] text-[13px] text-[#111827] dark:text-white placeholder-[#9CA3AF] focus:outline-none focus:border-[#1258F8] transition-colors"
+            clearable={!!search}
+            onClear={() => setSearch('')}
           />
         </div>
         <button
@@ -211,15 +212,12 @@ function ColumnPanelContent({
               {group.items.map(item => {
                 const checked = (draft[group.id] ?? []).includes(item.id)
                 return (
-                  <label key={item.id} className="flex items-start gap-2 py-0.5 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={checked}
-                      onChange={() => toggle(group.id, item.id)}
-                      className="mt-[2px] w-3.5 h-3.5 rounded border-[#D7DAE0] accent-[#1258F8] shrink-0"
-                    />
-                    <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-snug">{item.label}</span>
-                  </label>
+                  <Checkbox
+                    key={item.id}
+                    label={item.label}
+                    checked={checked}
+                    onChange={() => toggle(group.id, item.id)}
+                  />
                 )
               })}
             </div>

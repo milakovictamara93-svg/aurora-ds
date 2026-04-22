@@ -2,11 +2,21 @@
 
 import { useState } from 'react'
 import PageHeader from '@/app/components-lib/ui/PageHeader'
-import { ExclamationCircleIcon, CheckCircleIcon } from '@heroicons/react/20/solid'
+import InputText from '@/app/components-lib/ui/InputText'
+import InputPassword from '@/app/components-lib/ui/InputPassword'
+import type { InputState } from '@/app/components-lib/ui/InputText'
+import { CheckCircleIcon } from '@heroicons/react/20/solid'
 
-// ── Field component ───────────────────────────────────────────────────────────
+// ── Field wrapper — delegates to Aurora InputText ─────────────────────────────
 
 type FieldState = 'default' | 'error' | 'success' | 'disabled'
+
+const stateMap: Record<FieldState, InputState> = {
+  default: 'default',
+  error: 'error',
+  success: 'success',
+  disabled: 'disabled',
+}
 
 function Field({
   label,
@@ -20,7 +30,7 @@ function Field({
   hint,
 }: {
   label: string
-  type?: string
+  type?: 'text' | 'email' | 'number' | 'password'
   placeholder?: string
   helper?: string
   state?: FieldState
@@ -29,48 +39,36 @@ function Field({
   onChange?: (v: string) => void
   hint?: string
 }) {
-  const borderClass = {
-    default:  'border-[#D7DAE0] dark:border-[#1F2430] focus:border-[#1258F8]',
-    error:    'border-[#F87171] focus:border-[#F87171]',
-    success:  'border-[#22C55E] focus:border-[#22C55E]',
-    disabled: 'border-[#EDEEF1] dark:border-[#1F2430] bg-[#F7F8F8] dark:bg-[#0D1117] cursor-not-allowed',
-  }[state]
+  const fullLabel = hint ? `${label} ${hint}` : label
 
-  const helperClass = {
-    default:  'text-[#9CA3AF]',
-    error:    'text-[#F87171]',
-    success:  'text-[#22C55E]',
-    disabled: 'text-[#C4C9D4]',
-  }[state]
+  if (type === 'password') {
+    const pwState = state === 'success' ? 'default' : stateMap[state] as 'default' | 'error' | 'disabled'
+    return (
+      <InputPassword
+        label={fullLabel}
+        placeholder={placeholder}
+        helperText={helper}
+        state={pwState}
+        required={required}
+        value={value}
+        onChange={e => onChange?.(e.target.value)}
+        disabled={state === 'disabled'}
+      />
+    )
+  }
 
   return (
-    <div className="flex flex-col gap-1.5">
-      <label className="text-[13px] font-semibold text-[#111827] dark:text-white flex items-center gap-1">
-        {label}
-        {required && <span className="text-[#F87171]">*</span>}
-        {hint && <span className="font-normal text-[#9CA3AF] ml-1">{hint}</span>}
-      </label>
-      <div className="relative">
-        <input
-          type={type}
-          placeholder={placeholder}
-          value={value}
-          onChange={e => onChange?.(e.target.value)}
-          disabled={state === 'disabled'}
-          className={[
-            'w-full px-3 py-2 rounded-md border text-[14px] text-[#111827] dark:text-white bg-white dark:bg-[#111827] placeholder-[#C4C9D4] focus:outline-none focus:ring-2 focus:ring-[#1258F8]/20 transition-colors',
-            borderClass,
-          ].join(' ')}
-        />
-        {state === 'error' && (
-          <ExclamationCircleIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#F87171] pointer-events-none" />
-        )}
-        {state === 'success' && (
-          <CheckCircleIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#22C55E] pointer-events-none" />
-        )}
-      </div>
-      {helper && <p className={`text-[12px] ${helperClass}`}>{helper}</p>}
-    </div>
+    <InputText
+      label={fullLabel}
+      type={type}
+      placeholder={placeholder}
+      helperText={helper}
+      state={stateMap[state]}
+      required={required}
+      value={value}
+      onChange={e => onChange?.(e.target.value)}
+      disabled={state === 'disabled'}
+    />
   )
 }
 

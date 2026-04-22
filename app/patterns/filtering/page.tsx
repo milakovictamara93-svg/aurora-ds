@@ -5,7 +5,12 @@ import PageHeader from '@/app/components-lib/ui/PageHeader'
 import Tag from '@/app/components-lib/ui/Tag'
 import Slider from '@/app/components-lib/ui/Slider'
 import Modal from '@/app/components-lib/ui/Modal'
-import { FunnelIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
+import InputSearch from '@/app/components-lib/ui/InputSearch'
+import InputSelect from '@/app/components-lib/ui/InputSelect'
+import InputText from '@/app/components-lib/ui/InputText'
+import Checkbox from '@/app/components-lib/ui/Checkbox'
+import Radio from '@/app/components-lib/ui/Radio'
+import { FunnelIcon } from '@heroicons/react/20/solid'
 
 // ── Filter section wrapper (matches Figma 5120:145942) ────────────────────────
 
@@ -91,10 +96,6 @@ const ASSET_TYPES    = [
   { value: 'flagged',   label: 'Flagged' },
 ]
 
-// ── Shared input style ────────────────────────────────────────────────────────
-
-const inputCls = 'w-full px-2 py-1.5 rounded-md border border-[#D7DAE0] dark:border-[#1F2430] bg-white dark:bg-[#111827] text-[13px] text-[#111827] dark:text-white focus:outline-none focus:border-[#1258F8] transition-colors'
-
 // ── Filter panel content (rendered inside drawer) ─────────────────────────────
 
 function FilterPanelContent({
@@ -165,31 +166,39 @@ function FilterPanelContent({
         {(draft.dateMode === 'time' || draft.dateMode === 'both') && (
           <div className="flex gap-2 mb-2">
             <div className="flex-1">
-              <p className="text-[11px] text-[#9CA3AF] mb-1">From</p>
-              <input type="date" value={draft.dateFrom}
+              <InputText
+                label="From"
+                type="text"
+                value={draft.dateFrom}
                 onChange={e => setDraft(prev => ({ ...prev, dateFrom: e.target.value }))}
-                className={inputCls} />
+                placeholder="YYYY-MM-DD"
+              />
             </div>
             <div className="flex-1">
-              <p className="text-[11px] text-[#9CA3AF] mb-1">To</p>
-              <input type="date" value={draft.dateTo}
+              <InputText
+                label="To"
+                type="text"
+                value={draft.dateTo}
                 onChange={e => setDraft(prev => ({ ...prev, dateTo: e.target.value }))}
-                className={inputCls} />
+                placeholder="YYYY-MM-DD"
+              />
             </div>
           </div>
         )}
 
         {(draft.dateMode === 'area' || draft.dateMode === 'both') && (
           <div className={draft.dateMode === 'both' ? 'mt-2' : ''}>
-            <p className="text-[11px] text-[#9CA3AF] mb-1">Area</p>
-            <select value={draft.area}
-              onChange={e => setDraft(prev => ({ ...prev, area: e.target.value }))}
-              className={inputCls}>
-              <option value="">All regions</option>
-              <option value="eu">Europe</option>
-              <option value="am">Americas</option>
-              <option value="ap">Asia Pacific</option>
-            </select>
+            <InputSelect
+              label="Area"
+              options={[
+                { value: '',   label: 'All regions' },
+                { value: 'eu', label: 'Europe' },
+                { value: 'am', label: 'Americas' },
+                { value: 'ap', label: 'Asia Pacific' },
+              ]}
+              value={draft.area}
+              onChange={v => setDraft(prev => ({ ...prev, area: v }))}
+            />
           </div>
         )}
       </FilterSection>
@@ -214,25 +223,29 @@ function FilterPanelContent({
         />
         <div className="flex gap-2 mt-3">
           <div className="flex-1">
-            <p className="text-[11px] text-[#9CA3AF] mb-1">Minimum</p>
-            <input
-              type="number" value={draft.scoreRange[0]} min={0} max={draft.scoreRange[1]}
+            <InputText
+              label="Minimum"
+              type="number"
+              value={String(draft.scoreRange[0])}
+              min={0}
+              max={draft.scoreRange[1]}
               onChange={e => {
                 const v = Math.min(Number(e.target.value), draft.scoreRange[1])
                 setDraft(prev => ({ ...prev, scoreRange: [v, prev.scoreRange[1]] }))
               }}
-              className={inputCls}
             />
           </div>
           <div className="flex-1">
-            <p className="text-[11px] text-[#9CA3AF] mb-1">Maximum</p>
-            <input
-              type="number" value={draft.scoreRange[1]} min={draft.scoreRange[0]} max={100}
+            <InputText
+              label="Maximum"
+              type="number"
+              value={String(draft.scoreRange[1])}
+              min={draft.scoreRange[0]}
+              max={100}
               onChange={e => {
                 const v = Math.max(Number(e.target.value), draft.scoreRange[0])
                 setDraft(prev => ({ ...prev, scoreRange: [prev.scoreRange[0], v] }))
               }}
-              className={inputCls}
             />
           </div>
         </div>
@@ -243,26 +256,31 @@ function FilterPanelContent({
         title="Aspect categories"
         onClear={() => setDraft(prev => ({ ...prev, aspects: [] }))}
       >
-        <div className="relative mb-2">
-          <MagnifyingGlassIcon className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#9CA3AF]" />
-          <input
-            type="text" placeholder="Search…" value={search}
+        <div className="mb-2">
+          <InputSearch
+            placeholder="Search…"
+            value={search}
             onChange={e => setSearch(e.target.value)}
-            className="w-full pl-7 pr-3 py-1.5 rounded-md border border-[#D7DAE0] dark:border-[#1F2430] bg-white dark:bg-[#111827] text-[13px] text-[#111827] dark:text-white placeholder-[#9CA3AF] focus:outline-none focus:border-[#1258F8]"
+            clearable={!!search}
+            onClear={() => setSearch('')}
           />
         </div>
-        <label className="flex items-center gap-2 px-1 py-1 cursor-pointer mb-1">
-          <input type="checkbox" checked={allChecked} onChange={toggleAll}
-            className="w-3.5 h-3.5 rounded border-[#D7DAE0] accent-[#1258F8]" />
-          <span className="text-[13px] font-semibold text-[#111827] dark:text-white">Select all</span>
-        </label>
+        <div className="mb-1">
+          <Checkbox
+            label="Select all"
+            checked={allChecked}
+            state={allChecked ? 'checked' : filtered.some(c => draft.aspects.includes(c)) ? 'indeterminate' : 'unchecked'}
+            onChange={() => toggleAll()}
+          />
+        </div>
         <div className="flex flex-col gap-0.5 pl-1 max-h-44 overflow-y-auto">
           {filtered.map(c => (
-            <label key={c} className="flex items-center gap-2 py-0.5 cursor-pointer">
-              <input type="checkbox" checked={draft.aspects.includes(c)} onChange={() => toggleAspect(c)}
-                className="w-3.5 h-3.5 rounded border-[#D7DAE0] accent-[#1258F8]" />
-              <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">{c}</span>
-            </label>
+            <Checkbox
+              key={c}
+              label={c}
+              checked={draft.aspects.includes(c)}
+              onChange={() => toggleAspect(c)}
+            />
           ))}
         </div>
       </FilterSection>
@@ -274,13 +292,12 @@ function FilterPanelContent({
       >
         <div className="flex flex-col gap-2">
           {ASSET_TYPES.map(r => (
-            <label key={r.value} className="flex items-center gap-2 cursor-pointer">
-              <input type="radio" name="asset-type-draft" value={r.value}
-                checked={draft.assetType === r.value}
-                onChange={() => setDraft(prev => ({ ...prev, assetType: r.value }))}
-                className="w-3.5 h-3.5 border-[#D7DAE0] accent-[#1258F8]" />
-              <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">{r.label}</span>
-            </label>
+            <Radio
+              key={r.value}
+              label={r.label}
+              checked={draft.assetType === r.value}
+              onChange={() => setDraft(prev => ({ ...prev, assetType: r.value }))}
+            />
           ))}
         </div>
       </FilterSection>
