@@ -184,18 +184,26 @@ function SidePanel({
 // ── Top Bar ─────────────────────────────────────────────────────────────────
 
 export function TopBar({
-  sectionLabel = 'Analytics',
+  company = 'Scaler',
   portfolio = 'Global Portfolio',
   badge,
 }: {
-  sectionLabel?: string
+  company?:      string
   portfolio?:    string
   badge?:        string
 }) {
   return (
     <div className="h-14 shrink-0 bg-white dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430] flex items-center justify-between px-4 gap-4">
-      {/* Left: selectors */}
+      {/* Left: company + portfolio + asset selectors */}
       <div className="flex items-center gap-4">
+        <div className="flex items-center gap-1.5">
+          <span className="text-[11px] text-[#9CA3AF]">Company</span>
+          <button className="flex items-center gap-1 text-[13px] font-medium text-[#111827] dark:text-white">
+            {company}
+            <ChevronDownIcon className="w-3 h-3 text-[#505867]" />
+          </button>
+        </div>
+        <div className="w-px h-6 bg-[#EDEEF1] dark:bg-[#1F2430]" />
         <div className="flex items-center gap-1.5">
           <span className="text-[11px] text-[#9CA3AF]">Portfolio</span>
           <button className="flex items-center gap-1 text-[14px] font-bold text-[#111827] dark:text-white">
@@ -258,7 +266,7 @@ export default function Navigation({
   return (
     <div className="flex flex-col h-full bg-[#F7F8F8] dark:bg-[#111827] rounded-lg overflow-hidden border border-[#EDEEF1] dark:border-[#1F2430]">
       {/* Top bar */}
-      <TopBar sectionLabel={currentSection.label} portfolio="Global Portfolio" badge="87%" />
+      <TopBar portfolio="Global Portfolio" badge="87%" />
 
       {/* Body: icon rail + sidebar + content area */}
       <div className="flex flex-1 min-h-0">
