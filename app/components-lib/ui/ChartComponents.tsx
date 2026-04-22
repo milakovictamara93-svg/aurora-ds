@@ -345,6 +345,25 @@ export function ScoreChart({
                 )
               })}
             </div>
+
+            {/* Tooltip on selected bar */}
+            {selectedIndex !== null && selectedIndex !== undefined && !(missingFrom !== undefined && selectedIndex >= missingFrom) && (
+              <div
+                className="absolute z-[4]"
+                style={{
+                  left: `${((selectedIndex + 0.5) / data.length) * 100}%`,
+                  top: -8,
+                  transform: 'translateX(-50%)',
+                }}
+              >
+                <ChartTooltip
+                  title={`Asset ${selectedIndex + 1}`}
+                  subtitle="Score"
+                  rows={[{ label: 'Score', value: `${data[selectedIndex]}` }]}
+                  accentColor={activeColor}
+                />
+              </div>
+            )}
           </div>
 
           <div className="h-7 flex items-center justify-center gap-2 text-[12px] text-[#505867] dark:text-[#9CA3AF] tracking-[0.18px]">
