@@ -266,6 +266,108 @@ export function LineChart({
   )
 }
 
+// ── Score Chart (sorted bar chart — highest to lowest) ──────────────────
+
+export function ScoreChart({
+  data,
+  height = 160,
+  activeColor = CHART_COLORS.energy,
+  defaultColor = CHART_COLORS.barDefault,
+  disabledColor = CHART_COLORS.barDisabled,
+  missingFrom,
+  selectedIndex,
+  onSelect,
+}: {
+  data: number[]
+  height?: number
+  activeColor?: string
+  defaultColor?: string
+  disabledColor?: string
+  missingFrom?: number
+  selectedIndex?: number | null
+  onSelect?: (i: number | null) => void
+}) {
+  const [hoverIdx, setHoverIdx] = useState<number | null>(null)
+  const max = Math.max(...data, 100)
+  const chartH = height - 28 // reserve for bottom label
+  const hasSelection = selectedIndex !== null && selectedIndex !== undefined
+  const hasHover = hoverIdx !== null
+
+  return (
+    <div style={{ height }}>
+      <div className="flex h-full">
+        {/* Y axis */}
+        <div className="w-8 shrink-0 flex flex-col justify-between pb-7 text-[12px] text-[#505867] dark:text-[#9CA3AF] text-right pr-2 tracking-[0.18px]">
+          <span>100</span>
+          <span>50</span>
+          <span>0</span>
+        </div>
+
+        <div className="flex-1 flex flex-col min-w-0">
+          {/* Bars */}
+          <div className="flex-1 relative">
+            {/* Grid */}
+            <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
+              {[0, 1, 2].map(i => <div key={i} className="h-px bg-[#EDEEF1] dark:bg-[#1F2430]" />)}
+            </div>
+
+            {/* Bars — edge to edge, sorted data */}
+            <div className="absolute inset-0 flex items-end gap-px">
+              {data.map((v, i) => {
+                const isMissing = missingFrom !== undefined && i >= missingFrom
+                const pct = max > 0 ? (v / max) * 100 : 0
+                const isHovered = hoverIdx === i
+                const isSelected = selectedIndex === i
+
+                // Color logic matching Figma states:
+                // Default: all bars use activeColor with gradient opacity
+                // Hover: hovered bar = activeColor, rest = defaultColor (light blue)
+                // Active: selected bar = activeColor, rest = defaultColor
+                let barColor: string
+                let opacity = 1
+
+                if (isMissing) {
+                  barColor = disabledColor
+                } else if (hasHover || hasSelection) {
+                  // Interaction state: highlight one, dim rest
+                  barColor = (isHovered || isSelected) ? activeColor : defaultColor
+                } else {
+                  // Default state: gradient from full opacity to faded
+                  barColor = activeColor
+                  opacity = 1 - (i / data.length) * 0.5
+                }
+
+                return (
+                  <div
+                    key={i}
+                    className="flex-1 cursor-pointer"
+                    style={{ height: `${pct}%` }}
+                    onMouseEnter={() => setHoverIdx(i)}
+                    onMouseLeave={() => setHoverIdx(null)}
+                    onClick={() => onSelect?.(isSelected ? null : i)}
+                  >
+                    <div
+                      className="w-full h-full rounded-t-[2px]"
+                      style={{ backgroundColor: barColor, opacity }}
+                    />
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Bottom label */}
+          <div className="h-7 flex items-center justify-center gap-2 text-[12px] text-[#505867] dark:text-[#9CA3AF] tracking-[0.18px]">
+            <span>Highest score</span>
+            <span>→</span>
+            <span>Lowest score</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // ── Donut Chart ─────────────────────────────────────────────────────────
 
 export function DonutChart({

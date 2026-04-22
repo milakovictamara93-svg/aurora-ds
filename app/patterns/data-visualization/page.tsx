@@ -2,7 +2,7 @@
 
 import PageHeader from '@/app/components-lib/ui/PageHeader'
 import {
-  ColumnChart, LineChart, DonutChart, AspectScoreMini,
+  ColumnChart, ScoreChart, LineChart, DonutChart, AspectScoreMini,
   ChartLegend, ChartTooltip, ChartEmptyState, CHART_COLORS,
 } from '@/app/components-lib/ui/ChartComponents'
 
@@ -59,6 +59,24 @@ export default function DataVisualizationPage() {
                   { label: 'Natural gas', value: '44 kWh/m²' },
                 ]} />
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Score chart ─────────────────────────────────────────────── */}
+        <section>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Score chart</h2>
+          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
+            Bars sorted highest→lowest. Default state shows a coral gradient fading right. On hover/select, the active bar stays coral while others turn light blue.
+          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-4">
+              <p className="text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-3">Default — gradient fade</p>
+              <ScoreChart data={[100, 98, 95, 92, 90, 88, 85, 82, 80, 78, 75, 72, 70, 68, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 8, 5, 100, 100, 100, 100, 100, 100]} missingFrom={28} />
+            </div>
+            <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-4">
+              <p className="text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-3">Active — selected bar highlighted</p>
+              <ScoreChart data={[100, 98, 95, 92, 90, 88, 85, 82, 80, 78, 75, 72, 70, 68, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 8, 5, 100, 100, 100, 100, 100, 100]} missingFrom={28} selectedIndex={8} />
             </div>
           </div>
         </section>
