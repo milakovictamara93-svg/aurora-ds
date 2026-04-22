@@ -78,7 +78,7 @@ function SelectDemo() {
 
 export default function BreadcrumbsPage() {
   return (
-    <div className="flex flex-col gap-8 pb-16">
+    <div>
       <PageHeader
         title="Breadcrumbs"
         description="Show the user's location within a hierarchy and allow navigation back to any ancestor."

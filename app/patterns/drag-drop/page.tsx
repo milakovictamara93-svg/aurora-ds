@@ -336,12 +336,14 @@ const rules = [
 
 export default function DragDropPage() {
   return (
-    <div className="flex flex-col gap-10 pb-16">
+    <div>
       <PageHeader
         title="Drag and drop"
         description="Reorder lists and table columns by dragging. A grip handle signals the affordance; brand blue confirms the drop target and landed position."
         badge="Patterns"
       />
+
+      <div className="mt-8 flex flex-col gap-10">
 
       {/* ── States ─────────────────────────────────────────────────────────── */}
       <section>
@@ -417,6 +419,8 @@ export default function DragDropPage() {
           ))}
         </div>
       </section>
+
+      </div>
     </div>
   )
 }

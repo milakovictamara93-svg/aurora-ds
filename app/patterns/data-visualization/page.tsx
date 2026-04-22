@@ -203,12 +203,14 @@ const rules = [
 
 export default function DataVisualizationPage() {
   return (
-    <div className="flex flex-col gap-10 pb-16">
+    <div>
       <PageHeader
         title="Data visualization"
         description="Chart color usage, axis labels, and rules for displaying ESG data correctly."
         badge="Patterns"
       />
+
+      <div className="mt-8 flex flex-col gap-10">
 
       {/* ── Color palette ────────────────────────────────────────────────────── */}
       <section>
@@ -287,6 +289,8 @@ export default function DataVisualizationPage() {
           ))}
         </div>
       </section>
+
+      </div>
     </div>
   )
 }
