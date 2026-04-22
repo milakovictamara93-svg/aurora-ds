@@ -107,26 +107,23 @@ function IconRail({
 
   return (
     <div
-      className={clsx(
-        'shrink-0 bg-white dark:bg-[#0D1117] border-r border-[#EDEEF1] dark:border-[#1F2430] flex flex-col pt-3 pb-2 transition-all duration-200 ease-in-out overflow-hidden z-10',
-        expanded ? 'w-[200px]' : 'w-[70px]'
-      )}
+      className="shrink-0 bg-white dark:bg-[#0D1117] border-r border-[#EDEEF1] dark:border-[#1F2430] flex flex-col pt-3 pb-2 overflow-hidden z-10"
+      style={{ width: expanded ? 200 : 70, transition: 'width 150ms cubic-bezier(0.4, 0, 0.2, 1)' }}
       onMouseEnter={() => setExpanded(true)}
       onMouseLeave={() => setExpanded(false)}
     >
       {/* Scaler logo + wordmark */}
-      <div className={clsx('flex items-center gap-3 mb-6 px-4', expanded ? 'justify-start' : 'justify-center')}>
+      <div className="flex items-center gap-3 mb-6 h-8 px-[15px]">
         <ScalerLogo className="w-7 h-7 shrink-0" color="#111827" />
-        <span className={clsx(
-          'text-[18px] font-bold text-[#111827] dark:text-white tracking-[-0.2px] transition-opacity duration-200 whitespace-nowrap',
-          expanded ? 'opacity-100' : 'opacity-0 w-0'
-        )}>
-          scaler
-        </span>
+        {expanded && (
+          <span className="text-[18px] font-bold text-[#111827] dark:text-white tracking-[-0.2px] whitespace-nowrap animate-[fadeIn_100ms_ease-in]">
+            scaler
+          </span>
+        )}
       </div>
 
-      {/* Section icons — each section has its own accent color */}
-      <div className="flex flex-col gap-1 px-3">
+      {/* Section icons */}
+      <div className="flex flex-col gap-1 px-[15px]">
         {sections.map(section => {
           const Icon = section.icon
           const active = activeSection === section.id
@@ -135,20 +132,15 @@ function IconRail({
               key={section.id}
               onClick={() => onSectionChange(section.id)}
               className={clsx(
-                'h-10 rounded flex items-center gap-3 px-2 transition-all duration-200 whitespace-nowrap',
-                expanded ? 'w-full' : 'w-10 justify-center',
+                'h-10 rounded-lg flex items-center gap-3 whitespace-nowrap',
+                expanded ? 'px-2' : 'w-10 justify-center',
                 !active && 'text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5'
               )}
               style={active ? { color: section.color, backgroundColor: `${section.color}12` } : undefined}
               title={!expanded ? section.label : undefined}
             >
               <Icon className="w-5 h-5 shrink-0" />
-              <span className={clsx(
-                'text-[14px] font-medium transition-opacity duration-200',
-                expanded ? 'opacity-100' : 'opacity-0 w-0 overflow-hidden'
-              )}>
-                {section.label}
-              </span>
+              {expanded && <span className="text-[14px] font-medium">{section.label}</span>}
             </button>
           )
         })}
@@ -157,22 +149,22 @@ function IconRail({
       {/* Spacer */}
       <div className="flex-1" />
 
-      {/* Bottom: AI (Lumi) + divider + Account */}
-      <div className="flex flex-col gap-1 px-3">
+      {/* Bottom */}
+      <div className="flex flex-col gap-1 px-[15px]">
         <button className={clsx(
-          'h-10 rounded flex items-center gap-3 px-2 text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-all duration-200 whitespace-nowrap',
-          expanded ? 'w-full' : 'w-10 justify-center'
+          'h-10 rounded-lg flex items-center gap-3 text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5 whitespace-nowrap',
+          expanded ? 'px-2' : 'w-10 justify-center'
         )} title={!expanded ? 'Ask Lumi' : undefined}>
           <SparklesIcon className="w-5 h-5 shrink-0" />
-          <span className={clsx('text-[14px] font-medium transition-opacity duration-200', expanded ? 'opacity-100' : 'opacity-0 w-0 overflow-hidden')}>Ask Lumi</span>
+          {expanded && <span className="text-[14px] font-medium">Ask Lumi</span>}
         </button>
         <div className="h-px bg-[#EDEEF1] dark:bg-[#1F2430] mx-2" />
         <button className={clsx(
-          'h-10 rounded flex items-center gap-3 px-2 text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-all duration-200 whitespace-nowrap',
-          expanded ? 'w-full' : 'w-10 justify-center'
+          'h-10 rounded-lg flex items-center gap-3 text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5 whitespace-nowrap',
+          expanded ? 'px-2' : 'w-10 justify-center'
         )} title={!expanded ? 'Account' : undefined}>
           <UserCircleIcon className="w-5 h-5 shrink-0" />
-          <span className={clsx('text-[14px] font-medium transition-opacity duration-200', expanded ? 'opacity-100' : 'opacity-0 w-0 overflow-hidden')}>Account</span>
+          {expanded && <span className="text-[14px] font-medium">Account</span>}
         </button>
       </div>
     </div>
