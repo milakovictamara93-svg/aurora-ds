@@ -47,7 +47,7 @@ export default function ColumnChartPage() {
                     </div>
                     <div className="flex-1 flex items-end gap-px">
                       {[85, 100, 95, 130, 145, 80].map((v, i) => (
-                        <div key={i} className="flex-1 rounded-t-[3px]" style={{ height: `${(v / 150) * 100}%`, backgroundColor: i < 5 ? CHART_COLORS.energy : CHART_COLORS.barDisabled }} />
+                        <div key={i} className="flex-1 rounded-t-[3px]" style={{ height: `${(v / 150) * 100}%`, backgroundColor: CHART_COLORS.energy }} />
                       ))}
                     </div>
                   </div>
