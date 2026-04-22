@@ -103,7 +103,7 @@ export const PLATFORM_SECTIONS: NavSection[] = [
   },
 ]
 
-// ── Icon Rail (70px) ─────────────────────────────────────────────────────────
+// ── Icon Rail (70px collapsed, 200px expanded on hover) ─────────────────────
 
 function IconRail({
   sections,
@@ -114,15 +114,30 @@ function IconRail({
   activeSection:   string
   onSectionChange: (id: string) => void
 }) {
+  const [expanded, setExpanded] = useState(false)
+
   return (
-    <div className="w-[70px] shrink-0 bg-white dark:bg-[#0D1117] border-r border-[#EDEEF1] dark:border-[#1F2430] flex flex-col items-center pt-3 pb-2">
-      {/* Scaler logo */}
-      <div className="w-8 h-8 mb-4 flex items-center justify-center">
-        <ScalerLogo className="w-7 h-7" color="#111827" />
+    <div
+      className={clsx(
+        'shrink-0 bg-white dark:bg-[#0D1117] border-r border-[#EDEEF1] dark:border-[#1F2430] flex flex-col pt-3 pb-2 transition-all duration-200 ease-in-out overflow-hidden z-10',
+        expanded ? 'w-[200px]' : 'w-[70px]'
+      )}
+      onMouseEnter={() => setExpanded(true)}
+      onMouseLeave={() => setExpanded(false)}
+    >
+      {/* Scaler logo + wordmark */}
+      <div className={clsx('flex items-center gap-3 mb-6 px-4', expanded ? 'justify-start' : 'justify-center')}>
+        <ScalerLogo className="w-7 h-7 shrink-0" color="#111827" />
+        <span className={clsx(
+          'text-[18px] font-bold text-[#111827] dark:text-white tracking-[-0.2px] transition-opacity duration-200 whitespace-nowrap',
+          expanded ? 'opacity-100' : 'opacity-0 w-0'
+        )}>
+          scaler
+        </span>
       </div>
 
       {/* Section icons — each section has its own accent color */}
-      <div className="flex flex-col gap-1 px-4">
+      <div className="flex flex-col gap-1 px-3">
         {sections.map(section => {
           const Icon = section.icon
           const active = activeSection === section.id
@@ -131,13 +146,20 @@ function IconRail({
               key={section.id}
               onClick={() => onSectionChange(section.id)}
               className={clsx(
-                'w-10 h-10 rounded flex items-center justify-center transition-colors',
+                'h-10 rounded flex items-center gap-3 px-2 transition-all duration-200 whitespace-nowrap',
+                expanded ? 'w-full' : 'w-10 justify-center',
                 !active && 'text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5'
               )}
-              style={active ? { color: section.color, backgroundColor: `${section.color}15` } : undefined}
-              title={section.label}
+              style={active ? { color: section.color, backgroundColor: `${section.color}12` } : undefined}
+              title={!expanded ? section.label : undefined}
             >
-              <Icon className="w-5 h-5" />
+              <Icon className="w-5 h-5 shrink-0" />
+              <span className={clsx(
+                'text-[14px] font-medium transition-opacity duration-200',
+                expanded ? 'opacity-100' : 'opacity-0 w-0 overflow-hidden'
+              )}>
+                {section.label}
+              </span>
             </button>
           )
         })}
@@ -147,13 +169,21 @@ function IconRail({
       <div className="flex-1" />
 
       {/* Bottom: AI (Lumi) + divider + Account */}
-      <div className="flex flex-col gap-1 px-4 items-center">
-        <button className="w-10 h-10 rounded flex items-center justify-center text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors" title="Ask Lumi">
-          <SparklesIcon className="w-5 h-5" />
+      <div className="flex flex-col gap-1 px-3">
+        <button className={clsx(
+          'h-10 rounded flex items-center gap-3 px-2 text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-all duration-200 whitespace-nowrap',
+          expanded ? 'w-full' : 'w-10 justify-center'
+        )} title={!expanded ? 'Ask Lumi' : undefined}>
+          <SparklesIcon className="w-5 h-5 shrink-0" />
+          <span className={clsx('text-[14px] font-medium transition-opacity duration-200', expanded ? 'opacity-100' : 'opacity-0 w-0 overflow-hidden')}>Ask Lumi</span>
         </button>
-        <div className="h-px w-10 bg-[#EDEEF1] dark:bg-[#1F2430]" />
-        <button className="w-10 h-10 rounded flex items-center justify-center text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors" title="Account">
-          <UserCircleIcon className="w-5 h-5" />
+        <div className="h-px bg-[#EDEEF1] dark:bg-[#1F2430] mx-2" />
+        <button className={clsx(
+          'h-10 rounded flex items-center gap-3 px-2 text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-all duration-200 whitespace-nowrap',
+          expanded ? 'w-full' : 'w-10 justify-center'
+        )} title={!expanded ? 'Account' : undefined}>
+          <UserCircleIcon className="w-5 h-5 shrink-0" />
+          <span className={clsx('text-[14px] font-medium transition-opacity duration-200', expanded ? 'opacity-100' : 'opacity-0 w-0 overflow-hidden')}>Account</span>
         </button>
       </div>
     </div>
