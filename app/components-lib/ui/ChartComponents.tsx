@@ -293,14 +293,20 @@ export function LineChart({
   const actualEnd = projectionFrom ?? n
   const activeIdx = hoverIdx ?? selectedIdx
 
-  // Fixed viewBox — absolute coordinates
-  const vw = 1000
-  const vh = 400
-  function toX(i: number) { return n > 1 ? (i / (n - 1)) * vw : vw / 2 }
-  function toY(v: number) { return max > 0 ? (1 - v / max) * vh : vh }
-  function pts(arr: number[], start: number, end: number) {
-    return arr.slice(start, end).map((v, i) => `${toX(i + start).toFixed(0)},${toY(v).toFixed(0)}`).join(' ')
-  }
+  // Use the same div-based approach as ColumnChart.
+  // Lines are drawn as absolutely-positioned divs/spans won't work for curves,
+  // so we use an inline SVG that matches the container exactly via a ref.
+  // But simpler: just use the container height and calculate Y as pixel offsets,
+  // X as percentages via left positioning on absolutely placed markers,
+  // and draw the line via an SVG path using the same percentage-to-pixel logic.
+
+  // Chart area height = container height - 20px (x-axis labels)
+  const chartH = height - 20
+
+  // Convert data value to top offset (0 = top, chartH = bottom)
+  function yPx(v: number) { return max > 0 ? (1 - v / max) * chartH : chartH }
+  // Convert index to left percentage
+  function xPct(i: number) { return n > 1 ? (i / (n - 1)) * 100 : 50 }
 
   return (
     <div>
@@ -311,58 +317,81 @@ export function LineChart({
         </div>
 
         <div className="flex-1 flex flex-col min-w-0">
-          <div className="flex-1 relative">
+          <div className="flex-1 relative" style={{ height: chartH }}>
             {/* Grid */}
             <div className="absolute inset-0 flex flex-col justify-between pointer-events-none z-0">
               {[0, 1, 2, 3].map(i => <div key={i} className="h-px bg-[#EDEEF1] dark:bg-[#1F2430]" />)}
             </div>
 
-            {/* SVG */}
-            <svg viewBox={`0 0 ${vw} ${vh}`} preserveAspectRatio="none" className="absolute inset-0 w-full h-full z-[1]" style={{ overflow: 'visible' }}>
-              {/* Area fill */}
-              {showArea && series[0] && (
-                <polygon points={`${pts(series[0].points, 0, actualEnd)} ${toX(actualEnd - 1)},${vh} ${toX(0)},${vh}`} fill={series[0].color} opacity="0.15" />
-              )}
+            {/* Area fill */}
+            {showArea && series[0] && (
+              <svg className="absolute inset-0 w-full z-[1]" style={{ height: chartH }} preserveAspectRatio="none" viewBox={`0 0 100 ${chartH}`}>
+                <polygon
+                  points={series[0].points.slice(0, actualEnd).map((v, i) => `${xPct(i)},${yPx(v)}`).join(' ') + ` ${xPct(actualEnd - 1)},${chartH} ${xPct(0)},${chartH}`}
+                  fill={series[0].color}
+                  opacity="0.15"
+                />
+              </svg>
+            )}
 
-              {/* Lines */}
-              {series.map((s, si) => (
-                <g key={si}>
-                  <polyline points={pts(s.points, 0, actualEnd)} fill="none" stroke={s.color} strokeWidth={s.dashed ? 3 : 4} strokeDasharray={s.dashed ? '12 8' : undefined} opacity={s.dashed ? 0.5 : 1} vectorEffect="non-scaling-stroke" />
-                  {projectionFrom !== undefined && !s.dashed && projectionFrom < s.points.length && (
-                    <polyline points={pts(s.points, Math.max(0, projectionFrom - 1), s.points.length)} fill="none" stroke={s.color} strokeWidth={3} strokeDasharray="12 8" opacity="0.4" vectorEffect="non-scaling-stroke" />
-                  )}
-                </g>
-              ))}
+            {/* Lines as SVG paths — one SVG per series to avoid stretch issues */}
+            {series.map((s, si) => (
+              <svg key={si} className="absolute inset-0 w-full z-[2] pointer-events-none" style={{ height: chartH }} preserveAspectRatio="none" viewBox={`0 0 100 ${chartH}`}>
+                <polyline
+                  points={s.points.slice(0, actualEnd).map((v, i) => `${xPct(i)},${yPx(v)}`).join(' ')}
+                  fill="none" stroke={s.color}
+                  strokeWidth={2} vectorEffect="non-scaling-stroke"
+                  strokeDasharray={s.dashed ? '6 4' : undefined}
+                  opacity={s.dashed ? 0.5 : 1}
+                />
+                {projectionFrom !== undefined && !s.dashed && projectionFrom < s.points.length && (
+                  <polyline
+                    points={s.points.slice(Math.max(0, projectionFrom - 1)).map((v, i) => `${xPct(i + Math.max(0, projectionFrom - 1))},${yPx(v)}`).join(' ')}
+                    fill="none" stroke={s.color} strokeWidth={1.5} vectorEffect="non-scaling-stroke"
+                    strokeDasharray="6 4" opacity="0.4"
+                  />
+                )}
+              </svg>
+            ))}
 
-              {/* Hover vertical line */}
-              {activeIdx !== null && activeIdx < actualEnd && (
-                <line x1={toX(activeIdx)} y1={toY(series[0].points[activeIdx])} x2={toX(activeIdx)} y2={vh} stroke="#D7DAE0" strokeWidth={2} strokeDasharray="8 6" vectorEffect="non-scaling-stroke" />
-              )}
+            {/* Hover vertical dashed line */}
+            {activeIdx !== null && activeIdx < actualEnd && (
+              <div className="absolute z-[3] pointer-events-none" style={{ left: `${xPct(activeIdx)}%`, top: yPx(series[0].points[activeIdx]), bottom: 0, width: 1, borderLeft: '1px dashed #D7DAE0' }} />
+            )}
 
-              {/* Hit areas */}
-              {series[0]?.points.map((_, i) => {
-                if (i >= actualEnd) return null
-                const w = vw / Math.max(n - 1, 1)
-                return <rect key={`h${i}`} x={toX(i) - w / 2} y={0} width={w} height={vh} fill="transparent" className="cursor-pointer" onMouseEnter={() => setHoverIdx(i)} onMouseLeave={() => setHoverIdx(null)} onClick={() => setSelectedIdx(selectedIdx === i ? null : i)} />
-              })}
+            {/* Markers + hit areas — absolutely positioned divs (no SVG distortion) */}
+            {series.map((s, si) => s.points.map((v, i) => {
+              if (i >= actualEnd || s.dashed) return null
+              const isActive = activeIdx === i
+              const size = isActive ? 12 : 8
+              return (
+                <div
+                  key={`m${si}-${i}`}
+                  className="absolute z-[4] rounded-full cursor-pointer"
+                  style={{
+                    left: `${xPct(i)}%`,
+                    top: yPx(v),
+                    width: size, height: size,
+                    marginLeft: -size / 2, marginTop: -size / 2,
+                    backgroundColor: isActive ? s.color : 'white',
+                    border: `2px solid ${s.color}`,
+                  }}
+                  onMouseEnter={() => setHoverIdx(i)}
+                  onMouseLeave={() => setHoverIdx(null)}
+                  onClick={() => setSelectedIdx(selectedIdx === i ? null : i)}
+                />
+              )
+            }))}
 
-              {/* Markers — 8px normal, 12px active */}
-              {series.map((s, si) => s.points.map((v, i) => {
-                if (i >= actualEnd || s.dashed) return null
-                const isActive = activeIdx === i
-                return <circle key={`m${si}-${i}`} cx={toX(i)} cy={toY(v)} r={isActive ? 10 : 7} fill={isActive ? s.color : 'white'} stroke={s.color} strokeWidth={3} />
-              }))}
+            {/* Blue dot on comparison at hover */}
+            {activeIdx !== null && series[1]?.dashed && activeIdx < series[1].points.length && (
+              <div className="absolute z-[4] rounded-full pointer-events-none" style={{ left: `${xPct(activeIdx)}%`, top: yPx(series[1].points[activeIdx]), width: 12, height: 12, marginLeft: -6, marginTop: -6, backgroundColor: series[1].color, border: '2px solid white' }} />
+            )}
 
-              {/* Blue dot on comparison at hover */}
-              {activeIdx !== null && series[1]?.dashed && activeIdx < series[1].points.length && (
-                <circle cx={toX(activeIdx)} cy={toY(series[1].points[activeIdx])} r={10} fill={series[1].color} stroke="white" strokeWidth={3} />
-              )}
-
-              {/* Warning dot */}
-              {warningIndex !== undefined && series[0] && warningIndex < n && (
-                <circle cx={toX(warningIndex)} cy={toY(series[0].points[warningIndex])} r={10} fill="#F59E0B" stroke="white" strokeWidth={3} />
-              )}
-            </svg>
+            {/* Warning dot */}
+            {warningIndex !== undefined && series[0] && warningIndex < n && (
+              <div className="absolute z-[5] rounded-full pointer-events-none" style={{ left: `${xPct(warningIndex)}%`, top: yPx(series[0].points[warningIndex]), width: 12, height: 12, marginLeft: -6, marginTop: -6, backgroundColor: '#F59E0B', border: '2px solid white' }} />
+            )}
           </div>
 
           {/* X axis labels */}
