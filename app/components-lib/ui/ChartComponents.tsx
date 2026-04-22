@@ -86,7 +86,7 @@ export function ChartTooltip({
   )
 }
 
-// ── Column Chart (Figma: 6px bars, 4px top radius, Figma state colors) ──
+// ── Column Chart (Figma: 6px bars, 4px top radius, exact state colors) ──
 
 export function ColumnChart({
   data,
@@ -110,10 +110,10 @@ export function ColumnChart({
   const [hoverIdx, setHoverIdx] = useState<number | null>(null)
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null)
   const max = Math.max(...data)
-  const hasInteraction = hoverIdx !== null || selectedIdx !== null
 
-  // Tooltip data for selected bar
-  const tooltipBar = selectedIdx !== null ? selectedIdx : null
+  // Active bar = hovered OR selected (hover takes priority for visual)
+  const activeBar = hoverIdx ?? selectedIdx
+  const hasInteraction = activeBar !== null
 
   return (
     <div>
@@ -125,26 +125,25 @@ export function ColumnChart({
           <span>0</span>
         </div>
 
-        <div className="flex-1 flex flex-col min-w-0 relative">
-          {/* Bars area */}
-          <div className="flex-1 relative">
+        {/* Chart area — fills all remaining width */}
+        <div className="flex-1 flex flex-col min-w-0">
+          <div className="flex-1 relative overflow-hidden">
             {/* Grid lines */}
             <div className="absolute inset-0 flex flex-col justify-between pointer-events-none z-0">
               {[0, 1, 2, 3].map(i => <div key={i} className="h-px bg-[#EDEEF1] dark:bg-[#1F2430]" />)}
             </div>
 
-            {/* Bars */}
-            <div className="absolute inset-0 flex items-end z-[1]" style={{ gap: '1.5px', paddingLeft: '8px' }}>
+            {/* Bars — stretch full width, no left padding */}
+            <div className="absolute inset-0 flex items-end z-[1]" style={{ gap: 1 }}>
               {data.map((v, i) => {
                 const isMissing = missingFrom !== undefined && i >= missingFrom
                 const pct = max > 0 ? (v / max) * 100 : 0
-                const isHovered = hoverIdx === i
-                const isSelected = selectedIdx === i
+                const isActive = activeBar === i
 
                 let barColor: string
                 if (isMissing) {
                   barColor = CHART_COLORS.barDisabled
-                } else if (isSelected || isHovered) {
+                } else if (isActive) {
                   barColor = color
                 } else if (hasInteraction) {
                   barColor = CHART_COLORS.barInactive
@@ -155,44 +154,48 @@ export function ColumnChart({
                 return (
                   <div
                     key={i}
-                    className="relative cursor-pointer"
-                    style={{ flex: '1 1 0', maxWidth: 6, height: `${pct}%` }}
+                    className="flex-1 cursor-pointer"
+                    style={{ height: `${pct}%` }}
                     onMouseEnter={() => setHoverIdx(i)}
                     onMouseLeave={() => setHoverIdx(null)}
-                    onClick={() => setSelectedIdx(isSelected ? null : i)}
+                    onClick={() => setSelectedIdx(selectedIdx === i ? null : i)}
                   >
-                    <div
-                      className="w-full h-full rounded-t-[4px]"
-                      style={{ backgroundColor: barColor }}
-                    />
+                    <div className="w-full h-full rounded-t-[4px]" style={{ backgroundColor: barColor }} />
                   </div>
                 )
               })}
             </div>
 
-            {/* Warning icon — ON TOP of bars */}
+            {/* Warning — full height from icon to bottom of chart */}
             {showWarning && warningIndex !== undefined && (
               <div
-                className="absolute z-[3] -translate-x-1/2 pointer-events-none"
+                className="absolute z-[3] flex flex-col items-center pointer-events-none"
                 style={{
-                  left: `calc(8px + ${(warningIndex / data.length) * 100}%)`,
+                  left: `${((warningIndex + 0.5) / data.length) * 100}%`,
                   top: 0,
+                  bottom: 0,
+                  transform: 'translateX(-50%)',
                 }}
               >
-                <svg className="w-4 h-4 text-[#F59E0B]" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" /></svg>
-                <div className="w-px h-full bg-[#F59E0B] mx-auto opacity-40" style={{ minHeight: 100 }} />
+                <svg className="w-4 h-4 text-[#F59E0B] shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" /></svg>
+                <div className="w-px flex-1 bg-[#F59E0B] opacity-30" />
               </div>
             )}
 
-            {/* Tooltip positioned near selected bar */}
-            {tooltipBar !== null && (
-              <div className="absolute z-[4] top-0" style={{ left: `calc(8px + ${(tooltipBar / data.length) * 100}%)`, transform: 'translateX(-50%)' }}>
+            {/* Tooltip on selected bar */}
+            {selectedIdx !== null && (
+              <div
+                className="absolute z-[4]"
+                style={{
+                  left: `${((selectedIdx + 0.5) / data.length) * 100}%`,
+                  top: -8,
+                  transform: 'translateX(-50%)',
+                }}
+              >
                 <ChartTooltip
-                  title={labels?.[Math.floor(tooltipBar / (data.length / (labels?.length ?? 1)))] ?? `Bar ${tooltipBar + 1}`}
+                  title={labels?.[Math.floor(selectedIdx / (data.length / (labels?.length ?? 1)))] ?? `Bar ${selectedIdx + 1}`}
                   subtitle="Monthly consumption"
-                  rows={[
-                    { label: 'Value', value: `${data[tooltipBar]}` },
-                  ]}
+                  rows={[{ label: 'Value', value: `${data[selectedIdx]}` }]}
                 />
               </div>
             )}
@@ -200,16 +203,16 @@ export function ColumnChart({
 
           {/* X axis labels */}
           {labels && (
-            <div className="h-5 flex justify-between text-[12px] text-[#505867] dark:text-[#9CA3AF] tracking-[0.18px] pl-2">
+            <div className="h-5 flex justify-between text-[12px] text-[#505867] dark:text-[#9CA3AF] tracking-[0.18px]">
               {labels.map(l => <span key={l}>{l}</span>)}
             </div>
           )}
         </div>
       </div>
 
-      {/* Legend */}
+      {/* Legend — right aligned */}
       {legend && (
-        <div className="mt-3 flex justify-center">
+        <div className="mt-3 flex justify-end">
           <ChartLegend items={legend} />
         </div>
       )}
