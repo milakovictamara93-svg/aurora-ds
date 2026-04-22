@@ -6,7 +6,7 @@ import {
   Section, SpecTable, ColorRow,
   DoCard, DontCard, A11yRow, KeyRow,
   Preview, Annotation,
-  UseList, DontUseList, RelatedComponents, PageContent,
+  UseList, DontUseList, RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 import InputDate from '@/app/components-lib/ui/InputDate'
 
@@ -26,7 +26,7 @@ export default function DateInputPage() {
         <TabBar />
 
         <TabPanel id="usage">
-          <PageContent>
+          
             <Section title="States">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <Preview label="Default — empty">
@@ -103,11 +103,11 @@ export default function DateInputPage() {
               { href: '/components/inputs/text',   label: 'Text input', description: 'For year-only or month-year inputs.' },
               { href: '/components/inputs/select', label: 'Select',     description: 'For choosing from a defined list of periods.' },
             ]} />
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="style">
-          <PageContent>
+          
             <Section title="Anatomy">
               <Preview label="Calendar icon · Trigger · Clear × · Popover with presets + calendar + actions">
                 <InputDate id="a1" label="Reporting period" defaultValue={{ start: '2024-01-01', end: '2024-03-31' }} />
@@ -141,11 +141,11 @@ export default function DateInputPage() {
               <ColorRow label="Hover bg"                     hex="#F7F8F8" role="grey-50" border />
               <ColorRow label="Other-month text"             hex="#8C96A4" role="grey-400" border />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="code">
-          <PageContent>
+          
             <Section title="Basic usage">
               <Preview label="Live preview">
                 <InputDate id="c1" label="Reporting period" required />
@@ -197,11 +197,11 @@ const [range, setRange] = useState<DateRange | null>(null)
                 { property: 'disabled',     value: 'boolean',                                                   token: 'Shorthand for state="disabled"' },
               ]} />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="accessibility">
-          <PageContent>
+          
             <Section title="Keyboard">
               <div className="rounded-lg border border-grey-100 dark:border-grey-800 overflow-hidden bg-white dark:bg-grey-950">
                 <KeyRow keys={['Tab']}           action="Focus the date range trigger." />
@@ -220,7 +220,7 @@ const [range, setRange] = useState<DateRange | null>(null)
                 <A11yRow check="Save disabled">Save button has <code className="text-xs font-mono bg-grey-50 dark:bg-grey-900 px-1 py-0.5 rounded">disabled</code> until both start and end dates are selected, preventing incomplete submissions.</A11yRow>
               </div>
             </Section>
-          </PageContent>
+          
         </TabPanel>
       </ComponentTabs>
     </div>

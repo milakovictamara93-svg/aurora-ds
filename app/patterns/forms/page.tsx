@@ -116,7 +116,7 @@ function SpecRow({ label, value }: { label: string; value: string }) {
 function RuleCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] p-4 bg-white dark:bg-[#0D1117]">
-      <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-1">{title}</p>
+      <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-2">{title}</p>
       <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{children}</p>
     </div>
   )
@@ -260,7 +260,7 @@ export default function FormsPage() {
 
         {/* Multi-column form */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-1">Multi-column layout</h2>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2">Multi-column layout</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Use a 2-column grid for forms with many fields. Group related fields together. Wider fields (like address or notes) span the full width or 2 columns.
           </p>
@@ -271,7 +271,7 @@ export default function FormsPage() {
 
         {/* Stacked single-column */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-1">Single-column stacked</h2>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2">Single-column stacked</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Use a single column for short focused flows — onboarding, login, quick-edit panels. Keeps the user's eye on one decision at a time.
           </p>
@@ -282,7 +282,7 @@ export default function FormsPage() {
 
         {/* Sectioned form */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-1">Sectioned form</h2>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2">Sectioned form</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Group related fields under bold section headings. Separate sections with a divider. Each section can have a short description below the heading to clarify context or units.
           </p>
@@ -293,7 +293,7 @@ export default function FormsPage() {
 
         {/* Field states */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-3">Field states</h2>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2">Field states</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <PreviewBox label="Default">
               <Field label="Label" placeholder="Placeholder text" helper="Helper text provides additional context." />
@@ -312,7 +312,7 @@ export default function FormsPage() {
 
         {/* Specs */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-3">Field specs</h2>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2">Field specs</h2>
           <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117]">
             <SpecRow label="Label font" value="13px / semibold / #111827" />
             <SpecRow label="Required indicator" value="Red asterisk (*) — #F87171, after label text" />
@@ -333,7 +333,7 @@ export default function FormsPage() {
 
         {/* Rules */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-3">Rules</h2>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2">Rules</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <RuleCard title="Label above, never inside">
               Always place the label above the input field. Never use placeholder text as a substitute for a label — placeholder disappears on focus and is inaccessible to screen readers.

@@ -7,7 +7,7 @@ import {
   Section, SpecTable, ColorRow,
   DoCard, DontCard, A11yRow, KeyRow,
   Preview, Annotation,
-  UseList, DontUseList, RelatedComponents, PageContent,
+  UseList, DontUseList, RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 import InputTextarea from '@/app/components-lib/ui/InputTextarea'
 
@@ -52,7 +52,7 @@ export default function TextareaPage() {
         <TabBar />
 
         <TabPanel id="usage">
-          <PageContent>
+          
             <Section title="States">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Card label="Default">
@@ -125,11 +125,11 @@ export default function TextareaPage() {
             <RelatedComponents items={[
               { href: '/components/inputs/text', label: 'Text input', description: 'Single-line free-form entry.' },
             ]} />
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="style">
-          <PageContent>
+          
             <Section title="Anatomy">
               <Preview label="Label · Textarea · Helper text · Character count">
                 <div className="flex flex-col gap-4 max-w-sm">
@@ -155,11 +155,11 @@ export default function TextareaPage() {
               <ColorRow label="Border — warning" hex="#F96416" role="missing-info-500" border />
               <ColorRow label="Border — success" hex="#16A34A" role="success-600" border />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="code">
-          <PageContent>
+          
             <Section title="Basic textarea">
               <Preview label="Live preview"><InputTextarea id="c1" label="Notes" placeholder="Enter notes…" /></Preview>
               <Code>{`import InputTextarea from '@/components-lib/ui/InputTextarea'
@@ -196,11 +196,11 @@ export default function TextareaPage() {
                 { property: '...rest',    value: 'HTMLTextAreaElement attrs',                                                token: 'Forwarded' },
               ]} />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="accessibility">
-          <PageContent>
+          
             <Section title="Keyboard">
               <div className="rounded-lg border border-grey-100 dark:border-grey-800 overflow-hidden bg-white dark:bg-grey-950">
                 <KeyRow keys={['Tab']}       action="Focus the textarea." />
@@ -215,7 +215,7 @@ export default function TextareaPage() {
                 <A11yRow check="maxLength">Native maxLength prevents overflow; pair with showCount so users can see their remaining characters.</A11yRow>
               </div>
             </Section>
-          </PageContent>
+          
         </TabPanel>
       </ComponentTabs>
     </div>

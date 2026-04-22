@@ -7,7 +7,7 @@ import {
   Section, SpecTable, ColorRow,
   DoCard, DontCard, A11yRow, KeyRow,
   Preview, Annotation,
-  UseList, DontUseList, RelatedComponents, PageContent,
+  UseList, DontUseList, RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 import {
   ChatBubbleLeftIcon,
@@ -253,7 +253,7 @@ export default function ButtonGroupPage() {
 
         {/* ── USAGE ─────────────────────────────────────────────────────── */}
         <TabPanel id="usage">
-          <PageContent>
+          
             <Section title="When to use">
               <UseList items={[
                 <><strong className="font-semibold text-[#1F2430] dark:text-white">Inline groups</strong> — when a single record has multiple related actions (edit, share, delete) that should appear together without visual noise.</>,
@@ -352,12 +352,12 @@ export default function ButtonGroupPage() {
               { href: '/components/buttons', label: 'Buttons', description: 'Individual button variants and states.' },
               { href: '/components/navigation', label: 'Navigation', description: 'Sidebar and top-nav patterns.' },
             ]} />
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── STYLE ─────────────────────────────────────────────────────── */}
         <TabPanel id="style">
-          <PageContent>
+          
             <Section title="Sizing & spacing">
               <SpecTable rows={[
                 { property: 'Small height',         value: '32px',    token: 'h-8' },
@@ -380,12 +380,12 @@ export default function ButtonGroupPage() {
               <ColorRow label="Selected bg (toolbar)" hex="#EFF6FF" role="Blue 50 — active icon button background" border />
               <ColorRow label="Destructive text" hex="#DC2626" role="Error Red — destructive form action" border />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── CODE ──────────────────────────────────────────────────────── */}
         <TabPanel id="code">
-          <PageContent>
+          
             <Section title="Inline group">
               <Preview label="Live preview">
                 <InlineGroup />
@@ -414,12 +414,12 @@ export default function ButtonGroupPage() {
                 {splitSnippet}
               </pre>
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── ACCESSIBILITY ─────────────────────────────────────────────── */}
         <TabPanel id="accessibility">
-          <PageContent>
+          
             <Section title="ARIA requirements">
               <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#111827]">
                 <A11yRow check="aria-label">
@@ -457,7 +457,7 @@ export default function ButtonGroupPage() {
                 { property: 'Red on white',       value: '#DC2626 on #FFFFFF', token: '5.9:1 ✓ AA' },
               ]} />
             </Section>
-          </PageContent>
+          
         </TabPanel>
       </ComponentTabs>
     </div>

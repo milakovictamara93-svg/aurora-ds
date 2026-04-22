@@ -7,7 +7,7 @@ import {
   Section, SpecTable, A11yRow, KeyRow,
   Preview, Annotation,
   UseList, DontUseList, DoCard, DontCard,
-  RelatedComponents, PageContent,
+  RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 
 // ── Data ──────────────────────────────────────────────────────────────────────
@@ -36,7 +36,7 @@ export default function BannerPage() {
 
         {/* ── USAGE ──────────────────────────────────────────────────────── */}
         <TabPanel id="usage">
-          <PageContent>
+          
 
             <Section title="When to use">
               <UseList items={[
@@ -175,12 +175,12 @@ export default function BannerPage() {
               { href: '/components/inputs',  label: 'Input',  description: 'Inline field-level error and helper text within forms.' },
             ]} />
 
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── STYLE ──────────────────────────────────────────────────────── */}
         <TabPanel id="style">
-          <PageContent>
+          
 
             <Section title="Anatomy">
               <div className="flex flex-col gap-6">
@@ -261,12 +261,12 @@ export default function BannerPage() {
               ))}
             </Section>
 
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── CODE ───────────────────────────────────────────────────────── */}
         <TabPanel id="code">
-          <PageContent>
+          
 
             <Section title="Import">
               <div className="rounded-lg bg-[#111827] dark:bg-[#0D1117] border border-[#1F2430] overflow-x-auto">
@@ -335,12 +335,12 @@ export default function BannerPage() {
               </div>
             </Section>
 
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── ACCESSIBILITY ───────────────────────────────────────────────── */}
         <TabPanel id="accessibility">
-          <PageContent>
+          
 
             <Section title="ARIA & semantics">
               <div className="rounded-[8px] border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117]">
@@ -376,7 +376,7 @@ export default function BannerPage() {
               ]} />
             </Section>
 
-          </PageContent>
+          
         </TabPanel>
 
       </ComponentTabs>

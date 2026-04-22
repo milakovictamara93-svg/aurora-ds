@@ -741,7 +741,7 @@ export function RelatedComponents({
   return (
     <section className="rounded-[8px] overflow-hidden">
       <div className="py-8">
-        <h2 className="text-[24px] font-semibold text-[#111827] dark:text-white mb-8 leading-[1.4]">
+        <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">
           Related
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

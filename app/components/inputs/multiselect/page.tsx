@@ -6,7 +6,7 @@ import {
   Section, SpecTable, ColorRow,
   DoCard, DontCard, A11yRow, KeyRow,
   Preview, Annotation,
-  UseList, DontUseList, RelatedComponents, PageContent,
+  UseList, DontUseList, RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 import InputMultiselect from '@/app/components-lib/ui/InputMultiselect'
 
@@ -45,7 +45,7 @@ export default function MultiselectPage() {
 
         {/* ── USAGE ───────────────────────────────────────────────────────── */}
         <TabPanel id="usage">
-          <PageContent>
+          
 
             <Section title="States">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -121,12 +121,12 @@ export default function MultiselectPage() {
               { href: '/components/inputs/search-multiselect', label: 'Search multiselect', description: 'Search + select from large lists.'     },
               { href: '/components/inputs/tag',                label: 'Tag input',          description: 'Free-form custom value entry as tags.' },
             ]} />
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── STYLE ───────────────────────────────────────────────────────── */}
         <TabPanel id="style">
-          <PageContent>
+          
             <Section title="Anatomy">
               <Preview label="Label · Trigger with chips · Chevron · Menu with checkboxes">
                 <InputMultiselect id="a1" label="GHG scopes" options={SCOPE_OPTIONS} defaultValue={['s1']} />
@@ -159,12 +159,12 @@ export default function MultiselectPage() {
               <ColorRow label="Menu item — hover bg"       hex="#F7F8F8" role="grey-50" border />
               <ColorRow label="Menu item — disabled bg"    hex="#EDEEF1" role="grey-100" border />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── CODE ────────────────────────────────────────────────────────── */}
         <TabPanel id="code">
-          <PageContent>
+          
             <Section title="Basic multiselect">
               <Preview label="Live preview">
                 <InputMultiselect id="c1" label="ESG frameworks" placeholder="Select frameworks…" options={FRAMEWORK_OPTIONS} />
@@ -209,12 +209,12 @@ export default function MultiselectPage() {
                 { property: 'layout',       value: "'stacked' | 'inline'",                                      token: 'Default: "stacked"' },
               ]} />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── ACCESSIBILITY ───────────────────────────────────────────────── */}
         <TabPanel id="accessibility">
-          <PageContent>
+          
             <Section title="Keyboard">
               <div className="rounded-lg border border-grey-100 dark:border-grey-800 overflow-hidden bg-white dark:bg-grey-950">
                 <KeyRow keys={['Tab']}           action="Move focus to the trigger." />
@@ -230,7 +230,7 @@ export default function MultiselectPage() {
                 <A11yRow check="chip remove">Each chip × button has an <code className="text-xs font-mono bg-grey-50 dark:bg-grey-900 px-1 py-0.5 rounded">aria-label=&quot;Remove [label]&quot;</code> for screen reader users.</A11yRow>
               </div>
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
       </ComponentTabs>

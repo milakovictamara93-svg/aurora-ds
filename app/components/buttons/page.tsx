@@ -6,7 +6,7 @@ import {
   Section, SpecTable, ColorRow,
   DoCard, DontCard, A11yRow, KeyRow,
   Preview, Annotation,
-  UseList, DontUseList, VariantRow, VariantTable, StatesTable, RelatedComponents, PageContent,
+  UseList, DontUseList, VariantRow, VariantTable, StatesTable, RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 import { PlusIcon, ArrowPathIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 
@@ -106,7 +106,7 @@ export default function ButtonsPage() {
 
         {/* ── USAGE ─────────────────────────────────────────────────────────── */}
         <TabPanel id="usage">
-          <PageContent>
+          
             <Section title="When to use">
               <UseList items={[
                 <><strong className="font-semibold text-[#1F2430] dark:text-white">Primary</strong> for the single most important action per view (e.g., "Save", "Submit", "Export").</>,
@@ -238,12 +238,12 @@ export default function ButtonsPage() {
               { href: '/components/modals', label: 'Modals', description: 'Button placement within modal dialogs.' },
               { href: '/components/toasts', label: 'Toasts', description: 'Action buttons inside toast notifications.' },
             ]} />
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── STYLE ─────────────────────────────────────────────────────────── */}
         <TabPanel id="style">
-          <PageContent>
+          
             <Section title="Anatomy">
               <Preview label="Button anatomy — medium size">
                 <Btn variant="primary" icon={<PlusIcon className="w-4 h-4" />}>Label</Btn>
@@ -293,12 +293,12 @@ export default function ButtonsPage() {
               </Preview>
               <Annotation>2px solid ring, Sky 500 (#2295FF), 2px offset. Visible on keyboard navigation only.</Annotation>
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── CODE ──────────────────────────────────────────────────────────── */}
         <TabPanel id="code">
-          <PageContent>
+          
             <Section title="Primary button">
               <Preview label="Live preview">
                 <Btn variant="primary" icon={<PlusIcon className="w-4 h-4" />}>Add building</Btn>
@@ -373,12 +373,12 @@ export default function ButtonsPage() {
 </button>`}
               </pre>
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── ACCESSIBILITY ─────────────────────────────────────────────────── */}
         <TabPanel id="accessibility">
-          <PageContent>
+          
             <Section title="Keyboard navigation">
               <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#111827]">
                 <KeyRow keys={['Tab']} action="Move focus to the next interactive element." />
@@ -405,7 +405,7 @@ export default function ButtonsPage() {
                 { property: 'Disabled text',         value: '#B4BAC5 on #EDEEF1', token: '1.9:1 — intentionally muted' },
               ]} />
             </Section>
-          </PageContent>
+          
         </TabPanel>
       </ComponentTabs>
     </div>

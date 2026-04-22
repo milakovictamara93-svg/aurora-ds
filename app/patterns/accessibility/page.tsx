@@ -131,7 +131,7 @@ export default function AccessibilityPage() {
       </div>
 
       {/* Contrast checker */}
-      <h2 className="text-xl font-semibold text-token-primary mb-4">Contrast ratios</h2>
+      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Contrast ratios</h2>
       <div className="overflow-x-auto rounded-xl border border-token mb-10">
         <table className="w-full text-sm">
           <thead>
@@ -176,14 +176,14 @@ export default function AccessibilityPage() {
       </div>
 
       {/* Focus indicators */}
-      <h2 className="text-xl font-semibold text-token-primary mb-2">Focus indicators</h2>
+      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Focus indicators</h2>
       <p className="text-sm text-token-secondary mb-4">All interactive elements must show a visible focus ring. Use the standard pattern: 2px ring, 2px offset, Sky 500 color.</p>
       <div className="mb-10">
         <FocusDemo />
       </div>
 
       {/* Keyboard navigation */}
-      <h2 className="text-xl font-semibold text-token-primary mb-4">Keyboard navigation</h2>
+      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Keyboard navigation</h2>
       <div className="overflow-x-auto rounded-xl border border-token mb-10">
         <table className="w-full text-sm">
           <thead>
@@ -209,7 +209,7 @@ export default function AccessibilityPage() {
       </div>
 
       {/* ARIA patterns */}
-      <h2 className="text-xl font-semibold text-token-primary mb-2">ARIA patterns</h2>
+      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">ARIA patterns</h2>
       <p className="text-sm text-token-secondary mb-4">Use semantic HTML first. Add ARIA attributes only where semantics are insufficient.</p>
       <div className="space-y-6 mb-10">
         {ariaRules.map((r) => (
@@ -234,7 +234,7 @@ export default function AccessibilityPage() {
       </div>
 
       {/* Checklist */}
-      <h2 className="text-xl font-semibold text-token-primary mb-4">Accessibility checklist</h2>
+      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Accessibility checklist</h2>
       <div className="rounded-xl border border-token bg-token-primary divide-y divide-token">
         {[
           'All text meets 4.5:1 contrast ratio against its background',

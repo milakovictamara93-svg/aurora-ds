@@ -9,7 +9,7 @@ import {
   Section, SpecTable, A11yRow, KeyRow,
   Preview, Annotation,
   UseList, DontUseList, DoCard, DontCard,
-  RelatedComponents, PageContent,
+  RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 
 // ── Static preview shell (not interactive — for anatomy display) ──────────────
@@ -93,7 +93,7 @@ export default function ModalsPage() {
 
         {/* ── USAGE ──────────────────────────────────────────────────────── */}
         <TabPanel id="usage">
-          <PageContent>
+          
 
             <Section title="When to use">
               <UseList items={[
@@ -240,12 +240,12 @@ export default function ModalsPage() {
               { href: '/components/buttons', label: 'Button', description: 'Primary, secondary, and destructive button patterns used in modal footers.' },
             ]} />
 
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── STYLE ──────────────────────────────────────────────────────── */}
         <TabPanel id="style">
-          <PageContent>
+          
 
             <Section title="Types">
               <SpecTable rows={[
@@ -296,12 +296,12 @@ export default function ModalsPage() {
               ]} />
             </Section>
 
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── CODE ───────────────────────────────────────────────────────── */}
         <TabPanel id="code">
-          <PageContent>
+          
 
             <Section title="Import">
               <div className="rounded-lg bg-[#111827] dark:bg-[#0D1117] border border-[#1F2430] overflow-x-auto">
@@ -389,12 +389,12 @@ export default function ModalsPage() {
               </div>
             </Section>
 
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── ACCESSIBILITY ───────────────────────────────────────────────── */}
         <TabPanel id="accessibility">
-          <PageContent>
+          
 
             <Section title="ARIA & semantics">
               <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117]">
@@ -425,7 +425,7 @@ export default function ModalsPage() {
               ]} />
             </Section>
 
-          </PageContent>
+          
         </TabPanel>
 
       </ComponentTabs>

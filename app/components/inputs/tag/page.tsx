@@ -6,7 +6,7 @@ import {
   Section, SpecTable, ColorRow,
   DoCard, DontCard, A11yRow, KeyRow,
   Preview, Annotation,
-  UseList, DontUseList, RelatedComponents, PageContent,
+  UseList, DontUseList, RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 import InputTag from '@/app/components-lib/ui/InputTag'
 
@@ -35,7 +35,7 @@ export default function TagInputPage() {
         <TabBar />
 
         <TabPanel id="usage">
-          <PageContent>
+          
             <Section title="States">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Card label="Empty — type and press Enter or comma">
@@ -101,11 +101,11 @@ export default function TagInputPage() {
               { href: '/components/inputs/multiselect', label: 'Multiselect', description: 'Select from a predefined list.' },
               { href: '/components/inputs/search-multiselect', label: 'Search multiselect', description: 'Search + select from large lists.' },
             ]} />
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="style">
-          <PageContent>
+          
             <Section title="Anatomy">
               <Preview label="Chips · Text input · State icon">
                 <InputTag id="a1" label="Keywords" defaultValue={['Energy', 'GHG']} helperText="Helper text" />
@@ -123,11 +123,11 @@ export default function TagInputPage() {
                 { property: 'Border radius', value: '4px (rounded)',        token: 'Container and chips' },
               ]} />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="code">
-          <PageContent>
+          
             <Section title="Basic">
               <Preview label="Live preview"><InputTag id="c1" label="Keywords" placeholder="Add keyword…" helperText="Press Enter or comma to add." /></Preview>
               <Code>{`import InputTag from '@/components-lib/ui/InputTag'
@@ -159,11 +159,11 @@ export default function TagInputPage() {
                 { property: 'onChange',     value: '(tags: string[]) => void',                                                 token: 'Optional' },
               ]} />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="accessibility">
-          <PageContent>
+          
             <Section title="Keyboard">
               <div className="rounded-lg border border-grey-100 dark:border-grey-800 overflow-hidden bg-white dark:bg-grey-950">
                 <KeyRow keys={['Tab']}       action="Focus the internal text input." />
@@ -178,7 +178,7 @@ export default function TagInputPage() {
                 <A11yRow check="Live region">Consider adding an aria-live region to announce when a tag is added or removed.</A11yRow>
               </div>
             </Section>
-          </PageContent>
+          
         </TabPanel>
       </ComponentTabs>
     </div>

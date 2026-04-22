@@ -6,7 +6,7 @@ import {
   Section, SpecTable, ColorRow,
   DoCard, DontCard, A11yRow, KeyRow,
   Preview, Annotation,
-  UseList, DontUseList, RelatedComponents, PageContent,
+  UseList, DontUseList, RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 import InputText from '@/app/components-lib/ui/InputText'
 import { BuildingOfficeIcon } from '@heroicons/react/16/solid'
@@ -61,7 +61,7 @@ export default function TextInputPage() {
         <TabBar />
 
         <TabPanel id="usage">
-          <PageContent>
+          
             <Section title="States">
               <StateGrid />
             </Section>
@@ -141,11 +141,11 @@ export default function TextInputPage() {
               { href: '/components/inputs/password', label: 'Password', description: 'Masked entry with show/hide toggle.' },
               { href: '/components/inputs/search', label: 'Search', description: 'Filtered search with leading icon.' },
             ]} />
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="style">
-          <PageContent>
+          
             <Section title="Anatomy">
               <Preview label="Label · Input · Helper text · State icon">
                 <div className="flex flex-col gap-4 max-w-xs">
@@ -178,11 +178,11 @@ export default function TextInputPage() {
               <ColorRow label="Label"             hex="#111827" role="grey-950" border />
               <ColorRow label="Disabled bg"       hex="#F7F8F8" role="grey-50" border />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="code">
-          <PageContent>
+          
             <Section title="Basic">
               <Preview label="Live preview"><InputText id="c1" label="Building name" placeholder="Acme HQ" /></Preview>
               <Code>{`import InputText from '@/components-lib/ui/InputText'
@@ -228,11 +228,11 @@ export default function TextInputPage() {
                 { property: '...rest',      value: 'HTMLInputElement attrs',                                                        token: 'Forwarded' },
               ]} />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="accessibility">
-          <PageContent>
+          
             <Section title="Keyboard">
               <div className="rounded-lg border border-grey-100 dark:border-grey-800 overflow-hidden bg-white dark:bg-grey-950">
                 <KeyRow keys={['Tab']}       action="Move focus into / past the input." />
@@ -256,7 +256,7 @@ export default function TextInputPage() {
                 { property: 'Disabled',    value: 'grey-400 on grey-50',token: '2.5:1 — intentionally muted' },
               ]} />
             </Section>
-          </PageContent>
+          
         </TabPanel>
       </ComponentTabs>
     </div>

@@ -6,7 +6,7 @@ import {
   Section, SpecTable, ColorRow,
   DoCard, DontCard, A11yRow, KeyRow,
   Preview, Annotation,
-  UseList, DontUseList, RelatedComponents, PageContent,
+  UseList, DontUseList, RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 import InputPassword from '@/app/components-lib/ui/InputPassword'
 
@@ -35,7 +35,7 @@ export default function PasswordInputPage() {
         <TabBar />
 
         <TabPanel id="usage">
-          <PageContent>
+          
             <Section title="States">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Card label="Default — click eye to reveal">
@@ -96,11 +96,11 @@ export default function PasswordInputPage() {
             <RelatedComponents items={[
               { href: '/components/inputs/text', label: 'Text input', description: 'Base input for non-sensitive text.' },
             ]} />
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="style">
-          <PageContent>
+          
             <Section title="Anatomy">
               <Preview label="Masked · Revealed · Error (eye → error icon)">
                 <div className="flex flex-col gap-4 max-w-xs">
@@ -122,11 +122,11 @@ export default function PasswordInputPage() {
               <ColorRow label="Error icon"          hex="#DC2626" role="error-600" border />
               <ColorRow label="Border — error"      hex="#DC2626" role="error-600" border />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="code">
-          <PageContent>
+          
             <Section title="Default">
               <Preview label="Live preview"><InputPassword id="c1" label="Password" placeholder="Enter password" helperText="At least 8 characters." /></Preview>
               <Code>{`import InputPassword from '@/components-lib/ui/InputPassword'
@@ -148,11 +148,11 @@ export default function PasswordInputPage() {
                 { property: '...rest',    value: 'HTMLInputElement attrs',                  token: 'Forwarded' },
               ]} />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="accessibility">
-          <PageContent>
+          
             <Section title="Keyboard">
               <div className="rounded-lg border border-grey-100 dark:border-grey-800 overflow-hidden bg-white dark:bg-grey-950">
                 <KeyRow keys={['Tab']}         action="Focus the password input." />
@@ -168,7 +168,7 @@ export default function PasswordInputPage() {
                 <A11yRow check="autocomplete">Use autocomplete="current-password" for login, "new-password" for registration/change flows.</A11yRow>
               </div>
             </Section>
-          </PageContent>
+          
         </TabPanel>
       </ComponentTabs>
     </div>

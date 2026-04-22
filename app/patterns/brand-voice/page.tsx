@@ -73,7 +73,7 @@ export default function BrandVoicePage() {
       />
 
       {/* Voice principles */}
-      <h2 className="text-xl font-semibold text-token-primary mb-4">Voice principles</h2>
+      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Voice principles</h2>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
         {[
           {
@@ -100,7 +100,7 @@ export default function BrandVoicePage() {
       </div>
 
       {/* Capitalisation */}
-      <h2 className="text-xl font-semibold text-token-primary mb-1">Capitalisation</h2>
+      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Capitalisation</h2>
       <p className="text-sm text-token-secondary mb-4">Use sentence case everywhere in the UI. No title case except for proper nouns and acronyms.</p>
       <div className="overflow-x-auto rounded-xl border border-token mb-10">
         <table className="w-full text-sm">
@@ -123,7 +123,7 @@ export default function BrandVoicePage() {
       </div>
 
       {/* Button labels */}
-      <h2 className="text-xl font-semibold text-token-primary mb-1">Button labels</h2>
+      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Button labels</h2>
       <p className="text-sm text-token-secondary mb-4">Use specific verb-noun pairs. Avoid generic labels like "Submit" or "OK" — they don't tell users what will happen.</p>
       <div className="overflow-x-auto rounded-xl border border-token mb-10">
         <table className="w-full text-sm">
@@ -158,7 +158,7 @@ export default function BrandVoicePage() {
       </div>
 
       {/* Error messages */}
-      <h2 className="text-xl font-semibold text-token-primary mb-1">Error messages</h2>
+      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Error messages</h2>
       <p className="text-sm text-token-secondary mb-4">Error messages must explain what happened and what the user can do. Never show raw system errors or HTTP status codes.</p>
       <div className="space-y-4 mb-10">
         {errorMessages.map((e) => (
@@ -173,7 +173,7 @@ export default function BrandVoicePage() {
       </div>
 
       {/* Empty states writing */}
-      <h2 className="text-xl font-semibold text-token-primary mb-4">Empty state copy</h2>
+      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Empty state copy</h2>
       <div className="rounded-xl border border-token bg-token-primary p-6 mb-10">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
           <div>
@@ -192,7 +192,7 @@ export default function BrandVoicePage() {
       </div>
 
       {/* Formatting rules */}
-      <h2 className="text-xl font-semibold text-token-primary mb-4">Text formatting rules</h2>
+      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Text formatting rules</h2>
       <div className="rounded-xl border border-token bg-token-primary divide-y divide-token">
         {[
           { rule: 'No all caps', detail: 'Never use ALL CAPS for emphasis or decoration. Use font-semibold instead.' },

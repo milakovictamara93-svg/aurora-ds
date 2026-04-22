@@ -6,7 +6,7 @@ import {
   Section, SpecTable, ColorRow,
   DoCard, DontCard, A11yRow, KeyRow,
   Preview, Annotation,
-  UseList, DontUseList, RelatedComponents, PageContent,
+  UseList, DontUseList, RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 import {
   DataArrow,
@@ -72,7 +72,7 @@ export default function DataPointsPage() {
 
         {/* ── USAGE ─────────────────────────────────────────────────────────── */}
         <TabPanel id="usage">
-          <PageContent>
+          
 
             {/* DataArrow */}
             <Section title="DataArrow">
@@ -247,12 +247,12 @@ export default function DataPointsPage() {
               { href: '/components/cards',       label: 'Cards',         description: 'DataPoints live inside Standard and DataViz cards.' },
               { href: '/components/badges-tags', label: 'Badges & tags', description: 'Semantic status badges complement DataArrow.' },
             ]} />
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── STYLE ─────────────────────────────────────────────────────────── */}
         <TabPanel id="style">
-          <PageContent>
+          
             <Section title="Sizing">
               <SpecTable rows={[
                 { property: 'DataArrow sm',            value: '16×16 px',           token: 'w-4 h-4 — inline with small text' },
@@ -298,12 +298,12 @@ export default function DataPointsPage() {
               <ColorRow label="Alerts link active" hex="#1258F8" role="blue-600" border />
               <ColorRow label="Alerts link inactive" hex="#8C96A4" role="grey-400" border />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── CODE ──────────────────────────────────────────────────────────── */}
         <TabPanel id="code">
-          <PageContent>
+          
 
             <Section title="DataArrow">
               <Preview label="Live preview">
@@ -424,12 +424,12 @@ export default function DataPointsPage() {
               </div>
             </Section>
 
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── ACCESSIBILITY ─────────────────────────────────────────────────── */}
         <TabPanel id="accessibility">
-          <PageContent>
+          
             <Section title="ARIA requirements">
               <div className="rounded-lg border border-grey-100 dark:border-grey-800 overflow-hidden bg-white dark:bg-grey-950">
                 <A11yRow check="role=img">Every <code className="text-xs font-mono bg-grey-50 dark:bg-grey-900 px-1 py-0.5 rounded">DataArrow</code> carries <code className="text-xs font-mono bg-grey-50 dark:bg-grey-900 px-1 py-0.5 rounded">role=&quot;img&quot;</code> and an <code className="text-xs font-mono bg-grey-50 dark:bg-grey-900 px-1 py-0.5 rounded">aria-label</code> describing the state (e.g. &quot;Very high risk indicator&quot;).</A11yRow>
@@ -452,7 +452,7 @@ export default function DataPointsPage() {
                 { property: 'Blue-600 on white (alerts link)',  value: '#1258F8 on #FFF',    token: '≥ 4.5:1 ✓ AA' },
               ]} />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
       </ComponentTabs>

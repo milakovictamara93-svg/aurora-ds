@@ -8,7 +8,7 @@ import {
   Section, SpecTable, ColorRow,
   DoCard, DontCard, A11yRow, KeyRow,
   Preview, Annotation,
-  UseList, DontUseList, RelatedComponents, PageContent,
+  UseList, DontUseList, RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 
 // ── Toggle atom ───────────────────────────────────────────────────────────────
@@ -115,7 +115,7 @@ export default function TogglePage() {
         <TabBar />
 
         <TabPanel id="usage">
-          <PageContent>
+          
             <Section title="States">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <Card label="Off (interactive — click to toggle)">
@@ -208,11 +208,11 @@ export default function TogglePage() {
               { href: '/components/inputs/checkbox', label: 'Checkbox', description: 'Use when submit is required, or for multi-select.' },
               { href: '/components/inputs/radio', label: 'Radio', description: 'Mutually exclusive choice between named options.' },
             ]} />
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="style">
-          <PageContent>
+          
             <Section title="Anatomy">
               <Preview label="Track · Thumb · Label · Sublabel">
                 <div className="flex flex-col gap-4">
@@ -237,11 +237,11 @@ export default function TogglePage() {
               <ColorRow label="Track — disabled off"hex="#EDEEF1" role="grey-100" border />
               <ColorRow label="Track — disabled on" hex="#BFDBFE" role="blue-200" border />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="code">
-          <PageContent>
+          
             <Section title="Interactive toggle">
               <Preview label="Live preview"><InteractiveToggle label="Email notifications" sublabel="Receive weekly digest." /></Preview>
               <Code>{`const [enabled, setEnabled] = useState(false)
@@ -263,11 +263,11 @@ export default function TogglePage() {
   />
 </button>`}</Code>
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="accessibility">
-          <PageContent>
+          
             <Section title="Keyboard">
               <div className="rounded-lg border border-grey-100 dark:border-grey-800 overflow-hidden bg-white dark:bg-grey-950">
                 <KeyRow keys={['Tab']}   action="Focus the toggle." />
@@ -283,7 +283,7 @@ export default function TogglePage() {
                 <A11yRow check="Immediate effect">Announce the new state via an aria-live region when the toggle causes an immediate page change.</A11yRow>
               </div>
             </Section>
-          </PageContent>
+          
         </TabPanel>
       </ComponentTabs>
     </div>

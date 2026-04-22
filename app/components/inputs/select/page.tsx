@@ -6,7 +6,7 @@ import {
   Section, SpecTable, ColorRow,
   DoCard, DontCard, A11yRow, KeyRow,
   Preview, Annotation,
-  UseList, DontUseList, RelatedComponents, PageContent,
+  UseList, DontUseList, RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 import InputSelect from '@/app/components-lib/ui/InputSelect'
 
@@ -44,7 +44,7 @@ export default function SelectPage() {
 
         {/* ── USAGE ───────────────────────────────────────────────────────── */}
         <TabPanel id="usage">
-          <PageContent>
+          
 
             <Section title="States">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -141,12 +141,12 @@ export default function SelectPage() {
               { href: '/components/inputs/search-multiselect', label: 'Search multiselect', description: 'Search + select multiple options.'         },
               { href: '/components/inputs/radio',              label: 'Radio',              description: 'Visible list for ≤5 options.'               },
             ]} />
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── STYLE ───────────────────────────────────────────────────────── */}
         <TabPanel id="style">
-          <PageContent>
+          
             <Section title="Anatomy">
               <Preview label="Label · Trigger · Chevron · Menu">
                 <InputSelect id="a1" label="Label" placeholder="Placeholder" options={FREQ_OPTIONS} />
@@ -180,12 +180,12 @@ export default function SelectPage() {
               <ColorRow label="Placeholder text"         hex="#8C96A4" role="grey-400" border />
               <ColorRow label="Chevron icon"             hex="#505867" role="grey-600" border />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── CODE ────────────────────────────────────────────────────────── */}
         <TabPanel id="code">
-          <PageContent>
+          
             <Section title="Basic select">
               <Preview label="Live preview">
                 <InputSelect id="c1" label="Reporting frequency" placeholder="Select…" options={FREQ_OPTIONS} />
@@ -231,12 +231,12 @@ export default function SelectPage() {
                 { property: 'disabled',     value: 'boolean',                                                   token: 'Shorthand for state="disabled"' },
               ]} />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── ACCESSIBILITY ───────────────────────────────────────────────── */}
         <TabPanel id="accessibility">
-          <PageContent>
+          
             <Section title="Keyboard">
               <div className="rounded-lg border border-grey-100 dark:border-grey-800 overflow-hidden bg-white dark:bg-grey-950">
                 <KeyRow keys={['Tab']}           action="Move focus to the trigger." />
@@ -254,7 +254,7 @@ export default function SelectPage() {
                 <A11yRow check="aria-disabled">Disabled options carry <code className="text-xs font-mono bg-grey-50 dark:bg-grey-900 px-1 py-0.5 rounded">aria-disabled=&quot;true&quot;</code> and are unclickable.</A11yRow>
               </div>
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
       </ComponentTabs>

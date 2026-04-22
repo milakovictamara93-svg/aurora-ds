@@ -402,7 +402,7 @@ export default function DragDropPage() {
 
       {/* ── Rules ────────────────────────────────────────────────────────────── */}
       <section>
-        <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-4 leading-[1.4]">
+        <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">
           Rules
         </h2>
         <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] divide-y divide-[#EDEEF1] dark:divide-[#1F2430]">

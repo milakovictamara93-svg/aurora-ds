@@ -6,7 +6,7 @@ import {
   Section, SpecTable, ColorRow,
   DoCard, DontCard, A11yRow, KeyRow,
   Preview, Annotation,
-  UseList, DontUseList, RelatedComponents, PageContent,
+  UseList, DontUseList, RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 import InputSearchMultiselect from '@/app/components-lib/ui/InputSearchMultiselect'
 
@@ -37,7 +37,7 @@ export default function SearchMultiselectPage() {
         <TabBar />
 
         <TabPanel id="usage">
-          <PageContent>
+          
             <Section title="States">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <Preview label="Default — type to filter">
@@ -106,11 +106,11 @@ export default function SearchMultiselectPage() {
               { href: '/components/inputs/search', label: 'Search', description: 'Single-value search input.' },
               { href: '/components/inputs/select', label: 'Select', description: 'Single option from a fixed list.' },
             ]} />
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="style">
-          <PageContent>
+          
             <Section title="Anatomy">
               <Preview label="Search icon · Chips · Text input · State icon · Dropdown">
                 <InputSearchMultiselect id="a1" label="Buildings" defaultValue={['b1']} options={BUILDING_OPTIONS} />
@@ -128,11 +128,11 @@ export default function SearchMultiselectPage() {
               <ColorRow label="Chip text"      hex="#1D4ED8" role="blue-700" border />
               <ColorRow label="Spinner"        hex="#1258F8" role="blue-600 border-t" border />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="code">
-          <PageContent>
+          
             <Section title="Basic usage">
               <Preview label="Live preview">
                 <InputSearchMultiselect id="c1" label="Buildings" placeholder="Search buildings…" options={BUILDING_OPTIONS} />
@@ -158,11 +158,11 @@ export default function SearchMultiselectPage() {
                 { property: 'onChange',     value: '(values: string[]) => void',                                                     token: 'Optional' },
               ]} />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="accessibility">
-          <PageContent>
+          
             <Section title="Keyboard">
               <div className="rounded-lg border border-grey-100 dark:border-grey-800 overflow-hidden bg-white dark:bg-grey-950">
                 <KeyRow keys={['Tab']}         action="Focus the search input inside the control." />
@@ -172,7 +172,7 @@ export default function SearchMultiselectPage() {
                 <KeyRow keys={['Escape']}      action="Close the dropdown." />
               </div>
             </Section>
-          </PageContent>
+          
         </TabPanel>
       </ComponentTabs>
     </div>

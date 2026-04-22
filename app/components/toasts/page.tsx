@@ -8,7 +8,7 @@ import {
   Section, SpecTable, A11yRow, KeyRow,
   Preview, Annotation,
   UseList, DontUseList, DoCard, DontCard,
-  RelatedComponents, PageContent,
+  RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 
 // ── Data ──────────────────────────────────────────────────────────────────────
@@ -43,7 +43,7 @@ export default function ToastsPage() {
 
         {/* ── USAGE ──────────────────────────────────────────────────────── */}
         <TabPanel id="usage">
-          <PageContent>
+          
 
             <Section title="Interactive stacking demo">
               <Annotation>Fire toasts to see the depth-stacking behavior. Max 3 visible at once — extras are queued. Success auto-dismisses in 3 s, default in 4 s, warning in 5 s. Error and missing-info are persistent.</Annotation>
@@ -160,12 +160,12 @@ export default function ToastsPage() {
               { href: '/components/inputs',  label: 'Input',   description: 'Inline field-level error and helper text within forms.' },
             ]} />
 
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── STYLE ──────────────────────────────────────────────────────── */}
         <TabPanel id="style">
-          <PageContent>
+          
 
             <Section title="Anatomy">
               <Preview label="High contrast toast">
@@ -226,12 +226,12 @@ export default function ToastsPage() {
               ]} />
             </Section>
 
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── CODE ───────────────────────────────────────────────────────── */}
         <TabPanel id="code">
-          <PageContent>
+          
 
             <Section title="Import">
               <div className="rounded-lg bg-[#111827] dark:bg-[#0D1117] border border-[#1F2430] overflow-x-auto">
@@ -325,12 +325,12 @@ function MyComponent() {
               </div>
             </Section>
 
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── ACCESSIBILITY ───────────────────────────────────────────────── */}
         <TabPanel id="accessibility">
-          <PageContent>
+          
 
             <Section title="ARIA & semantics">
               <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117]">
@@ -361,7 +361,7 @@ function MyComponent() {
               ]} />
             </Section>
 
-          </PageContent>
+          
         </TabPanel>
 
       </ComponentTabs>

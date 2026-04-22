@@ -365,7 +365,7 @@ function SpecRow({ label, value }: { label: string; value: string }) {
 function RuleCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] p-4 bg-white dark:bg-[#0D1117]">
-      <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-1">{title}</p>
+      <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-2">{title}</p>
       <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{children}</p>
     </div>
   )
@@ -385,7 +385,7 @@ export default function ColumnCustomizationPage() {
       <div className="mt-8 flex flex-col gap-10">
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-1">Customize view drawer</h2>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2">Customize view drawer</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             The <strong className="font-semibold text-[#111827] dark:text-white">Customize</strong> button opens a <strong className="font-semibold text-[#111827] dark:text-white">Modal (drawer)</strong> listing all available columns grouped by category. Each group has a "Clear" link. A global search filters across all groups. Changes take effect only when "Apply" is pressed.
           </p>
@@ -393,7 +393,7 @@ export default function ColumnCustomizationPage() {
         </section>
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-3">Behaviour specs</h2>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2">Behaviour specs</h2>
           <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117]">
             <SpecRow label="Trigger button" value="'Customize' with TableCells icon. Gets blue-tinted active state when any columns are hidden." />
             <SpecRow label="Draft vs applied" value="Drawer works on a draft copy. Cancel discards changes; Apply saves them and updates the table." />
@@ -406,7 +406,7 @@ export default function ColumnCustomizationPage() {
         </section>
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-3">Column layout specs</h2>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2">Column layout specs</h2>
           <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117]">
             <SpecRow label="Drawer width" value="480px max (from Modal drawer)" />
             <SpecRow label="Section header" value="14px semibold + 'Clear' text button right-aligned + border-b separator" />
@@ -418,7 +418,7 @@ export default function ColumnCustomizationPage() {
         </section>
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-3">Rules</h2>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2">Rules</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <RuleCard title="Opt-out, not opt-in">
               All columns are visible by default. Users remove columns they don't need. This avoids an empty table on first use.

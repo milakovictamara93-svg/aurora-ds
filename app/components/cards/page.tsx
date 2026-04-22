@@ -7,7 +7,7 @@ import {
   Section, SpecTable, ColorRow,
   DoCard, DontCard, A11yRow, KeyRow,
   Preview, Annotation,
-  UseList, DontUseList, RelatedComponents, PageContent,
+  UseList, DontUseList, RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 import {
   SimpleCard,
@@ -311,7 +311,7 @@ export default function CardsPage() {
 
         {/* ── USAGE ─────────────────────────────────────────────────────────── */}
         <TabPanel id="usage">
-          <PageContent>
+          
 
             {/* ── Simple ───────────────────────────────────────────────────── */}
             <Section title="Simple card">
@@ -578,12 +578,12 @@ export default function CardsPage() {
               { href: '/components/modals', label: 'Modals', description: 'When card content should expand into a full overlay.' },
               { href: '/components/badges-tags', label: 'Badges & tags', description: 'Status indicators placed inside card headers.' },
             ]} />
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── STYLE ─────────────────────────────────────────────────────────── */}
         <TabPanel id="style">
-          <PageContent>
+          
             <Section title="Spacing & sizing">
               <SpecTable rows={[
                 { property: 'Card border radius',       value: '8px (rounded-lg)',       token: '—' },
@@ -646,12 +646,12 @@ export default function CardsPage() {
                 </Preview>
               </div>
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── CODE ──────────────────────────────────────────────────────────── */}
         <TabPanel id="code">
-          <PageContent>
+          
 
             <Section title="SimpleCard">
               <Preview label="Live preview">
@@ -839,12 +839,12 @@ export default function CardsPage() {
                 ]} />
               </div>
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── ACCESSIBILITY ─────────────────────────────────────────────────── */}
         <TabPanel id="accessibility">
-          <PageContent>
+          
             <Section title="ARIA requirements">
               <div className="rounded-lg border border-grey-100 dark:border-grey-800 overflow-hidden bg-white dark:bg-grey-950">
                 <A11yRow check="role=region">
@@ -921,7 +921,7 @@ export default function CardsPage() {
                 { property: 'Status incomplete text',     value: '#6B7280 on #F3F4F6',  token: '4.0:1 ✓ AA (large text)' },
               ]} />
             </Section>
-          </PageContent>
+          
         </TabPanel>
       </ComponentTabs>
     </div>

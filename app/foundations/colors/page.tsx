@@ -291,7 +291,7 @@ export default function ColorsPage() {
 
       {/* Usage rules */}
       <div className="mt-12 mb-10 p-6 rounded-xl border border-token bg-token-primary">
-        <h2 className="text-base font-semibold text-token-primary mb-4">Key usage rules</h2>
+        <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Key usage rules</h2>
         <div className="space-y-2">
           {RULES.map(r => (
             <div key={r.token} className="flex items-center gap-3 text-sm">
@@ -319,7 +319,7 @@ export default function ColorsPage() {
       {/* Semantic tokens */}
       <div className="mb-10">
         <div className="mb-2">
-          <h2 className="text-2xl font-semibold text-token-primary">Semantic tokens</h2>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4]">Semantic tokens</h2>
           <p className="text-sm text-token-secondary mt-1">
             Use these in components — they map to the correct Figma semantic layer values and update globally when the theme changes.
           </p>
@@ -410,7 +410,7 @@ export default function ColorsPage() {
       {/* ESG Aspect colors */}
       <div className="mb-10">
         <div className="mb-2">
-          <h2 className="text-2xl font-semibold text-token-primary">ESG Aspect colors</h2>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4]">ESG Aspect colors</h2>
           <p className="text-sm text-token-secondary mt-1">
             Each ESG data category has a dedicated color spectrum. Always use the correct spectrum — never substitute or repurpose across categories.
           </p>
@@ -447,7 +447,7 @@ export default function ColorsPage() {
         {SECTIONS.map(section => (
           <section key={section.id}>
             <div className="mb-2">
-              <h2 className="text-2xl font-semibold text-token-primary">{section.heading}</h2>
+              <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4]">{section.heading}</h2>
               <p className="text-sm text-token-secondary mt-1">{section.description}</p>
             </div>
 

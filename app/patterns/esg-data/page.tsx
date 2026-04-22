@@ -120,7 +120,7 @@ export default function ESGDataPage() {
       />
 
       {/* Spectrum overview */}
-      <h2 className="text-xl font-semibold text-token-primary mb-4">Aspect color map</h2>
+      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Aspect color map</h2>
       <div className="overflow-x-auto rounded-xl border border-token mb-10">
         <table className="w-full text-sm">
           <thead>
@@ -155,7 +155,7 @@ export default function ESGDataPage() {
       </div>
 
       {/* Metric cards */}
-      <h2 className="text-xl font-semibold text-token-primary mb-4">Metric card pattern</h2>
+      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Metric card pattern</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-10">
         {aspects.map(a => (
           <div key={a.name} className={`rounded-lg border ${a.border} bg-token-primary overflow-hidden`}>
@@ -186,7 +186,7 @@ export default function ESGDataPage() {
       </div>
 
       {/* Rules */}
-      <h2 className="text-xl font-semibold text-token-primary mb-4">Rules</h2>
+      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Rules</h2>
       <div className="p-6 rounded-xl border border-token bg-token-primary">
         <ul className="space-y-3 text-sm text-token-secondary">
           <li className="flex items-start gap-2">

@@ -432,7 +432,7 @@ function SpecRow({ label, value }: { label: string; value: string }) {
 function RuleCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] p-4 bg-white dark:bg-[#0D1117]">
-      <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-1">{title}</p>
+      <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-2">{title}</p>
       <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{children}</p>
     </div>
   )
@@ -452,7 +452,7 @@ export default function FilteringPage() {
       <div className="mt-8 flex flex-col gap-10">
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-1">Filter bar + drawer</h2>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2">Filter bar + drawer</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             The filter bar shows active filters as <strong className="font-semibold text-[#111827] dark:text-white">Tag</strong> chips. The "Filter" button opens a <strong className="font-semibold text-[#111827] dark:text-white">Modal (drawer)</strong> with sections for each filter type. Applying closes the drawer and updates the chips.
           </p>
@@ -460,7 +460,7 @@ export default function FilteringPage() {
         </section>
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-3">Filter chip specs</h2>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2">Filter chip specs</h2>
           <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117]">
             <SpecRow label="Component" value="Tag — system='default', style='filled', showCount=false, showRemove=true" />
             <SpecRow label="Height" value="28px (medium size)" />
@@ -472,7 +472,7 @@ export default function FilteringPage() {
         </section>
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-3">Filter section types</h2>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2">Filter section types</h2>
           <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117]">
             <SpecRow label="Date range" value="Time / Both / Area toggle, then date inputs. 'Both' is default for ESG data with temporal + spatial dimensions." />
             <SpecRow label="Histogram range" value="RangeHistogram bars (colored by selection) + Slider (range mode) + min/max numeric inputs. Bars in range = blue-600, bars outside = grey-200." />
@@ -482,7 +482,7 @@ export default function FilteringPage() {
         </section>
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-3">Rules</h2>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2">Rules</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <RuleCard title="Chips reflect applied state only">
               Filter chips in the bar show applied filters — not the draft inside the open drawer. Changes only become chips after pressing "Apply".

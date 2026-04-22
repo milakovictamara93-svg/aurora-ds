@@ -8,7 +8,7 @@ import {
   Section, SpecTable, ColorRow,
   DoCard, DontCard, A11yRow, KeyRow,
   Preview, Annotation,
-  UseList, DontUseList, RelatedComponents, PageContent,
+  UseList, DontUseList, RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 import { CheckIcon, MinusIcon } from '@heroicons/react/16/solid'
 
@@ -115,7 +115,7 @@ export default function CheckboxPage() {
         <TabBar />
 
         <TabPanel id="usage">
-          <PageContent>
+          
             <Section title="States">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <Card label="Unchecked">
@@ -213,11 +213,11 @@ export default function CheckboxPage() {
               { href: '/components/inputs/toggle', label: 'Toggle', description: 'Binary on/off with immediate effect.' },
               { href: '/components/inputs/multiselect', label: 'Multiselect', description: 'Multi-select for longer lists.' },
             ]} />
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="style">
-          <PageContent>
+          
             <Section title="Anatomy">
               <Preview label="Box · Check/minus icon · Label · Sublabel">
                 <div className="flex flex-col gap-4">
@@ -241,11 +241,11 @@ export default function CheckboxPage() {
               <ColorRow label="Check icon"       hex="#FFFFFF" role="white" border />
               <ColorRow label="Disabled border"  hex="#D7DAE0" role="grey-200" border />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="code">
-          <PageContent>
+          
             <Section title="Interactive checkbox">
               <Preview label="Live preview"><InteractiveCheckbox label="Include Scope 3 emissions" sublabel="Indirect value chain emissions." /></Preview>
               <Code>{`const [checked, setChecked] = useState(false)
@@ -261,11 +261,11 @@ export default function CheckboxPage() {
   Include Scope 3 emissions
 </label>`}</Code>
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="accessibility">
-          <PageContent>
+          
             <Section title="Keyboard">
               <div className="rounded-lg border border-grey-100 dark:border-grey-800 overflow-hidden bg-white dark:bg-grey-950">
                 <KeyRow keys={['Tab']}   action="Move focus to the checkbox." />
@@ -280,7 +280,7 @@ export default function CheckboxPage() {
                 <A11yRow check="aria-disabled">Use aria-disabled="true" alongside the visual disabled state.</A11yRow>
               </div>
             </Section>
-          </PageContent>
+          
         </TabPanel>
       </ComponentTabs>
     </div>

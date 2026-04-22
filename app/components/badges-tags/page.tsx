@@ -10,7 +10,7 @@ import {
   Section, SpecTable,
   A11yRow,
   Preview, Annotation,
-  UseList, DontUseList, RelatedComponents, PageContent,
+  UseList, DontUseList, RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 
 const ALL_SYSTEMS: TagSystem[] = ['default', 'disabled', 'error', 'warning', 'missing-info', 'success']
@@ -30,7 +30,7 @@ export default function BadgesTagsPage() {
 
         {/* ── USAGE ───────────────────────────────────────────────────────── */}
         <TabPanel id="usage">
-          <PageContent>
+          
 
             {/* Tags */}
             <Section title="When to use">
@@ -157,12 +157,12 @@ export default function BadgesTagsPage() {
               { href: '/components/inputs',  label: 'Inputs', description: 'Tags are used inside multi-select inputs to show selected values.' },
               { href: '/patterns/esg-data',  label: 'ESG data', description: 'Full guidance on ESG aspect color usage across the UI.' },
             ]} />
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── STYLE ───────────────────────────────────────────────────────── */}
         <TabPanel id="style">
-          <PageContent>
+          
 
             <Section title="Tag — anatomy">
               <Preview label="label + number indicator + × remove">
@@ -230,12 +230,12 @@ export default function BadgesTagsPage() {
               ]} />
             </Section>
 
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── CODE ────────────────────────────────────────────────────────── */}
         <TabPanel id="code">
-          <PageContent>
+          
 
             <Section title="Tag — filled">
               <Preview label="Live preview">
@@ -308,12 +308,12 @@ export default function BadgesTagsPage() {
               </pre>
             </Section>
 
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── ACCESSIBILITY ────────────────────────────────────────────────── */}
         <TabPanel id="accessibility">
-          <PageContent>
+          
             <Section title="ARIA requirements">
               <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#111827]">
                 <A11yRow check="Tag remove button">
@@ -330,7 +330,7 @@ export default function BadgesTagsPage() {
                 </A11yRow>
               </div>
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
       </ComponentTabs>

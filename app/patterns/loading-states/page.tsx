@@ -85,14 +85,14 @@ export default function LoadingStatesPage() {
       />
 
       {/* Skeleton — cards */}
-      <h2 className="text-xl font-semibold text-token-primary mb-4">Skeleton screens — cards</h2>
+      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Skeleton screens — cards</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
         <SkeletonCard />
         <SkeletonCard />
       </div>
 
       {/* Skeleton — metric cards */}
-      <h2 className="text-xl font-semibold text-token-primary mb-4">Skeleton screens — ESG metric cards</h2>
+      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Skeleton screens — ESG metric cards</h2>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
         <SkeletonMetricCard accentColor="bg-energy-200 dark:bg-energy-900" />
         <SkeletonMetricCard accentColor="bg-ghg-200 dark:bg-ghg-900" />
@@ -101,7 +101,7 @@ export default function LoadingStatesPage() {
       </div>
 
       {/* Skeleton — table */}
-      <h2 className="text-xl font-semibold text-token-primary mb-4">Skeleton screens — table</h2>
+      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Skeleton screens — table</h2>
       <div className="rounded-xl border border-token overflow-hidden mb-10">
         <table className="w-full text-sm">
           <thead>
@@ -118,7 +118,7 @@ export default function LoadingStatesPage() {
       </div>
 
       {/* Spinners */}
-      <h2 className="text-xl font-semibold text-token-primary mb-4">Spinners</h2>
+      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Spinners</h2>
       <div className="p-6 rounded-xl border border-token bg-token-primary mb-10">
         <div className="flex flex-wrap items-center gap-8">
           <div className="flex flex-col items-center gap-2">
@@ -149,7 +149,7 @@ export default function LoadingStatesPage() {
       </div>
 
       {/* Button loading */}
-      <h2 className="text-xl font-semibold text-token-primary mb-4">Button loading states</h2>
+      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Button loading states</h2>
       <div className="p-6 rounded-xl border border-token bg-token-primary flex flex-wrap gap-4 mb-10">
         <button disabled className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-blue-600 text-white font-semibold text-sm opacity-80 cursor-wait shadow-level-1">
           <Spinner size="sm" color="text-white" />
@@ -170,7 +170,7 @@ export default function LoadingStatesPage() {
       </div>
 
       {/* Progress bars */}
-      <h2 className="text-xl font-semibold text-token-primary mb-4">Progress indicators</h2>
+      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Progress indicators</h2>
       <div className="p-6 rounded-xl border border-token bg-token-primary space-y-6">
         {[
           { label: 'Data upload', value: 72, color: 'bg-sky-500' },
@@ -191,7 +191,7 @@ export default function LoadingStatesPage() {
       </div>
 
       {/* Page-level loading */}
-      <h2 className="text-xl font-semibold text-token-primary mt-10 mb-4">Full-page loading overlay</h2>
+      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mt-10 mb-2">Full-page loading overlay</h2>
       <div className="relative rounded-xl border border-token overflow-hidden" style={{ height: 200 }}>
         <div className="absolute inset-0 bg-token-primary/80 backdrop-blur-sm flex flex-col items-center justify-center gap-3 z-10">
           <Spinner size="lg" />

@@ -7,7 +7,7 @@ import {
   Section, SpecTable, ColorRow,
   DoCard, DontCard, A11yRow, KeyRow,
   Preview, Annotation,
-  UseList, DontUseList, RelatedComponents, PageContent,
+  UseList, DontUseList, RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 
 type ControlState = 'default' | 'hover' | 'disabled'
@@ -247,11 +247,11 @@ export default function ControlsPage() {
 
         {/* ── USAGE ─────────────────────────────────────────────────────────── */}
         <TabPanel id="usage">
-          <PageContent>
+          
 
             {/* ════════════════════════ CHECKBOX ════════════════════════ */}
             <div className="mb-2">
-              <h2 className="text-[24px] font-bold text-[#1F2430] dark:text-white leading-tight">Checkbox</h2>
+              <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Checkbox</h2>
               <p className="mt-1 text-sm text-[#505867] dark:text-[#9CA3AF]">
                 Allow users to select one or more independent options from a list.
               </p>
@@ -342,7 +342,7 @@ export default function ControlsPage() {
 
             {/* ════════════════════════ RADIO BUTTON ════════════════════════ */}
             <div className="pt-8 border-t border-[#EDEEF1] dark:border-[#1F2430] mb-2">
-              <h2 className="text-[24px] font-bold text-[#1F2430] dark:text-white leading-tight">Radio button</h2>
+              <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Radio button</h2>
               <p className="mt-1 text-sm text-[#505867] dark:text-[#9CA3AF]">
                 Allow users to select exactly one option from a mutually exclusive set.
               </p>
@@ -432,7 +432,7 @@ export default function ControlsPage() {
 
             {/* ════════════════════════ TOGGLE ════════════════════════ */}
             <div className="pt-8 border-t border-[#EDEEF1] dark:border-[#1F2430] mb-2">
-              <h2 className="text-[24px] font-bold text-[#1F2430] dark:text-white leading-tight">Toggle</h2>
+              <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Toggle</h2>
               <p className="mt-1 text-sm text-[#505867] dark:text-[#9CA3AF]">
                 Instantly switch a single setting between on and off — no form submit required.
               </p>
@@ -512,12 +512,12 @@ export default function ControlsPage() {
               { href: '/components/buttons', label: 'Buttons', description: 'Submit and cancel actions that accompany control groups.' },
               { href: '/components/modals', label: 'Modals', description: 'Controls often appear inside modal forms and confirmation dialogs.' },
             ]} />
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── STYLE ─────────────────────────────────────────────────────────── */}
         <TabPanel id="style">
-          <PageContent>
+          
 
             {/* ── Checkbox style ── */}
             <Section title="Checkbox — anatomy">
@@ -660,12 +660,12 @@ export default function ControlsPage() {
               <ColorRow label="Track — off disabled" hex="#D7DAE0" role="Grey 200 — muted inactive (reduced opacity)" border />
             </Section>
 
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── CODE ──────────────────────────────────────────────────────────── */}
         <TabPanel id="code">
-          <PageContent>
+          
 
             <Section title="Checkbox">
               <Preview label="Live preview">
@@ -782,12 +782,12 @@ export default function ControlsPage() {
               </div>
             </Section>
 
-          </PageContent>
+          
         </TabPanel>
 
         {/* ── ACCESSIBILITY ─────────────────────────────────────────────────── */}
         <TabPanel id="accessibility">
-          <PageContent>
+          
 
             <Section title="Roles & semantics">
               <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#111827] divide-y divide-[#EDEEF1] dark:divide-[#1F2430]">
@@ -823,7 +823,7 @@ export default function ControlsPage() {
               </div>
             </Section>
 
-          </PageContent>
+          
         </TabPanel>
       </ComponentTabs>
     </div>

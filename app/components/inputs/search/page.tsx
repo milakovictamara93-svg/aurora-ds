@@ -7,7 +7,7 @@ import {
   Section, SpecTable, ColorRow,
   DoCard, DontCard, A11yRow, KeyRow,
   Preview, Annotation,
-  UseList, DontUseList, RelatedComponents, PageContent,
+  UseList, DontUseList, RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
 import InputSearch from '@/app/components-lib/ui/InputSearch'
 
@@ -49,7 +49,7 @@ export default function SearchInputPage() {
         <TabBar />
 
         <TabPanel id="usage">
-          <PageContent>
+          
             <Section title="States">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Card label="Default (interactive — type to see clear button)">
@@ -104,11 +104,11 @@ export default function SearchInputPage() {
               { href: '/components/inputs/search-multiselect', label: 'Search multiselect', description: 'Search + pick multiple results.' },
               { href: '/components/inputs/select', label: 'Select', description: 'Choose one option from a fixed list.' },
             ]} />
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="style">
-          <PageContent>
+          
             <Section title="Anatomy">
               <Preview label="Leading icon · Input · Clear button (conditional)">
                 <InteractiveSearch />
@@ -129,11 +129,11 @@ export default function SearchInputPage() {
               <ColorRow label="Border — focus" hex="#1258F8" role="blue-600" border />
               <ColorRow label="Clear button"   hex="#8C96A4" role="grey-400; hover grey-600" border />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="code">
-          <PageContent>
+          
             <Section title="Controlled search">
               <Preview label="Live preview"><InteractiveSearch /></Preview>
               <Code>{`import { useState } from 'react'
@@ -160,11 +160,11 @@ const [query, setQuery] = useState('')
                 { property: '...rest',    value: 'HTMLInputElement attrs', token: 'Forwarded' },
               ]} />
             </Section>
-          </PageContent>
+          
         </TabPanel>
 
         <TabPanel id="accessibility">
-          <PageContent>
+          
             <Section title="Keyboard">
               <div className="rounded-lg border border-grey-100 dark:border-grey-800 overflow-hidden bg-white dark:bg-grey-950">
                 <KeyRow keys={['Tab']}       action="Move focus to the search input." />
@@ -180,7 +180,7 @@ const [query, setQuery] = useState('')
                 <A11yRow check="Leading icon">Marked pointer-events-none and aria-hidden — decorative only.</A11yRow>
               </div>
             </Section>
-          </PageContent>
+          
         </TabPanel>
       </ComponentTabs>
     </div>

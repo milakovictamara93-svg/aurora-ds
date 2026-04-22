@@ -212,7 +212,7 @@ export default function DataVisualizationPage() {
 
       {/* ── Color palette ────────────────────────────────────────────────────── */}
       <section>
-        <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-4 leading-[1.4]">
+        <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">
           Chart color palette
         </h2>
         <div className="overflow-x-auto rounded-xl border border-[#EDEEF1] dark:border-[#1F2430]">
@@ -243,7 +243,7 @@ export default function DataVisualizationPage() {
 
       {/* ── Chart examples ───────────────────────────────────────────────────── */}
       <section>
-        <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-4 leading-[1.4]">
+        <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">
           Chart examples
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -255,7 +255,7 @@ export default function DataVisualizationPage() {
 
       {/* ── Empty state for charts ───────────────────────────────────────────── */}
       <section>
-        <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-4 leading-[1.4]">
+        <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">
           Empty state for charts
         </h2>
         <div className="rounded-xl border border-dashed border-[#D7DAE0] dark:border-[#374151] bg-white dark:bg-[#111827] p-12 flex flex-col items-center justify-center text-center">
@@ -272,7 +272,7 @@ export default function DataVisualizationPage() {
 
       {/* ── Rules ────────────────────────────────────────────────────────────── */}
       <section>
-        <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-4 leading-[1.4]">
+        <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">
           Rules
         </h2>
         <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] divide-y divide-[#EDEEF1] dark:divide-[#1F2430]">
