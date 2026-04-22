@@ -8,6 +8,8 @@ import Modal from '@/app/components-lib/ui/Modal'
 import InputSearch from '@/app/components-lib/ui/InputSearch'
 import InputSelect from '@/app/components-lib/ui/InputSelect'
 import InputText from '@/app/components-lib/ui/InputText'
+import InputDate from '@/app/components-lib/ui/InputDate'
+import type { DateRange } from '@/app/components-lib/ui/InputDate'
 import Checkbox from '@/app/components-lib/ui/Checkbox'
 import Radio from '@/app/components-lib/ui/Radio'
 import { FunnelIcon } from '@heroicons/react/20/solid'
@@ -164,25 +166,14 @@ function FilterPanelContent({
         </div>
 
         {(draft.dateMode === 'time' || draft.dateMode === 'both') && (
-          <div className="flex gap-2 mb-2">
-            <div className="flex-1">
-              <InputText
-                label="From"
-                type="text"
-                value={draft.dateFrom}
-                onChange={e => setDraft(prev => ({ ...prev, dateFrom: e.target.value }))}
-                placeholder="YYYY-MM-DD"
-              />
-            </div>
-            <div className="flex-1">
-              <InputText
-                label="To"
-                type="text"
-                value={draft.dateTo}
-                onChange={e => setDraft(prev => ({ ...prev, dateTo: e.target.value }))}
-                placeholder="YYYY-MM-DD"
-              />
-            </div>
+          <div className="mb-2">
+            <InputDate
+              label="Date range"
+              value={{ start: draft.dateFrom, end: draft.dateTo }}
+              onChange={(v: DateRange | null) => {
+                if (v) setDraft(prev => ({ ...prev, dateFrom: v.start, dateTo: v.end }))
+              }}
+            />
           </div>
         )}
 

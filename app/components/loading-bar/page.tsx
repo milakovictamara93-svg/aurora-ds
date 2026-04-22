@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import PageHeader from '@/app/components-lib/ui/PageHeader'
 import LoadingBar from '@/app/components-lib/ui/LoadingBar'
+import Slider from '@/app/components-lib/ui/Slider'
 import {
   ComponentTabs, TabBar, TabPanel,
   Section, SpecTable, Preview,
@@ -73,17 +74,13 @@ export default function LoadingBarPage() {
             <Preview>
               <div className="flex flex-col gap-4 w-full max-w-sm">
                 <LoadingBar value={value} size="md" />
-                <div className="flex items-center gap-3">
-                  <input
-                    type="range"
-                    min={0}
-                    max={100}
-                    value={value}
-                    onChange={e => setValue(Number(e.target.value))}
-                    className="flex-1 accent-[#1258F8]"
-                  />
-                  <span className="text-[13px] font-medium text-[#111827] dark:text-white w-10 text-right">{value}%</span>
-                </div>
+                <Slider
+                  min={0}
+                  max={100}
+                  value={value}
+                  onChange={v => setValue(v)}
+                  showValue
+                />
               </div>
             </Preview>
           </Section>

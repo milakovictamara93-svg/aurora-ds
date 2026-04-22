@@ -9,6 +9,7 @@ import {
   Preview, Annotation,
   UseList, DontUseList, RelatedComponents,
 } from '@/app/components-lib/ui/ComponentTabs'
+import InputText from '@/app/components-lib/ui/InputText'
 import {
   SimpleCard,
   StandardCard,
@@ -40,22 +41,8 @@ function ChartPlaceholder({ height = 120 }: { height?: number }) {
 function FormSlot() {
   return (
     <div className="flex flex-col gap-3">
-      <div className="flex flex-col gap-1">
-        <label className="text-xs font-medium text-grey-950 dark:text-white">Building name</label>
-        <input
-          readOnly
-          defaultValue="Aurora HQ"
-          className="h-8 rounded border border-grey-200 dark:border-grey-700 bg-white dark:bg-grey-900 text-sm px-3 text-grey-950 dark:text-white"
-        />
-      </div>
-      <div className="flex flex-col gap-1">
-        <label className="text-xs font-medium text-grey-950 dark:text-white">Energy source</label>
-        <input
-          readOnly
-          defaultValue="Solar + Grid"
-          className="h-8 rounded border border-grey-200 dark:border-grey-700 bg-white dark:bg-grey-900 text-sm px-3 text-grey-950 dark:text-white"
-        />
-      </div>
+      <InputText label="Building name" defaultValue="Aurora HQ" state="read-only" />
+      <InputText label="Energy source" defaultValue="Solar + Grid" state="read-only" />
     </div>
   )
 }
