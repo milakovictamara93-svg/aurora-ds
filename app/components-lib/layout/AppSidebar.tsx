@@ -84,8 +84,7 @@ const COMPONENT_GROUPS: NavGroup[] = [
     id: 'navigation',
     label: 'Navigation',
     items: [
-      { href: '/components/navigation',   label: 'Top nav',     available: false },
-      { href: '/components/sidebar',      label: 'Sidebar',     available: false },
+      { href: '/components/navigation',   label: 'Navigation' },
       { href: '/components/tabs',         label: 'Tabs' },
       { href: '/components/accordion',    label: 'Accordion' },
       { href: '/components/breadcrumbs',  label: 'Breadcrumbs' },
