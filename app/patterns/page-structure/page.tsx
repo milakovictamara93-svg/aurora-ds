@@ -3,18 +3,17 @@
 import { useState } from 'react'
 import PageHeader from '@/app/components-lib/ui/PageHeader'
 import PageLayout from '@/app/components-lib/ui/PageLayout'
-import { PlusIcon, ArrowDownTrayIcon } from '@heroicons/react/20/solid'
-
-// ── Page ──────────────────────────────────────────────────────────────────────
+import { ArrowDownTrayIcon } from '@heroicons/react/20/solid'
 
 export default function PageStructurePage() {
-  const [activeTab, setActiveTab] = useState('Overview')
+  const [tab1, setTab1] = useState('Overview')
+  const [tab2, setTab2] = useState('Energy')
 
   return (
     <div>
       <PageHeader
         title="Page structure"
-        description="Standard layout pattern for platform pages — page header with title, reporting year, tabs, section header, and content area."
+        description="Standard layout for platform pages — h1 header with reporting year, main tabs, section header with search and actions."
         badge="Patterns"
       />
 
@@ -23,22 +22,23 @@ export default function PageStructurePage() {
         <section>
           <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Full page layout</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
-            Every platform page follows this structure: a page header (h1 + badge + reporting year + actions), horizontal tabs, a section header (h2 + badge + search + actions), and the content area below.
+            The complete structure: page header (h1 + badge + interactive reporting year + actions), main tabs, section header (h2 + badge + search + actions + overflow menu), and content.
           </p>
-          <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#111827]">
+          <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-visible bg-[#F7F8F8] dark:bg-[#0D1117]">
             <PageLayout
               title="Asset List"
               badge="87%"
+              badgeSystem="error"
               subtitle="2025 Global Portfolio · AMER, EMEA, APAC · Office, Residential"
-              reportingYear="Reporting Year: 2025 (Apr 2025–Mar 2026)"
+              reportingYear="2025 (Apr 2025 – Mar 2026)"
               actions={[
                 { label: 'Upload', variant: 'icon', icon: <ArrowDownTrayIcon className="w-4 h-4" /> },
                 { label: 'Upload', variant: 'secondary' },
                 { label: 'Create asset', variant: 'primary' },
               ]}
               tabs={['Overview', 'Alerts', 'Asset Groups', 'Upload Log']}
-              activeTab={activeTab}
-              onTabChange={setActiveTab}
+              activeTab={tab1}
+              onTabChange={setTab1}
               sectionTitle="Overview"
               sectionBadge="64 assets"
               showSearch
@@ -49,25 +49,8 @@ export default function PageStructurePage() {
               ]}
               showMoreMenu
             >
-              <div className="h-64 rounded-lg bg-[#F7F8F8] dark:bg-[#0D1117] flex items-center justify-center">
-                <p className="text-[13px] text-[#C4C9D4] dark:text-[#3F4654]">Content area — table, cards, charts, etc.</p>
-              </div>
-            </PageLayout>
-          </div>
-        </section>
-
-        <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Minimal — title only</h2>
-          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
-            Not all pages need every element. A simple page may just have a title and content.
-          </p>
-          <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#111827]">
-            <PageLayout
-              title="Settings"
-              reportingYear=""
-            >
-              <div className="h-40 rounded-lg bg-[#F7F8F8] dark:bg-[#0D1117] flex items-center justify-center">
-                <p className="text-[13px] text-[#C4C9D4] dark:text-[#3F4654]">Content area</p>
+              <div className="h-64 rounded-lg bg-[#F7F8F8] dark:bg-[#0D1117] border border-dashed border-[#D7DAE0] dark:border-[#374151] flex items-center justify-center">
+                <p className="text-[13px] text-[#C4C9D4] dark:text-[#3F4654]">Content area — table, cards, charts</p>
               </div>
             </PageLayout>
           </div>
@@ -76,23 +59,44 @@ export default function PageStructurePage() {
         <section>
           <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">With tabs + section header</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
-            Tabs split the page into sub-views. The section header below the tabs provides context and actions specific to the active tab.
+            Tabs split the page into sub-views. The active tab has a white background with rounded top corners, creating a card connection to the content below.
           </p>
-          <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#111827]">
+          <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-visible bg-[#F7F8F8] dark:bg-[#0D1117]">
             <PageLayout
               title="Performance"
               badge="Active"
+              badgeSystem="success"
               subtitle="Global Portfolio"
               tabs={['Energy', 'GHG Emissions', 'Water', 'Waste', 'Certifications']}
-              sectionTitle="Energy"
+              activeTab={tab2}
+              onTabChange={setTab2}
+              sectionTitle={tab2}
               sectionSubtitle="Portfolio Year-over-Year comparison"
               showSearch
               sectionActions={[
                 { label: 'Export', variant: 'secondary' },
               ]}
             >
-              <div className="h-48 rounded-lg bg-[#F7F8F8] dark:bg-[#0D1117] flex items-center justify-center">
+              <div className="h-48 rounded-lg bg-[#F7F8F8] dark:bg-[#0D1117] border border-dashed border-[#D7DAE0] dark:border-[#374151] flex items-center justify-center">
                 <p className="text-[13px] text-[#C4C9D4] dark:text-[#3F4654]">Charts and data tables</p>
+              </div>
+            </PageLayout>
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Minimal — title only</h2>
+          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
+            Not every page needs all elements. The simplest form is just a title, reporting year, and content.
+          </p>
+          <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-visible bg-[#F7F8F8] dark:bg-[#0D1117]">
+            <PageLayout
+              title="Settings"
+              reportingYear=""
+              actions={[{ label: 'Save', variant: 'primary' }]}
+            >
+              <div className="h-40 rounded-lg bg-[#F7F8F8] dark:bg-[#0D1117] border border-dashed border-[#D7DAE0] dark:border-[#374151] flex items-center justify-center">
+                <p className="text-[13px] text-[#C4C9D4] dark:text-[#3F4654]">Content area</p>
               </div>
             </PageLayout>
           </div>
@@ -102,16 +106,16 @@ export default function PageStructurePage() {
           <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Anatomy</h2>
           <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117]">
             {[
-              { label: 'Page title (h1)',         value: '24px semibold, grey-950. Required on every page.' },
-              { label: 'Optional badge',           value: 'Tag component next to the title — shows status, count, or percentage.' },
-              { label: 'Subtitle',                 value: '14px regular, grey-600. Entity context info (portfolio name, regions, etc.).' },
-              { label: 'Reporting year',           value: 'Button/pill at the right of the header row. Shows fiscal year range with calendar icon.' },
-              { label: 'Header actions',           value: 'Right-aligned buttons: icon button + secondary (outline) + primary (filled).' },
-              { label: 'Tabs',                     value: 'Horizontal tabs with 2px blue bottom border on active. Sits below the header, above section content.' },
-              { label: 'Section title (h2)',       value: '20px semibold, grey-950. Optional — used when tabs have their own sub-heading.' },
-              { label: 'Section search',           value: 'InputSearch inline with the section title.' },
-              { label: 'Section actions',          value: 'Same pattern as header: icon + secondary + primary + optional ⋮ more menu.' },
-              { label: 'Content area',             value: 'Flexible area below everything. Tables, cards, charts, forms, etc.' },
+              { label: 'Page title (h1)',          value: '24px semibold, #111827. Always present.' },
+              { label: 'Optional badge',            value: 'Tag component (filled, small) next to the title.' },
+              { label: 'Subtitle',                  value: '14px regular, #111827. Entity context: portfolio name, regions, property types.' },
+              { label: 'Reporting year',            value: 'Pill button (rounded-full, 32px height, border). Opens dropdown with type + date range columns. Green "Apply" button.' },
+              { label: 'Header actions',            value: 'Right-aligned: icon button (blue border) + secondary (blue border) + primary (blue fill). 32px height, 8px gap.' },
+              { label: 'Main tabs',                 value: 'White bg on active tab with rounded top corners — connects visually to the content card below.' },
+              { label: 'Section title (h2)',        value: '20px semibold, #111827. Inside the content card, below tabs.' },
+              { label: 'Section search',            value: 'InputSearch, 320px wide, inline with h2.' },
+              { label: 'Section actions',           value: 'Same pattern as header actions + optional ⋮ overflow menu.' },
+              { label: 'Content area',              value: 'White card with rounded-bl + rounded-br + rounded-tr corners. Flexible: tables, charts, forms.' },
             ].map((row, i) => (
               <div key={i} className="flex items-start gap-4 px-4 py-3 border-b border-[#EDEEF1] dark:border-[#1F2430] last:border-b-0">
                 <span className="text-[13px] font-medium text-[#111827] dark:text-white w-40 shrink-0">{row.label}</span>
@@ -125,12 +129,12 @@ export default function PageStructurePage() {
           <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Rules</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {[
-              { title: 'Title is always present', desc: 'Every page must have an h1 title. It\'s the primary landmark for screen readers and the first thing users see.' },
-              { title: 'Reporting year at page level', desc: 'The reporting year selector belongs in the page header, not in the global top bar. It\'s page-specific context.' },
-              { title: 'Tabs for sub-views, not navigation', desc: 'Tabs split a page into views (Overview, Alerts, etc.). For navigating between different pages, use the sidebar.' },
-              { title: 'Actions follow the pattern: icon → secondary → primary', desc: 'Right-aligned, in that order. Icon buttons for common actions (export, add), named buttons for primary flows.' },
-              { title: 'Section header is optional', desc: 'Only add a section title + actions when the tab content needs its own heading or controls (e.g., a table toolbar).' },
-              { title: 'Content area is flexible', desc: 'The page layout only defines the header and tab structure. Content below is free-form — tables, charts, cards, forms.' },
+              { title: 'Title is always present', desc: 'Every page must have an h1. It\'s the primary landmark and the first thing users see.' },
+              { title: 'Reporting year at page level', desc: 'The reporting year is page-specific context — it lives in the page header, not the global top bar.' },
+              { title: 'Tabs connect to content', desc: 'The active tab gets a white background that visually merges with the content card below — no gap or border between them.' },
+              { title: 'Actions: icon → secondary → primary', desc: 'Right-aligned, in that order. All 32px height. Icon buttons for repeated actions, named buttons for primary flows.' },
+              { title: 'Section header is optional', desc: 'Only add h2 + actions when the tab content has its own heading or toolbar (e.g., a data table).' },
+              { title: 'Reporting year is interactive', desc: 'The pill opens a dropdown with reporting type (Calendar/Fiscal) and a scrollable date range list. Changes require "Apply".' },
             ].map((rule, i) => (
               <div key={i} className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] p-4 bg-white dark:bg-[#0D1117]">
                 <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-1">{rule.title}</p>
