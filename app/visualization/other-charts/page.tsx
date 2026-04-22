@@ -95,29 +95,37 @@ export default function OtherChartsPage() {
                     })}
                   </div>
 
-                  {/* Line overlay */}
-                  <svg className="absolute inset-0 w-full z-[2] pointer-events-none" style={{ height: '100%' }} preserveAspectRatio="none" viewBox={`0 0 100 135`}>
-                    <polyline
-                      points={BULLET_LINE.map((v, i) => `${(i / (BULLET_LINE.length - 1)) * 100},${135 - (v / 150) * 135}`).join(' ')}
-                      fill="none" stroke="#1258F8" strokeWidth={2} vectorEffect="non-scaling-stroke"
-                    />
-                  </svg>
+                  {/* Line overlay — starts at center of first bar, ends at center of last */}
+                  {(() => {
+                    const n = BULLET_LINE.length
+                    // Each bar is flex-1 in the container, so bar center = (i + 0.5) / n * 100%
+                    const barCenter = (i: number) => ((i + 0.5) / n) * 100
+                    return (
+                      <svg className="absolute inset-0 w-full z-[2] pointer-events-none" style={{ height: '100%' }} preserveAspectRatio="none" viewBox={`0 0 100 135`}>
+                        <polyline
+                          points={BULLET_LINE.map((v, i) => `${barCenter(i)},${135 - (v / 150) * 135}`).join(' ')}
+                          fill="none" stroke="#1258F8" strokeWidth={2} vectorEffect="non-scaling-stroke"
+                        />
+                      </svg>
+                    )
+                  })()}
 
-                  {/* Hover vertical dashed line */}
+                  {/* Hover vertical dashed line — aligned to bar center */}
                   {bulletActive !== null && (
-                    <div className="absolute z-[3] pointer-events-none" style={{ left: `${(bulletActive / (BULLET_LINE.length - 1)) * 100}%`, top: `${(1 - BULLET_LINE[bulletActive] / 150) * 100}%`, bottom: 0, width: 1, borderLeft: '1px dashed #D7DAE0' }} />
+                    <div className="absolute z-[3] pointer-events-none" style={{ left: `${((bulletActive + 0.5) / BULLET_LINE.length) * 100}%`, top: `${(1 - BULLET_LINE[bulletActive] / 150) * 100}%`, bottom: 0, width: 1, borderLeft: '1px dashed #D7DAE0' }} />
                   )}
 
-                  {/* Dot markers */}
+                  {/* Dot markers — aligned to bar centers */}
                   {BULLET_LINE.map((v, i) => {
                     const isActive = bulletActive === i
                     const size = isActive ? 12 : 6
+                    const n = BULLET_LINE.length
                     return (
                       <div
                         key={`dot-${i}`}
                         className="absolute z-[4] rounded-full pointer-events-none"
                         style={{
-                          left: `${(i / (BULLET_LINE.length - 1)) * 100}%`,
+                          left: `${((i + 0.5) / n) * 100}%`,
                           top: `${(1 - v / 150) * 100}%`,
                           width: size, height: size,
                           marginLeft: -size / 2, marginTop: -size / 2,
@@ -131,7 +139,7 @@ export default function OtherChartsPage() {
 
                   {/* Tooltip */}
                   {bulletSelected !== null && (
-                    <div className="absolute z-[5]" style={{ left: `${(bulletSelected / (BULLET_LINE.length - 1)) * 100}%`, top: Math.max(0, (1 - BULLET_LINE[bulletSelected] / 150) * 100 - 10) + '%', transform: 'translateX(-50%)' }}>
+                    <div className="absolute z-[5]" style={{ left: `${((bulletSelected + 0.5) / BULLET_LINE.length) * 100}%`, top: Math.max(0, (1 - BULLET_LINE[bulletSelected] / 150) * 100 - 10) + '%', transform: 'translateX(-50%)' }}>
                       <ChartTooltip
                         title={BULLET_LABELS[bulletSelected]}
                         rows={[{ label: 'Energy use intensity', value: `${BULLET_LINE[bulletSelected]} kWh/m²` }]}
@@ -247,93 +255,117 @@ export default function OtherChartsPage() {
                 { label: 'Scope 1', value: 25, color: '#C80831' },
                 { label: 'Scope 2', value: 75, color: '#8B5CF6' },
               ]
-              const total = sources.reduce((s, src) => s + src.value, 0)
-              const h = 200
-
-              // Left column: Total energy (full height)
-              // Middle column: sources (proportional)
-              // Right column: scopes (proportional)
+              const total = 100
+              const h = 180
+              const gap = 4
+              const blockW = 80
+              const colL = 0         // Total block
+              const colM = 240       // Source blocks
+              const colR = 480       // Scope blocks
+              const svgW = colR + blockW
 
               let srcY = 0
               const srcBands = sources.map(s => {
-                const bandH = (s.value / total) * h
+                const bandH = (s.value / total) * (h - gap * (sources.length - 1))
                 const y = srcY
-                srcY += bandH + 4
+                srcY += bandH + gap
                 return { ...s, y, h: bandH }
               })
 
               let scopeY = 0
               const scopeTotal = scopes.reduce((s, sc) => s + sc.value, 0)
               const scopeBands = scopes.map(s => {
-                const bandH = (s.value / scopeTotal) * h
+                const bandH = (s.value / scopeTotal) * (h - gap * (scopes.length - 1))
                 const y = scopeY
-                scopeY += bandH + 4
+                scopeY += bandH + gap
                 return { ...s, y, h: bandH }
               })
 
               return (
-                <div className="relative" style={{ height: h + 40 }}>
-                  {/* Column labels */}
-                  <div className="flex justify-between text-[12px] font-semibold text-[#111827] dark:text-white mb-2">
-                    <span className="w-[80px]">Total</span>
-                    <span className="w-[120px] text-center">Source</span>
-                    <span className="w-[80px] text-right">Scope</span>
+                <div className="relative" style={{ height: h + 30 }}>
+                  <div className="flex justify-between text-[12px] font-semibold text-[#111827] dark:text-white mb-2 px-1">
+                    <span>Total energy</span>
+                    <span>Source</span>
+                    <span>Scope</span>
                   </div>
 
-                  <svg width="100%" height={h} className="overflow-visible">
-                    {/* Left: total energy block */}
-                    <rect x="0" y="0" width="80" height={h} rx="4" fill="#FF455F" opacity="0.15" />
-                    <text x="40" y={h / 2 + 4} textAnchor="middle" fontSize="12" fontWeight="600" fill="#111827">100 MWh</text>
+                  <svg viewBox={`0 0 ${svgW} ${h}`} width="100%" height={h} preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                      {sources.map((src, i) => (
+                        <linearGradient key={`g${i}`} id={`sg${i}`} x1="0" y1="0" x2="1" y2="0">
+                          <stop offset="0%" stopColor={src.color} stopOpacity="0.4" />
+                          <stop offset="100%" stopColor={src.color} stopOpacity="0.1" />
+                        </linearGradient>
+                      ))}
+                      {sources.map((src, i) => (
+                        <linearGradient key={`g2${i}`} id={`sg2${i}`} x1="0" y1="0" x2="1" y2="0">
+                          <stop offset="0%" stopColor={src.color} stopOpacity="0.1" />
+                          <stop offset="100%" stopColor={src.color} stopOpacity="0.4" />
+                        </linearGradient>
+                      ))}
+                    </defs>
 
-                    {/* Flows from total → sources */}
+                    {/* Total block — full color */}
+                    <rect x={colL} y={0} width={blockW} height={h} rx="4" fill="#FF455F" />
+                    <text x={colL + blockW / 2} y={h / 2 + 4} textAnchor="middle" fontSize="13" fontWeight="600" fill="white">100 MWh</text>
+
+                    {/* Flows total → source (gradient connectors) */}
                     {srcBands.map((src, i) => {
-                      const isActive = sankeyHover === i
-                      const dimmed = sankeyHover !== null && !isActive
-                      const srcMidY = src.y + src.h / 2
+                      const dimmed = sankeyHover !== null && sankeyHover !== i
+                      const x1 = colL + blockW
+                      const x2 = colM
+                      const cpx = (x1 + x2) / 2
                       return (
-                        <g key={i}
+                        <path
+                          key={`f1-${i}`}
+                          d={`M${x1},${src.y} C${cpx},${src.y} ${cpx},${src.y} ${x2},${src.y} L${x2},${src.y + src.h} C${cpx},${src.y + src.h} ${cpx},${src.y + src.h} ${x1},${src.y + src.h} Z`}
+                          fill={`url(#sg${i})`}
+                          opacity={dimmed ? 0.2 : 1}
+                          style={{ transition: 'opacity 150ms ease-out' }}
+                          className="cursor-pointer"
                           onMouseEnter={() => setSankeyHover(i)}
                           onMouseLeave={() => setSankeyHover(null)}
-                          className="cursor-pointer"
-                        >
-                          {/* Flow curve */}
-                          <path
-                            d={`M80,${src.y} C200,${src.y} 200,${src.y} 320,${src.y} L320,${src.y + src.h} C200,${src.y + src.h} 200,${src.y + src.h} 80,${src.y + src.h} Z`}
-                            fill={src.color}
-                            opacity={dimmed ? 0.1 : 0.3}
-                            style={{ transition: 'opacity 150ms ease-out' }}
-                          />
-                          {/* Source block */}
-                          <rect x="320" y={src.y} width="120" height={src.h} rx="4" fill={src.color} opacity={dimmed ? 0.15 : 0.6} style={{ transition: 'opacity 150ms ease-out' }} />
-                          <text x="380" y={srcMidY + 4} textAnchor="middle" fontSize="11" fill={dimmed ? '#9CA3AF' : '#111827'}>{src.label}</text>
-                          <text x="380" y={srcMidY + 16} textAnchor="middle" fontSize="10" fill="#9CA3AF">{src.value} MWh</text>
+                        />
+                      )
+                    })}
+
+                    {/* Source blocks — full color */}
+                    {srcBands.map((src, i) => {
+                      const dimmed = sankeyHover !== null && sankeyHover !== i
+                      return (
+                        <g key={`sb-${i}`} className="cursor-pointer" onMouseEnter={() => setSankeyHover(i)} onMouseLeave={() => setSankeyHover(null)}>
+                          <rect x={colM} y={src.y} width={blockW} height={src.h} rx="4" fill={src.color} opacity={dimmed ? 0.3 : 1} style={{ transition: 'opacity 150ms ease-out' }} />
+                          <text x={colM + blockW / 2} y={src.y + src.h / 2 + 1} textAnchor="middle" fontSize="11" fill="white" fontWeight="500">{src.label}</text>
+                          <text x={colM + blockW / 2} y={src.y + src.h / 2 + 13} textAnchor="middle" fontSize="9" fill="rgba(255,255,255,0.7)">{src.value} MWh</text>
                         </g>
                       )
                     })}
 
-                    {/* Flows from sources → scopes */}
+                    {/* Flows source → scope (gradient connectors) */}
                     {srcBands.map((src, i) => {
-                      const isActive = sankeyHover === i
-                      const dimmed = sankeyHover !== null && !isActive
-                      // Map: Electricity → Scope 2, Natural gas → Scope 1, District heating → Scope 2
+                      const dimmed = sankeyHover !== null && sankeyHover !== i
                       const targetIdx = src.label === 'Natural gas' ? 0 : 1
-                      const target = scopeBands[targetIdx]
+                      const tgt = scopeBands[targetIdx]
+                      const x1 = colM + blockW
+                      const x2 = colR
+                      const cpx = (x1 + x2) / 2
+                      const tgtY = tgt.y + (targetIdx === 1 && i > 0 ? srcBands.filter((_, j) => j < i && sources[j].label !== 'Natural gas').reduce((s, b) => s + b.h + gap, 0) : 0)
                       return (
                         <path
-                          key={`flow-${i}`}
-                          d={`M440,${src.y} C520,${src.y} 520,${target.y} 600,${target.y} L600,${target.y + Math.min(src.h, target.h)} C520,${target.y + Math.min(src.h, target.h)} 520,${src.y + src.h} 440,${src.y + src.h} Z`}
-                          fill={src.color}
-                          opacity={dimmed ? 0.05 : 0.2}
+                          key={`f2-${i}`}
+                          d={`M${x1},${src.y} C${cpx},${src.y} ${cpx},${tgtY} ${x2},${tgtY} L${x2},${tgtY + src.h} C${cpx},${tgtY + src.h} ${cpx},${src.y + src.h} ${x1},${src.y + src.h} Z`}
+                          fill={`url(#sg2${i})`}
+                          opacity={dimmed ? 0.2 : 1}
                           style={{ transition: 'opacity 150ms ease-out' }}
                         />
                       )
                     })}
 
-                    {/* Scope blocks */}
+                    {/* Scope blocks — full color */}
                     {scopeBands.map((sc, i) => (
-                      <g key={`scope-${i}`}>
-                        <rect x="600" y={sc.y} width="80" height={sc.h} rx="4" fill={sc.color} opacity="0.6" />
-                        <text x="640" y={sc.y + sc.h / 2 + 4} textAnchor="middle" fontSize="11" fill="white" fontWeight="500">{sc.label}</text>
+                      <g key={`scb-${i}`}>
+                        <rect x={colR} y={sc.y} width={blockW} height={sc.h} rx="4" fill={sc.color} />
+                        <text x={colR + blockW / 2} y={sc.y + sc.h / 2 + 4} textAnchor="middle" fontSize="11" fill="white" fontWeight="500">{sc.label}</text>
                       </g>
                     ))}
                   </svg>

@@ -313,7 +313,7 @@ export function LineChart({
       <div className="flex" style={{ height }}>
         {/* Y axis */}
         <div className="w-8 shrink-0 flex flex-col justify-between pb-5 text-[12px] text-[#505867] dark:text-[#9CA3AF] text-right pr-2 tracking-[0.18px]">
-          <span>{max}</span><span>{Math.round(max / 2)}</span><span>0</span>
+          <span>{max}</span><span>{Math.round(max * 2 / 3)}</span><span>{Math.round(max / 3)}</span><span>0</span>
         </div>
 
         <div className="flex-1 flex flex-col min-w-0">
