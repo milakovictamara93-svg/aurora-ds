@@ -307,7 +307,7 @@ export function VariantRow({
 // ── VariantTable ──────────────────────────────────────────────────────────────
 export function VariantTable({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-[8px] border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117]">
+    <div className="rounded-[8px] border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] overflow-visible">
       {children}
     </div>
   )
@@ -706,7 +706,6 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
   ),
   '/patterns/accessibility': (
     <div className="flex flex-col gap-2">
-      {/* Contrast example */}
       <div className="flex items-center gap-1.5">
         <div className="w-5 h-5 rounded flex items-center justify-center bg-[#111827]">
           <span className="text-[8px] font-bold text-white">Aa</span>
@@ -716,17 +715,89 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
         </div>
         <span className="text-[9px] font-semibold text-[#22C55E]">AAA</span>
       </div>
-      {/* Focus ring */}
       <div className="flex items-center gap-1.5">
         <div className="w-5 h-5 rounded border-2 border-[#1258F8] ring-2 ring-[#1258F8]/30 bg-white dark:bg-[#111827]" />
         <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">Focus ring visible</span>
       </div>
-      {/* Keyboard */}
-      <div className="flex items-center gap-1.5">
-        <span className="inline-flex items-center px-1.5 py-0.5 rounded border border-[#D7DAE0] dark:border-[#374151] bg-[#F7F8F8] dark:bg-[#1F2430]">
-          <span className="text-[9px] font-mono text-[#505867] dark:text-[#9CA3AF]">Tab</span>
-        </span>
-        <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">Keyboard nav</span>
+    </div>
+  ),
+  '/components/accordion': (
+    <div className="flex flex-col gap-0.5">
+      {['Energy', 'GHG Emissions', 'Water'].map((label, i) => (
+        <div key={label} className={`flex items-center gap-1.5 px-1 h-6 rounded text-[10px] ${i === 0 ? 'bg-[#EEF6FF] text-[#1258F8] font-medium' : 'text-[#505867] dark:text-[#9CA3AF]'}`}>
+          <svg className="w-2.5 h-2.5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" /></svg>
+          {label}
+        </div>
+      ))}
+    </div>
+  ),
+  '/components/spinner': (
+    <div className="flex items-center gap-3">
+      {[16, 24, 32].map(s => (
+        <div key={s} style={{ width: s, height: s }} className="rounded-full border-2 border-[#EDEEF1] dark:border-[#374151] border-t-[#1258F8] animate-spin" />
+      ))}
+    </div>
+  ),
+  '/components/skeleton': (
+    <div className="flex flex-col gap-2 w-full">
+      <div className="h-3 w-3/4 rounded bg-[#EDEEF1] dark:bg-[#1F2430] animate-pulse" />
+      <div className="h-3 w-full rounded bg-[#EDEEF1] dark:bg-[#1F2430] animate-pulse" />
+      <div className="h-3 w-1/2 rounded bg-[#EDEEF1] dark:bg-[#1F2430] animate-pulse" />
+    </div>
+  ),
+  '/components/loading-bar': (
+    <div className="w-full flex flex-col gap-2">
+      <div className="h-1 w-full rounded-full bg-[#EDEEF1] dark:bg-[#1F2430] overflow-hidden">
+        <div className="h-1 w-[65%] rounded-full bg-[#1258F8]" />
+      </div>
+      <div className="h-1.5 w-full rounded-full bg-[#EDEEF1] dark:bg-[#1F2430] overflow-hidden">
+        <div className="h-1.5 w-[40%] rounded-full bg-[#22C55E]" />
+      </div>
+    </div>
+  ),
+  '/components/progress-steps': (
+    <div className="flex items-center gap-1">
+      {[true, true, true, false, false].map((done, i) => (
+        <div key={i} className={`w-5 h-5 rounded-full flex items-center justify-center text-[8px] font-bold ${done ? 'bg-[#1258F8] text-white' : 'border border-[#D7DAE0] dark:border-[#374151] text-[#9CA3AF]'}`}>
+          {done ? '✓' : i + 1}
+        </div>
+      ))}
+    </div>
+  ),
+  '/patterns/filtering': (
+    <div className="flex flex-col gap-1.5">
+      <div className="flex items-center gap-1">
+        <div className="h-5 px-2 flex items-center rounded border border-[#1258F8] bg-[#EEF6FF] gap-1">
+          <svg className="w-3 h-3 text-[#1258F8]" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M2.628 1.601C5.028 1.206 7.49 1 10 1s4.973.206 7.372.601a.75.75 0 01.628.74v2.288a2.25 2.25 0 01-.659 1.59l-4.682 4.683a2.25 2.25 0 00-.659 1.59v3.037c0 .684-.31 1.33-.844 1.757l-1.937 1.55A.75.75 0 018 18.25v-5.757a2.25 2.25 0 00-.659-1.591L2.659 6.22A2.25 2.25 0 012 4.629V2.34a.75.75 0 01.628-.74z" clipRule="evenodd" /></svg>
+          <span className="text-[9px] font-semibold text-[#1258F8]">Filter</span>
+        </div>
+        <Tag label="Energy" system="default" style="filled" size="small" showCount={false} showRemove={false} />
+        <Tag label="Score 20-80" system="default" style="filled" size="small" showCount={false} showRemove={false} />
+      </div>
+    </div>
+  ),
+  '/components/inputs/text': (
+    <div className="flex flex-col gap-1 w-full">
+      <span className="text-[10px] font-semibold text-[#111827] dark:text-white">Building name</span>
+      <div className="h-7 flex items-center px-2 rounded border border-[#D7DAE0] dark:border-[#374151] bg-white dark:bg-[#111827]">
+        <span className="text-[10px] text-[#111827] dark:text-white">Scaler HQ</span>
+      </div>
+    </div>
+  ),
+  '/components/inputs/select': (
+    <div className="flex flex-col gap-1 w-full">
+      <span className="text-[10px] font-semibold text-[#111827] dark:text-white">Region</span>
+      <div className="h-7 flex items-center justify-between px-2 rounded border border-[#D7DAE0] dark:border-[#374151] bg-white dark:bg-[#111827]">
+        <span className="text-[10px] text-[#111827] dark:text-white">Europe</span>
+        <svg className="w-3 h-3 text-[#9CA3AF]" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" /></svg>
+      </div>
+    </div>
+  ),
+  '/components/inputs/search': (
+    <div className="flex flex-col gap-1 w-full">
+      <div className="h-7 flex items-center gap-1.5 px-2 rounded border border-[#D7DAE0] dark:border-[#374151] bg-white dark:bg-[#111827]">
+        <svg className="w-3.5 h-3.5 text-[#9CA3AF]" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clipRule="evenodd" /></svg>
+        <span className="text-[10px] text-[#9CA3AF]">Search assets...</span>
       </div>
     </div>
   ),
@@ -739,7 +810,7 @@ export function RelatedComponents({
   items: { href: string; label: string; description: string }[]
 }) {
   return (
-    <section className="rounded-[8px] overflow-hidden">
+    <section className="rounded-[8px]">
       <div className="py-8">
         <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">
           Related

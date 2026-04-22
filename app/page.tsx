@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ArrowRightIcon } from '@heroicons/react/20/solid'
 import AppLayout from '@/app/components-lib/layout/AppLayout'
 import VideoCard from '@/app/components-lib/ui/VideoCard'
+import Tag from '@/app/components-lib/ui/Tag'
 
 // ── Exact Figma building-block shapes (SVG paths exported directly from Aurora DS Figma file)
 // Colors and paths are permanent — no expiry.
@@ -49,9 +50,7 @@ export default function HomePage() {
       ══════════════════════════════════════════════════════════════════ */}
       <section className="flex flex-col items-center justify-center gap-6 min-h-[320px] p-8 text-center">
         {/* Version badge */}
-        <div className="inline-flex items-center px-3 py-1.5 rounded-full border border-[rgba(109,120,138,0.2)] dark:border-white/10 text-[11px] font-medium text-[#505867] dark:text-[#9CA3AF]">
-          v1.0 · In progress
-        </div>
+        <Tag label="v1.0 · In progress" system="default" style="outline" size="small" showCount={false} showRemove={false} />
 
         {/* H1 */}
         <h1 className="text-[40px] font-bold text-[#111827] dark:text-white leading-[1.2] tracking-tight">
@@ -165,7 +164,7 @@ export default function HomePage() {
         </Link>
 
         <Link
-          href="/patterns/esg-data"
+          href="/patterns/data-visualization"
           className="bg-white dark:bg-[#111827] border border-[#EDEEF1] dark:border-[#1F2430] rounded-lg px-4 py-4
             hover:border-[#1258F8] hover:shadow-[0_4px_16px_rgba(18,88,248,0.10)] transition-all duration-200 group"
         >

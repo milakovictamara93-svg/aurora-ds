@@ -256,28 +256,28 @@ export function ToastGroupDemo() {
             <p className="text-[13px] text-[#C4C9D4] dark:text-[#3F4654] select-none">No active toasts — add one above</p>
           </div>
         ) : (
-          <div className="flex flex-col gap-2">
-            {/* Dismiss all */}
+          <div className="relative flex flex-col gap-2">
+            {/* Dismiss all — top-right inside the group */}
             {showDismissAll && (
-              <div className="flex justify-end mb-1">
-                <button
-                  onClick={dismissAll}
-                  className="text-[12px] font-medium text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-[#1F2430] border border-[#EDEEF1] dark:border-[#1F2430] rounded-md px-2 py-1 shadow-sm hover:text-[#111827] dark:hover:text-white transition-colors whitespace-nowrap"
-                >
-                  Dismiss all
-                </button>
-              </div>
+              <button
+                onClick={dismissAll}
+                className="absolute -top-1 right-0 z-10 text-[12px] font-medium text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-[#1F2430] border border-[#EDEEF1] dark:border-[#1F2430] rounded-md px-2 py-1 shadow-sm hover:text-[#111827] dark:hover:text-white transition-colors whitespace-nowrap"
+              >
+                Dismiss all
+              </button>
             )}
             {/* Flat column — all toasts fully visible */}
-            {toasts.map(toast => (
-              <Toast
-                key={toast.id}
-                variant={toast.variant}
-                label={toast.label}
-                description={toast.description}
-                onDismiss={() => removeToast(toast.id)}
-              />
-            ))}
+            <div className={showDismissAll ? 'pt-7 flex flex-col gap-2' : 'flex flex-col gap-2'}>
+              {toasts.map(toast => (
+                <Toast
+                  key={toast.id}
+                  variant={toast.variant}
+                  label={toast.label}
+                  description={toast.description}
+                  onDismiss={() => removeToast(toast.id)}
+                />
+              ))}
+            </div>
           </div>
         )}
       </div>
