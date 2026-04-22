@@ -122,7 +122,6 @@ const VISUALIZATION: NavGroup = {
   label: 'Visualization',
   items: [
     { href: '/visualization/column-chart',    label: 'Column chart' },
-    { href: '/visualization/score-chart',     label: 'Score chart' },
     { href: '/visualization/line-chart',      label: 'Line chart' },
     { href: '/visualization/donut-chart',     label: 'Donut chart' },
     { href: '/visualization/overview',        label: 'Overview' },
