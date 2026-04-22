@@ -113,7 +113,7 @@ function IconRail({
     >
       {/* Scaler logo + wordmark — hover here to expand */}
       <div
-        className="flex items-center gap-3 mb-6 h-8 px-[15px] cursor-pointer"
+        className={clsx('flex items-center gap-3 mb-6 h-8 cursor-pointer', expanded ? 'px-[15px]' : 'justify-center')}
         onMouseEnter={() => setExpanded(true)}
       >
         <ScalerLogo className="w-7 h-7 shrink-0" color="#111827" />
