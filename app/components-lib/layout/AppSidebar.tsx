@@ -124,6 +124,7 @@ const VISUALIZATION: NavGroup = {
     { href: '/visualization/column-chart',    label: 'Column chart' },
     { href: '/visualization/line-chart',      label: 'Line chart' },
     { href: '/visualization/donut-chart',     label: 'Circular charts' },
+    { href: '/visualization/other-charts',   label: 'Other charts' },
     { href: '/visualization/overview',        label: 'Overview' },
   ],
 }
