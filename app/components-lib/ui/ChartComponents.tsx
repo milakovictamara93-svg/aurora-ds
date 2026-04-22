@@ -111,9 +111,8 @@ export function ColumnChart({
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null)
   const max = Math.max(...data)
 
-  // Active bar = hovered OR selected (hover takes priority for visual)
-  const activeBar = hoverIdx ?? selectedIdx
-  const hasInteraction = activeBar !== null
+  // Both hovered and selected bars are highlighted (red) simultaneously
+  const hasInteraction = hoverIdx !== null || selectedIdx !== null
 
   return (
     <div>
@@ -138,12 +137,13 @@ export function ColumnChart({
               {data.map((v, i) => {
                 const isMissing = missingFrom !== undefined && i >= missingFrom
                 const pct = max > 0 ? (v / max) * 100 : 0
-                const isActive = activeBar === i
+                const isHovered = hoverIdx === i
+                const isSelected = selectedIdx === i
 
                 let barColor: string
                 if (isMissing) {
                   barColor = CHART_COLORS.barDisabled
-                } else if (isActive) {
+                } else if (isHovered || isSelected) {
                   barColor = color
                 } else if (hasInteraction) {
                   barColor = CHART_COLORS.barInactive
