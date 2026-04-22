@@ -98,11 +98,11 @@ function ReportingYearPicker({
       {/* Trigger pill */}
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 h-8 px-4 rounded-full border border-[#D7DAE0] dark:border-[#374151] bg-white dark:bg-[#111827] text-[14px] text-[#8C96A4] tracking-[0.21px] hover:border-[#9CA3AF] transition-colors whitespace-nowrap"
+        className="flex items-center gap-2 h-8 px-4 rounded-full border border-[#D7DAE0] dark:border-[#374151] bg-white dark:bg-[#111827] text-[14px] tracking-[0.21px] hover:border-[#9CA3AF] transition-colors whitespace-nowrap"
       >
         <span>
-          <span className="font-medium">Reporting Year</span>
-          <span>: {value}</span>
+          <span className="font-medium text-[#505867] dark:text-[#9CA3AF]">Reporting Year</span>
+          <span className="text-[#111827] dark:text-white">: {value}</span>
         </span>
         <CalendarIcon className="w-4 h-4 shrink-0" />
       </button>
@@ -258,38 +258,39 @@ export default function PageLayout({
         )}
       </div>
 
-      {/* ── Main tabs ───────────────────────────────────────────────────── */}
-      {tabs && tabs.length > 0 && (
-        <div className="px-6 mt-4">
-          <div className="flex min-w-max">
-            {tabs.map(tab => {
-              const active = activeTab === tab
-              return (
-                <button
-                  key={tab}
-                  onClick={() => handleTabChange(tab)}
-                  className={clsx(
-                    'h-8 px-3 text-[14px] font-medium tracking-[0.21px] transition-colors rounded-t',
-                    active
-                      ? 'bg-white dark:bg-[#111827] text-[#111827] dark:text-white'
-                      : 'text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white'
-                  )}
-                >
-                  {tab}
-                </button>
-              )
-            })}
+      {/* ── Main tabs + content card — same horizontal margin as h1 ──── */}
+      <div className="px-6 pb-6">
+        {tabs && tabs.length > 0 && (
+          <div className="mt-4">
+            <div className="flex min-w-max">
+              {tabs.map(tab => {
+                const active = activeTab === tab
+                return (
+                  <button
+                    key={tab}
+                    onClick={() => handleTabChange(tab)}
+                    className={clsx(
+                      'h-8 px-3 text-[14px] font-medium tracking-[0.21px] transition-colors rounded-t',
+                      active
+                        ? 'bg-white dark:bg-[#111827] text-[#111827] dark:text-white'
+                        : 'text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white'
+                    )}
+                  >
+                    {tab}
+                  </button>
+                )
+              })}
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* ── Content card (white bg, rounded bottom + right) ────────────── */}
-      <div className={clsx(
-        'bg-white dark:bg-[#111827] flex-1 min-h-0 flex flex-col gap-4 px-4 py-4',
-        tabs && tabs.length > 0
-          ? 'rounded-bl-lg rounded-br-lg rounded-tr-lg'
-          : 'mt-4 rounded-lg'
-      )}>
+        {/* Content card */}
+        <div className={clsx(
+          'bg-white dark:bg-[#111827] flex-1 min-h-0 flex flex-col gap-4 px-4 py-4',
+          tabs && tabs.length > 0
+            ? 'rounded-bl-lg rounded-br-lg rounded-tr-lg'
+            : 'mt-4 rounded-lg'
+        )}>
         {/* Section header */}
         {(sectionTitle || showSearch || sectionActions.length > 0) && (
           <div className="flex flex-col gap-2">
@@ -331,6 +332,7 @@ export default function PageLayout({
         {/* Content slot */}
         <div className="flex-1 min-h-0">
           {children}
+        </div>
         </div>
       </div>
     </div>
