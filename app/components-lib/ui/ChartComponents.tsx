@@ -3,32 +3,29 @@
 import { useState } from 'react'
 import clsx from 'clsx'
 
-// ── Chart color palette (from Figma) ────────────────────────────────────────
+// ── Chart colors from Aurora foundations ──────────────────────────────────────
 
 export const CHART_COLORS = {
-  // Primary data series
-  primary:    '#F87171',  // coral/energy red — default single series
-  secondary:  '#2295FF',  // sky blue — comparison/secondary
-  tertiary:   '#F97316',  // orange
-  quaternary: '#8B5CF6',  // purple
+  // ESG aspect primaries (from foundations/colors — base values)
+  energy:         '#FF455F',  // Energy 500
+  ghg:            '#FFB246',  // GHG 300 (base)
+  water:          '#1FD7EE',  // Water 400 (base)
+  waste:          '#65A289',  // Waste 400
+  certifications: '#2F4FC0',  // Cert 700 (base)
+  engagement:     '#D76513',  // Engagement 600 (base)
+  esgRisk:        '#39D79D',  // ESG Risk 400 (base)
 
-  // ESG aspects (used in pie/donut charts)
-  energy:          '#F87171',
-  ghg:             '#F97316',
-  water:           '#22D3EE',
-  waste:           '#285446',
-  certifications:  '#2563EB',
-  engagement:      '#F59E0B',
-  esgRisk:         '#EF4444',
+  // Chart structural
+  barDefault:     '#BBDAFF',  // --graph/primary/default (unselected bars)
+  barDisabled:    '#D7DAE0',  // --graph/primary/disabled (missing/estimated)
+  barSelected:    '#FF455F',  // selected/active bar uses aspect color
+  comparison:     '#2295FF',  // blue for comparison lines (Sky 500)
+  projection:     '#FF455F',  // dashed line for projections
 
-  // States
-  missing:    '#D7DAE0',  // missing/estimated data
-  missingAlt: '#EDEEF1',  // lighter missing
-  pending:    '#D7DAE0',  // pending year (greyed out)
-  warning:    '#F59E0B',  // warning indicator
-  grid:       '#EDEEF1',  // grid lines
-  axis:       '#9CA3AF',  // axis labels
-  bg:         '#F7F8F8',  // chart background
+  // UI
+  grid:           '#EDEEF1',  // grid lines (Grey 100)
+  axisText:       '#505867',  // axis labels (Grey 600)
+  warning:        '#F59E0B',  // warning triangle
 }
 
 // ── Legend ─────────────────────────────────────────────────────────────────
@@ -42,13 +39,13 @@ export function ChartLegend({
 }) {
   return (
     <div className={clsx(
-      'flex gap-4',
-      direction === 'vertical' ? 'flex-col gap-1.5' : 'flex-wrap items-center'
+      'flex',
+      direction === 'vertical' ? 'flex-col gap-1.5' : 'flex-wrap items-center gap-4'
     )}>
       {items.map(item => (
         <div key={item.label} className="flex items-center gap-1.5">
           <div className="w-2 h-2 rounded-sm shrink-0" style={{ backgroundColor: item.color }} />
-          <span className="text-[12px] text-[#9CA3AF] tracking-[0.18px]">{item.label}</span>
+          <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF] tracking-[0.18px]">{item.label}</span>
         </div>
       ))}
     </div>
@@ -84,72 +81,90 @@ export function ChartTooltip({
   )
 }
 
-// ── Column Chart (Bar chart) ────────────────────────────────────────────
+// ── Column Chart ────────────────────────────────────────────────────────
 
 export function ColumnChart({
   data,
   height = 160,
+  color = CHART_COLORS.energy,
+  disabledColor = CHART_COLORS.barDisabled,
   showWarning = false,
   warningIndex,
   missingFrom,
-  series = 'single',
-  colors,
+  labels,
 }: {
   data: number[]
   height?: number
+  color?: string
+  disabledColor?: string
   showWarning?: boolean
   warningIndex?: number
   missingFrom?: number
-  series?: 'single' | 'multiple'
-  colors?: string[]
+  labels?: string[]
 }) {
   const [hoverIdx, setHoverIdx] = useState<number | null>(null)
   const max = Math.max(...data)
-  const barColors = colors ?? [CHART_COLORS.primary]
+  const chartH = height - 24 // reserve bottom for labels
 
   return (
-    <div className="relative" style={{ height }}>
-      {/* Y axis labels */}
-      <div className="absolute left-0 top-0 bottom-4 w-8 flex flex-col justify-between text-[10px] text-[#9CA3AF] text-right">
-        <span>{max}</span>
-        <span>{Math.round(max / 2)}</span>
-        <span>0</span>
-      </div>
+    <div style={{ height }}>
+      {/* Y axis + chart area */}
+      <div className="flex h-full">
+        {/* Y axis labels */}
+        <div className="w-8 shrink-0 flex flex-col justify-between pb-6 text-[12px] text-[#505867] dark:text-[#9CA3AF] text-right pr-2 tracking-[0.18px]">
+          <span>{max}</span>
+          <span>{Math.round(max / 2)}</span>
+          <span>0</span>
+        </div>
 
-      {/* Grid lines */}
-      <div className="absolute left-10 right-0 top-0 bottom-4 flex flex-col justify-between pointer-events-none">
-        {[0, 1, 2].map(i => (
-          <div key={i} className="border-b border-dashed border-[#EDEEF1] dark:border-[#1F2430]" />
-        ))}
-      </div>
-
-      {/* Bars */}
-      <div className="absolute left-10 right-0 top-0 bottom-4 flex items-end gap-[2px]">
-        {data.map((v, i) => {
-          const isMissing = missingFrom !== undefined && i >= missingFrom
-          const pct = max > 0 ? (v / max) * 100 : 0
-          const isHover = hoverIdx === i
-          return (
-            <div
-              key={i}
-              className="flex-1 relative cursor-pointer transition-opacity"
-              style={{ height: `${pct}%`, opacity: isHover ? 1 : hoverIdx !== null ? 0.5 : 1 }}
-              onMouseEnter={() => setHoverIdx(i)}
-              onMouseLeave={() => setHoverIdx(null)}
-            >
-              <div
-                className="w-full h-full rounded-t-sm"
-                style={{ backgroundColor: isMissing ? CHART_COLORS.missing : barColors[0] }}
-              />
-              {/* Warning icon */}
-              {showWarning && warningIndex === i && (
-                <div className="absolute -top-5 left-1/2 -translate-x-1/2 text-[#F59E0B]">
-                  <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" /></svg>
-                </div>
-              )}
+        {/* Chart body — fills remaining width */}
+        <div className="flex-1 flex flex-col min-w-0">
+          {/* Bars area */}
+          <div className="flex-1 relative">
+            {/* Grid lines */}
+            <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
+              {[0, 1, 2].map(i => (
+                <div key={i} className="h-px bg-[#EDEEF1] dark:bg-[#1F2430]" />
+              ))}
             </div>
-          )
-        })}
+
+            {/* Bars — edge to edge */}
+            <div className="absolute inset-0 flex items-end gap-px">
+              {data.map((v, i) => {
+                const isMissing = missingFrom !== undefined && i >= missingFrom
+                const pct = max > 0 ? (v / max) * 100 : 0
+                const isHover = hoverIdx === i
+                const dimmed = hoverIdx !== null && !isHover
+                return (
+                  <div
+                    key={i}
+                    className="flex-1 relative"
+                    style={{ height: `${pct}%`, opacity: dimmed ? 0.4 : 1, transition: 'opacity 100ms' }}
+                    onMouseEnter={() => setHoverIdx(i)}
+                    onMouseLeave={() => setHoverIdx(null)}
+                  >
+                    <div
+                      className="w-full h-full rounded-t-[2px] cursor-pointer"
+                      style={{ backgroundColor: isMissing ? disabledColor : color }}
+                    />
+                    {showWarning && warningIndex === i && (
+                      <div className="absolute -top-5 left-1/2 -translate-x-1/2">
+                        <svg className="w-4 h-4 text-[#F59E0B]" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" /></svg>
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* X axis labels */}
+          {labels && (
+            <div className="h-6 flex justify-between text-[12px] text-[#505867] dark:text-[#9CA3AF] tracking-[0.18px] pt-1">
+              {labels.map(l => <span key={l}>{l}</span>)}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )
@@ -162,8 +177,9 @@ export function LineChart({
   comparisonPoints,
   projectionFrom,
   height = 160,
-  color = CHART_COLORS.primary,
-  comparisonColor = CHART_COLORS.secondary,
+  color = CHART_COLORS.energy,
+  comparisonColor = CHART_COLORS.comparison,
+  labels,
 }: {
   points: number[]
   comparisonPoints?: number[]
@@ -171,80 +187,76 @@ export function LineChart({
   height?: number
   color?: string
   comparisonColor?: string
+  labels?: string[]
 }) {
   const [hoverIdx, setHoverIdx] = useState<number | null>(null)
   const allValues = [...points, ...(comparisonPoints ?? [])]
   const max = Math.max(...allValues)
-  const min = Math.min(...allValues, 0)
+  const min = Math.min(0, ...allValues)
   const range = max - min || 1
+  const padT = 8
+  const padB = labels ? 24 : 8
+  const padL = 36
+  const padR = 4
+  const chartW = 640
+  const chartH = height
 
-  function toY(v: number) {
-    return height - 20 - ((v - min) / range) * (height - 40)
-  }
-
-  function toX(i: number, total: number) {
-    return 40 + (i / (total - 1)) * (640 - 80)
-  }
-
+  function toY(v: number) { return padT + ((max - v) / range) * (chartH - padT - padB) }
+  function toX(i: number, total: number) { return padL + (i / Math.max(total - 1, 1)) * (chartW - padL - padR) }
   function buildPath(pts: number[]) {
-    return pts.map((v, i) => `${i === 0 ? 'M' : 'L'} ${toX(i, pts.length)} ${toY(v)}`).join(' ')
+    return pts.map((v, i) => `${i === 0 ? 'M' : 'L'}${toX(i, pts.length)},${toY(v)}`).join(' ')
   }
 
   return (
-    <svg width="100%" viewBox={`0 0 640 ${height}`} className="overflow-visible">
-      {/* Grid lines */}
+    <svg width="100%" viewBox={`0 0 ${chartW} ${chartH}`} className="overflow-visible">
+      {/* Grid */}
       {[0, 1, 2, 3].map(i => {
-        const y = 10 + (i / 3) * (height - 40)
-        return <line key={i} x1="40" y1={y} x2="640" y2={y} stroke="#EDEEF1" strokeDasharray="4 4" />
+        const y = padT + (i / 3) * (chartH - padT - padB)
+        return <line key={i} x1={padL} y1={y} x2={chartW - padR} y2={y} stroke="#EDEEF1" strokeWidth="1" />
       })}
 
-      {/* Y axis labels */}
+      {/* Y axis */}
       {[0, 1, 2, 3].map(i => {
         const val = max - (i / 3) * range
-        const y = 10 + (i / 3) * (height - 40)
-        return <text key={i} x="32" y={y + 4} textAnchor="end" className="text-[10px] fill-[#9CA3AF]">{Math.round(val)}</text>
+        const y = padT + (i / 3) * (chartH - padT - padB)
+        return <text key={i} x={padL - 6} y={y + 4} textAnchor="end" className="text-[12px]" fill="#505867">{Math.round(val)}</text>
       })}
 
-      {/* Comparison line (blue, thinner) */}
+      {/* X axis */}
+      {labels && labels.map((l, i) => (
+        <text key={l} x={toX(i, labels.length)} y={chartH - 4} textAnchor="middle" className="text-[12px]" fill="#505867">{l}</text>
+      ))}
+
+      {/* Comparison (dashed blue) */}
       {comparisonPoints && (
-        <path d={buildPath(comparisonPoints)} fill="none" stroke={comparisonColor} strokeWidth="1.5" strokeDasharray="6 4" opacity="0.6" />
+        <path d={buildPath(comparisonPoints)} fill="none" stroke={comparisonColor} strokeWidth="1.5" strokeDasharray="6 4" opacity="0.5" />
       )}
 
-      {/* Main line */}
+      {/* Main line (solid) */}
       <path
         d={buildPath(points.slice(0, projectionFrom ?? points.length))}
-        fill="none"
-        stroke={color}
-        strokeWidth="2"
+        fill="none" stroke={color} strokeWidth="2"
       />
 
       {/* Projection (dashed) */}
       {projectionFrom !== undefined && projectionFrom < points.length && (
         <path
-          d={buildPath(points.slice(projectionFrom - 1))}
-          fill="none"
-          stroke={color}
-          strokeWidth="1.5"
-          strokeDasharray="6 4"
-          opacity="0.5"
+          d={buildPath(points.slice(Math.max(0, projectionFrom - 1)))}
+          fill="none" stroke={color} strokeWidth="1.5" strokeDasharray="6 4" opacity="0.4"
         />
       )}
 
-      {/* Data points */}
+      {/* Markers — only on actual data, not projections */}
       {points.map((v, i) => {
         if (projectionFrom !== undefined && i >= projectionFrom) return null
         const cx = toX(i, points.length)
         const cy = toY(v)
         return (
           <circle
-            key={i}
-            cx={cx}
-            cy={cy}
-            r={hoverIdx === i ? 5 : 3}
-            fill={color}
-            stroke="white"
-            strokeWidth="2"
-            className="cursor-pointer transition-all"
+            key={i} cx={cx} cy={cy}
+            r={hoverIdx === i ? 5 : 4}
+            fill={color} stroke="white" strokeWidth="2"
+            className="cursor-pointer"
             onMouseEnter={() => setHoverIdx(i)}
             onMouseLeave={() => setHoverIdx(null)}
           />
@@ -284,27 +296,21 @@ export function DonutChart({
           const dashGap = circumference - dashLen
           const currentOffset = offset
           offset += dashLen
-
           return (
             <circle
               key={i}
-              cx={size / 2}
-              cy={size / 2}
-              r={radius}
-              fill="none"
-              stroke={seg.color}
+              cx={size / 2} cy={size / 2} r={radius}
+              fill="none" stroke={seg.color}
               strokeWidth={hoverIdx === i ? strokeWidth + 4 : strokeWidth}
               strokeDasharray={`${dashLen} ${dashGap}`}
               strokeDashoffset={-currentOffset}
-              className="cursor-pointer transition-all duration-150"
+              className="cursor-pointer transition-all duration-100"
               onMouseEnter={() => setHoverIdx(i)}
               onMouseLeave={() => setHoverIdx(null)}
             />
           )
         })}
       </svg>
-
-      {/* Center text */}
       {(centerValue || centerLabel) && (
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           {centerValue && <span className="text-[24px] font-semibold text-[#111827] dark:text-white">{centerValue}</span>}
@@ -318,11 +324,9 @@ export function DonutChart({
 // ── Aspect Score Mini ───────────────────────────────────────────────────
 
 export function AspectScoreMini({
-  label,
   points,
   color,
 }: {
-  label: string
   points: number[]
   color: string
 }) {
@@ -334,18 +338,18 @@ export function AspectScoreMini({
 
   const path = points.map((v, i) => {
     const x = (i / (points.length - 1)) * w
-    const y = h - ((v - min) / range) * h
-    return `${i === 0 ? 'M' : 'L'} ${x} ${y}`
+    const y = h - 4 - ((v - min) / range) * (h - 8)
+    return `${i === 0 ? 'M' : 'L'}${x},${y}`
   }).join(' ')
 
+  const lastX = w
+  const lastY = h - 4 - ((points[points.length - 1] - min) / range) * (h - 8)
+
   return (
-    <div className="flex items-center gap-3">
-      <svg width={w} height={h} className="shrink-0">
-        <path d={path} fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" />
-        {/* End marker */}
-        <circle cx={w} cy={h - ((points[points.length - 1] - min) / range) * h} r="3" fill={color} />
-      </svg>
-    </div>
+    <svg width={w} height={h}>
+      <path d={path} fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" />
+      <circle cx={lastX} cy={lastY} r="3" fill={color} />
+    </svg>
   )
 }
 
@@ -362,7 +366,6 @@ export function ChartEmptyState({
 }) {
   return (
     <div className="relative flex items-center justify-center" style={{ height }}>
-      {/* Dashed grid */}
       <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
         {[0, 1, 2, 3].map(i => (
           <div key={i} className="border-b border-dashed border-[#EDEEF1] dark:border-[#1F2430]" />

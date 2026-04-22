@@ -6,19 +6,18 @@ import {
   ChartLegend, ChartTooltip, ChartEmptyState, CHART_COLORS,
 } from '@/app/components-lib/ui/ChartComponents'
 
-// ── Sample data ──────────────────────────────────────────────────────────────
+const MONTHLY = [8, 12, 15, 22, 28, 35, 42, 50, 58, 65, 72, 78, 82, 88, 92, 98, 102, 108, 112, 115, 118, 120, 125, 128, 130, 135, 138, 140, 142, 145, 148, 150, 148, 145, 140, 135]
+const TREND = [75, 95, 90, 120, 125, 115, 105]
+const BENCH = [110, 110, 110, 110, 110, 110, 110]
 
-const MONTHLY_DATA = [8, 12, 15, 22, 28, 35, 42, 50, 58, 65, 72, 78, 82, 88, 92, 98, 102, 108, 112, 115, 118, 120, 125, 128, 130, 135, 138, 140, 142, 145, 148, 150, 148, 145, 140, 135]
-const TREND_POINTS = [75, 95, 90, 120, 125, 115, 105]
-const COMPARISON_POINTS = [110, 110, 110, 110, 110, 110, 110]
-const ASPECT_SEGMENTS = [
-  { label: 'Energy',         value: 28, color: '#F87171' },
-  { label: 'GHG',            value: 18, color: '#F97316' },
-  { label: 'Water',          value: 15, color: '#22D3EE' },
-  { label: 'Waste',          value: 12, color: '#285446' },
-  { label: 'Certifications', value: 14, color: '#2563EB' },
-  { label: 'Engagement',     value: 8,  color: '#F59E0B' },
-  { label: 'ESG Risk',       value: 5,  color: '#EF4444' },
+const ASPECTS = [
+  { label: 'Energy',         value: 28, color: CHART_COLORS.energy },
+  { label: 'GHG',            value: 18, color: CHART_COLORS.ghg },
+  { label: 'Water',          value: 15, color: CHART_COLORS.water },
+  { label: 'Waste',          value: 12, color: CHART_COLORS.waste },
+  { label: 'Certifications', value: 14, color: CHART_COLORS.certifications },
+  { label: 'Engagement',     value: 8,  color: CHART_COLORS.engagement },
+  { label: 'ESG Risk',       value: 5,  color: CHART_COLORS.esgRisk },
 ]
 
 export default function DataVisualizationPage() {
@@ -26,187 +25,139 @@ export default function DataVisualizationPage() {
     <div>
       <PageHeader
         title="Data visualization"
-        description="Chart types, color usage, interaction patterns, and rules for displaying ESG data correctly."
+        description="Chart types, color usage, interaction patterns, and rules for displaying ESG data."
         badge="Patterns"
       />
 
       <div className="mt-8 flex flex-col gap-10">
 
-        {/* ── Column chart ──────────────────────────────────────────────── */}
+        {/* ── Column chart ────────────────────────────────────────────── */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Column chart (bar)</h2>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Column chart</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
-            The primary chart type for monthly consumption data. Bars use the energy coral color for single-series. Missing or estimated data is shown in grey. A yellow warning icon flags data quality issues.
+            Primary chart for monthly consumption. Uses the ESG aspect color for bars. Missing data is grey. Hover dims non-hovered bars.
           </p>
-
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {/* Single series */}
             <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-4">
-              <p className="text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-3">Single series — default</p>
-              <ColumnChart data={MONTHLY_DATA} showWarning warningIndex={22} missingFrom={30} />
-              <div className="mt-3">
-                <ChartLegend items={[
-                  { label: 'Energy use intensity', color: CHART_COLORS.primary },
-                  { label: 'Missing', color: CHART_COLORS.missing },
-                  { label: 'Warnings', color: CHART_COLORS.warning },
-                ]} />
-              </div>
+              <p className="text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-3">Default — energy</p>
+              <ColumnChart data={MONTHLY} showWarning warningIndex={22} missingFrom={30} labels={['2020', '2021', '2022', '2023', '2024', '2025']} />
             </div>
-
-            {/* Multiple series */}
             <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-4">
-              <p className="text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-3">Multiple series</p>
-              <ColumnChart data={MONTHLY_DATA.map(v => v * 0.7)} colors={['#F97316']} missingFrom={30} />
-              <div className="mt-3">
-                <ChartLegend items={[
-                  { label: 'Electricity', color: '#F97316' },
-                  { label: 'Natural gas', color: '#8B5CF6' },
-                ]} />
-              </div>
+              <p className="text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-3">GHG aspect</p>
+              <ColumnChart data={MONTHLY.map(v => v * 0.7)} color={CHART_COLORS.ghg} missingFrom={30} labels={['2020', '2021', '2022', '2023', '2024', '2025']} />
             </div>
-
-            {/* Empty state */}
             <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-4">
               <p className="text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-3">Empty state</p>
               <ChartEmptyState />
             </div>
-
-            {/* Hover tooltip */}
             <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-4">
-              <p className="text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-3">Tooltip on hover</p>
+              <p className="text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-3">Tooltip</p>
               <div className="flex items-center justify-center py-4">
-                <ChartTooltip
-                  title="Jan 2024"
-                  subtitle="Monthly consumption"
-                  rows={[
-                    { label: 'Energy use intensity', value: '142 kWh/m²' },
-                    { label: 'Electricity', value: '98 kWh/m²' },
-                    { label: 'Natural gas', value: '44 kWh/m²' },
-                  ]}
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── Line chart ────────────────────────────────────────────────── */}
-        <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Line chart with markers</h2>
-          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
-            Used for trend data (YoY, stranding analysis). Coral line with circle markers for primary series. Dashed blue line for comparison/benchmark. Dashed projection for future years.
-          </p>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-4">
-              <p className="text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-3">Trend with projection</p>
-              <LineChart
-                points={TREND_POINTS}
-                comparisonPoints={COMPARISON_POINTS}
-                projectionFrom={5}
-              />
-              <div className="mt-3">
-                <ChartLegend items={[
-                  { label: 'Actual', color: CHART_COLORS.primary },
-                  { label: 'Benchmark', color: CHART_COLORS.secondary },
+                <ChartTooltip title="Jan 2024" subtitle="Monthly" rows={[
+                  { label: 'Energy use intensity', value: '142 kWh/m²' },
+                  { label: 'Electricity', value: '98 kWh/m²' },
+                  { label: 'Natural gas', value: '44 kWh/m²' },
                 ]} />
               </div>
             </div>
+          </div>
+        </section>
 
+        {/* ── Line chart ──────────────────────────────────────────────── */}
+        <section>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Line chart with markers</h2>
+          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
+            For trends (YoY, stranding). Solid line for actual, dashed for projections/benchmarks. Markers on data points.
+          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-4">
+              <p className="text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-3">Trend with projection + benchmark</p>
+              <LineChart points={TREND} comparisonPoints={BENCH} projectionFrom={5} labels={['2018', '2020', '2022', '2024', '2026', '2028', '2030']} />
+              <div className="mt-3">
+                <ChartLegend items={[
+                  { label: 'Actual', color: CHART_COLORS.energy },
+                  { label: 'Benchmark', color: CHART_COLORS.comparison },
+                ]} />
+              </div>
+            </div>
             <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-4">
               <p className="text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-3">Simple trend</p>
-              <LineChart points={[45, 52, 48, 60, 55, 72, 68, 80, 75, 85]} color="#1258F8" />
+              <LineChart points={[45, 52, 48, 60, 55, 72, 68, 80, 75, 85]} color="#1258F8" labels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']} />
             </div>
           </div>
         </section>
 
-        {/* ── Pie / Donut ───────────────────────────────────────────────── */}
+        {/* ── Donut ───────────────────────────────────────────────────── */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Pie and donut charts</h2>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Donut chart</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
-            Used for ESG aspect breakdowns and portfolio-level composition. Donut is the default — center shows the total value. ESG aspect colors are mandatory.
+            For ESG aspect breakdowns. Center shows aggregate value. Hover expands the segment.
           </p>
-
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-4 flex flex-col items-center gap-3">
-              <p className="text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF] self-start">Donut — aspects</p>
-              <DonutChart segments={ASPECT_SEGMENTS} centerValue="78" centerLabel="out of 100" />
-              <ChartLegend items={ASPECT_SEGMENTS} direction="vertical" />
+              <p className="text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF] self-start">Aspects</p>
+              <DonutChart segments={ASPECTS} centerValue="78" centerLabel="out of 100" />
             </div>
-
             <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-4 flex flex-col items-center gap-3">
-              <p className="text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF] self-start">Donut — portfolio</p>
-              <DonutChart
-                segments={[
-                  { label: 'Office',       value: 45, color: '#1258F8' },
-                  { label: 'Residential',  value: 30, color: '#22D3EE' },
-                  { label: 'Industrial',   value: 15, color: '#F97316' },
-                  { label: 'Retail',        value: 10, color: '#8B5CF6' },
-                ]}
-                centerValue="64"
-                centerLabel="assets"
-              />
+              <p className="text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF] self-start">Portfolio</p>
+              <DonutChart segments={[
+                { label: 'Office', value: 45, color: '#1258F8' },
+                { label: 'Residential', value: 30, color: CHART_COLORS.water },
+                { label: 'Industrial', value: 15, color: CHART_COLORS.ghg },
+                { label: 'Retail', value: 10, color: CHART_COLORS.certifications },
+              ]} centerValue="64" centerLabel="assets" />
             </div>
-
             <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-4 flex flex-col items-center gap-3">
-              <p className="text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF] self-start">Donut — small</p>
-              <DonutChart
-                segments={ASPECT_SEGMENTS}
-                size={120}
-                strokeWidth={16}
-                centerValue="78"
-                centerLabel="score"
-              />
+              <p className="text-[12px] font-semibold text-[#505867] dark:text-[#9CA3AF] self-start">Small</p>
+              <DonutChart segments={ASPECTS} size={120} strokeWidth={16} centerValue="78" centerLabel="score" />
             </div>
           </div>
         </section>
 
-        {/* ── Aspect score mini charts ───────────────────────────────────── */}
+        {/* ── Sparklines ──────────────────────────────────────────────── */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Aspect score sparklines</h2>
-          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
-            Compact sparkline charts showing trend per ESG aspect. Each uses the aspect's designated color.
-          </p>
-
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Aspect sparklines</h2>
           <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-4">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {[
-                { label: 'Energy',         color: '#F87171', data: [65, 72, 68, 75, 70, 62, 58] },
-                { label: 'GHG',            color: '#F97316', data: [50, 55, 52, 60, 58, 55, 52] },
-                { label: 'Water',          color: '#22D3EE', data: [40, 42, 38, 45, 48, 50, 52] },
-                { label: 'Waste',          color: '#285446', data: [30, 35, 32, 38, 40, 42, 45] },
-                { label: 'Certifications', color: '#2563EB', data: [80, 82, 85, 88, 90, 88, 92] },
-                { label: 'Engagement',     color: '#F59E0B', data: [20, 25, 28, 30, 35, 38, 40] },
-                { label: 'ESG Risk',       color: '#EF4444', data: [70, 68, 65, 60, 55, 50, 48] },
-              ].map(aspect => (
-                <div key={aspect.label} className="flex flex-col gap-1">
-                  <span className="text-[11px] font-medium text-[#505867] dark:text-[#9CA3AF]">{aspect.label}</span>
-                  <AspectScoreMini label={aspect.label} points={aspect.data} color={aspect.color} />
+                { label: 'Energy', color: CHART_COLORS.energy, data: [65, 72, 68, 75, 70, 62, 58] },
+                { label: 'GHG', color: CHART_COLORS.ghg, data: [50, 55, 52, 60, 58, 55, 52] },
+                { label: 'Water', color: CHART_COLORS.water, data: [40, 42, 38, 45, 48, 50, 52] },
+                { label: 'Waste', color: CHART_COLORS.waste, data: [30, 35, 32, 38, 40, 42, 45] },
+                { label: 'Certifications', color: CHART_COLORS.certifications, data: [80, 82, 85, 88, 90, 88, 92] },
+                { label: 'Engagement', color: CHART_COLORS.engagement, data: [20, 25, 28, 30, 35, 38, 40] },
+                { label: 'ESG Risk', color: CHART_COLORS.esgRisk, data: [70, 68, 65, 60, 55, 50, 48] },
+              ].map(a => (
+                <div key={a.label} className="flex flex-col gap-1">
+                  <span className="text-[11px] font-medium text-[#505867] dark:text-[#9CA3AF]">{a.label}</span>
+                  <AspectScoreMini points={a.data} color={a.color} />
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ── Chart color palette ────────────────────────────────────────── */}
+        {/* ── Color palette ────────────────────────────────────────────── */}
         <section>
           <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Chart color palette</h2>
           <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117]">
             {[
-              { label: 'Primary (Energy)',    hex: '#F87171', usage: 'Default single-series bar/line color' },
-              { label: 'Secondary (Sky)',     hex: '#2295FF', usage: 'Comparison lines, benchmarks' },
-              { label: 'Tertiary (Orange)',   hex: '#F97316', usage: 'GHG, secondary bar series' },
-              { label: 'Quaternary (Purple)', hex: '#8B5CF6', usage: 'Third series in multi-series charts' },
-              { label: 'Missing data',        hex: '#D7DAE0', usage: 'Grey bars for estimated/missing data' },
-              { label: 'Warning',             hex: '#F59E0B', usage: 'Yellow triangle on data quality issues' },
-              { label: 'Water',               hex: '#22D3EE', usage: 'Water aspect in pie/donut' },
-              { label: 'Waste',               hex: '#285446', usage: 'Waste aspect in pie/donut' },
-              { label: 'Certifications',      hex: '#2563EB', usage: 'Certifications aspect in pie/donut' },
-              { label: 'Grid lines',          hex: '#EDEEF1', usage: 'Dashed horizontal grid' },
-              { label: 'Axis labels',         hex: '#9CA3AF', usage: '10px axis tick labels' },
+              { label: 'Energy',          hex: '#FF455F', usage: 'Energy 500 — default bar/line color for energy data' },
+              { label: 'GHG',             hex: '#FFB246', usage: 'GHG 300 — GHG emissions data' },
+              { label: 'Water',           hex: '#1FD7EE', usage: 'Water 400 — water consumption data' },
+              { label: 'Waste',           hex: '#65A289', usage: 'Waste 400 — waste/recycling data' },
+              { label: 'Certifications',  hex: '#2F4FC0', usage: 'Cert 700 — certification scores' },
+              { label: 'Engagement',      hex: '#D76513', usage: 'Engagement 600 — tenant engagement' },
+              { label: 'ESG Risk',        hex: '#39D79D', usage: 'ESG Risk 400 — risk indicators' },
+              { label: 'Comparison',      hex: '#2295FF', usage: 'Sky 500 — benchmark/comparison dashed lines' },
+              { label: 'Missing data',    hex: '#D7DAE0', usage: 'Grey 200 — estimated or missing bars' },
+              { label: 'Warning',         hex: '#F59E0B', usage: 'Yellow — data quality warning triangle' },
+              { label: 'Grid',            hex: '#EDEEF1', usage: 'Grey 100 — horizontal grid lines' },
+              { label: 'Axis text',       hex: '#505867', usage: 'Grey 600 — axis labels, 12px' },
             ].map((row, i) => (
               <div key={i} className="flex items-center gap-4 px-4 py-3 border-b border-[#EDEEF1] dark:border-[#1F2430] last:border-b-0">
                 <div className="w-6 h-6 rounded shrink-0 border border-black/5" style={{ backgroundColor: row.hex }} />
-                <span className="text-[13px] font-medium text-[#111827] dark:text-white w-40 shrink-0">{row.label}</span>
+                <span className="text-[13px] font-medium text-[#111827] dark:text-white w-32 shrink-0">{row.label}</span>
                 <code className="text-[12px] font-mono text-[#1258F8] w-20 shrink-0">{row.hex}</code>
                 <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">{row.usage}</span>
               </div>
@@ -214,21 +165,21 @@ export default function DataVisualizationPage() {
           </div>
         </section>
 
-        {/* ── Rules ─────────────────────────────────────────────────────── */}
+        {/* ── Rules ───────────────────────────────────────────────────── */}
         <section>
           <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Rules</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {[
-              { title: 'ESG aspect colors are mandatory', desc: 'Always use the designated color for each ESG aspect (Energy=coral, GHG=orange, Water=cyan, etc.). Never assign arbitrary colors to aspects.' },
-              { title: 'Missing data must be visually distinct', desc: 'Grey (#D7DAE0) bars or dashed lines for estimated/missing data. Never mix missing data with actual data without a visual indicator.' },
-              { title: 'Tooltips show blue-accent data rows', desc: 'Chart tooltips have a title, optional subtitle, and data rows with a 2px blue left border. Label on left, value right-aligned.' },
-              { title: 'Donut is default for composition', desc: 'Use donut charts (not pie) for showing composition. Center displays the aggregate value + unit.' },
-              { title: 'Dashed lines for projections/benchmarks', desc: 'Future projections and benchmark comparison lines are always dashed, never solid. Actual measured data is solid.' },
-              { title: 'Warning icons on data quality issues', desc: 'A yellow triangle (⚠) appears above bars or at data points where data quality flags exist. Hovering shows the issue.' },
-            ].map((rule, i) => (
+              { title: 'Use ESG aspect colors', desc: 'Each ESG aspect has a designated color from foundations. Never assign arbitrary colors.' },
+              { title: 'Missing data is grey', desc: '#D7DAE0 bars for missing/estimated data. Never mix with actual data without a visual indicator.' },
+              { title: 'Dashed = projected or comparison', desc: 'Solid lines are actual data. Dashed lines are projections or benchmarks. No exceptions.' },
+              { title: 'Donut over pie', desc: 'Use donut (not pie) for composition. Center shows aggregate value + unit.' },
+              { title: 'Hover dims siblings', desc: 'When hovering a bar, other bars dim to 40% opacity. Hovered bar stays full opacity.' },
+              { title: 'No legends on simple charts', desc: 'Single-series bar charts and donut charts don\'t need legends. Use legends only for multi-line comparisons.' },
+            ].map((r, i) => (
               <div key={i} className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] p-4 bg-white dark:bg-[#0D1117]">
-                <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-1">{rule.title}</p>
-                <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{rule.desc}</p>
+                <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-1">{r.title}</p>
+                <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{r.desc}</p>
               </div>
             ))}
           </div>
