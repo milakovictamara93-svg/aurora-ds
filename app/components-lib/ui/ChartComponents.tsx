@@ -383,6 +383,8 @@ export function LineChart({
   color = CHART_COLORS.energy,
   comparisonColor = CHART_COLORS.comparison,
   labels,
+  showArea = false,
+  warningIndex,
 }: {
   points: number[]
   comparisonPoints?: number[]
@@ -391,38 +393,96 @@ export function LineChart({
   color?: string
   comparisonColor?: string
   labels?: string[]
+  /** Shadow/area fill beneath the line */
+  showArea?: boolean
+  /** Yellow warning dot at this index */
+  warningIndex?: number
 }) {
   const [hoverIdx, setHoverIdx] = useState<number | null>(null)
+  const [selectedIdx, setSelectedIdx] = useState<number | null>(null)
   const allValues = [...points, ...(comparisonPoints ?? [])]
   const max = Math.max(...allValues)
   const min = Math.min(0, ...allValues)
   const range = max - min || 1
   const padT = 8; const padB = labels ? 24 : 8; const padL = 36; const padR = 4; const W = 640; const H = height
+  const bottomY = H - padB
 
   function toY(v: number) { return padT + ((max - v) / range) * (H - padT - padB) }
   function toX(i: number, n: number) { return padL + (i / Math.max(n - 1, 1)) * (W - padL - padR) }
-  function path(pts: number[]) { return pts.map((v, i) => `${i === 0 ? 'M' : 'L'}${toX(i, pts.length)},${toY(v)}`).join(' ') }
+  function buildPath(pts: number[]) { return pts.map((v, i) => `${i === 0 ? 'M' : 'L'}${toX(i, pts.length)},${toY(v)}`).join(' ') }
+
+  const activeIdx = hoverIdx ?? selectedIdx
+  const actualEnd = projectionFrom ?? points.length
 
   return (
     <svg width="100%" viewBox={`0 0 ${W} ${H}`}>
+      {/* Grid */}
       {[0, 1, 2, 3].map(i => {
         const y = padT + (i / 3) * (H - padT - padB)
         return <line key={i} x1={padL} y1={y} x2={W - padR} y2={y} stroke="#EDEEF1" />
       })}
+      {/* Y axis */}
       {[0, 1, 2, 3].map(i => {
         const val = max - (i / 3) * range; const y = padT + (i / 3) * (H - padT - padB)
         return <text key={i} x={padL - 6} y={y + 4} textAnchor="end" fontSize="12" fill="#505867">{Math.round(val)}</text>
       })}
+      {/* X axis */}
       {labels?.map((l, i) => <text key={l} x={toX(i, labels.length)} y={H - 4} textAnchor="middle" fontSize="12" fill="#505867">{l}</text>)}
-      {comparisonPoints && <path d={path(comparisonPoints)} fill="none" stroke={comparisonColor} strokeWidth="1.5" strokeDasharray="6 4" opacity="0.5" />}
-      <path d={path(points.slice(0, projectionFrom ?? points.length))} fill="none" stroke={color} strokeWidth="2" />
-      {projectionFrom !== undefined && projectionFrom < points.length && (
-        <path d={path(points.slice(Math.max(0, projectionFrom - 1)))} fill="none" stroke={color} strokeWidth="1.5" strokeDasharray="6 4" opacity="0.4" />
+
+      {/* Area fill (shadow style) */}
+      {showArea && (
+        <path
+          d={`${buildPath(points.slice(0, actualEnd))} L${toX(actualEnd - 1, points.length)},${bottomY} L${toX(0, points.length)},${bottomY} Z`}
+          fill={color}
+          opacity="0.12"
+        />
       )}
+
+      {/* Comparison line (dashed blue) */}
+      {comparisonPoints && <path d={buildPath(comparisonPoints)} fill="none" stroke={comparisonColor} strokeWidth="1.5" strokeDasharray="6 4" opacity="0.5" />}
+
+      {/* Main line (solid) */}
+      <path d={buildPath(points.slice(0, actualEnd))} fill="none" stroke={color} strokeWidth="2" />
+
+      {/* Projection (dashed) */}
+      {projectionFrom !== undefined && projectionFrom < points.length && (
+        <path d={buildPath(points.slice(Math.max(0, projectionFrom - 1)))} fill="none" stroke={color} strokeWidth="1.5" strokeDasharray="6 4" opacity="0.4" />
+      )}
+
+      {/* Hover vertical indicator line */}
+      {activeIdx !== null && activeIdx < actualEnd && (
+        <line x1={toX(activeIdx, points.length)} y1={toY(points[activeIdx])} x2={toX(activeIdx, points.length)} y2={bottomY} stroke="#D7DAE0" strokeWidth="1" strokeDasharray="4 3" />
+      )}
+
+      {/* Data markers */}
       {points.map((v, i) => {
-        if (projectionFrom !== undefined && i >= projectionFrom) return null
-        return <circle key={i} cx={toX(i, points.length)} cy={toY(v)} r={hoverIdx === i ? 5 : 4} fill={color} stroke="white" strokeWidth="2" className="cursor-pointer" onMouseEnter={() => setHoverIdx(i)} onMouseLeave={() => setHoverIdx(null)} />
+        if (i >= actualEnd) return null
+        const cx = toX(i, points.length)
+        const cy = toY(v)
+        const isActive = activeIdx === i
+        return (
+          <circle
+            key={i} cx={cx} cy={cy}
+            r={isActive ? 5 : 4}
+            fill={isActive ? color : 'white'}
+            stroke={color} strokeWidth="2"
+            className="cursor-pointer"
+            onMouseEnter={() => setHoverIdx(i)}
+            onMouseLeave={() => setHoverIdx(null)}
+            onClick={() => setSelectedIdx(selectedIdx === i ? null : i)}
+          />
+        )
       })}
+
+      {/* Blue dot on comparison line at hover position */}
+      {activeIdx !== null && comparisonPoints && activeIdx < comparisonPoints.length && (
+        <circle cx={toX(activeIdx, comparisonPoints.length)} cy={toY(comparisonPoints[activeIdx])} r={4} fill={comparisonColor} stroke="white" strokeWidth="2" />
+      )}
+
+      {/* Warning dot */}
+      {warningIndex !== undefined && warningIndex < points.length && (
+        <circle cx={toX(warningIndex, points.length)} cy={toY(points[warningIndex])} r={5} fill="#F59E0B" stroke="white" strokeWidth="2" />
+      )}
     </svg>
   )
 }

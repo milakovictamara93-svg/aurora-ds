@@ -94,47 +94,55 @@ export default function ColumnChartPage() {
           </p>
 
           <ChartCard label="MoM comparison" suffix="kWh/m²" legend={[{ label: '2023', color: '#FFCACF' }, { label: '2024', color: '#2295FF' }, { label: '2025', color: '#1258F8' }]}>
-            <div className="flex" style={{ height: 160 }}>
-              {/* Y axis */}
-              <div className="w-8 shrink-0 flex flex-col justify-between pb-6 text-[12px] text-[#505867] text-right pr-2">
-                <span>1.5</span><span>1</span><span>0.5</span><span>0</span>
-              </div>
-
-              <div className="flex-1 flex flex-col">
-                {/* Bars area */}
-                <div className="flex-1 relative min-h-0">
-                  {/* Grid */}
-                  <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
-                    {[0, 1, 2, 3].map(i => <div key={i} className="h-px bg-[#EDEEF1]" />)}
+            {(() => {
+              const barH = 120 // px height for tallest bar
+              const maxVal = 150
+              const colors = ['#FFCACF', '#2295FF', '#1258F8']
+              return (
+                <div>
+                  {/* Y axis + bars */}
+                  <div className="flex gap-1">
+                    {/* Y axis */}
+                    <div className="w-8 shrink-0 flex flex-col justify-between text-[12px] text-[#505867] text-right pr-2" style={{ height: barH }}>
+                      <span>1.5</span><span>1</span><span>0.5</span><span>0</span>
+                    </div>
+                    {/* Bar groups */}
+                    <div className="flex-1 flex items-end gap-2">
+                      {MOM_GROUPS.map((group, gi) => {
+                        const dimmed = momHover !== null && momHover !== gi
+                        return (
+                          <div
+                            key={gi}
+                            className="flex-1 flex items-end justify-center gap-px cursor-pointer"
+                            style={{ height: barH, opacity: dimmed ? 0.3 : 1, transition: 'opacity 100ms' }}
+                            onMouseEnter={() => setMomHover(gi)}
+                            onMouseLeave={() => setMomHover(null)}
+                          >
+                            {group.map((val, bi) => (
+                              <div
+                                key={bi}
+                                className="rounded-t-[2px]"
+                                style={{
+                                  width: 10,
+                                  height: Math.round((val / maxVal) * barH),
+                                  backgroundColor: colors[bi],
+                                }}
+                              />
+                            ))}
+                          </div>
+                        )
+                      })}
+                    </div>
                   </div>
-                  {/* Grouped bars */}
-                  <div className="absolute inset-0 flex items-end gap-1">
-                    {MOM_GROUPS.map((group, gi) => {
-                      const maxVal = 150
-                      const isHovered = momHover === gi
-                      const dimmed = momHover !== null && !isHovered
-                      return (
-                        <div
-                          key={gi}
-                          className="flex-1 flex items-end justify-center gap-px cursor-pointer"
-                          style={{ opacity: dimmed ? 0.3 : 1 }}
-                          onMouseEnter={() => setMomHover(gi)}
-                          onMouseLeave={() => setMomHover(null)}
-                        >
-                          {group.map((val, bi) => (
-                            <div key={bi} className="flex-1 max-w-3 rounded-t-[2px]" style={{ height: `${(val / maxVal) * 100}%`, backgroundColor: ['#FFCACF', '#2295FF', '#1258F8'][bi] }} />
-                          ))}
-                        </div>
-                      )
-                    })}
+                  {/* X labels */}
+                  <div className="flex ml-9 mt-1">
+                    {MONTHS.map(m => (
+                      <div key={m} className="flex-1 text-center text-[12px] text-[#505867]">{m}</div>
+                    ))}
                   </div>
                 </div>
-                {/* X labels */}
-                <div className="h-5 flex justify-around text-[12px] text-[#505867] pt-1">
-                  {MONTHS.map(m => <span key={m}>{m}</span>)}
-                </div>
-              </div>
-            </div>
+              )
+            })()}
           </ChartCard>
         </section>
 
