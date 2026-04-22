@@ -109,11 +109,13 @@ function IconRail({
     <div
       className="shrink-0 bg-white dark:bg-[#0D1117] border-r border-[#EDEEF1] dark:border-[#1F2430] flex flex-col pt-3 pb-2 overflow-hidden z-10"
       style={{ width: expanded ? 200 : 70, transition: 'width 150ms cubic-bezier(0.4, 0, 0.2, 1)' }}
-      onMouseEnter={() => setExpanded(true)}
       onMouseLeave={() => setExpanded(false)}
     >
-      {/* Scaler logo + wordmark */}
-      <div className="flex items-center gap-3 mb-6 h-8 px-[15px]">
+      {/* Scaler logo + wordmark — hover here to expand */}
+      <div
+        className="flex items-center gap-3 mb-6 h-8 px-[15px] cursor-pointer"
+        onMouseEnter={() => setExpanded(true)}
+      >
         <ScalerLogo className="w-7 h-7 shrink-0" color="#111827" />
         {expanded && (
           <span className="text-[18px] font-bold text-[#111827] dark:text-white tracking-[-0.2px] whitespace-nowrap animate-[fadeIn_100ms_ease-in]">
