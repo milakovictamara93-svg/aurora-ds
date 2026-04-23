@@ -33,7 +33,7 @@ export default function MiniDashboard({
           {i > 0 && (
             <div className="h-[54px] w-px bg-[#EDEEF1] dark:bg-[#1F2430] shrink-0 mx-2" />
           )}
-          <div className="flex flex-col items-center justify-center flex-1 h-[54px] gap-1 min-w-0">
+          <div className="flex flex-col items-center justify-center flex-1 h-[54px] min-w-0">
             <div className="flex items-start">
               <span className="text-[14px] font-medium text-[#111827] dark:text-white tracking-[0.21px] text-center">
                 {slot.label}
