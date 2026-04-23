@@ -95,7 +95,7 @@ export default function MiniDashboardPage() {
 
           <Section title="Condensed">
             <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
-              Smaller version with 36px slots, 12px labels and 9px descriptions. For tight spaces like card headers or toolbars.
+              Inline horizontal layout — value and description sit side by side, separated by middle dots. Single line, wraps if needed. For card headers, toolbars, or anywhere vertical space is tight.
             </p>
             <Preview>
               <div className="w-full">
