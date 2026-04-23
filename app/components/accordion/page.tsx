@@ -386,7 +386,7 @@ export default function AccordionPage() {
               <A11yRow check='role="region"'>Applied to each content panel</A11yRow>
               <A11yRow check="aria-labelledby">Set on each panel pointing back to its trigger</A11yRow>
               <A11yRow check="disabled">Native disabled on button — excluded from tab order</A11yRow>
-              <A11yRow check="Focus ring">2px sky-500 ring with 2px offset</A11yRow>
+              <A11yRow check="Focus ring">2px blue-600 ring with 2px offset</A11yRow>
             </div>
           </Section>
 

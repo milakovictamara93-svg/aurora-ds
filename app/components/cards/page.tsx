@@ -100,7 +100,7 @@ const DRILL_ASSETS = [
     ],
     bar: [
       { color: '#d76513', pct: 16, label: 'Smart meters' }, { color: '#22C55E', pct: 25, label: 'Invoices / Conventional meters' },
-      { color: '#ffb246', pct: 25, label: 'Estimation (SJV Cluster)' }, { color: '#ed113a', pct: 19, label: 'Estimation (SJV postal code)' }, { color: '#2295FF', pct: 15, label: 'Estimation (Calculation)' },
+      { color: '#ffb246', pct: 25, label: 'Estimation (SJV Cluster)' }, { color: '#ed113a', pct: 19, label: 'Estimation (SJV postal code)' }, { color: '#1258F8', pct: 15, label: 'Estimation (Calculation)' },
     ],
   },
   {
@@ -118,7 +118,7 @@ const DRILL_ASSETS = [
     ],
     bar: [
       { color: '#d76513', pct: 20 }, { color: '#22C55E', pct: 18 },
-      { color: '#ffb246', pct: 30 }, { color: '#ed113a', pct: 22 }, { color: '#2295FF', pct: 10 },
+      { color: '#ffb246', pct: 30 }, { color: '#ed113a', pct: 22 }, { color: '#1258F8', pct: 10 },
     ],
   },
   {
@@ -136,7 +136,7 @@ const DRILL_ASSETS = [
     ],
     bar: [
       { color: '#d76513', pct: 10 }, { color: '#22C55E', pct: 35 },
-      { color: '#ffb246', pct: 20 }, { color: '#ed113a', pct: 15 }, { color: '#2295FF', pct: 20 },
+      { color: '#ffb246', pct: 20 }, { color: '#ed113a', pct: 15 }, { color: '#1258F8', pct: 20 },
     ],
   },
   {
@@ -154,7 +154,7 @@ const DRILL_ASSETS = [
     ],
     bar: [
       { color: '#d76513', pct: 30 }, { color: '#22C55E', pct: 10 },
-      { color: '#ffb246', pct: 15 }, { color: '#ed113a', pct: 35 }, { color: '#2295FF', pct: 10 },
+      { color: '#ffb246', pct: 15 }, { color: '#ed113a', pct: 35 }, { color: '#1258F8', pct: 10 },
     ],
   },
   {
@@ -172,7 +172,7 @@ const DRILL_ASSETS = [
     ],
     bar: [
       { color: '#d76513', pct: 8 },  { color: '#22C55E', pct: 40 },
-      { color: '#ffb246', pct: 18 }, { color: '#ed113a', pct: 12 }, { color: '#2295FF', pct: 22 },
+      { color: '#ffb246', pct: 18 }, { color: '#ed113a', pct: 12 }, { color: '#1258F8', pct: 22 },
     ],
   },
   {
@@ -190,7 +190,7 @@ const DRILL_ASSETS = [
     ],
     bar: [
       { color: '#d76513', pct: 14 }, { color: '#22C55E', pct: 28 },
-      { color: '#ffb246', pct: 22 }, { color: '#ed113a', pct: 18 }, { color: '#2295FF', pct: 18 },
+      { color: '#ffb246', pct: 22 }, { color: '#ed113a', pct: 18 }, { color: '#1258F8', pct: 18 },
     ],
   },
 ]
@@ -498,7 +498,7 @@ export default function CardsPage() {
                       { color: '#22C55E', pct: 25, label: 'Invoices / Conventional meters' },
                       { color: '#ffb246', pct: 25, label: 'Estimation (SJV Cluster)' },
                       { color: '#ed113a', pct: 19, label: 'Estimation (SJV postal code)' },
-                      { color: '#2295FF', pct: 15, label: 'Estimation (Calculation)' },
+                      { color: '#1258F8', pct: 15, label: 'Estimation (Calculation)' },
                     ]}
                     footerLabel="See asset details"
                     onFooterClick={() => {}}

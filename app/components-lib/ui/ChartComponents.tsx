@@ -22,7 +22,7 @@ export const CHART_COLORS = {
   barSelected:    '#FF455F',  // --aspect/energy/primary (selected bar)
 
   // UI
-  comparison:     '#2295FF',  // Sky 500 — dashed comparison lines
+  comparison:     '#1258F8',  // Blue 600 — dashed comparison lines
   accent:         '#1258F8',  // Blue 600 — tooltip accent bar
   grid:           '#EDEEF1',  // Grey 100
   axisText:       '#505867',  // Grey 600

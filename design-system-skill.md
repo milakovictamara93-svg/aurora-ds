@@ -13,34 +13,6 @@ Comprehensive design system documentation for Scaler's ESG data collection and a
 
 ### 1.1 Color System
 
-#### Brand Colors
-
-**Sky (Primary Brand)**
-- 50: #EEF8FF
-- 100: #D9EFFF
-- 200: #BCE4FF
-- 300: #8ED5FF
-- 400: #59BBFF
-- 500: #2295FF (Base)
-- 600: #1B7EF5
-- 700: #1467E1
-- 800: #1752B6
-- 900: #19488F
-- 950: #142C57
-
-**Emerald (Secondary Brand)**
-- 50: #E9FFF7
-- 100: #CBFFEA
-- 200: #9BFFDA
-- 300: #43F9C2 (Base)
-- 400: #1BECB4
-- 500: #00D39E
-- 600: #00AC82
-- 700: #008A6C
-- 800: #006D56
-- 900: #005948
-- 950: #00332A
-
 #### Primary Colors
 
 **Blue (Primary Interactions)**
@@ -157,9 +129,9 @@ Comprehensive design system documentation for Scaler's ESG data collection and a
 - 100: #DEEDE4
 - 200: #BEDCCD
 - 300: #93C2AD
-- 400: #65A289 (Base)
+- 400: #65A289
 - 500: #44856C
-- 600: #2F6451
+- 600: #2F6451 (Base)
 - 700: #285446
 - 800: #214438
 - 900: #1C3830
@@ -240,11 +212,9 @@ Comprehensive design system documentation for Scaler's ESG data collection and a
 - Use WCAG AAA standards where possible
 
 **Color Application:**
-- Sky 500: Primary actions, links, focus states
-- Blue 600: Primary buttons (base state)
+- Blue 600: Primary actions, links, focus states, buttons (base state)
 - Grey 600: Dark grey for body text on light backgrounds
 - Grey 50: Light backgrounds, subtle surfaces
-- Emerald 300: Success states, positive indicators
 - Aspect colors: Data visualization, category-specific components
 - Semantic colors: System feedback (errors, warnings, success)
 
@@ -481,7 +451,7 @@ import { Check } from 'lucide-react'
 #### Icon Colors
 
 **Default Colors:**
-- Primary actions: `--brand-sky-500` (#2295FF)
+- Primary actions: `--primitive-blue-600` (#1258F8)
 - Secondary/neutral: `--primitive-grey-600` (#505867)
 - Success: `--primitive-green-500` (#22C55E)
 - Error: `--primitive-red-400` (#F87171)
@@ -618,7 +588,7 @@ All components follow these principles:
 
 ### 2.4 Button
 **Variants:**
-- Primary (Sky 500 background, white text)
+- Primary (Blue 600 background, white text)
 - Secondary (Grey outline, Grey 600 text)
 - Tertiary (Text only, no background)
 - Destructive (Red 600 background)
@@ -795,7 +765,7 @@ All components follow these principles:
 **Row States:**
 - Default
 - Hover (light grey background)
-- Selected (Sky 50 background)
+- Selected (Blue 50 background)
 - Disabled (reduced opacity)
 
 ### 2.15 Tabs
@@ -1088,11 +1058,6 @@ All components follow these principles:
 All colors are available as CSS variables:
 
 ```css
-/* Brand */
---brand-sky-50: #eef8ff;
---brand-sky-500: #2295ff;
---brand-emerald-300: #43f9c2;
-
 /* Primary */
 --primitive-blue-600: #1258f8;
 
@@ -1160,9 +1125,8 @@ All colors are available as CSS variables:
 
 ### 6.2 Color Usage
 
-**Brand Colors:**
-- Sky: Primary actions, links, focus states
-- Emerald: Success, positive indicators
+**Primary Colors:**
+- Blue: Primary actions, links, focus states
 
 **Aspect Colors:**
 - Use consistently per data category
@@ -1197,7 +1161,7 @@ All colors are available as CSS variables:
 ### 7.1 Visual Accuracy
 
 **Color Validation:**
-- âœ“ Brand colors match tokens exactly (no approximations)
+- âœ” Primary colors match tokens exactly (no approximations)
 - âœ“ Semantic colors used correctly (error=red, success=green, etc.)
 - âœ“ Aspect colors match assigned categories
 - âœ“ Contrast ratios meet WCAG standards
@@ -1254,7 +1218,7 @@ All colors are available as CSS variables:
 - âœ“ Header row sticky
 - âœ“ Sortable columns indicated
 - âœ“ Row hover state (grey background)
-- âœ“ Selected row state (sky background)
+- âœ” Selected row state (blue background)
 - âœ“ Proper cell alignment (numbers right-aligned)
 - âœ“ Empty state message
 
@@ -1339,7 +1303,7 @@ All colors are available as CSS variables:
 
 **CSS Variables:**
 - Use design tokens for all colors, spacing
-- Example: `color: var(--brand-sky-500);`
+- Example: `color: var(--primitive-blue-600);`
 
 **Utility Classes:**
 - Tailwind CSS compatible
@@ -1406,7 +1370,7 @@ export default {
 ## 9. Quick Reference
 
 ### Color Quick Picks
-- Primary Action: `--brand-sky-500` (#2295FF)
+- Primary Action: `--primitive-blue-600` (#1258F8)
 - Body Text: `--primitive-grey-600` (#505867)
 - Background: `--primitive-grey-50` (#F7F8F8)
 - Error: `--primitive-red-400` (#F87171)

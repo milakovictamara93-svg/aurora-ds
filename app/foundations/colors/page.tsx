@@ -272,7 +272,7 @@ const SECTIONS: PaletteSection[] = [
 
 const RULES = [
   { token: 'blue-600', hex: '#1258F8', usage: 'Primary buttons — base state' },
-  { token: 'sky-500',  hex: '#2295FF', usage: 'Primary actions, links, focus rings' },
+  { token: 'blue-600', hex: '#1258F8', usage: 'Primary actions, links, focus rings' },
   { token: 'grey-600', hex: '#505867', usage: 'Body text on light backgrounds' },
   { token: 'grey-50',  hex: '#F7F8F8', usage: 'Default page background' },
   { token: 'grey-900', hex: '#1F2430', usage: 'Page background in dark mode' },
@@ -299,18 +299,18 @@ export default function ColorsPage() {
                 className="w-5 h-5 rounded flex-shrink-0 border border-token"
                 style={{ backgroundColor: r.hex }}
               />
-              <code className="font-mono text-sky-600 dark:text-sky-400 text-xs">--{r.token}</code>
+              <code className="font-mono text-blue-600 dark:text-blue-400 text-xs">--{r.token}</code>
               <span className="text-token-secondary">{r.usage}</span>
             </div>
           ))}
           <div className="flex items-center gap-3 text-sm mt-1">
             <span className="w-5 h-5 rounded flex-shrink-0 border border-token bg-token-tertiary" />
-            <code className="font-mono text-sky-600 dark:text-sky-400 text-xs">ESG palettes</code>
+            <code className="font-mono text-blue-600 dark:text-blue-400 text-xs">ESG palettes</code>
             <span className="text-token-secondary">Always use the designated spectrum per data category — never substitute</span>
           </div>
           <div className="flex items-center gap-3 text-sm">
             <span className="w-5 h-5 rounded flex-shrink-0 border border-token bg-token-tertiary" />
-            <code className="font-mono text-sky-600 dark:text-sky-400 text-xs">WCAG AA</code>
+            <code className="font-mono text-blue-600 dark:text-blue-400 text-xs">WCAG AA</code>
             <span className="text-token-secondary">Minimum 4.5:1 contrast for body text, 3:1 for large text and UI components</span>
           </div>
         </div>
@@ -391,7 +391,7 @@ export default function ColorsPage() {
                             className="w-4 h-4 rounded-sm border border-token shrink-0"
                             style={{ backgroundColor: row.hex }}
                           />
-                          <code className="font-mono text-xs text-sky-600 dark:text-sky-400">{row.token}</code>
+                          <code className="font-mono text-xs text-blue-600 dark:text-blue-400">{row.token}</code>
                         </div>
                       </td>
                       <td className="px-4 py-2.5">

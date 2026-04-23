@@ -207,7 +207,7 @@ const sections: NavSection[] = [
               <A11yRow check='aria-current="page"'>Apply to the active sidebar item so screen readers identify the current page</A11yRow>
               <A11yRow check="title on icon buttons">Icon rail buttons use title attributes since they have no visible text labels</A11yRow>
               <A11yRow check="skip-nav link">Add a visually-hidden skip link as the first focusable element to jump past navigation</A11yRow>
-              <A11yRow check="Focus ring">2px sky-500 ring with 2px offset on all interactive navigation elements</A11yRow>
+              <A11yRow check="Focus ring">2px blue-600 ring with 2px offset on all interactive navigation elements</A11yRow>
             </div>
           </Section>
 

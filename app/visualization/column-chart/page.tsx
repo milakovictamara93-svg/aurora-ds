@@ -107,11 +107,11 @@ export default function ColumnChartPage() {
             Grouped columns per month comparing multiple years. Each month shows 3 bars side by side.
           </p>
 
-          <ChartCard label="MoM comparison" suffix="kWh/m²" legend={[{ label: '2023', color: '#FFCACF' }, { label: '2024', color: '#2295FF' }, { label: '2025', color: '#1258F8' }]}>
+          <ChartCard label="MoM comparison" suffix="kWh/m²" legend={[{ label: '2023', color: '#FFCACF' }, { label: '2024', color: '#1258F8' }, { label: '2025', color: '#1258F8' }]}>
             {(() => {
               const barH = 120 // px height for tallest bar
               const maxVal = 150
-              const colors = ['#FFCACF', '#2295FF', '#1258F8']
+              const colors = ['#FFCACF', '#1258F8', '#1258F8']
               return (
                 <div>
                   {/* Y axis + bars */}

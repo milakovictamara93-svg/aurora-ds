@@ -60,10 +60,8 @@ Components to build:
 
 ## Design Tokens (implement as CSS variables)
 
-### Core Brand
+### Primary
 ```css
---brand-sky-500: #2295FF;
---brand-emerald-300: #43F9C2;
 --brand-blue-600: #1258F8;
 ```
 
@@ -107,8 +105,7 @@ Components to build:
 - Never use arbitrary values
 
 **Colors**
-- Primary actions: Sky 500 (#2295FF)
-- Primary buttons: Blue 600 (#1258F8)
+- Primary actions/buttons: Blue 600 (#1258F8)
 - Body text: Grey 600 (#505867)
 - Backgrounds: Grey 50 (#F7F8F8)
 - ESG aspect colors: Always use the designated spectrum per category

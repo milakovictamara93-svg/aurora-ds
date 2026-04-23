@@ -35,7 +35,7 @@ function Btn({
     if (state === 'default')  cls = 'bg-[#1258F8] text-white shadow-sm hover:bg-[#1146E4] active:bg-[#143ABB]'
     else if (state === 'hover')   cls = 'bg-[#1146E4] text-white shadow-sm'
     else if (state === 'pressed') cls = 'bg-[#143ABB] text-white'
-    else if (state === 'focus')   cls = 'bg-[#1258F8] text-white ring-2 ring-[#2295FF] ring-offset-2'
+    else if (state === 'focus')   cls = 'bg-[#1258F8] text-white ring-2 ring-[#1258F8] ring-offset-2'
     else if (state === 'disabled')cls = 'bg-[#EDEEF1] dark:bg-[#1F2430] text-[#B4BAC5] dark:text-[#374151] cursor-not-allowed'
     else if (state === 'loading') cls = 'bg-[#56A3FF] text-white cursor-wait'
     else if (state === 'danger')  cls = 'bg-[#DC2626] text-white shadow-sm hover:bg-[#B91C1C] active:bg-[#991B1B]'
@@ -43,7 +43,7 @@ function Btn({
     if (state === 'default')  cls = 'border border-[#1258F8] text-[#1258F8] bg-transparent hover:bg-[#1258F8]/10 active:bg-[#1258F8]/15'
     else if (state === 'hover')   cls = 'border border-[#1146E4] text-[#1258F8] bg-[#1258F8]/10'
     else if (state === 'pressed') cls = 'border border-[#1258F8] text-[#1258F8] bg-[#1258F8]/15'
-    else if (state === 'focus')   cls = 'border border-[#1258F8] text-[#1258F8] bg-[#1258F8]/10 ring-2 ring-[#2295FF] ring-offset-2'
+    else if (state === 'focus')   cls = 'border border-[#1258F8] text-[#1258F8] bg-[#1258F8]/10 ring-2 ring-[#1258F8] ring-offset-2'
     else if (state === 'disabled')cls = 'border border-[#D7DAE0] dark:border-[#374151] text-[#B4BAC5] dark:text-[#374151] cursor-not-allowed'
     else if (state === 'loading') cls = 'border border-[#56A3FF] text-[#56A3FF] cursor-wait'
     else if (state === 'danger')  cls = 'border border-[#DC2626] text-[#DC2626] hover:bg-[#DC2626]/10'
@@ -51,13 +51,13 @@ function Btn({
     if (state === 'default')  cls = 'border border-[#EDEEF1] dark:border-[#1F2430] text-[#1F2430] dark:text-white bg-white dark:bg-[#111827] hover:bg-[#F7F8F8] hover:border-[#D7DAE0] dark:hover:bg-[#1F2430] active:bg-[#EDEEF1]'
     else if (state === 'hover')   cls = 'border border-[#D7DAE0] dark:border-[#374151] text-[#1F2430] dark:text-white bg-[#F7F8F8] dark:bg-[#1F2430]'
     else if (state === 'pressed') cls = 'border border-[#D7DAE0] dark:border-[#374151] text-[#1F2430] dark:text-white bg-[#EDEEF1] dark:bg-[#1F2430]'
-    else if (state === 'focus')   cls = 'border border-[#EDEEF1] dark:border-[#1F2430] text-[#1F2430] dark:text-white ring-2 ring-[#2295FF] ring-offset-2'
+    else if (state === 'focus')   cls = 'border border-[#EDEEF1] dark:border-[#1F2430] text-[#1F2430] dark:text-white ring-2 ring-[#1258F8] ring-offset-2'
     else if (state === 'disabled')cls = 'border border-[#EDEEF1] dark:border-[#1F2430] text-[#B4BAC5] cursor-not-allowed'
     else if (state === 'danger')  cls = 'border border-[#F87171] text-[#F87171] hover:bg-[#F87171]/10'
   } else if (variant === 'text') {
     cls = isDisabled ? 'text-[#B4BAC5] cursor-not-allowed px-1' : 'text-[#1F2430] dark:text-white hover:text-[#1258F8] active:text-[#143ABB] px-1'
   } else if (variant === 'link') {
-    cls = 'text-[#2295FF] underline underline-offset-2 px-0 h-auto text-sm hover:text-[#1258F8]'
+    cls = 'text-[#1258F8] underline underline-offset-2 px-0 h-auto text-sm hover:text-[#1146E4]'
   } else if (variant === 'icon') {
     const iconBase = size === 'sm' ? 'w-6 h-6 rounded' : 'w-8 h-8 rounded'
     return (
@@ -280,7 +280,7 @@ export default function ButtonsPage() {
             <Section title="Colors">
               <ColorRow label="Primary fill" hex="#1258F8" role="Blue 600 — primary action" />
               <ColorRow label="Primary hover" hex="#1146E4" role="Darkened fill on hover" border />
-              <ColorRow label="Sky 500 (focus ring)" hex="#2295FF" role="Focus indicator ring" border />
+              <ColorRow label="Blue 600 (focus ring)" hex="#1258F8" role="Focus indicator ring" border />
               <ColorRow label="Danger" hex="#DC2626" role="Destructive action" border />
               <ColorRow label="Disabled fill" hex="#EDEEF1" role="Grey 100 — muted, non-interactive" border />
             </Section>
@@ -291,7 +291,7 @@ export default function ButtonsPage() {
                 <Btn variant="secondary" state="focus">Focused</Btn>
                 <Btn variant="tertiary" state="focus">Focused</Btn>
               </Preview>
-              <Annotation>2px solid ring, Sky 500 (#2295FF), 2px offset. Visible on keyboard navigation only.</Annotation>
+              <Annotation>2px solid ring, Blue 600 (#1258F8), 2px offset. Visible on keyboard navigation only.</Annotation>
             </Section>
           
         </TabPanel>
@@ -309,7 +309,7 @@ export default function ButtonsPage() {
   className="inline-flex items-center gap-2 h-8 px-3 rounded
              bg-[#1258F8] text-white text-sm font-medium
              hover:bg-[#1146E4] focus:outline-none
-             focus:ring-2 focus:ring-[#2295FF] focus:ring-offset-2
+             focus:ring-2 focus:ring-[#1258F8] focus:ring-offset-2
              disabled:bg-[#EDEEF1] disabled:text-[#B4BAC5]
              disabled:cursor-not-allowed transition-colors"
 >
@@ -329,7 +329,7 @@ export default function ButtonsPage() {
   className="inline-flex items-center gap-2 h-8 px-3 rounded
              border border-[#1258F8] text-[#1258F8] text-sm font-medium
              hover:bg-[#1258F8]/10 focus:outline-none
-             focus:ring-2 focus:ring-[#2295FF] focus:ring-offset-2
+             focus:ring-2 focus:ring-[#1258F8] focus:ring-offset-2
              disabled:border-[#D7DAE0] disabled:text-[#B4BAC5]
              disabled:cursor-not-allowed transition-colors"
 >
@@ -348,7 +348,7 @@ export default function ButtonsPage() {
   className="inline-flex items-center gap-2 h-8 px-3 rounded
              border border-[#EDEEF1] text-[#1F2430] text-sm font-medium
              bg-white hover:bg-[#F7F8F8] hover:border-[#D7DAE0]
-             focus:outline-none focus:ring-2 focus:ring-[#2295FF]
+             focus:outline-none focus:ring-2 focus:ring-[#1258F8]
              focus:ring-offset-2 disabled:text-[#B4BAC5]
              disabled:cursor-not-allowed transition-colors"
 >

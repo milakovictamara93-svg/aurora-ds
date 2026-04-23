@@ -607,7 +607,7 @@ export function AssetCard({
                     <button
                       type="button"
                       onClick={row.onImprove}
-                      className="text-[12px] font-medium text-[#1258F8] dark:text-[#2295FF] underline hover:no-underline transition-all"
+                      className="text-[12px] font-medium text-[#1258F8] dark:text-[#1258F8] underline hover:no-underline transition-all"
                     >
                       Improve
                     </button>

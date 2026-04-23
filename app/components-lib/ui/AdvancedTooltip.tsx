@@ -97,7 +97,7 @@ function TextSectionBlock({ section }: { section: TextSection }) {
         {section.description}
       </p>
       {section.badge && (
-        <span className="mt-2 inline-block text-[11px] font-medium text-[#1258F8] dark:text-[#2295FF] bg-[#D9EAFF] dark:bg-[#1258F8]/20 px-2 py-0.5 rounded-full">
+        <span className="mt-2 inline-block text-[11px] font-medium text-[#1258F8] dark:text-[#1258F8] bg-[#D9EAFF] dark:bg-[#1258F8]/20 px-2 py-0.5 rounded-full">
           {section.badge}
         </span>
       )}
@@ -280,7 +280,7 @@ export default function AdvancedTooltip({
               {expandable && !primaryAction && !secondaryAction && (
                 <button
                   onClick={() => setExpanded(prev => !prev)}
-                  className="ml-auto text-[13px] font-medium text-[#1258F8] dark:text-[#2295FF] hover:underline"
+                  className="ml-auto text-[13px] font-medium text-[#1258F8] dark:text-[#1258F8] hover:underline"
                 >
                   {expanded ? 'Show less' : 'Show more'}
                 </button>

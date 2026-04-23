@@ -410,7 +410,7 @@ export default function DragDropPage() {
         <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] divide-y divide-[#EDEEF1] dark:divide-[#1F2430]">
           {rules.map(r => (
             <div key={r.num} className="flex gap-4 p-5">
-              <span className="text-[#1258F8] dark:text-[#2295FF] font-bold text-sm shrink-0 w-5">{r.num}.</span>
+              <span className="text-[#1258F8] dark:text-[#1258F8] font-bold text-sm shrink-0 w-5">{r.num}.</span>
               <div>
                 <p className="font-semibold text-sm text-[#111827] dark:text-white mb-0.5">{r.title}</p>
                 <p className="text-sm text-[#505867] dark:text-[#9CA3AF]">{r.body}</p>

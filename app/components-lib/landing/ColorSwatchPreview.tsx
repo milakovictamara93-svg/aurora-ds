@@ -4,9 +4,6 @@ import ColorSwatch from '@/app/components-lib/ui/ColorSwatch'
 
 const previewColors = [
   // Brand
-  { name: 'Sky 500', hex: '#2295FF', token: '--brand-sky-500' },
-  { name: 'Sky 300', hex: '#8ED5FF', token: '--sky-300' },
-  { name: 'Emerald 300', hex: '#43F9C2', token: '--brand-emerald-300' },
   { name: 'Blue 600', hex: '#1258F8', token: '--brand-blue-600' },
   // Greys
   { name: 'Grey 950', hex: '#111827', token: '--grey-950' },

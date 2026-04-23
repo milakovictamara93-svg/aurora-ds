@@ -53,7 +53,7 @@ function AccordionPanel({
         aria-controls={panelId}
         disabled={item.disabled}
         onClick={onToggle}
-        className="w-full h-7 flex items-center gap-1.5 px-1 rounded-md text-left transition-colors hover:bg-[#F7F8F8] dark:hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2295FF] focus-visible:ring-offset-2"
+        className="w-full h-7 flex items-center gap-1.5 px-1 rounded-md text-left transition-colors hover:bg-[#F7F8F8] dark:hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1258F8] focus-visible:ring-offset-2"
       >
         {/* Chevron — right when closed, rotates 90° to point down when open */}
         <ChevronRightIcon

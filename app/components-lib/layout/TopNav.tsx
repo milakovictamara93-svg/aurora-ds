@@ -43,7 +43,7 @@ export default function TopNav() {
             <span className="text-white font-bold text-sm select-none">S</span>
           </div>
           <span className="font-bold text-base text-token-primary tracking-tight">
-            Scaler <span className="text-sky-500">DS</span>
+            Scaler <span className="text-blue-600">DS</span>
           </span>
         </Link>
 
@@ -56,7 +56,7 @@ export default function TopNav() {
               className={clsx(
                 'px-4 py-2 rounded text-sm font-medium transition-colors',
                 isActive(href)
-                  ? 'bg-sky-50 text-sky-600 dark:bg-sky-950 dark:text-sky-400'
+                  ? 'bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400'
                   : 'text-token-secondary hover:text-token-primary hover:bg-token-tertiary'
               )}
             >
@@ -97,7 +97,7 @@ export default function TopNav() {
               className={clsx(
                 'px-4 py-3 rounded text-sm font-medium transition-colors',
                 isActive(href)
-                  ? 'bg-sky-50 text-sky-600 dark:bg-sky-950 dark:text-sky-400'
+                  ? 'bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400'
                   : 'text-token-secondary hover:text-token-primary hover:bg-token-tertiary'
               )}
             >

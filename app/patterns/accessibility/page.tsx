@@ -5,11 +5,10 @@ import PageHeader from '@/app/components-lib/ui/PageHeader'
 
 const contrastPairs = [
   { fg: '#FFFFFF', bg: '#1258F8', fgName: 'White', bgName: 'Blue 600', ratio: '7.1:1', aa: true, aaa: true, use: 'Primary button text' },
-  { fg: '#FFFFFF', bg: '#2295FF', fgName: 'White', bgName: 'Sky 500', ratio: '4.6:1', aa: true, aaa: false, use: 'Focused link on white' },
+  { fg: '#FFFFFF', bg: '#1258F8', fgName: 'White', bgName: 'Blue 600', ratio: '7.1:1', aa: true, aaa: true, use: 'Focused link on white' },
   { fg: '#1F2430', bg: '#F7F8F8', fgName: 'Grey 900', bgName: 'Grey 50', ratio: '14.3:1', aa: true, aaa: true, use: 'Body text on page bg' },
   { fg: '#505867', bg: '#FFFFFF', fgName: 'Grey 600', bgName: 'White', ratio: '5.9:1', aa: true, aaa: false, use: 'Secondary text' },
   { fg: '#FFFFFF', bg: '#22C55E', fgName: 'White', bgName: 'Success', ratio: '2.8:1', aa: false, aaa: false, use: 'Avoid white on success bg' },
-  { fg: '#1F2430', bg: '#43F9C2', fgName: 'Grey 900', bgName: 'Emerald 300', ratio: '9.1:1', aa: true, aaa: true, use: 'Dark text on brand emerald' },
 ]
 
 const keyboardPatterns = [
@@ -74,7 +73,7 @@ function FocusDemo() {
         <button
           onFocus={() => setFocused('btn2')}
           onBlur={() => setFocused(null)}
-          className="px-4 py-2 rounded-lg border border-token text-token-primary text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-grey-900 transition-shadow"
+          className="px-4 py-2 rounded-lg border border-token text-token-primary text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 dark:focus:ring-offset-grey-900 transition-shadow"
         >
           Secondary button
         </button>
@@ -82,14 +81,14 @@ function FocusDemo() {
           onFocus={() => setFocused('input')}
           onBlur={() => setFocused(null)}
           placeholder="Type here..."
-          className="px-3 py-2 rounded-lg border border-token bg-token-primary text-token-primary text-sm placeholder:text-token-muted focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-shadow"
+          className="px-3 py-2 rounded-lg border border-token bg-token-primary text-token-primary text-sm placeholder:text-token-muted focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-shadow"
         />
         <a
           href="#"
           onFocus={() => setFocused('link')}
           onBlur={() => setFocused(null)}
           onClick={e => e.preventDefault()}
-          className="px-2 py-2 text-sm text-sky-600 dark:text-sky-400 underline focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-grey-900 rounded transition-shadow"
+          className="px-2 py-2 text-sm text-blue-600 dark:text-blue-400 underline focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 dark:focus:ring-offset-grey-900 rounded transition-shadow"
         >
           Text link
         </a>
@@ -98,13 +97,13 @@ function FocusDemo() {
             type="checkbox"
             onFocus={() => setFocused('checkbox')}
             onBlur={() => setFocused(null)}
-            className="w-4 h-4 rounded accent-blue-600 focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
+            className="w-4 h-4 rounded accent-blue-600 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
           />
           <span className="text-sm text-token-secondary">Checkbox</span>
         </label>
       </div>
       {focused && (
-        <p className="mt-4 text-xs text-token-muted">Focus on: <span className="font-mono text-sky-600">{focused}</span> — ring visible, 2px, 2px offset</p>
+        <p className="mt-4 text-xs text-token-muted">Focus on: <span className="font-mono text-blue-600">{focused}</span> — ring visible, 2px, 2px offset</p>
       )}
     </div>
   )
@@ -120,13 +119,13 @@ export default function AccessibilityPage() {
       />
 
       {/* Standard */}
-      <div className="flex items-start gap-4 p-5 rounded-xl border border-sky-200 dark:border-sky-800 bg-sky-50 dark:bg-sky-950/30 mb-10">
-        <svg className="w-5 h-5 text-sky-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+      <div className="flex items-start gap-4 p-5 rounded-xl border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/30 mb-10">
+        <svg className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
         </svg>
         <div>
-          <p className="font-semibold text-sm text-sky-700 dark:text-sky-300 mb-1">Compliance target: WCAG 2.1 Level AA</p>
-          <p className="text-sm text-sky-600 dark:text-sky-400">All Scaler UI components must meet WCAG 2.1 AA. AAA is the target for text-heavy pages and data tables. Minimum contrast ratio: 4.5:1 for normal text, 3:1 for large text and UI components.</p>
+          <p className="font-semibold text-sm text-blue-700 dark:text-blue-300 mb-1">Compliance target: WCAG 2.1 Level AA</p>
+          <p className="text-sm text-blue-600 dark:text-blue-400">All Scaler UI components must meet WCAG 2.1 AA. AAA is the target for text-heavy pages and data tables. Minimum contrast ratio: 4.5:1 for normal text, 3:1 for large text and UI components.</p>
         </div>
       </div>
 
@@ -177,7 +176,7 @@ export default function AccessibilityPage() {
 
       {/* Focus indicators */}
       <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Focus indicators</h2>
-      <p className="text-sm text-token-secondary mb-4">All interactive elements must show a visible focus ring. Use the standard pattern: 2px ring, 2px offset, Sky 500 color.</p>
+      <p className="text-sm text-token-secondary mb-4">All interactive elements must show a visible focus ring. Use the standard pattern: 2px ring, 2px offset, Blue 600 color.</p>
       <div className="mb-10">
         <FocusDemo />
       </div>

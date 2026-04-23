@@ -152,7 +152,7 @@ export default function MultiselectPage() {
             <Section title="Colors">
               <ColorRow label="Trigger border — default"   hex="#D7DAE0" role="grey-200" />
               <ColorRow label="Trigger border — open"      hex="#1258F8" role="blue-600 — focus ring" border />
-              <ColorRow label="Chip background"            hex="#D9EAFF" role="sky-100 — matches selected item" border />
+              <ColorRow label="Chip background"            hex="#D9EAFF" role="blue-100 — matches selected item" border />
               <ColorRow label="Chip text"                  hex="#1258F8" role="blue-600" border />
               <ColorRow label="Checkbox — checked bg"      hex="#1258F8" role="blue-600" border />
               <ColorRow label="Checkbox — unchecked border" hex="#D7DAE0" role="grey-200" border />

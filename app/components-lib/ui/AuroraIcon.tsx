@@ -10,7 +10,7 @@ export default function AuroraIcon({
   return (
     <svg
       viewBox="0 0 100 100"
-      className={`transition-[transform,color] duration-500 ease-in-out group-hover:rotate-[360deg] group-hover:text-[#2295FF] ${className}`}
+      className={`transition-[transform,color] duration-500 ease-in-out group-hover:rotate-[360deg] group-hover:text-[#1258F8] ${className}`}
       fill="currentColor"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"

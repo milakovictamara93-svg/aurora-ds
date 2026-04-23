@@ -27,7 +27,7 @@ export default function Spinner({
       className={clsx(
         'rounded-full animate-spin shrink-0',
         'border-grey-200 dark:border-white/20',
-        'border-t-blue-600 dark:border-t-sky-500',
+        'border-t-blue-600 dark:border-t-blue-400',
         SIZES[size],
         className
       )}

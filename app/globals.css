@@ -4,9 +4,7 @@
 
 /* ─── Design Tokens ─── */
 :root {
-  /* ── Brand aliases ── */
-  --brand-sky-500: #2295FF;
-  --brand-emerald-300: #43F9C2;
+  /* ── Primary alias ── */
   --brand-blue-600: #1258F8;
 
   /* ── Blue (Primary) ── */
@@ -21,32 +19,6 @@
   --blue-800: #143AB9;
   --blue-900: #173691;
   --blue-950: #132258;
-
-  /* ── Sky (Brand) ── */
-  --sky-50: #EEF8FF;
-  --sky-100: #D9EFFF;
-  --sky-200: #BCE4FF;
-  --sky-300: #8ED5FF;
-  --sky-400: #59BBFF;
-  --sky-500: #2295FF;
-  --sky-600: #1B7EF5;
-  --sky-700: #1467E1;
-  --sky-800: #1752B6;
-  --sky-900: #19488F;
-  --sky-950: #142C57;
-
-  /* ── Emerald (Brand) ── */
-  --emerald-50: #E9FFF7;
-  --emerald-100: #CBFFEA;
-  --emerald-200: #9BFFDA;
-  --emerald-300: #43F9C2;
-  --emerald-400: #1BECB4;
-  --emerald-500: #00D39E;
-  --emerald-600: #00AC82;
-  --emerald-700: #008A6C;
-  --emerald-800: #006D56;
-  --emerald-900: #005948;
-  --emerald-950: #00332A;
 
   /* ── Grey (Neutrals) ── */
   --grey-0: #FFFFFF;
@@ -255,7 +227,7 @@ pre, code {
 
 /* ─── Focus ring ─── */
 :focus-visible {
-  outline: 2px solid var(--brand-sky-500);
+  outline: 2px solid var(--blue-600);
   outline-offset: 2px;
   border-radius: 4px;
 }

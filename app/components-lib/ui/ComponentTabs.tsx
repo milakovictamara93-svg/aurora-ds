@@ -51,7 +51,7 @@ export function TabBar({ tabs = ['usage', 'style', 'code', 'accessibility'] }: {
             className={[
               'flex items-center gap-2 h-8 px-3 text-[14px] font-medium border-b-2 -mb-[2px] transition-colors whitespace-nowrap rounded-tl-[4px] rounded-tr-[4px]',
               active === t
-                ? 'border-[#1258F8] text-[#111827] dark:text-white dark:border-[#2295FF]'
+                ? 'border-[#1258F8] text-[#111827] dark:text-white dark:border-[#1258F8]'
                 : 'border-transparent text-[#505867] dark:text-[#6B7280] hover:text-[#111827] dark:hover:text-white',
             ].join(' ')}
           >
@@ -124,7 +124,7 @@ export function SpecTable({ rows }: { rows: { property: string; value: string; t
             <tr key={r.property} className="hover:bg-[#F7F8F8] dark:hover:bg-[#0D1117]/60 transition-colors">
               <td className="px-4 py-2.5 font-medium text-[#1F2430] dark:text-white">{r.property}</td>
               <td className="px-4 py-2.5 font-mono text-xs text-[#505867] dark:text-[#9CA3AF]">{r.value}</td>
-              <td className="px-4 py-2.5 font-mono text-xs text-[#1258F8] dark:text-[#2295FF]">{r.token ?? '—'}</td>
+              <td className="px-4 py-2.5 font-mono text-xs text-[#1258F8] dark:text-[#1258F8]">{r.token ?? '—'}</td>
             </tr>
           ))}
         </tbody>
@@ -185,7 +185,7 @@ export function DontCard({ children }: { children: React.ReactNode }) {
 export function A11yRow({ check, children }: { check: string; children: React.ReactNode }) {
   return (
     <div className="flex gap-4 px-4 py-4 border-b border-[#EDEEF1] dark:border-[#1F2430] last:border-b-0">
-      <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#0D1117] text-[#1258F8] dark:text-[#2295FF] px-2 py-1 rounded self-start shrink-0 whitespace-nowrap">
+      <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#0D1117] text-[#1258F8] dark:text-[#1258F8] px-2 py-1 rounded self-start shrink-0 whitespace-nowrap">
         {check}
       </code>
       <p className="text-sm text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{children}</p>
@@ -256,7 +256,7 @@ export function UseList({ items }: { items: React.ReactNode[] }) {
     <ul className="flex flex-col gap-2 max-w-[800px]">
       {items.map((item, i) => (
         <li key={i} className="flex items-start gap-3 text-[16px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45]">
-          <span className="mt-0.5 text-[#1258F8] dark:text-[#2295FF] font-bold shrink-0 text-base leading-snug">→</span>
+          <span className="mt-0.5 text-[#1258F8] dark:text-[#1258F8] font-bold shrink-0 text-base leading-snug">→</span>
           <span>{item}</span>
         </li>
       ))}
@@ -453,7 +453,7 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
           <span>Energy use intensity</span><span className="font-medium text-[#111827] dark:text-white">142 kWh/m²</span>
         </div>
         <div className="h-2 rounded flex overflow-hidden mt-1">
-          {[['#d76513',16],['#22C55E',25],['#ffb246',25],['#ed113a',19],['#2295FF',15]].map(([c,w],i)=>(
+          {[['#d76513',16],['#22C55E',25],['#ffb246',25],['#ed113a',19],['#1258F8',15]].map(([c,w],i)=>(
             <div key={i} style={{width:`${w}%`,backgroundColor:String(c)}} />
           ))}
         </div>
@@ -665,7 +665,7 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
       {/* Mini data bar chart */}
       <div className="flex items-end gap-1 h-10 mt-1">
         {[60, 85, 45, 70, 92, 55].map((h, i) => (
-          <div key={i} className="flex-1 rounded-t" style={{ height: `${h}%`, background: i % 2 === 0 ? '#2295FF' : '#D9EAFF' }} />
+          <div key={i} className="flex-1 rounded-t" style={{ height: `${h}%`, background: i % 2 === 0 ? '#1258F8' : '#D9EAFF' }} />
         ))}
       </div>
     </div>
@@ -907,9 +907,9 @@ export function RelatedComponents({
               <a
                 key={href}
                 href={href}
-                className="group block px-4 py-4 rounded-[8px] border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] hover:border-[#1258F8] dark:hover:border-[#2295FF] transition-colors"
+                className="group block px-4 py-4 rounded-[8px] border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] hover:border-[#1258F8] dark:hover:border-[#1258F8] transition-colors"
               >
-                <p className="text-[16px] font-semibold text-[#111827] dark:text-white group-hover:text-[#1258F8] dark:group-hover:text-[#2295FF] transition-colors mb-1">
+                <p className="text-[16px] font-semibold text-[#111827] dark:text-white group-hover:text-[#1258F8] dark:group-hover:text-[#1258F8] transition-colors mb-1">
                   {label}
                 </p>
                 <p className="text-sm text-[#505867] dark:text-[#9CA3AF] mb-4">{description}</p>

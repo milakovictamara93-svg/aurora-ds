@@ -31,7 +31,7 @@ export default function Sidebar({ items, section }: SidebarProps) {
               className={clsx(
                 'px-3 py-2 rounded text-sm font-medium transition-colors',
                 pathname === href
-                  ? 'bg-sky-50 text-sky-600 dark:bg-sky-950/60 dark:text-sky-400'
+                  ? 'bg-blue-50 text-blue-600 dark:bg-blue-950/60 dark:text-blue-400'
                   : 'text-token-secondary hover:text-token-primary hover:bg-token-tertiary'
               )}
             >

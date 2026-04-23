@@ -157,7 +157,7 @@ function Pagination({
         <select
           value={pageSize}
           onChange={e => { onPageSize(Number(e.target.value)); onPage(1) }}
-          className="h-8 pl-2 pr-6 rounded border border-[#D7DAE0] dark:border-[#374151] text-[13px] text-[#111827] dark:text-white bg-white dark:bg-[#111827] appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#2295FF]"
+          className="h-8 pl-2 pr-6 rounded border border-[#D7DAE0] dark:border-[#374151] text-[13px] text-[#111827] dark:text-white bg-white dark:bg-[#111827] appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#1258F8]"
           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 20 20'%3E%3Cpath fill='%23505867' d='M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06z'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 6px center' }}
         >
           {pageSizeOptions.map(s => <option key={s} value={s}>{s}</option>)}

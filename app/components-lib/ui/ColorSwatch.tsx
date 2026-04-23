@@ -96,7 +96,7 @@ export default function ColorSwatch({ name, hex, token, textColor, size = 'md', 
         {token && (
           <button
             onClick={() => copy(token)}
-            className="text-xs text-token-muted hover:text-sky-500 font-mono transition-colors mt-0.5 block text-left"
+            className="text-xs text-token-muted hover:text-blue-600 font-mono transition-colors mt-0.5 block text-left"
             title={`Click to copy token ${token}`}
           >
             {token}
