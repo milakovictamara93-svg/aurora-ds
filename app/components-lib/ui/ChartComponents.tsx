@@ -579,15 +579,20 @@ export function AspectScoreMini({ points, color }: { points: number[]; color: st
 
 // ── Empty State ─────────────────────────────────────────────────────────
 
-export function ChartEmptyState({ message = 'No assets added', action = 'Add assets', height = 160 }: { message?: string; action?: string; height?: number }) {
+export function ChartEmptyState({ message = 'No assets added', action = 'Add assets', height = 160, icon }: { message?: string; action?: string; height?: number; icon?: React.ReactNode }) {
   return (
     <div className="relative flex items-center justify-center" style={{ height }}>
       <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
         {[0, 1, 2, 3].map(i => <div key={i} className="border-b border-dashed border-[#EDEEF1] dark:border-[#1F2430]" />)}
       </div>
-      <div className="relative flex flex-col items-center gap-1 z-10">
-        <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">{message}</p>
-        <button className="text-[14px] font-medium text-[#1258F8] hover:text-[#1146E4] underline">{action}</button>
+      <div className="relative flex flex-col items-center gap-2 z-10">
+        {icon ?? (
+          <div className="w-10 h-10 rounded-full bg-[#F7F8F8] dark:bg-[#1F2430] flex items-center justify-center mb-1">
+            <svg className="w-5 h-5 text-[#9CA3AF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
+          </div>
+        )}
+        <p className="text-[14px] font-medium text-[#111827] dark:text-white">{message}</p>
+        <button className="text-[14px] font-medium text-[#1258F8] hover:text-[#1146E4] transition-colors">{action}</button>
       </div>
     </div>
   )
