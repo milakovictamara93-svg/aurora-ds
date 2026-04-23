@@ -146,7 +146,7 @@ const SECTIONS: PaletteSection[] = [
           { name: 'Waste 300', hex: '#93C2AD', token: '--waste-300' },
           { name: 'Waste 400', hex: '#65A289', token: '--waste-400' },
           { name: 'Waste 500', hex: '#44856C', token: '--waste-500', textColor: 'light' },
-          { name: 'Waste 600', hex: '#2F6451', token: '--waste-600', textColor: 'light' },
+          { name: 'Waste 600', hex: '#2F6451', token: '--waste-600', textColor: 'light', base: true },
           { name: 'Waste 700', hex: '#285446', token: '--waste-700', textColor: 'light' },
           { name: 'Waste 800', hex: '#214438', token: '--waste-800', textColor: 'light' },
           { name: 'Waste 900', hex: '#1C3830', token: '--waste-900', textColor: 'light' },

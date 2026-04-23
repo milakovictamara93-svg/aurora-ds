@@ -44,7 +44,16 @@
       "mcp__Claude_Preview__preview_start",
       "Read(//private/tmp/**)",
       "Bash(unzip -o \"/Users/tamaramilakovic/Documents/Scaler/Design system guidelines/Colors _ Primitive.zip\" -d colors_primitive)",
-      "Bash(unzip -o \"/Users/tamaramilakovic/Documents/Scaler/Design system guidelines/Colors _ Semantic.zip\" -d colors_semantic)"
+      "Bash(unzip -o \"/Users/tamaramilakovic/Documents/Scaler/Design system guidelines/Colors _ Semantic.zip\" -d colors_semantic)",
+      "Bash(rm -f \"/Users/tamaramilakovic/Desktop/aurora-design-system.skill\")",
+      "Bash(zip -r \"/Users/tamaramilakovic/Desktop/aurora-design-system.skill\" aurora-design-system/)",
+      "Bash(zip -r \"/Users/tamaramilakovic/Desktop/aurora-design-system.skill\" SKILL.md references/)",
+      "Bash(zipinfo:*)",
+      "Bash(mkdir -p /tmp/aurora-flat)",
+      "Bash(cp /tmp/aurora-skill-extract/aurora-design-system/SKILL.md /tmp/aurora-flat/)",
+      "Bash(cp /tmp/aurora-skill-extract/aurora-design-system/references/colors.md /tmp/aurora-flat/colors.md)",
+      "Bash(cp /tmp/aurora-skill-extract/aurora-design-system/references/components.md /tmp/aurora-flat/components.md)",
+      "Read(//tmp/**)"
     ]
   }
 }
