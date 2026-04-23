@@ -15,7 +15,6 @@ import {
   DataCompletion,
   DataProgress,
 } from '@/app/components-lib/ui/DataPoint'
-import MiniDashboard from '@/app/components-lib/ui/MiniDashboard'
 
 function Code({ children }: { children: string }) {
   return (
@@ -244,45 +243,9 @@ export default function DataPointsPage() {
               </div>
             </Section>
 
-            <Section title="Mini dashboard">
-              <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
-                Horizontal bar with data slots separated by vertical dividers. Each slot shows a value and description. Two placements: white (above content) and grey (inside content). Slots can have an orange alert indicator.
-              </p>
-              <Preview label="Above content (white)">
-                <div className="w-full">
-                  <MiniDashboard
-                    placement="above"
-                    slots={[
-                      { label: '64/65', description: 'Assets in analytics' },
-                      { label: '58/65', description: 'Assets in reports', alert: true },
-                      { label: '100%', description: 'Data completion' },
-                      { label: '69.98%', description: 'Data coverage' },
-                      { label: '87.47%', description: 'Data reliability' },
-                      { label: 'N/A', description: 'Target comparison' },
-                    ]}
-                  />
-                </div>
-              </Preview>
-              <div className="mt-4" />
-              <Preview label="Inside content (grey)">
-                <div className="w-full">
-                  <MiniDashboard
-                    placement="inside"
-                    slots={[
-                      { label: '64/65', description: 'Assets in analytics' },
-                      { label: '58/65', description: 'Assets in reports', alert: true },
-                      { label: '100%', description: 'Data completion' },
-                      { label: '69.98%', description: 'Data coverage' },
-                      { label: '87.47%', description: 'Data reliability' },
-                      { label: 'N/A', description: 'Target comparison' },
-                    ]}
-                  />
-                </div>
-              </Preview>
-            </Section>
-
             <RelatedComponents items={[
-              { href: '/components/cards',       label: 'Cards',         description: 'DataPoints live inside Standard and DataViz cards.' },
+              { href: '/components/cards',           label: 'Cards',           description: 'DataPoints live inside Standard and DataViz cards.' },
+              { href: '/components/mini-dashboard',  label: 'Mini dashboard',  description: 'Horizontal summary bar with data slots.' },
               { href: '/components/badges-tags', label: 'Badges & tags', description: 'Semantic status badges complement DataArrow.' },
             ]} />
           
