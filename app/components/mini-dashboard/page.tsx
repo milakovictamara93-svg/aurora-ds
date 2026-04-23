@@ -93,15 +93,27 @@ export default function MiniDashboardPage() {
             </Preview>
           </Section>
 
-          <Section title="Condensed">
+          <Section title="Condensed — all variants">
             <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
-              Inline horizontal layout — value and description sit side by side, separated by middle dots. Single line, wraps if needed. For card headers, toolbars, or anywhere vertical space is tight.
+              Inline layout with small dividers. Value and description side by side, spread across full width.
             </p>
-            <Preview>
-              <div className="w-full">
-                <MiniDashboard variant="outline" size="condensed" slots={SLOTS} />
-              </div>
-            </Preview>
+            <div className="flex flex-col gap-4">
+              <Preview label="Condensed — above (white)">
+                <div className="w-full">
+                  <MiniDashboard variant="above" size="condensed" slots={SLOTS} />
+                </div>
+              </Preview>
+              <Preview label="Condensed — inside (grey)">
+                <div className="w-full">
+                  <MiniDashboard variant="inside" size="condensed" slots={SLOTS} />
+                </div>
+              </Preview>
+              <Preview label="Condensed — outline">
+                <div className="w-full">
+                  <MiniDashboard variant="outline" size="condensed" slots={SLOTS} />
+                </div>
+              </Preview>
+            </div>
           </Section>
 
           <Section title="When to use">
