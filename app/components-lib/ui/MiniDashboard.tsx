@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import clsx from 'clsx'
 
 export interface DataSlot {
@@ -32,24 +33,26 @@ export default function MiniDashboard({
   // Condensed: full width, inline label+description per slot, small dividers between
   if (size === 'condensed') {
     return (
-      <div className={clsx('flex items-center justify-between rounded-lg px-3 py-2', bg, className)}>
+      <div className={clsx('flex items-center rounded-lg px-3 py-2', bg, className)}>
         {slots.map((slot, i) => (
-          <div key={i} className={clsx('flex flex-1 items-center min-w-0', i === 0 ? 'justify-start' : 'justify-center')}>
+          <React.Fragment key={i}>
             {i > 0 && (
-              <div className="h-4 w-px bg-[#EDEEF1] dark:bg-[#1F2430] shrink-0 mx-3" />
+              <div className="h-4 w-px bg-[#EDEEF1] dark:bg-[#1F2430] shrink-0" />
             )}
-            <div className="flex items-baseline gap-1 min-w-0">
-              <span className="text-[13px] font-medium text-[#111827] dark:text-white tracking-[0.18px] whitespace-nowrap">
-                {slot.label}
-              </span>
-              {slot.alert && (
-                <div className="w-1 h-1 rounded-full bg-[#F96416] shrink-0 -mt-2" />
-              )}
-              <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF] tracking-[0.18px] truncate">
-                {slot.description}
-              </span>
+            <div className="flex flex-1 items-center justify-center min-w-0 px-2">
+              <div className="flex items-baseline gap-1 min-w-0">
+                <span className="text-[13px] font-medium text-[#111827] dark:text-white tracking-[0.18px] whitespace-nowrap">
+                  {slot.label}
+                </span>
+                {slot.alert && (
+                  <div className="w-1 h-1 rounded-full bg-[#F96416] shrink-0 -mt-2" />
+                )}
+                <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF] tracking-[0.18px] truncate">
+                  {slot.description}
+                </span>
+              </div>
             </div>
-          </div>
+          </React.Fragment>
         ))}
       </div>
     )
