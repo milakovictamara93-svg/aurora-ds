@@ -83,12 +83,23 @@ export default function MiniDashboardPage() {
 
           <Section title="Fewer slots">
             <Preview>
-              <div className="w-full max-w-lg">
+              <div className="w-full">
                 <MiniDashboard variant="outline" slots={[
                   { label: '78/100', description: 'GRESB Score' },
                   { label: 'A', description: 'NABERS Rating' },
                   { label: '4 Star', description: 'Green Star' },
                 ]} />
+              </div>
+            </Preview>
+          </Section>
+
+          <Section title="Condensed">
+            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
+              Smaller version with 36px slots, 12px labels and 9px descriptions. For tight spaces like card headers or toolbars.
+            </p>
+            <Preview>
+              <div className="w-full">
+                <MiniDashboard variant="outline" size="condensed" slots={SLOTS} />
               </div>
             </Preview>
           </Section>
