@@ -592,7 +592,7 @@ export function ChartEmptyState({ message = 'No assets added', action = 'Add ass
           </div>
         )}
         <p className="text-[14px] font-medium text-[#111827] dark:text-white">{message}</p>
-        <button className="text-[14px] font-medium text-[#1258F8] hover:text-[#1146E4] transition-colors">{action}</button>
+        <button className="h-8 px-4 rounded-lg bg-[#1258F8] text-[13px] font-medium text-white hover:bg-[#1146E4] transition-colors">{action}</button>
       </div>
     </div>
   )
