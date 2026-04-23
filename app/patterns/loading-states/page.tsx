@@ -1,76 +1,130 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import PageHeader from '@/app/components-lib/ui/PageHeader'
+import Spinner from '@/app/components-lib/ui/Spinner'
+import Skeleton from '@/app/components-lib/ui/Skeleton'
+import LoadingBar from '@/app/components-lib/ui/LoadingBar'
 
-function SkeletonLine({ w = 'w-full', h = 'h-4' }: { w?: string; h?: string }) {
-  return <div className={`${w} ${h} rounded bg-grey-200 dark:bg-grey-700 animate-pulse`} />
-}
+// ── Skeleton presets ────────────────────────────────────────────────────────
 
 function SkeletonCard() {
   return (
-    <div className="rounded-xl border border-token bg-token-primary p-6 space-y-4">
-      <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-full bg-grey-200 dark:bg-grey-700 animate-pulse shrink-0" />
-        <div className="flex-1 space-y-2">
-          <SkeletonLine w="w-2/3" h="h-4" />
-          <SkeletonLine w="w-1/3" h="h-3" />
-        </div>
+    <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-4">
+      <Skeleton width="40%" height={14} className="mb-3" />
+      <Skeleton width="100%" height={10} className="mb-2" />
+      <Skeleton width="80%" height={10} className="mb-4" />
+      <Skeleton width="100%" height={80} />
+    </div>
+  )
+}
+
+function SkeletonTable() {
+  return (
+    <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#111827]">
+      <div className="flex gap-4 px-4 py-3 bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
+        {[120, 160, 100, 80].map((w, i) => <Skeleton key={i} width={w} height={10} />)}
       </div>
-      <SkeletonLine h="h-4" />
-      <SkeletonLine w="w-5/6" h="h-4" />
-      <SkeletonLine w="w-3/4" h="h-4" />
-      <div className="flex gap-3 pt-2">
-        <div className="h-8 w-24 rounded-lg bg-grey-200 dark:bg-grey-700 animate-pulse" />
-        <div className="h-8 w-20 rounded-lg bg-grey-200 dark:bg-grey-700 animate-pulse" />
+      {[0, 1, 2, 3, 4].map(r => (
+        <div key={r} className="flex gap-4 px-4 py-3 border-b border-[#EDEEF1] dark:border-[#1F2430] last:border-b-0">
+          {[120, 160, 100, 80].map((w, i) => <Skeleton key={i} width={w} height={10} />)}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function SkeletonChart() {
+  return (
+    <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-4">
+      <div className="flex items-center justify-between mb-4">
+        <Skeleton width={120} height={14} />
+        <Skeleton width={80} height={14} />
+      </div>
+      <div className="flex items-end gap-1 h-[120px]">
+        {Array.from({ length: 20 }).map((_, i) => (
+          <div key={i} className="flex-1 bg-[#EDEEF1] dark:bg-[#1F2430] rounded-t animate-pulse" style={{ height: `${30 + Math.sin(i * 0.5) * 40 + 40}%` }} />
+        ))}
       </div>
     </div>
   )
 }
 
-function SkeletonMetricCard({ accentColor }: { accentColor: string }) {
+function SkeletonMetricCards() {
   return (
-    <div className="rounded-lg border border-token bg-token-primary overflow-hidden">
-      <div className={`h-1 ${accentColor}`} />
-      <div className="p-5 space-y-3">
-        <div className="flex items-center gap-2">
-          <div className="w-5 h-5 rounded bg-grey-200 dark:bg-grey-700 animate-pulse" />
-          <SkeletonLine w="w-24" h="h-3" />
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {[0, 1, 2, 3].map(i => (
+        <div key={i} className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-4">
+          <Skeleton width="60%" height={10} className="mb-3" />
+          <Skeleton width="40%" height={24} className="mb-2" />
+          <Skeleton width="80%" height={8} />
         </div>
-        <SkeletonLine w="w-2/3" h="h-8" />
-        <SkeletonLine w="w-1/2" h="h-3" />
+      ))}
+    </div>
+  )
+}
+
+function ButtonLoading() {
+  return (
+    <div className="flex items-center gap-3">
+      <button className="h-8 px-4 rounded-lg bg-[#1258F8] text-[13px] font-medium text-white flex items-center gap-2 opacity-75 cursor-wait">
+        <Spinner size="sm" />
+        Saving...
+      </button>
+      <button className="h-8 px-4 rounded-lg border border-[#D7DAE0] dark:border-[#374151] text-[13px] font-medium text-[#505867] flex items-center gap-2 opacity-75 cursor-wait">
+        <Spinner size="sm" />
+        Loading...
+      </button>
+      <button className="h-8 px-4 rounded-lg bg-[#1258F8] text-[13px] font-medium text-white flex items-center gap-2">
+        <Spinner size="sm" />
+        Exporting
+      </button>
+    </div>
+  )
+}
+
+function ProgressDemo() {
+  const [progress, setProgress] = useState(0)
+  useEffect(() => {
+    const t = setInterval(() => setProgress(p => p >= 100 ? 0 : p + 2), 100)
+    return () => clearInterval(t)
+  }, [])
+  return (
+    <div className="flex flex-col gap-4">
+      <div>
+        <div className="flex items-center justify-between mb-1">
+          <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">Uploading report...</span>
+          <span className="text-[13px] font-medium text-[#111827] dark:text-white">{progress}%</span>
+        </div>
+        <LoadingBar value={progress} size="md" />
+      </div>
+      <div>
+        <div className="flex items-center justify-between mb-1">
+          <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">Processing assets</span>
+          <span className="text-[13px] font-medium text-[#111827] dark:text-white">{Math.min(progress, 65)}%</span>
+        </div>
+        <LoadingBar value={Math.min(progress, 65)} size="sm" />
       </div>
     </div>
   )
 }
 
-function SkeletonTableRow() {
+function FullPageOverlay() {
   return (
-    <tr className="border-b border-token">
-      <td className="px-4 py-3.5"><SkeletonLine w="w-32" /></td>
-      <td className="px-4 py-3.5"><SkeletonLine w="w-20" /></td>
-      <td className="px-4 py-3.5"><SkeletonLine w="w-24" /></td>
-      <td className="px-4 py-3.5"><SkeletonLine w="w-16" /></td>
-    </tr>
-  )
-}
-
-function Spinner({ size = 'md', color = 'text-sky-500' }: { size?: 'sm' | 'md' | 'lg'; color?: string }) {
-  const sizes = { sm: 'w-4 h-4', md: 'w-6 h-6', lg: 'w-8 h-8' }
-  return (
-    <svg className={`${sizes[size]} ${color} animate-spin`} viewBox="0 0 24 24" fill="none">
-      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
-      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-    </svg>
-  )
-}
-
-function ProgressBar({ value, color = 'bg-sky-500' }: { value: number; color?: string }) {
-  return (
-    <div className="h-1.5 w-full bg-grey-100 dark:bg-grey-800 rounded-full overflow-hidden">
-      <div
-        className={`h-full ${color} rounded-full transition-all duration-300`}
-        style={{ width: `${value}%` }}
-      />
+    <div className="relative rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] overflow-hidden" style={{ height: 200 }}>
+      <div className="p-4 opacity-30">
+        <div className="h-3 w-48 bg-[#EDEEF1] rounded mb-3" />
+        <div className="h-3 w-full bg-[#EDEEF1] rounded mb-2" />
+        <div className="h-3 w-3/4 bg-[#EDEEF1] rounded mb-6" />
+        <div className="flex gap-2">
+          {[1, 2, 3, 4].map(i => <div key={i} className="flex-1 h-16 bg-[#EDEEF1] rounded" />)}
+        </div>
+      </div>
+      <div className="absolute inset-0 bg-white/80 dark:bg-[#111827]/80 flex flex-col items-center justify-center gap-3">
+        <Spinner size="md" />
+        <p className="text-[14px] font-medium text-[#111827] dark:text-white">Loading data...</p>
+        <p className="text-[12px] text-[#9CA3AF]">This may take a moment</p>
+      </div>
     </div>
   )
 }
@@ -78,133 +132,78 @@ function ProgressBar({ value, color = 'bg-sky-500' }: { value: number; color?: s
 export default function LoadingStatesPage() {
   return (
     <div>
-      <PageHeader
-        title="Loading states"
-        description="Skeleton screens, button spinners, and progress indicators. Loading states must match the shape of the content they replace."
-        badge="Patterns"
-      />
+      <PageHeader title="Loading states" description="Skeleton screens, spinners, progress bars, and button loading indicators." badge="Patterns" />
 
-      {/* Skeleton — cards */}
-      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Skeleton screens — cards</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-        <SkeletonCard />
-        <SkeletonCard />
-      </div>
+      <div className="mt-8 flex flex-col gap-10">
 
-      {/* Skeleton — metric cards */}
-      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Skeleton screens — ESG metric cards</h2>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-        <SkeletonMetricCard accentColor="bg-energy-200 dark:bg-energy-900" />
-        <SkeletonMetricCard accentColor="bg-ghg-200 dark:bg-ghg-900" />
-        <SkeletonMetricCard accentColor="bg-water-200 dark:bg-water-900" />
-        <SkeletonMetricCard accentColor="bg-waste-200 dark:bg-waste-900" />
-      </div>
+        <section>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Skeleton — cards</h2>
+          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
+            Placeholder shapes that mirror the layout of the content being loaded. Pulse animation indicates activity.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <SkeletonCard /><SkeletonCard /><SkeletonCard />
+          </div>
+        </section>
 
-      {/* Skeleton — table */}
-      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Skeleton screens — table</h2>
-      <div className="rounded-xl border border-token overflow-hidden mb-10">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="bg-token-secondary border-b border-token">
-              {['Building', 'Category', 'Value', 'Status'].map(h => (
-                <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-token-muted uppercase tracking-widest">{h}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="bg-token-primary">
-            {Array.from({ length: 5 }).map((_, i) => <SkeletonTableRow key={i} />)}
-          </tbody>
-        </table>
-      </div>
+        <section>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Skeleton — metric cards</h2>
+          <SkeletonMetricCards />
+        </section>
 
-      {/* Spinners */}
-      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Spinners</h2>
-      <div className="p-6 rounded-xl border border-token bg-token-primary mb-10">
-        <div className="flex flex-wrap items-center gap-8">
-          <div className="flex flex-col items-center gap-2">
-            <Spinner size="sm" />
-            <span className="text-xs text-token-muted">Small</span>
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            <Spinner size="md" />
-            <span className="text-xs text-token-muted">Medium</span>
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            <Spinner size="lg" />
-            <span className="text-xs text-token-muted">Large</span>
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            <Spinner size="md" color="text-success-500" />
-            <span className="text-xs text-token-muted">Success</span>
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            <Spinner size="md" color="text-error-400" />
-            <span className="text-xs text-token-muted">Error</span>
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            <Spinner size="md" color="text-ai-500" />
-            <span className="text-xs text-token-muted">AI</span>
-          </div>
-        </div>
-      </div>
+        <section>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Skeleton — table</h2>
+          <SkeletonTable />
+        </section>
 
-      {/* Button loading */}
-      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Button loading states</h2>
-      <div className="p-6 rounded-xl border border-token bg-token-primary flex flex-wrap gap-4 mb-10">
-        <button disabled className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-blue-600 text-white font-semibold text-sm opacity-80 cursor-wait shadow-level-1">
-          <Spinner size="sm" color="text-white" />
-          Saving…
-        </button>
-        <button disabled className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-sky-50 text-sky-700 font-semibold text-sm opacity-80 cursor-wait">
-          <Spinner size="sm" color="text-sky-500" />
-          Loading…
-        </button>
-        <button disabled className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-token text-token-primary font-semibold text-sm opacity-60 cursor-wait">
-          <Spinner size="sm" color="text-token-muted" />
-          Processing…
-        </button>
-        <button disabled className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-error-500 text-white font-semibold text-sm opacity-80 cursor-wait">
-          <Spinner size="sm" color="text-white" />
-          Deleting…
-        </button>
-      </div>
+        <section>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Skeleton — chart</h2>
+          <SkeletonChart />
+        </section>
 
-      {/* Progress bars */}
-      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mb-2">Progress indicators</h2>
-      <div className="p-6 rounded-xl border border-token bg-token-primary space-y-6">
-        {[
-          { label: 'Data upload', value: 72, color: 'bg-sky-500' },
-          { label: 'Report generation', value: 38, color: 'bg-blue-600' },
-          { label: 'Energy target', value: 90, color: 'bg-energy-500' },
-          { label: 'Water reduction', value: 55, color: 'bg-water-400' },
-          { label: 'GHG reduction target', value: 24, color: 'bg-ghg-400' },
-          { label: 'ESG score', value: 81, color: 'bg-esg-risk-500' },
-        ].map(({ label, value, color }) => (
-          <div key={label}>
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium text-token-primary">{label}</span>
-              <span className="text-sm font-semibold text-token-secondary">{value}%</span>
-            </div>
-            <ProgressBar value={value} color={color} />
+        <section>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Spinners</h2>
+          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
+            Used for inline loading or when the layout shape isn't known.
+          </p>
+          <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-6 flex items-center gap-8">
+            {([['sm', '16px'], ['md', '24px'], ['lg', '32px']] as const).map(([size, label]) => (
+              <div key={size} className="flex flex-col items-center gap-2">
+                <Spinner size={size} />
+                <span className="text-[11px] text-[#9CA3AF]">{label}</span>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </section>
 
-      {/* Page-level loading */}
-      <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4] mt-10 mb-2">Full-page loading overlay</h2>
-      <div className="relative rounded-xl border border-token overflow-hidden" style={{ height: 200 }}>
-        <div className="absolute inset-0 bg-token-primary/80 backdrop-blur-sm flex flex-col items-center justify-center gap-3 z-10">
-          <Spinner size="lg" />
-          <p className="text-sm font-medium text-token-secondary">Loading your dashboard…</p>
-        </div>
-        <div className="p-6 opacity-30 pointer-events-none">
-          <SkeletonLine w="w-48" h="h-6" />
-          <div className="mt-4 space-y-2">
-            <SkeletonLine />
-            <SkeletonLine w="w-5/6" />
-            <SkeletonLine w="w-2/3" />
+        <section>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Button loading</h2>
+          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
+            Buttons show an inline spinner and updated label during async operations.
+          </p>
+          <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-6">
+            <ButtonLoading />
           </div>
-        </div>
+        </section>
+
+        <section>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Progress bars</h2>
+          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
+            Determinate progress for uploads, exports, and multi-step processes.
+          </p>
+          <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-6">
+            <ProgressDemo />
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Full-page loading overlay</h2>
+          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
+            Semi-transparent overlay with centered spinner. Used when the entire page needs to reload.
+          </p>
+          <FullPageOverlay />
+        </section>
+
       </div>
     </div>
   )

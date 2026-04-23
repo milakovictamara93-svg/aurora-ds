@@ -112,8 +112,8 @@ const PATTERNS: NavGroup = {
     { href: '/patterns/column-customization',  label: 'Column customization' },
     { href: '/patterns/forms',                 label: 'Forms' },
     { href: '/patterns/upload',                label: 'Upload' },
-    { href: '/patterns/empty-states',          label: 'Empty states',   available: false },
-    { href: '/patterns/loading-states',        label: 'Loading states', available: false },
+    { href: '/patterns/empty-states',          label: 'Empty states' },
+    { href: '/patterns/loading-states',        label: 'Loading states' },
   ],
 }
 
