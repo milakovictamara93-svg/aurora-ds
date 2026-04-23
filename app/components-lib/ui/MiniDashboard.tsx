@@ -34,7 +34,7 @@ export default function MiniDashboard({
     return (
       <div className={clsx('flex items-center justify-between rounded-lg px-3 py-2', bg, className)}>
         {slots.map((slot, i) => (
-          <div key={i} className="flex flex-1 items-center justify-center min-w-0">
+          <div key={i} className={clsx('flex flex-1 items-center min-w-0', i === 0 ? 'justify-start' : 'justify-center')}>
             {i > 0 && (
               <div className="h-4 w-px bg-[#EDEEF1] dark:bg-[#1F2430] shrink-0 mx-3" />
             )}
