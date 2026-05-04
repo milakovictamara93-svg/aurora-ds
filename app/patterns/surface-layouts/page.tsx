@@ -497,6 +497,58 @@ export default function SurfaceLayoutsPage() {
           </div>
         </section>
 
+        {/* ── Content padding rule ──────────────────────────────────── */}
+        <section>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Content padding</h2>
+          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed max-w-[640px]">
+            Content inside a white container must always have padding. Never let tables, charts, or text go full-width edge-to-edge within the container — this breaks the visual hierarchy and makes the layout feel unfinished.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <DontCard>
+              <div className="mb-3 rounded-lg overflow-hidden">
+                <div className="bg-white dark:bg-[#111827] rounded-lg">
+                  {/* Full-width content touching edges */}
+                  <div className="bg-[#F7F8F8] dark:bg-[#0D1117] h-6 w-full" />
+                  <div className="bg-[#EDEEF1] dark:bg-[#1F2430] h-px" />
+                  <div className="h-8" />
+                  <div className="bg-[#EDEEF1] dark:bg-[#1F2430] h-px" />
+                  <div className="h-8" />
+                </div>
+              </div>
+              Content goes edge-to-edge with no padding — table rows touch the container walls.
+            </DontCard>
+
+            <DoCard>
+              <div className="mb-3 rounded-lg overflow-hidden">
+                <div className="bg-white dark:bg-[#111827] rounded-lg p-4">
+                  {/* Padded content */}
+                  <div className="bg-[#F7F8F8] dark:bg-[#0D1117] h-6 rounded" />
+                  <div className="bg-[#EDEEF1] dark:bg-[#1F2430] h-px my-2" />
+                  <div className="h-8 rounded bg-[#F7F8F8] dark:bg-[#0D1117]" />
+                  <div className="bg-[#EDEEF1] dark:bg-[#1F2430] h-px my-2" />
+                  <div className="h-8 rounded bg-[#F7F8F8] dark:bg-[#0D1117]" />
+                </div>
+              </div>
+              Content has consistent padding (16–20px) on all sides within the container.
+            </DoCard>
+          </div>
+
+          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {[
+              { title: 'Minimum 16px padding', desc: 'All white containers must have at least 16px (px-4 py-4) internal padding. Use 20px (p-5) for content-heavy sections.' },
+              { title: 'Tables get container padding', desc: 'Even tables with their own header row need padding between the table edge and the container wall. Never let a table span the full container width.' },
+              { title: 'Charts need breathing room', desc: 'Charts and visualizations should have at least 16px padding on all sides within their container card.' },
+              { title: 'Consistent across all tab panels', desc: 'Every tab panel within a single container should use the same padding value. Don\'t mix p-4 and p-5 in sibling panels.' },
+            ].map((rule, i) => (
+              <div key={i} className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] p-4 bg-white dark:bg-[#0D1117]">
+                <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-1">{rule.title}</p>
+                <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{rule.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* ── Migration notes ─────────────────────────────────────────── */}
         <section>
           <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Migration notes</h2>

@@ -262,7 +262,7 @@ export default function PageLayout({
       <div className="px-6 pb-6">
         {tabs && tabs.length > 0 && (
           <div className="mt-4">
-            <div className="flex min-w-max">
+            <div className="flex min-w-max bg-[#F7F8F8] dark:bg-[#0D1117] rounded-t-lg">
               {tabs.map(tab => {
                 const active = activeTab === tab
                 return (

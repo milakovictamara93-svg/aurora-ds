@@ -88,7 +88,7 @@ export default function Tabs({
       ref={listRef}
       role="tablist"
       className={clsx(
-        'flex items-end',
+        'flex items-end bg-[#F7F8F8] dark:bg-[#0D1117] rounded-t-lg',
         className
       )}
     >
