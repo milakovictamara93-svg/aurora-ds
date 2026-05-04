@@ -4,6 +4,7 @@ import { useState } from 'react'
 import PageHeader from '@/app/components-lib/ui/PageHeader'
 import Tabs from '@/app/components-lib/ui/Tabs'
 import type { TabItem } from '@/app/components-lib/ui/Tabs'
+import { DoCard, DontCard } from '@/app/components-lib/ui/ComponentTabs'
 
 // ── Shared mini-components for demos ─────────────────────────────────────────
 
@@ -12,7 +13,7 @@ function MiniTable({ rows = 4 }: { rows?: number }) {
     <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#111827]">
       <div className="flex items-center h-8 px-3 bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
         {['Name', 'Type', 'Status', 'Value'].map(h => (
-          <span key={h} className="flex-1 text-[10px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-wide">{h}</span>
+          <span key={h} className="flex-1 text-[10px] font-semibold text-[#505867] dark:text-[#6B7280] tracking-wide">{h}</span>
         ))}
       </div>
       {Array.from({ length: rows }).map((_, i) => (
@@ -139,10 +140,11 @@ export default function SurfaceLayoutsPage() {
 
           {/* Live demo */}
           <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
-            <div className="px-3 py-1.5 bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430] text-[10px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-wider">
-              Live preview
+            <div className="px-3 py-1.5 bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
+              <span className="text-[10px] font-semibold text-[#505867] dark:text-[#6B7280] tracking-wide">Live preview</span>
             </div>
             <div className="bg-[#F7F8F8] dark:bg-[#0D1117] p-5 flex flex-col gap-4">
+
               {/* Top row: action bar */}
               <div className="flex items-center justify-between rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] px-4 py-3">
                 <span className="text-[12px] font-semibold text-[#111827] dark:text-white">Data collection overview</span>
@@ -197,8 +199,8 @@ export default function SurfaceLayoutsPage() {
 
           {/* Live demo */}
           <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
-            <div className="px-3 py-1.5 bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430] text-[10px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-wider">
-              Live preview
+            <div className="px-3 py-1.5 bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
+              <span className="text-[10px] font-semibold text-[#505867] dark:text-[#6B7280] tracking-wide">Live preview</span>
             </div>
             <div className="bg-[#F7F8F8] dark:bg-[#0D1117] p-5">
               {/* Primary tabs */}
@@ -244,9 +246,9 @@ export default function SurfaceLayoutsPage() {
 
           {/* Live demo — problematic version */}
           <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
-            <div className="px-3 py-1.5 bg-[#FEE2E2] dark:bg-[#450a0a] border-b border-[#EDEEF1] dark:border-[#1F2430] text-[10px] font-semibold text-[#DC2626] dark:text-[#F87171] uppercase tracking-wider flex items-center gap-1.5">
-              <svg className="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-8-5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0v-4.5A.75.75 0 0 1 10 5Zm0 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clipRule="evenodd" /></svg>
-              Avoid — current inconsistent pattern
+            <div className="px-3 py-1.5 bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430] flex items-center gap-2">
+              <span className="text-[10px] font-semibold text-[#505867] dark:text-[#6B7280] tracking-wide">Live preview</span>
+              <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-[#FEE2E2] text-[#DC2626] dark:bg-[#450a0a] dark:text-[#F87171]">Avoid</span>
             </div>
             <div className="bg-[#F7F8F8] dark:bg-[#0D1117] p-5">
               {/* Borderless secondary tabs floating on grey */}
@@ -309,9 +311,9 @@ export default function SurfaceLayoutsPage() {
 
           {/* Live demo — fixed version */}
           <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
-            <div className="px-3 py-1.5 bg-[#DCFCE7] dark:bg-[#052e14] border-b border-[#EDEEF1] dark:border-[#1F2430] text-[10px] font-semibold text-[#15803D] dark:text-[#4ade80] uppercase tracking-wider flex items-center gap-1.5">
-              <svg className="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 1 0 0-8 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clipRule="evenodd" /></svg>
-              Recommended — unified container
+            <div className="px-3 py-1.5 bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430] flex items-center gap-2">
+              <span className="text-[10px] font-semibold text-[#505867] dark:text-[#6B7280] tracking-wide">Live preview</span>
+              <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-[#DCFCE7] text-[#15803D] dark:bg-[#052e14] dark:text-[#4ade80]">Recommended</span>
             </div>
             <div className="bg-[#F7F8F8] dark:bg-[#0D1117] p-5">
               {/* Primary tabs */}
@@ -368,15 +370,8 @@ export default function SurfaceLayoutsPage() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Don't */}
-            <div className="rounded-[8px] border border-[#DC2626] dark:border-[#DC2626]/40 bg-white dark:bg-[#0D1117] overflow-hidden">
-              <div className="flex items-center gap-2 h-[38px] pl-4 bg-[#FEF2F2] dark:bg-[#450a0a]/50 border-b border-[#DC2626] dark:border-[#DC2626]/40">
-                <svg className="w-5 h-5 text-[#DC2626] dark:text-[#F87171] shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                  <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clipRule="evenodd" />
-                </svg>
-                <span className="text-[12px] font-semibold text-[#DC2626] dark:text-[#F87171]">Don&apos;t</span>
-              </div>
-              <div className="p-4 bg-[#F7F8F8] dark:bg-[#0D1117]">
+            <DontCard>
+              <div className="mb-3 rounded-lg bg-[#F7F8F8] dark:bg-[#0D1117] p-3">
                 {/* Floating underline tabs */}
                 <div className="flex mb-3">
                   {['Tab A', 'Tab B'].map((l, i) => (
@@ -389,20 +384,11 @@ export default function SurfaceLayoutsPage() {
                   <div className="rounded border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] h-12" />
                 </div>
               </div>
-              <div className="px-4 pb-3 bg-[#F7F8F8] dark:bg-[#0D1117]">
-                <p className="text-[11px] text-[#505867] dark:text-[#9CA3AF]">Underline tabs floating on grey with individually bordered blocks — disconnected and noisy.</p>
-              </div>
-            </div>
+              Underline tabs floating on grey with individually bordered blocks — disconnected and noisy.
+            </DontCard>
 
-            {/* Do */}
-            <div className="rounded-[8px] border border-[#16a34a] dark:border-[#16a34a]/40 bg-white dark:bg-[#0D1117] overflow-hidden">
-              <div className="flex items-center gap-2 h-[38px] pl-4 bg-[#f0fdf5] dark:bg-[#052e14]/50 border-b border-[#16a34a] dark:border-[#16a34a]/40">
-                <svg className="w-5 h-5 text-[#16a34a] dark:text-[#4ade80] shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                  <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
-                </svg>
-                <span className="text-[12px] font-semibold text-[#16a34a] dark:text-[#4ade80]">Do</span>
-              </div>
-              <div className="p-4 bg-[#F7F8F8] dark:bg-[#0D1117]">
+            <DoCard>
+              <div className="mb-3 rounded-lg bg-[#F7F8F8] dark:bg-[#0D1117] p-3">
                 {/* Primary tabs anchored to container */}
                 <div className="flex items-end border-b border-[#EDEEF1] dark:border-[#1F2430]">
                   {['Tab A', 'Tab B'].map((l, i) => (
@@ -416,10 +402,8 @@ export default function SurfaceLayoutsPage() {
                   <div className="h-12" />
                 </div>
               </div>
-              <div className="px-4 pb-3 bg-[#F7F8F8] dark:bg-[#0D1117]">
-                <p className="text-[11px] text-[#505867] dark:text-[#9CA3AF]">Primary tabs anchor to a single white container. Internal sections use dividers, not borders.</p>
-              </div>
-            </div>
+              Primary tabs anchor to a single white container. Internal sections use dividers, not borders.
+            </DoCard>
           </div>
         </section>
 
@@ -482,7 +466,7 @@ export default function SurfaceLayoutsPage() {
               <thead className="bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
                 <tr>
                   {['Pattern', 'Tabs?', 'Container', 'Inner borders', 'When to use'].map(h => (
-                    <th key={h} className="text-left px-4 py-2.5 font-semibold text-[#505867] dark:text-[#6B7280] text-[11px] uppercase tracking-wide">{h}</th>
+                    <th key={h} className="text-left px-4 py-2.5 font-semibold text-[#505867] dark:text-[#6B7280] text-[11px] tracking-wide">{h}</th>
                   ))}
                 </tr>
               </thead>
