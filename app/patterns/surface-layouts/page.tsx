@@ -59,8 +59,8 @@ function SectionHeader({ title, subtitle }: { title: string; subtitle?: string }
   return (
     <div className="flex items-center justify-between mb-3">
       <div>
-        <span className="text-[12px] font-semibold text-[#111827] dark:text-white">{title}</span>
-        {subtitle && <span className="text-[10px] text-[#9CA3AF] ml-2">{subtitle}</span>}
+        <span className="text-[20px] font-semibold text-[#111827] dark:text-white leading-[1.4]">{title}</span>
+        {subtitle && <span className="text-[14px] text-[#9CA3AF] ml-2">{subtitle}</span>}
       </div>
       <div className="flex gap-1.5">
         <MiniButton label="Filter" variant="secondary" />
@@ -147,7 +147,7 @@ export default function SurfaceLayoutsPage() {
 
               {/* Top row: action bar */}
               <div className="flex items-center justify-between rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] px-4 py-3">
-                <span className="text-[12px] font-semibold text-[#111827] dark:text-white">Data collection overview</span>
+                <span className="text-[20px] font-semibold text-[#111827] dark:text-white leading-[1.4]">Data collection overview</span>
                 <div className="flex gap-2">
                   <MiniButton label="Filter" variant="secondary" />
                   <MiniButton label="New request" variant="primary" />
