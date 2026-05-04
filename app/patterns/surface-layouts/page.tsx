@@ -345,41 +345,58 @@ export default function SurfaceLayoutsPage() {
         <section>
           <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Content padding</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
-            Content inside a white container must always have padding. Never let tables, charts, or text go full-width edge-to-edge within the container.
+            Content inside a white container must always have padding on all four sides — top, bottom, left, and right. Never let tables, charts, or text stretch full-width to the container edges.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <DontCard>
-              <div className="mb-3 rounded-lg overflow-hidden">
+              <div className="mb-3 rounded-lg overflow-hidden border border-[#EDEEF1] dark:border-[#1F2430]">
                 <div className="bg-white dark:bg-[#111827] rounded-lg">
-                  <div className="bg-[#F7F8F8] dark:bg-[#0D1117] h-6 w-full" />
+                  {/* Table touching left and right edges */}
+                  <div className="bg-[#F7F8F8] dark:bg-[#0D1117] h-7 flex items-center px-2">
+                    <span className="text-[9px] text-[#9CA3AF]">Name</span>
+                    <span className="text-[9px] text-[#9CA3AF] ml-auto">Status</span>
+                  </div>
                   <div className="bg-[#EDEEF1] dark:bg-[#1F2430] h-px" />
-                  <div className="h-8" />
+                  <div className="h-7 flex items-center px-2">
+                    <span className="inline-block rounded bg-[#EDEEF1] dark:bg-[#1F2430] h-2 w-16" />
+                  </div>
                   <div className="bg-[#EDEEF1] dark:bg-[#1F2430] h-px" />
-                  <div className="h-8" />
+                  <div className="h-7 flex items-center px-2">
+                    <span className="inline-block rounded bg-[#EDEEF1] dark:bg-[#1F2430] h-2 w-20" />
+                  </div>
                 </div>
               </div>
-              Content goes edge-to-edge with no padding — table rows touch the container walls.
+              Table stretches full-width — left and right edges touch the container walls with no padding.
             </DontCard>
 
             <DoCard>
-              <div className="mb-3 rounded-lg overflow-hidden">
+              <div className="mb-3 rounded-lg overflow-hidden border border-[#EDEEF1] dark:border-[#1F2430]">
                 <div className="bg-white dark:bg-[#111827] rounded-lg p-4">
-                  <div className="bg-[#F7F8F8] dark:bg-[#0D1117] h-6 rounded" />
-                  <div className="bg-[#EDEEF1] dark:bg-[#1F2430] h-px my-2" />
-                  <div className="h-8 rounded bg-[#F7F8F8] dark:bg-[#0D1117]" />
-                  <div className="bg-[#EDEEF1] dark:bg-[#1F2430] h-px my-2" />
-                  <div className="h-8 rounded bg-[#F7F8F8] dark:bg-[#0D1117]" />
+                  {/* Table with padding on all sides */}
+                  <div className="rounded border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
+                    <div className="bg-[#F7F8F8] dark:bg-[#0D1117] h-7 flex items-center px-2">
+                      <span className="text-[9px] text-[#9CA3AF]">Name</span>
+                      <span className="text-[9px] text-[#9CA3AF] ml-auto">Status</span>
+                    </div>
+                    <div className="h-7 flex items-center px-2">
+                      <span className="inline-block rounded bg-[#EDEEF1] dark:bg-[#1F2430] h-2 w-16" />
+                    </div>
+                    <div className="bg-[#EDEEF1] dark:bg-[#1F2430] h-px" />
+                    <div className="h-7 flex items-center px-2">
+                      <span className="inline-block rounded bg-[#EDEEF1] dark:bg-[#1F2430] h-2 w-20" />
+                    </div>
+                  </div>
                 </div>
               </div>
-              Content has consistent padding (16–20px) on all sides within the container.
+              Table has 16px padding on all four sides — clear gap between content and container edges.
             </DoCard>
           </div>
 
           <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
             {[
-              { title: 'Minimum 16px padding', desc: 'All white containers must have at least 16px (px-4 py-4) internal padding. Use 20px (p-5) for content-heavy sections.' },
-              { title: 'Tables get container padding', desc: 'Even tables with their own header row need padding between the table edge and the container wall.' },
+              { title: 'Padding on all four sides', desc: 'All white containers must have at least 16px padding on top, bottom, left, and right (p-4). Use 20px (p-5) for content-heavy sections.' },
+              { title: 'Tables never go full-width', desc: 'Tables must not stretch to the left and right edges of their container. Always wrap tables in a padded container so there is visible space on both sides.' },
               { title: 'Charts need breathing room', desc: 'Charts and visualizations should have at least 16px padding on all sides within their container card.' },
               { title: 'Consistent across all tab panels', desc: 'Every tab panel within a single container should use the same padding value. Don\'t mix p-4 and p-5 in sibling panels.' },
             ].map((rule, i) => (
