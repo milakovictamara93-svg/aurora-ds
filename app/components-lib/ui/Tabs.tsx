@@ -88,7 +88,7 @@ export default function Tabs({
       ref={listRef}
       role="tablist"
       className={clsx(
-        'flex items-end border-b border-[#EDEEF1] dark:border-[#1F2430]',
+        'flex items-end',
         className
       )}
     >
@@ -105,15 +105,10 @@ export default function Tabs({
             onKeyDown={e => handleKeyDown(e, item.id)}
             className={clsx(
               'flex items-center gap-2 px-3 h-8 text-[14px] font-medium transition-colors',
-              'rounded-tl rounded-tr whitespace-nowrap focus:outline-none',
+              'rounded-t whitespace-nowrap focus:outline-none',
               'focus-visible:ring-2 focus-visible:ring-[#1258F8]/40 focus-visible:ring-offset-0',
               active
-                ? [
-                    'bg-white dark:bg-[#111827]',
-                    'text-[#111827] dark:text-white',
-                    '-mb-px border border-[#EDEEF1] dark:border-[#1F2430]',
-                    'border-b-white dark:border-b-[#111827]',
-                  ]
+                ? 'bg-white dark:bg-[#111827] text-[#111827] dark:text-white'
                 : 'text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white hover:bg-[#F7F8F8] dark:hover:bg-white/5'
             )}
           >

@@ -56,7 +56,7 @@ export default function OtherChartsPage() {
 
         {/* ── Line with bullets (15:6756) ──────────────────────────────── */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Line with bullets</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Line with bullets</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Blue column bars with a connected dot line overlay. Hover shows vertical indicator + enlarged marker + tooltip. Click locks selection.
           </p>
@@ -159,7 +159,7 @@ export default function OtherChartsPage() {
 
         {/* ── Bubble chart (82:6678) ───────────────────────────────────── */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Bubble chart</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Bubble chart</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Scatter plot with sized circles. X = Energy use intensity, Y = Like-for-like change. Bubble size = asset area. Hover highlights one, fades rest.
           </p>
@@ -239,7 +239,7 @@ export default function OtherChartsPage() {
 
         {/* ── Sankey diagram (3:2579) ──────────────────────────────────── */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Sankey diagram</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Sankey diagram</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Flow diagram showing how total energy breaks down into sources, then into emission scopes. Band width proportional to value. Hover highlights a flow.
           </p>
@@ -377,7 +377,7 @@ export default function OtherChartsPage() {
 
         {/* Empty */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Empty state</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Empty state</h2>
           <ChartCard label="Chart" suffix="">
             <ChartEmptyState />
           </ChartCard>

@@ -137,7 +137,7 @@ export default function LoadingStatesPage() {
       <div className="mt-8 flex flex-col gap-10">
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Skeleton — cards</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Skeleton — cards</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Placeholder shapes that mirror the layout of the content being loaded. Pulse animation indicates activity.
           </p>
@@ -147,22 +147,22 @@ export default function LoadingStatesPage() {
         </section>
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Skeleton — metric cards</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Skeleton — metric cards</h2>
           <SkeletonMetricCards />
         </section>
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Skeleton — table</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Skeleton — table</h2>
           <SkeletonTable />
         </section>
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Skeleton — chart</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Skeleton — chart</h2>
           <SkeletonChart />
         </section>
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Spinners</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Spinners</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Used for inline loading or when the layout shape isn't known.
           </p>
@@ -177,7 +177,7 @@ export default function LoadingStatesPage() {
         </section>
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Button loading</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Button loading</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Buttons show an inline spinner and updated label during async operations.
           </p>
@@ -187,7 +187,7 @@ export default function LoadingStatesPage() {
         </section>
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Progress bars</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Progress bars</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Determinate progress for uploads, exports, and multi-step processes.
           </p>
@@ -197,7 +197,7 @@ export default function LoadingStatesPage() {
         </section>
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Full-page loading overlay</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Full-page loading overlay</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Semi-transparent overlay with centered spinner. Used when the entire page needs to reload.
           </p>

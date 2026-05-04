@@ -251,7 +251,7 @@ export default function ControlsPage() {
 
             {/* ════════════════════════ CHECKBOX ════════════════════════ */}
             <div className="mb-2">
-              <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Checkbox</h2>
+              <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Checkbox</h2>
               <p className="mt-1 text-sm text-[#505867] dark:text-[#9CA3AF]">
                 Allow users to select one or more independent options from a list.
               </p>
@@ -342,7 +342,7 @@ export default function ControlsPage() {
 
             {/* ════════════════════════ RADIO BUTTON ════════════════════════ */}
             <div className="pt-8 border-t border-[#EDEEF1] dark:border-[#1F2430] mb-2">
-              <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Radio button</h2>
+              <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Radio button</h2>
               <p className="mt-1 text-sm text-[#505867] dark:text-[#9CA3AF]">
                 Allow users to select exactly one option from a mutually exclusive set.
               </p>
@@ -432,7 +432,7 @@ export default function ControlsPage() {
 
             {/* ════════════════════════ TOGGLE ════════════════════════ */}
             <div className="pt-8 border-t border-[#EDEEF1] dark:border-[#1F2430] mb-2">
-              <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Toggle</h2>
+              <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Toggle</h2>
               <p className="mt-1 text-sm text-[#505867] dark:text-[#9CA3AF]">
                 Instantly switch a single setting between on and off — no form submit required.
               </p>

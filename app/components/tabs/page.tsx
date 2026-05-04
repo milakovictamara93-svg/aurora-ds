@@ -107,7 +107,7 @@ export default function TabsPage() {
                     onChange={setPrimaryActive}
                     type="primary"
                   />
-                  <div className="bg-white dark:bg-[#111827] border border-t-0 border-[#EDEEF1] dark:border-[#1F2430] rounded-b-lg px-5 py-4 min-h-[72px] flex items-center">
+                  <div className="bg-white dark:bg-[#111827] rounded-b-lg px-5 py-4 min-h-[72px] flex items-center">
                     <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">{CONTENT[primaryActive]}</p>
                   </div>
                 </div>
@@ -149,7 +149,7 @@ export default function TabsPage() {
                       onChange={setViewActive}
                       type="primary"
                     />
-                    <div className="bg-white dark:bg-[#111827] border border-t-0 border-[#EDEEF1] dark:border-[#1F2430] rounded-b-lg px-5 py-4 min-h-[60px] flex items-center">
+                    <div className="bg-white dark:bg-[#111827] rounded-b-lg px-5 py-4 min-h-[60px] flex items-center">
                       <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">{CONTENT[viewActive]}</p>
                     </div>
                   </div>
@@ -186,7 +186,7 @@ export default function TabsPage() {
                       onChange={setPrimaryNoIcon}
                       type="primary"
                     />
-                    <div className="bg-white dark:bg-[#111827] border border-t-0 border-[#EDEEF1] dark:border-[#1F2430] rounded-b-lg px-5 py-4 min-h-[60px] flex items-center">
+                    <div className="bg-white dark:bg-[#111827] rounded-b-lg px-5 py-4 min-h-[60px] flex items-center">
                       <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">{CONTENT[primaryNoIcon]}</p>
                     </div>
                   </div>
@@ -235,16 +235,16 @@ export default function TabsPage() {
                 <DoCard>
                   <div className="mb-3">
                     {/* Primary at page level */}
-                    <div className="flex items-end border-b border-[#EDEEF1] dark:border-[#374151]">
+                    <div className="flex items-end">
                       {['Energy', 'GHG', 'Water'].map((label, i) => (
-                        <div key={label} className={`px-3 h-7 flex items-center text-[11px] font-medium rounded-tl rounded-tr whitespace-nowrap ${
+                        <div key={label} className={`px-3 h-7 flex items-center text-[11px] font-medium rounded-t whitespace-nowrap ${
                           i === 0
-                            ? 'bg-white dark:bg-[#111827] text-[#111827] dark:text-white -mb-px border border-[#EDEEF1] dark:border-[#374151] border-b-white dark:border-b-[#111827]'
+                            ? 'bg-white dark:bg-[#111827] text-[#111827] dark:text-white'
                             : 'text-[#505867] dark:text-[#9CA3AF]'
                         }`}>{label}</div>
                       ))}
                     </div>
-                    <div className="border border-t-0 border-[#EDEEF1] dark:border-[#374151] rounded-b px-3 py-2">
+                    <div className="bg-white dark:bg-[#111827] rounded-b px-3 py-2">
                       {/* Secondary inside card */}
                       <div className="border border-[#EDEEF1] dark:border-[#374151] rounded p-2">
                         <div className="flex items-center mb-2">
@@ -265,11 +265,11 @@ export default function TabsPage() {
                   <div className="mb-3 flex flex-col gap-2">
                     {/* Two primary tab bars stacked */}
                     {[['Energy', 'GHG', 'Water'], ['YoY', 'MoM', 'YTD']].map((labels, row) => (
-                      <div key={row} className="flex items-end border-b border-[#EDEEF1] dark:border-[#374151]">
+                      <div key={row} className="flex items-end">
                         {labels.map((label, i) => (
-                          <div key={label} className={`px-3 h-7 flex items-center text-[11px] font-medium rounded-tl rounded-tr whitespace-nowrap ${
+                          <div key={label} className={`px-3 h-7 flex items-center text-[11px] font-medium rounded-t whitespace-nowrap ${
                             i === 0
-                              ? 'bg-white dark:bg-[#111827] text-[#111827] dark:text-white -mb-px border border-[#EDEEF1] dark:border-[#374151] border-b-white dark:border-b-[#111827]'
+                              ? 'bg-white dark:bg-[#111827] text-[#111827] dark:text-white'
                               : 'text-[#505867] dark:text-[#9CA3AF]'
                           }`}>{label}</div>
                         ))}
@@ -322,15 +322,15 @@ export default function TabsPage() {
                   {/* Primary anatomy */}
                   <div className="flex flex-col gap-3">
                     <p className="text-[11px] font-bold uppercase tracking-widest text-[#9CA3AF] dark:text-[#505867]">Primary</p>
-                    <div className="flex items-end border-b border-[#EDEEF1] dark:border-[#1F2430]">
+                    <div className="flex items-end">
                       {[
                         { label: 'Active',   active: true,  hover: false },
                         { label: 'Default',  active: false, hover: false },
                         { label: 'Hover',    active: false, hover: true  },
                       ].map(({ label, active, hover }) => (
-                        <div key={label} className={`px-3 h-8 flex items-center text-[13px] font-medium rounded-tl rounded-tr whitespace-nowrap ${
+                        <div key={label} className={`px-3 h-8 flex items-center text-[13px] font-medium rounded-t whitespace-nowrap ${
                           active
-                            ? 'bg-white dark:bg-[#111827] text-[#111827] dark:text-white -mb-px border border-[#EDEEF1] dark:border-[#1F2430] border-b-white dark:border-b-[#111827]'
+                            ? 'bg-white dark:bg-[#111827] text-[#111827] dark:text-white'
                             : hover
                             ? 'text-[#111827] dark:text-white bg-[#F7F8F8] dark:bg-white/5'
                             : 'text-[#505867] dark:text-[#9CA3AF]'
@@ -340,7 +340,7 @@ export default function TabsPage() {
                       ))}
                     </div>
                     <div className="flex gap-8">
-                      <Annotation>Active — white bg, border covers tab bar line</Annotation>
+                      <Annotation>Active — white bg, no border</Annotation>
                       <Annotation>Default — grey-600 text, transparent bg</Annotation>
                       <Annotation>Hover — text darkens, subtle fill</Annotation>
                     </div>
@@ -385,11 +385,11 @@ export default function TabsPage() {
                 { property: 'Icon size',                   value: '16px',                       token: 'w-4 h-4' },
                 { property: 'Icon gap',                    value: '8px',                        token: 'gap-2' },
                 { property: 'Primary active — bg',         value: 'white / grey-950',           token: 'bg-white dark:bg-[#111827]' },
-                { property: 'Primary active — indicator',  value: 'covers border with same bg', token: '-mb-px border-b-white' },
+                { property: 'Primary active — indicator',  value: 'white bg, no border',         token: 'bg-white rounded-t' },
                 { property: 'Secondary active — border',   value: '2px solid blue-600',         token: 'border-b-2 border-[#1258F8]' },
                 { property: 'Inactive text',               value: 'grey-600',                   token: 'text-[#505867]' },
                 { property: 'Active text',                 value: 'grey-950',                   token: 'text-[#111827]' },
-                { property: 'Tab bar border',              value: '1px grey-100 bottom',        token: 'border-b border-[#EDEEF1]' },
+                { property: 'Tab bar border',              value: 'none — white content provides edge', token: '—' },
               ]} />
             </Section>
 

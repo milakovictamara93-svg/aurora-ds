@@ -24,7 +24,7 @@ export default function LineChartPage() {
 
         {/* Regular — default */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Line with markers — big</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Line with markers — big</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Coral line with circle markers. Dashed blue comparison (benchmark). Dashed coral projection. Hover shows vertical indicator. Click locks selection.
           </p>
@@ -42,7 +42,7 @@ export default function LineChartPage() {
 
         {/* Pending year */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Pending year</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Pending year</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Dashed segment bridges the data gap. Yellow warning dot at the discontinuity.
           </p>
@@ -61,7 +61,7 @@ export default function LineChartPage() {
 
         {/* Shadow / area */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Shadow style (area fill)</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Shadow style (area fill)</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Pink transparent fill beneath the coral line. Used for cumulative metrics. Hover shows marker and vertical indicator same as regular style.
           </p>
@@ -76,7 +76,7 @@ export default function LineChartPage() {
 
         {/* MoM (254:18307) */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Line — month over month</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Line — month over month</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Two lines comparing current year (coral) to previous year (blue) across months. Hover shows both markers and vertical indicator.
           </p>
@@ -93,7 +93,7 @@ export default function LineChartPage() {
 
         {/* YoY (264:25118) */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Line — year over year</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Line — year over year</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Two lines comparing current (coral) to previous (blue) across years.
           </p>
@@ -110,7 +110,7 @@ export default function LineChartPage() {
 
         {/* Small charts (1:3007) */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Line — small</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Line — small</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Compact line charts for card slots. Single, multiple, standard and shadow variants.
           </p>
@@ -138,7 +138,7 @@ export default function LineChartPage() {
 
         {/* Asset distribution small (173:60692) */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Asset distribution — small</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Asset distribution — small</h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <ChartCard label="Distribution" suffix="default">
               <LineChart series={[{ points: [150, 10, 50, 60, 90, 50], color: CHART_COLORS.energy }]} labels={["'20", "'21", "'22", "'23", "'24", "'25"]} height={120} />
@@ -151,7 +151,7 @@ export default function LineChartPage() {
 
         {/* Empty */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Empty state</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Empty state</h2>
           <ChartCard label="Energy use intensity" suffix="kWh/m²/y">
             <ChartEmptyState />
           </ChartCard>

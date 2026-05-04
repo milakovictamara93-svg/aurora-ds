@@ -20,7 +20,7 @@ export default function PageStructurePage() {
       <div className="mt-8 flex flex-col gap-10">
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Full page layout</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Full page layout</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             The complete structure: page header (h1 + badge + interactive reporting year + actions), main tabs, section header (h2 + badge + search + actions + overflow menu), and content.
           </p>
@@ -57,7 +57,7 @@ export default function PageStructurePage() {
         </section>
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">With tabs + section header</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">With tabs + section header</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Tabs split the page into sub-views. The active tab has a white background with rounded top corners, creating a card connection to the content below.
           </p>
@@ -85,7 +85,7 @@ export default function PageStructurePage() {
         </section>
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Minimal — title only</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Minimal — title only</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Not every page needs all elements. The simplest form is just a title, reporting year, and content.
           </p>
@@ -103,7 +103,7 @@ export default function PageStructurePage() {
         </section>
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Anatomy</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Anatomy</h2>
           <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117]">
             {[
               { label: 'Page title (h1)',          value: '24px semibold, #111827. Always present.' },
@@ -126,7 +126,7 @@ export default function PageStructurePage() {
         </section>
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Rules</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Rules</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {[
               { title: 'Title is always present', desc: 'Every page must have an h1. It\'s the primary landmark and the first thing users see.' },

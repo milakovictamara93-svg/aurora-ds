@@ -331,7 +331,7 @@ export default function UploadPage() {
 
         {/* Interactive single file upload */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2">Single file upload</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2">Single file upload</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Click to browse or drag a file over the zone. The zone transitions through selected → uploading → success / error states. Click "Upload another" or "Retry" to reset.
           </p>
@@ -340,7 +340,7 @@ export default function UploadPage() {
 
         {/* All states */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2">Upload states</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2">Upload states</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <StatePreview label="Idle — drop zone">
               <div className="flex flex-col items-center gap-2 py-6 rounded-xl border-2 border-dashed border-[#D7DAE0] dark:border-[#1F2430] bg-[#F7F8F8] dark:bg-[#0D1117]">
@@ -397,7 +397,7 @@ export default function UploadPage() {
 
         {/* Bulk upload table */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2">Bulk upload — status table</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2">Bulk upload — status table</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             When uploading multiple files, display each file as a table row with name, size, and a status indicator. Show progress inline for in-flight uploads. Allow per-row removal with the × button.
           </p>
@@ -406,7 +406,7 @@ export default function UploadPage() {
 
         {/* Specs */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2">Specs</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2">Specs</h2>
           <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117]">
             <SpecRow label="Drop zone border" value="2px dashed #D7DAE0 → #1258F8 on drag-over" />
             <SpecRow label="Drop zone bg (idle)" value="#F7F8F8 dark:bg-[#0D1117]" />
@@ -422,7 +422,7 @@ export default function UploadPage() {
 
         {/* Rules */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2">Rules</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2">Rules</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <RuleCard title="Always show accepted file types">
               The drop zone must state which file types and maximum size are accepted. Never surprise users with a failed upload they could have avoided.

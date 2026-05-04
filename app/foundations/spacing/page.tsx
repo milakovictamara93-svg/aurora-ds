@@ -64,7 +64,7 @@ export default function SpacingPage() {
       {/* ── Rules ─────────────────────────────────────────────────────────── */}
       <section className="mt-10">
         <div className="mb-2">
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white leading-[1.4]">Rules</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white leading-[1.4]">Rules</h2>
         </div>
 
         <div className="divide-y divide-token rounded-xl border border-token overflow-hidden bg-token-primary">

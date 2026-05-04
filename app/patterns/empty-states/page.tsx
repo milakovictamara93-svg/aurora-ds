@@ -61,7 +61,7 @@ export default function EmptyStatesPage() {
       <div className="mt-8 flex flex-col gap-10">
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">First use / no data</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">First use / no data</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Shown when a section has no content yet. Guides the user to take the first action.
           </p>
@@ -89,7 +89,7 @@ export default function EmptyStatesPage() {
         </section>
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Search / filter</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Search / filter</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Shown when a search or filter returns zero results.
           </p>
@@ -112,7 +112,7 @@ export default function EmptyStatesPage() {
         </section>
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Error states</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Error states</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Shown when data fails to load or an operation encounters an error.
           </p>
@@ -136,7 +136,7 @@ export default function EmptyStatesPage() {
         </section>
 
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Anatomy</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Anatomy</h2>
           <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117]">
             {[
               { label: 'Icon', value: 'Centered, 28px inside a 56px circle. Grey bg for default, red bg for error, blue bg for search.' },

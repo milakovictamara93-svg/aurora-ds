@@ -31,7 +31,7 @@ export default function ColumnChartPage() {
 
         {/* ── Standard columns (1:740) ─────────────────────────────────── */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Columns — big</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Columns — big</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Standard monthly consumption bars. Single series in the aspect color. Missing data in grey. Warning icon + line on top. Click to select (stays red while hovering).
           </p>
@@ -78,7 +78,7 @@ export default function ColumnChartPage() {
 
         {/* ── Score chart (36:6070) ─────────────────────────────────────── */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Score chart</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Score chart</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Bars sorted highest→lowest. Default shows coral gradient fading right. Missing assets show as full-height grey bars (always to the top). Click to select.
           </p>
@@ -90,7 +90,7 @@ export default function ColumnChartPage() {
 
         {/* ── Asset distribution (170:30699) ────────────────────────────── */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Asset distribution</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Asset distribution</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Columns with a line overlay showing the trend across assets.
           </p>
@@ -102,7 +102,7 @@ export default function ColumnChartPage() {
 
         {/* ── Columns MoM (254:19247) — grouped bars ───────────────────── */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Columns — month over month</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Columns — month over month</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Grouped columns per month comparing multiple years. Each month shows 3 bars side by side.
           </p>
@@ -162,7 +162,7 @@ export default function ColumnChartPage() {
 
         {/* ── Empty state (single, at the end) ────────────────────────── */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Empty state</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Empty state</h2>
           <ChartCard label="Energy use intensity" suffix="kWh/m²/y">
             <ChartEmptyState />
           </ChartCard>

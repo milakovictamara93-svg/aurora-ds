@@ -174,7 +174,7 @@ export default function DonutChartPage() {
 
         {/* ── Donut (27:3537) ────────────────────────────────────────── */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Donut</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Donut</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Ring chart with center value. Hover fades other segments. Click pulls the selected segment out. Sharp and rounded corner variants.
           </p>
@@ -218,7 +218,7 @@ export default function DonutChartPage() {
 
         {/* ── Pie (27:3400) ──────────────────────────────────────────── */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Pie</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Pie</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Filled circle. Same interactions as donut — hover fades siblings, click pulls out.
           </p>
@@ -242,7 +242,7 @@ export default function DonutChartPage() {
 
         {/* ── Nightingale (27:3593) ──────────────────────────────────── */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Nightingale</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Nightingale</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Polar area chart where segment radius varies by value. Concentric grid rings show scale (25, 50, 75, 100).
           </p>

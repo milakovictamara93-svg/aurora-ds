@@ -122,7 +122,7 @@ export default function SurfaceLayoutsPage() {
 
         {/* ── Problem statement ─────────────────────────────────────────── */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">The problem</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">The problem</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-4 leading-relaxed max-w-[640px]">
             The platform uses three different ways to lay out content blocks on grey backgrounds. While the first two are intentional and work well, the third (tabs with bordered inner elements) creates visual noise and inconsistent hierarchy. This page documents all three and provides a recommended fix.
           </p>
@@ -211,7 +211,7 @@ export default function SurfaceLayoutsPage() {
                 type="primary"
               />
               {/* White content container — connects to active tab */}
-              <div className="bg-white dark:bg-[#111827] border border-t-0 border-[#EDEEF1] dark:border-[#1F2430] rounded-b-lg rounded-tr-lg p-5">
+              <div className="bg-white dark:bg-[#111827] rounded-b-lg rounded-tr-lg p-5">
                 <SectionHeader title="Overview" subtitle="64 assets" />
                 <MiniTable rows={4} />
               </div>
@@ -221,10 +221,10 @@ export default function SurfaceLayoutsPage() {
           {/* Rules */}
           <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
             {[
-              { title: 'Tab connects to container', desc: 'The active primary tab has a white background that merges into the content card below — no gap or visible border between them.' },
+              { title: 'Tab connects to container', desc: 'The active primary tab has a white background that merges into the content card below — no gap, no border, just white on grey.' },
               { title: 'One container per tab', desc: 'Each tab reveals one white container. Don\'t put multiple bordered blocks inside — use dividers or sections within the single container instead.' },
               { title: 'Section headers live inside', desc: 'The h2 section header, search bar, and action buttons sit inside the white container, not floating above it.' },
-              { title: 'Border radius: bottom + top-right', desc: 'The container has rounded-b-lg and rounded-tr-lg. The top-left corner is covered by the active tab.' },
+              { title: 'No border on the container', desc: 'The white container has no border — the contrast between white and grey-50 background provides enough visual separation.' },
             ].map((rule, i) => (
               <div key={i} className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] p-4 bg-white dark:bg-[#0D1117]">
                 <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-1">{rule.title}</p>
@@ -292,8 +292,8 @@ export default function SurfaceLayoutsPage() {
                 'When the user switches tabs, the visual connection between the tab indicator and the content below is lost.',
               ].map((text, i) => (
                 <li key={i} className="flex items-start gap-2 text-[13px] text-[#505867] dark:text-[#9CA3AF]">
-                  <svg className="w-3.5 h-3.5 mt-0.5 shrink-0 text-[#F87171]" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 1 0 0-8 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z" clipRule="evenodd" />
+                  <svg className="w-4 h-4 mt-0.5 shrink-0 text-[#F87171]" viewBox="0 0 24 24" fill="currentColor">
+                    <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clipRule="evenodd" />
                   </svg>
                   {text}
                 </li>
@@ -304,7 +304,7 @@ export default function SurfaceLayoutsPage() {
 
         {/* ── THE FIX ───────────────────────────────────────────────────── */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">The fix: wrap tabs in a container</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">The fix: wrap tabs in a container</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed max-w-[640px]">
             When you have multiple content blocks inside a tab, use Pattern 2 — wrap everything in a single white container with the primary tab bar on top. Inside the container, use <strong>dividers</strong> (not borders) to separate the blocks. The inner tables or cards lose their outer border — the container provides the boundary.
           </p>
@@ -324,7 +324,7 @@ export default function SurfaceLayoutsPage() {
                 type="primary"
               />
               {/* Single white container */}
-              <div className="bg-white dark:bg-[#111827] border border-t-0 border-[#EDEEF1] dark:border-[#1F2430] rounded-b-lg rounded-tr-lg">
+              <div className="bg-white dark:bg-[#111827] rounded-b-lg rounded-tr-lg">
                 {/* Section 1 */}
                 <div className="p-5">
                   <SectionHeader title="Active requests" subtitle="12 items" />
@@ -352,8 +352,8 @@ export default function SurfaceLayoutsPage() {
                 'The tab-to-content connection is now clear: active tab merges into the white card below.',
               ].map((text, i) => (
                 <li key={i} className="flex items-start gap-2 text-[13px] text-[#505867] dark:text-[#9CA3AF]">
-                  <svg className="w-3.5 h-3.5 mt-0.5 shrink-0 text-[#22C55E]" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 1 0 0-8 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clipRule="evenodd" />
+                  <svg className="w-4 h-4 mt-0.5 shrink-0 text-[#22C55E]" viewBox="0 0 24 24" fill="currentColor">
+                    <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
                   </svg>
                   {text}
                 </li>
@@ -364,7 +364,7 @@ export default function SurfaceLayoutsPage() {
 
         {/* ── Side-by-side comparison ──────────────────────────────────── */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Side-by-side comparison</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Side-by-side comparison</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             The left shows the problematic pattern; the right shows the recommended fix.
           </p>
@@ -390,13 +390,13 @@ export default function SurfaceLayoutsPage() {
             <DoCard>
               <div className="mb-3 rounded-lg bg-[#F7F8F8] dark:bg-[#0D1117] p-3">
                 {/* Primary tabs anchored to container */}
-                <div className="flex items-end border-b border-[#EDEEF1] dark:border-[#1F2430]">
+                <div className="flex items-end">
                   {['Tab A', 'Tab B'].map((l, i) => (
-                    <span key={l} className={`px-2 h-6 text-[10px] font-medium flex items-center rounded-tl rounded-tr ${i === 0 ? 'bg-white dark:bg-[#111827] text-[#111827] dark:text-white -mb-px border border-[#EDEEF1] dark:border-[#1F2430] border-b-white dark:border-b-[#111827]' : 'text-[#9CA3AF]'}`}>{l}</span>
+                    <span key={l} className={`px-2 h-6 text-[10px] font-medium flex items-center rounded-t ${i === 0 ? 'bg-white dark:bg-[#111827] text-[#111827] dark:text-white' : 'text-[#9CA3AF]'}`}>{l}</span>
                   ))}
                 </div>
                 {/* Single container with internal dividers */}
-                <div className="bg-white dark:bg-[#111827] border border-t-0 border-[#EDEEF1] dark:border-[#1F2430] rounded-b rounded-tr">
+                <div className="bg-white dark:bg-[#111827] rounded-b rounded-tr">
                   <div className="h-12" />
                   <div className="border-t border-[#EDEEF1] dark:border-[#1F2430]" />
                   <div className="h-12" />
@@ -409,7 +409,7 @@ export default function SurfaceLayoutsPage() {
 
         {/* ── Decision tree ────────────────────────────────────────────── */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Decision tree</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Decision tree</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
             Use this flowchart to decide which pattern to apply.
           </p>
@@ -460,7 +460,7 @@ export default function SurfaceLayoutsPage() {
 
         {/* ── Quick reference ─────────────────────────────────────────── */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Quick reference</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Quick reference</h2>
           <div className="overflow-x-auto rounded-lg border border-[#EDEEF1] dark:border-[#1F2430]">
             <table className="w-full text-[13px]">
               <thead className="bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
@@ -481,7 +481,7 @@ export default function SurfaceLayoutsPage() {
                 <tr>
                   <td className="px-4 py-2.5 font-medium text-[#111827] dark:text-white">2. Single container</td>
                   <td className="px-4 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Yes (primary)</td>
-                  <td className="px-4 py-2.5 text-[#505867] dark:text-[#9CA3AF]">One white card</td>
+                  <td className="px-4 py-2.5 text-[#505867] dark:text-[#9CA3AF]">One white card, no border</td>
                   <td className="px-4 py-2.5 text-[#505867] dark:text-[#9CA3AF]">No — use dividers inside</td>
                   <td className="px-4 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Entity detail pages, tabbed views</td>
                 </tr>
@@ -499,14 +499,14 @@ export default function SurfaceLayoutsPage() {
 
         {/* ── Migration notes ─────────────────────────────────────────── */}
         <section>
-          <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">Migration notes</h2>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">Migration notes</h2>
           <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-4 leading-relaxed max-w-[640px]">
             For pages currently using Pattern 3, here is the migration path:
           </p>
           <div className="flex flex-col gap-3">
             {[
               { step: '1', title: 'Replace secondary tabs with primary tabs', desc: 'Swap the underline-only tab bar for the primary tab component. The active tab should get a white background with border.' },
-              { step: '2', title: 'Add a single white container below the tabs', desc: 'Create one <div> with white background, grey-100 border (no top border), and rounded-b-lg + rounded-tr-lg corners.' },
+              { step: '2', title: 'Add a single white container below the tabs', desc: 'Create one <div> with white background, no border, and rounded-b-lg + rounded-tr-lg corners. The white-on-grey contrast provides the edge.' },
               { step: '3', title: 'Move all inner blocks into the container', desc: 'Remove the individual border and border-radius from each inner block. They are now sections inside the container.' },
               { step: '4', title: 'Separate sections with dividers', desc: 'Add a <div className="border-t border-grey-100" /> between sections instead of relying on block borders for separation.' },
               { step: '5', title: 'Verify spacing', desc: 'Each section inside the container should have consistent padding (p-5 or px-5 py-4). Check that the gap between tab bar and content is 0px.' },

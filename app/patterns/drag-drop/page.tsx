@@ -347,7 +347,7 @@ export default function DragDropPage() {
 
       {/* ── States ─────────────────────────────────────────────────────────── */}
       <section>
-        <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">
+        <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">
           Item states
         </h2>
         <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45] mb-6">
@@ -382,7 +382,7 @@ export default function DragDropPage() {
 
       {/* ── List reorder demo ────────────────────────────────────────────────── */}
       <section>
-        <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">
+        <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">
           List reorder
         </h2>
         <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45] mb-4">
@@ -393,7 +393,7 @@ export default function DragDropPage() {
 
       {/* ── Table column reorder demo ─────────────────────────────────────────── */}
       <section>
-        <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">
+        <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">
           Table column reorder
         </h2>
         <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45] mb-4">
@@ -404,7 +404,7 @@ export default function DragDropPage() {
 
       {/* ── Rules ────────────────────────────────────────────────────────────── */}
       <section>
-        <h2 className="text-[20px] font-bold text-[#111827] dark:text-white mb-2 leading-[1.4]">
+        <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">
           Rules
         </h2>
         <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] divide-y divide-[#EDEEF1] dark:divide-[#1F2430]">
