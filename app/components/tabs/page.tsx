@@ -99,7 +99,7 @@ export default function TabsPage() {
               <p className="text-[13px] italic text-[#505867] dark:text-[#9CA3AF] mb-4">
                 Mental model: &ldquo;Where am I globally within this page?&rdquo;
               </p>
-              <Preview>
+              <Preview bg="subtle">
                 <div className="w-full flex flex-col">
                   <Tabs
                     items={PRIMARY_TABS}
@@ -139,7 +139,7 @@ export default function TabsPage() {
             </Section>
 
             <Section title="With icons">
-              <Preview>
+              <Preview bg="subtle">
                 <div className="w-full flex flex-col gap-6">
                   {/* Primary + icons */}
                   <div className="flex flex-col">
@@ -172,7 +172,7 @@ export default function TabsPage() {
             </Section>
 
             <Section title="Text only (no icons)">
-              <Preview>
+              <Preview bg="subtle">
                 <div className="w-full flex flex-col gap-6">
                   <div className="flex flex-col">
                     <Tabs
