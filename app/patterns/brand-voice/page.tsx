@@ -203,7 +203,7 @@ export default function BrandVoicePage() {
           { rule: 'Percentages', detail: 'No space between number and %: 72%, not 72 %. For changes: +8.3% or −3.1% using proper plus/minus signs.' },
         ].map((r) => (
           <div key={r.rule} className="flex gap-4 p-5">
-            <svg className="w-4 h-4 text-sky-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+            <svg className="w-4 h-4 text-[#1258F8] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
             <div>

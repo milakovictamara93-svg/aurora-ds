@@ -271,8 +271,7 @@ const SECTIONS: PaletteSection[] = [
 // ── Usage rules ───────────────────────────────────────────────────────────────
 
 const RULES = [
-  { token: 'blue-600', hex: '#1258F8', usage: 'Primary buttons — base state' },
-  { token: 'blue-600', hex: '#1258F8', usage: 'Primary actions, links, focus rings' },
+  { token: 'blue-600', hex: '#1258F8', usage: 'Primary buttons, actions, links, focus rings' },
   { token: 'grey-600', hex: '#505867', usage: 'Body text on light backgrounds' },
   { token: 'grey-50',  hex: '#F7F8F8', usage: 'Default page background' },
   { token: 'grey-900', hex: '#1F2430', usage: 'Page background in dark mode' },

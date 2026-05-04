@@ -190,23 +190,23 @@ export default function ESGDataPage() {
       <div className="p-6 rounded-xl border border-token bg-token-primary">
         <ul className="space-y-3 text-sm text-token-secondary">
           <li className="flex items-start gap-2">
-            <span className="text-sky-500 font-bold shrink-0">1.</span>
+            <span className="text-[#1258F8] font-bold shrink-0">1.</span>
             <span>Always use the designated spectrum for each ESG category. Never mix spectrums (e.g. don't use Energy red for Water data).</span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-sky-500 font-bold shrink-0">2.</span>
+            <span className="text-[#1258F8] font-bold shrink-0">2.</span>
             <span>Use the accent strip (1px top border using base color) on metric cards to reinforce category identity.</span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-sky-500 font-bold shrink-0">3.</span>
+            <span className="text-[#1258F8] font-bold shrink-0">3.</span>
             <span>Trends: green (success) = improvement/reduction, red (error) = increase/deterioration. Context-dependent — a water increase is bad, but an engagement increase is good.</span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-sky-500 font-bold shrink-0">4.</span>
+            <span className="text-[#1258F8] font-bold shrink-0">4.</span>
             <span>Always show the unit alongside the value. Use the correct scientific notation (MWh, tCO₂e, kL, t).</span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-sky-500 font-bold shrink-0">5.</span>
+            <span className="text-[#1258F8] font-bold shrink-0">5.</span>
             <span>Include the reporting period on all metric displays. Never show orphaned numbers without context.</span>
           </li>
         </ul>
