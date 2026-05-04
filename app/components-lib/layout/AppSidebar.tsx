@@ -108,6 +108,7 @@ const PATTERNS: NavGroup = {
   label: 'Patterns',
   items: [
     { href: '/patterns/page-structure',         label: 'Page structure' },
+    { href: '/patterns/surface-layouts',        label: 'Surface layouts' },
     { href: '/patterns/drag-drop',             label: 'Drag and drop' },
     { href: '/patterns/filtering',             label: 'Filtering' },
     { href: '/patterns/column-customization',  label: 'Column customization' },
