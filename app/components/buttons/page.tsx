@@ -272,21 +272,36 @@ export default function ButtonsPage() {
       <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy">
         <AnatomyBlock
           diagram={
-            <div className="bg-[#F7F8F8] dark:bg-[#111827] border border-dashed border-[#D7DAE0] dark:border-[#374151] rounded-lg px-12 py-10 flex items-center justify-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#1258F8] text-white rounded-md text-[14px] font-medium">
-                <span className="text-[11px] opacity-60">1</span>
-                <CheckIcon className="w-4 h-4" />
-                <span>Save changes</span>
-                <ChevronRightIcon className="w-4 h-4 opacity-40" />
-                <span className="text-[11px] opacity-60">4</span>
+            <div className="bg-[#F7F8F8] dark:bg-[#111827] rounded-lg px-12 py-14 flex items-center justify-center">
+              <div className="relative inline-flex items-center">
+                {/* Pointer 1: Container */}
+                <span className="absolute -top-8 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">1</span>
+                <span className="absolute -top-[13px] left-1/2 w-px h-[13px] bg-[#111827] dark:bg-white" />
+
+                {/* The button */}
+                <div className="inline-flex items-center gap-2 h-8 px-3 bg-[#1258F8] text-white rounded text-[14px] font-medium relative">
+                  {/* Pointer 2: Leading icon */}
+                  <span className="absolute -bottom-8 left-2 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">2</span>
+                  <span className="absolute -bottom-[13px] left-[14px] w-px h-[13px] bg-[#111827] dark:bg-white" />
+                  <CheckIcon className="w-4 h-4" />
+
+                  {/* Pointer 3: Label */}
+                  <span className="absolute -top-8 right-8 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">3</span>
+                  <span className="absolute -top-[13px] right-[42px] w-px h-[13px] bg-[#111827] dark:bg-white" />
+                  <span>Save changes</span>
+
+                  {/* Pointer 4: Focus ring area */}
+                  <span className="absolute -bottom-8 right-1 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">4</span>
+                  <span className="absolute -bottom-[13px] right-[11px] w-px h-[13px] bg-[#111827] dark:bg-white" />
+                </div>
               </div>
             </div>
           }
           annotations={[
-            { num: '1', label: 'Leading icon', description: <>Optional. Reinforces the action verb.</> },
-            { num: '2', label: 'Padding', description: <>Horizontal padding scales with size (px-3 md, px-2 sm, px-4 lg).</> },
-            { num: '3', label: 'Label', description: <>Verb-noun, sentence case. Required unless inside IconButton.</> },
-            { num: '4', label: 'Trailing icon', description: <>Optional. Reserve for navigation or expansion. Hidden when loading.</> },
+            { num: '1', label: 'Container', description: <>Height, padding, border-radius, and fill. Defines the clickable target area. Includes focus ring on keyboard navigation.</> },
+            { num: '2', label: 'Leading icon', description: <>Optional. 16px, left of label with <Code>gap-1.5</Code>. Reinforces the action verb. Replaced by spinner when loading.</> },
+            { num: '3', label: 'Label', description: <>Verb-noun, sentence case, Manrope Medium. 12px in sm, 14px in md. Required (use IconButton for icon-only).</> },
+            { num: '4', label: 'Trailing icon', description: <>Optional. Reserve for directional cues (chevron-right, external-link). Hidden when loading.</> },
           ]}
         />
       </SectionWrapper>
