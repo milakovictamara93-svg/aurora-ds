@@ -125,7 +125,7 @@ export function TitleBlock({
   title,
   description,
   covers,
-  status = 'stable',
+  status,
   since,
 }: {
   title: string
@@ -139,31 +139,37 @@ export function TitleBlock({
     status === 'beta' ? 'bg-[#d97706]' :
     'bg-[#dc2626]'
 
+  const showMeta = status || since
+
   return (
     <div className="mb-12">
       <h1 className="text-[40px] font-semibold text-[#111827] dark:text-white leading-[1.1] tracking-[-0.02em] mb-3">
         {title}
       </h1>
-      <p className="text-[18px] text-[#505867] dark:text-[#9CA3AF] leading-[1.5] mb-3 max-w-[640px]">
+      <p className="text-[18px] text-[#505867] dark:text-[#9CA3AF] leading-[1.5] max-w-[640px]">
         {description}
       </p>
       {covers && (
-        <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-6 max-w-[640px]"
+        <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mt-3 max-w-[640px]"
           dangerouslySetInnerHTML={{ __html: covers }}
         />
       )}
-      <div className="flex flex-wrap gap-2 items-center">
-        <span className="inline-flex items-center gap-1.5 text-[12px] font-medium px-2.5 py-1 border border-[#EDEEF1] dark:border-[#1F2430] rounded-full bg-white dark:bg-[#0D1117] text-[#111827] dark:text-white">
-          <span className={`w-1.5 h-1.5 rounded-full ${dotColor}`} />
-          {status.charAt(0).toUpperCase() + status.slice(1)}
-        </span>
-        {since && (
-          <span className="inline-flex items-center gap-1.5 text-[12px] font-medium px-2.5 py-1 border border-[#EDEEF1] dark:border-[#1F2430] rounded-full bg-white dark:bg-[#0D1117]">
-            <span className="text-[#505867] dark:text-[#9CA3AF]">since</span>
-            <span className="text-[#111827] dark:text-white">{since}</span>
-          </span>
-        )}
-      </div>
+      {showMeta && (
+        <div className="flex flex-wrap gap-2 items-center mt-6">
+          {status && (
+            <span className="inline-flex items-center gap-1.5 text-[12px] font-medium px-2.5 py-1 border border-[#EDEEF1] dark:border-[#1F2430] rounded-full bg-white dark:bg-[#0D1117] text-[#111827] dark:text-white">
+              <span className={`w-1.5 h-1.5 rounded-full ${dotColor}`} />
+              {status.charAt(0).toUpperCase() + status.slice(1)}
+            </span>
+          )}
+          {since && (
+            <span className="inline-flex items-center gap-1.5 text-[12px] font-medium px-2.5 py-1 border border-[#EDEEF1] dark:border-[#1F2430] rounded-full bg-white dark:bg-[#0D1117]">
+              <span className="text-[#505867] dark:text-[#9CA3AF]">since</span>
+              <span className="text-[#111827] dark:text-white">{since}</span>
+            </span>
+          )}
+        </div>
+      )}
     </div>
   )
 }
@@ -196,14 +202,21 @@ export function SectionWrapper({
     }
   }, [id, num, title, register])
 
+  const isFirst = num === '01'
+
   return (
     <section
       id={id}
-      className="mt-16 pt-8 border-t border-[#EDEEF1] dark:border-[#1F2430] first:mt-0 first:pt-0 first:border-t-0 scroll-mt-8"
+      className={[
+        'scroll-mt-8',
+        isFirst ? '' : 'mt-16 pt-8 border-t border-[#EDEEF1] dark:border-[#1F2430]',
+      ].join(' ')}
     >
-      <span className="font-mono text-[12px] text-[#C4C9D4] dark:text-[#3F4654] tracking-[0.04em] mb-2 block">
-        {num} / {total}
-      </span>
+      {!isFirst && (
+        <span className="font-mono text-[12px] text-[#C4C9D4] dark:text-[#3F4654] tracking-[0.04em] mb-2 block">
+          {num} / {total}
+        </span>
+      )}
       <h2 className="text-[26px] font-semibold text-[#111827] dark:text-white tracking-[-0.015em] mb-2">
         {title}
       </h2>

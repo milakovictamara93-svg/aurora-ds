@@ -5,11 +5,11 @@ import {
   ComponentPageLayout, TitleBlock, SectionWrapper,
   WhenToUse, DecisionTree, RequiredPairings, ForbiddenRefuse,
   AccessibilityList, AnatomyBlock, CanonicalExample,
-  PageFooter, Code,
+  Code,
 } from '@/app/components-lib/ui/ComponentPage'
 import { SpecTable } from '@/app/components-lib/ui/ComponentTabs'
 
-// ── Shared button atom ───────────────────────────────────────────────────────
+// ── Shared button atom (Aurora design tokens) ────────────────────────────────
 
 function Btn({
   variant = 'primary',
@@ -18,45 +18,70 @@ function Btn({
   children,
   icon,
 }: {
-  variant?: 'primary' | 'secondary' | 'tertiary' | 'text' | 'danger'
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'text' | 'link' | 'icon' | 'danger'
   size?: 'sm' | 'md' | 'lg'
-  state?: 'default' | 'disabled' | 'loading'
+  state?: 'default' | 'hover' | 'pressed' | 'focus' | 'disabled' | 'loading' | 'danger'
   children?: React.ReactNode
   icon?: React.ReactNode
 }) {
   const isDisabled = state === 'disabled'
   const base = 'inline-flex items-center justify-center gap-1.5 font-medium transition-all focus:outline-none select-none'
-
-  const sizes: Record<string, string> = {
-    sm: 'h-6 px-3 text-xs rounded',
-    md: 'h-8 px-3.5 text-sm rounded-md',
-    lg: 'h-10 px-5 text-base rounded-md',
-  }
-  const sz = sizes[size]
+  const sm = 'h-6 px-3 text-xs rounded'
+  const md = 'h-8 px-3 text-sm rounded'
+  const lg = 'h-10 px-5 text-base rounded-md'
+  const sz = size === 'sm' ? sm : size === 'lg' ? lg : md
 
   let cls = ''
   if (variant === 'primary') {
-    cls = state === 'disabled'
-      ? 'bg-[#EDEEF1] dark:bg-[#1F2430] text-[#B4BAC5] dark:text-[#374151] cursor-not-allowed'
-      : state === 'loading'
-      ? 'bg-[#1F2430]/80 text-white cursor-wait'
-      : 'bg-[#1F2430] dark:bg-white dark:text-[#111827] text-white shadow-sm hover:bg-[#111827] active:bg-black'
+    if (state === 'default')  cls = 'bg-[#1258F8] text-white shadow-sm hover:bg-[#1146E4] active:bg-[#143ABB]'
+    else if (state === 'hover')   cls = 'bg-[#1146E4] text-white shadow-sm'
+    else if (state === 'pressed') cls = 'bg-[#143ABB] text-white'
+    else if (state === 'focus')   cls = 'bg-[#1258F8] text-white ring-2 ring-[#1258F8] ring-offset-2'
+    else if (state === 'disabled')cls = 'bg-[#EDEEF1] dark:bg-[#1F2430] text-[#B4BAC5] dark:text-[#374151] cursor-not-allowed'
+    else if (state === 'loading') cls = 'bg-[#56A3FF] text-white cursor-wait'
+    else if (state === 'danger')  cls = 'bg-[#DC2626] text-white shadow-sm hover:bg-[#B91C1C] active:bg-[#991B1B]'
   } else if (variant === 'secondary') {
-    cls = state === 'disabled'
-      ? 'border border-[#D7DAE0] dark:border-[#374151] text-[#B4BAC5] dark:text-[#374151] cursor-not-allowed'
-      : 'border border-[#1F2430] dark:border-white text-[#1F2430] dark:text-white hover:bg-[#F7F8F8] dark:hover:bg-white/5 active:bg-[#EDEEF1]'
+    if (state === 'default')  cls = 'border border-[#1258F8] text-[#1258F8] bg-transparent hover:bg-[#1258F8]/10 active:bg-[#1258F8]/15'
+    else if (state === 'hover')   cls = 'border border-[#1146E4] text-[#1258F8] bg-[#1258F8]/10'
+    else if (state === 'pressed') cls = 'border border-[#1258F8] text-[#1258F8] bg-[#1258F8]/15'
+    else if (state === 'focus')   cls = 'border border-[#1258F8] text-[#1258F8] bg-[#1258F8]/10 ring-2 ring-[#1258F8] ring-offset-2'
+    else if (state === 'disabled')cls = 'border border-[#D7DAE0] dark:border-[#374151] text-[#B4BAC5] dark:text-[#374151] cursor-not-allowed'
+    else if (state === 'loading') cls = 'border border-[#56A3FF] text-[#56A3FF] cursor-wait'
+    else if (state === 'danger')  cls = 'border border-[#DC2626] text-[#DC2626] hover:bg-[#DC2626]/10'
   } else if (variant === 'tertiary') {
-    cls = state === 'disabled'
-      ? 'border border-[#EDEEF1] dark:border-[#1F2430] text-[#B4BAC5] cursor-not-allowed'
-      : 'border border-[#EDEEF1] dark:border-[#1F2430] text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-[#111827] hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430] hover:border-[#D7DAE0]'
+    if (state === 'default')  cls = 'border border-[#EDEEF1] dark:border-[#1F2430] text-[#1F2430] dark:text-white bg-white dark:bg-[#111827] hover:bg-[#F7F8F8] hover:border-[#D7DAE0] dark:hover:bg-[#1F2430] active:bg-[#EDEEF1]'
+    else if (state === 'hover')   cls = 'border border-[#D7DAE0] dark:border-[#374151] text-[#1F2430] dark:text-white bg-[#F7F8F8] dark:bg-[#1F2430]'
+    else if (state === 'pressed') cls = 'border border-[#D7DAE0] dark:border-[#374151] text-[#1F2430] dark:text-white bg-[#EDEEF1] dark:bg-[#1F2430]'
+    else if (state === 'focus')   cls = 'border border-[#EDEEF1] dark:border-[#1F2430] text-[#1F2430] dark:text-white ring-2 ring-[#1258F8] ring-offset-2'
+    else if (state === 'disabled')cls = 'border border-[#EDEEF1] dark:border-[#1F2430] text-[#B4BAC5] cursor-not-allowed'
+    else if (state === 'danger')  cls = 'border border-[#F87171] text-[#F87171] hover:bg-[#F87171]/10'
   } else if (variant === 'text') {
-    cls = state === 'disabled'
-      ? 'text-[#B4BAC5] cursor-not-allowed'
-      : 'text-[#1F2430] dark:text-white hover:text-[#111827] active:text-black'
+    cls = isDisabled ? 'text-[#B4BAC5] cursor-not-allowed px-1' : 'text-[#1F2430] dark:text-white hover:text-[#1258F8] active:text-[#143ABB] px-1'
+  } else if (variant === 'link') {
+    cls = 'text-[#1258F8] underline underline-offset-2 px-0 h-auto text-sm hover:text-[#1146E4]'
+  } else if (variant === 'icon') {
+    const iconBase = size === 'sm' ? 'w-6 h-6 rounded' : 'w-8 h-8 rounded'
+    return (
+      <button
+        disabled={isDisabled}
+        className={`${base} ${iconBase} ${
+          state === 'disabled'
+            ? 'bg-[#EDEEF1] dark:bg-[#1F2430] text-[#B4BAC5] cursor-not-allowed'
+            : 'bg-[#1258F8] text-white hover:bg-[#1146E4]'
+        }`}
+        aria-label="Icon button"
+      >
+        {icon ?? <MagnifyingGlassIcon className="w-4 h-4" />}
+      </button>
+    )
   } else if (variant === 'danger') {
-    cls = state === 'disabled'
+    cls = isDisabled
       ? 'bg-[#EDEEF1] dark:bg-[#1F2430] text-[#B4BAC5] cursor-not-allowed'
-      : 'bg-[#B91C1C] text-white shadow-sm hover:bg-[#991B1B] active:bg-[#7F1D1D]'
+      : 'bg-[#DC2626] text-white shadow-sm hover:bg-[#B91C1C] active:bg-[#991B1B]'
+  }
+
+  if (variant === 'link') {
+    return <a href="#" className={`${base} ${cls}`} tabIndex={isDisabled ? -1 : 0}>{children ?? 'View documentation'}</a>
   }
 
   return (
@@ -102,13 +127,10 @@ export default function ButtonsPage() {
       <TitleBlock
         title="Button"
         description="Labelled action trigger. Use for actions on the current view: save, submit, export, add. For navigation use <a> or LinkButton. For icon-only triggers use IconButton."
-        covers={'This page covers <code class="font-mono text-[13px] bg-[#F7F8F8] dark:bg-[#1F2430] px-1.5 py-0.5 rounded">Button</code>. See also <code class="font-mono text-[13px] bg-[#F7F8F8] dark:bg-[#1F2430] px-1.5 py-0.5 rounded">IconButton</code> and <code class="font-mono text-[13px] bg-[#F7F8F8] dark:bg-[#1F2430] px-1.5 py-0.5 rounded">LinkButton</code>.'}
-        status="stable"
-        since="1.0.0"
       />
 
       {/* ── 01 When to use ──────────────────────────────────────────────────── */}
-      <SectionWrapper id="when-to-use" num="01" total={TOTAL} title="When to use, when not to use" description="First-line discrimination from neighbouring components.">
+      <SectionWrapper id="when-to-use" num="01" total={TOTAL} title="When to use, when not to use" description="Both columns matter equally. If your case doesn't fit the left, the right names the better alternative.">
         <WhenToUse
           doItems={[
             <>Triggering an action on the current view: save, submit, export, add</>,
@@ -127,7 +149,7 @@ export default function ButtonsPage() {
       </SectionWrapper>
 
       {/* ── 02 Decision tree ────────────────────────────────────────────────── */}
-      <SectionWrapper id="decision-tree" num="02" total={TOTAL} title="Decision tree against neighbours" description="Routing table for when multiple components could plausibly fit the user's intent.">
+      <SectionWrapper id="decision-tree" num="02" total={TOTAL} title="Decision tree against neighbours" description="Use when more than one Button-family component could plausibly fit. The not column flags the common confusion case.">
         <DecisionTree
           rows={[
             { intent: 'Trigger an action on this page', use: <Code>Button</Code>, not: <Code>&lt;a&gt;</Code> },
@@ -233,7 +255,7 @@ export default function ButtonsPage() {
       </SectionWrapper>
 
       {/* ── 08 Accessibility ────────────────────────────────────────────────── */}
-      <SectionWrapper id="accessibility" num="08" total={TOTAL} title="Accessibility" description="Required ARIA, keyboard handling, and focus behaviour. Not negotiable.">
+      <SectionWrapper id="accessibility" num="08" total={TOTAL} title="Accessibility" description="Native button semantics, keyboard activation, visible focus ring, 44 x 44 px minimum touch target on mobile. Non-negotiable.">
         <AccessibilityList
           items={[
             { key: 'Role', value: <>Native <Code>&lt;button&gt;</Code>, no role override. Submit buttons are <Code>type="submit"</Code>.</> },
@@ -252,7 +274,7 @@ export default function ButtonsPage() {
         <AnatomyBlock
           diagram={
             <div className="bg-[#F7F8F8] dark:bg-[#111827] border border-dashed border-[#D7DAE0] dark:border-[#374151] rounded-lg px-12 py-10 flex items-center justify-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#1F2430] dark:bg-white text-white dark:text-[#111827] rounded-md text-[14px] font-medium">
+              <div className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#1258F8] text-white rounded-md text-[14px] font-medium">
                 <span className="text-[11px] opacity-60">1</span>
                 <CheckIcon className="w-4 h-4" />
                 <span>Save changes</span>
@@ -305,8 +327,6 @@ const onSave = async () => {
 </template>`}
         />
       </SectionWrapper>
-
-      <PageFooter lastUpdated="2026-05-12" version="1.4.2" />
     </ComponentPageLayout>
   )
 }
