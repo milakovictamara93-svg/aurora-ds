@@ -1,465 +1,299 @@
 'use client'
 
 import { useState } from 'react'
-import PageHeader from '@/app/components-lib/ui/PageHeader'
 import {
-  ComponentTabs, TabBar, TabPanel,
-  Section, SpecTable, ColorRow,
-  DoCard, DontCard, A11yRow, KeyRow,
-  Preview, Annotation,
-  UseList, DontUseList, RelatedComponents,
-} from '@/app/components-lib/ui/ComponentTabs'
-import {
-  ChatBubbleLeftIcon,
-  EyeIcon,
-  PencilIcon,
-  TrashIcon,
-  EllipsisVerticalIcon,
-  ChevronDownIcon,
-} from '@heroicons/react/20/solid'
+  ComponentPageLayout, TitleBlock, SectionWrapper,
+  WhenToUse, DecisionTree, RequiredPairings, ForbiddenRefuse,
+  AccessibilityList, AnatomyBlock, RelatedGrid,
+  Code,
+} from '@/app/components-lib/ui/ComponentPage'
+import { SpecTable } from '@/app/components-lib/ui/ComponentTabs'
 
-// ── Inline Button Group ─────────────────────────────────────────────────────
+// ── SegmentedControl atom ────────────────────────────────────────────────────
 
-function InlineGroup() {
+type SegVariant = 'primary' | 'secondary' | 'tertiary'
+type SegSize = 'sm' | 'md'
+
+function SegCtrl({
+  options,
+  size = 'md',
+  variant = 'primary',
+  defaultIndex = 0,
+}: {
+  options: string[]
+  size?: SegSize
+  variant?: SegVariant
+  defaultIndex?: number
+}) {
+  const [selected, setSelected] = useState(defaultIndex)
+  const h = size === 'sm' ? 'h-7' : 'h-9'
+  const px = size === 'sm' ? 'px-2.5 text-xs' : 'px-3.5 text-sm'
+
+  const activeClass: Record<SegVariant, string> = {
+    primary: 'bg-[#1258F8] text-white',
+    secondary: 'bg-transparent text-[#111827] dark:text-white ring-[1.5px] ring-inset ring-[#111827] dark:ring-white',
+    tertiary: 'bg-transparent text-[#111827] dark:text-white font-semibold',
+  }
+
   return (
-    <div className="flex items-center gap-2">
-      {/* Icon-only button */}
-      <button className="inline-flex items-center justify-center w-10 h-10 rounded-[4px] border border-[#1258F8] text-[#1258F8] bg-white dark:bg-transparent dark:text-[#1258F8] hover:bg-[#EFF6FF] dark:hover:bg-[#1258F8]/10 transition-colors">
-        <PencilIcon className="w-5 h-5" />
-      </button>
-      {/* Secondary button */}
-      <button className="inline-flex items-center justify-center h-10 px-4 rounded-[4px] border border-[#1258F8] text-[#1258F8] bg-white dark:bg-transparent dark:text-[#1258F8] hover:bg-[#EFF6FF] dark:hover:bg-[#1258F8]/10 text-sm font-medium transition-colors whitespace-nowrap">
-        Secondary
-      </button>
-      {/* Primary button */}
-      <button className="inline-flex items-center justify-center h-10 px-4 rounded-[4px] bg-[#1258F8] text-white hover:bg-[#0E46D4] text-sm font-medium transition-colors whitespace-nowrap">
-        Primary
-      </button>
-      {/* Overflow */}
-      <button className="inline-flex items-center justify-center w-10 h-10 rounded-[4px] border border-[#D7DAE0] dark:border-[#1F2430] text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-transparent hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430] transition-colors">
-        <EllipsisVerticalIcon className="w-5 h-5" />
-      </button>
-    </div>
-  )
-}
-
-// ── Toolbar Button Group ────────────────────────────────────────────────────
-
-function ToolbarGroup() {
-  const [active, setActive] = useState<number | null>(null)
-  const tools = [
-    { icon: <ChatBubbleLeftIcon className="w-5 h-5" />, label: 'Comment' },
-    { icon: <EyeIcon className="w-5 h-5" />, label: 'View' },
-    { icon: <PencilIcon className="w-5 h-5" />, label: 'Edit' },
-    { icon: <TrashIcon className="w-5 h-5" />, label: 'Delete' },
-  ]
-  return (
-    <div className="flex items-center">
-      {tools.map((tool, i) => (
+    <div className="inline-flex border border-[#D7DAE0] dark:border-[#374151] rounded-lg bg-[#F7F8F8] dark:bg-[#1F2430] p-[3px] gap-[2px]">
+      {options.map((opt, i) => (
         <button
-          key={i}
-          onClick={() => setActive(active === i ? null : i)}
-          aria-label={tool.label}
-          className={`inline-flex items-center justify-center w-10 h-10 border-t border-b border-r border-[#D7DAE0] dark:border-[#1F2430] transition-colors
-            ${i === 0 ? 'border-l rounded-l-[4px]' : ''}
-            ${i === tools.length - 1 ? 'rounded-r-[4px]' : ''}
-            ${active === i
-              ? 'bg-[#EFF6FF] text-[#1258F8] dark:bg-[#1258F8]/10 dark:text-[#1258F8]'
-              : 'bg-white dark:bg-transparent text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430]'
-            }`}
+          key={opt}
+          onClick={() => setSelected(i)}
+          className={[
+            'inline-flex items-center justify-center rounded-[5px] font-medium transition-all whitespace-nowrap',
+            h, px,
+            selected === i
+              ? activeClass[variant]
+              : 'bg-transparent text-[#505867] dark:text-[#9CA3AF] hover:bg-black/[0.04] dark:hover:bg-white/[0.04]',
+          ].join(' ')}
         >
-          {tool.icon}
+          {opt}
         </button>
       ))}
-      <button className="inline-flex items-center justify-center w-10 h-10 border border-l-0 border-[#D7DAE0] dark:border-[#1F2430] rounded-r-[4px] bg-white dark:bg-transparent text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430] transition-colors ml-[-1px]">
-        <EllipsisVerticalIcon className="w-5 h-5" />
-      </button>
     </div>
   )
 }
 
-// ── Form Button Group ───────────────────────────────────────────────────────
+// ── Variant card ─────────────────────────────────────────────────────────────
 
-function FormGroup() {
+function VariantCard({
+  children,
+  name,
+  description,
+}: {
+  children: React.ReactNode
+  name: string
+  description: string
+}) {
   return (
-    <div className="flex items-center justify-between w-full">
-      {/* Destructive text button */}
-      <button className="inline-flex items-center justify-center h-10 px-4 rounded-[4px] text-[#DC2626] bg-transparent hover:bg-[#FEF2F2] dark:hover:bg-[#DC2626]/10 text-sm font-medium transition-colors">
-        Delete
-      </button>
-      {/* Cancel + Confirm */}
-      <div className="flex items-center gap-2">
-        <button className="inline-flex items-center justify-center h-10 px-4 rounded-[4px] border border-[#D7DAE0] dark:border-[#374151] text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-transparent hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430] text-sm font-medium transition-colors">
-          Cancel
-        </button>
-        <button className="inline-flex items-center justify-center h-10 px-4 rounded-[4px] bg-[#1258F8] text-white hover:bg-[#0E46D4] text-sm font-medium transition-colors">
-          Confirm
-        </button>
+    <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] overflow-hidden">
+      <div className="h-[80px] bg-[#F7F8F8] dark:bg-[#111827] flex items-center justify-center px-4">
+        {children}
+      </div>
+      <div className="px-4 py-3 border-t border-[#EDEEF1] dark:border-[#1F2430]">
+        <p className="font-mono text-[12px] font-medium text-[#111827] dark:text-white">{name}</p>
+        <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mt-0.5 leading-[1.4]">{description}</p>
       </div>
     </div>
   )
 }
 
-// ── Segmented Control ───────────────────────────────────────────────────────
+// ── Page ─────────────────────────────────────────────────────────────────────
 
-type SegmentedSize = 'sm' | 'md'
+const TOTAL = '09'
 
-function SegmentedControl({ options, size = 'md' }: { options: string[]; size?: SegmentedSize }) {
-  const [selected, setSelected] = useState(0)
-  const h = size === 'sm' ? 'h-8' : 'h-10'
-  const px = size === 'sm' ? 'px-3' : 'px-4'
-  const text = 'text-sm font-medium'
-
+export default function SegmentedControlPage() {
   return (
-    <div className="inline-flex border border-[#D7DAE0] dark:border-[#374151] rounded-[8px] overflow-hidden">
-      {options.map((opt, i) => {
-        const isFirst = i === 0
-        const isLast = i === options.length - 1
-        const isSelected = selected === i
-        return (
-          <button
-            key={opt}
-            onClick={() => setSelected(i)}
-            className={`inline-flex items-center justify-center ${h} ${px} ${text} transition-colors whitespace-nowrap
-              ${isFirst ? '' : 'border-l border-[#D7DAE0] dark:border-[#374151]'}
-              ${isSelected
-                ? 'bg-[#1258F8] text-white'
-                : 'bg-white dark:bg-[#111827] text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430]'
-              }`}
-          >
-            {opt}
-          </button>
-        )
-      })}
-    </div>
-  )
-}
-
-// ── Split Button ────────────────────────────────────────────────────────────
-
-function SplitButton({ variant = 'primary' }: { variant?: 'primary' | 'secondary' }) {
-  const [open, setOpen] = useState(false)
-
-  const isPrimary = variant === 'primary'
-
-  const mainCls = isPrimary
-    ? 'bg-[#1258F8] text-white hover:bg-[#0E46D4]'
-    : 'border border-[#1258F8] text-[#1258F8] bg-white dark:bg-transparent hover:bg-[#EFF6FF] dark:hover:bg-[#1258F8]/10'
-
-  const chevronCls = isPrimary
-    ? `bg-[#1258F8] text-white border-l border-white/20 hover:bg-[#0E46D4] ${open ? 'bg-[#143AB9]' : ''}`
-    : `border border-l-0 border-[#1258F8] text-[#1258F8] bg-white dark:bg-transparent hover:bg-[#EFF6FF] dark:hover:bg-[#1258F8]/10 ${open ? 'bg-[#EFF6FF]' : ''}`
-
-  return (
-    <div className="relative inline-flex">
-      <button className={`inline-flex items-center justify-center h-10 px-4 rounded-l-[4px] text-sm font-medium transition-colors ${mainCls}`}>
-        Button text
-      </button>
-      <button
-        onClick={() => setOpen(!open)}
-        className={`inline-flex items-center justify-center w-10 h-10 rounded-r-[4px] transition-colors ${chevronCls}`}
-      >
-        <ChevronDownIcon className="w-5 h-5" />
-      </button>
-      {open && (
-        <div className="absolute top-full right-0 mt-1 w-[240px] bg-white dark:bg-[#111827] border border-[#D7DAE0] dark:border-[#1F2430] rounded-[4px] shadow-lg z-10 py-1">
-          <div className="px-2 py-1">
-            <p className="text-xs font-medium text-[#505867] dark:text-[#6B7280] px-2 py-1">Actions</p>
-            <button className="w-full text-left px-2 py-1.5 text-sm text-[#1F2430] dark:text-white hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430] rounded-[2px] transition-colors">Edit</button>
-            <button className="w-full text-left px-2 py-1.5 text-sm text-[#1F2430] dark:text-white hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430] rounded-[2px] transition-colors">Duplicate</button>
-          </div>
-          <div className="border-t border-[#EDEEF1] dark:border-[#1F2430] px-2 py-1">
-            <p className="text-xs font-medium text-[#505867] dark:text-[#6B7280] px-2 py-1">Export</p>
-            <button className="w-full text-left px-2 py-1.5 text-sm text-[#1F2430] dark:text-white hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430] rounded-[2px] transition-colors">Export as CSV</button>
-            <button className="w-full text-left px-2 py-1.5 text-sm text-[#1F2430] dark:text-white hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430] rounded-[2px] transition-colors">Export as PDF</button>
-          </div>
-          <div className="border-t border-[#EDEEF1] dark:border-[#1F2430] px-2 py-1">
-            <button className="w-full text-left px-2 py-1.5 text-sm text-[#DC2626] hover:bg-[#FEF2F2] dark:hover:bg-[#DC2626]/10 rounded-[2px] transition-colors">Delete</button>
-          </div>
-        </div>
-      )}
-    </div>
-  )
-}
-
-// ── Code snippets ───────────────────────────────────────────────────────────
-
-const inlineSnippet = `<div className="flex items-center gap-2">
-  {/* Icon-only */}
-  <button className="inline-flex items-center justify-center
-    w-10 h-10 rounded-[4px] border border-[#1258F8]
-    text-[#1258F8] bg-white hover:bg-[#EFF6FF]">
-    <PencilIcon className="w-5 h-5" />
-  </button>
-  {/* Secondary */}
-  <button className="inline-flex items-center h-10 px-4 rounded-[4px]
-    border border-[#1258F8] text-[#1258F8] bg-white
-    hover:bg-[#EFF6FF] text-sm font-medium">
-    Secondary
-  </button>
-  {/* Primary */}
-  <button className="inline-flex items-center h-10 px-4 rounded-[4px]
-    bg-[#1258F8] text-white hover:bg-[#0E46D4] text-sm font-medium">
-    Primary
-  </button>
-</div>`
-
-const segmentedSnippet = `{/* Shared outer border + overflow-hidden clips inner borders */}
-<div className="inline-flex border border-[#D7DAE0] rounded-[8px] overflow-hidden">
-  {options.map((opt, i) => (
-    <button key={opt}
-      className={\`h-10 px-4 text-sm font-medium transition-colors
-        \${i > 0 ? 'border-l border-[#D7DAE0]' : ''}
-        \${selected === i
-          ? 'bg-[#1258F8] text-white'
-          : 'bg-white text-[#505867] hover:bg-[#F7F8F8]'
-        }\`}>
-      {opt}
-    </button>
-  ))}
-</div>`
-
-const splitSnippet = `<div className="relative inline-flex">
-  <button className="h-10 px-4 rounded-l-[4px] bg-[#1258F8]
-    text-white text-sm font-medium hover:bg-[#0E46D4]">
-    Button text
-  </button>
-  <button onClick={() => setOpen(!open)}
-    className="w-10 h-10 rounded-r-[4px] bg-[#1258F8]
-      text-white border-l border-white/20 hover:bg-[#0E46D4]">
-    <ChevronDownIcon className="w-5 h-5" />
-  </button>
-  {open && (
-    <div className="absolute top-full right-0 mt-1 w-[240px]
-      bg-white border border-[#D7DAE0] rounded-[4px] shadow-lg z-10 py-1">
-      {/* menu sections */}
-    </div>
-  )}
-</div>`
-
-// ── Page ────────────────────────────────────────────────────────────────────
-
-export default function ButtonGroupPage() {
-  return (
-    <div>
-      <PageHeader
-        title="Button Group"
-        description="Clusters of related actions — inline, toolbar, form footer, segmented control, and split button patterns."
-        badge="Components"
+    <ComponentPageLayout>
+      <TitleBlock
+        title="SegmentedControl"
+        description="Mutually-exclusive choice rendered as a horizontal group of buttons. Reach for it for view-mode toggles, density selectors, and fixed-option time-range pickers."
       />
 
-      <ComponentTabs>
-        <TabBar />
+      {/* ── 01 When to use ──────────────────────────────────────────────────── */}
+      <SectionWrapper id="when-to-use" num="01" total={TOTAL} title="When to use, when not to use">
+        <WhenToUse
+          doItems={[
+            <>2-5 mutually exclusive options, all visible at once</>,
+            <>Switching between views (List / Grid / Map)</>,
+            <>Picking a density, range, or mode (Day / Week / Month)</>,
+            <>Option labels are short (~1-2 words)</>,
+          ]}
+          dontItems={[
+            <>Binary on/off -- use <Code>Toggle</Code></>,
+            <>More than 5 options or searchable -- use <Code>Combobox</Code> or <Code>Listbox</Code></>,
+            <>Navigation between pages -- use <Code>Tabs</Code></>,
+            <>Single action -- use <Code>Button</Code></>,
+          ]}
+        />
+      </SectionWrapper>
 
-        {/* ── USAGE ─────────────────────────────────────────────────────── */}
-        <TabPanel id="usage">
-          
-            <Section title="When to use">
-              <UseList items={[
-                <><strong className="font-semibold text-[#1F2430] dark:text-white">Inline groups</strong> — when a single record has multiple related actions (edit, share, delete) that should appear together without visual noise.</>,
-                <><strong className="font-semibold text-[#1F2430] dark:text-white">Toolbar groups</strong> — when icon-only actions form a coherent set (formatting, view controls) and space is at a premium.</>,
-                <><strong className="font-semibold text-[#1F2430] dark:text-white">Form footer groups</strong> — to pair Cancel/Confirm with a destructive action at the opposite end.</>,
-                <><strong className="font-semibold text-[#1F2430] dark:text-white">Segmented control</strong> — when users switch between mutually exclusive views or filter modes (Week / Month / Year).</>,
-                <><strong className="font-semibold text-[#1F2430] dark:text-white">Split button</strong> — when a primary action has a small set of closely related alternatives reachable via dropdown.</>,
-              ]} />
-            </Section>
+      {/* ── 02 Decision tree ────────────────────────────────────────────────── */}
+      <SectionWrapper id="decision-tree" num="02" total={TOTAL} title="Decision tree against neighbours" description="Use when more than one component could plausibly fit. SegmentedControl gets reached for in places where Toggle, Tabs, or Combobox would serve the user better.">
+        <DecisionTree
+          rows={[
+            { intent: 'Pick one of 2-5 visible options', use: <Code>SegmentedControl</Code>, not: <Code>Combobox</Code> },
+            { intent: 'Toggle a binary on/off', use: <Code>Toggle</Code>, not: <><Code>SegmentedControl</Code> with 2 options</> },
+            { intent: 'Pick from more than 5 options', use: <><Code>Combobox</Code> or <Code>Listbox</Code></>, not: <Code>SegmentedControl</Code> },
+            { intent: 'Search and pick from a long list', use: <Code>Combobox</Code>, not: <Code>SegmentedControl</Code> },
+            { intent: 'Navigate between pages or views', use: <Code>Tabs</Code>, not: <Code>SegmentedControl</Code> },
+            { intent: 'Trigger a single action', use: <Code>Button</Code>, not: <><Code>SegmentedControl</Code> with one option</> },
+          ]}
+        />
+      </SectionWrapper>
 
-            <Section title="When not to use">
-              <DontUseList items={[
-                "Don't use a segmented control for navigation — use a tab bar instead.",
-                "Don't put more than 5 segments in a segmented control — use a select/dropdown.",
-                "Don't use a split button when the secondary actions are unrelated to the primary — use a standalone dropdown.",
-              ]} />
-            </Section>
+      {/* ── 03 Variants ─────────────────────────────────────────────────────── */}
+      <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants" description="Choose by surface chrome. Primary in main content areas where the control is the focal point. Secondary in panels alongside primary buttons, where filled active states would compete. Tertiary inline in headers and toolbars where any chrome would be noise.">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <VariantCard name="primary" description="Filled active segment. The default. Use in main content areas.">
+            <SegCtrl options={['List', 'Grid', 'Map']} size="sm" variant="primary" />
+          </VariantCard>
+          <VariantCard name="secondary" description="Outlined active segment. Use in dense panels or alongside primary buttons.">
+            <SegCtrl options={['List', 'Grid', 'Map']} size="sm" variant="secondary" />
+          </VariantCard>
+          <VariantCard name="tertiary" description="Bold-only active. Use inline in headers and toolbars where chrome would be noise.">
+            <SegCtrl options={['List', 'Grid', 'Map']} size="sm" variant="tertiary" />
+          </VariantCard>
+        </div>
+      </SectionWrapper>
 
-            <Section title="Inline group">
-              <Preview label="Icon + Secondary + Primary + Overflow">
-                <InlineGroup />
-              </Preview>
-              <Annotation>Mix icon-only, secondary, and primary buttons in a single row. Always put the primary CTA last (rightmost).</Annotation>
-            </Section>
+      {/* ── 04 Sizes ────────────────────────────────────────────────────────── */}
+      <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes" description="md is the default. Use sm inside dense UI -- table rows, dropdowns, sidebars -- where vertical rhythm matters more than tap-target generosity. There is no lg: large segmented controls compete with primary CTAs and the visual hierarchy collapses.">
+        <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-8 flex flex-col items-center gap-4">
+          <div className="text-center">
+            <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] mb-1.5">sm / 28px</p>
+            <SegCtrl options={['Day', 'Week', 'Month']} size="sm" />
+          </div>
+          <div className="text-center">
+            <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] mb-1.5">md / 36px (default)</p>
+            <SegCtrl options={['Day', 'Week', 'Month']} size="md" />
+          </div>
+        </div>
+      </SectionWrapper>
 
-            <Section title="Toolbar group">
-              <Preview label="Icon-only actions with shared border">
-                <ToolbarGroup />
-              </Preview>
-              <Annotation>Toolbar buttons share borders — no gap between them. Active state uses Blue 50 background (#EFF6FF) with Blue 600 icon tint.</Annotation>
-            </Section>
+      {/* ── 05 API ──────────────────────────────────────────────────────────── */}
+      <SectionWrapper id="api" num="05" total={TOTAL} title="API" description="The option schema is the contract. Every object in :options must conform to it; mismatches break selection silently.">
+        <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3">Props</h3>
+        <SpecTable rows={[
+          { property: 'modelValue', value: 'string | number', token: 'required' },
+          { property: 'options', value: 'SegmentOption[]', token: 'required, >= 2' },
+          { property: 'size', value: "'sm' | 'md'", token: "default: 'md'" },
+          { property: 'variant', value: "'primary' | 'secondary' | 'tertiary'", token: "default: 'primary'" },
+        ]} />
 
-            <Section title="Form footer group">
-              <Preview label="Destructive left · Cancel + Confirm right">
-                <div className="w-full max-w-[420px]">
-                  <FormGroup />
+        <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3 mt-8">Option schema</h3>
+        <SpecTable rows={[
+          { property: 'label', value: 'string', token: 'required, ~12 chars max' },
+          { property: 'value', value: 'string | number', token: 'required, unique' },
+          { property: 'disabled', value: 'boolean', token: 'optional' },
+          { property: 'icon', value: 'IconName', token: 'optional, via option slot' },
+          { property: 'badge', value: 'string | number', token: 'optional, via option slot' },
+        ]} />
+
+        <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3 mt-8">Events</h3>
+        <SpecTable rows={[
+          { property: 'update:modelValue', value: 'string | number', token: 'On selection change' },
+        ]} />
+      </SectionWrapper>
+
+      {/* ── 06 Required pairings ────────────────────────────────────────────── */}
+      <SectionWrapper id="required-pairings" num="06" total={TOTAL} title="Required pairings" description="Rules that must hold. Missing one is a blocking failure: ask, don't guess.">
+        <RequiredPairings
+          rules={[
+            <>Provide at least 2 options. A SegmentedControl with one option should be a <Code>Button</Code>.</>,
+            <>The selected <Code>modelValue</Code> must match one option's <Code>value</Code>. Otherwise no segment renders active.</>,
+            <>Use <Code>v-model</Code>. Setting <Code>:options</Code> without binding the value is a read-only widget and will not react to user clicks.</>,
+            <>Option <Code>value</Code>s must be unique within the options array.</>,
+          ]}
+        />
+      </SectionWrapper>
+
+      {/* ── 07 Forbidden and refuse ─────────────────────────────────────────── */}
+      <SectionWrapper id="forbidden" num="07" total={TOTAL} title="Forbidden and refuse" description="Hard-no rules. Refuse and produce the suggested response instead of generating code.">
+        <ForbiddenRefuse
+          rules={[
+            {
+              rule: <>Render a SegmentedControl with more than 5 options.</>,
+              response: <>"Above 5 options the segments get crowded and individual labels are hard to read. Want a <Code>Combobox</Code> or <Code>Listbox</Code> instead?"</>,
+            },
+            {
+              rule: <>Use SegmentedControl for navigation between pages or routes.</>,
+              response: <>"Use <Code>Tabs</Code> for navigation. SegmentedControl is for picking a value, not changing the URL."</>,
+            },
+            {
+              rule: <>Render a SegmentedControl with one option.</>,
+              response: <>"Single options are just buttons. Use <Code>Button</Code> instead?"</>,
+            },
+            {
+              rule: <>Use SegmentedControl for free-text or open-ended values.</>,
+              response: <>"SegmentedControl is for fixed enumerated values. Want a <Code>TextInput</Code> or <Code>Combobox</Code>?"</>,
+            },
+            {
+              rule: <>Use option labels longer than ~12 characters.</>,
+              response: <>"Long labels break the visual rhythm of the control. Either shorten them, or use <Code>Combobox</Code> if you need descriptive choices."</>,
+            },
+          ]}
+        />
+      </SectionWrapper>
+
+      {/* ── 08 Accessibility ────────────────────────────────────────────────── */}
+      <SectionWrapper id="accessibility" num="08" total={TOTAL} title="Accessibility" description="Group role with arrow-key navigation between segments, focus management on entry and exit, contrast on the active segment. Required.">
+        <AccessibilityList
+          items={[
+            { key: 'Role', value: <>Wrapper has <Code>role="group"</Code> with <Code>aria-label="Segmented control"</Code>. Each segment is a real <Code>&lt;button&gt;</Code> with <Code>aria-pressed</Code> reflecting the selected state.</> },
+            { key: 'Keyboard', value: <><Code>Tab</Code> moves focus into the group. <Code>Arrow Left/Right</Code> moves focus between segments. <Code>Space</Code> or <Code>Enter</Code> selects the focused segment. <Code>Tab</Code> exits the group.</> },
+            { key: 'Focus', value: <>Focus ring visible at 3:1 minimum contrast against both surface and active-segment backgrounds.</> },
+            { key: 'Disabled', value: <>Disabled options receive the <Code>disabled</Code> attribute and skip arrow-key focus, but remain visible.</> },
+            { key: 'Touch target', value: <>Minimum 44 x 44 px per segment on mobile. <Code>md</Code> size meets this with padding; <Code>sm</Code> does not, so do not use <Code>sm</Code> on mobile-primary surfaces.</> },
+            { key: 'Contrast', value: <>Active segment background meets WCAG AA against its label and against the inactive segment surface. Verified per release.</> },
+          ]}
+        />
+      </SectionWrapper>
+
+      {/* ── 09 Anatomy ──────────────────────────────────────────────────────── */}
+      <SectionWrapper id="anatomy" num="09" total={TOTAL} title="Anatomy">
+        <AnatomyBlock
+          diagram={
+            <div className="bg-[#F7F8F8] dark:bg-[#111827] rounded-lg px-12 py-14 flex items-center justify-center">
+              <div className="relative inline-flex border border-[#D7DAE0] dark:border-[#374151] rounded-lg bg-[#EDEEF1] dark:bg-[#1F2430] p-[3px] gap-[2px]">
+                {/* Pointer 3: Container -- bottom center */}
+                <span className="absolute bottom-[-3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
+                <span className="absolute bottom-[-19px] left-1/2 -translate-x-1/2 w-px h-[16px] bg-[#111827] dark:bg-white" />
+                <span className="absolute bottom-[-39px] left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">3</span>
+
+                {/* Active segment */}
+                <div className="relative inline-flex items-center justify-center h-9 px-3.5 rounded-[5px] bg-[#1258F8] text-white text-sm font-medium">
+                  Day
+                  {/* Pointer 1: Active segment -- top */}
+                  <span className="absolute top-[-3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
+                  <span className="absolute top-[-19px] left-1/2 -translate-x-1/2 w-px h-[16px] bg-[#111827] dark:bg-white" />
+                  <span className="absolute top-[-39px] left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">1</span>
                 </div>
-              </Preview>
-              <Annotation>Place the destructive action on the left to visually separate it from the Cancel/Confirm cluster. Use justify-between on the container.</Annotation>
-            </Section>
 
-            <Section title="Segmented control">
-              <Preview label="Small and Medium sizes">
-                <div className="flex flex-col gap-4 items-start">
-                  <div className="flex flex-col gap-1 items-start">
-                    <p className="text-xs text-[#505867] dark:text-[#9CA3AF] mb-1">Small (32px)</p>
-                    <SegmentedControl options={['Week', 'Month', 'Year']} size="sm" />
-                  </div>
-                  <div className="flex flex-col gap-1 items-start">
-                    <p className="text-xs text-[#505867] dark:text-[#9CA3AF] mb-1">Medium (40px)</p>
-                    <SegmentedControl options={['Week', 'Month', 'Year']} size="md" />
-                  </div>
+                {/* Inactive segment */}
+                <div className="relative inline-flex items-center justify-center h-9 px-3.5 rounded-[5px] text-[#505867] dark:text-[#9CA3AF] text-sm font-medium">
+                  Week
+                  {/* Pointer 2: Inactive segment -- top */}
+                  <span className="absolute top-[-3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
+                  <span className="absolute top-[-19px] left-1/2 -translate-x-1/2 w-px h-[16px] bg-[#111827] dark:bg-white" />
+                  <span className="absolute top-[-39px] left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">2</span>
                 </div>
-              </Preview>
-              <Annotation>Active segment uses Blue 600 fill. Inactive segments share the outer border via overflow-hidden — no inner border radius on individual segments.</Annotation>
-            </Section>
 
-            <Section title="Split button">
-              <Preview label="Primary and Secondary variants">
-                <div className="flex items-start gap-6 flex-wrap pb-52">
-                  <div className="flex flex-col gap-1 items-start">
-                    <p className="text-xs text-[#505867] dark:text-[#9CA3AF] mb-1">Primary</p>
-                    <SplitButton variant="primary" />
-                  </div>
-                  <div className="flex flex-col gap-1 items-start">
-                    <p className="text-xs text-[#505867] dark:text-[#9CA3AF] mb-1">Secondary</p>
-                    <SplitButton variant="secondary" />
-                  </div>
+                {/* Third segment, no pointer */}
+                <div className="inline-flex items-center justify-center h-9 px-3.5 rounded-[5px] text-[#505867] dark:text-[#9CA3AF] text-sm font-medium">
+                  Month
                 </div>
-              </Preview>
-              <Annotation>Click the chevron to open the dropdown. Chevron background darkens (#143AB9) when the dropdown is open.</Annotation>
-            </Section>
 
-            <Section title="Do / Don't">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <DoCard>
-                  <p className="font-semibold text-[#1F2430] dark:text-white mb-1">Put primary actions last</p>
-                  <p>In left-to-right reading order, users expect the most important action at the end of the group — it reads as a natural conclusion.</p>
-                </DoCard>
-                <DontCard>
-                  <p className="font-semibold text-[#1F2430] dark:text-white mb-1">Don't scatter primary actions</p>
-                  <p>Placing a primary button in the middle of a group breaks the visual hierarchy and makes the intended CTA ambiguous.</p>
-                </DontCard>
-                <DoCard>
-                  <p className="font-semibold text-[#1F2430] dark:text-white mb-1">Use tooltips on icon-only buttons</p>
-                  <p>Always pair icon-only toolbar buttons with a tooltip or aria-label so their action is discoverable for all users.</p>
-                </DoCard>
-                <DontCard>
-                  <p className="font-semibold text-[#1F2430] dark:text-white mb-1">Don't mix too many variants in one group</p>
-                  <p>Combining icon-only, text, and split buttons in the same group creates visual noise. Keep groups cohesive by type.</p>
-                </DontCard>
+                {/* Pointer 4: Separator gap -- bottom right area */}
+                <span className="absolute bottom-[-3px] right-[58px] w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
+                <span className="absolute bottom-[-19px] right-[60px] w-px h-[16px] bg-[#111827] dark:bg-white" />
+                <span className="absolute bottom-[-39px] right-[51px] w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">4</span>
               </div>
-            </Section>
+            </div>
+          }
+          annotations={[
+            { num: '1', label: 'Active segment', description: <>Filled background, <Code>aria-pressed="true"</Code>. Only one active at a time.</> },
+            { num: '2', label: 'Inactive segment', description: <>Transparent background, <Code>aria-pressed="false"</Code>. Hover shows subtle fill.</> },
+            { num: '3', label: 'Container', description: <>Shared border and background. Single border radius around the whole control, not per segment.</> },
+            { num: '4', label: 'Separator', description: <>2px gap between segments inherited from container padding. No inner dividers.</> },
+          ]}
+        />
+      </SectionWrapper>
 
-            <RelatedComponents items={[
-              { href: '/components/buttons', label: 'Buttons', description: 'Individual button variants and states.' },
-              { href: '/components/navigation', label: 'Navigation', description: 'Sidebar and top-nav patterns.' },
-            ]} />
-          
-        </TabPanel>
-
-        {/* ── STYLE ─────────────────────────────────────────────────────── */}
-        <TabPanel id="style">
-          
-            <Section title="Sizing & spacing">
-              <SpecTable rows={[
-                { property: 'Small height',         value: '32px',    token: 'h-8' },
-                { property: 'Medium height',        value: '40px',    token: 'h-10' },
-                { property: 'Horizontal padding',   value: '16px',    token: 'px-4' },
-                { property: 'Icon button size',     value: '40×40px', token: 'w-10 h-10' },
-                { property: 'Inline group gap',     value: '8px',     token: 'gap-2' },
-                { property: 'Toolbar border share', value: '0px gap', token: 'border-l (shared)' },
-                { property: 'Segmented radius',     value: '8px',     token: 'rounded-[8px]' },
-                { property: 'Button radius',        value: '4px',     token: 'rounded-[4px]' },
-              ]} />
-            </Section>
-
-            <Section title="Colors">
-              <ColorRow label="Primary fill" hex="#1258F8" role="Blue 600 — primary button and active segment" />
-              <ColorRow label="Primary hover" hex="#0E46D4" role="Blue 700 — primary button hover" border />
-              <ColorRow label="Chevron active" hex="#143AB9" role="Pressed state for split button chevron" border />
-              <ColorRow label="Secondary border" hex="#1258F8" role="Blue 600 — secondary variant border" border />
-              <ColorRow label="Toolbar border" hex="#D7DAE0" role="Grey 200 — shared toolbar button border" border />
-              <ColorRow label="Selected bg (toolbar)" hex="#EFF6FF" role="Blue 50 — active icon button background" border />
-              <ColorRow label="Destructive text" hex="#DC2626" role="Error Red — destructive form action" border />
-            </Section>
-          
-        </TabPanel>
-
-        {/* ── CODE ──────────────────────────────────────────────────────── */}
-        <TabPanel id="code">
-          
-            <Section title="Inline group">
-              <Preview label="Live preview">
-                <InlineGroup />
-              </Preview>
-              <pre className="mt-4 bg-[#0D1117] text-[#E2E8F0] text-sm font-mono rounded-lg p-4 overflow-x-auto leading-relaxed whitespace-pre">
-                {inlineSnippet}
-              </pre>
-            </Section>
-
-            <Section title="Segmented control">
-              <Preview label="Live preview">
-                <SegmentedControl options={['Week', 'Month', 'Year']} />
-              </Preview>
-              <pre className="mt-4 bg-[#0D1117] text-[#E2E8F0] text-sm font-mono rounded-lg p-4 overflow-x-auto leading-relaxed whitespace-pre">
-                {segmentedSnippet}
-              </pre>
-            </Section>
-
-            <Section title="Split button">
-              <Preview label="Live preview">
-                <div className="pb-52">
-                  <SplitButton variant="primary" />
-                </div>
-              </Preview>
-              <pre className="mt-4 bg-[#0D1117] text-[#E2E8F0] text-sm font-mono rounded-lg p-4 overflow-x-auto leading-relaxed whitespace-pre">
-                {splitSnippet}
-              </pre>
-            </Section>
-          
-        </TabPanel>
-
-        {/* ── ACCESSIBILITY ─────────────────────────────────────────────── */}
-        <TabPanel id="accessibility">
-          
-            <Section title="ARIA requirements">
-              <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#111827]">
-                <A11yRow check="aria-label">
-                  Icon-only buttons must have <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">aria-label</code> describing the action (e.g. <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">aria-label="Edit"</code>). Never rely solely on a visual icon.
-                </A11yRow>
-                <A11yRow check='role="group"'>
-                  Wrap related button clusters in a <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">{'<div role="group" aria-label="...">'}</code> so screen readers announce the group context.
-                </A11yRow>
-                <A11yRow check="aria-pressed">
-                  Toolbar toggle buttons should use <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">aria-pressed="true/false"</code> to communicate the active state.
-                </A11yRow>
-                <A11yRow check="aria-expanded">
-                  The split button's chevron trigger must use <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">aria-expanded</code> and <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">aria-haspopup="menu"</code> to signal the dropdown relationship.
-                </A11yRow>
-                <A11yRow check="aria-checked">
-                  Segmented control segments act like radio buttons — use <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">role="radio"</code> and <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">aria-checked</code> on each segment, wrapped in a <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">role="radiogroup"</code>.
-                </A11yRow>
-              </div>
-            </Section>
-
-            <Section title="Keyboard navigation">
-              <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#111827]">
-                <KeyRow keys={['Tab']} action="Move focus between button group members and between groups." />
-                <KeyRow keys={['Enter', 'Space']} action="Activate the focused button, toggle a toolbar button, or open/close a split button dropdown." />
-                <KeyRow keys={['←', '→']} action="Navigate between segments in a segmented control when using roving tabindex." />
-                <KeyRow keys={['Escape']} action="Close the split button dropdown and return focus to the chevron trigger." />
-              </div>
-            </Section>
-
-            <Section title="Contrast">
-              <SpecTable rows={[
-                { property: 'White on Blue 600', value: '#FFFFFF on #1258F8', token: '5.9:1 ✓ AA' },
-                { property: 'Blue 600 on white', value: '#1258F8 on #FFFFFF', token: '5.9:1 ✓ AA' },
-                { property: 'Grey 600 on white', value: '#505867 on #FFFFFF', token: '7.0:1 ✓ AA' },
-                { property: 'Red on white',       value: '#DC2626 on #FFFFFF', token: '5.9:1 ✓ AA' },
-              ]} />
-            </Section>
-          
-        </TabPanel>
-      </ComponentTabs>
-    </div>
+      {/* ── Related (unnumbered) ─────────────────────────────────────────── */}
+      <div className="mt-16 pt-8 border-t border-[#EDEEF1] dark:border-[#1F2430]">
+        <p className="text-[10px] font-bold tracking-[0.08em] uppercase text-[#C4C9D4] dark:text-[#3F4654] mb-4">Related components</p>
+        <RelatedGrid
+          items={[
+            { href: '/components/controls', name: 'Toggle', description: 'Binary on/off switch.' },
+            { href: '/components/inputs', name: 'Combobox', description: 'Searchable selection from a longer list.' },
+            { href: '/components/tabs', name: 'Tabs', description: 'Navigation between page-level views.' },
+            { href: '/components/buttons', name: 'Button', description: 'Single action trigger.' },
+          ]}
+        />
+      </div>
+    </ComponentPageLayout>
   )
 }

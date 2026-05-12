@@ -38,7 +38,7 @@ const COMPONENT_GROUPS: NavGroup[] = [
     label: 'Actions',
     items: [
       { href: '/components/buttons',      label: 'Button' },
-      { href: '/components/button-group', label: 'Button Group' },
+      { href: '/components/button-group', label: 'Segmented control' },
     ],
   },
   {
