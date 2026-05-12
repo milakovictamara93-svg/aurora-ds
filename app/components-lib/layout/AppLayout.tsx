@@ -34,7 +34,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
       {/* Main content — offset by sidebar on desktop, offset by top bar on mobile */}
       <div className="lg:ml-[264px] flex flex-col min-h-screen">
-        <div className="flex-1 px-4 pt-[72px] pb-16 lg:px-10 lg:pt-8 2xl:px-16 bg-white dark:bg-[#0D1117]">
+        <div className="flex-1 px-4 pt-[72px] pb-16 lg:px-10 lg:pt-8 2xl:px-16">
           {children}
         </div>
         <Footer />

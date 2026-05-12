@@ -83,7 +83,7 @@ function TableOfContents() {
 
   return (
     <aside className="hidden xl:block w-[220px] shrink-0">
-      <div className="sticky top-8 max-h-[calc(100vh-64px)] overflow-y-auto">
+      <div className="sticky top-8 max-h-[calc(100vh-64px)] overflow-y-auto bg-white dark:bg-[#0D1117] rounded-lg px-4 py-5">
         <p className="text-[10px] font-bold tracking-[0.08em] uppercase text-[#C4C9D4] dark:text-[#3F4654] mb-3">
           On this page
         </p>
