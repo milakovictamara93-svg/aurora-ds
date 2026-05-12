@@ -11,7 +11,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-[#F7F8F8] dark:bg-[#111827] page-grid-bg">
+    <div className="min-h-screen bg-white dark:bg-[#0D1117]">
       <AppSidebar mobileOpen={mobileNavOpen} onMobileClose={() => setMobileNavOpen(false)} />
 
       {/* Mobile top bar — hidden on lg+ where the sidebar is always visible */}

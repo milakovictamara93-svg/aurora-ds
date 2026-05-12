@@ -302,7 +302,7 @@ export default function AppSidebar({
         mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
       )}>
       {/* Sidebar panel */}
-      <div className="bg-white dark:bg-[#0D1117] rounded-[8px] h-full flex flex-col overflow-hidden">
+      <div className="bg-[#F7F8F8] dark:bg-[#111827] rounded-[8px] h-full flex flex-col overflow-hidden">
 
         {/* Logo */}
         <div className="px-4 py-5 shrink-0">
@@ -367,7 +367,7 @@ export default function AppSidebar({
         </nav>
 
         {/* Dark mode toggle — always pinned at bottom, never scrolls away */}
-        <div className="shrink-0 border-t border-[#EDEEF1] dark:border-[#1F2430] px-4 py-3 bg-white dark:bg-[#0D1117] rounded-b-[8px]">
+        <div className="shrink-0 border-t border-[#EDEEF1] dark:border-[#1F2430] px-4 py-3 bg-[#F7F8F8] dark:bg-[#111827] rounded-b-[8px]">
           <button
             onClick={toggleDark}
             className="flex items-center gap-2.5 text-[13px] text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white transition-colors w-full"
