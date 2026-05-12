@@ -77,6 +77,7 @@ const COMPONENT_GROUPS: NavGroup[] = [
     items: [
       { href: '/components/toasts',   label: 'Toast' },
       { href: '/components/modals',   label: 'Modal' },
+      { href: '/components/drawer',   label: 'Drawer' },
       { href: '/components/banner',   label: 'Banner' },
       { href: '/components/tooltip',  label: 'Tooltip' },
     ],
@@ -99,6 +100,30 @@ const COMPONENT_GROUPS: NavGroup[] = [
       { href: '/components/loading-bar',    label: 'Loading bar' },
       { href: '/components/skeleton',       label: 'Skeleton' },
       { href: '/components/progress-steps', label: 'Progress steps' },
+    ],
+  },
+  {
+    id: 'overlays',
+    label: 'Overlays',
+    items: [
+      { href: '/components/menu',   label: 'Menu' },
+      { href: '/components/popper', label: 'Popper' },
+    ],
+  },
+  {
+    id: 'content',
+    label: 'Content',
+    items: [
+      { href: '/components/markdown',  label: 'Markdown' },
+      { href: '/components/prose',     label: 'Prose' },
+      { href: '/components/formatted', label: 'Formatted' },
+    ],
+  },
+  {
+    id: 'documents',
+    label: 'Documents',
+    items: [
+      { href: '/components/pdf-viewer', label: 'PDF viewer' },
     ],
   },
 ]
