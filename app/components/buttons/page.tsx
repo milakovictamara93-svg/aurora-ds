@@ -130,7 +130,7 @@ export default function ButtonsPage() {
       />
 
       {/* ── 01 When to use ──────────────────────────────────────────────────── */}
-      <SectionWrapper id="when-to-use" num="01" total={TOTAL} title="When to use, when not to use" description="Both columns matter equally. If your case doesn't fit the left, the right names the better alternative.">
+      <SectionWrapper id="when-to-use" num="01" total={TOTAL} title="When to use, when not to use">
         <WhenToUse
           doItems={[
             <>Triggering an action on the current view: save, submit, export, add</>,
@@ -149,7 +149,7 @@ export default function ButtonsPage() {
       </SectionWrapper>
 
       {/* ── 02 Decision tree ────────────────────────────────────────────────── */}
-      <SectionWrapper id="decision-tree" num="02" total={TOTAL} title="Decision tree against neighbours" description="Use when more than one Button-family component could plausibly fit. The not column flags the common confusion case.">
+      <SectionWrapper id="decision-tree" num="02" total={TOTAL} title="Decision tree against neighbours" description="Use when more than one Button-family component could plausibly fit.">
         <DecisionTree
           rows={[
             { intent: 'Trigger an action on this page', use: <Code>Button</Code>, not: <Code>&lt;a&gt;</Code> },
@@ -270,7 +270,7 @@ export default function ButtonsPage() {
       </SectionWrapper>
 
       {/* ── 09 Anatomy and example ──────────────────────────────────────────── */}
-      <SectionWrapper id="anatomy-example" num="09" total={TOTAL} title="Anatomy and example" description="One complete, runnable example. If pasted, it works.">
+      <SectionWrapper id="anatomy-example" num="09" total={TOTAL} title="Anatomy and example">
         <AnatomyBlock
           diagram={
             <div className="bg-[#F7F8F8] dark:bg-[#111827] border border-dashed border-[#D7DAE0] dark:border-[#374151] rounded-lg px-12 py-10 flex items-center justify-center">
