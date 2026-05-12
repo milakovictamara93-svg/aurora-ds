@@ -1,76 +1,14 @@
 'use client'
 
+import { useState } from 'react'
 import { XMarkIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import Modal from '@/app/components-lib/ui/Modal'
 import {
   ComponentPageLayout, TitleBlock, SectionWrapper,
   WhenToUse, RequiredPairings, ForbiddenRefuse,
   AccessibilityList, AnatomyBlock, RelatedGrid,
   Code,
 } from '@/app/components-lib/ui/ComponentPage'
-
-// ── Modal demo shells ────────────────────────────────────────────────────────
-
-function ModalDemo({
-  title,
-  subtitle,
-  icon,
-  body,
-  primaryLabel = 'Confirm',
-  secondaryLabel = 'Cancel',
-  dangerLabel,
-  size = 'standard',
-}: {
-  title: string
-  subtitle?: string
-  icon?: React.ReactNode
-  body?: string
-  primaryLabel?: string
-  secondaryLabel?: string | null
-  dangerLabel?: string
-  size?: 'standard' | 'confirm'
-}) {
-  const maxW = size === 'confirm' ? 'max-w-[420px]' : 'max-w-[560px]'
-  return (
-    <div className="relative rounded-lg bg-[#F7F8F8] dark:bg-[#111827] border border-[#EDEEF1] dark:border-[#1F2430] min-h-[280px] flex items-center justify-center overflow-hidden mb-4">
-      <div className="absolute inset-0 bg-black/40" />
-      <div className={`relative z-10 w-full ${maxW} bg-white dark:bg-[#0D1117] rounded-lg shadow-xl mx-4`}>
-        {/* Header */}
-        <div className="flex items-start gap-3 px-6 pt-5 pb-4">
-          {icon && (
-            <div className="w-6 h-6 rounded-full bg-[#d97706] text-white flex items-center justify-center shrink-0 mt-0.5">
-              {icon}
-            </div>
-          )}
-          <div className="flex-1 min-w-0">
-            <p className="text-[16px] font-semibold text-[#111827] dark:text-white">{title}</p>
-            {subtitle && <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mt-0.5">{subtitle}</p>}
-          </div>
-          <button className="text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white p-1 -mr-1">
-            <XMarkIcon className="w-5 h-5" />
-          </button>
-        </div>
-        {/* Body */}
-        {body && (
-          <div className="px-6 pb-4 text-[14px] text-[#505867] dark:text-[#9CA3AF]">{body}</div>
-        )}
-        {/* Footer */}
-        <div className="flex items-center justify-end gap-2 px-6 py-4 border-t border-[#EDEEF1] dark:border-[#1F2430]">
-          {dangerLabel && (
-            <span className="mr-auto text-[13px] font-medium text-[#DC2626]">{dangerLabel}</span>
-          )}
-          {secondaryLabel && (
-            <div className="h-8 px-3.5 flex items-center rounded-md border border-[#D7DAE0] dark:border-[#374151] text-[13px] font-medium text-[#111827] dark:text-white">
-              {secondaryLabel}
-            </div>
-          )}
-          <div className={`h-8 px-3.5 flex items-center rounded-md text-[13px] font-medium text-white ${dangerLabel && !secondaryLabel ? 'bg-[#DC2626]' : 'bg-[#1F2430] dark:bg-white dark:text-[#111827]'}`}>
-            {dangerLabel && !secondaryLabel ? dangerLabel : primaryLabel}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
 
 // ── Shape card ───────────────────────────────────────────────────────────────
 
@@ -109,11 +47,25 @@ function ShapeCard({
   )
 }
 
+// ── Pointer helper ───────────────────────────────────────────────────────────
+
+function Pip({ n, className }: { n: number; className?: string }) {
+  return (
+    <span className={`w-5 h-5 rounded-full bg-[#111827] text-white text-[10px] font-bold flex items-center justify-center shrink-0 ${className ?? ''}`}>
+      {n}
+    </span>
+  )
+}
+
 // ── Page ─────────────────────────────────────────────────────────────────────
 
 const TOTAL = '08'
 
 export default function ModalsPage() {
+  const [openModal, setOpenModal] = useState<
+    'standard' | 'subtitle' | 'confirm' | 'danger' | null
+  >(null)
+
   return (
     <ComponentPageLayout>
       <TitleBlock
@@ -174,41 +126,31 @@ export default function ModalsPage() {
       </SectionWrapper>
 
       {/* ── 03 Variants ─────────────────────────────────────────────────────── */}
-      <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants" description="Visual differences signal the weight of what the user is being asked to do.">
-        <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3">Standard modal</h3>
-        <ModalDemo
-          title="Edit building details"
-          body="Update the address, floor area, and reporting categories for this building."
-          primaryLabel="Save changes"
-        />
+      <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants" description="Visual differences signal the weight of what the user is being asked to do. Click any demo to see the live modal.">
+        <div className="flex flex-wrap gap-3 mb-6">
+          {([
+            { key: 'standard', label: 'Standard modal' },
+            { key: 'subtitle', label: 'With subtitle' },
+            { key: 'confirm',  label: 'Confirmation (danger)' },
+          ] as const).map(({ key, label }) => (
+            <button
+              key={key}
+              onClick={() => setOpenModal(key)}
+              className="h-8 px-3.5 rounded-md border border-[#D7DAE0] dark:border-[#374151] text-[13px] font-medium text-[#111827] dark:text-white bg-white dark:bg-[#111827] hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430] transition-colors"
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+
+        <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3">Standard</h3>
+        <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-4">Title, body content, Cancel + primary action footer. The default shape for focused tasks.</p>
 
         <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3 mt-6">With subtitle</h3>
-        <ModalDemo
-          title="Saved view created"
-          subtitle="You can rename it from the views menu."
-          body={'Your filters are now saved as "Q1 GHG critical assets".'}
-          primaryLabel="Done"
-          secondaryLabel={null}
-        />
-
-        <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3 mt-6">With icon</h3>
-        <ModalDemo
-          title="Are you sure?"
-          icon={<ExclamationTriangleIcon className="w-3.5 h-3.5" />}
-          body="This action will affect 12 assets."
-          primaryLabel="Continue"
-          size="confirm"
-        />
+        <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-4">Second line under the title for supplementary context. Use sparingly.</p>
 
         <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3 mt-6">Confirmation modal (danger pairing)</h3>
-        <ModalDemo
-          title="Delete report?"
-          body="All saved versions will be permanently removed."
-          primaryLabel="Delete"
-          secondaryLabel="Cancel"
-          dangerLabel="Delete"
-          size="confirm"
-        />
+        <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-4">Narrow, no body slot. One question, one consequence, Cancel + destructive button. Always paired with an irreversible action.</p>
       </SectionWrapper>
 
       {/* ── 04 Required pairings ────────────────────────────────────────────── */}
@@ -271,63 +213,62 @@ export default function ModalsPage() {
 
       {/* ── 07 Anatomy ──────────────────────────────────────────────────────── */}
       <SectionWrapper id="anatomy" num="07" total={TOTAL} title="Anatomy">
-        <AnatomyBlock
-          diagram={
-            <div className="bg-black/40 rounded-lg p-10 relative">
-              {/* Pointer 1: Backdrop */}
-              <span className="absolute top-4 right-4 w-5 h-5 rounded-full bg-[#111827] text-white text-[10px] font-bold flex items-center justify-center">1</span>
-
-              {/* Modal shell */}
-              <div className="bg-white dark:bg-[#0D1117] rounded-lg max-w-[460px] mx-auto relative">
-                {/* Header */}
-                <div className="flex items-start gap-3 px-5 pt-4 pb-3 border-b border-[#EDEEF1] dark:border-[#1F2430] relative">
-                  {/* Pointer 2: Title */}
-                  <span className="absolute -left-7 top-3.5 w-[5px] h-[5px] rounded-full bg-[#111827]" />
-                  <span className="absolute -left-[22px] top-[17px] w-[10px] h-px bg-[#111827]" />
-                  <span className="absolute -left-[42px] top-[12px] w-5 h-5 rounded-full bg-[#111827] text-white text-[10px] font-bold flex items-center justify-center">2</span>
-
-                  {/* Pointer 3: Subtitle */}
-                  <span className="absolute -left-7 top-[34px] w-[5px] h-[5px] rounded-full bg-[#111827]" />
-                  <span className="absolute -left-[22px] top-[37px] w-[10px] h-px bg-[#111827]" />
-                  <span className="absolute -left-[42px] top-[32px] w-5 h-5 rounded-full bg-[#111827] text-white text-[10px] font-bold flex items-center justify-center">3</span>
-
-                  <div className="flex-1">
+        <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-8 mb-6">
+          {/* Diagram */}
+          <div className="bg-black/40 rounded-lg p-8 sm:p-10 flex items-center justify-center">
+            <div className="w-full max-w-[420px] bg-white rounded-lg overflow-hidden shadow-xl">
+              {/* Header */}
+              <div className="px-5 pt-4 pb-3 border-b border-[#EDEEF1] flex items-start justify-between">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <Pip n={2} />
                     <p className="text-[14px] font-semibold text-[#111827]">Modal title</p>
+                  </div>
+                  <div className="flex items-center gap-2 mt-1">
+                    <Pip n={3} />
                     <p className="text-[12px] text-[#505867]">Optional subtitle</p>
                   </div>
-                  <button className="text-[#505867] text-[18px] leading-none p-1">x</button>
                 </div>
-
-                {/* Body */}
-                <div className="px-5 py-4 text-[13px] text-[#505867] relative">
-                  {/* Pointer 4: ModalContent */}
-                  <span className="absolute -left-7 top-4 w-[5px] h-[5px] rounded-full bg-[#111827]" />
-                  <span className="absolute -left-[22px] top-[19px] w-[10px] h-px bg-[#111827]" />
-                  <span className="absolute -left-[42px] top-[14px] w-5 h-5 rounded-full bg-[#111827] text-white text-[10px] font-bold flex items-center justify-center">4</span>
-                  Body content lives in ModalContent. Scrolls independently when content overflows.
-                </div>
-
-                {/* Footer */}
-                <div className="flex items-center justify-end gap-2 px-5 py-3 border-t border-[#EDEEF1] dark:border-[#1F2430] relative">
-                  {/* Pointer 5: ModalFooter */}
-                  <span className="absolute -left-7 top-3.5 w-[5px] h-[5px] rounded-full bg-[#111827]" />
-                  <span className="absolute -left-[22px] top-[17px] w-[10px] h-px bg-[#111827]" />
-                  <span className="absolute -left-[42px] top-[12px] w-5 h-5 rounded-full bg-[#111827] text-white text-[10px] font-bold flex items-center justify-center">5</span>
-
-                  <div className="h-7 px-3 flex items-center rounded border border-[#D7DAE0] text-[13px] font-medium text-[#111827]">Cancel</div>
-                  <div className="h-7 px-3 flex items-center rounded bg-[#1F2430] text-[13px] font-medium text-white">Confirm</div>
+                <button className="text-[#505867] p-1"><XMarkIcon className="w-4 h-4" /></button>
+              </div>
+              {/* Body */}
+              <div className="px-5 py-4 flex items-start gap-2">
+                <Pip n={4} />
+                <p className="text-[13px] text-[#505867]">Body content lives in ModalContent. Scrolls independently when content overflows.</p>
+              </div>
+              {/* Footer */}
+              <div className="px-5 py-3 border-t border-[#EDEEF1] flex items-center gap-2">
+                <Pip n={5} />
+                <div className="flex items-center gap-2 ml-auto">
+                  <div className="h-7 px-3 flex items-center rounded border border-[#D7DAE0] text-[12px] font-medium text-[#111827]">Cancel</div>
+                  <div className="h-7 px-3 flex items-center rounded bg-[#1258F8] text-[12px] font-medium text-white">Confirm</div>
                 </div>
               </div>
             </div>
-          }
-          annotations={[
-            { num: '1', label: 'Backdrop', description: <>Semi-transparent overlay. Click dismisses unless <Code>static</Code>. <Code>aria-hidden="true"</Code>.</> },
-            { num: '2', label: 'Title', description: <>Required. Connected via <Code>aria-labelledby</Code>. Optional status icon precedes.</> },
-            { num: '3', label: 'Subtitle', description: <>Optional second line under the title. Use sparingly.</> },
-            { num: '4', label: 'ModalContent', description: <>Body slot. Scrolls independently. Connected via <Code>aria-describedby</Code> on ConfirmModal.</> },
-            { num: '5', label: 'ModalFooter', description: <>Right-aligned action row. Cancel left, confirm right. Custom buttons use <Code>{"position: 'left' | 'right'"}</Code>.</> },
-          ]}
-        />
+          </div>
+          {/* Backdrop pointer label */}
+          <div className="flex items-center gap-2 mt-4 mb-2">
+            <Pip n={1} />
+            <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">Backdrop (dark overlay behind the modal)</span>
+          </div>
+
+          {/* Legend */}
+          <div className="flex flex-col gap-1 mt-4">
+            {[
+              { num: '1', label: 'Backdrop', desc: <>Semi-transparent overlay. Click dismisses unless <Code>static</Code>. <Code>aria-hidden="true"</Code>.</> },
+              { num: '2', label: 'Title', desc: <>Required. Connected via <Code>aria-labelledby</Code>. Optional status icon precedes.</> },
+              { num: '3', label: 'Subtitle', desc: <>Optional second line under the title. Use sparingly.</> },
+              { num: '4', label: 'ModalContent', desc: <>Body slot. Scrolls independently. Connected via <Code>aria-describedby</Code> on ConfirmModal.</> },
+              { num: '5', label: 'ModalFooter', desc: <>Right-aligned action row. Cancel left, confirm right. Custom buttons use <Code>{"position: 'left' | 'right'"}</Code>.</> },
+            ].map(({ num, label, desc }) => (
+              <div key={num} className="grid grid-cols-[24px_140px_1fr] gap-3 py-1.5 text-[13px]">
+                <span className="font-mono text-[11px] text-[#C4C9D4] dark:text-[#3F4654] bg-[#F7F8F8] dark:bg-[#1F2430] rounded text-center leading-[18px] h-[18px]">{num}</span>
+                <span className="font-mono text-[12px] text-[#111827] dark:text-white">{label}</span>
+                <span className="text-[#505867] dark:text-[#9CA3AF]">{desc}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </SectionWrapper>
 
       {/* ── 08 Related ──────────────────────────────────────────────────────── */}
@@ -341,6 +282,45 @@ export default function ModalsPage() {
           ]}
         />
       </SectionWrapper>
+
+      {/* ── Live modal instances ─────────────────────────────────────────── */}
+      <Modal
+        open={openModal === 'standard'}
+        onClose={() => setOpenModal(null)}
+        type="standard"
+        title="Edit building details"
+        primaryLabel="Save changes"
+        primaryAction={() => setOpenModal(null)}
+        secondaryLabel="Cancel"
+      >
+        <p>Update the address, floor area, and reporting categories for this building.</p>
+      </Modal>
+
+      <Modal
+        open={openModal === 'subtitle'}
+        onClose={() => setOpenModal(null)}
+        type="standard"
+        title="Saved view created"
+        subtitle="You can rename it from the views menu."
+        primaryLabel="Done"
+        primaryAction={() => setOpenModal(null)}
+      >
+        <p>Your filters are now saved as &quot;Q1 GHG critical assets&quot;.</p>
+      </Modal>
+
+      <Modal
+        open={openModal === 'confirm'}
+        onClose={() => setOpenModal(null)}
+        type="confirmation"
+        title="Delete report?"
+        primaryLabel="Confirm"
+        primaryAction={() => setOpenModal(null)}
+        secondaryLabel="Cancel"
+        destructiveLabel="Delete"
+        destructiveAction={() => setOpenModal(null)}
+      >
+        <p>All saved versions will be permanently removed.</p>
+      </Modal>
     </ComponentPageLayout>
   )
 }
