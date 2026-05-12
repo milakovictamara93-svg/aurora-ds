@@ -63,7 +63,7 @@ export function ComponentPageLayout({
     <TocCtx.Provider value={{ entries, register, activeId }}>
       <div className="flex gap-12">
         {/* Main content */}
-        <div className="flex-1 min-w-0 max-w-[760px] pb-24">
+        <div className="flex-1 min-w-0 pb-24">
           {children}
         </div>
 
@@ -83,7 +83,7 @@ function TableOfContents() {
 
   return (
     <aside className="hidden xl:block w-[220px] shrink-0">
-      <div className="sticky top-8 max-h-[calc(100vh-64px)] overflow-y-auto bg-[#F7F8F8] dark:bg-[#111827] rounded-lg px-4 py-5">
+      <div className="sticky top-8 max-h-[calc(100vh-64px)] overflow-y-auto bg-white dark:bg-[#0D1117] rounded-lg px-4 py-5">
         <p className="text-[10px] font-bold tracking-[0.08em] uppercase text-[#C4C9D4] dark:text-[#3F4654] mb-3">
           On this page
         </p>
