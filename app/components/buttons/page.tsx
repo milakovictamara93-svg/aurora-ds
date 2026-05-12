@@ -1,10 +1,10 @@
 'use client'
 
-import { PlusIcon, ArrowPathIcon, MagnifyingGlassIcon, CheckIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
+import { ArrowPathIcon, MagnifyingGlassIcon, CheckIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import {
   ComponentPageLayout, TitleBlock, SectionWrapper,
   WhenToUse, DecisionTree, RequiredPairings, ForbiddenRefuse,
-  AccessibilityList, AnatomyBlock, CanonicalExample,
+  AccessibilityList, AnatomyBlock,
   Code,
 } from '@/app/components-lib/ui/ComponentPage'
 import { SpecTable } from '@/app/components-lib/ui/ComponentTabs'
@@ -119,7 +119,7 @@ function VariantCard({
 
 // ── Page ─────────────────────────────────────────────────────────────────────
 
-const TOTAL = '09'
+const TOTAL = '08'
 
 export default function ButtonsPage() {
   return (
@@ -185,11 +185,10 @@ export default function ButtonsPage() {
       </SectionWrapper>
 
       {/* ── 04 Sizes ────────────────────────────────────────────────────────── */}
-      <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes" description="md is the default for standard contexts. Use sm inside dense UI -- table rows, dropdowns, sidebars -- where vertical rhythm matters more than tap-target generosity. Use lg for hero CTAs and marketing surfaces where the button is the focal point.">
+      <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes" description="md is the default for standard contexts. Use sm inside dense UI -- table rows, dropdowns, sidebars -- where vertical rhythm matters more than tap-target generosity.">
         <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-8 flex gap-4 items-center justify-center flex-wrap">
           <Btn variant="primary" size="sm">sm</Btn>
           <Btn variant="primary" size="md">md</Btn>
-          <Btn variant="primary" size="lg">lg</Btn>
         </div>
       </SectionWrapper>
 
@@ -207,8 +206,8 @@ export default function ButtonsPage() {
         ]} />
       </SectionWrapper>
 
-      {/* ── 06 Required pairings ────────────────────────────────────────────── */}
-      <SectionWrapper id="required-pairings" num="06" total={TOTAL} title="Required pairings" description="Rules that must hold. Missing one is a blocking failure: ask, don't guess.">
+      {/* ── 05 Required pairings ────────────────────────────────────────────── */}
+      <SectionWrapper id="required-pairings" num="05" total={TOTAL} title="Required pairings" description="Rules that must hold. Missing one is a blocking failure: ask, don't guess.">
         <RequiredPairings
           rules={[
             <>When <Code>danger=true</Code>: pair with a <Code>Modal</Code> or <Code>Drawer</Code> confirmation step. Label must describe the irreversible outcome ("Delete building", not "Confirm").</>,
@@ -218,8 +217,8 @@ export default function ButtonsPage() {
         />
       </SectionWrapper>
 
-      {/* ── 07 Forbidden and refuse ─────────────────────────────────────────── */}
-      <SectionWrapper id="forbidden" num="07" total={TOTAL} title="Forbidden and refuse" description="Hard-no rules. Refuse and produce the suggested response instead of generating code.">
+      {/* ── 06 Forbidden and refuse ─────────────────────────────────────────── */}
+      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden and refuse" description="Hard-no rules. Refuse and produce the suggested response instead of generating code.">
         <ForbiddenRefuse
           rules={[
             {
@@ -254,8 +253,8 @@ export default function ButtonsPage() {
         />
       </SectionWrapper>
 
-      {/* ── 08 Accessibility ────────────────────────────────────────────────── */}
-      <SectionWrapper id="accessibility" num="08" total={TOTAL} title="Accessibility" description="Native button semantics, keyboard activation, visible focus ring, 44 x 44 px minimum touch target on mobile. Non-negotiable.">
+      {/* ── 07 Accessibility ────────────────────────────────────────────────── */}
+      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility" description="Native button semantics, keyboard activation, visible focus ring, 44 x 44 px minimum touch target on mobile. Non-negotiable.">
         <AccessibilityList
           items={[
             { key: 'Role', value: <>Native <Code>&lt;button&gt;</Code>, no role override. Submit buttons are <Code>type="submit"</Code>.</> },
@@ -269,8 +268,8 @@ export default function ButtonsPage() {
         />
       </SectionWrapper>
 
-      {/* ── 09 Anatomy and example ──────────────────────────────────────────── */}
-      <SectionWrapper id="anatomy-example" num="09" total={TOTAL} title="Anatomy and example">
+      {/* ── 08 Anatomy ─────────────────────────────────────────────────────── */}
+      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy">
         <AnatomyBlock
           diagram={
             <div className="bg-[#F7F8F8] dark:bg-[#111827] border border-dashed border-[#D7DAE0] dark:border-[#374151] rounded-lg px-12 py-10 flex items-center justify-center">
@@ -289,42 +288,6 @@ export default function ButtonsPage() {
             { num: '3', label: 'Label', description: <>Verb-noun, sentence case. Required unless inside IconButton.</> },
             { num: '4', label: 'Trailing icon', description: <>Optional. Reserve for navigation or expansion. Hidden when loading.</> },
           ]}
-        />
-
-        <CanonicalExample
-          filename="Button.example.vue"
-          code={`<!-- Save flow with loading and a secondary cancel -->
-<script setup lang="ts">
-import { ref } from 'vue'
-import { Button } from '@aurora/components'
-import { useBuildings } from '@/stores/buildings'
-
-const saving = ref(false)
-const { save } = useBuildings()
-
-const onSave = async () => {
-  saving.value = true
-  try { await save() }
-  finally { saving.value = false }
-}
-</script>
-
-<template>
-  <div class="flex gap-2">
-    <Button
-      variant="primary"
-      :loading="saving"
-      leading-icon="check"
-      type="submit"
-      @click="onSave"
-    >
-      Save changes
-    </Button>
-    <Button variant="secondary" :disabled="saving">
-      Cancel
-    </Button>
-  </div>
-</template>`}
         />
       </SectionWrapper>
     </ComponentPageLayout>
