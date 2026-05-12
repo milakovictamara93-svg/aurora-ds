@@ -272,27 +272,34 @@ export default function ButtonsPage() {
       <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy">
         <AnatomyBlock
           diagram={
-            <div className="bg-[#F7F8F8] dark:bg-[#111827] rounded-lg px-12 py-14 flex items-center justify-center">
+            <div className="bg-[#F7F8F8] dark:bg-[#111827] rounded-lg px-12 py-16 flex items-center justify-center">
               <div className="relative inline-flex items-center">
-                {/* Pointer 1: Container */}
-                <span className="absolute -top-8 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">1</span>
-                <span className="absolute -top-[13px] left-1/2 w-px h-[13px] bg-[#111827] dark:bg-white" />
 
                 {/* The button */}
                 <div className="inline-flex items-center gap-2 h-8 px-3 bg-[#1258F8] text-white rounded text-[14px] font-medium relative">
-                  {/* Pointer 2: Leading icon */}
-                  <span className="absolute -bottom-8 left-2 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">2</span>
-                  <span className="absolute -bottom-[13px] left-[14px] w-px h-[13px] bg-[#111827] dark:bg-white" />
                   <CheckIcon className="w-4 h-4" />
-
-                  {/* Pointer 3: Label */}
-                  <span className="absolute -top-8 right-8 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">3</span>
-                  <span className="absolute -top-[13px] right-[42px] w-px h-[13px] bg-[#111827] dark:bg-white" />
                   <span>Save changes</span>
+                  <ChevronRightIcon className="w-4 h-4 opacity-60" />
 
-                  {/* Pointer 4: Focus ring area */}
-                  <span className="absolute -bottom-8 right-1 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">4</span>
-                  <span className="absolute -bottom-[13px] right-[11px] w-px h-[13px] bg-[#111827] dark:bg-white" />
+                  {/* Pointer 1: Container -- bottom center */}
+                  <span className="absolute bottom-[-3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
+                  <span className="absolute bottom-[-19px] left-1/2 -translate-x-1/2 w-px h-[16px] bg-[#111827] dark:bg-white" />
+                  <span className="absolute bottom-[-39px] left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">1</span>
+
+                  {/* Pointer 2: Leading icon -- top, aligned to icon */}
+                  <span className="absolute top-[-3px] left-[13px] w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
+                  <span className="absolute top-[-19px] left-[15px] w-px h-[16px] bg-[#111827] dark:bg-white" />
+                  <span className="absolute top-[-39px] left-[6px] w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">2</span>
+
+                  {/* Pointer 3: Label -- top, aligned to label center */}
+                  <span className="absolute top-[-3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
+                  <span className="absolute top-[-19px] left-1/2 -translate-x-1/2 w-px h-[16px] bg-[#111827] dark:bg-white" />
+                  <span className="absolute top-[-39px] left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">3</span>
+
+                  {/* Pointer 4: Trailing icon -- top, aligned to trailing icon */}
+                  <span className="absolute top-[-3px] right-[13px] w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
+                  <span className="absolute top-[-19px] right-[15px] w-px h-[16px] bg-[#111827] dark:bg-white" />
+                  <span className="absolute top-[-39px] right-[6px] w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">4</span>
                 </div>
               </div>
             </div>
