@@ -47,16 +47,6 @@ function ShapeCard({
   )
 }
 
-// ── Pointer helper ───────────────────────────────────────────────────────────
-
-function Pip({ n, className }: { n: number; className?: string }) {
-  return (
-    <span className={`w-5 h-5 rounded-full bg-[#111827] text-white text-[10px] font-bold flex items-center justify-center shrink-0 ${className ?? ''}`}>
-      {n}
-    </span>
-  )
-}
-
 // ── Page ─────────────────────────────────────────────────────────────────────
 
 const TOTAL = '08'
@@ -213,62 +203,67 @@ export default function ModalsPage() {
 
       {/* ── 07 Anatomy ──────────────────────────────────────────────────────── */}
       <SectionWrapper id="anatomy" num="07" total={TOTAL} title="Anatomy">
-        <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-8 mb-6">
-          {/* Diagram */}
-          <div className="bg-black/40 rounded-lg p-8 sm:p-10 flex items-center justify-center">
-            <div className="w-full max-w-[420px] bg-white rounded-lg overflow-hidden shadow-xl">
-              {/* Header */}
-              <div className="px-5 pt-4 pb-3 border-b border-[#EDEEF1] flex items-start justify-between">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <Pip n={2} />
-                    <p className="text-[14px] font-semibold text-[#111827]">Modal title</p>
+        <AnatomyBlock
+          diagram={
+            <div className="relative bg-black/40 rounded-lg p-8 sm:px-16 sm:py-12 w-full">
+              {/* Pointer 1: Backdrop -- top-right of the overlay */}
+              <span className="absolute top-3 right-3 w-5 h-5 rounded-full bg-[#111827] text-white text-[10px] font-bold flex items-center justify-center">1</span>
+              <span className="absolute top-[22px] right-[22px] w-[5px] h-[5px] rounded-full bg-white" />
+
+              {/* Modal shell */}
+              <div className="w-full max-w-[420px] mx-auto bg-white rounded-lg overflow-visible shadow-xl relative">
+                {/* Header */}
+                <div className="px-5 pt-4 pb-3 border-b border-[#EDEEF1] relative">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <p className="text-[14px] font-semibold text-[#111827]">Modal title</p>
+                      <p className="text-[12px] text-[#505867] mt-0.5">Optional subtitle</p>
+                    </div>
+                    <button className="text-[#505867] p-1"><XMarkIcon className="w-4 h-4" /></button>
                   </div>
-                  <div className="flex items-center gap-2 mt-1">
-                    <Pip n={3} />
-                    <p className="text-[12px] text-[#505867]">Optional subtitle</p>
-                  </div>
+
+                  {/* Pointer 2: Title -- left side, aligned to title */}
+                  <span className="absolute left-[20px] top-[12px] w-[5px] h-[5px] rounded-full bg-[#111827]" />
+                  <span className="absolute left-[8px] top-[14px] w-[12px] h-px bg-[#111827]" />
+                  <span className="absolute -left-[18px] top-[5px] w-5 h-5 rounded-full bg-[#111827] text-white text-[10px] font-bold flex items-center justify-center">2</span>
+
+                  {/* Pointer 3: Subtitle -- left side, aligned to subtitle */}
+                  <span className="absolute left-[20px] top-[34px] w-[5px] h-[5px] rounded-full bg-[#111827]" />
+                  <span className="absolute left-[8px] top-[36px] w-[12px] h-px bg-[#111827]" />
+                  <span className="absolute -left-[18px] top-[27px] w-5 h-5 rounded-full bg-[#111827] text-white text-[10px] font-bold flex items-center justify-center">3</span>
                 </div>
-                <button className="text-[#505867] p-1"><XMarkIcon className="w-4 h-4" /></button>
-              </div>
-              {/* Body */}
-              <div className="px-5 py-4 flex items-start gap-2">
-                <Pip n={4} />
-                <p className="text-[13px] text-[#505867]">Body content lives in ModalContent. Scrolls independently when content overflows.</p>
-              </div>
-              {/* Footer */}
-              <div className="px-5 py-3 border-t border-[#EDEEF1] flex items-center gap-2">
-                <Pip n={5} />
-                <div className="flex items-center gap-2 ml-auto">
+
+                {/* Body */}
+                <div className="px-5 py-4 text-[13px] text-[#505867] relative">
+                  Body content lives in ModalContent. Scrolls independently when content overflows.
+
+                  {/* Pointer 4: ModalContent -- left side */}
+                  <span className="absolute left-[20px] top-[18px] w-[5px] h-[5px] rounded-full bg-[#111827]" />
+                  <span className="absolute left-[8px] top-[20px] w-[12px] h-px bg-[#111827]" />
+                  <span className="absolute -left-[18px] top-[11px] w-5 h-5 rounded-full bg-[#111827] text-white text-[10px] font-bold flex items-center justify-center">4</span>
+                </div>
+
+                {/* Footer */}
+                <div className="px-5 py-3 border-t border-[#EDEEF1] flex items-center justify-end gap-2 relative">
                   <div className="h-7 px-3 flex items-center rounded border border-[#D7DAE0] text-[12px] font-medium text-[#111827]">Cancel</div>
                   <div className="h-7 px-3 flex items-center rounded bg-[#1258F8] text-[12px] font-medium text-white">Confirm</div>
+
+                  {/* Pointer 5: ModalFooter -- left side */}
+                  <span className="absolute left-[20px] top-[14px] w-[5px] h-[5px] rounded-full bg-[#111827]" />
+                  <span className="absolute left-[8px] top-[16px] w-[12px] h-px bg-[#111827]" />
+                  <span className="absolute -left-[18px] top-[7px] w-5 h-5 rounded-full bg-[#111827] text-white text-[10px] font-bold flex items-center justify-center">5</span>
                 </div>
               </div>
             </div>
-          </div>
-          {/* Backdrop pointer label */}
-          <div className="flex items-center gap-2 mt-4 mb-2">
-            <Pip n={1} />
-            <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">Backdrop (dark overlay behind the modal)</span>
-          </div>
-
-          {/* Legend */}
-          <div className="flex flex-col gap-1 mt-4">
-            {[
-              { num: '1', label: 'Backdrop', desc: <>Semi-transparent overlay. Click dismisses unless <Code>static</Code>. <Code>aria-hidden="true"</Code>.</> },
-              { num: '2', label: 'Title', desc: <>Required. Connected via <Code>aria-labelledby</Code>. Optional status icon precedes.</> },
-              { num: '3', label: 'Subtitle', desc: <>Optional second line under the title. Use sparingly.</> },
-              { num: '4', label: 'ModalContent', desc: <>Body slot. Scrolls independently. Connected via <Code>aria-describedby</Code> on ConfirmModal.</> },
-              { num: '5', label: 'ModalFooter', desc: <>Right-aligned action row. Cancel left, confirm right. Custom buttons use <Code>{"position: 'left' | 'right'"}</Code>.</> },
-            ].map(({ num, label, desc }) => (
-              <div key={num} className="grid grid-cols-[24px_140px_1fr] gap-3 py-1.5 text-[13px]">
-                <span className="font-mono text-[11px] text-[#C4C9D4] dark:text-[#3F4654] bg-[#F7F8F8] dark:bg-[#1F2430] rounded text-center leading-[18px] h-[18px]">{num}</span>
-                <span className="font-mono text-[12px] text-[#111827] dark:text-white">{label}</span>
-                <span className="text-[#505867] dark:text-[#9CA3AF]">{desc}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+          }
+          annotations={[
+            { num: '1', label: 'Backdrop', description: <>Semi-transparent overlay. Click dismisses unless <Code>static</Code>. <Code>aria-hidden="true"</Code>.</> },
+            { num: '2', label: 'Title', description: <>Required. Connected via <Code>aria-labelledby</Code>. Optional status icon precedes.</> },
+            { num: '3', label: 'Subtitle', description: <>Optional second line under the title. Use sparingly.</> },
+            { num: '4', label: 'ModalContent', description: <>Body slot. Scrolls independently. Connected via <Code>aria-describedby</Code> on ConfirmModal.</> },
+            { num: '5', label: 'ModalFooter', description: <>Right-aligned action row. Cancel left, confirm right. Custom buttons use <Code>{"position: 'left' | 'right'"}</Code>.</> },
+          ]}
+        />
       </SectionWrapper>
 
       {/* ── 08 Related ──────────────────────────────────────────────────────── */}
