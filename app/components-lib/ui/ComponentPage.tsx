@@ -202,21 +202,14 @@ export function SectionWrapper({
     }
   }, [id, num, title, register])
 
-  const isFirst = num === '01'
-
   return (
     <section
       id={id}
-      className={[
-        'scroll-mt-8',
-        isFirst ? '' : 'mt-16 pt-8 border-t border-[#EDEEF1] dark:border-[#1F2430]',
-      ].join(' ')}
+      className="scroll-mt-8 mt-16 pt-8 border-t border-[#EDEEF1] dark:border-[#1F2430]"
     >
-      {!isFirst && (
-        <span className="font-mono text-[12px] text-[#C4C9D4] dark:text-[#3F4654] tracking-[0.04em] mb-2 block">
-          {num} / {total}
-        </span>
-      )}
+      <span className="font-mono text-[12px] text-[#C4C9D4] dark:text-[#3F4654] tracking-[0.04em] mb-2 block">
+        {num} / {total}
+      </span>
       <h2 className="text-[26px] font-semibold text-[#111827] dark:text-white tracking-[-0.015em] mb-2">
         {title}
       </h2>
