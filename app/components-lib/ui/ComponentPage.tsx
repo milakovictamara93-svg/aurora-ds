@@ -61,13 +61,13 @@ export function ComponentPageLayout({
 
   return (
     <TocCtx.Provider value={{ entries, register, activeId }}>
-      <div className="flex gap-12 max-w-[1060px]">
+      <div className="flex justify-center gap-12">
         {/* Main content */}
         <div className="flex-1 min-w-0 max-w-[760px] pb-24">
           {children}
         </div>
 
-        {/* Sticky TOC */}
+        {/* Sticky TOC — matches left sidebar visual weight */}
         <TableOfContents />
       </div>
     </TocCtx.Provider>
@@ -82,7 +82,7 @@ function TableOfContents() {
   if (entries.length === 0) return null
 
   return (
-    <aside className="hidden xl:block w-[200px] shrink-0">
+    <aside className="hidden xl:block w-[220px] shrink-0">
       <div className="sticky top-8 max-h-[calc(100vh-64px)] overflow-y-auto">
         <p className="text-[10px] font-bold tracking-[0.08em] uppercase text-[#C4C9D4] dark:text-[#3F4654] mb-3">
           On this page
