@@ -1,16 +1,18 @@
 'use client'
 
-import PageHeader from '@/app/components-lib/ui/PageHeader'
-import {
-  ComponentTabs, TabBar, TabPanel,
-  Section, SpecTable, ColorRow,
-  DoCard, DontCard, A11yRow, KeyRow,
-  Preview, Annotation,
-  UseList, DontUseList, VariantRow, VariantTable, StatesTable, RelatedComponents,
-} from '@/app/components-lib/ui/ComponentTabs'
 import { PlusIcon, ArrowPathIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
+import {
+  ComponentPageLayout, TitleBlock, SectionWrapper,
+  WhenToUse, DecisionTree, RequiredPairings, ForbiddenRefuse,
+  AccessibilityList, AnatomyBlock, CanonicalExample,
+  RelatedGrid, PageFooter, Code,
+} from '@/app/components-lib/ui/ComponentPage'
+import {
+  SpecTable, StatesTable, VariantTable, VariantRow,
+} from '@/app/components-lib/ui/ComponentTabs'
 
-// ─── Shared button atom ───────────────────────────────────────────────────────
+// ── Shared button atom ───────────────────────────────────────────────────────
+
 function Btn({
   variant = 'primary',
   size = 'md',
@@ -82,332 +84,306 @@ function Btn({
   return (
     <button disabled={isDisabled} className={`${base} ${sz} ${cls}`}>
       {icon && state !== 'loading' && icon}
-      {children ?? 'Btn'}
+      {children ?? 'Button'}
       {state === 'loading' && <ArrowPathIcon className="w-3.5 h-3.5 animate-spin" />}
     </button>
   )
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
+// ── Page ─────────────────────────────────────────────────────────────────────
+
+const TOTAL = '12'
+
 export default function ButtonsPage() {
   const STATES = ['default', 'hover', 'pressed', 'focus', 'disabled', 'loading', 'danger'] as const
   const VARIANTS = ['primary', 'secondary', 'tertiary'] as const
 
   return (
-    <div>
-      <PageHeader
-        title="Buttons"
-        description="Trigger actions and submit forms. Six variants, two sizes, seven states."
-        badge="Components"
+    <ComponentPageLayout>
+      <TitleBlock
+        title="Button"
+        description="Trigger actions and submit forms. Six variants, two sizes, seven interactive states. The most fundamental interactive element in the system."
+        covers={'This page covers <code class="font-mono text-[13px] bg-[#F7F8F8] dark:bg-[#1F2430] px-1.5 py-0.5 rounded">Button</code>, <code class="font-mono text-[13px] bg-[#F7F8F8] dark:bg-[#1F2430] px-1.5 py-0.5 rounded">IconButton</code>, and the <code class="font-mono text-[13px] bg-[#F7F8F8] dark:bg-[#1F2430] px-1.5 py-0.5 rounded">danger</code> state pairing.'}
+        status="stable"
+        since="1.0.0"
       />
 
-      <ComponentTabs>
-        <TabBar />
+      {/* ── 01 When to use ──────────────────────────────────────────────────── */}
+      <SectionWrapper id="when-to-use" num="01" total={TOTAL} title="When to use, when not to use">
+        <WhenToUse
+          doItems={[
+            <>The single most important action per view: "Save", "Submit", "Export" (Primary).</>,
+            <>Supporting actions that sit alongside a primary button (Secondary).</>,
+            <>Low-emphasis actions like "Cancel" or neutral confirmations (Tertiary).</>,
+            <>Inline actions within dense UI such as table rows or list items (Text).</>,
+            <>Navigation to another page or external resource (Link).</>,
+            <>Space-constrained areas like toolbars or table row actions (Icon-only).</>,
+          ]}
+          dontItems={[
+            <>More than one Primary button per view. Multiple primaries collapse the visual hierarchy.</>,
+            <>A button when a link is needed. If clicking changes the URL, use an anchor element.</>,
+            <>Danger state for routine deletions. Reserve it for irreversible destructive actions with a confirmation step.</>,
+            <>Buttons for passive status display. Use a Tag or Badge instead.</>,
+          ]}
+        />
+      </SectionWrapper>
 
-        {/* ── USAGE ─────────────────────────────────────────────────────────── */}
-        <TabPanel id="usage">
-          
-            <Section title="When to use">
-              <UseList items={[
-                <><strong className="font-semibold text-[#1F2430] dark:text-white">Primary</strong> for the single most important action per view (e.g., "Save", "Submit", "Export").</>,
-                <><strong className="font-semibold text-[#1F2430] dark:text-white">Secondary</strong> for supporting actions that sit alongside a primary button.</>,
-                <><strong className="font-semibold text-[#1F2430] dark:text-white">Tertiary</strong> for low-emphasis actions such as "Cancel" or neutral confirmations.</>,
-                <><strong className="font-semibold text-[#1F2430] dark:text-white">Text</strong> for inline actions within dense UI (table rows, list items).</>,
-                <><strong className="font-semibold text-[#1F2430] dark:text-white">Link</strong> for navigation — use an <code className="px-1 py-0.5 rounded bg-[#F7F8F8] dark:bg-[#1F2430] text-xs font-mono text-[#1258F8]">&lt;a&gt;</code> tag, not a button.</>,
-                <><strong className="font-semibold text-[#1F2430] dark:text-white">Icon</strong> only in space-constrained areas (toolbars, table rows). Always include <code className="px-1 py-0.5 rounded bg-[#F7F8F8] dark:bg-[#1F2430] text-xs font-mono text-[#1258F8]">aria-label</code>.</>,
-              ]} />
-            </Section>
+      {/* ── 02 Decision tree ────────────────────────────────────────────────── */}
+      <SectionWrapper id="decision-tree" num="02" total={TOTAL} title="Decision tree against neighbours" description="When multiple components could plausibly fit the user's intent.">
+        <DecisionTree
+          rows={[
+            { intent: 'Trigger the primary action on the page', use: <Code>Button variant="primary"</Code>, not: <Code>Button variant="secondary"</Code> },
+            { intent: 'Accompany the primary action', use: <Code>Button variant="secondary"</Code>, not: <span>Two primaries side by side</span> },
+            { intent: 'Cancel or dismiss', use: <Code>Button variant="tertiary"</Code>, not: <Code>Button variant="secondary"</Code> },
+            { intent: 'Add an inline action in a table row', use: <Code>Button variant="text"</Code>, not: <Code>Button variant="tertiary"</Code> },
+            { intent: 'Navigate to another page', use: <Code>Button variant="link"</Code>, not: <Code>Button variant="primary"</Code> },
+            { intent: 'Action in a toolbar with no room for a label', use: <Code>Button variant="icon"</Code>, not: <span>Text-only button truncated</span> },
+            { intent: 'Toggle between 2-5 options', use: <Code>SegmentedControl</Code>, not: <span>Group of Buttons</span> },
+            { intent: 'Confirm a destructive action in a modal', use: <Code>Button danger</Code>, not: <Code>Button variant="primary"</Code> },
+          ]}
+        />
+      </SectionWrapper>
 
-            <Section title="When not to use">
-              <DontUseList items={[
-                "Don't use more than one Primary button per view. Multiple primaries create confusion about what action matters.",
-                "Don't use a button when a link is needed. If it changes the URL, use <a>.",
-                "Don't use the Danger state for routine deletions — reserve it for irreversible destructive actions with a confirmation step.",
-              ]} />
-            </Section>
+      {/* ── 03 Variants ─────────────────────────────────────────────────────── */}
+      <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants" description="Six variants. Each has a specific role in the hierarchy.">
+        <VariantTable>
+          <VariantRow
+            preview={<Btn variant="primary" icon={<PlusIcon className="w-4 h-4" />}>Add building</Btn>}
+            name="Primary"
+            description="The main action. One per view. Blue 600 filled."
+          />
+          <VariantRow
+            preview={<Btn variant="secondary">Export report</Btn>}
+            name="Secondary"
+            description="Supporting action alongside primary. Blue 600 outlined."
+          />
+          <VariantRow
+            preview={<Btn variant="tertiary">Cancel</Btn>}
+            name="Tertiary"
+            description="Low-emphasis. Cancel, dismiss. Neutral grey outline."
+          />
+          <VariantRow
+            preview={<Btn variant="text">+ Add row</Btn>}
+            name="Text"
+            description="Minimal chrome. Inline actions in dense UI. No border or background."
+          />
+          <VariantRow
+            preview={<Btn variant="link">View documentation</Btn>}
+            name="Link"
+            description="Navigational. Renders as an anchor element. Underlined."
+          />
+          <VariantRow
+            preview={<Btn variant="icon"><MagnifyingGlassIcon className="w-4 h-4" /></Btn>}
+            name="Icon"
+            description="Action without a label. Always needs aria-label."
+            last
+          />
+        </VariantTable>
+      </SectionWrapper>
 
-            <Section title="Variants">
-              <VariantTable>
-                <VariantRow
-                  preview={<Btn variant="primary" icon={<PlusIcon className="w-4 h-4" />}>Add building</Btn>}
-                  name="Primary"
-                  description="The main action. One per view. Blue 600 filled."
-                />
-                <VariantRow
-                  preview={<Btn variant="secondary">Export report</Btn>}
-                  name="Secondary"
-                  description="Supporting action alongside primary. Outlined Blue 600."
-                />
-                <VariantRow
-                  preview={<Btn variant="tertiary">Cancel</Btn>}
-                  name="Tertiary"
-                  description="Low-emphasis. Cancel, dismiss. Neutral outline."
-                />
-                <VariantRow
-                  preview={<Btn variant="text">+ Add row</Btn>}
-                  name="Text"
-                  description="Minimal. Use in dense UI — no border or background."
-                />
-                <VariantRow
-                  preview={<Btn variant="link">View documentation</Btn>}
-                  name="Link"
-                  description="Navigational. Always renders as an <a> element."
-                />
-                <VariantRow
-                  preview={<Btn variant="icon"><MagnifyingGlassIcon className="w-4 h-4" /></Btn>}
-                  name="Icon"
-                  description="Action without label. Always needs aria-label."
-                  last
-                />
-              </VariantTable>
-            </Section>
+      {/* ── 04 States ───────────────────────────────────────────────────────── */}
+      <SectionWrapper id="states" num="04" total={TOTAL} title="States" description="Seven interactive states across the three main variants.">
+        <StatesTable
+          columns={['Default', 'Hover', 'Pressed', 'Focus', 'Disabled', 'Loading', 'Danger']}
+          rows={VARIANTS.map(v => ({
+            label: v,
+            cells: STATES.map(s => (
+              <Btn key={s} variant={v} state={s} size="md" />
+            )),
+          }))}
+        />
+      </SectionWrapper>
 
-            <Section title="States">
-              <StatesTable
-                columns={['Default', 'Hover', 'Pressed', 'Focus', 'Disabled', 'Loading', 'Danger']}
-                rows={VARIANTS.map(v => ({
-                  label: v,
-                  cells: STATES.map(s => (
-                    <Btn key={s} variant={v} state={s} size="md" />
-                  )),
-                }))}
-              />
-            </Section>
+      {/* ── 05 Sizes ────────────────────────────────────────────────────────── */}
+      <SectionWrapper id="sizes" num="05" total={TOTAL} title="Sizes" description="Two sizes. Medium is the default. There is no large: large buttons compete with primary CTAs and the visual hierarchy collapses.">
+        <div className="flex flex-col gap-4">
+          <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
+            <div className="px-4 py-2.5 border-b border-[#EDEEF1] dark:border-[#1F2430] bg-[#F7F8F8] dark:bg-[#0D1117]">
+              <span className="text-xs font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-wider">Small (h-6, 24px) -- dense UI contexts</span>
+            </div>
+            <div className="p-6 flex flex-wrap gap-3 items-center bg-white dark:bg-[#111827]">
+              <Btn variant="primary" size="sm" icon={<PlusIcon className="w-3.5 h-3.5" />}>Button</Btn>
+              <Btn variant="secondary" size="sm">Button</Btn>
+              <Btn variant="tertiary" size="sm">Button</Btn>
+              <Btn variant="icon" size="sm"><MagnifyingGlassIcon className="w-3.5 h-3.5" /></Btn>
+            </div>
+          </div>
+          <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
+            <div className="px-4 py-2.5 border-b border-[#EDEEF1] dark:border-[#1F2430] bg-[#F7F8F8] dark:bg-[#0D1117]">
+              <span className="text-xs font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-wider">Medium (h-8, 32px, default) -- standard contexts</span>
+            </div>
+            <div className="p-6 flex flex-wrap gap-3 items-center bg-white dark:bg-[#111827]">
+              <Btn variant="primary" size="md" icon={<PlusIcon className="w-4 h-4" />}>Button</Btn>
+              <Btn variant="secondary" size="md">Button</Btn>
+              <Btn variant="tertiary" size="md">Button</Btn>
+              <Btn variant="icon" size="md"><MagnifyingGlassIcon className="w-4 h-4" /></Btn>
+            </div>
+          </div>
+        </div>
+      </SectionWrapper>
 
-            <Section title="Sizes">
-              <div className="flex flex-col gap-4">
-                <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
-                  <div className="px-4 py-2.5 border-b border-[#EDEEF1] dark:border-[#1F2430] bg-[#F7F8F8] dark:bg-[#0D1117]">
-                    <span className="text-xs font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-wider">Small (h-6) — dense UI contexts</span>
-                  </div>
-                  <div className="p-6 flex flex-wrap gap-3 items-center bg-white dark:bg-[#111827]">
-                    <Btn variant="primary" size="sm" icon={<PlusIcon className="w-3.5 h-3.5" />}>Button</Btn>
-                    <Btn variant="secondary" size="sm">Button</Btn>
-                    <Btn variant="tertiary" size="sm">Button</Btn>
-                    <Btn variant="icon" size="sm"><MagnifyingGlassIcon className="w-3.5 h-3.5" /></Btn>
-                  </div>
-                </div>
-                <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
-                  <div className="px-4 py-2.5 border-b border-[#EDEEF1] dark:border-[#1F2430] bg-[#F7F8F8] dark:bg-[#0D1117]">
-                    <span className="text-xs font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-wider">Medium (h-8, default) — standard contexts</span>
-                  </div>
-                  <div className="p-6 flex flex-wrap gap-3 items-center bg-white dark:bg-[#111827]">
-                    <Btn variant="primary" size="md" icon={<PlusIcon className="w-4 h-4" />}>Button</Btn>
-                    <Btn variant="secondary" size="md">Button</Btn>
-                    <Btn variant="tertiary" size="md">Button</Btn>
-                    <Btn variant="icon" size="md"><MagnifyingGlassIcon className="w-4 h-4" /></Btn>
-                  </div>
-                </div>
-              </div>
-              <Annotation>Small uses h-6 / px-3 / rounded / 12px text. Medium uses h-8 / px-3 / rounded / 14px text (default).</Annotation>
-            </Section>
+      {/* ── 06 Required pairings ────────────────────────────────────────────── */}
+      <SectionWrapper id="required-pairings" num="06" total={TOTAL} title="Required pairings" description="Rules that must hold. Missing one is a blocking failure: ask, don't guess.">
+        <RequiredPairings
+          rules={[
+            <>One Primary button per view. If two actions compete for primary, demote the less important one to Secondary.</>,
+            <>Icon-only buttons require <Code>aria-label</Code>. No exceptions. The label describes the action, not the icon.</>,
+            <>Loading state must set <Code>aria-busy="true"</Code> and disable the button. Swap the icon for a spinner but keep the label visible.</>,
+            <>Danger buttons only appear inside a confirmation flow (Modal or ConfirmModal). Never render a standalone Danger button on a page surface.</>,
+            <>Use native <Code>&lt;button&gt;</Code> elements. Never use <Code>&lt;div&gt;</Code> or <Code>&lt;span&gt;</Code> with a click handler. The Link variant uses <Code>&lt;a&gt;</Code>.</>,
+            <>Button labels must be verb-noun pairs in sentence case: "Add building", "Export report", "Delete record". Never "OK", "Submit", or "Click here".</>,
+          ]}
+        />
+      </SectionWrapper>
 
-            <Section title="Do / Don't">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <DoCard>
-                  <div className="flex gap-2 mb-3">
-                    <Btn variant="tertiary" size="md">Cancel</Btn>
-                    <Btn variant="primary" size="md">Save changes</Btn>
-                  </div>
-                  <p>Use specific verb-noun labels. Pair a primary with a neutral secondary or tertiary action.</p>
-                </DoCard>
-                <DontCard>
-                  <div className="flex gap-2 mb-3">
-                    <Btn variant="tertiary" size="md">OK</Btn>
-                    <Btn variant="primary" size="md">Submit</Btn>
-                  </div>
-                  <p>Don't use vague labels like "OK" or "Submit". Don't use two primary buttons side by side.</p>
-                </DontCard>
-                <DoCard>
-                  <div className="flex gap-2 mb-3">
-                    <Btn variant="primary" size="md" icon={<PlusIcon className="w-4 h-4" />}>Add building</Btn>
-                  </div>
-                  <p>Icons reinforce the action. Leading icon (left) is the standard position.</p>
-                </DoCard>
-                <DontCard>
-                  <div className="flex gap-2 mb-3">
-                    <Btn variant="primary" size="md">🏢 Add building 🏢</Btn>
-                  </div>
-                  <p>Don't use emoji in buttons. Don't place icons on both sides of the label.</p>
-                </DontCard>
-              </div>
-            </Section>
+      {/* ── 07 Forbidden and refuse ─────────────────────────────────────────── */}
+      <SectionWrapper id="forbidden" num="07" total={TOTAL} title="Forbidden and refuse" description="Hard-no rules. Refuse and produce the suggested response instead of generating code.">
+        <ForbiddenRefuse
+          rules={[
+            {
+              rule: <>Render two Primary buttons in the same view.</>,
+              response: <>"One Primary per view. Demote the less important action to Secondary or Tertiary."</>,
+            },
+            {
+              rule: <>Use a button for navigation. If the action changes the URL, it is a link.</>,
+              response: <>"Use <Code>Button variant="link"</Code> which renders an anchor element with <Code>href</Code>."</>,
+            },
+            {
+              rule: <>Use Danger state without a confirmation step.</>,
+              response: <>"Danger buttons live inside <Code>ConfirmModal</Code>. Wrap the action in a confirmation flow first."</>,
+            },
+            {
+              rule: <>Use vague labels like "OK", "Submit", "Yes", "No", or "Click here".</>,
+              response: <>"Labels should be verb-noun: 'Save changes', 'Delete building', 'Export report'. The label tells the user what will happen."</>,
+            },
+            {
+              rule: <>Use a <Code>&lt;div&gt;</Code> or <Code>&lt;span&gt;</Code> as a button.</>,
+              response: <>"Use a native <Code>&lt;button&gt;</Code>. It provides keyboard handling, focus management, and accessibility for free."</>,
+            },
+            {
+              rule: <>Place icons on both sides of the label, or use emoji in buttons.</>,
+              response: <>"One leading icon maximum. No trailing icons. No emoji. The icon reinforces the action, not decorates it."</>,
+            },
+          ]}
+        />
+      </SectionWrapper>
 
-            <RelatedComponents items={[
-              { href: '/components/inputs', label: 'Inputs', description: 'Form fields that buttons often accompany.' },
-              { href: '/components/modals', label: 'Modals', description: 'Button placement within modal dialogs.' },
-              { href: '/components/toasts', label: 'Toasts', description: 'Action buttons inside toast notifications.' },
-            ]} />
-          
-        </TabPanel>
+      {/* ── 08 API ──────────────────────────────────────────────────────────── */}
+      <SectionWrapper id="api" num="08" total={TOTAL} title="API" description="Props accepted by the Button component.">
+        <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3">Props</h3>
+        <SpecTable rows={[
+          { property: 'variant', value: "'primary' | 'secondary' | 'tertiary' | 'text' | 'link' | 'icon'", token: "default: 'primary'" },
+          { property: 'size', value: "'sm' | 'md'", token: "default: 'md'" },
+          { property: 'danger', value: 'boolean', token: "default: false" },
+          { property: 'disabled', value: 'boolean', token: "default: false" },
+          { property: 'loading', value: 'boolean', token: "default: false" },
+          { property: 'icon', value: 'IconName | ReactNode', token: 'optional -- leading icon' },
+          { property: 'aria-label', value: 'string', token: 'required for icon variant' },
+          { property: 'type', value: "'button' | 'submit' | 'reset'", token: "default: 'button'" },
+          { property: 'onClick', value: '(e: MouseEvent) => void', token: 'optional' },
+        ]} />
 
-        {/* ── STYLE ─────────────────────────────────────────────────────────── */}
-        <TabPanel id="style">
-          
-            <Section title="Anatomy">
-              <Preview label="Button anatomy — medium size">
-                <Btn variant="primary" icon={<PlusIcon className="w-4 h-4" />}>Label</Btn>
-                <Btn variant="secondary">Label</Btn>
-                <Btn variant="tertiary">Label</Btn>
-              </Preview>
-              <p className="text-sm text-[#505867] dark:text-[#9CA3AF] mt-3">
-                A button consists of an optional leading icon, label text, and optional trailing icon. Icon-only buttons omit the label.
-              </p>
-            </Section>
+        <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3 mt-8">Spacing and sizing</h3>
+        <SpecTable rows={[
+          { property: 'Height -- small', value: '24px (h-6)', token: '--' },
+          { property: 'Height -- medium', value: '32px (h-8)', token: '--' },
+          { property: 'Padding -- small', value: '12px (px-3)', token: '--' },
+          { property: 'Padding -- medium', value: '12px (px-3)', token: '--' },
+          { property: 'Icon gap', value: '6px / 8px', token: 'gap-1.5 / gap-2' },
+          { property: 'Border radius', value: '4px (rounded)', token: '--' },
+          { property: 'Font size -- small', value: '12px', token: 'text-xs' },
+          { property: 'Font size -- medium', value: '14px', token: 'text-sm' },
+          { property: 'Font weight', value: '500 (medium)', token: 'font-medium' },
+        ]} />
 
-            <Section title="Spacing & sizing">
-              <SpecTable rows={[
-                { property: 'Height — small',    value: '24px (h-6)',   token: '—' },
-                { property: 'Height — medium',   value: '32px (h-8)',   token: '—' },
-                { property: 'Padding — small',   value: '12px (px-3)',  token: '—' },
-                { property: 'Padding — medium',  value: '12px (px-3)',  token: '—' },
-                { property: 'Icon gap',           value: '6px / 8px',   token: 'gap-1.5 / gap-2' },
-                { property: 'Border radius',      value: '4px (rounded)', token: '—' },
-              ]} />
-            </Section>
+        <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3 mt-8">Colors</h3>
+        <SpecTable rows={[
+          { property: 'Primary fill', value: '#1258F8', token: 'Blue 600' },
+          { property: 'Primary hover', value: '#1146E4', token: 'Blue 700' },
+          { property: 'Primary pressed', value: '#143ABB', token: 'Blue 800' },
+          { property: 'Danger fill', value: '#DC2626', token: 'Red 600' },
+          { property: 'Disabled fill', value: '#EDEEF1', token: 'Grey 100' },
+          { property: 'Disabled text', value: '#B4BAC5', token: 'Grey 300' },
+          { property: 'Focus ring', value: '#1258F8', token: 'Blue 600, 2px solid, 2px offset' },
+        ]} />
+      </SectionWrapper>
 
-            <Section title="Typography">
-              <SpecTable rows={[
-                { property: 'Font family', value: 'Manrope',    token: '--font-manrope' },
-                { property: 'Font size — small',  value: '12px', token: 'text-xs' },
-                { property: 'Font size — medium', value: '14px', token: 'text-sm' },
-                { property: 'Font weight',        value: '500 (medium)', token: 'font-medium' },
-                { property: 'Letter spacing',     value: 'normal', token: '—' },
-                { property: 'Text transform',     value: 'sentence case', token: '—' },
-              ]} />
-            </Section>
+      {/* ── 09 Accessibility ────────────────────────────────────────────────── */}
+      <SectionWrapper id="accessibility" num="09" total={TOTAL} title="Accessibility" description="Keyboard, ARIA, and focus. Not negotiable.">
+        <AccessibilityList
+          items={[
+            { key: 'Role', value: <>Native <Code>&lt;button&gt;</Code> has implicit <Code>role="button"</Code>. Link variant uses <Code>&lt;a&gt;</Code> with <Code>role="link"</Code>.</> },
+            { key: 'Keyboard', value: <><Code>Tab</Code> moves focus in. <Code>Enter</Code> or <Code>Space</Code> activates. <Code>Shift+Tab</Code> moves focus out.</> },
+            { key: 'Focus ring', value: <>2px solid ring, Blue 600, 2px offset. Visible on keyboard navigation only, not on click.</> },
+            { key: 'aria-label', value: <>Required on icon-only buttons. Describes the action: <Code>aria-label="Search buildings"</Code>.</> },
+            { key: 'aria-busy', value: <>Set <Code>aria-busy="true"</Code> during loading state. Screen readers announce that the action is in progress.</> },
+            { key: 'disabled', value: <>Use the native <Code>disabled</Code> attribute. Do not use <Code>aria-disabled</Code> alone; it does not prevent activation.</> },
+            { key: 'Touch target', value: <>Medium (32px) meets 44px minimum with padding. Small (24px) does not; do not use small on mobile-primary surfaces.</> },
+            { key: 'Contrast', value: <>Primary: white on Blue 600 = 5.5:1 (AA). Tertiary: Grey 900 on white = 14.1:1 (AAA). Disabled is intentionally muted at 1.9:1.</> },
+          ]}
+        />
+      </SectionWrapper>
 
-            <Section title="Colors">
-              <ColorRow label="Primary fill" hex="#1258F8" role="Blue 600 — primary action" />
-              <ColorRow label="Primary hover" hex="#1146E4" role="Darkened fill on hover" border />
-              <ColorRow label="Blue 600 (focus ring)" hex="#1258F8" role="Focus indicator ring" border />
-              <ColorRow label="Danger" hex="#DC2626" role="Destructive action" border />
-              <ColorRow label="Disabled fill" hex="#EDEEF1" role="Grey 100 — muted, non-interactive" border />
-            </Section>
+      {/* ── 10 Anatomy ──────────────────────────────────────────────────────── */}
+      <SectionWrapper id="anatomy" num="10" total={TOTAL} title="Anatomy" description="Button structure at medium size.">
+        <AnatomyBlock
+          diagram={
+            <div className="flex items-center gap-8">
+              <Btn variant="primary" icon={<PlusIcon className="w-4 h-4" />}>Add building</Btn>
+              <Btn variant="secondary">Export report</Btn>
+              <Btn variant="tertiary">Cancel</Btn>
+            </div>
+          }
+          annotations={[
+            { num: '1', label: 'Container', description: <>Height, padding, border-radius, and background. Defines the clickable area.</> },
+            { num: '2', label: 'Leading icon', description: <>Optional. 16px in small, 20px in medium. Sits left of label with <Code>gap-1.5</Code>.</> },
+            { num: '3', label: 'Label', description: <>Verb-noun, sentence case, Manrope Medium. 12px in small, 14px in medium.</> },
+            { num: '4', label: 'Focus ring', description: <>2px solid Blue 600, 2px offset from container. Only visible on keyboard focus.</> },
+            { num: '5', label: 'Spinner', description: <>Replaces the leading icon during loading. Same size as the icon it replaces. Label stays visible.</> },
+          ]}
+        />
+      </SectionWrapper>
 
-            <Section title="Focus ring">
-              <Preview label="Focus state">
-                <Btn variant="primary" state="focus">Focused</Btn>
-                <Btn variant="secondary" state="focus">Focused</Btn>
-                <Btn variant="tertiary" state="focus">Focused</Btn>
-              </Preview>
-              <Annotation>2px solid ring, Blue 600 (#1258F8), 2px offset. Visible on keyboard navigation only.</Annotation>
-            </Section>
-          
-        </TabPanel>
+      {/* ── 11 Canonical example ─────────────────────────────────────────────── */}
+      <SectionWrapper id="canonical-example" num="11" total={TOTAL} title="Canonical example" description="Primary button with icon and loading state. Pasted as-is, it works.">
+        <CanonicalExample
+          filename="SaveButton.example.vue"
+          code={`<script setup lang="ts">
+import { ref } from 'vue'
+import { Button } from '@scaler-tech/aurora/button'
+import { useBuildingSave } from '@/stores/buildings'
 
-        {/* ── CODE ──────────────────────────────────────────────────────────── */}
-        <TabPanel id="code">
-          
-            <Section title="Primary button">
-              <Preview label="Live preview">
-                <Btn variant="primary" icon={<PlusIcon className="w-4 h-4" />}>Add building</Btn>
-              </Preview>
-              <pre className="mt-4 bg-[#0D1117] text-[#E2E8F0] text-sm font-mono rounded-lg p-4 overflow-x-auto leading-relaxed">
-{`<button
-  type="button"
-  className="inline-flex items-center gap-2 h-8 px-3 rounded
-             bg-[#1258F8] text-white text-sm font-medium
-             hover:bg-[#1146E4] focus:outline-none
-             focus:ring-2 focus:ring-[#1258F8] focus:ring-offset-2
-             disabled:bg-[#EDEEF1] disabled:text-[#B4BAC5]
-             disabled:cursor-not-allowed transition-colors"
->
-  <PlusIcon className="w-4 h-4" />
-  Add building
-</button>`}
-              </pre>
-            </Section>
+const { save, saving } = useBuildingSave()
+</script>
 
-            <Section title="Secondary button">
-              <Preview label="Live preview">
-                <Btn variant="secondary">Export report</Btn>
-              </Preview>
-              <pre className="mt-4 bg-[#0D1117] text-[#E2E8F0] text-sm font-mono rounded-lg p-4 overflow-x-auto leading-relaxed">
-{`<button
-  type="button"
-  className="inline-flex items-center gap-2 h-8 px-3 rounded
-             border border-[#1258F8] text-[#1258F8] text-sm font-medium
-             hover:bg-[#1258F8]/10 focus:outline-none
-             focus:ring-2 focus:ring-[#1258F8] focus:ring-offset-2
-             disabled:border-[#D7DAE0] disabled:text-[#B4BAC5]
-             disabled:cursor-not-allowed transition-colors"
->
-  Export report
-</button>`}
-              </pre>
-            </Section>
+<template>
+  <Button
+    variant="primary"
+    icon="plus"
+    :loading="saving"
+    @click="save"
+  >
+    Add building
+  </Button>
+</template>`}
+        />
+      </SectionWrapper>
 
-            <Section title="Tertiary button">
-              <Preview label="Live preview">
-                <Btn variant="tertiary">Cancel</Btn>
-              </Preview>
-              <pre className="mt-4 bg-[#0D1117] text-[#E2E8F0] text-sm font-mono rounded-lg p-4 overflow-x-auto leading-relaxed">
-{`<button
-  type="button"
-  className="inline-flex items-center gap-2 h-8 px-3 rounded
-             border border-[#EDEEF1] text-[#1F2430] text-sm font-medium
-             bg-white hover:bg-[#F7F8F8] hover:border-[#D7DAE0]
-             focus:outline-none focus:ring-2 focus:ring-[#1258F8]
-             focus:ring-offset-2 disabled:text-[#B4BAC5]
-             disabled:cursor-not-allowed transition-colors"
->
-  Cancel
-</button>`}
-              </pre>
-            </Section>
+      {/* ── 12 Related ──────────────────────────────────────────────────────── */}
+      <SectionWrapper id="related" num="12" total={TOTAL} title="Related components">
+        <RelatedGrid
+          items={[
+            { href: '/components/button-group', name: 'ButtonGroup', description: 'Group related buttons with shared segmented styling.' },
+            { href: '/components/inputs', name: 'TextInput', description: 'Form fields that buttons often accompany.' },
+            { href: '/components/modals', name: 'Modal', description: 'Button placement within modal dialogs. See danger pairing.' },
+            { href: '/components/toasts', name: 'Toast', description: 'Action buttons inside toast notifications.' },
+            { href: '/components/tabs', name: 'Tabs', description: 'Tab triggers share button-like affordances but navigate views.' },
+            { href: '/components/badges-tags', name: 'Tag', description: 'Status indicators. Not interactive like buttons.' },
+          ]}
+        />
+      </SectionWrapper>
 
-            <Section title="Loading state">
-              <Preview label="Live preview">
-                <Btn variant="primary" state="loading">Saving</Btn>
-              </Preview>
-              <pre className="mt-4 bg-[#0D1117] text-[#E2E8F0] text-sm font-mono rounded-lg p-4 overflow-x-auto leading-relaxed">
-{`<button
-  type="button"
-  disabled
-  className="inline-flex items-center gap-2 h-8 px-3 rounded
-             bg-[#56A3FF] text-white text-sm font-medium cursor-wait"
->
-  <ArrowPathIcon className="w-3.5 h-3.5 animate-spin" />
-  Saving
-</button>`}
-              </pre>
-            </Section>
-          
-        </TabPanel>
-
-        {/* ── ACCESSIBILITY ─────────────────────────────────────────────────── */}
-        <TabPanel id="accessibility">
-          
-            <Section title="Keyboard navigation">
-              <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#111827]">
-                <KeyRow keys={['Tab']} action="Move focus to the next interactive element." />
-                <KeyRow keys={['Shift+Tab']} action="Move focus to the previous interactive element." />
-                <KeyRow keys={['Enter', 'Space']} action="Activate the focused button." />
-                <KeyRow keys={['Esc']} action="Cancel the current action if inside a modal or popover." />
-              </div>
-            </Section>
-
-            <Section title="ARIA requirements">
-              <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#111827]">
-                <A11yRow check="aria-label">Required on icon-only buttons. Describes the action: <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">aria-label="Add building"</code>.</A11yRow>
-                <A11yRow check="aria-disabled">Use <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">disabled</code> attribute — do not use aria-disabled alone; it doesn't prevent activation.</A11yRow>
-                <A11yRow check="aria-busy">Add <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">aria-busy="true"</code> during loading state so screen readers announce progress.</A11yRow>
-                <A11yRow check="role">Native <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">&lt;button&gt;</code> elements have implicit role="button". Never use <code className="text-xs font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">&lt;div&gt;</code> as a button.</A11yRow>
-              </div>
-            </Section>
-
-            <Section title="Contrast">
-              <SpecTable rows={[
-                { property: 'Primary text on fill',  value: 'White on #1258F8', token: '5.5:1 ✓ AA' },
-                { property: 'Secondary text',        value: '#1258F8 on white', token: '5.5:1 ✓ AA' },
-                { property: 'Tertiary text',         value: '#1F2430 on white', token: '14.1:1 ✓ AAA' },
-                { property: 'Disabled text',         value: '#B4BAC5 on #EDEEF1', token: '1.9:1 — intentionally muted' },
-              ]} />
-            </Section>
-          
-        </TabPanel>
-      </ComponentTabs>
-    </div>
+      <PageFooter lastUpdated="2026-05-12" version="1.4.2" />
+    </ComponentPageLayout>
   )
 }
