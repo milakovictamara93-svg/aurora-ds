@@ -9,44 +9,34 @@ import {
 } from '@/app/components-lib/ui/ComponentPage'
 import { SpecTable } from '@/app/components-lib/ui/ComponentTabs'
 
-// ── SegmentedControl atom ────────────────────────────────────────────────────
-
-type SegVariant = 'primary' | 'secondary' | 'tertiary'
-type SegSize = 'sm' | 'md'
+// ── SegmentedControl atom (matches our existing component) ───────────────────
 
 function SegCtrl({
   options,
   size = 'md',
-  variant = 'primary',
   defaultIndex = 0,
 }: {
   options: string[]
-  size?: SegSize
-  variant?: SegVariant
+  size?: 'sm' | 'md'
   defaultIndex?: number
 }) {
   const [selected, setSelected] = useState(defaultIndex)
-  const h = size === 'sm' ? 'h-7' : 'h-9'
-  const px = size === 'sm' ? 'px-2.5 text-xs' : 'px-3.5 text-sm'
-
-  const activeClass: Record<SegVariant, string> = {
-    primary: 'bg-[#1258F8] text-white',
-    secondary: 'bg-transparent text-[#111827] dark:text-white ring-[1.5px] ring-inset ring-[#111827] dark:ring-white',
-    tertiary: 'bg-transparent text-[#111827] dark:text-white font-semibold',
-  }
+  const h = size === 'sm' ? 'h-8' : 'h-10'
+  const px = size === 'sm' ? 'px-3' : 'px-4'
 
   return (
-    <div className="inline-flex border border-[#D7DAE0] dark:border-[#374151] rounded-lg bg-[#F7F8F8] dark:bg-[#1F2430] p-[3px] gap-[2px]">
+    <div className="inline-flex border border-[#D7DAE0] dark:border-[#374151] rounded-[8px] overflow-hidden">
       {options.map((opt, i) => (
         <button
           key={opt}
           onClick={() => setSelected(i)}
           className={[
-            'inline-flex items-center justify-center rounded-[5px] font-medium transition-all whitespace-nowrap',
+            'inline-flex items-center justify-center text-sm font-medium transition-colors whitespace-nowrap',
             h, px,
+            i > 0 ? 'border-l border-[#D7DAE0] dark:border-[#374151]' : '',
             selected === i
-              ? activeClass[variant]
-              : 'bg-transparent text-[#505867] dark:text-[#9CA3AF] hover:bg-black/[0.04] dark:hover:bg-white/[0.04]',
+              ? 'bg-[#1258F8] text-white'
+              : 'bg-white dark:bg-[#111827] text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430]',
           ].join(' ')}
         >
           {opt}
@@ -56,33 +46,9 @@ function SegCtrl({
   )
 }
 
-// ── Variant card ─────────────────────────────────────────────────────────────
-
-function VariantCard({
-  children,
-  name,
-  description,
-}: {
-  children: React.ReactNode
-  name: string
-  description: string
-}) {
-  return (
-    <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] overflow-hidden">
-      <div className="h-[80px] bg-[#F7F8F8] dark:bg-[#111827] flex items-center justify-center px-4">
-        {children}
-      </div>
-      <div className="px-4 py-3 border-t border-[#EDEEF1] dark:border-[#1F2430]">
-        <p className="font-mono text-[12px] font-medium text-[#111827] dark:text-white">{name}</p>
-        <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mt-0.5 leading-[1.4]">{description}</p>
-      </div>
-    </div>
-  )
-}
-
 // ── Page ─────────────────────────────────────────────────────────────────────
 
-const TOTAL = '09'
+const TOTAL = '08'
 
 export default function SegmentedControlPage() {
   return (
@@ -124,43 +90,27 @@ export default function SegmentedControlPage() {
         />
       </SectionWrapper>
 
-      {/* ── 03 Variants ─────────────────────────────────────────────────────── */}
-      <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants" description="Choose by surface chrome. Primary in main content areas where the control is the focal point. Secondary in panels alongside primary buttons, where filled active states would compete. Tertiary inline in headers and toolbars where any chrome would be noise.">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <VariantCard name="primary" description="Filled active segment. The default. Use in main content areas.">
-            <SegCtrl options={['List', 'Grid', 'Map']} size="sm" variant="primary" />
-          </VariantCard>
-          <VariantCard name="secondary" description="Outlined active segment. Use in dense panels or alongside primary buttons.">
-            <SegCtrl options={['List', 'Grid', 'Map']} size="sm" variant="secondary" />
-          </VariantCard>
-          <VariantCard name="tertiary" description="Bold-only active. Use inline in headers and toolbars where chrome would be noise.">
-            <SegCtrl options={['List', 'Grid', 'Map']} size="sm" variant="tertiary" />
-          </VariantCard>
-        </div>
-      </SectionWrapper>
-
-      {/* ── 04 Sizes ────────────────────────────────────────────────────────── */}
-      <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes" description="md is the default. Use sm inside dense UI -- table rows, dropdowns, sidebars -- where vertical rhythm matters more than tap-target generosity. There is no lg: large segmented controls compete with primary CTAs and the visual hierarchy collapses.">
-        <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-8 flex flex-col items-center gap-4">
+      {/* ── 03 Sizes ────────────────────────────────────────────────────────── */}
+      <SectionWrapper id="sizes" num="03" total={TOTAL} title="Sizes" description="md is the default. Use sm inside dense UI -- table rows, sidebars -- where vertical rhythm matters more than tap-target generosity. There is no lg: large segmented controls compete with primary CTAs and the visual hierarchy collapses.">
+        <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-8 flex flex-col items-center gap-6">
           <div className="text-center">
-            <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] mb-1.5">sm / 28px</p>
+            <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] mb-2">sm / 32px</p>
             <SegCtrl options={['Day', 'Week', 'Month']} size="sm" />
           </div>
           <div className="text-center">
-            <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] mb-1.5">md / 36px (default)</p>
+            <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] mb-2">md / 40px (default)</p>
             <SegCtrl options={['Day', 'Week', 'Month']} size="md" />
           </div>
         </div>
       </SectionWrapper>
 
-      {/* ── 05 API ──────────────────────────────────────────────────────────── */}
-      <SectionWrapper id="api" num="05" total={TOTAL} title="API" description="The option schema is the contract. Every object in :options must conform to it; mismatches break selection silently.">
+      {/* ── 04 API ──────────────────────────────────────────────────────────── */}
+      <SectionWrapper id="api" num="04" total={TOTAL} title="API" description="The option schema is the contract. Every object in :options must conform to it; mismatches break selection silently.">
         <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3">Props</h3>
         <SpecTable rows={[
           { property: 'modelValue', value: 'string | number', token: 'required' },
           { property: 'options', value: 'SegmentOption[]', token: 'required, >= 2' },
           { property: 'size', value: "'sm' | 'md'", token: "default: 'md'" },
-          { property: 'variant', value: "'primary' | 'secondary' | 'tertiary'", token: "default: 'primary'" },
         ]} />
 
         <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3 mt-8">Option schema</h3>
@@ -178,8 +128,8 @@ export default function SegmentedControlPage() {
         ]} />
       </SectionWrapper>
 
-      {/* ── 06 Required pairings ────────────────────────────────────────────── */}
-      <SectionWrapper id="required-pairings" num="06" total={TOTAL} title="Required pairings" description="Rules that must hold. Missing one is a blocking failure: ask, don't guess.">
+      {/* ── 05 Required pairings ────────────────────────────────────────────── */}
+      <SectionWrapper id="required-pairings" num="05" total={TOTAL} title="Required pairings" description="Rules that must hold. Missing one is a blocking failure: ask, don't guess.">
         <RequiredPairings
           rules={[
             <>Provide at least 2 options. A SegmentedControl with one option should be a <Code>Button</Code>.</>,
@@ -190,8 +140,8 @@ export default function SegmentedControlPage() {
         />
       </SectionWrapper>
 
-      {/* ── 07 Forbidden and refuse ─────────────────────────────────────────── */}
-      <SectionWrapper id="forbidden" num="07" total={TOTAL} title="Forbidden and refuse" description="Hard-no rules. Refuse and produce the suggested response instead of generating code.">
+      {/* ── 06 Forbidden and refuse ─────────────────────────────────────────── */}
+      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden and refuse" description="Hard-no rules. Refuse and produce the suggested response instead of generating code.">
         <ForbiddenRefuse
           rules={[
             {
@@ -218,8 +168,8 @@ export default function SegmentedControlPage() {
         />
       </SectionWrapper>
 
-      {/* ── 08 Accessibility ────────────────────────────────────────────────── */}
-      <SectionWrapper id="accessibility" num="08" total={TOTAL} title="Accessibility" description="Group role with arrow-key navigation between segments, focus management on entry and exit, contrast on the active segment. Required.">
+      {/* ── 07 Accessibility ────────────────────────────────────────────────── */}
+      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility" description="Group role with arrow-key navigation between segments, focus management on entry and exit, contrast on the active segment. Required.">
         <AccessibilityList
           items={[
             { key: 'Role', value: <>Wrapper has <Code>role="group"</Code> with <Code>aria-label="Segmented control"</Code>. Each segment is a real <Code>&lt;button&gt;</Code> with <Code>aria-pressed</Code> reflecting the selected state.</> },
@@ -232,19 +182,19 @@ export default function SegmentedControlPage() {
         />
       </SectionWrapper>
 
-      {/* ── 09 Anatomy ──────────────────────────────────────────────────────── */}
-      <SectionWrapper id="anatomy" num="09" total={TOTAL} title="Anatomy">
+      {/* ── 08 Anatomy ──────────────────────────────────────────────────────── */}
+      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy">
         <AnatomyBlock
           diagram={
             <div className="bg-[#F7F8F8] dark:bg-[#111827] rounded-lg px-12 py-14 flex items-center justify-center">
-              <div className="relative inline-flex border border-[#D7DAE0] dark:border-[#374151] rounded-lg bg-[#EDEEF1] dark:bg-[#1F2430] p-[3px] gap-[2px]">
+              <div className="relative inline-flex border border-[#D7DAE0] dark:border-[#374151] rounded-[8px] overflow-visible">
                 {/* Pointer 3: Container -- bottom center */}
                 <span className="absolute bottom-[-3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
                 <span className="absolute bottom-[-19px] left-1/2 -translate-x-1/2 w-px h-[16px] bg-[#111827] dark:bg-white" />
                 <span className="absolute bottom-[-39px] left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">3</span>
 
                 {/* Active segment */}
-                <div className="relative inline-flex items-center justify-center h-9 px-3.5 rounded-[5px] bg-[#1258F8] text-white text-sm font-medium">
+                <div className="relative inline-flex items-center justify-center h-10 px-4 bg-[#1258F8] text-white text-sm font-medium rounded-l-[7px]">
                   Day
                   {/* Pointer 1: Active segment -- top */}
                   <span className="absolute top-[-3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
@@ -252,8 +202,16 @@ export default function SegmentedControlPage() {
                   <span className="absolute top-[-39px] left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">1</span>
                 </div>
 
+                {/* Divider */}
+                <div className="relative w-px bg-[#D7DAE0] dark:bg-[#374151]">
+                  {/* Pointer 4: Separator -- bottom */}
+                  <span className="absolute bottom-[-3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
+                  <span className="absolute bottom-[-19px] left-1/2 -translate-x-1/2 w-px h-[16px] bg-[#111827] dark:bg-white" />
+                  <span className="absolute bottom-[-39px] left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">4</span>
+                </div>
+
                 {/* Inactive segment */}
-                <div className="relative inline-flex items-center justify-center h-9 px-3.5 rounded-[5px] text-[#505867] dark:text-[#9CA3AF] text-sm font-medium">
+                <div className="relative inline-flex items-center justify-center h-10 px-4 bg-white dark:bg-[#111827] text-[#505867] dark:text-[#9CA3AF] text-sm font-medium">
                   Week
                   {/* Pointer 2: Inactive segment -- top */}
                   <span className="absolute top-[-3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
@@ -261,28 +219,26 @@ export default function SegmentedControlPage() {
                   <span className="absolute top-[-39px] left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">2</span>
                 </div>
 
-                {/* Third segment, no pointer */}
-                <div className="inline-flex items-center justify-center h-9 px-3.5 rounded-[5px] text-[#505867] dark:text-[#9CA3AF] text-sm font-medium">
+                {/* Divider */}
+                <div className="w-px bg-[#D7DAE0] dark:bg-[#374151]" />
+
+                {/* Third segment */}
+                <div className="inline-flex items-center justify-center h-10 px-4 bg-white dark:bg-[#111827] text-[#505867] dark:text-[#9CA3AF] text-sm font-medium rounded-r-[7px]">
                   Month
                 </div>
-
-                {/* Pointer 4: Separator gap -- bottom right area */}
-                <span className="absolute bottom-[-3px] right-[58px] w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
-                <span className="absolute bottom-[-19px] right-[60px] w-px h-[16px] bg-[#111827] dark:bg-white" />
-                <span className="absolute bottom-[-39px] right-[51px] w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">4</span>
               </div>
             </div>
           }
           annotations={[
-            { num: '1', label: 'Active segment', description: <>Filled background, <Code>aria-pressed="true"</Code>. Only one active at a time.</> },
-            { num: '2', label: 'Inactive segment', description: <>Transparent background, <Code>aria-pressed="false"</Code>. Hover shows subtle fill.</> },
-            { num: '3', label: 'Container', description: <>Shared border and background. Single border radius around the whole control, not per segment.</> },
-            { num: '4', label: 'Separator', description: <>2px gap between segments inherited from container padding. No inner dividers.</> },
+            { num: '1', label: 'Active segment', description: <>Blue 600 filled background, <Code>aria-pressed="true"</Code>. Only one active at a time.</> },
+            { num: '2', label: 'Inactive segment', description: <>White background, <Code>aria-pressed="false"</Code>. Hover shows subtle fill.</> },
+            { num: '3', label: 'Container', description: <>Shared outer border and rounded-[8px] radius. Clips all segments via overflow-hidden.</> },
+            { num: '4', label: 'Separator', description: <>1px border-l between segments. Inherited from the segment's left border, not a standalone element.</> },
           ]}
         />
       </SectionWrapper>
 
-      {/* ── Related (unnumbered) ─────────────────────────────────────────── */}
+      {/* ── Related ─────────────────────────────────────────────────────────── */}
       <div className="mt-16 pt-8 border-t border-[#EDEEF1] dark:border-[#1F2430]">
         <p className="text-[10px] font-bold tracking-[0.08em] uppercase text-[#C4C9D4] dark:text-[#3F4654] mb-4">Related components</p>
         <RelatedGrid
