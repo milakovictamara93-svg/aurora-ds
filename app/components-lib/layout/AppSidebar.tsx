@@ -45,6 +45,7 @@ const COMPONENT_GROUPS: NavGroup[] = [
     id: 'forms',
     label: 'Forms',
     items: [
+      { href: '/components/combobox',                  label: 'Combobox' },
       { href: '/components/inputs/text',              label: 'Text' },
       { href: '/components/inputs/search',            label: 'Search' },
       { href: '/components/inputs/password',          label: 'Password' },
