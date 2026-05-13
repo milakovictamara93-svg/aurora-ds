@@ -149,7 +149,7 @@ export default function ButtonsPage() {
       </SectionWrapper>
 
       {/* ── 02 Decision tree ────────────────────────────────────────────────── */}
-      <SectionWrapper id="decision-tree" num="02" total={TOTAL} title="Decision tree against neighbours" description="Use when more than one Button-family component could plausibly fit.">
+      <SectionWrapper id="decision-tree" num="02" total={TOTAL} title="Decision tree against neighbours">
         <DecisionTree
           rows={[
             { intent: 'Trigger an action on this page', use: <Code>Button</Code>, not: <Code>&lt;a&gt;</Code> },

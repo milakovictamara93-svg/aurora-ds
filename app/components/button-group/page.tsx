@@ -87,7 +87,7 @@ export default function SegmentedControlPage() {
       </SectionWrapper>
 
       {/* ── 02 Decision tree ────────────────────────────────────────────────── */}
-      <SectionWrapper id="decision-tree" num="02" total={TOTAL} title="Decision tree against neighbours" description="Use when more than one component could plausibly fit. SegmentedControl gets reached for in places where Toggle, Tabs, or Combobox would serve the user better.">
+      <SectionWrapper id="decision-tree" num="02" total={TOTAL} title="Decision tree against neighbours">
         <DecisionTree
           rows={[
             { intent: 'Pick one of 2-5 visible options', use: <Code>SegmentedControl</Code>, not: <Code>Combobox</Code> },
