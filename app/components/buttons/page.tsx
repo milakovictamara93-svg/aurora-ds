@@ -109,9 +109,9 @@ function VariantCard({
       <div className="h-[72px] bg-[#F7F8F8] dark:bg-[#111827] flex items-center justify-center px-3">
         {children}
       </div>
-      <div className="px-3 py-2.5 border-t border-[#EDEEF1] dark:border-[#1F2430]">
-        <p className="font-mono text-[12px] font-medium text-[#111827] dark:text-white">{name}</p>
-        <p className="text-[10px] text-[#C4C9D4] dark:text-[#3F4654] uppercase tracking-[0.04em] mt-0.5">{tag}</p>
+      <div className="px-3 py-3 border-t border-[#EDEEF1] dark:border-[#1F2430]">
+        <p className="font-mono text-[12px] font-medium text-[#111827] dark:text-white mb-1">{name}</p>
+        <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-[1.4]">{tag}</p>
       </div>
     </div>
   )
@@ -164,22 +164,25 @@ export default function ButtonsPage() {
       </SectionWrapper>
 
       {/* ── 03 Variants ─────────────────────────────────────────────────────── */}
-      <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants" description="Choose by emphasis. One primary button per view -- multiple primaries make the dominant action ambiguous. Reach for secondary alongside primary, tertiary for low-emphasis dismiss and skip actions, text for inline dense UI where chrome would be noise.">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-          <VariantCard name="primary" tag="Main action, one per view">
+      <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <VariantCard name="primary" tag="The single most important action per view (e.g. 'Save', 'Submit', 'Export').">
             <Btn variant="primary">Save changes</Btn>
           </VariantCard>
-          <VariantCard name="secondary" tag="Alongside primary">
-            <Btn variant="secondary">Cancel</Btn>
+          <VariantCard name="secondary" tag="Supporting actions that sit alongside a primary button.">
+            <Btn variant="secondary">Export report</Btn>
           </VariantCard>
-          <VariantCard name="tertiary" tag="Dismiss, low-emphasis">
-            <Btn variant="tertiary">Skip</Btn>
+          <VariantCard name="tertiary" tag="Low-emphasis actions such as 'Cancel' or neutral confirmations.">
+            <Btn variant="tertiary">Cancel</Btn>
           </VariantCard>
-          <VariantCard name="text" tag="Inline, no chrome">
+          <VariantCard name="text" tag="Inline actions within dense UI (table rows, list items).">
             <Btn variant="text">View details</Btn>
           </VariantCard>
-          <VariantCard name="danger" tag="Irreversible only, pair with Modal">
-            <Btn variant="danger">Delete</Btn>
+          <VariantCard name="link" tag="Navigation -- use an <a> tag, not a button.">
+            <Btn variant="link">View documentation</Btn>
+          </VariantCard>
+          <VariantCard name="icon" tag="Space-constrained areas (toolbars, table rows). Always include aria-label.">
+            <Btn variant="icon"><MagnifyingGlassIcon className="w-4 h-4" /></Btn>
           </VariantCard>
         </div>
       </SectionWrapper>
