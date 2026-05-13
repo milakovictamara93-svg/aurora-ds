@@ -29,13 +29,13 @@ function SegCtrl({
   const px = size === 'sm' ? 'px-2.5 text-xs' : 'px-3.5 text-sm'
 
   const activeStyles: Record<SegVariant, string> = {
-    primary: 'bg-[#1258F8] text-white rounded-[6px]',
-    secondary: 'bg-white dark:bg-[#0D1117] text-[#111827] dark:text-white rounded-[6px] shadow-sm',
+    primary: 'bg-[#1258F8] text-white',
+    secondary: 'bg-white dark:bg-[#0D1117] text-[#111827] dark:text-white',
     tertiary: 'text-[#111827] dark:text-white font-semibold',
   }
 
   return (
-    <div className="inline-flex bg-[#EDEEF1] dark:bg-[#1F2430] rounded-[8px] p-[3px] gap-[2px]">
+    <div className="inline-flex border border-[#D7DAE0] dark:border-[#374151] rounded-[8px] overflow-hidden">
       {options.map((opt, i) => (
         <button
           key={opt}
@@ -43,9 +43,10 @@ function SegCtrl({
           className={[
             'inline-flex items-center justify-center font-medium transition-all whitespace-nowrap',
             h, px,
+            i > 0 ? 'border-l border-[#D7DAE0] dark:border-[#374151]' : '',
             selected === i
               ? activeStyles[variant]
-              : 'text-[#505867] dark:text-[#9CA3AF] rounded-[6px] hover:bg-black/[0.04] dark:hover:bg-white/[0.04]',
+              : 'bg-white dark:bg-[#111827] text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430]',
           ].join(' ')}
         >
           {opt}
@@ -216,14 +217,14 @@ export default function SegmentedControlPage() {
           diagram={
             <div className="bg-[#F7F8F8] dark:bg-[#111827] rounded-lg px-12 py-14 flex items-center justify-center">
               {/* Container */}
-              <div className="relative inline-flex bg-[#EDEEF1] dark:bg-[#1F2430] rounded-[8px] p-[3px] gap-[2px]">
+              <div className="relative inline-flex border border-[#D7DAE0] dark:border-[#374151] rounded-[8px] overflow-visible">
                 {/* Pointer 3: Container -- bottom center */}
                 <span className="absolute bottom-[-3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
                 <span className="absolute bottom-[-19px] left-1/2 -translate-x-1/2 w-px h-[16px] bg-[#111827] dark:bg-white" />
                 <span className="absolute bottom-[-39px] left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">3</span>
 
                 {/* Active segment */}
-                <div className="relative inline-flex items-center justify-center h-9 px-3.5 bg-[#1258F8] text-white text-sm font-medium rounded-[6px]">
+                <div className="relative inline-flex items-center justify-center h-9 px-3.5 bg-[#1258F8] text-white text-sm font-medium rounded-l-[7px]">
                   Day
                   {/* Pointer 1: Active segment -- top */}
                   <span className="absolute top-[-3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
@@ -231,8 +232,16 @@ export default function SegmentedControlPage() {
                   <span className="absolute top-[-39px] left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">1</span>
                 </div>
 
+                {/* Divider */}
+                <div className="relative w-px bg-[#D7DAE0] dark:bg-[#374151]">
+                  {/* Pointer 4: Separator -- bottom */}
+                  <span className="absolute bottom-[-3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
+                  <span className="absolute bottom-[-19px] left-1/2 -translate-x-1/2 w-px h-[16px] bg-[#111827] dark:bg-white" />
+                  <span className="absolute bottom-[-39px] left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">4</span>
+                </div>
+
                 {/* Inactive segment */}
-                <div className="relative inline-flex items-center justify-center h-9 px-3.5 text-[#505867] dark:text-[#9CA3AF] text-sm font-medium rounded-[6px]">
+                <div className="relative inline-flex items-center justify-center h-9 px-3.5 bg-white dark:bg-[#111827] text-[#505867] dark:text-[#9CA3AF] text-sm font-medium">
                   Week
                   {/* Pointer 2: Inactive segment -- top */}
                   <span className="absolute top-[-3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
@@ -240,23 +249,21 @@ export default function SegmentedControlPage() {
                   <span className="absolute top-[-39px] left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">2</span>
                 </div>
 
+                {/* Divider */}
+                <div className="w-px bg-[#D7DAE0] dark:bg-[#374151]" />
+
                 {/* Third segment */}
-                <div className="inline-flex items-center justify-center h-9 px-3.5 text-[#505867] dark:text-[#9CA3AF] text-sm font-medium rounded-[6px]">
+                <div className="inline-flex items-center justify-center h-9 px-3.5 bg-white dark:bg-[#111827] text-[#505867] dark:text-[#9CA3AF] text-sm font-medium rounded-r-[7px]">
                   Month
                 </div>
-
-                {/* Pointer 4: Separator gap -- between Day and Week, bottom */}
-                <span className="absolute bottom-[-3px] left-[72px] w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
-                <span className="absolute bottom-[-19px] left-[74px] w-px h-[16px] bg-[#111827] dark:bg-white" />
-                <span className="absolute bottom-[-39px] left-[65px] w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">4</span>
               </div>
             </div>
           }
           annotations={[
             { num: '1', label: 'Active segment', description: <>Filled background (Blue 600 for primary), <Code>aria-pressed="true"</Code>. Only one active at a time.</> },
-            { num: '2', label: 'Inactive segment', description: <>Transparent background, <Code>aria-pressed="false"</Code>. Hover shows subtle fill.</> },
-            { num: '3', label: 'Container', description: <>Grey background surface with shared rounded-[8px] radius. Holds all segments with 3px padding.</> },
-            { num: '4', label: 'Separator', description: <>2px gap between segments inherited from container padding. No visible dividers.</> },
+            { num: '2', label: 'Inactive segment', description: <>White background, <Code>aria-pressed="false"</Code>. Hover shows subtle fill.</> },
+            { num: '3', label: 'Container', description: <>Shared border and rounded-[8px] radius around the whole control. White background, no fill.</> },
+            { num: '4', label: 'Separator', description: <>1px border between segments. Visible divider line inherited from segment border-l.</> },
           ]}
         />
       </SectionWrapper>
