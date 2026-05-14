@@ -49,7 +49,7 @@ export default function TabsPage() {
       </SectionWrapper>
 
       <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants" description="Two types: Primary (underline, for main content areas) and Secondary (bottom border, for sub-sections).">
-        <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-6 flex flex-col gap-6">
+        <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-[#F7F8F8] dark:bg-[#111827] p-6 flex flex-col gap-6">
           <div>
             <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] mb-2 font-mono">primary</p>
             <Tabs

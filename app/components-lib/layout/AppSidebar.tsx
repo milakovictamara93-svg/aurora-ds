@@ -65,7 +65,7 @@ const COMPONENT_GROUPS: NavGroup[] = [
       { href: '/components/data-points',    label: 'Data points' },
       { href: '/components/mini-dashboard', label: 'Mini dashboard' },
       { href: '/components/badges-tags',           label: 'Tag' },
-      { href: '/components/badges-tags#indicator', label: 'Indicator' },
+      { href: '/components/indicator',              label: 'Indicator' },
       { href: '/components/data-points#arrow',     label: 'Data arrow' },
       { href: '/components/formatted',      label: 'Formatted' },
       { href: '/components/markdown',       label: 'Markdown' },

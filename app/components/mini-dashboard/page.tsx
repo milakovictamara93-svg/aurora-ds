@@ -38,7 +38,7 @@ export default function MiniDashboardPage() {
         ]} />
       </SectionWrapper>
 
-      <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants" description="Two background variants: 'above' (white) for use above main content, and 'inside' (grey) for use within cards or content sections.">
+      <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants" description="Three background variants (above, inside, outline) and two sizes (default, condensed).">
         <div className="flex flex-col gap-6">
           <div>
             <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3">Above content (white)</h3>
@@ -50,6 +50,24 @@ export default function MiniDashboardPage() {
             <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3">Inside content (grey)</h3>
             <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-6">
               <MiniDashboard variant="inside" slots={SLOTS} />
+            </div>
+          </div>
+          <div>
+            <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3">Outline</h3>
+            <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-6">
+              <MiniDashboard variant="outline" slots={SLOTS} />
+            </div>
+          </div>
+          <div>
+            <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3">Condensed -- above</h3>
+            <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-6">
+              <MiniDashboard variant="above" size="condensed" slots={SLOTS} />
+            </div>
+          </div>
+          <div>
+            <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3">Condensed -- inside</h3>
+            <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-6">
+              <MiniDashboard variant="inside" size="condensed" slots={SLOTS} />
             </div>
           </div>
         </div>

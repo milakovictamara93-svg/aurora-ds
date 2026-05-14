@@ -36,10 +36,49 @@ export default function FileUploadPage() {
         ]} />
       </SectionWrapper>
 
-      <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants" description="Drop zone for drag-and-drop, click-to-browse trigger, file list with progress bars, and uploaded file preview with remove action.">
-        <div className="rounded-lg border-2 border-dashed border-[#D7DAE0] dark:border-[#374151] bg-[#F7F8F8] dark:bg-[#111827] p-8 text-center">
-          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">Drag files here or click to browse</p>
-          <p className="text-[12px] text-[#C4C9D4] dark:text-[#3F4654] mt-1">CSV, XLSX, PDF up to 10MB</p>
+      <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants" description="Three states: empty drop zone, uploading with progress, and uploaded file list with remove action.">
+        <div className="flex flex-col gap-4">
+          <div>
+            <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3">Empty drop zone</h3>
+            <div className="rounded-lg border-2 border-dashed border-[#D7DAE0] dark:border-[#374151] bg-[#F7F8F8] dark:bg-[#111827] p-8 text-center">
+              <div className="w-10 h-10 mx-auto mb-3 rounded-full bg-[#EDEEF1] dark:bg-[#1F2430] flex items-center justify-center">
+                <svg className="w-5 h-5 text-[#505867] dark:text-[#9CA3AF]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
+              </div>
+              <p className="text-[14px] font-medium text-[#111827] dark:text-white">Drag files here or click to browse</p>
+              <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] mt-1">CSV, XLSX, PDF up to 10MB</p>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3">Uploading</h3>
+            <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-4">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded bg-[#EDEEF1] dark:bg-[#1F2430] flex items-center justify-center shrink-0">
+                  <svg className="w-4 h-4 text-[#505867]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-[13px] font-medium text-[#111827] dark:text-white truncate">energy-data-2024.csv</p>
+                  <div className="h-1 w-full rounded-full bg-[#EDEEF1] dark:bg-[#1F2430] mt-1.5 overflow-hidden">
+                    <div className="h-1 rounded-full bg-[#1258F8] w-[65%]" />
+                  </div>
+                  <p className="text-[11px] text-[#505867] dark:text-[#9CA3AF] mt-1">65% uploaded</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3">Uploaded</h3>
+            <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-4 flex flex-col gap-2">
+              {['energy-data-2024.csv', 'ghg-emissions-q1.xlsx'].map(name => (
+                <div key={name} className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded bg-[#f0fdf4] dark:bg-green-950 flex items-center justify-center shrink-0">
+                    <svg className="w-4 h-4 text-[#16a34a]" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" /></svg>
+                  </div>
+                  <p className="text-[13px] font-medium text-[#111827] dark:text-white flex-1 truncate">{name}</p>
+                  <button className="text-[#505867] dark:text-[#9CA3AF] hover:text-[#DC2626] text-[12px]">Remove</button>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </SectionWrapper>
 

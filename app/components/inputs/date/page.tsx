@@ -4,7 +4,7 @@ import InputDate from '@/app/components-lib/ui/InputDate'
 import {
   ComponentPageLayout, TitleBlock, SectionWrapper,
   WhenToUse, DecisionTree, RequiredPairings, ForbiddenRefuse,
-  AccessibilityList, Code, TodoSection,
+  AccessibilityList, Code,
 } from '@/app/components-lib/ui/ComponentPage'
 
 const TOTAL = '06'
@@ -13,12 +13,22 @@ export default function DatePickerPage() {
   return (
     <ComponentPageLayout>
       <TitleBlock title="Date picker" description="Calendar popup for selecting a single date or date range. Preset shortcuts on the left, month calendar on the right." />
+
       <SectionWrapper id="when-to-use" num="01" total={TOTAL} title="When to use, when not to use">
         <WhenToUse
-          doItems={[<>Selecting a date or date range in a form</>, <>Filtering data by time period</>, <>The user benefits from a calendar view</>]}
-          dontItems={[<>Year-only or month-only selection -- use <Code>Combobox</Code></>, <>Free-form date entry with no validation -- use <Code>Text input</Code></>, <>Time-only selection</>]}
+          doItems={[
+            <>Selecting a date or date range in a form</>,
+            <>Filtering data by time period</>,
+            <>The user benefits from a calendar view</>,
+          ]}
+          dontItems={[
+            <>Year-only or month-only selection -- use <Code>Combobox</Code></>,
+            <>Free-form date entry with no validation -- use <Code>Text input</Code></>,
+            <>Time-only selection</>,
+          ]}
         />
       </SectionWrapper>
+
       <SectionWrapper id="decision-tree" num="02" total={TOTAL} title="Decision tree against neighbours">
         <DecisionTree rows={[
           { intent: 'Select a date or date range', use: <Code>Date picker</Code>, not: <Code>Text input</Code> },
@@ -26,7 +36,41 @@ export default function DatePickerPage() {
           { intent: 'Free-form date text', use: <Code>Text input</Code>, not: <Code>Date picker</Code> },
         ]} />
       </SectionWrapper>
-      <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants"><TodoSection label="Date picker demo coming in follow-up." /></SectionWrapper>
+
+      <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants" description="Click the trigger to open the calendar. Preset shortcuts on the left, month calendar on the right. Save/Cancel confirm or discard the selection.">
+        <div className="flex flex-col gap-4">
+          <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-6 max-w-[300px]">
+            <InputDate
+              id="date-default"
+              label="Reporting period"
+            />
+          </div>
+          <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-6 max-w-[300px]">
+            <InputDate
+              id="date-prefilled"
+              label="Date range"
+              defaultValue={{ start: '2026-01-01', end: '2026-03-31' }}
+            />
+          </div>
+          <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-6 max-w-[300px]">
+            <InputDate
+              id="date-error"
+              label="Submission deadline"
+              state="error"
+              helperText="End date must be after start date"
+            />
+          </div>
+          <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-6 max-w-[300px]">
+            <InputDate
+              id="date-disabled"
+              label="Locked period"
+              disabled
+              defaultValue={{ start: '2025-01-01', end: '2025-12-31' }}
+            />
+          </div>
+        </div>
+      </SectionWrapper>
+
       <SectionWrapper id="required-pairings" num="04" total={TOTAL} title="Required pairings">
         <RequiredPairings rules={[
           <>Date format must be ISO 8601 (YYYY-MM-DD) internally. Display format follows locale.</>,
@@ -34,12 +78,14 @@ export default function DatePickerPage() {
           <>Save and Cancel buttons in the calendar popup to confirm or discard selection.</>,
         ]} />
       </SectionWrapper>
+
       <SectionWrapper id="forbidden" num="05" total={TOTAL} title="Forbidden and refuse">
         <ForbiddenRefuse rules={[
           { rule: <>Use Date picker for year-only input.</>, response: <>"A full calendar for just a year is overkill. Use <Code>Combobox</Code>."</> },
           { rule: <>Auto-close the calendar on date selection without confirmation.</>, response: <>"For date ranges, the user needs Save/Cancel. Single date can auto-close."</> },
         ]} />
       </SectionWrapper>
+
       <SectionWrapper id="accessibility" num="06" total={TOTAL} title="Accessibility">
         <AccessibilityList items={[
           { key: 'Role', value: <>Trigger: <Code>role="combobox"</Code>. Calendar: <Code>role="dialog"</Code> with grid navigation.</> },
