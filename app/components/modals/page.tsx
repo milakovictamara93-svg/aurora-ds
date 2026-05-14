@@ -6,7 +6,7 @@ import Modal from '@/app/components-lib/ui/Modal'
 import Button from '@/app/components-lib/ui/Button'
 import {
   ComponentPageLayout, TitleBlock, SectionWrapper,
-  WhenToUse, RequiredPairings, ForbiddenRefuse,
+  WhenToUse, DecisionTree, RequiredPairings, ForbiddenRefuse,
   AccessibilityList, AnatomyBlock, RelatedGrid,
   Code,
 } from '@/app/components-lib/ui/ComponentPage'
@@ -50,7 +50,7 @@ function ShapeCard({
 
 // ── Page ─────────────────────────────────────────────────────────────────────
 
-const TOTAL = '08'
+const TOTAL = '09'
 
 export default function ModalsPage() {
   const [openModal, setOpenModal] = useState<
@@ -81,8 +81,22 @@ export default function ModalsPage() {
         />
       </SectionWrapper>
 
-      {/* ── 02 Picking the right shape ──────────────────────────────────────── */}
-      <SectionWrapper id="picking-shape" num="02" total={TOTAL} title="Picking the right shape" description="Pick by weight. Standard for most focused tasks. Confirmation only for irreversible actions. Full-screen for immersive workflows where the page behind would distract. Drawer is a separate component for content the user should still be able to see the page through.">
+      {/* ── 02 Decision tree ────────────────────────────────────────────────── */}
+      <SectionWrapper id="decision-tree" num="02" total={TOTAL} title="Decision tree against neighbours">
+        <DecisionTree
+          rows={[
+            { intent: 'Focused task needing full attention', use: <Code>Modal</Code>, not: <Code>Drawer</Code> },
+            { intent: 'Supplementary content alongside the page', use: <Code>Drawer</Code>, not: <Code>Modal</Code> },
+            { intent: 'Confirm a destructive action', use: <Code>ConfirmModal</Code>, not: <Code>Toast</Code> },
+            { intent: 'Transient success/error feedback', use: <Code>Toast</Code>, not: <Code>Modal</Code> },
+            { intent: 'Page-level persistent status', use: <Code>Banner</Code>, not: <Code>Modal</Code> },
+            { intent: 'Immersive editor or wizard', use: <><Code>Modal fullscreen</Code></>, not: <Code>Drawer</Code> },
+          ]}
+        />
+      </SectionWrapper>
+
+      {/* ── 03 Picking the right shape ──────────────────────────────────────── */}
+      <SectionWrapper id="picking-shape" num="03" total={TOTAL} title="Picking the right shape" description="Pick by weight. Standard for most focused tasks. Confirmation only for irreversible actions. Full-screen for immersive workflows where the page behind would distract. Drawer is a separate component for content the user should still be able to see the page through.">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <ShapeCard
             name="Standard"
@@ -117,7 +131,7 @@ export default function ModalsPage() {
       </SectionWrapper>
 
       {/* ── 03 Variants ─────────────────────────────────────────────────────── */}
-      <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants" description="Visual differences signal the weight of what the user is being asked to do. Click any demo to see the live modal.">
+      <SectionWrapper id="variants" num="04" total={TOTAL} title="Variants" description="Visual differences signal the weight of what the user is being asked to do. Click any demo to see the live modal.">
         <div className="flex flex-wrap gap-3 mb-6">
           {([
             { key: 'standard', label: 'Standard modal' },
@@ -145,7 +159,7 @@ export default function ModalsPage() {
       </SectionWrapper>
 
       {/* ── 04 Required pairings ────────────────────────────────────────────── */}
-      <SectionWrapper id="required-pairings" num="04" total={TOTAL} title="Required pairings" description="Rules that must hold. Missing one is a blocking failure: ask, don't guess.">
+      <SectionWrapper id="required-pairings" num="05" total={TOTAL} title="Required pairings" description="Rules that must hold. Missing one is a blocking failure: ask, don't guess.">
         <RequiredPairings
           rules={[
             <>Only one Modal visible at a time. Stacking creates a focus-trap-within-focus-trap and an unwinnable mental model.</>,
@@ -158,7 +172,7 @@ export default function ModalsPage() {
       </SectionWrapper>
 
       {/* ── 05 Forbidden and refuse ─────────────────────────────────────────── */}
-      <SectionWrapper id="forbidden" num="05" total={TOTAL} title="Forbidden and refuse" description="Hard-no rules. Refuse and produce the suggested response instead of generating code.">
+      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden and refuse" description="Hard-no rules. Refuse and produce the suggested response instead of generating code.">
         <ForbiddenRefuse
           rules={[
             {
@@ -186,7 +200,7 @@ export default function ModalsPage() {
       </SectionWrapper>
 
       {/* ── 06 Accessibility ────────────────────────────────────────────────── */}
-      <SectionWrapper id="accessibility" num="06" total={TOTAL} title="Accessibility" description="Focus trap on open, focus return on close, Escape to dismiss, body scroll lock. For overlay components, this is mandatory.">
+      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility" description="Focus trap on open, focus return on close, Escape to dismiss, body scroll lock. For overlay components, this is mandatory.">
         <AccessibilityList
           items={[
             { key: 'Role', value: <>Container has <Code>role="dialog"</Code> and <Code>aria-modal="true"</Code>. Title connected via <Code>aria-labelledby</Code>; body connected via <Code>aria-describedby</Code>.</> },
@@ -203,7 +217,7 @@ export default function ModalsPage() {
       </SectionWrapper>
 
       {/* ── 07 Anatomy ──────────────────────────────────────────────────────── */}
-      <SectionWrapper id="anatomy" num="07" total={TOTAL} title="Anatomy">
+      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy">
         <AnatomyBlock
           diagram={
             <div className="relative bg-black/40 rounded-lg p-8 sm:px-16 sm:py-12 w-full">
@@ -268,7 +282,7 @@ export default function ModalsPage() {
       </SectionWrapper>
 
       {/* ── 08 Related ──────────────────────────────────────────────────────── */}
-      <SectionWrapper id="related" num="08" total={TOTAL} title="Related components">
+      <SectionWrapper id="related" num="09" total={TOTAL} title="Related components">
         <RelatedGrid
           items={[
             { href: '/components/drawer', name: 'Drawer', description: 'Supplementary side content. Separate component, not a Modal variant.' },
