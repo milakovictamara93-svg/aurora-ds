@@ -6,7 +6,7 @@ import {
   AccessibilityList, Code, TodoSection,
 } from '@/app/components-lib/ui/ComponentPage'
 
-const TOTAL = '08'
+const TOTAL = '06'
 
 export default function NavigationPage() {
   return (
@@ -45,11 +45,7 @@ export default function NavigationPage() {
         <TodoSection label="Navigation shell demo coming in follow-up." />
       </SectionWrapper>
 
-      <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes">
-        <TodoSection label="Sidebar: 264px. Top bar: 56px. Collapsible to icon rail." />
-      </SectionWrapper>
-
-      <SectionWrapper id="required-pairings" num="05" total={TOTAL} title="Required pairings">
+      <SectionWrapper id="required-pairings" num="04" total={TOTAL} title="Required pairings">
         <RequiredPairings
           rules={[
             <>Active page must be visually highlighted in the sidebar.</>,
@@ -59,7 +55,7 @@ export default function NavigationPage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden and refuse">
+      <SectionWrapper id="forbidden" num="05" total={TOTAL} title="Forbidden and refuse">
         <ForbiddenRefuse
           rules={[
             { rule: <>Use Navigation for in-page content switching.</>, response: <>"Use <Code>Tabs</Code> for switching views within a page."</> },
@@ -68,7 +64,7 @@ export default function NavigationPage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility">
+      <SectionWrapper id="accessibility" num="06" total={TOTAL} title="Accessibility">
         <AccessibilityList
           items={[
             { key: 'Role', value: <><Code>&lt;nav aria-label="Site navigation"&gt;</Code> for the sidebar.</> },
@@ -77,10 +73,6 @@ export default function NavigationPage() {
             { key: 'Keyboard', value: <><Code>Tab</Code> moves through nav links. <Code>Enter</Code> activates.</> },
           ]}
         />
-      </SectionWrapper>
-
-      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy">
-        <TodoSection label="Anatomy diagram for Navigation coming in follow-up." />
       </SectionWrapper>
     </ComponentPageLayout>
   )

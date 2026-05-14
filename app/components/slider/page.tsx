@@ -7,7 +7,7 @@ import {
   AccessibilityList, Code, TodoSection,
 } from '@/app/components-lib/ui/ComponentPage'
 
-const TOTAL = '08'
+const TOTAL = '06'
 
 export default function SliderPage() {
   return (
@@ -32,21 +32,20 @@ export default function SliderPage() {
           <Slider min={0} max={100} defaultValue={65} />
         </div>
       </SectionWrapper>
-      <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes"><TodoSection label="Single size. Track height is 4px, thumb is 16px." /></SectionWrapper>
-      <SectionWrapper id="required-pairings" num="05" total={TOTAL} title="Required pairings">
+      <SectionWrapper id="required-pairings" num="04" total={TOTAL} title="Required pairings">
         <RequiredPairings rules={[
           <>Always show the current value as a number (tooltip or adjacent label).</>,
           <>Show min and max labels at the track ends.</>,
           <>For precise entry, pair with a number input that syncs with the slider.</>,
         ]} />
       </SectionWrapper>
-      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden and refuse">
+      <SectionWrapper id="forbidden" num="05" total={TOTAL} title="Forbidden and refuse">
         <ForbiddenRefuse rules={[
           { rule: <>Use Slider without showing the current value.</>, response: <>"Users need to see the exact value they're selecting. Show it in a tooltip or label."</> },
           { rule: <>Use Slider for precise values where exact numbers matter.</>, response: <>"Sliders are imprecise by nature. Use a number input for exact values."</> },
         ]} />
       </SectionWrapper>
-      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility">
+      <SectionWrapper id="accessibility" num="06" total={TOTAL} title="Accessibility">
         <AccessibilityList items={[
           { key: 'Role', value: <><Code>role="slider"</Code> with <Code>aria-valuemin</Code>, <Code>aria-valuemax</Code>, <Code>aria-valuenow</Code>.</> },
           { key: 'Keyboard', value: <><Code>Arrow Left/Right</Code> adjusts by step. <Code>Home/End</Code> jumps to min/max.</> },
@@ -54,7 +53,6 @@ export default function SliderPage() {
           { key: 'Touch target', value: <>Thumb is 16px but touch target extends to 44px via padding.</> },
         ]} />
       </SectionWrapper>
-      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy"><TodoSection label="Anatomy diagram for Slider coming in follow-up." /></SectionWrapper>
     </ComponentPageLayout>
   )
 }

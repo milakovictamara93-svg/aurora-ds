@@ -6,7 +6,7 @@ import {
   AccessibilityList, Code, TodoSection,
 } from '@/app/components-lib/ui/ComponentPage'
 
-const TOTAL = '08'
+const TOTAL = '06'
 
 export default function CardPage() {
   return (
@@ -26,28 +26,26 @@ export default function CardPage() {
         ]} />
       </SectionWrapper>
       <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants"><TodoSection label="Card family demos (Simple, Standard, Form, Data viz, Overview, Asset) coming in follow-up." /></SectionWrapper>
-      <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes"><TodoSection label="Cards adapt to content. Padding is 24px." /></SectionWrapper>
-      <SectionWrapper id="required-pairings" num="05" total={TOTAL} title="Required pairings">
+      <SectionWrapper id="required-pairings" num="04" total={TOTAL} title="Required pairings">
         <RequiredPairings rules={[
           <>Cards use 24px internal padding and 6-8px border radius.</>,
           <>Elevated cards use shadow-level-3. Flat cards use border only.</>,
           <>Interactive cards (clickable) need hover state and cursor pointer.</>,
         ]} />
       </SectionWrapper>
-      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden and refuse">
+      <SectionWrapper id="forbidden" num="05" total={TOTAL} title="Forbidden and refuse">
         <ForbiddenRefuse rules={[
           { rule: <>Nest cards inside cards.</>, response: <>"Nested cards create visual confusion. Flatten the hierarchy."</> },
           { rule: <>Use a card for a single line of text.</>, response: <>"Cards are for grouped content. A single line doesn't need a container."</> },
         ]} />
       </SectionWrapper>
-      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility">
+      <SectionWrapper id="accessibility" num="06" total={TOTAL} title="Accessibility">
         <AccessibilityList items={[
           { key: 'Role', value: <>Use <Code>&lt;article&gt;</Code> or <Code>role="group"</Code> with a heading for each card.</> },
           { key: 'Interactive', value: <>Clickable cards need <Code>role="link"</Code> or wrap content in an <Code>&lt;a&gt;</Code>.</> },
           { key: 'Focus', value: <>Interactive cards show a focus ring on keyboard navigation.</> },
         ]} />
       </SectionWrapper>
-      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy"><TodoSection label="Anatomy diagram for Card coming in follow-up." /></SectionWrapper>
     </ComponentPageLayout>
   )
 }

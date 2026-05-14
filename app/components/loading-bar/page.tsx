@@ -7,7 +7,7 @@ import {
   AccessibilityList, Code, TodoSection,
 } from '@/app/components-lib/ui/ComponentPage'
 
-const TOTAL = '08'
+const TOTAL = '06'
 
 export default function LoadingBarPage() {
   return (
@@ -56,11 +56,7 @@ export default function LoadingBarPage() {
         </div>
       </SectionWrapper>
 
-      <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes">
-        <TodoSection label="Single height (4px track). No size variants." />
-      </SectionWrapper>
-
-      <SectionWrapper id="required-pairings" num="05" total={TOTAL} title="Required pairings">
+      <SectionWrapper id="required-pairings" num="04" total={TOTAL} title="Required pairings">
         <RequiredPairings
           rules={[
             <>Must reflect actual progress. Do not fake progress or animate to 90% and stall.</>,
@@ -70,7 +66,7 @@ export default function LoadingBarPage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden and refuse">
+      <SectionWrapper id="forbidden" num="05" total={TOTAL} title="Forbidden and refuse">
         <ForbiddenRefuse
           rules={[
             { rule: <>Use Loading bar for indeterminate operations.</>, response: <>"Use <Code>Spinner</Code> for indeterminate waits. Loading bar needs a real percentage."</> },
@@ -79,7 +75,7 @@ export default function LoadingBarPage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility">
+      <SectionWrapper id="accessibility" num="06" total={TOTAL} title="Accessibility">
         <AccessibilityList
           items={[
             { key: 'Role', value: <><Code>role="progressbar"</Code> with <Code>aria-valuenow</Code>, <Code>aria-valuemin="0"</Code>, <Code>aria-valuemax="100"</Code>.</> },
@@ -87,10 +83,6 @@ export default function LoadingBarPage() {
             { key: 'Updates', value: <>Screen readers announce progress changes at meaningful intervals, not every frame.</> },
           ]}
         />
-      </SectionWrapper>
-
-      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy">
-        <TodoSection label="Anatomy diagram for Loading bar coming in follow-up." />
       </SectionWrapper>
     </ComponentPageLayout>
   )

@@ -8,7 +8,7 @@ import {
   AccessibilityList, AnatomyBlock, Code, TodoSection,
 } from '@/app/components-lib/ui/ComponentPage'
 
-const TOTAL = '08'
+const TOTAL = '06'
 
 export default function TabsPage() {
   const [active1, setActive1] = useState('energy')
@@ -80,11 +80,7 @@ export default function TabsPage() {
         </div>
       </SectionWrapper>
 
-      <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes">
-        <TodoSection label="Single size per type. No size variants." />
-      </SectionWrapper>
-
-      <SectionWrapper id="required-pairings" num="05" total={TOTAL} title="Required pairings">
+      <SectionWrapper id="required-pairings" num="04" total={TOTAL} title="Required pairings">
         <RequiredPairings
           rules={[
             <>One tab must always be active. There is no empty state.</>,
@@ -94,7 +90,7 @@ export default function TabsPage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden and refuse">
+      <SectionWrapper id="forbidden" num="05" total={TOTAL} title="Forbidden and refuse">
         <ForbiddenRefuse
           rules={[
             { rule: <>Use Tabs for form value selection.</>, response: <>"Use <Code>SegmentedControl</Code> for picking a value. Tabs navigate views, not select data."</> },
@@ -104,7 +100,7 @@ export default function TabsPage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility">
+      <SectionWrapper id="accessibility" num="06" total={TOTAL} title="Accessibility">
         <AccessibilityList
           items={[
             { key: 'Role', value: <>Container: <Code>role="tablist"</Code>. Each tab: <Code>role="tab"</Code> with <Code>aria-selected</Code>. Panel: <Code>role="tabpanel"</Code>.</> },
@@ -113,10 +109,6 @@ export default function TabsPage() {
             { key: 'Touch target', value: <>Each tab meets 44px minimum height with padding.</> },
           ]}
         />
-      </SectionWrapper>
-
-      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy">
-        <TodoSection label="Anatomy diagram for Tabs coming in follow-up." />
       </SectionWrapper>
     </ComponentPageLayout>
   )

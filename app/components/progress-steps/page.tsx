@@ -6,7 +6,7 @@ import {
   AccessibilityList, Code, TodoSection,
 } from '@/app/components-lib/ui/ComponentPage'
 
-const TOTAL = '08'
+const TOTAL = '06'
 
 export default function ProgressStepsPage() {
   return (
@@ -51,11 +51,7 @@ export default function ProgressStepsPage() {
         </div>
       </SectionWrapper>
 
-      <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes">
-        <TodoSection label="Single size. No size variants." />
-      </SectionWrapper>
-
-      <SectionWrapper id="required-pairings" num="05" total={TOTAL} title="Required pairings">
+      <SectionWrapper id="required-pairings" num="04" total={TOTAL} title="Required pairings">
         <RequiredPairings
           rules={[
             <>Each step needs a label describing what happens at that step.</>,
@@ -65,7 +61,7 @@ export default function ProgressStepsPage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden and refuse">
+      <SectionWrapper id="forbidden" num="05" total={TOTAL} title="Forbidden and refuse">
         <ForbiddenRefuse
           rules={[
             { rule: <>Use Progress steps for non-sequential navigation.</>, response: <>"Use <Code>Tabs</Code> for free-form view switching. Steps imply a sequence."</> },
@@ -74,7 +70,7 @@ export default function ProgressStepsPage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility">
+      <SectionWrapper id="accessibility" num="06" total={TOTAL} title="Accessibility">
         <AccessibilityList
           items={[
             { key: 'Role', value: <><Code>role="navigation"</Code> with <Code>aria-label="Progress"</Code>. Each step is a list item.</> },
@@ -82,10 +78,6 @@ export default function ProgressStepsPage() {
             { key: 'Labels', value: <>Each step announced with its label and state (completed, current, upcoming).</> },
           ]}
         />
-      </SectionWrapper>
-
-      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy">
-        <TodoSection label="Anatomy diagram for Progress steps coming in follow-up." />
       </SectionWrapper>
     </ComponentPageLayout>
   )

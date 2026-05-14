@@ -7,7 +7,7 @@ import {
   AccessibilityList, Code, TodoSection,
 } from '@/app/components-lib/ui/ComponentPage'
 
-const TOTAL = '08'
+const TOTAL = '06'
 
 export default function BreadcrumbsPage() {
   return (
@@ -59,11 +59,7 @@ export default function BreadcrumbsPage() {
         </div>
       </SectionWrapper>
 
-      <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes">
-        <TodoSection label="Single size (13px text). No size variants." />
-      </SectionWrapper>
-
-      <SectionWrapper id="required-pairings" num="05" total={TOTAL} title="Required pairings">
+      <SectionWrapper id="required-pairings" num="04" total={TOTAL} title="Required pairings">
         <RequiredPairings
           rules={[
             <>The last item (current page) has no link. It is text only.</>,
@@ -73,7 +69,7 @@ export default function BreadcrumbsPage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden and refuse">
+      <SectionWrapper id="forbidden" num="05" total={TOTAL} title="Forbidden and refuse">
         <ForbiddenRefuse
           rules={[
             { rule: <>Use Breadcrumbs on single-level pages.</>, response: <>"Breadcrumbs need at least 2 levels. On flat pages they add noise."</> },
@@ -82,7 +78,7 @@ export default function BreadcrumbsPage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility">
+      <SectionWrapper id="accessibility" num="06" total={TOTAL} title="Accessibility">
         <AccessibilityList
           items={[
             { key: 'Role', value: <><Code>&lt;nav aria-label="Breadcrumb"&gt;</Code> wrapping an ordered list.</> },
@@ -90,10 +86,6 @@ export default function BreadcrumbsPage() {
             { key: 'Separator', value: <>Separator is decorative, hidden from screen readers via <Code>aria-hidden="true"</Code>.</> },
           ]}
         />
-      </SectionWrapper>
-
-      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy">
-        <TodoSection label="Anatomy diagram for Breadcrumbs coming in follow-up." />
       </SectionWrapper>
     </ComponentPageLayout>
   )

@@ -36,7 +36,7 @@ function VariantCard({
 
 // ── Page ─────────────────────────────────────────────────────────────────────
 
-const TOTAL = '08'
+const TOTAL = '07'
 
 export default function TextInputPage() {
   return (
@@ -164,13 +164,8 @@ export default function TextInputPage() {
         </div>
       </SectionWrapper>
 
-      {/* ── 04 Sizes ──────────────────────────────────────────────────────── */}
-      <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes">
-        <TodoSection label="TextInput ships at a single height (h-8 / 32px). Size variants are not currently supported." />
-      </SectionWrapper>
-
-      {/* ── 05 Required pairings ──────────────────────────────────────────── */}
-      <SectionWrapper id="required-pairings" num="05" total={TOTAL} title="Required pairings" description="Rules that must hold. Missing one is a blocking failure: ask, don't guess.">
+      {/* ── 04 Required pairings ──────────────────────────────────────────── */}
+      <SectionWrapper id="required-pairings" num="04" total={TOTAL} title="Required pairings" description="Rules that must hold. Missing one is a blocking failure: ask, don't guess.">
         <RequiredPairings
           rules={[
             <>Every <Code>TextInput</Code> must have a visible <Code>label</Code>. If a visible label is impossible (e.g. search in a toolbar), provide <Code>aria-label</Code> on the input instead.</>,
@@ -184,7 +179,7 @@ export default function TextInputPage() {
       </SectionWrapper>
 
       {/* ── 06 Forbidden and refuse ───────────────────────────────────────── */}
-      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden and refuse" description="Hard-no rules. Refuse and produce the suggested response instead of generating code.">
+      <SectionWrapper id="forbidden" num="05" total={TOTAL} title="Forbidden and refuse" description="Hard-no rules. Refuse and produce the suggested response instead of generating code.">
         <ForbiddenRefuse
           rules={[
             {
@@ -216,7 +211,7 @@ export default function TextInputPage() {
       </SectionWrapper>
 
       {/* ── 07 Accessibility ──────────────────────────────────────────────── */}
-      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility" description="Native input semantics, programmatic label association, visible focus ring, and screen-reader-friendly validation. Non-negotiable.">
+      <SectionWrapper id="accessibility" num="06" total={TOTAL} title="Accessibility" description="Native input semantics, programmatic label association, visible focus ring, and screen-reader-friendly validation. Non-negotiable.">
         <AccessibilityList
           items={[
             { key: 'Role', value: <>Native <Code>&lt;input&gt;</Code>. The <Code>type</Code> attribute provides implicit semantics (text, email, number, tel, url). No role override needed.</> },
@@ -233,7 +228,7 @@ export default function TextInputPage() {
       </SectionWrapper>
 
       {/* ── 08 Anatomy ────────────────────────────────────────────────────── */}
-      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy">
+      <SectionWrapper id="anatomy" num="07" total={TOTAL} title="Anatomy">
         <AnatomyBlock
           diagram={
             <div className="bg-[#F7F8F8] dark:bg-[#111827] rounded-lg px-12 py-20 flex items-center justify-center">

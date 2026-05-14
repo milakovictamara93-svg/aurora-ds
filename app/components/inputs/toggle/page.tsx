@@ -6,7 +6,7 @@ import {
   AccessibilityList, AnatomyBlock, Code, TodoSection,
 } from '@/app/components-lib/ui/ComponentPage'
 
-const TOTAL = '08'
+const TOTAL = '07'
 
 export default function TogglePage() {
   return (
@@ -59,11 +59,7 @@ export default function TogglePage() {
         </div>
       </SectionWrapper>
 
-      <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes">
-        <TodoSection label="Single size (32 x 16 px track). No size variants." />
-      </SectionWrapper>
-
-      <SectionWrapper id="required-pairings" num="05" total={TOTAL} title="Required pairings">
+      <SectionWrapper id="required-pairings" num="04" total={TOTAL} title="Required pairings">
         <RequiredPairings
           rules={[
             <>Toggle must have a visible label describing what it controls.</>,
@@ -73,7 +69,7 @@ export default function TogglePage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden and refuse">
+      <SectionWrapper id="forbidden" num="05" total={TOTAL} title="Forbidden and refuse">
         <ForbiddenRefuse
           rules={[
             { rule: <>Use Toggle for a setting that requires a form submit.</>, response: <>"Toggle takes effect immediately. Use <Code>Checkbox</Code> for settings that need a save step."</> },
@@ -83,7 +79,7 @@ export default function TogglePage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility">
+      <SectionWrapper id="accessibility" num="06" total={TOTAL} title="Accessibility">
         <AccessibilityList
           items={[
             { key: 'Role', value: <><Code>role="switch"</Code> with <Code>aria-checked</Code> reflecting the on/off state.</> },
@@ -95,7 +91,7 @@ export default function TogglePage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy">
+      <SectionWrapper id="anatomy" num="07" total={TOTAL} title="Anatomy">
         <AnatomyBlock
           diagram={
             <div className="bg-[#F7F8F8] dark:bg-[#111827] rounded-lg px-12 py-10 flex items-center justify-center">

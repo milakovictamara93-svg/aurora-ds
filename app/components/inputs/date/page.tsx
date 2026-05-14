@@ -7,7 +7,7 @@ import {
   AccessibilityList, Code, TodoSection,
 } from '@/app/components-lib/ui/ComponentPage'
 
-const TOTAL = '08'
+const TOTAL = '06'
 
 export default function DatePickerPage() {
   return (
@@ -27,28 +27,26 @@ export default function DatePickerPage() {
         ]} />
       </SectionWrapper>
       <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants"><TodoSection label="Date picker demo coming in follow-up." /></SectionWrapper>
-      <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes"><TodoSection label="Trigger: h-8 (matches Text input). Calendar popup: fixed width." /></SectionWrapper>
-      <SectionWrapper id="required-pairings" num="05" total={TOTAL} title="Required pairings">
+      <SectionWrapper id="required-pairings" num="04" total={TOTAL} title="Required pairings">
         <RequiredPairings rules={[
           <>Date format must be ISO 8601 (YYYY-MM-DD) internally. Display format follows locale.</>,
           <>Provide preset shortcuts for common ranges (Last 7 days, Last 30 days, This quarter).</>,
           <>Save and Cancel buttons in the calendar popup to confirm or discard selection.</>,
         ]} />
       </SectionWrapper>
-      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden and refuse">
+      <SectionWrapper id="forbidden" num="05" total={TOTAL} title="Forbidden and refuse">
         <ForbiddenRefuse rules={[
           { rule: <>Use Date picker for year-only input.</>, response: <>"A full calendar for just a year is overkill. Use <Code>Combobox</Code>."</> },
           { rule: <>Auto-close the calendar on date selection without confirmation.</>, response: <>"For date ranges, the user needs Save/Cancel. Single date can auto-close."</> },
         ]} />
       </SectionWrapper>
-      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility">
+      <SectionWrapper id="accessibility" num="06" total={TOTAL} title="Accessibility">
         <AccessibilityList items={[
           { key: 'Role', value: <>Trigger: <Code>role="combobox"</Code>. Calendar: <Code>role="dialog"</Code> with grid navigation.</> },
           { key: 'Keyboard', value: <>Arrow keys navigate days. Enter selects. Escape closes. Tab moves between month/year controls.</> },
           { key: 'Label', value: <>Trigger has <Code>aria-label</Code> describing the date field. Selected date announced on change.</> },
         ]} />
       </SectionWrapper>
-      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy"><TodoSection label="Anatomy diagram for Date picker coming in follow-up." /></SectionWrapper>
     </ComponentPageLayout>
   )
 }

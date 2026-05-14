@@ -7,7 +7,7 @@ import {
   AccessibilityList, Code, TodoSection,
 } from '@/app/components-lib/ui/ComponentPage'
 
-const TOTAL = '08'
+const TOTAL = '06'
 
 export default function SkeletonPage() {
   return (
@@ -57,11 +57,7 @@ export default function SkeletonPage() {
         </div>
       </SectionWrapper>
 
-      <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes">
-        <TodoSection label="Skeleton adapts to the size of the content it replaces. No fixed sizes." />
-      </SectionWrapper>
-
-      <SectionWrapper id="required-pairings" num="05" total={TOTAL} title="Required pairings">
+      <SectionWrapper id="required-pairings" num="04" total={TOTAL} title="Required pairings">
         <RequiredPairings
           rules={[
             <>Skeleton shape must match the content it replaces. Text lines for text, circles for avatars, rectangles for images.</>,
@@ -71,7 +67,7 @@ export default function SkeletonPage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden and refuse">
+      <SectionWrapper id="forbidden" num="05" total={TOTAL} title="Forbidden and refuse">
         <ForbiddenRefuse
           rules={[
             { rule: <>Use Skeleton for indeterminate waits where layout is unknown.</>, response: <>"Use <Code>Spinner</Code> when you don't know what the content will look like."</> },
@@ -80,7 +76,7 @@ export default function SkeletonPage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility">
+      <SectionWrapper id="accessibility" num="06" total={TOTAL} title="Accessibility">
         <AccessibilityList
           items={[
             { key: 'aria-busy', value: <>Container sets <Code>aria-busy="true"</Code> while loading. Screen readers wait for content.</> },
@@ -88,10 +84,6 @@ export default function SkeletonPage() {
             { key: 'Alt text', value: <>Skeleton has no alt text. It is decorative and hidden from assistive technology.</> },
           ]}
         />
-      </SectionWrapper>
-
-      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy">
-        <TodoSection label="Anatomy diagram for Skeleton coming in follow-up." />
       </SectionWrapper>
     </ComponentPageLayout>
   )

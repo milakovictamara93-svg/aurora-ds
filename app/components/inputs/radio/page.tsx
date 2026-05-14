@@ -7,7 +7,7 @@ import {
   AccessibilityList, AnatomyBlock, Code, TodoSection,
 } from '@/app/components-lib/ui/ComponentPage'
 
-const TOTAL = '08'
+const TOTAL = '07'
 
 export default function RadioPage() {
   return (
@@ -54,11 +54,7 @@ export default function RadioPage() {
         </div>
       </SectionWrapper>
 
-      <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes">
-        <TodoSection label="Single size (16px circle). No size variants." />
-      </SectionWrapper>
-
-      <SectionWrapper id="required-pairings" num="05" total={TOTAL} title="Required pairings" description="Rules that must hold.">
+      <SectionWrapper id="required-pairings" num="04" total={TOTAL} title="Required pairings" description="Rules that must hold.">
         <RequiredPairings
           rules={[
             <>Radio buttons must be grouped inside a <Code>fieldset</Code> with a <Code>legend</Code> or <Code>role="radiogroup"</Code> with <Code>aria-labelledby</Code>.</>,
@@ -69,7 +65,7 @@ export default function RadioPage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden and refuse">
+      <SectionWrapper id="forbidden" num="05" total={TOTAL} title="Forbidden and refuse">
         <ForbiddenRefuse
           rules={[
             { rule: <>Use Radio for multi-select.</>, response: <>"Radio is mutually exclusive. Use <Code>Checkbox</Code> for multi-select."</> },
@@ -80,7 +76,7 @@ export default function RadioPage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility">
+      <SectionWrapper id="accessibility" num="06" total={TOTAL} title="Accessibility">
         <AccessibilityList
           items={[
             { key: 'Role', value: <>Native <Code>&lt;input type="radio"&gt;</Code>. Group with <Code>role="radiogroup"</Code>.</> },
@@ -92,7 +88,7 @@ export default function RadioPage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy">
+      <SectionWrapper id="anatomy" num="07" total={TOTAL} title="Anatomy">
         <AnatomyBlock
           diagram={
             <div className="bg-[#F7F8F8] dark:bg-[#111827] rounded-lg px-12 py-10 flex items-center justify-center">

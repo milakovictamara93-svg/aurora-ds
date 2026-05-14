@@ -7,7 +7,7 @@ import {
   AccessibilityList, Code, TodoSection,
 } from '@/app/components-lib/ui/ComponentPage'
 
-const TOTAL = '08'
+const TOTAL = '06'
 
 export default function MiniDashboardPage() {
   return (
@@ -27,26 +27,24 @@ export default function MiniDashboardPage() {
         ]} />
       </SectionWrapper>
       <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants"><TodoSection label="Mini dashboard variant demos coming in follow-up." /></SectionWrapper>
-      <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes"><TodoSection label="Full-width. Adapts to content." /></SectionWrapper>
-      <SectionWrapper id="required-pairings" num="05" total={TOTAL} title="Required pairings">
+      <SectionWrapper id="required-pairings" num="04" total={TOTAL} title="Required pairings">
         <RequiredPairings rules={[
           <>Each slot needs a label and a value. Optional trend indicator.</>,
           <>Dividers separate slots visually. Use consistent spacing.</>,
           <>3-6 slots maximum. More than 6 becomes a table.</>,
         ]} />
       </SectionWrapper>
-      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden and refuse">
+      <SectionWrapper id="forbidden" num="05" total={TOTAL} title="Forbidden and refuse">
         <ForbiddenRefuse rules={[
           { rule: <>Show more than 6 metrics in a mini dashboard.</>, response: <>"6+ metrics need a <Code>Table</Code> or dedicated dashboard view."</> },
         ]} />
       </SectionWrapper>
-      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility">
+      <SectionWrapper id="accessibility" num="06" total={TOTAL} title="Accessibility">
         <AccessibilityList items={[
           { key: 'Structure', value: <>Use a <Code>&lt;dl&gt;</Code> (definition list) with <Code>&lt;dt&gt;</Code> for labels and <Code>&lt;dd&gt;</Code> for values.</> },
           { key: 'Dividers', value: <>Dividers are decorative. Hidden from screen readers via <Code>aria-hidden="true"</Code>.</> },
         ]} />
       </SectionWrapper>
-      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy"><TodoSection label="Anatomy diagram for Mini dashboard coming in follow-up." /></SectionWrapper>
     </ComponentPageLayout>
   )
 }

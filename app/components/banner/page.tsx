@@ -8,7 +8,7 @@ import {
 } from '@/app/components-lib/ui/ComponentPage'
 import Banner from '@/app/components-lib/ui/Banner'
 
-const TOTAL = '08'
+const TOTAL = '07'
 
 export default function BannerPage() {
   const [dismissed, setDismissed] = useState<Record<string, boolean>>({})
@@ -207,12 +207,9 @@ export default function BannerPage() {
       </SectionWrapper>
 
       {/* ── 04 Sizes ───────────────────────────────────────────────────────── */}
-      <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes">
-        <TodoSection label="Banners are full-width by design and do not have size variants. Height is determined by type: system (40px fixed) or regular (content-driven)." />
-      </SectionWrapper>
 
       {/* ── 05 Required pairings ───────────────────────────────────────────── */}
-      <SectionWrapper id="required-pairings" num="05" total={TOTAL} title="Required pairings">
+      <SectionWrapper id="required-pairings" num="04" total={TOTAL} title="Required pairings">
         <RequiredPairings
           rules={[
             <>Place banners at the top of the content area, above the page title. They must span the full width of the content region.</>,
@@ -226,7 +223,7 @@ export default function BannerPage() {
       </SectionWrapper>
 
       {/* ── 06 Forbidden / refuse ──────────────────────────────────────────── */}
-      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden and refuse">
+      <SectionWrapper id="forbidden" num="05" total={TOTAL} title="Forbidden and refuse">
         <ForbiddenRefuse
           rules={[
             {
@@ -258,7 +255,7 @@ export default function BannerPage() {
       </SectionWrapper>
 
       {/* ── 07 Accessibility ───────────────────────────────────────────────── */}
-      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility">
+      <SectionWrapper id="accessibility" num="06" total={TOTAL} title="Accessibility">
         <AccessibilityList
           items={[
             {
@@ -294,7 +291,7 @@ export default function BannerPage() {
       </SectionWrapper>
 
       {/* ── 08 Anatomy ─────────────────────────────────────────────────────── */}
-      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy">
+      <SectionWrapper id="anatomy" num="07" total={TOTAL} title="Anatomy">
         <AnatomyBlock
           diagram={
             <div className="w-full max-w-[640px]">

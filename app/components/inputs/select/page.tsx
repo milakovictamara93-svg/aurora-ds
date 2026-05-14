@@ -7,7 +7,7 @@ import {
   AccessibilityList, Code, TodoSection,
 } from '@/app/components-lib/ui/ComponentPage'
 
-const TOTAL = '08'
+const TOTAL = '06'
 
 const OPTIONS = [
   { value: 'gri', label: 'GRI Standards' },
@@ -39,28 +39,26 @@ export default function ListboxPage() {
           <InputSelect options={OPTIONS} placeholder="Framework" label="Reporting framework" />
         </div>
       </SectionWrapper>
-      <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes"><TodoSection label="Trigger: h-8. Menu items: h-6. Single size." /></SectionWrapper>
-      <SectionWrapper id="required-pairings" num="05" total={TOTAL} title="Required pairings">
+      <SectionWrapper id="required-pairings" num="04" total={TOTAL} title="Required pairings">
         <RequiredPairings rules={[
           <>Each option needs a unique <Code>value</Code> and a <Code>label</Code>.</>,
           <>Placeholder text describes what the user is selecting.</>,
           <>Selected option must be visually distinct (blue highlight).</>,
         ]} />
       </SectionWrapper>
-      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden and refuse">
+      <SectionWrapper id="forbidden" num="05" total={TOTAL} title="Forbidden and refuse">
         <ForbiddenRefuse rules={[
           { rule: <>Use Listbox for multi-select.</>, response: <>"Listbox is single-select. Use <Code>Combobox multiple</Code> for multi-select."</> },
           { rule: <>Use Listbox with more than 20 options without search.</>, response: <>"20+ options need search. Use <Code>Combobox</Code> which has built-in filtering."</> },
         ]} />
       </SectionWrapper>
-      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility">
+      <SectionWrapper id="accessibility" num="06" total={TOTAL} title="Accessibility">
         <AccessibilityList items={[
           { key: 'Role', value: <>Trigger: <Code>role="combobox"</Code>. Options list: <Code>role="listbox"</Code>. Each option: <Code>role="option"</Code>.</> },
           { key: 'Keyboard', value: <>Arrow Down/Up navigates options. Enter selects. Escape closes.</> },
           { key: 'Selection', value: <>Selected option has <Code>aria-selected="true"</Code>.</> },
         ]} />
       </SectionWrapper>
-      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy"><TodoSection label="Anatomy diagram for Listbox coming in follow-up." /></SectionWrapper>
     </ComponentPageLayout>
   )
 }

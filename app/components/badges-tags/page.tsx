@@ -8,7 +8,7 @@ import {
   AccessibilityList, Code, TodoSection,
 } from '@/app/components-lib/ui/ComponentPage'
 
-const TOTAL = '08'
+const TOTAL = '07'
 
 export default function TagPage() {
   return (
@@ -72,7 +72,6 @@ export default function TagPage() {
           { key: 'Color', value: <>System colors have sufficient contrast. Do not rely on color alone for meaning.</> },
         ]} />
       </SectionWrapper>
-      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy"><TodoSection label="Anatomy diagram for Tag coming in follow-up." /></SectionWrapper>
     </ComponentPageLayout>
   )
 }

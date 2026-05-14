@@ -7,7 +7,7 @@ import {
   AccessibilityList, Code, TodoSection,
 } from '@/app/components-lib/ui/ComponentPage'
 
-const TOTAL = '08'
+const TOTAL = '06'
 
 export default function AccordionPage() {
   return (
@@ -71,11 +71,7 @@ export default function AccordionPage() {
         </div>
       </SectionWrapper>
 
-      <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes">
-        <TodoSection label="Single size (28px trigger height). No size variants." />
-      </SectionWrapper>
-
-      <SectionWrapper id="required-pairings" num="05" total={TOTAL} title="Required pairings">
+      <SectionWrapper id="required-pairings" num="04" total={TOTAL} title="Required pairings">
         <RequiredPairings
           rules={[
             <>Each item needs a unique <Code>id</Code> and a <Code>label</Code>.</>,
@@ -85,7 +81,7 @@ export default function AccordionPage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden and refuse">
+      <SectionWrapper id="forbidden" num="05" total={TOTAL} title="Forbidden and refuse">
         <ForbiddenRefuse
           rules={[
             { rule: <>Use Accordion for page navigation.</>, response: <>"Use <Code>Tabs</Code> or sidebar navigation. Accordion is for content disclosure, not wayfinding."</> },
@@ -95,7 +91,7 @@ export default function AccordionPage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility">
+      <SectionWrapper id="accessibility" num="06" total={TOTAL} title="Accessibility">
         <AccessibilityList
           items={[
             { key: 'Role', value: <>Trigger: <Code>&lt;button&gt;</Code> with <Code>aria-expanded</Code> and <Code>aria-controls</Code>. Panel: <Code>role="region"</Code> with <Code>aria-labelledby</Code>.</> },
@@ -104,10 +100,6 @@ export default function AccordionPage() {
             { key: 'Animation', value: <>Panel expand/collapse respects <Code>prefers-reduced-motion</Code>.</> },
           ]}
         />
-      </SectionWrapper>
-
-      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy">
-        <TodoSection label="Anatomy diagram for Accordion coming in follow-up." />
       </SectionWrapper>
     </ComponentPageLayout>
   )

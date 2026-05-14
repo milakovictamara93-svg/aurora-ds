@@ -7,7 +7,7 @@ import {
   AccessibilityList, Code, TodoSection,
 } from '@/app/components-lib/ui/ComponentPage'
 
-const TOTAL = '08'
+const TOTAL = '06'
 
 export default function SpinnerPage() {
   return (
@@ -51,11 +51,7 @@ export default function SpinnerPage() {
         </div>
       </SectionWrapper>
 
-      <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes" description="Four sizes: 16px (inline/button), 24px (default), 32px (card), 48px (page-level).">
-        <TodoSection label="See variants above for size demos." />
-      </SectionWrapper>
-
-      <SectionWrapper id="required-pairings" num="05" total={TOTAL} title="Required pairings">
+      <SectionWrapper id="required-pairings" num="04" total={TOTAL} title="Required pairings">
         <RequiredPairings
           rules={[
             <>Spinner must have an accessible label via <Code>aria-label</Code> or surrounding context.</>,
@@ -65,7 +61,7 @@ export default function SpinnerPage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden and refuse">
+      <SectionWrapper id="forbidden" num="05" total={TOTAL} title="Forbidden and refuse">
         <ForbiddenRefuse
           rules={[
             { rule: <>Use Spinner for operations with known progress.</>, response: <>"Use <Code>Loading bar</Code> when you can show a percentage. Spinners are for indeterminate waits."</> },
@@ -75,7 +71,7 @@ export default function SpinnerPage() {
         />
       </SectionWrapper>
 
-      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility">
+      <SectionWrapper id="accessibility" num="06" total={TOTAL} title="Accessibility">
         <AccessibilityList
           items={[
             { key: 'Role', value: <><Code>role="status"</Code> with <Code>aria-label="Loading"</Code> (or contextual label).</> },
@@ -83,10 +79,6 @@ export default function SpinnerPage() {
             { key: 'Screen reader', value: <>Announces "Loading" on appearance. Does not re-announce on every animation frame.</> },
           ]}
         />
-      </SectionWrapper>
-
-      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy">
-        <TodoSection label="Anatomy diagram for Spinner coming in follow-up." />
       </SectionWrapper>
     </ComponentPageLayout>
   )
