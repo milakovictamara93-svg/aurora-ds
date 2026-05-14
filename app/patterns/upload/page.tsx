@@ -1,7 +1,15 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { TitleBlock } from '@/app/components-lib/ui/ComponentPage'
+import {
+  ComponentPageLayout,
+  TitleBlock,
+  SectionWrapper,
+  WhenToUse,
+  RequiredPairings,
+  ForbiddenRefuse,
+  Code,
+} from '@/app/components-lib/ui/ComponentPage'
 import {
   ArrowUpTrayIcon, DocumentIcon, XMarkIcon,
   CheckCircleIcon, ExclamationCircleIcon, ArrowPathIcon,
@@ -316,113 +324,129 @@ function StatePreview({ label, children }: { label: string; children: React.Reac
   )
 }
 
+// ── Constants ─────────────────────────────────────────────────────────────────
+
+const TOTAL = '07'
+
 // ── Page ─────────────────────────────────────────────────────────────────────
 
 export default function UploadPage() {
   return (
-    <div>
+    <ComponentPageLayout>
       <TitleBlock
         title="Upload"
         description="Patterns for file upload — single file drag-and-drop zones, progress feedback, result states, and bulk upload with a status table."
-       
       />
 
-      <div className="mt-8 flex flex-col gap-10">
+      {/* 01 — When to use */}
+      <SectionWrapper id="when-to-use" num="01" total={TOTAL} title="When to use">
+        <WhenToUse
+          doItems={[
+            'Users need to import data files (CSV, XLSX, PDF) into the platform',
+            'Bulk data ingestion for ESG metrics, energy readings, or certifications',
+            'Single document attachment to a form, record, or submission',
+            'Replacing or updating an existing uploaded file',
+          ]}
+          dontItems={[
+            'Pasting or typing tabular data directly — use an inline editable table instead',
+            'Selecting from existing platform records — use a search/select picker',
+            'Images or avatars — use a dedicated image picker with crop/preview',
+            'Real-time streaming data — use an API integration pattern, not file upload',
+          ]}
+        />
+      </SectionWrapper>
 
-        {/* Interactive single file upload */}
-        <section>
-          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2">Single file upload</h2>
-          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
-            Click to browse or drag a file over the zone. The zone transitions through selected → uploading → success / error states. Click "Upload another" or "Retry" to reset.
-          </p>
-          <UploadZoneDemo />
-        </section>
+      {/* 02 — Single file upload */}
+      <SectionWrapper
+        id="single-file-upload"
+        num="02"
+        total={TOTAL}
+        title="Single file upload"
+        description="Click to browse or drag a file over the zone. The zone transitions through selected, uploading, success, and error states. Click &quot;Upload another&quot; or &quot;Retry&quot; to reset."
+      >
+        <UploadZoneDemo />
+      </SectionWrapper>
 
-        {/* All states */}
-        <section>
-          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2">Upload states</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <StatePreview label="Idle — drop zone">
-              <div className="flex flex-col items-center gap-2 py-6 rounded-xl border-2 border-dashed border-[#D7DAE0] dark:border-[#1F2430] bg-[#F7F8F8] dark:bg-[#0D1117]">
-                <div className="w-10 h-10 rounded-full bg-[#EDEEF1] dark:bg-[#1F2430] flex items-center justify-center">
-                  <ArrowUpTrayIcon className="w-5 h-5 text-[#9CA3AF]" />
-                </div>
-                <p className="text-[13px] font-semibold text-[#111827] dark:text-white">Drop files here or click to browse</p>
-                <p className="text-[11px] text-[#9CA3AF]">Supports CSV, XLSX, PDF — up to 20 MB</p>
+      {/* 03 — Upload states */}
+      <SectionWrapper id="upload-states" num="03" total={TOTAL} title="Upload states">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <StatePreview label="Idle — drop zone">
+            <div className="flex flex-col items-center gap-2 py-6 rounded-xl border-2 border-dashed border-[#D7DAE0] dark:border-[#1F2430] bg-[#F7F8F8] dark:bg-[#0D1117]">
+              <div className="w-10 h-10 rounded-full bg-[#EDEEF1] dark:bg-[#1F2430] flex items-center justify-center">
+                <ArrowUpTrayIcon className="w-5 h-5 text-[#9CA3AF]" />
               </div>
-            </StatePreview>
-            <StatePreview label="Drag over — active">
-              <div className="flex flex-col items-center gap-2 py-6 rounded-xl border-2 border-dashed border-[#1258F8] bg-[#EEF6FF] dark:bg-[#1258F8]/10">
-                <div className="w-10 h-10 rounded-full bg-[#1258F8]/15 flex items-center justify-center">
-                  <ArrowUpTrayIcon className="w-5 h-5 text-[#1258F8]" />
-                </div>
-                <p className="text-[13px] font-semibold text-[#1258F8]">Drop to upload</p>
+              <p className="text-[13px] font-semibold text-[#111827] dark:text-white">Drop files here or click to browse</p>
+              <p className="text-[11px] text-[#9CA3AF]">Supports CSV, XLSX, PDF — up to 20 MB</p>
+            </div>
+          </StatePreview>
+          <StatePreview label="Drag over — active">
+            <div className="flex flex-col items-center gap-2 py-6 rounded-xl border-2 border-dashed border-[#1258F8] bg-[#EEF6FF] dark:bg-[#1258F8]/10">
+              <div className="w-10 h-10 rounded-full bg-[#1258F8]/15 flex items-center justify-center">
+                <ArrowUpTrayIcon className="w-5 h-5 text-[#1258F8]" />
               </div>
-            </StatePreview>
-            <StatePreview label="File selected — confirm">
-              <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
-                <div className="p-4 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-[#EEF6FF] dark:bg-[#1258F8]/15 flex items-center justify-center shrink-0">
-                    <DocumentIcon className="w-5 h-5 text-[#1258F8]" />
-                  </div>
-                  <div>
-                    <p className="text-[13px] font-semibold text-[#111827] dark:text-white">report-2024.xlsx</p>
-                    <p className="text-[12px] text-[#9CA3AF]">2.4 MB · application/xlsx</p>
-                  </div>
+              <p className="text-[13px] font-semibold text-[#1258F8]">Drop to upload</p>
+            </div>
+          </StatePreview>
+          <StatePreview label="File selected — confirm">
+            <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
+              <div className="p-4 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-[#EEF6FF] dark:bg-[#1258F8]/15 flex items-center justify-center shrink-0">
+                  <DocumentIcon className="w-5 h-5 text-[#1258F8]" />
                 </div>
-                <div className="px-4 pb-4 flex gap-2 border-t border-[#EDEEF1] dark:border-[#1F2430] pt-3">
-                  <button className="flex-1 py-2 rounded-md text-[13px] font-medium border border-[#D7DAE0] dark:border-[#1F2430] text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-[#111827]">Cancel</button>
-                  <button className="flex-1 py-2 rounded-md text-[13px] font-medium bg-[#1258F8] text-white">Upload</button>
-                </div>
-              </div>
-            </StatePreview>
-            <StatePreview label="Uploading — progress">
-              <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] p-4 flex flex-col gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-[#EEF6FF] dark:bg-[#1258F8]/15 flex items-center justify-center shrink-0">
-                    <DocumentIcon className="w-5 h-5 text-[#1258F8]" />
-                  </div>
-                  <div>
-                    <p className="text-[13px] font-semibold text-[#111827] dark:text-white">report-2024.xlsx</p>
-                    <p className="text-[12px] text-[#9CA3AF]">Uploading… 62%</p>
-                  </div>
-                </div>
-                <div className="w-full h-1.5 bg-[#EDEEF1] dark:bg-[#1F2430] rounded-full overflow-hidden">
-                  <div className="h-full bg-[#1258F8] rounded-full" style={{ width: '62%' }} />
+                <div>
+                  <p className="text-[13px] font-semibold text-[#111827] dark:text-white">report-2024.xlsx</p>
+                  <p className="text-[12px] text-[#9CA3AF]">2.4 MB · application/xlsx</p>
                 </div>
               </div>
-            </StatePreview>
-          </div>
-        </section>
+              <div className="px-4 pb-4 flex gap-2 border-t border-[#EDEEF1] dark:border-[#1F2430] pt-3">
+                <button className="flex-1 py-2 rounded-md text-[13px] font-medium border border-[#D7DAE0] dark:border-[#1F2430] text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-[#111827]">Cancel</button>
+                <button className="flex-1 py-2 rounded-md text-[13px] font-medium bg-[#1258F8] text-white">Upload</button>
+              </div>
+            </div>
+          </StatePreview>
+          <StatePreview label="Uploading — progress">
+            <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] p-4 flex flex-col gap-3">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-[#EEF6FF] dark:bg-[#1258F8]/15 flex items-center justify-center shrink-0">
+                  <DocumentIcon className="w-5 h-5 text-[#1258F8]" />
+                </div>
+                <div>
+                  <p className="text-[13px] font-semibold text-[#111827] dark:text-white">report-2024.xlsx</p>
+                  <p className="text-[12px] text-[#9CA3AF]">Uploading… 62%</p>
+                </div>
+              </div>
+              <div className="w-full h-1.5 bg-[#EDEEF1] dark:bg-[#1F2430] rounded-full overflow-hidden">
+                <div className="h-full bg-[#1258F8] rounded-full" style={{ width: '62%' }} />
+              </div>
+            </div>
+          </StatePreview>
+        </div>
+      </SectionWrapper>
 
-        {/* Bulk upload table */}
-        <section>
-          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2">Bulk upload — status table</h2>
-          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
-            When uploading multiple files, display each file as a table row with name, size, and a status indicator. Show progress inline for in-flight uploads. Allow per-row removal with the × button.
-          </p>
-          <BulkUploadDemo />
-        </section>
+      {/* 04 — Bulk upload */}
+      <SectionWrapper
+        id="bulk-upload"
+        num="04"
+        total={TOTAL}
+        title="Bulk upload — status table"
+        description="When uploading multiple files, display each file as a table row with name, size, and a status indicator. Show progress inline for in-flight uploads. Allow per-row removal with the x button."
+      >
+        <BulkUploadDemo />
+      </SectionWrapper>
 
-        {/* Specs */}
-        <section>
-          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2">Specs</h2>
-          <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117]">
-            <SpecRow label="Drop zone border" value="2px dashed #D7DAE0 → #1258F8 on drag-over" />
-            <SpecRow label="Drop zone bg (idle)" value="#F7F8F8 dark:bg-[#0D1117]" />
-            <SpecRow label="Drop zone bg (active)" value="#EEF6FF — Blue 50 tint" />
-            <SpecRow label="Upload icon size" value="24px in 48px circle container" />
-            <SpecRow label="Progress bar height" value="6px, bg #EDEEF1, fill #1258F8" />
-            <SpecRow label="Success color" value="#22C55E (border, icon, text)" />
-            <SpecRow label="Error color" value="#F87171 (border, icon, text)" />
-            <SpecRow label="File icon" value="DocumentIcon 20px, color #1258F8 in blue-tinted box" />
-            <SpecRow label="Border radius" value="12px for zone and card containers (rounded-xl)" />
-          </div>
-        </section>
+      {/* 05 — Rules */}
+      <SectionWrapper id="rules" num="05" total={TOTAL} title="Rules">
+        <div className="flex flex-col gap-4">
+          <RequiredPairings
+            rules={[
+              <>Drop zone must always display accepted file types and maximum size. Never let users discover limits after a failed upload.</>,
+              <>Show a file preview card with name and size before initiating the upload. Always provide a cancel path before data is sent.</>,
+              <>Use a progress bar with percentage for uploads. Spinners are not acceptable for file transfers.</>,
+              <>Failed uploads must persist as visible error rows until the user acts. Do not auto-dismiss errors.</>,
+              <>Bulk uploads must process concurrently and show each file as a separate row. Never collapse progress into a single spinner.</>,
+            ]}
+          />
 
-        {/* Rules */}
-        <section>
-          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2">Rules</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <RuleCard title="Always show accepted file types">
               The drop zone must state which file types and maximum size are accepted. Never surprise users with a failed upload they could have avoided.
@@ -440,9 +464,52 @@ export default function UploadPage() {
               For multi-file uploads, upload files concurrently. Show each file as a separate row — never collapse progress into a single spinner.
             </RuleCard>
           </div>
-        </section>
+        </div>
+      </SectionWrapper>
 
-      </div>
-    </div>
+      {/* 06 — Forbidden */}
+      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden">
+        <ForbiddenRefuse
+          rules={[
+            {
+              rule: 'Do not auto-start upload on file selection without confirmation.',
+              response: 'Always show the file preview card with Cancel and Upload buttons first.',
+            },
+            {
+              rule: 'Do not use a generic spinner instead of a progress bar for file uploads.',
+              response: 'Users need to know how far along the upload is. Use a deterministic progress bar with percentage.',
+            },
+            {
+              rule: 'Do not silently discard files that exceed the size limit.',
+              response: 'Show an inline error on the drop zone explaining the file is too large and what the limit is.',
+            },
+            {
+              rule: 'Do not auto-dismiss upload error states.',
+              response: 'Errors must persist until the user clicks Retry or removes the file. Failed uploads are data-loss risks.',
+            },
+            {
+              rule: 'Do not allow upload without showing accepted file types.',
+              response: 'The drop zone label must always include supported formats and max size.',
+            },
+          ]}
+        />
+      </SectionWrapper>
+
+      {/* 07 — Specs */}
+      <SectionWrapper id="specs" num="07" total={TOTAL} title="Specs">
+        <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117]">
+          <SpecRow label="Drop zone border" value="2px dashed #D7DAE0 → #1258F8 on drag-over" />
+          <SpecRow label="Drop zone bg (idle)" value="#F7F8F8 dark:bg-[#0D1117]" />
+          <SpecRow label="Drop zone bg (active)" value="#EEF6FF — Blue 50 tint" />
+          <SpecRow label="Upload icon size" value="24px in 48px circle container" />
+          <SpecRow label="Progress bar height" value="6px, bg #EDEEF1, fill #1258F8" />
+          <SpecRow label="Success color" value="#22C55E (border, icon, text)" />
+          <SpecRow label="Error color" value="#F87171 (border, icon, text)" />
+          <SpecRow label="File icon" value="DocumentIcon 20px, color #1258F8 in blue-tinted box" />
+          <SpecRow label="Border radius" value="12px for zone and card containers (rounded-xl)" />
+        </div>
+      </SectionWrapper>
+
+    </ComponentPageLayout>
   )
 }

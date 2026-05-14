@@ -1,7 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import { TitleBlock } from '@/app/components-lib/ui/ComponentPage'
+import {
+  ComponentPageLayout,
+  TitleBlock,
+  SectionWrapper,
+  WhenToUse,
+  RequiredPairings,
+  ForbiddenRefuse,
+  Code,
+} from '@/app/components-lib/ui/ComponentPage'
 import Tag from '@/app/components-lib/ui/Tag'
 import Slider from '@/app/components-lib/ui/Slider'
 import Modal from '@/app/components-lib/ui/Modal'
@@ -13,6 +21,8 @@ import type { DateRange } from '@/app/components-lib/ui/InputDate'
 import Checkbox from '@/app/components-lib/ui/Checkbox'
 import Radio from '@/app/components-lib/ui/Radio'
 import { FunnelIcon } from '@heroicons/react/20/solid'
+
+const TOTAL = '07'
 
 // ── Filter section wrapper (matches Figma 5120:145942) ────────────────────────
 
@@ -450,67 +460,167 @@ function RuleCard({ title, children }: { title: string; children: React.ReactNod
 
 export default function FilteringPage() {
   return (
-    <div>
+    <ComponentPageLayout>
       <TitleBlock
         title="Filtering"
-        description="Patterns for filtering tabular and list data — a filter bar with active Tag chips, and a Drawer panel with sections for each filter type."
-       
+        description="Patterns for filtering tabular and list data -- a filter bar with active Tag chips, and a Drawer panel with sections for each filter type."
       />
 
-      <div className="mt-8 flex flex-col gap-10">
+      {/* 01 — When to use */}
+      <SectionWrapper
+        id="when-to-use"
+        num="01"
+        total={TOTAL}
+        title="When to use"
+        description="Decide whether the filter bar + drawer pattern is the right fit."
+      >
+        <WhenToUse
+          doItems={[
+            <>Tables or lists with more than three filterable dimensions (date, score, category, type).</>,
+            <>ESG portfolio views where users slice data by aspect, region, and time period simultaneously.</>,
+            <>Any view where applied filters must remain visible as removable chips so the user always knows what is active.</>,
+            <>Dashboards where filter state is shared across multiple cards or charts on the same page.</>,
+          ]}
+          dontItems={[
+            <>Simple single-dimension filtering -- use an inline dropdown or segmented control instead.</>,
+            <>Search-only flows where the user types a query. Use <Code>InputSearch</Code> standalone.</>,
+            <>Sorting controls. Sorting is not filtering; keep them as separate interactions.</>,
+            <>Fewer than 10 items in the list. Filtering adds cognitive overhead that is not worth it at small scale.</>,
+          ]}
+        />
+      </SectionWrapper>
 
-        <section>
-          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2">Filter bar + drawer</h2>
-          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-5 leading-relaxed">
-            The filter bar shows active filters as <strong className="font-semibold text-[#111827] dark:text-white">Tag</strong> chips. The "Filter" button opens a <strong className="font-semibold text-[#111827] dark:text-white">Modal (drawer)</strong> with sections for each filter type. Applying closes the drawer and updates the chips.
-          </p>
-          <FilterBarDemo />
-        </section>
+      {/* 02 — Filter bar + drawer */}
+      <SectionWrapper
+        id="filter-bar-drawer"
+        num="02"
+        total={TOTAL}
+        title="Filter bar + drawer"
+        description="The filter bar shows active filters as Tag chips. The &quot;Filter&quot; button opens a Modal (drawer) with sections for each filter type. Applying closes the drawer and updates the chips."
+      >
+        <FilterBarDemo />
+      </SectionWrapper>
 
-        <section>
-          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2">Filter chip specs</h2>
-          <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117]">
-            <SpecRow label="Component" value="Tag — system='default', style='filled', showCount=false, showRemove=true" />
-            <SpecRow label="Height" value="28px (medium size)" />
-            <SpecRow label="Background" value="blue-100 (#D9EAFF)" />
-            <SpecRow label="Text" value="blue-900 (#173691)" />
-            <SpecRow label="Remove icon" value="× at 20px, same text color" />
-            <SpecRow label="'Clear all' position" value="After last chip, same row — plain text button" />
-          </div>
-        </section>
+      {/* 03 — Filter chip specs */}
+      <SectionWrapper
+        id="filter-chip-specs"
+        num="03"
+        total={TOTAL}
+        title="Filter chip specs"
+      >
+        <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117]">
+          <SpecRow label="Component" value="Tag — system='default', style='filled', showCount=false, showRemove=true" />
+          <SpecRow label="Height" value="28px (medium size)" />
+          <SpecRow label="Background" value="blue-100 (#D9EAFF)" />
+          <SpecRow label="Text" value="blue-900 (#173691)" />
+          <SpecRow label="Remove icon" value="x at 20px, same text color" />
+          <SpecRow label="'Clear all' position" value="After last chip, same row — plain text button" />
+        </div>
+      </SectionWrapper>
 
-        <section>
-          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2">Filter section types</h2>
-          <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117]">
-            <SpecRow label="Date range" value="Time / Both / Area toggle, then date inputs. 'Both' is default for ESG data with temporal + spatial dimensions." />
-            <SpecRow label="Histogram range" value="RangeHistogram bars (colored by selection) + Slider (range mode) + min/max numeric inputs. Bars in range = blue-600, bars outside = grey-200." />
-            <SpecRow label="Multi-select" value="Search input + 'Select all' checkbox + item list. Each Clear resets that section's selection to empty." />
-            <SpecRow label="Radio group" value="Mutually exclusive options. Clear resets to the default (first) option." />
-          </div>
-        </section>
+      {/* 04 — Filter section types */}
+      <SectionWrapper
+        id="filter-section-types"
+        num="04"
+        total={TOTAL}
+        title="Filter section types"
+      >
+        <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117]">
+          <SpecRow label="Date range" value="Time / Both / Area toggle, then date inputs. 'Both' is default for ESG data with temporal + spatial dimensions." />
+          <SpecRow label="Histogram range" value="RangeHistogram bars (colored by selection) + Slider (range mode) + min/max numeric inputs. Bars in range = blue-600, bars outside = grey-200." />
+          <SpecRow label="Multi-select" value="Search input + 'Select all' checkbox + item list. Each Clear resets that section's selection to empty." />
+          <SpecRow label="Radio group" value="Mutually exclusive options. Clear resets to the default (first) option." />
+        </div>
+      </SectionWrapper>
 
-        <section>
-          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2">Rules</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <RuleCard title="Chips reflect applied state only">
-              Filter chips in the bar show applied filters — not the draft inside the open drawer. Changes only become chips after pressing "Apply".
-            </RuleCard>
-            <RuleCard title="Each section has its own Clear">
-              Every filter section must have a "Clear" link that resets only that section, without touching others.
-            </RuleCard>
-            <RuleCard title="Filter button shows active state">
-              When any filters are applied, the Filter button gets a blue-tinted background and filled funnel icon to signal the data is filtered.
-            </RuleCard>
-            <RuleCard title="Drawer, not inline panel">
-              Use Modal type='drawer' for the filter panel. It slides in from the right and uses the existing footer actions (Cancel / Apply).
-            </RuleCard>
-            <RuleCard title="Histogram coloring follows range">
-              In range filters, histogram bars inside [min, max] are blue-600. Bars outside are grey-200. This helps users understand what data they're including.
-            </RuleCard>
-          </div>
-        </section>
+      {/* 05 — Rules */}
+      <SectionWrapper
+        id="rules"
+        num="05"
+        total={TOTAL}
+        title="Rules"
+        description="Required behavior for all filter implementations."
+      >
+        <RequiredPairings
+          rules={[
+            <>Filter chips in the bar reflect <strong>applied state only</strong>. Changes inside the open drawer do not become chips until the user presses "Apply".</>,
+            <>Every filter section must include its own <strong>"Clear" link</strong> that resets only that section without touching others.</>,
+            <>When any filters are applied, the Filter button must switch to an <strong>active state</strong> (blue-tinted background, filled funnel icon) so users can tell data is filtered at a glance.</>,
+            <>Use <Code>Modal type=&quot;drawer&quot;</Code> for the filter panel. It slides in from the right and uses the standard footer actions (Cancel / Apply).</>,
+            <>In range filters, histogram bars inside the selected range are <strong>blue-600</strong>. Bars outside the range are <strong>grey-200</strong>.</>,
+            <>A global <strong>"Clear all"</strong> text button must appear inline after the last chip when any filters are active.</>,
+          ]}
+        />
 
-      </div>
-    </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
+          <RuleCard title="Chips reflect applied state only">
+            Filter chips in the bar show applied filters -- not the draft inside the open drawer. Changes only become chips after pressing "Apply".
+          </RuleCard>
+          <RuleCard title="Each section has its own Clear">
+            Every filter section must have a "Clear" link that resets only that section, without touching others.
+          </RuleCard>
+          <RuleCard title="Filter button shows active state">
+            When any filters are applied, the Filter button gets a blue-tinted background and filled funnel icon to signal the data is filtered.
+          </RuleCard>
+          <RuleCard title="Drawer, not inline panel">
+            Use Modal type='drawer' for the filter panel. It slides in from the right and uses the existing footer actions (Cancel / Apply).
+          </RuleCard>
+          <RuleCard title="Histogram coloring follows range">
+            In range filters, histogram bars inside [min, max] are blue-600. Bars outside are grey-200. This helps users understand what data they're including.
+          </RuleCard>
+        </div>
+      </SectionWrapper>
+
+      {/* 06 — Forbidden */}
+      <SectionWrapper
+        id="forbidden"
+        num="06"
+        total={TOTAL}
+        title="Forbidden"
+        description="Patterns that break filtering UX or create confusion."
+      >
+        <ForbiddenRefuse
+          rules={[
+            {
+              rule: <>Do not apply filters automatically as the user changes values inside the drawer.</>,
+              response: <>Immediate application removes the ability to undo before committing. Always require an explicit "Apply" action.</>,
+            },
+            {
+              rule: <>Do not hide the active filter count or chips behind a collapsed state.</>,
+              response: <>Users must see what filters are active at all times. If chip space overflows, wrap to a second row -- never truncate or hide behind a "+N more" badge.</>,
+            },
+            {
+              rule: <>Do not mix sorting controls into the filter drawer.</>,
+              response: <>Sorting and filtering are separate concerns. Sort controls belong in the table header or a dedicated sort dropdown, not inside the filter panel.</>,
+            },
+            {
+              rule: <>Do not use inline filter dropdowns as a replacement when three or more filter dimensions exist.</>,
+              response: <>Inline dropdowns do not scale. Beyond two dimensions, always use the drawer pattern to keep the toolbar manageable.</>,
+            },
+            {
+              rule: <>Do not reset all filters when the user removes a single chip.</>,
+              response: <>Each chip removal must only clear that specific filter. The "Clear all" button is the only way to reset everything at once.</>,
+            },
+          ]}
+        />
+      </SectionWrapper>
+
+      {/* 07 — Accessibility */}
+      <SectionWrapper
+        id="accessibility"
+        num="07"
+        total={TOTAL}
+        title="Accessibility"
+        description="Keyboard and screen reader requirements for the filtering pattern."
+      >
+        <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117]">
+          <SpecRow label="Filter button" value="role='button', aria-expanded reflects drawer state, aria-haspopup='dialog'" />
+          <SpecRow label="Drawer" value="role='dialog', aria-modal='true', focus trapped while open" />
+          <SpecRow label="Chips" value="Each chip is a button with aria-label describing the filter and 'remove' action" />
+          <SpecRow label="Keyboard" value="Tab through chips, Enter/Space to remove. Escape closes the drawer without applying." />
+          <SpecRow label="Live region" value="Announce 'N filters applied' to screen readers when the user clicks Apply" />
+        </div>
+      </SectionWrapper>
+    </ComponentPageLayout>
   )
 }

@@ -1,7 +1,17 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { TitleBlock } from '@/app/components-lib/ui/ComponentPage'
+import {
+  ComponentPageLayout,
+  TitleBlock,
+  SectionWrapper,
+  WhenToUse,
+  RequiredPairings,
+  ForbiddenRefuse,
+  Code,
+} from '@/app/components-lib/ui/ComponentPage'
+
+const TOTAL = '07'
 
 // ── Drag handle icon ──────────────────────────────────────────────────────────
 
@@ -274,7 +284,7 @@ function TableColumnReorderDemo() {
           <tbody className="divide-y divide-[#EDEEF1] dark:divide-[#1F2430]">
             {ROWS.map((row, ri) => (
               <tr key={ri} className="hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430] transition-colors">
-                {columns.map((col, ci) => {
+                {columns.map((col) => {
                   const colIdx = INITIAL_COLUMNS.findIndex(c => c.id === col.id)
                   const isOver    = over    === col.id
                   const isDropped = dropped === col.id
@@ -289,7 +299,7 @@ function TableColumnReorderDemo() {
                         isDropped ? 'bg-[#EEF6FF] dark:bg-[#1258F8]/10' : '',
                       ].join(' ')}
                     >
-                      {colIdx >= 0 ? row[colIdx] : '—'}
+                      {colIdx >= 0 ? row[colIdx] : '\u2014'}
                     </td>
                   )
                 })}
@@ -302,57 +312,36 @@ function TableColumnReorderDemo() {
   )
 }
 
-// ── Rules ──────────────────────────────────────────────────────────────────────
-
-const rules = [
-  {
-    num: '1',
-    title: 'Always show a drag handle',
-    body: 'Use the 6-dot grip icon on the left edge of every draggable item. Never make the entire surface draggable without a visible affordance — users must be able to click text, buttons, and links inside.',
-  },
-  {
-    num: '2',
-    title: 'Indicate the dragging state clearly',
-    body: 'When an item is being dragged, reduce its opacity to 40% in the original slot to show the "ghost" placeholder. The floating copy should have an elevated shadow.',
-  },
-  {
-    num: '3',
-    title: 'Highlight the drop zone with brand blue',
-    body: 'Use border-[#1258F8] + bg-[#EEF6FF] on the target slot while dragging over it. For table columns, add a 2px left border in brand blue.',
-  },
-  {
-    num: '4',
-    title: 'Confirm the drop with a brief flash',
-    body: 'After a successful drop, apply ring-2 ring-[#1258F8]/20 to the landed item for ~800 ms before removing it. This confirms the action without requiring a toast.',
-  },
-  {
-    num: '5',
-    title: 'Support keyboard reordering',
-    body: 'Provide arrow key support when the drag handle is focused: Up/Down moves the item, Space confirms, Escape cancels. Announce position changes with aria-live.',
-  },
-]
-
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function DragDropPage() {
   return (
-    <div>
+    <ComponentPageLayout>
       <TitleBlock
         title="Drag and drop"
         description="Reorder lists and table columns by dragging. A grip handle signals the affordance; brand blue confirms the drop target and landed position."
-       
       />
 
-      <div className="mt-8 flex flex-col gap-10">
+      {/* 01 — When to use */}
+      <SectionWrapper id="when-to-use" num="01" total={TOTAL} title="When to use" description="Decide whether drag and drop is the right interaction for the task.">
+        <WhenToUse
+          doItems={[
+            'The user needs to reorder a short list (sidebar sections, dashboard widgets, priority queues)',
+            'Column order in a data table is user-configurable',
+            'The sequence directly affects output (report section order, pipeline stages)',
+            'Items have a visible grip handle and the list contains fewer than ~20 items',
+          ]}
+          dontItems={[
+            'The list is longer than 20 items. Use a "move to position" input or arrow buttons instead',
+            'Items are sorted by a data attribute (date, name, value). Sorting controls are the right pattern',
+            'The reorder has no persistent effect. Do not add drag if the order resets on reload',
+            'Touch is the primary input. Native drag events are unreliable on mobile; use tap-and-hold with arrow buttons',
+          ]}
+        />
+      </SectionWrapper>
 
-      {/* ── States ─────────────────────────────────────────────────────────── */}
-      <section>
-        <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">
-          Item states
-        </h2>
-        <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45] mb-6">
-          Four distinct visual states communicate each phase of the interaction.
-        </p>
+      {/* 02 — Item states */}
+      <SectionWrapper id="item-states" num="02" total={TOTAL} title="Item states" description="Four distinct visual states communicate each phase of the interaction.">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <StateCard label="Default"  state="default"  />
           <StateCard label="Dragging" state="dragging" />
@@ -363,7 +352,7 @@ export default function DragDropPage() {
         {/* Step labels */}
         <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-3">
           {[
-            { step: '1', title: 'Pick up',     body: 'User grabs the handle. The item\'s slot fades to 40% — a placeholder that shows where it came from.' },
+            { step: '1', title: 'Pick up',     body: 'User grabs the handle. The item\'s slot fades to 40% \u2014 a placeholder that shows where it came from.' },
             { step: '2', title: 'Drag over',   body: 'While hovering a valid drop target, that slot gets a blue border + tint, and the grip icon turns blue.' },
             { step: '3', title: 'Drop',        body: 'On release, the item lands in the new position with a brief blue ring that fades after 800 ms.' },
           ].map(({ step, title, body }) => (
@@ -378,49 +367,76 @@ export default function DragDropPage() {
             </div>
           ))}
         </div>
-      </section>
+      </SectionWrapper>
 
-      {/* ── List reorder demo ────────────────────────────────────────────────── */}
-      <section>
-        <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">
-          List reorder
-        </h2>
-        <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45] mb-4">
-          Use for ordered lists, sidebar sections, or any sequence where users control priority.
-        </p>
+      {/* 03 — List reorder */}
+      <SectionWrapper id="list-reorder" num="03" total={TOTAL} title="List reorder" description="Use for ordered lists, sidebar sections, or any sequence where users control priority.">
         <ListReorderDemo />
-      </section>
+      </SectionWrapper>
 
-      {/* ── Table column reorder demo ─────────────────────────────────────────── */}
-      <section>
-        <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">
-          Table column reorder
-        </h2>
-        <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45] mb-4">
-          Column headers carry the grip handle. The active column highlights with a left border indicator and tinted cells below.
-        </p>
+      {/* 04 — Table column reorder */}
+      <SectionWrapper id="table-column-reorder" num="04" total={TOTAL} title="Table column reorder" description="Column headers carry the grip handle. The active column highlights with a left border indicator and tinted cells below.">
         <TableColumnReorderDemo />
-      </section>
+      </SectionWrapper>
 
-      {/* ── Rules ────────────────────────────────────────────────────────────── */}
-      <section>
-        <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-2 leading-[1.4]">
-          Rules
-        </h2>
+      {/* 05 — Rules */}
+      <SectionWrapper id="rules" num="05" total={TOTAL} title="Rules" description="Required pairings for every drag-and-drop implementation.">
+        <RequiredPairings
+          rules={[
+            <>Always show a <Code>GripIcon</Code> drag handle on the left edge. Never make the entire surface draggable without a visible affordance.</>,
+            <>Reduce the dragged item to 40% opacity in its original slot to show the ghost placeholder. The floating copy gets an elevated shadow.</>,
+            <>Highlight the drop zone with <Code>border-[#1258F8]</Code> + <Code>bg-[#EEF6FF]</Code>. For table columns, add a 2px left border in brand blue.</>,
+            <>Confirm the drop with <Code>ring-2 ring-[#1258F8]/20</Code> for ~800 ms before removing the ring. No toast needed.</>,
+            <>Support keyboard reordering: Arrow keys move, Space confirms, Escape cancels. Announce position changes with <Code>aria-live</Code>.</>,
+          ]}
+        />
+      </SectionWrapper>
+
+      {/* 06 — Forbidden */}
+      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden" description="Patterns that break usability or accessibility. Do not ship these.">
+        <ForbiddenRefuse
+          rules={[
+            {
+              rule: 'Making the entire row/card the drag target without a grip handle',
+              response: 'Users cannot select text, click links, or interact with controls inside the item. Always scope drag to the handle element only.',
+            },
+            {
+              rule: 'Drag and drop as the only reorder mechanism (no keyboard alternative)',
+              response: 'Screen readers and keyboard users are locked out. Provide arrow-key reordering on the focused handle.',
+            },
+            {
+              rule: 'Using drag and drop on lists longer than 20 items',
+              response: 'Long-distance drags are error-prone and exhausting. Use a "move to position" number input or explicit up/down buttons.',
+            },
+            {
+              rule: 'Allowing drag on mobile without a tap-and-hold fallback',
+              response: 'Native HTML drag events do not fire reliably on touch devices. Either disable drag on mobile or implement pointer-event-based reordering.',
+            },
+            {
+              rule: 'Dropping without any visual confirmation',
+              response: 'The user has no proof the action succeeded. Always flash the landed item with the brand-blue ring for 800 ms.',
+            },
+          ]}
+        />
+      </SectionWrapper>
+
+      {/* 07 — Accessibility */}
+      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility" description="Keyboard and screen reader requirements for drag-and-drop patterns.">
         <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] divide-y divide-[#EDEEF1] dark:divide-[#1F2430]">
-          {rules.map(r => (
-            <div key={r.num} className="flex gap-4 p-5">
-              <span className="text-[#1258F8] dark:text-[#1258F8] font-bold text-sm shrink-0 w-5">{r.num}.</span>
-              <div>
-                <p className="font-semibold text-sm text-[#111827] dark:text-white mb-0.5">{r.title}</p>
-                <p className="text-sm text-[#505867] dark:text-[#9CA3AF]">{r.body}</p>
-              </div>
+          {[
+            { key: 'Role', value: <>Each draggable item must have <Code>role="listitem"</Code> inside a <Code>role="list"</Code> container.</> },
+            { key: 'Grab state', value: <>Set <Code>aria-grabbed="true"</Code> on the item being dragged and <Code>aria-grabbed="false"</Code> on all others.</> },
+            { key: 'Live region', value: <>Announce position changes with an <Code>aria-live="assertive"</Code> region, e.g. "Energy monitoring moved to position 3 of 5."</> },
+            { key: 'Keyboard', value: 'Focus the grip handle with Tab. Arrow Up/Down moves the item. Space/Enter confirms. Escape cancels and restores original order.' },
+            { key: 'Focus management', value: 'After a drop, return focus to the grip handle of the moved item in its new position.' },
+          ].map((item, i, arr) => (
+            <div key={i} className="flex gap-4 p-5">
+              <span className="text-[#1258F8] font-bold text-sm shrink-0 w-20">{item.key}</span>
+              <p className="text-sm text-[#505867] dark:text-[#9CA3AF]">{item.value}</p>
             </div>
           ))}
         </div>
-      </section>
-
-      </div>
-    </div>
+      </SectionWrapper>
+    </ComponentPageLayout>
   )
 }
