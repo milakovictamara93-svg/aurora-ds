@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import PageHeader from '@/app/components-lib/ui/PageHeader'
+import { TitleBlock } from '@/app/components-lib/ui/ComponentPage'
 import Tabs from '@/app/components-lib/ui/Tabs'
 import type { TabItem } from '@/app/components-lib/ui/Tabs'
 import { DoCard, DontCard } from '@/app/components-lib/ui/ComponentTabs'
@@ -79,10 +79,10 @@ export default function SurfaceLayoutsPage() {
 
   return (
     <div>
-      <PageHeader
+      <TitleBlock
         title="Surface layouts"
         description="How to compose blocks, cards, tables, and tabs on page backgrounds. This page defines when to use each layout pattern and how to keep them consistent."
-        badge="Patterns"
+       
       />
 
       <div className="mt-8 flex flex-col gap-10">

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import PageHeader from '@/app/components-lib/ui/PageHeader'
+import { TitleBlock } from '@/app/components-lib/ui/ComponentPage'
 import Modal from '@/app/components-lib/ui/Modal'
 import InputSearch from '@/app/components-lib/ui/InputSearch'
 import Checkbox from '@/app/components-lib/ui/Checkbox'
@@ -374,10 +374,10 @@ function RuleCard({ title, children }: { title: string; children: React.ReactNod
 export default function ColumnCustomizationPage() {
   return (
     <div>
-      <PageHeader
+      <TitleBlock
         title="Column customization"
         description="Patterns for letting users control which table columns are visible — a Customize button that opens a Drawer with grouped checkbox lists, search, and per-group clear controls."
-        badge="Patterns"
+       
       />
 
       <div className="mt-8 flex flex-col gap-10">

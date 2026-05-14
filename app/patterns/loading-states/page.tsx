@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import PageHeader from '@/app/components-lib/ui/PageHeader'
+import { TitleBlock } from '@/app/components-lib/ui/ComponentPage'
 import Spinner from '@/app/components-lib/ui/Spinner'
 import Skeleton from '@/app/components-lib/ui/Skeleton'
 import LoadingBar from '@/app/components-lib/ui/LoadingBar'
@@ -132,7 +132,7 @@ function FullPageOverlay() {
 export default function LoadingStatesPage() {
   return (
     <div>
-      <PageHeader title="Loading states" description="Skeleton screens, spinners, progress bars, and button loading indicators." badge="Patterns" />
+      <TitleBlock title="Loading states" description="Skeleton screens, spinners, progress bars, and button loading indicators." />
 
       <div className="mt-8 flex flex-col gap-10">
 

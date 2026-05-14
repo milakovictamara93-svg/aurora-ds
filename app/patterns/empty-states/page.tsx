@@ -1,6 +1,6 @@
 'use client'
 
-import PageHeader from '@/app/components-lib/ui/PageHeader'
+import { TitleBlock } from '@/app/components-lib/ui/ComponentPage'
 import Tag from '@/app/components-lib/ui/Tag'
 import {
   DocumentTextIcon, CloudArrowUpIcon, ExclamationCircleIcon,
@@ -56,7 +56,7 @@ function EmptyState({
 export default function EmptyStatesPage() {
   return (
     <div>
-      <PageHeader title="Empty states" description="Templates for no-data, first-use, error, search, and permission states." badge="Patterns" />
+      <TitleBlock title="Empty states" description="Templates for no-data, first-use, error, search, and permission states." />
 
       <div className="mt-8 flex flex-col gap-10">
 

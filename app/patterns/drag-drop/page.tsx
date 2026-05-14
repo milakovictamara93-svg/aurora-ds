@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import PageHeader from '@/app/components-lib/ui/PageHeader'
+import { TitleBlock } from '@/app/components-lib/ui/ComponentPage'
 
 // ── Drag handle icon ──────────────────────────────────────────────────────────
 
@@ -337,10 +337,10 @@ const rules = [
 export default function DragDropPage() {
   return (
     <div>
-      <PageHeader
+      <TitleBlock
         title="Drag and drop"
         description="Reorder lists and table columns by dragging. A grip handle signals the affordance; brand blue confirms the drop target and landed position."
-        badge="Patterns"
+       
       />
 
       <div className="mt-8 flex flex-col gap-10">

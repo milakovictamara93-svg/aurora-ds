@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import PageHeader from '@/app/components-lib/ui/PageHeader'
+import { TitleBlock } from '@/app/components-lib/ui/ComponentPage'
 import InputText from '@/app/components-lib/ui/InputText'
 import InputPassword from '@/app/components-lib/ui/InputPassword'
 import type { InputState } from '@/app/components-lib/ui/InputText'
@@ -248,10 +248,10 @@ function SectionGroupDemo() {
 export default function FormsPage() {
   return (
     <div>
-      <PageHeader
+      <TitleBlock
         title="Forms"
         description="Layout patterns, field states, and composition rules for building consistent forms across the Aurora design system."
-        badge="Patterns"
+       
       />
 
       <div className="mt-8 flex flex-col gap-10">

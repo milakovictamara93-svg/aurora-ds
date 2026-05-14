@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import PageHeader from '@/app/components-lib/ui/PageHeader'
+import { TitleBlock } from '@/app/components-lib/ui/ComponentPage'
 import Tag from '@/app/components-lib/ui/Tag'
 import Slider from '@/app/components-lib/ui/Slider'
 import Modal from '@/app/components-lib/ui/Modal'
@@ -451,10 +451,10 @@ function RuleCard({ title, children }: { title: string; children: React.ReactNod
 export default function FilteringPage() {
   return (
     <div>
-      <PageHeader
+      <TitleBlock
         title="Filtering"
         description="Patterns for filtering tabular and list data — a filter bar with active Tag chips, and a Drawer panel with sections for each filter type."
-        badge="Patterns"
+       
       />
 
       <div className="mt-8 flex flex-col gap-10">

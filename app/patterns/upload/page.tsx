@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import PageHeader from '@/app/components-lib/ui/PageHeader'
+import { TitleBlock } from '@/app/components-lib/ui/ComponentPage'
 import {
   ArrowUpTrayIcon, DocumentIcon, XMarkIcon,
   CheckCircleIcon, ExclamationCircleIcon, ArrowPathIcon,
@@ -321,10 +321,10 @@ function StatePreview({ label, children }: { label: string; children: React.Reac
 export default function UploadPage() {
   return (
     <div>
-      <PageHeader
+      <TitleBlock
         title="Upload"
         description="Patterns for file upload — single file drag-and-drop zones, progress feedback, result states, and bulk upload with a status table."
-        badge="Patterns"
+       
       />
 
       <div className="mt-8 flex flex-col gap-10">

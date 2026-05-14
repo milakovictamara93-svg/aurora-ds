@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import PageHeader from '@/app/components-lib/ui/PageHeader'
+import { TitleBlock } from '@/app/components-lib/ui/ComponentPage'
 import PageLayout from '@/app/components-lib/ui/PageLayout'
 import { ArrowDownTrayIcon } from '@heroicons/react/20/solid'
 
@@ -11,10 +11,10 @@ export default function PageStructurePage() {
 
   return (
     <div>
-      <PageHeader
+      <TitleBlock
         title="Page structure"
         description="Standard layout for platform pages — h1 header with reporting year, main tabs, section header with search and actions."
-        badge="Patterns"
+       
       />
 
       <div className="mt-8 flex flex-col gap-10">
