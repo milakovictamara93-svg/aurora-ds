@@ -64,9 +64,9 @@ const COMPONENT_GROUPS: NavGroup[] = [
       { href: '/components/cards',          label: 'Card' },
       { href: '/components/data-points',    label: 'Data points' },
       { href: '/components/mini-dashboard', label: 'Mini dashboard' },
-      { href: '/components/badges-tags',    label: 'Tag' },
-      { href: '/components/badges-tags',    label: 'Indicator' },
-      { href: '/components/data-points',    label: 'Data arrow' },
+      { href: '/components/badges-tags',           label: 'Tag' },
+      { href: '/components/badges-tags#indicator', label: 'Indicator' },
+      { href: '/components/data-points#arrow',     label: 'Data arrow' },
       { href: '/components/formatted',      label: 'Formatted' },
       { href: '/components/markdown',       label: 'Markdown' },
       { href: '/components/prose',          label: 'Prose' },
@@ -144,7 +144,7 @@ const VISUALIZATION: NavGroup = {
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 function groupContainsPath(group: NavGroup, pathname: string) {
-  return group.items.some(item => item.available !== false && pathname === item.href)
+  return group.items.some(item => item.available !== false && pathname === item.href.split('#')[0])
 }
 
 function initialOpen(pathname: string): Record<string, boolean> {
@@ -195,7 +195,8 @@ function NavSection({
       >
         <div className={clsx('flex flex-col gap-0.5 py-0.5', indent ? 'pl-2' : 'pl-1')}>
           {group.items.map(({ href, label, available }) => {
-            const active = pathname === href
+            const hrefPath = href.split('#')[0]
+            const active = pathname === hrefPath
             if (available === false) {
               return (
                 <span

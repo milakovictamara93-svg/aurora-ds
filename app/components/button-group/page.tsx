@@ -273,8 +273,8 @@ export default function SegmentedControlPage() {
         <p className="text-[10px] font-bold tracking-[0.08em] uppercase text-[#C4C9D4] dark:text-[#3F4654] mb-4">Related components</p>
         <RelatedGrid
           items={[
-            { href: '/components/controls', name: 'Toggle', description: 'Binary on/off switch.' },
-            { href: '/components/inputs', name: 'Combobox', description: 'Searchable selection from a longer list.' },
+            { href: '/components/inputs/toggle', name: 'Toggle', description: 'Binary on/off switch.' },
+            { href: '/components/combobox', name: 'Combobox', description: 'Searchable selection from a longer list.' },
             { href: '/components/tabs', name: 'Tabs', description: 'Navigation between page-level views.' },
             { href: '/components/buttons', name: 'Button', description: 'Single action trigger.' },
           ]}

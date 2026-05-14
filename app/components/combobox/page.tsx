@@ -338,7 +338,7 @@ export default function ComboboxPage() {
           items={[
             { href: '/components/inputs/select', name: 'Listbox', description: 'Standalone filterable list when not a form input.' },
             { href: '/components/button-group', name: 'Segmented control', description: 'Pick one of 2-5 visible options.' },
-            { href: '/components/controls', name: 'Toggle', description: 'Binary on/off.' },
+            { href: '/components/inputs/toggle', name: 'Toggle', description: 'Binary on/off.' },
             { href: '/components/inputs/tag', name: 'Tag input', description: 'Free-form custom values.' },
             { href: '/components/inputs/text', name: 'Text input', description: 'Single-line text entry.' },
             { href: '/components/inputs/radio', name: 'Radio', description: 'Mutually exclusive in a visible list.' },
