@@ -1,4 +1,4 @@
-import PageHeader from '@/app/components-lib/ui/PageHeader'
+import { TitleBlock, RequiredPairings, ForbiddenRefuse, Code } from '@/app/components-lib/ui/ComponentPage'
 import ColorSwatch from '@/app/components-lib/ui/ColorSwatch'
 
 interface ColorDef { name: string; hex: string; token: string; textColor?: 'light' | 'dark'; base?: boolean }
@@ -282,10 +282,10 @@ const RULES = [
 export default function ColorsPage() {
   return (
     <div>
-      <PageHeader
+      <TitleBlock
         title="Colors"
         description="All color tokens for the Aurora design system — click any swatch to copy the hex value, click the token name to copy the CSS variable."
-        badge="Foundations"
+       
       />
 
       {/* Usage rules */}
@@ -474,6 +474,26 @@ export default function ColorsPage() {
             </div>
           </section>
         ))}
+      </div>
+
+      {/* Rules */}
+      <div className="mt-14">
+        <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-4 leading-[1.4]">Rules</h2>
+        <RequiredPairings rules={[
+          <>Primary actions (buttons, links, focus rings) use Blue 600 (<Code>#1258F8</Code>). No other blue for interactive elements.</>,
+          <>Body text uses Grey 600 (<Code>#505867</Code>). Headings use Grey 900 (<Code>#1F2430</Code>). Never use pure black for text.</>,
+          <>Backgrounds use Grey 50 (<Code>#F7F8F8</Code>) for surfaces and White for cards. Grey 100 for disabled fills.</>,
+          <>ESG aspect colors are fixed per category. Energy is always red, GHG is always orange, Water is always cyan. Never reassign aspect colors.</>,
+          <>Semantic colors: Error = Red 400 (<Code>#F87171</Code>), Warning = Orange (<Code>#FB7D3C</Code>), Success = Green 500 (<Code>#22C55E</Code>). Use only for their intended meaning.</>,
+          <>All text must meet WCAG AA contrast (4.5:1 for body text, 3:1 for large text) against its background.</>,
+        ]} />
+        <div className="mt-6">
+          <ForbiddenRefuse rules={[
+            { rule: <>Use hex values not in the token set.</>, response: <>"Every color must come from a design token. No arbitrary hex values. Check the palette above."</> },
+            { rule: <>Use color alone to convey meaning.</>, response: <>"Always pair color with a text label or icon. Color-blind users cannot distinguish red/green/orange."</> },
+            { rule: <>Use Blue 600 for non-interactive decorative elements.</>, response: <>"Blue 600 signals interactivity. For decorative use, pick a grey or aspect color."</> },
+          ]} />
+        </div>
       </div>
     </div>
   )

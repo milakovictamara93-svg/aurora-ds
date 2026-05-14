@@ -1,5 +1,5 @@
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import PageHeader from '@/app/components-lib/ui/PageHeader'
+import { TitleBlock, RequiredPairings, ForbiddenRefuse, Code } from '@/app/components-lib/ui/ComponentPage'
 
 // ── Border radius scale (mirrors tailwind.config.ts) ─────────────────────────
 const RADII = [
@@ -54,10 +54,10 @@ const SHADOWS = [
 export default function BordersShadowsPage() {
   return (
     <div>
-      <PageHeader
+      <TitleBlock
         title="Borders & Shadows"
         description="All border radius values must come from the approved scale. Shadow levels define a consistent elevation system — from subtle hover depth to full modal lift."
-        badge="Foundations"
+       
       />
 
       {/* ── Border radius ──────────────────────────────────────────────────── */}
@@ -223,6 +223,24 @@ export default function BordersShadowsPage() {
           </div>
         </div>
       </section>
+
+      {/* Rules */}
+      <div className="mt-14">
+        <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-4 leading-[1.4]">Rules</h2>
+        <RequiredPairings rules={[
+          <>Border radius: 2px (badges), 4px (inputs, buttons), 6-8px (cards), 12px (modals), 16px (large panels). Never use arbitrary values.</>,
+          <>Border color: Grey 200 (<Code>#D7DAE0</Code>) for default, Blue 600 for focus, Error Red for validation errors.</>,
+          <>Shadows: Level 1-5. Cards use Level 3. Modals use Level 5. Tooltips use Level 2. No custom box-shadow values.</>,
+          <>Focus ring: 2px solid Blue 600, 2px offset. Applied on keyboard focus only, not on click.</>,
+        ]} />
+        <div className="mt-6">
+          <ForbiddenRefuse rules={[
+            { rule: <>Use arbitrary border-radius values.</>, response: <>"Pick from the approved set: 2, 4, 6, 8, 12, 16px. No rounded-[7px] or rounded-[10px]."</> },
+            { rule: <>Use custom box-shadow values.</>, response: <>"Use the shadow level tokens (Level 1-5). Custom shadows create visual inconsistency."</> },
+            { rule: <>Remove focus rings without providing an alternative.</>, response: <>"Focus rings are required for keyboard accessibility. If you hide the ring, provide an equally visible alternative."</> },
+          ]} />
+        </div>
+      </div>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import PageHeader from '@/app/components-lib/ui/PageHeader'
+import { TitleBlock, RequiredPairings, ForbiddenRefuse, Code } from '@/app/components-lib/ui/ComponentPage'
 
 // ── Spacing scale (source of truth — mirrors Figma node 46:39706) ─────────────
 // Base unit: 4px. Every value is a multiple of 4. No exceptions.
@@ -26,10 +26,10 @@ const MAX_BAR = 320
 export default function SpacingPage() {
   return (
     <div>
-      <PageHeader
+      <TitleBlock
         title="Spacings"
         description="All spacing uses a 4px base unit. Every gap, padding, and margin across the entire system must be a multiple of 4 — no exceptions."
-        badge="Foundations"
+       
       />
 
       {/* ── Scale table ───────────────────────────────────────────────────── */}
@@ -124,6 +124,23 @@ export default function SpacingPage() {
           </div>
         </div>
       </section>
+
+      {/* Rules */}
+      <div className="mt-14">
+        <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-4 leading-[1.4]">Rules</h2>
+        <RequiredPairings rules={[
+          <>Base unit is 4px. All spacing must be multiples of 4: 4, 8, 12, 16, 20, 24, 32, 40, 48, 64.</>,
+          <>Component internal padding: 8px (dense), 12px (compact), 16px (default), 24px (spacious).</>,
+          <>Section gaps: 24px (tight), 32px (default), 40px (relaxed). Card padding: 24px.</>,
+          <>Never use arbitrary spacing values. If a design calls for 13px or 18px, round to the nearest 4px multiple.</>,
+        ]} />
+        <div className="mt-6">
+          <ForbiddenRefuse rules={[
+            { rule: <>Use spacing values not divisible by 4.</>, response: <>"All spacing is 4px-based. Round to the nearest multiple: 12 not 13, 16 not 15, 20 not 18."</> },
+            { rule: <>Use margin-top on the first child of a container.</>, response: <>"Use padding on the parent or gap on the flex/grid container. Margin-top on first child creates inconsistent spacing."</> },
+          ]} />
+        </div>
+      </div>
     </div>
   )
 }

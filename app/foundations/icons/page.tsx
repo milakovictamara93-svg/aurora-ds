@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import PageHeader from '@/app/components-lib/ui/PageHeader'
+import { TitleBlock, RequiredPairings, ForbiddenRefuse, Code } from '@/app/components-lib/ui/ComponentPage'
 import {
   HomeIcon, ChevronRightIcon, ChevronDownIcon, ChevronLeftIcon, ChevronUpIcon,
   ArrowRightIcon, ArrowLeftIcon, ArrowUpIcon, ArrowDownIcon,
@@ -232,10 +232,10 @@ function IconTile({ name, Icon }: { name: string; Icon: React.ComponentType<{ cl
 export default function IconsPage() {
   return (
     <div>
-      <PageHeader
+      <TitleBlock
         title="Icons"
         description="Hero Icons is the primary icon library. Custom icons are used only for domain-specific concepts not covered by Hero Icons."
-        badge="Foundations"
+       
       />
 
       {/* ── Hero Icons ───────────────────────────────────────────────────── */}
@@ -349,6 +349,24 @@ export default function IconsPage() {
           </div>
         </div>
       </section>
+
+      {/* Rules */}
+      <div className="mt-14">
+        <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-4 leading-[1.4]">Rules</h2>
+        <RequiredPairings rules={[
+          <>Default icon size: 24px, outline style, from Hero Icons. Button icons: 20px. Inline text icons: 16px.</>,
+          <>Icon-to-text gap: 8px (<Code>gap-2</Code>). Icon-to-icon gap: 4px (<Code>gap-1</Code>).</>,
+          <>Icons are decorative unless they are the sole interactive element. Decorative icons get <Code>aria-hidden="true"</Code>.</>,
+          <>Interactive icon-only buttons require <Code>aria-label</Code> describing the action, not the icon.</>,
+        ]} />
+        <div className="mt-6">
+          <ForbiddenRefuse rules={[
+            { rule: <>Use icons from a different icon set than Hero Icons.</>, response: <>"Hero Icons (outline, 24px) is the primary set. Lucide is the secondary. No mixing with other sets."</> },
+            { rule: <>Use solid icons in the default state.</>, response: <>"Outline style is the default. Solid is reserved for active/selected states (e.g. filled star for favorited)."</> },
+            { rule: <>Use an icon without a text label as the only way to communicate meaning.</>, response: <>"Icons are ambiguous. Always pair with a text label, tooltip, or aria-label."</> },
+          ]} />
+        </div>
+      </div>
     </div>
   )
 }
