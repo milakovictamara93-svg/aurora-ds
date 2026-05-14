@@ -273,10 +273,10 @@ export default function ComboboxPage() {
                 <span className="absolute -left-[22px] top-[12px] w-[10px] h-px bg-[#111827] dark:bg-white" />
                 <span className="absolute -left-[42px] top-[5px] w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">1</span>
 
-                {/* Chip -- matches InputMultiselect chip style */}
-                <span className="relative inline-flex items-center gap-1 bg-[#edeef1] dark:bg-[#1F2430] rounded px-1.5 py-0.5 text-xs text-[#111827] dark:text-white">
+                {/* Chip -- matches InputMultiselect: bg-[#d9eaff], text-[#1258f8], text-xs, font-medium, XMarkIcon */}
+                <span className="relative inline-flex items-center gap-0.5 bg-[#d9eaff] dark:bg-blue-900/30 text-[#1258f8] dark:text-blue-300 text-xs font-medium rounded px-1.5 py-0.5">
                   Acme Tower
-                  <span className="text-[#505867] dark:text-[#9CA3AF] text-[10px] cursor-pointer">x</span>
+                  <svg className="w-3 h-3 cursor-pointer" viewBox="0 0 20 20" fill="currentColor"><path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" /></svg>
                   {/* Pointer 2: Chip */}
                   <span className="absolute -top-6 left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
                   <span className="absolute -top-[16px] left-1/2 -translate-x-1/2 w-px h-[10px] bg-[#111827] dark:bg-white" />
