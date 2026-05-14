@@ -90,6 +90,10 @@ export default function TextInputPage() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-4">
+            <p className="font-mono text-[12px] font-medium text-[#111827] dark:text-white mb-2">TextInput</p>
+            <InputText id="family-text" label="Building name" placeholder="Enter building name" />
+          </div>
+          <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-4">
             <p className="font-mono text-[12px] font-medium text-[#111827] dark:text-white mb-2">SearchInput</p>
             <InputSearch id="family-search" placeholder="Search assets..." />
           </div>
@@ -97,7 +101,7 @@ export default function TextInputPage() {
             <p className="font-mono text-[12px] font-medium text-[#111827] dark:text-white mb-2">PasswordInput</p>
             <InputPassword id="family-pass" label="Password" />
           </div>
-          <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-4 sm:col-span-2">
+          <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-4">
             <p className="font-mono text-[12px] font-medium text-[#111827] dark:text-white mb-2">Textarea</p>
             <InputTextarea id="family-textarea" label="Notes" placeholder="Add a description..." />
           </div>
