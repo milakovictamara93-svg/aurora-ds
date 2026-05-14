@@ -2,11 +2,14 @@
 
 import { MagnifyingGlassIcon } from '@heroicons/react/16/solid'
 import InputText from '@/app/components-lib/ui/InputText'
+import InputSearch from '@/app/components-lib/ui/InputSearch'
+import InputPassword from '@/app/components-lib/ui/InputPassword'
+import InputTextarea from '@/app/components-lib/ui/InputTextarea'
 import {
   ComponentPageLayout, TitleBlock, SectionWrapper,
   WhenToUse, DecisionTree, RequiredPairings, ForbiddenRefuse,
   AccessibilityList, AnatomyBlock,
-  Code, TodoSection,
+  Code,
 } from '@/app/components-lib/ui/ComponentPage'
 import { SpecTable } from '@/app/components-lib/ui/ComponentTabs'
 
@@ -36,14 +39,14 @@ function VariantCard({
 
 // ── Page ─────────────────────────────────────────────────────────────────────
 
-const TOTAL = '07'
+const TOTAL = '08'
 
 export default function TextInputPage() {
   return (
     <ComponentPageLayout>
       <TitleBlock
         title="Text input"
-        description="The base single-line input for free-form text. Supports stacked and inline layouts, five validation states, and optional leading/trailing icons."
+        description="Base text-entry component covering four variants via props: single-line text, search, password, and multi-line textarea. Supports stacked and inline layouts, five validation states, and optional leading/trailing icons."
       />
 
       {/* ── 01 When to use ──────────────────────────────────────────────────── */}
@@ -66,8 +69,43 @@ export default function TextInputPage() {
         />
       </SectionWrapper>
 
-      {/* ── 02 Decision tree ────────────────────────────────────────────────── */}
-      <SectionWrapper id="decision-tree" num="02" total={TOTAL} title="Decision tree against neighbours">
+      {/* ── 02 The text input family ───────────────────────────────────────── */}
+      <SectionWrapper id="text-family" num="02" total={TOTAL} title="The text input family" description="One base component, four modes. Designers will find Text, Search, Password, and Textarea as separate components in the design library. All share the same 32px height, 4px radius, and validation states.">
+        <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117] mb-4">
+          <table className="w-full text-[14px] border-collapse">
+            <thead>
+              <tr className="bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
+                <th className="text-left px-4 py-2.5 text-[11px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]">Need</th>
+                <th className="text-left px-4 py-2.5 text-[11px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]">Component</th>
+                <th className="text-left px-4 py-2.5 text-[11px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]">Example</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#EDEEF1] dark:divide-[#1F2430]">
+              <tr><td className="px-4 py-3 text-[#111827] dark:text-white">Single-line free text</td><td className="px-4 py-3"><Code>TextInput</Code></td><td className="px-4 py-3 text-[#505867] dark:text-[#9CA3AF]">Building name, email, address</td></tr>
+              <tr><td className="px-4 py-3 text-[#111827] dark:text-white">Search with clear button</td><td className="px-4 py-3"><Code>SearchInput</Code></td><td className="px-4 py-3 text-[#505867] dark:text-[#9CA3AF]">Asset search, filter bar</td></tr>
+              <tr><td className="px-4 py-3 text-[#111827] dark:text-white">Masked entry with show/hide</td><td className="px-4 py-3"><Code>PasswordInput</Code></td><td className="px-4 py-3 text-[#505867] dark:text-[#9CA3AF]">Login, API key entry</td></tr>
+              <tr><td className="px-4 py-3 text-[#111827] dark:text-white">Multi-line text</td><td className="px-4 py-3"><Code>Textarea</Code></td><td className="px-4 py-3 text-[#505867] dark:text-[#9CA3AF]">Notes, descriptions, comments</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-4">
+            <p className="font-mono text-[12px] font-medium text-[#111827] dark:text-white mb-2">SearchInput</p>
+            <InputSearch id="family-search" placeholder="Search assets..." />
+          </div>
+          <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-4">
+            <p className="font-mono text-[12px] font-medium text-[#111827] dark:text-white mb-2">PasswordInput</p>
+            <InputPassword id="family-pass" label="Password" />
+          </div>
+          <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-4 sm:col-span-2">
+            <p className="font-mono text-[12px] font-medium text-[#111827] dark:text-white mb-2">Textarea</p>
+            <InputTextarea id="family-textarea" label="Notes" placeholder="Add a description..." />
+          </div>
+        </div>
+      </SectionWrapper>
+
+      {/* ── 03 Decision tree ────────────────────────────────────────────────── */}
+      <SectionWrapper id="decision-tree" num="03" total={TOTAL} title="Decision tree against neighbours">
         <DecisionTree
           rows={[
             { intent: 'Enter a short free-form value (name, email, number)', use: <Code>TextInput</Code>, not: <Code>Textarea</Code> },
@@ -82,7 +120,7 @@ export default function TextInputPage() {
       </SectionWrapper>
 
       {/* ── 03 Variants ───────────────────────────────────────────────────── */}
-      <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants" description="All validation states and layout modes. Each state sets its own border color, focus ring, trailing icon, and helper text color automatically.">
+      <SectionWrapper id="variants" num="04" total={TOTAL} title="Variants" description="All validation states and layout modes. Each state sets its own border color, focus ring, trailing icon, and helper text color automatically.">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           <VariantCard name="default" tag="Resting state. Grey border, blue focus ring on interaction.">
             <InputText
@@ -165,7 +203,7 @@ export default function TextInputPage() {
       </SectionWrapper>
 
       {/* ── 04 Required pairings ──────────────────────────────────────────── */}
-      <SectionWrapper id="required-pairings" num="04" total={TOTAL} title="Required pairings" description="Rules that must hold. Missing one is a blocking failure: ask, don't guess.">
+      <SectionWrapper id="required-pairings" num="05" total={TOTAL} title="Required pairings" description="Rules that must hold. Missing one is a blocking failure: ask, don't guess.">
         <RequiredPairings
           rules={[
             <>Every <Code>TextInput</Code> must have a visible <Code>label</Code>. If a visible label is impossible (e.g. search in a toolbar), provide <Code>aria-label</Code> on the input instead.</>,
@@ -179,7 +217,7 @@ export default function TextInputPage() {
       </SectionWrapper>
 
       {/* ── 06 Forbidden and refuse ───────────────────────────────────────── */}
-      <SectionWrapper id="forbidden" num="05" total={TOTAL} title="Forbidden and refuse" description="Hard-no rules. Refuse and produce the suggested response instead of generating code.">
+      <SectionWrapper id="forbidden" num="06" total={TOTAL} title="Forbidden and refuse" description="Hard-no rules. Refuse and produce the suggested response instead of generating code.">
         <ForbiddenRefuse
           rules={[
             {
@@ -211,7 +249,7 @@ export default function TextInputPage() {
       </SectionWrapper>
 
       {/* ── 07 Accessibility ──────────────────────────────────────────────── */}
-      <SectionWrapper id="accessibility" num="06" total={TOTAL} title="Accessibility" description="Native input semantics, programmatic label association, visible focus ring, and screen-reader-friendly validation. Non-negotiable.">
+      <SectionWrapper id="accessibility" num="07" total={TOTAL} title="Accessibility" description="Native input semantics, programmatic label association, visible focus ring, and screen-reader-friendly validation. Non-negotiable.">
         <AccessibilityList
           items={[
             { key: 'Role', value: <>Native <Code>&lt;input&gt;</Code>. The <Code>type</Code> attribute provides implicit semantics (text, email, number, tel, url). No role override needed.</> },
@@ -228,7 +266,7 @@ export default function TextInputPage() {
       </SectionWrapper>
 
       {/* ── 08 Anatomy ────────────────────────────────────────────────────── */}
-      <SectionWrapper id="anatomy" num="07" total={TOTAL} title="Anatomy">
+      <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy">
         <AnatomyBlock
           diagram={
             <div className="bg-[#F7F8F8] dark:bg-[#111827] rounded-lg px-12 py-20 flex items-center justify-center">

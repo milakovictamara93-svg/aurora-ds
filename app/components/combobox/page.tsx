@@ -126,7 +126,7 @@ export default function ComboboxPage() {
     <ComponentPageLayout>
       <TitleBlock
         title="Combobox"
-        description="Dropdown for picking from a known list of options. Single or multi, with or without search. Keyboard navigable per WAI-ARIA combobox pattern."
+        description="Dropdown for picking from a known list of options. Covers Select, Multiselect, Search multiselect, and Tag input via props. Single or multi, with or without search. Keyboard navigable per WAI-ARIA combobox pattern."
       />
 
       {/* ── 01 When to use ──────────────────────────────────────────────────── */}

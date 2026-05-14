@@ -297,10 +297,18 @@ export default function Navigation({
   sections = PLATFORM_SECTIONS,
   defaultSection = 'collection',
   defaultItem = 'col-asset-list',
+  children,
+  fullHeight = false,
+  portfolio = 'Global Portfolio',
+  badge = '87%',
 }: {
   sections?:       NavSection[]
   defaultSection?: string
   defaultItem?:    string
+  children?:       React.ReactNode
+  fullHeight?:     boolean
+  portfolio?:      string
+  badge?:          string
 }) {
   const [activeSection, setActiveSection] = useState(defaultSection)
   const [activeItem, setActiveItem] = useState(defaultItem)
@@ -314,7 +322,12 @@ export default function Navigation({
   }
 
   return (
-    <div className="flex flex-col h-full bg-[#F7F8F8] dark:bg-[#111827] rounded-lg overflow-hidden border border-[#EDEEF1] dark:border-[#1F2430]">
+    <div className={clsx(
+      'flex flex-col bg-[#F7F8F8] dark:bg-[#111827] overflow-hidden',
+      fullHeight
+        ? 'min-h-screen'
+        : 'h-full rounded-lg border border-[#EDEEF1] dark:border-[#1F2430]',
+    )}>
       <div className="flex flex-1 min-h-0">
         {/* Icon rail */}
         <IconRail
@@ -328,8 +341,8 @@ export default function Navigation({
           <TopBar
             sectionLabel={currentSection.label}
             sectionColor={currentSection.color}
-            portfolio="Global Portfolio"
-            badge="87%"
+            portfolio={portfolio}
+            badge={badge}
           />
           <div className="flex flex-1 min-h-0">
             <SidePanel
@@ -338,12 +351,16 @@ export default function Navigation({
               onItemChange={setActiveItem}
             />
             <div className="flex-1 p-6 overflow-auto bg-[#F7F8F8] dark:bg-[#0D1117]">
-              <p className="text-[20px] font-semibold text-[#111827] dark:text-white mb-1">
-                {currentSection.items.find(i => i.id === activeItem)?.label ?? 'Page'}
-              </p>
-              <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] tracking-[0.21px]">
-                {currentSection.label} / {currentSection.items.find(i => i.id === activeItem)?.label}
-              </p>
+              {children ?? (
+                <>
+                  <p className="text-[20px] font-semibold text-[#111827] dark:text-white mb-1">
+                    {currentSection.items.find(i => i.id === activeItem)?.label ?? 'Page'}
+                  </p>
+                  <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] tracking-[0.21px]">
+                    {currentSection.label} / {currentSection.items.find(i => i.id === activeItem)?.label}
+                  </p>
+                </>
+              )}
             </div>
           </div>
         </div>
