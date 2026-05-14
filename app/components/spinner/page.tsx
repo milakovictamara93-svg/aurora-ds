@@ -45,10 +45,9 @@ export default function SpinnerPage() {
 
       <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants">
         <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-6 flex items-center gap-6">
-          <Spinner size={16} />
-          <Spinner size={24} />
-          <Spinner size={32} />
-          <Spinner size={48} />
+          <Spinner size="sm" />
+          <Spinner size="md" />
+          <Spinner size="lg" />
         </div>
       </SectionWrapper>
 

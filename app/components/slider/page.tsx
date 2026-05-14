@@ -29,7 +29,7 @@ export default function SliderPage() {
       </SectionWrapper>
       <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants">
         <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-6">
-          <Slider label="Score threshold" min={0} max={100} defaultValue={65} />
+          <Slider min={0} max={100} defaultValue={65} />
         </div>
       </SectionWrapper>
       <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes"><TodoSection label="Single size. Track height is 4px, thumb is 16px." /></SectionWrapper>
