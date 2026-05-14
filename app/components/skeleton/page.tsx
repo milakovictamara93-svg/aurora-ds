@@ -48,7 +48,7 @@ export default function SkeletonPage() {
           <Skeleton width="100%" height={12} />
           <Skeleton width="50%" height={12} />
           <div className="flex items-center gap-3 mt-2">
-            <Skeleton width={32} height={32} rounded />
+            <Skeleton width={32} height={32} rounded="full" />
             <div className="flex-1 flex flex-col gap-2">
               <Skeleton width="40%" height={10} />
               <Skeleton width="60%" height={10} />
