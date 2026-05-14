@@ -30,8 +30,8 @@ function SegCtrl({
 
   const activeStyles: Record<SegVariant, string> = {
     primary: 'bg-[#1258F8] text-white',
-    secondary: 'bg-white dark:bg-[#0D1117] text-[#111827] dark:text-white',
-    tertiary: 'text-[#111827] dark:text-white font-semibold',
+    secondary: 'bg-[#D9EAFF] dark:bg-[#1258F8]/20 text-[#111827] dark:text-white',
+    tertiary: 'bg-[#EDEEF1] dark:bg-[#1F2430] text-[#111827] dark:text-white',
   }
 
   return (

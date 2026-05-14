@@ -214,7 +214,7 @@ export default function ModalsPage() {
               {/* Modal shell */}
               <div className="w-full max-w-[420px] mx-auto bg-white rounded-lg overflow-visible shadow-xl relative">
                 {/* Header */}
-                <div className="px-5 pt-4 pb-3 border-b border-[#EDEEF1] relative">
+                <div className="px-5 pt-4 pb-3 relative">
                   <div className="flex items-start justify-between">
                     <div>
                       <p className="text-[14px] font-semibold text-[#111827]">Modal title</p>
@@ -245,7 +245,7 @@ export default function ModalsPage() {
                 </div>
 
                 {/* Footer */}
-                <div className="px-5 py-3 border-t border-[#EDEEF1] flex items-center justify-end gap-2 relative">
+                <div className="px-5 py-3 flex items-center justify-end gap-2 relative">
                   <div className="h-7 px-3 flex items-center rounded border border-[#D7DAE0] text-[12px] font-medium text-[#111827]">Cancel</div>
                   <div className="h-7 px-3 flex items-center rounded bg-[#1258F8] text-[12px] font-medium text-white">Confirm</div>
 
