@@ -1,9 +1,10 @@
 'use client'
 
+import Navigation from '@/app/components-lib/ui/Navigation'
 import {
   ComponentPageLayout, TitleBlock, SectionWrapper,
   WhenToUse, DecisionTree, RequiredPairings, ForbiddenRefuse,
-  AccessibilityList, Code, TodoSection,
+  AccessibilityList, Code,
 } from '@/app/components-lib/ui/ComponentPage'
 
 const TOTAL = '06'
@@ -11,10 +12,7 @@ const TOTAL = '06'
 export default function NavigationPage() {
   return (
     <ComponentPageLayout>
-      <TitleBlock
-        title="Navigation"
-        description="Icon rail + sidebar + top bar shell for section and page wayfinding across the platform."
-      />
+      <TitleBlock title="Navigation" description="Icon rail + sidebar + top bar shell for section and page wayfinding across the platform." />
 
       <SectionWrapper id="when-to-use" num="01" total={TOTAL} title="When to use, when not to use">
         <WhenToUse
@@ -32,47 +30,42 @@ export default function NavigationPage() {
       </SectionWrapper>
 
       <SectionWrapper id="decision-tree" num="02" total={TOTAL} title="Decision tree against neighbours">
-        <DecisionTree
-          rows={[
-            { intent: 'App-level section navigation', use: <Code>Navigation</Code>, not: <Code>Tabs</Code> },
-            { intent: 'In-page view switching', use: <Code>Tabs</Code>, not: <Code>Navigation</Code> },
-            { intent: 'Hierarchy path display', use: <Code>Breadcrumbs</Code>, not: <Code>Navigation</Code> },
-          ]}
-        />
+        <DecisionTree rows={[
+          { intent: 'App-level section navigation', use: <Code>Navigation</Code>, not: <Code>Tabs</Code> },
+          { intent: 'In-page view switching', use: <Code>Tabs</Code>, not: <Code>Navigation</Code> },
+          { intent: 'Hierarchy path display', use: <Code>Breadcrumbs</Code>, not: <Code>Navigation</Code> },
+        ]} />
       </SectionWrapper>
 
-      <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants">
-        <TodoSection label="Navigation shell demo coming in follow-up." />
+      <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants" description="Collapsed icon rail and expanded sidebar. The component ships as a complete shell with sections, items, and active state management.">
+        <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-6 overflow-hidden" style={{ maxHeight: 400 }}>
+          <Navigation defaultSection="analytics" defaultItem="performance" />
+        </div>
       </SectionWrapper>
 
       <SectionWrapper id="required-pairings" num="04" total={TOTAL} title="Required pairings">
-        <RequiredPairings
-          rules={[
-            <>Active page must be visually highlighted in the sidebar.</>,
-            <>Mobile: sidebar collapses behind a hamburger menu with overlay.</>,
-            <>Logo links to the home/landing page.</>,
-          ]}
-        />
+        <RequiredPairings rules={[
+          <>Active page must be visually highlighted in the sidebar.</>,
+          <>Mobile: sidebar collapses behind a hamburger menu with overlay.</>,
+          <>Logo links to the home/landing page.</>,
+          <>Sections are collapsible. Auto-expand the section containing the active page.</>,
+        ]} />
       </SectionWrapper>
 
       <SectionWrapper id="forbidden" num="05" total={TOTAL} title="Forbidden and refuse">
-        <ForbiddenRefuse
-          rules={[
-            { rule: <>Use Navigation for in-page content switching.</>, response: <>"Use <Code>Tabs</Code> for switching views within a page."</> },
-            { rule: <>Hide the active page indicator.</>, response: <>"Users need to know where they are. Always highlight the current page."</> },
-          ]}
-        />
+        <ForbiddenRefuse rules={[
+          { rule: <>Use Navigation for in-page content switching.</>, response: <>"Use <Code>Tabs</Code> for switching views within a page."</> },
+          { rule: <>Hide the active page indicator.</>, response: <>"Users need to know where they are. Always highlight the current page."</> },
+        ]} />
       </SectionWrapper>
 
       <SectionWrapper id="accessibility" num="06" total={TOTAL} title="Accessibility">
-        <AccessibilityList
-          items={[
-            { key: 'Role', value: <><Code>&lt;nav aria-label="Site navigation"&gt;</Code> for the sidebar.</> },
-            { key: 'Current', value: <>Active link has <Code>aria-current="page"</Code>.</> },
-            { key: 'Mobile', value: <>Hamburger button has <Code>aria-label="Open navigation"</Code>. Overlay closes on Escape.</> },
-            { key: 'Keyboard', value: <><Code>Tab</Code> moves through nav links. <Code>Enter</Code> activates.</> },
-          ]}
-        />
+        <AccessibilityList items={[
+          { key: 'Role', value: <><Code>&lt;nav aria-label="Site navigation"&gt;</Code> for the sidebar.</> },
+          { key: 'Current', value: <>Active link has <Code>aria-current="page"</Code>.</> },
+          { key: 'Mobile', value: <>Hamburger button has <Code>aria-label="Open navigation"</Code>. Overlay closes on Escape.</> },
+          { key: 'Keyboard', value: <><Code>Tab</Code> moves through nav links. <Code>Enter</Code> activates.</> },
+        ]} />
       </SectionWrapper>
     </ComponentPageLayout>
   )

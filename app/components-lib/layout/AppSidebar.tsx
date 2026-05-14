@@ -53,7 +53,7 @@ const COMPONENT_GROUPS: NavGroup[] = [
       { href: '/components/inputs/toggle',            label: 'Toggle' },
       { href: '/components/slider',                   label: 'Slider' },
       { href: '/components/inputs/date',              label: 'Date picker' },
-      { href: '/components/inputs',                   label: 'File upload' },
+      { href: '/components/file-upload',               label: 'File upload' },
     ],
   },
   {
