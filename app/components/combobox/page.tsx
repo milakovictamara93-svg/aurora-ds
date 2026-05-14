@@ -176,7 +176,7 @@ export default function ComboboxPage() {
             />
           </VariantCard>
           <VariantCard name="<Combobox multiple>" description="Multi value, long list. Chips plus filter input.">
-            <InputMultiselect
+            <InputSearchMultiselect
               options={BUILDING_OPTIONS}
               placeholder="Buildings"
               defaultValue={['acme']}

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { XMarkIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import Modal from '@/app/components-lib/ui/Modal'
+import Button from '@/app/components-lib/ui/Button'
 import {
   ComponentPageLayout, TitleBlock, SectionWrapper,
   WhenToUse, RequiredPairings, ForbiddenRefuse,
@@ -123,13 +124,13 @@ export default function ModalsPage() {
             { key: 'subtitle', label: 'With subtitle' },
             { key: 'confirm',  label: 'Confirmation (danger)' },
           ] as const).map(({ key, label }) => (
-            <button
+            <Button
               key={key}
+              variant="tertiary"
               onClick={() => setOpenModal(key)}
-              className="h-8 px-3.5 rounded-md border border-[#D7DAE0] dark:border-[#374151] text-[13px] font-medium text-[#111827] dark:text-white bg-white dark:bg-[#111827] hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430] transition-colors"
             >
               {label}
-            </button>
+            </Button>
           ))}
         </div>
 
