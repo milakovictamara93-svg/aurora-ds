@@ -84,22 +84,22 @@ export default function ButtonsPage() {
       <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           <VariantCard name="primary" tag="The single most important action per view (e.g. 'Save', 'Submit', 'Export').">
-            <Buttonvariant="primary">Save changes</Btn>
+            <Button variant="primary">Save changes</Button>
           </VariantCard>
           <VariantCard name="secondary" tag="Supporting actions that sit alongside a primary button.">
-            <Buttonvariant="secondary">Export report</Btn>
+            <Button variant="secondary">Export report</Button>
           </VariantCard>
           <VariantCard name="tertiary" tag="Low-emphasis actions such as 'Cancel' or neutral confirmations.">
-            <Buttonvariant="tertiary">Cancel</Btn>
+            <Button variant="tertiary">Cancel</Button>
           </VariantCard>
           <VariantCard name="text" tag="Inline actions within dense UI (table rows, list items).">
-            <Buttonvariant="text">View details</Btn>
+            <Button variant="text">View details</Button>
           </VariantCard>
           <VariantCard name="link" tag="Navigation -- use an <a> tag, not a button.">
-            <Buttonvariant="link">View documentation</Btn>
+            <Button variant="link">View documentation</Button>
           </VariantCard>
           <VariantCard name="icon" tag="Space-constrained areas (toolbars, table rows). Always include aria-label.">
-            <Buttonvariant="icon"><MagnifyingGlassIcon className="w-4 h-4" /></Btn>
+            <Button variant="icon"><MagnifyingGlassIcon className="w-4 h-4" /></Button>
           </VariantCard>
         </div>
       </SectionWrapper>
@@ -107,8 +107,8 @@ export default function ButtonsPage() {
       {/* ── 04 Sizes ────────────────────────────────────────────────────────── */}
       <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes" description="md is the default for standard contexts. Use sm inside dense UI -- table rows, dropdowns, sidebars -- where vertical rhythm matters more than tap-target generosity.">
         <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-8 flex gap-4 items-center justify-center flex-wrap">
-          <Buttonvariant="primary" size="sm">sm</Btn>
-          <Buttonvariant="primary" size="md">md</Btn>
+          <Button variant="primary" size="sm">sm</Button>
+          <Button variant="primary" size="md">md</Button>
         </div>
       </SectionWrapper>
 
