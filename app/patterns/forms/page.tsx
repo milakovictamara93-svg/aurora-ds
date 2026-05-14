@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { TitleBlock } from '@/app/components-lib/ui/ComponentPage'
+import { TitleBlock, WhenToUse, DecisionTree, RequiredPairings, ForbiddenRefuse, Code } from '@/app/components-lib/ui/ComponentPage'
 import InputText from '@/app/components-lib/ui/InputText'
 import InputPassword from '@/app/components-lib/ui/InputPassword'
 import type { InputState } from '@/app/components-lib/ui/InputText'
@@ -255,6 +255,38 @@ export default function FormsPage() {
       />
 
       <div className="mt-8 flex flex-col gap-10">
+
+        {/* When to use */}
+        <section>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-4 leading-[1.4]">When to use</h2>
+          <WhenToUse
+            doItems={[
+              <>Multi-field data entry: create, edit, or configure a resource</>,
+              <>Structured input requiring labels, validation, and an explicit submit action</>,
+              <>Grouped fields that belong to a single logical entity (building, report, user profile)</>,
+              <>Flows that need inline validation feedback before submission</>,
+            ]}
+            dontItems={[
+              <>Single-field inline edits -- update in place without a form wrapper</>,
+              <>Search queries -- use the search input pattern directly</>,
+              <>Filtering -- use the filtering pattern with filter chips</>,
+              <>Settings that take effect immediately -- use <Code>Toggle</Code> or inline controls</>,
+            ]}
+          />
+        </section>
+
+        {/* Decision tree */}
+        <section>
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-4 leading-[1.4]">Decision tree</h2>
+          <DecisionTree rows={[
+            { intent: 'Many fields, wide viewport', use: <>Multi-column (2-col grid)</>, not: <>Single-column</> },
+            { intent: 'Short focused flow (login, quick edit)', use: <>Single-column stacked</>, not: <>Multi-column</> },
+            { intent: 'More than 6 fields with distinct groups', use: <>Sectioned form with dividers</>, not: <>One long column</> },
+            { intent: 'Dense numeric entry (metrics, scores)', use: <>3-column grid for short fields</>, not: <>Full-width fields</> },
+            { intent: 'Label positioning on wide forms', use: <>Stacked (label above)</>, not: <>Inline (label left) -- only for narrow settings panels</> },
+            { intent: 'Destructive action in a form footer', use: <>Left-aligned red text button</>, not: <>Red primary button next to Save</> },
+          ]} />
+        </section>
 
         {/* Multi-column form */}
         <section>
