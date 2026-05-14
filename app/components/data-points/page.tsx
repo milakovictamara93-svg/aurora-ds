@@ -27,12 +27,15 @@ export default function DataPointsPage() {
           { intent: 'Show a row of KPIs', use: <Code>Mini dashboard</Code>, not: <>Multiple Data points</> },
         ]} />
       </SectionWrapper>
-      <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants" description="DataArrow (directional indicator), DataTrend (percentage change), DataCompletion (progress ring).">
+      <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants" description="DataArrow (directional indicator), DataTrend (percentage change), DataCompletion (progress pill).">
         <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-6 flex flex-wrap gap-6 items-center">
-          <DataArrow type="up" state="positive" />
-          <DataArrow type="down" state="negative" />
-          <DataArrow type="flat" state="neutral" />
-          <DataTrend direction="up" value="+12.4%" state="positive" />
+          <DataArrow type="consumption" state="positive-high" />
+          <DataArrow type="consumption" state="negative-high" />
+          <DataArrow type="indicator" state="very-low" />
+          <DataArrow type="indicator" state="high" />
+          <DataArrow type="indicator" state="n-a" />
+          <DataTrend value="+12.4%" state="positive" />
+          <DataTrend value="-3.1%" state="negative" />
           <DataCompletion percentage={68} count={34} label="Complete" />
         </div>
       </SectionWrapper>
