@@ -47,11 +47,11 @@ export default function LoadingBarPage() {
         <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-6 flex flex-col gap-4">
           <div>
             <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] mb-2">65% complete</p>
-            <LoadingBar progress={65} />
+            <LoadingBar value={65} />
           </div>
           <div>
             <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] mb-2">100% complete</p>
-            <LoadingBar progress={100} />
+            <LoadingBar value={100} />
           </div>
         </div>
       </SectionWrapper>
