@@ -265,55 +265,58 @@ export default function ComboboxPage() {
       <SectionWrapper id="anatomy" num="08" total={TOTAL} title="Anatomy" description="Multi-select with search shown -- the most-parts case. Single-select and noSearch variants have the same anatomy with fewer parts.">
         <AnatomyBlock
           diagram={
-            <div className="bg-[#F7F8F8] dark:bg-[#111827] rounded-lg px-6 py-8 w-full max-w-[460px] mx-auto">
-              {/* Trigger */}
-              <div className="relative flex items-center gap-1.5 flex-wrap border border-[#D7DAE0] dark:border-[#374151] rounded px-3 py-2 bg-white dark:bg-[#0D1117] min-h-[32px]">
+            <div className="bg-[#F7F8F8] dark:bg-[#111827] rounded-lg px-12 py-8 w-full max-w-[460px] mx-auto">
+              {/* Trigger -- matches InputMultiselect: h-8, rounded (4px), border-[#d7dae0], pl-3 pr-9, text-sm */}
+              <div className="relative flex items-center gap-1.5 flex-wrap border border-[#d7dae0] dark:border-[#374151] rounded pl-3 pr-9 py-1 bg-white dark:bg-[#111827] min-h-[32px]">
                 {/* Pointer 1: ComboboxInput */}
                 <span className="absolute -left-7 top-[10px] w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
                 <span className="absolute -left-[22px] top-[12px] w-[10px] h-px bg-[#111827] dark:bg-white" />
                 <span className="absolute -left-[42px] top-[5px] w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">1</span>
 
-                {/* Chip */}
-                <span className="relative inline-flex items-center gap-1 bg-[#EDEEF1] dark:bg-[#1F2430] rounded px-1.5 py-0.5 text-[12px] text-[#111827] dark:text-white">
+                {/* Chip -- matches InputMultiselect chip style */}
+                <span className="relative inline-flex items-center gap-1 bg-[#edeef1] dark:bg-[#1F2430] rounded px-1.5 py-0.5 text-xs text-[#111827] dark:text-white">
                   Acme Tower
-                  <span className="text-[#505867] dark:text-[#9CA3AF] text-[11px]">x</span>
+                  <span className="text-[#505867] dark:text-[#9CA3AF] text-[10px] cursor-pointer">x</span>
                   {/* Pointer 2: Chip */}
                   <span className="absolute -top-6 left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
                   <span className="absolute -top-[16px] left-1/2 -translate-x-1/2 w-px h-[10px] bg-[#111827] dark:bg-white" />
                   <span className="absolute -top-[36px] left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">2</span>
                 </span>
 
-                <span className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">Harb</span>
-                <span className="ml-auto text-[#505867] dark:text-[#9CA3AF]">&#9662;</span>
+                <span className="text-sm text-[#111827] dark:text-white">Harb</span>
+                {/* Chevron -- matches InputSelect: ChevronDownIcon w-4 h-4, right-2.5 */}
+                <span className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#505867] dark:text-[#9CA3AF]">
+                  <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" /></svg>
+                </span>
               </div>
 
-              {/* Dropdown list */}
-              <div className="relative mt-1.5 border border-[#D7DAE0] dark:border-[#374151] rounded bg-white dark:bg-[#0D1117] overflow-hidden">
+              {/* Dropdown -- matches InputSelect menu: mt-1, rounded, border-[#d7dae0], shadow-md, py-1 */}
+              <div className="relative mt-1 border border-[#d7dae0] dark:border-[#374151] rounded bg-white dark:bg-[#111827] shadow-md py-1 overflow-hidden">
                 {/* Pointer 3: ComboboxContent */}
                 <span className="absolute -left-7 top-[10px] w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
                 <span className="absolute -left-[22px] top-[12px] w-[10px] h-px bg-[#111827] dark:bg-white" />
                 <span className="absolute -left-[42px] top-[5px] w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">3</span>
 
-                {/* Option: active */}
-                <div className="relative px-3 py-2 text-[14px] text-[#111827] dark:text-white bg-[#F7F8F8] dark:bg-[#1F2430]">
-                  Harbour View HQ
+                {/* Option: hover/active -- matches: h-6, px-2, text-xs, hover:bg-[#f7f8f8] */}
+                <div className="relative flex items-center gap-2 px-2 h-6 text-xs text-[#111827] dark:text-white bg-[#f7f8f8] dark:bg-[#1F2430]">
+                  <span className="flex-1 truncate">Harbour View HQ</span>
                   {/* Pointer 4: ComboboxItem */}
-                  <span className="absolute -right-7 top-[10px] w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
-                  <span className="absolute -right-[22px] top-[12px] w-[10px] h-px bg-[#111827] dark:bg-white" />
-                  <span className="absolute -right-[42px] top-[5px] w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">4</span>
+                  <span className="absolute -right-7 top-[6px] w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
+                  <span className="absolute -right-[22px] top-[8px] w-[10px] h-px bg-[#111827] dark:bg-white" />
+                  <span className="absolute -right-[42px] top-[1px] w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">4</span>
                 </div>
-                {/* Option: selected */}
-                <div className="px-3 py-2 text-[14px] text-[#111827] dark:text-white flex items-center justify-between">
-                  Acme Tower
-                  <span className="text-[12px] font-bold">&#10003;</span>
+                {/* Option: selected -- matches: bg-[#d9eaff] */}
+                <div className="flex items-center gap-2 px-2 h-6 text-xs text-[#111827] dark:text-white bg-[#d9eaff] dark:bg-blue-900/30">
+                  <span className="flex-1 truncate">Acme Tower</span>
+                  <svg className="w-3 h-3 text-[#1258F8]" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" /></svg>
                 </div>
-                {/* Empty */}
-                <div className="relative px-3 py-2 text-[14px] text-[#505867] dark:text-[#9CA3AF] italic">
-                  No more matches
+                {/* Empty state */}
+                <div className="relative flex items-center px-2 h-6 text-xs text-[#8c96a4] dark:text-[#9CA3AF] italic">
+                  <span>No more matches</span>
                   {/* Pointer 5: ComboboxEmpty */}
-                  <span className="absolute -right-7 top-[10px] w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
-                  <span className="absolute -right-[22px] top-[12px] w-[10px] h-px bg-[#111827] dark:bg-white" />
-                  <span className="absolute -right-[42px] top-[5px] w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">5</span>
+                  <span className="absolute -right-7 top-[6px] w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
+                  <span className="absolute -right-[22px] top-[8px] w-[10px] h-px bg-[#111827] dark:bg-white" />
+                  <span className="absolute -right-[42px] top-[1px] w-5 h-5 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-bold flex items-center justify-center">5</span>
                 </div>
               </div>
             </div>
