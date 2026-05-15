@@ -86,38 +86,54 @@ export default function HomePage() {
       ══════════════════════════════════════════════════════════════════ */}
       <section className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
         {/* Left: text */}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-5">
           <h2 className="text-[32px] font-bold text-[#111827] dark:text-white leading-[1.15] tracking-[-0.5px]">
             Why Aurora?
           </h2>
-          <p className="text-[15px] font-semibold text-[#505867] dark:text-[#9CA3AF] leading-[1.7]">
-            Built for the complexity of ESG data
-          </p>
           <p className="text-[15px] text-[#505867] dark:text-[#9CA3AF] leading-[1.7]">
             Real estate sustainability data is dense, technical, and consequential.
-            Aurora was built specifically for this challenge — a design system that
-            makes complex information clear, actionable, and trustworthy.
+            Aurora is the source of truth for designers, developers, and AI coding agents
+            building Scaler's platform. Every component, pattern, and token documented here
+            is production-ready and enforced.
           </p>
-          <ul className="list-disc ml-[22px] text-[15px] text-[#505867] dark:text-[#9CA3AF] leading-[1.7]">
-            <li>
-              <strong className="font-semibold text-[#111827] dark:text-white">
-                Consistency at scale
-              </strong>
-              {' '}— One system across 25,000+ buildings. Every screen feels intentional.
-            </li>
-            <li>
-              <strong className="font-semibold text-[#111827] dark:text-white">
-                Accessible by default
-              </strong>
-              {' '}— WCAG AA built in from the start — not bolted on at the end.
-            </li>
-            <li>
-              <strong className="font-semibold text-[#111827] dark:text-white">
-                Designed for decisions
-              </strong>
-              {' '}— High-stakes data needs clear hierarchy. Aurora makes sure it lands.
-            </li>
-          </ul>
+          <div className="flex flex-col gap-3">
+            <div className="flex items-start gap-3">
+              <span className="w-5 h-5 rounded-full bg-[#1258F8] flex items-center justify-center shrink-0 mt-0.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-white" />
+              </span>
+              <div>
+                <p className="text-[15px] font-semibold text-[#111827] dark:text-white">Consistency at scale</p>
+                <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">One system across 25,000+ buildings. Every screen feels intentional.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="w-5 h-5 rounded-full bg-[#1258F8] flex items-center justify-center shrink-0 mt-0.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-white" />
+              </span>
+              <div>
+                <p className="text-[15px] font-semibold text-[#111827] dark:text-white">Accessible by default</p>
+                <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">WCAG AA built in from the start. Every component ships with keyboard nav, focus management, and ARIA.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="w-5 h-5 rounded-full bg-[#1258F8] flex items-center justify-center shrink-0 mt-0.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-white" />
+              </span>
+              <div>
+                <p className="text-[15px] font-semibold text-[#111827] dark:text-white">AI-agent ready</p>
+                <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">Every component page has structured when-to-use rules, decision trees, required pairings, and forbidden patterns that AI coding agents can parse and follow.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="w-5 h-5 rounded-full bg-[#1258F8] flex items-center justify-center shrink-0 mt-0.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-white" />
+              </span>
+              <div>
+                <p className="text-[15px] font-semibold text-[#111827] dark:text-white">Designed for decisions</p>
+                <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">High-stakes ESG data needs clear hierarchy. Aurora's type scale, color system, and data visualization tokens make sure it lands.</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Right: video card */}
