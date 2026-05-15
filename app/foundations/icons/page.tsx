@@ -204,36 +204,15 @@ export default function IconsPage() {
           </p>
         </div>
 
-        <div className="divide-y divide-token rounded-xl border border-token overflow-hidden bg-token-primary">
-          {/* Column header */}
-          <div className="grid grid-cols-[200px_1fr] gap-4 px-6 py-3 bg-token-secondary">
-            <span className="text-[11px] uppercase tracking-widest font-semibold text-token-muted">Name</span>
-            <div className="flex items-center gap-6">
-              <span className="text-[11px] uppercase tracking-widest font-semibold text-token-muted w-4 text-center">16</span>
-              <span className="text-[11px] uppercase tracking-widest font-semibold text-token-muted w-5 text-center">20</span>
-              <span className="text-[11px] uppercase tracking-widest font-semibold text-token-muted w-6 text-center">24 out</span>
-              <span className="text-[11px] uppercase tracking-widest font-semibold text-token-muted w-6 text-center">24 solid</span>
-            </div>
-          </div>
-
-          {CUSTOM_ICON_NAMES.map((name) => (
-            <div key={name} className="grid grid-cols-[200px_1fr] gap-4 items-center px-6 py-4">
-              <span className="text-[13px] font-medium text-token-primary">{name}</span>
-              <div className="flex items-center gap-6">
-                {[
-                  { size: 'w-4 h-4', label: '16' },
-                  { size: 'w-5 h-5', label: '20' },
-                  { size: 'w-6 h-6', label: '24o' },
-                  { size: 'w-6 h-6', label: '24s' },
-                ].map(({ size, label }) => (
-                  <span key={label} className={`${size} rounded bg-[#EDEEF1] dark:bg-[#1F2430] flex items-center justify-center text-[7px] font-bold text-[#505867] dark:text-[#9CA3AF]`}>
-                    {label}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/icons/custom-icons-reference.png"
+          alt="Custom icon set: Water, EU taxonomy, SFDR, GresB, Meters, Targets, Scores, Regulatory, Reports, Roadmaps, Overview, Analytics, AI indicator, Loader, Drag and drop, Building units, Assets. Each in micro (16px), mini (20px), outline (24px), and solid (24px) variants."
+          className="w-full rounded-xl border border-[#EDEEF1] dark:border-[#1F2430]"
+        />
+        <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] mt-2">
+          {CUSTOM_ICON_NAMES.length} custom icons, 4 sizes each. Source: Figma design system file.
+        </p>
       </section>
 
       {/* ── Rules ────────────────────────────────────────────────────────── */}
