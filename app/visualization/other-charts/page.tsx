@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import PageHeader from '@/app/components-lib/ui/PageHeader'
+import { TitleBlock, RequiredPairings, ForbiddenRefuse, Code } from '@/app/components-lib/ui/ComponentPage'
 import { ChartCard, ChartTooltip, ChartEmptyState, CHART_COLORS } from '@/app/components-lib/ui/ChartComponents'
 
 // ── Line with bullets data (15:6756) ────────────────────────────────────────
@@ -50,7 +50,7 @@ export default function OtherChartsPage() {
 
   return (
     <div>
-      <PageHeader title="Other charts" description="Line with bullets, bubble chart, and sankey diagram." badge="Visualization" />
+      <TitleBlock title="Other charts" description="Line with bullets, bubble chart, and sankey diagram." />
 
       <div className="mt-8 flex flex-col gap-10">
 
@@ -383,6 +383,25 @@ export default function OtherChartsPage() {
           </ChartCard>
         </section>
 
+      </div>
+
+      {/* Rules */}
+      <div className="mt-14">
+        <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-4 leading-[1.4]">Rules</h2>
+        <RequiredPairings rules={[
+          <>Every chart must have a title and axis labels. A chart without labels is unreadable.</>,
+          <>Use the ESG aspect color palette for data series. Energy = red, GHG = orange, Water = cyan. Never reassign aspect colors.</>,
+          <>Show a legend when there are 2+ data series. Single-series charts do not need a legend.</>,
+          <>Provide an empty state when there is no data. Never show an empty chart frame with no explanation.</>,
+          <>Tooltips on hover must show the exact value, series name, and data point label.</>,
+        ]} />
+        <div className="mt-6">
+          <ForbiddenRefuse rules={[
+            { rule: <>Use arbitrary colors for chart data series.</>, response: <>"Use the designated aspect color tokens. Consistent colors let users recognize data categories across views."</> },
+            { rule: <>Show a chart without axis labels or a title.</>, response: <>"Every chart needs a title, axis labels, and units. Without context, data is meaningless."</> },
+            { rule: <>Truncate axis labels without a tooltip.</>, response: <>"If labels are too long, truncate with ellipsis and show the full text on hover."</> },
+          ]} />
+        </div>
       </div>
     </div>
   )
