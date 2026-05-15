@@ -213,19 +213,22 @@ export default function IconsPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
           {CUSTOM_ICONS.map(({ name, file }) => (
-            <div key={file} className="flex flex-col items-center gap-2 rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-3 hover:border-[#D7DAE0] dark:hover:border-[#374151] transition-colors">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`/icons/custom/${file}.svg`}
-                alt={name}
-                className="w-6 h-6 object-contain dark:invert"
-              />
-              <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF] text-center leading-tight">{name}</span>
+            <div key={file} className="flex items-center gap-3 rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] px-3 py-2.5">
+              <span className="w-8 h-8 rounded-md bg-[#F7F8F8] dark:bg-[#1F2430] flex items-center justify-center shrink-0 text-[11px] font-bold text-[#505867] dark:text-[#9CA3AF]">
+                {name.charAt(0).toUpperCase()}
+              </span>
+              <div>
+                <p className="text-[13px] font-medium text-[#111827] dark:text-white leading-tight">{name}</p>
+                <p className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">4 sizes: 16 / 20 / 24o / 24s</p>
+              </div>
             </div>
           ))}
         </div>
+        <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] mt-3">
+          Custom icon SVGs are maintained in the <a href="https://www.figma.com/design/7Wh29fsgcz1zbr5ZWIB4Uj/Design-system" className="text-[#1258F8] hover:underline" target="_blank" rel="noopener noreferrer">Figma design system file</a>. Export via Figma's native export to get production-ready SVGs.
+        </p>
       </section>
 
       {/* ── Rules ────────────────────────────────────────────────────────── */}
