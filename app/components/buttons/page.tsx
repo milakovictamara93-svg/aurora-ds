@@ -227,7 +227,7 @@ export default function ButtonsPage() {
           annotations={[
             { num: '1', label: 'Container', description: <>Height, padding, border-radius, and fill. Defines the clickable target area. Includes focus ring on keyboard navigation.</> },
             { num: '2', label: 'Leading icon', description: <>Optional. 16px, left of label with <Code>gap-1.5</Code>. Reinforces the action verb. Replaced by spinner when loading.</> },
-            { num: '3', label: 'Label', description: <>Verb-noun, sentence case, Manrope Medium. 12px in sm, 14px in md. Required (use IconButton for icon-only).</> },
+            { num: '3', label: 'Label', description: <>Verb-noun, sentence case, Inter Medium. 12px in sm, 14px in md. Required (use IconButton for icon-only).</> },
             { num: '4', label: 'Trailing icon', description: <>Optional. Reserve for directional cues (chevron-right, external-link). Hidden when loading.</> },
           ]}
         />

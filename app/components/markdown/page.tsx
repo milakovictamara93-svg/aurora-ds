@@ -42,7 +42,7 @@ export default function MarkdownPage() {
       <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants" description="Supported markdown elements, all rendered with design-system typography tokens.">
         <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-6 text-[14px] text-[#505867] dark:text-[#9CA3AF] flex flex-col gap-3">
           <div className="grid grid-cols-[120px_1fr] gap-x-4 gap-y-2">
-            <span className="font-mono text-[12px] text-[#111827] dark:text-white">Headings</span><span>h1-h6, sized by level, Manrope Bold</span>
+            <span className="font-mono text-[12px] text-[#111827] dark:text-white">Headings</span><span>h1-h6, sized by level, Inter Bold</span>
             <span className="font-mono text-[12px] text-[#111827] dark:text-white">Paragraphs</span><span>16px body text, 145% line-height</span>
             <span className="font-mono text-[12px] text-[#111827] dark:text-white">Lists</span><span>Ordered and unordered, nested support</span>
             <span className="font-mono text-[12px] text-[#111827] dark:text-white">Code</span><span>Inline code and fenced code blocks with syntax highlighting</span>

@@ -644,7 +644,7 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
     <div className="flex flex-col gap-1.5">
       <span className="text-[18px] font-bold text-[#111827] dark:text-white leading-tight">Display heading</span>
       <span className="text-[14px] font-semibold text-[#111827] dark:text-white">Section subheading</span>
-      <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">Body — 16px, 145% line-height, Manrope</span>
+      <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">Body — 16px, 145% line-height, Inter</span>
       <span className="text-[10px] text-[#8C96A4] tracking-wide">CAPTION · LABEL · 12PX</span>
     </div>
   ),

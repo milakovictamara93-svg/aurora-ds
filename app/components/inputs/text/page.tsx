@@ -322,7 +322,7 @@ export default function TextInputPage() {
             </div>
           }
           annotations={[
-            { num: '1', label: 'Label', description: <>Required visible text above the input. Sentence case, Manrope Medium 14px. Asterisk appended when <Code>required=true</Code>. Associated via <Code>htmlFor</Code>.</> },
+            { num: '1', label: 'Label', description: <>Required visible text above the input. Sentence case, Inter Medium 14px. Asterisk appended when <Code>required=true</Code>. Associated via <Code>htmlFor</Code>.</> },
             { num: '2', label: 'Input field', description: <>32px height, 4px border-radius, 12px horizontal padding. Border color changes per state (grey default, blue focus, red error, orange warning, green success).</> },
             { num: '3', label: 'Trailing icon', description: <>Automatic state icon: exclamation-circle for error, exclamation-triangle for warning, check-circle for success. 16px, positioned 10px from right edge. Can be overridden via <Code>trailingIcon</Code> prop.</> },
             { num: '4', label: 'Helper text', description: <>12px text below the input. Color follows the current state. Linked to the input via <Code>aria-describedby</Code> when <Code>id</Code> is set. Use for instructions, constraints, or validation messages.</> },

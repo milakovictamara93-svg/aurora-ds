@@ -339,7 +339,7 @@ export default function TypographyPage() {
       <div className="mt-14">
         <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-4 leading-[1.4]">Rules</h2>
         <RequiredPairings rules={[
-          <>Font family is Manrope only. No other typefaces in the product UI.</>,
+          <>Font family is Inter only. No other typefaces in the product UI.</>,
           <>H1: 28px, H2: 24px, H3: 20px. All headings at 140% line-height. Never skip heading levels.</>,
           <>Body text: 16px minimum, 145% line-height, 1.5% letter-spacing. Grey 600 for body, Grey 900 for headings.</>,
           <>Font weight: Regular (400) for body, Medium (500) for labels, Semibold (600) for headings, Bold (700) for emphasis only.</>,
@@ -349,7 +349,7 @@ export default function TypographyPage() {
           <ForbiddenRefuse rules={[
             { rule: <>Use ALL CAPS for emphasis.</>, response: <>"Use font-weight 600 or 700 for emphasis. ALL CAPS is reserved for tiny labels (10-11px tracking-wide)."</> },
             { rule: <>Use italic or underline for emphasis.</>, response: <>"Bold only. Italic is not used in the system. Underline is reserved for links."</> },
-            { rule: <>Use a font other than Manrope.</>, response: <>"Manrope is the only typeface. Load it from Google Fonts. No system font fallbacks in production."</> },
+            { rule: <>Use a font other than Inter.</>, response: <>"Inter is the only typeface. Load it from Google Fonts. No system font fallbacks in production."</> },
           ]} />
         </div>
       </div>
