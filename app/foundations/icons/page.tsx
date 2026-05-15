@@ -218,7 +218,7 @@ export default function IconsPage() {
             <div key={file} className="flex flex-col items-center gap-2 rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-3 hover:border-[#D7DAE0] dark:hover:border-[#374151] transition-colors">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={`/icons/custom/${file}.png`}
+                src={`/icons/custom/${file}.svg`}
                 alt={name}
                 className="w-6 h-6 object-contain dark:invert"
               />
