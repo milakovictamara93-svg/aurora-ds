@@ -20,16 +20,25 @@ import {
 } from '@heroicons/react/24/outline'
 import { CheckCircleIcon as CheckCircleSolid } from '@heroicons/react/24/solid'
 
-// ── Custom icon names (SVGs live in the Figma design system file) ─────────────
-// To render the actual SVGs, export them from Figma and place in public/icons/.
+// ── Custom icons (solid 24px, exported from Figma) ───────────────────────────
 
-// ── Custom icon data ──────────────────────────────────────────────────────────
-
-const CUSTOM_ICON_NAMES = [
-  'Water', 'EU taxonomy', 'SFDR', 'GresB', 'Meters', 'Targets',
-  'Scores', 'Regulatory', 'Reports', 'Roadmaps', 'Overview',
-  'Analytics', 'AI indicator', 'Loader', 'Drag and drop',
-  'Building units', 'Assets',
+const CUSTOM_ICONS = [
+  { name: 'Water',           file: 'water' },
+  { name: 'EU taxonomy',     file: 'eu-taxonomy' },
+  { name: 'SFDR',            file: 'sfdr' },
+  { name: 'GresB',           file: 'gresb' },
+  { name: 'Meters',          file: 'meters' },
+  { name: 'Targets',         file: 'targets' },
+  { name: 'Scores',          file: 'scores' },
+  { name: 'Regulatory',      file: 'regulatory' },
+  { name: 'Reports',         file: 'reports' },
+  { name: 'Roadmaps',        file: 'roadmaps' },
+  { name: 'Overview',        file: 'overview' },
+  { name: 'Analytics',       file: 'analytics' },
+  { name: 'AI indicator',    file: 'ai-indicator' },
+  { name: 'Loader',          file: 'loader' },
+  { name: 'Drag and drop',   file: 'drag-and-drop' },
+  { name: 'Building units',  file: 'building-units' },
 ]
 
 // ── Hero icon groups ──────────────────────────────────────────────────────────
@@ -204,15 +213,19 @@ export default function IconsPage() {
           </p>
         </div>
 
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/icons/custom-icons-reference.png"
-          alt="Custom icon set: Water, EU taxonomy, SFDR, GresB, Meters, Targets, Scores, Regulatory, Reports, Roadmaps, Overview, Analytics, AI indicator, Loader, Drag and drop, Building units, Assets. Each in micro (16px), mini (20px), outline (24px), and solid (24px) variants."
-          className="w-full rounded-xl border border-[#EDEEF1] dark:border-[#1F2430]"
-        />
-        <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] mt-2">
-          {CUSTOM_ICON_NAMES.length} custom icons, 4 sizes each. Source: Figma design system file.
-        </p>
+        <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
+          {CUSTOM_ICONS.map(({ name, file }) => (
+            <div key={file} className="flex flex-col items-center gap-2 rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] p-3 hover:border-[#D7DAE0] dark:hover:border-[#374151] transition-colors">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`/icons/custom/${file}.png`}
+                alt={name}
+                className="w-6 h-6 object-contain dark:invert"
+              />
+              <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF] text-center leading-tight">{name}</span>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* ── Rules ────────────────────────────────────────────────────────── */}

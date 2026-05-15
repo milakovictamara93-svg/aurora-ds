@@ -1,0 +1,8 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 21.5 17.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Vector">
+<path d="M16.75 16.75V2.75C16.75 2.21957 16.5393 1.71086 16.1642 1.33579C15.7891 0.960714 15.2804 0.75 14.75 0.75H6.75C6.21957 0.75 5.71086 0.960714 5.33579 1.33579C4.96071 1.71086 4.75 2.21957 4.75 2.75V16.75" fill="var(--fill-0, #505867)" style="fill:#505867;fill:color(display-p3 0.3137 0.3451 0.4039);fill-opacity:1;"/>
+<path d="M0.75 16.75H20.75Z" fill="var(--fill-0, #505867)" style="fill:#505867;fill:color(display-p3 0.3137 0.3451 0.4039);fill-opacity:1;"/>
+<path d="M12.75 8.75V8.76Z" fill="var(--fill-0, #505867)" style="fill:#505867;fill:color(display-p3 0.3137 0.3451 0.4039);fill-opacity:1;"/>
+<path d="M16.75 16.75V2.75C16.75 2.21957 16.5393 1.71086 16.1642 1.33579C15.7891 0.960714 15.2804 0.75 14.75 0.75H6.75C6.21957 0.75 5.71086 0.960714 5.33579 1.33579C4.96071 1.71086 4.75 2.21957 4.75 2.75V16.75M0.75 16.75H20.75M12.75 8.75V8.76" stroke="var(--stroke-0, #505867)" style="stroke:#505867;stroke:color(display-p3 0.3137 0.3451 0.4039);stroke-opacity:1;" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
