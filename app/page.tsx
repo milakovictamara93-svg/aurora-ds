@@ -96,42 +96,22 @@ export default function HomePage() {
             building Scaler's platform. Every component, pattern, and token documented here
             is production-ready and enforced.
           </p>
-          <div className="flex flex-col gap-3">
-            <div className="flex items-start gap-3">
-              <span className="w-5 h-5 rounded-full bg-[#1258F8] flex items-center justify-center shrink-0 mt-0.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-white" />
-              </span>
-              <div>
-                <p className="text-[15px] font-semibold text-[#111827] dark:text-white">Consistency at scale</p>
-                <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">One system across 25,000+ buildings. Every screen feels intentional.</p>
-              </div>
+          <div className="flex flex-col gap-5 mt-2">
+            <div>
+              <p className="text-[15px] font-semibold text-[#111827] dark:text-white">Consistency at scale</p>
+              <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mt-1">One system across 25,000+ buildings. Every screen feels intentional.</p>
             </div>
-            <div className="flex items-start gap-3">
-              <span className="w-5 h-5 rounded-full bg-[#1258F8] flex items-center justify-center shrink-0 mt-0.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-white" />
-              </span>
-              <div>
-                <p className="text-[15px] font-semibold text-[#111827] dark:text-white">Accessible by default</p>
-                <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">WCAG AA built in from the start. Every component ships with keyboard nav, focus management, and ARIA.</p>
-              </div>
+            <div>
+              <p className="text-[15px] font-semibold text-[#111827] dark:text-white">Accessible by default</p>
+              <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mt-1">WCAG AA built in from the start. Every component ships with keyboard nav, focus management, and ARIA.</p>
             </div>
-            <div className="flex items-start gap-3">
-              <span className="w-5 h-5 rounded-full bg-[#1258F8] flex items-center justify-center shrink-0 mt-0.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-white" />
-              </span>
-              <div>
-                <p className="text-[15px] font-semibold text-[#111827] dark:text-white">AI-agent ready</p>
-                <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">Every component page has structured when-to-use rules, decision trees, required pairings, and forbidden patterns that AI coding agents can parse and follow.</p>
-              </div>
+            <div>
+              <p className="text-[15px] font-semibold text-[#111827] dark:text-white">AI-agent ready</p>
+              <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mt-1">Every component page has structured when-to-use rules, decision trees, required pairings, and forbidden patterns that AI coding agents can parse and follow.</p>
             </div>
-            <div className="flex items-start gap-3">
-              <span className="w-5 h-5 rounded-full bg-[#1258F8] flex items-center justify-center shrink-0 mt-0.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-white" />
-              </span>
-              <div>
-                <p className="text-[15px] font-semibold text-[#111827] dark:text-white">Designed for decisions</p>
-                <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">High-stakes ESG data needs clear hierarchy. Aurora's type scale, color system, and data visualization tokens make sure it lands.</p>
-              </div>
+            <div>
+              <p className="text-[15px] font-semibold text-[#111827] dark:text-white">Designed for decisions</p>
+              <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mt-1">High-stakes ESG data needs clear hierarchy. Aurora's type scale, color system, and data visualization tokens make sure it lands.</p>
             </div>
           </div>
         </div>
@@ -143,7 +123,7 @@ export default function HomePage() {
       {/* ══════════════════════════════════════════════════════════════════
           THREE SECTION CARDS — Foundations · Components · Patterns
       ══════════════════════════════════════════════════════════════════ */}
-      <section className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <section className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-4">
 
         <Link
           href="/foundations/colors"
