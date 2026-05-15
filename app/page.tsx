@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { ArrowRightIcon } from '@heroicons/react/20/solid'
 import AppLayout from '@/app/components-lib/layout/AppLayout'
-import VideoCard from '@/app/components-lib/ui/VideoCard'
 import Tag from '@/app/components-lib/ui/Tag'
 
 // ── Exact Figma building-block shapes (SVG paths exported directly from Aurora DS Figma file)
@@ -84,9 +83,8 @@ export default function HomePage() {
       {/* ══════════════════════════════════════════════════════════════════
           WHY AURORA — text left, animated blue card right
       ══════════════════════════════════════════════════════════════════ */}
-      <section className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-        {/* Left: text */}
-        <div className="flex flex-col gap-5">
+      <section className="mt-12">
+        <div className="flex flex-col gap-5 max-w-[640px]">
           <h2 className="text-[32px] font-bold text-[#111827] dark:text-white leading-[1.15] tracking-[-0.5px]">
             Why Aurora?
           </h2>
@@ -115,9 +113,6 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-
-        {/* Right: video card */}
-        <VideoCard />
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
