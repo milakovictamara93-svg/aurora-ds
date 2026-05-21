@@ -9,6 +9,9 @@ const config: Config = {
   ],
   safelist: [
     { pattern: /^(bg|border|text|hover:bg|hover:text|dark:bg|dark:border|dark:text|dark:hover:bg|dark:hover:text)-missing-info-(50|100|200|300|400|500|600|700|800|900|950)$/ },
+    { pattern: /^(bg|border|text|hover:bg|hover:text|dark:bg|dark:border|dark:text)-grey-(0|50|100|200|300|400|500|600|700|800|900|950)$/ },
+    { pattern: /^(bg|border|text|hover:bg|hover:text|dark:bg|dark:border|dark:text)-blue-(50|100|200|300|400|500|600|700|800|900|950)$/ },
+    { pattern: /^(bg|border|text|hover:bg|hover:text|dark:bg|dark:border|dark:text)-(success|error|warning|energy|ai)-(50|100|200|300|400|500|600|700|800|900|950)$/ },
   ],
   theme: {
     extend: {
