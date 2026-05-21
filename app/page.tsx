@@ -177,26 +177,17 @@ export default function HomePage() {
       <section className="mt-8">
         <Link
           href="/playground"
-          className="flex items-center justify-between rounded-lg px-6 py-5 border border-[#EDEEF1] dark:border-[#1F2430] bg-gradient-to-r from-[#F4F2FF] to-white dark:from-[#1a1535] dark:to-[#111827] hover:border-[#653FFF] hover:shadow-[0_4px_16px_rgba(101,63,255,0.12)] transition-all duration-200 group"
+          className="flex items-center justify-between rounded-lg px-6 py-5 border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] hover:border-[#1258F8] hover:shadow-[0_4px_16px_rgba(18,88,248,0.10)] transition-all duration-200 group"
         >
-          <div className="flex items-center gap-4">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14.7429 9.25714V24H9.1875V18.7865L3.9452 24H0V20.1144L5.36819 14.776H0V9.25714H14.7429Z" fill="#6961E4"/>
-              <path d="M9.25714 9.25714V24H14.8125V18.7865L20.0548 24H24V20.1144L18.6318 14.776H24V9.25714H9.25714Z" fill="#6961E4"/>
-              <path d="M9.25714 14.7429V0H14.8125V5.21351L20.0548 0H24V3.8856L18.6318 9.224H24V14.7429H9.25714Z" fill="#6961E4"/>
-              <path d="M14.7429 14.7429V0H9.1875V5.21351L3.9452 0H0V3.8856L5.36819 9.224H0V14.7429H14.7429Z" fill="#6961E4"/>
-              <path d="M12 5.14285L12.1563 6.87368C12.3948 9.51346 14.4865 11.6052 17.1263 11.8437L18.8571 12L17.1263 12.1563C14.4865 12.3948 12.3948 14.4865 12.1563 17.1263L12 18.8571L11.8437 17.1263C11.6052 14.4865 9.51346 12.3948 6.87368 12.1563L5.14285 12L6.87368 11.8437C9.51346 11.6052 11.6052 9.51346 11.8437 6.87368L12 5.14285Z" fill="#F5F5F5"/>
-            </svg>
-            <div>
-              <p className="text-[16px] font-semibold text-[#111827] dark:text-white group-hover:text-[#653FFF] transition-colors">
-                Playground
-              </p>
-              <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">
-                Interactive redesign prototype with Lumi AI, performance dashboards, and asset management.
-              </p>
-            </div>
+          <div>
+            <p className="text-[16px] font-semibold text-[#111827] dark:text-white group-hover:text-[#1258F8] transition-colors">
+              Playground
+            </p>
+            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">
+              Live prototypes exploring new layouts, interactions, and product directions.
+            </p>
           </div>
-          <ArrowRightIcon className="w-5 h-5 text-[#9CA3AF] group-hover:text-[#653FFF] transition-colors shrink-0" />
+          <ArrowRightIcon className="w-5 h-5 text-[#9CA3AF] group-hover:text-[#1258F8] transition-colors shrink-0" />
         </Link>
       </section>
 
