@@ -64,10 +64,10 @@ export default function HomePage() {
         {/* CTAs */}
         <div className="flex items-center gap-4">
           <Link
-            href="/foundations/colors"
+            href="/playground"
             className="inline-flex items-center gap-2 h-8 px-3 rounded-lg border border-[#D7DAE0] dark:border-[#374151] text-[14px] font-medium text-[#111827] dark:text-white hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors"
           >
-            View foundations
+            Playground
             <ArrowRightIcon className="w-4 h-4" />
           </Link>
           <Link
@@ -169,26 +169,6 @@ export default function HomePage() {
           </div>
         </Link>
 
-      </section>
-
-      {/* ══════════════════════════════════════════════════════════════════
-          PLAYGROUND CTA
-      ══════════════════════════════════════════════════════════════════ */}
-      <section className="mt-8">
-        <Link
-          href="/playground"
-          className="flex items-center justify-between rounded-lg px-6 py-5 border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] hover:border-[#1258F8] hover:shadow-[0_4px_16px_rgba(18,88,248,0.10)] transition-all duration-200 group"
-        >
-          <div>
-            <p className="text-[16px] font-semibold text-[#111827] dark:text-white group-hover:text-[#1258F8] transition-colors">
-              Playground
-            </p>
-            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">
-              Live prototypes exploring new layouts, interactions, and product directions.
-            </p>
-          </div>
-          <ArrowRightIcon className="w-5 h-5 text-[#9CA3AF] group-hover:text-[#1258F8] transition-colors shrink-0" />
-        </Link>
       </section>
 
     </AppLayout>
