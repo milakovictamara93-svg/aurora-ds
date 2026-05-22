@@ -1497,6 +1497,199 @@ function HomeContent() {
   )
 }
 
+// ── Data Collection Overview ─────────────────────────────────────────────
+
+function DataCollectionOverview() {
+  const [favorited, setFavorited] = useState(false)
+  const [infoExpanded, setInfoExpanded] = useState(true)
+
+  return (
+    <div className="flex-1 min-w-0 min-h-0 overflow-auto bg-grey-50 dark:bg-[#0c0f14] px-2 pb-2 -mt-px">
+      <div className="bg-white dark:bg-grey-950 rounded-lg border border-grey-100 dark:border-grey-800 min-h-full overflow-hidden pb-4">
+
+        {/* Title */}
+        <div className="px-5 h-11 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <h1 className="text-[14px] font-medium text-grey-950 dark:text-white">Overview - Amsterdam - Newmarkt</h1>
+            <button onClick={() => setFavorited(!favorited)} className="text-grey-300 hover:text-warning-400 transition-colors">
+              {favorited ? <StarIcon className="w-4 h-4 text-warning-400" /> : <StarIconOutline className="w-4 h-4" />}
+            </button>
+            <span className="inline-flex items-center h-[20px] px-2 rounded-full bg-success-100 text-success-700 text-[12px] font-medium">94.73%</span>
+            <span className="inline-flex items-center h-[20px] px-2 rounded-full bg-error-100 text-error-900 text-[12px] font-medium gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-error-500" />1 assets need attention
+            </span>
+            <button className="text-[12px] text-[#1258F8] font-medium">View issues</button>
+          </div>
+        </div>
+
+        <div className="border-b border-grey-100 dark:border-grey-800" />
+
+        {/* Info card - expandable */}
+        <div className="mx-5 mt-4 rounded-lg border border-grey-100 dark:border-grey-800">
+          <div className="flex items-center justify-between px-4 py-3">
+            <p className="text-[13px] text-grey-950 dark:text-white"><span className="font-medium">Amsterdam - Newmarkt</span> <span className="text-grey-400 mx-1">|</span> <span className="text-[#505867]">Europe</span></p>
+            <div className="flex items-center gap-2">
+              <button className="h-7 px-3 rounded border border-grey-200 text-[12px] font-medium text-grey-700 hover:bg-grey-50 transition-colors">Edit</button>
+              <button onClick={() => setInfoExpanded(!infoExpanded)} className="w-6 h-6 flex items-center justify-center rounded text-grey-400 hover:text-grey-600 transition-colors">
+                <ChevronDownIcon className={clsx('w-4 h-4 transition-transform', !infoExpanded && '-rotate-90')} />
+              </button>
+            </div>
+          </div>
+          {infoExpanded && (
+            <div className="px-4 pb-4 grid grid-cols-3 gap-x-8 gap-y-3 border-t border-grey-100 dark:border-grey-800 pt-3">
+              <div>
+                <p className="text-[11px] text-grey-400">Total GFA</p>
+                <p className="text-[13px] font-medium text-grey-950 dark:text-white">0 m2</p>
+              </div>
+              <div>
+                <p className="text-[11px] text-grey-400">Total GAV</p>
+                <p className="text-[13px] font-medium text-grey-950 dark:text-white">-</p>
+              </div>
+              <div>
+                <p className="text-[11px] text-grey-400 mb-1">Assets included in analytics: 1 / 1</p>
+                <div className="h-2 rounded-full bg-grey-100 overflow-hidden"><div className="h-full bg-[#1258F8] rounded-full" style={{ width: '100%' }} /></div>
+              </div>
+              <div>
+                <p className="text-[11px] text-grey-400 mb-1">Assets included in reports: 1 / 1</p>
+                <div className="h-2 rounded-full bg-grey-100 overflow-hidden"><div className="h-full bg-[#1258F8] rounded-full" style={{ width: '100%' }} /></div>
+              </div>
+              <div>
+                <p className="text-[11px] text-grey-400">Default reporting year</p>
+                <p className="text-[13px] font-medium text-grey-950 dark:text-white">N/A</p>
+              </div>
+              <div>
+                <p className="text-[11px] text-grey-400 mb-1">Property type by m2</p>
+                <div className="h-2 rounded-full bg-grey-100 overflow-hidden"><div className="h-full bg-grey-300 rounded-full" style={{ width: '5%' }} /></div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Asset List + Meters row */}
+        <div className="px-5 mt-4 grid grid-cols-2 gap-4">
+          {/* Asset List */}
+          <div className="rounded-lg border border-grey-100 dark:border-grey-800 p-4">
+            <div className="flex items-center justify-between mb-1">
+              <h3 className="text-[14px] font-semibold text-grey-950 dark:text-white">Asset List</h3>
+              <button className="text-[12px] text-[#1258F8] font-medium">View</button>
+            </div>
+            <p className="text-[12px] text-grey-400 mb-4">Add, edit, and group assets across the portfolio</p>
+            <div className="flex items-center">
+              <div className="flex-1 text-center border-r border-grey-100 dark:border-grey-800">
+                <p className="text-[18px] font-semibold text-grey-950 dark:text-white">1</p>
+                <p className="text-[11px] text-grey-400">Assets</p>
+              </div>
+              <div className="flex-1 text-center">
+                <span className="inline-flex items-center h-[20px] px-2 rounded-full bg-success-100 text-success-700 text-[12px] font-medium">94.74%</span>
+                <p className="text-[11px] text-grey-400 mt-1">Critical Data Completion</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Meters */}
+          <div className="rounded-lg border border-grey-100 dark:border-grey-800 p-4">
+            <div className="flex items-center justify-between mb-1">
+              <h3 className="text-[14px] font-semibold text-grey-950 dark:text-white">Meters</h3>
+              <button className="text-[12px] text-[#1258F8] font-medium">View</button>
+            </div>
+            <p className="text-[12px] text-grey-400 mb-4">Set up meters and resolve coverage gaps</p>
+            <div className="flex items-center">
+              <div className="flex-1 text-center border-r border-grey-100 dark:border-grey-800">
+                <div className="flex items-center justify-center gap-1">
+                  <BoltIcon className="w-3.5 h-3.5 text-warning-500" />
+                  <span className="inline-flex items-center h-[20px] px-2 rounded-full bg-error-100 text-error-700 text-[12px] font-medium">0%</span>
+                </div>
+                <p className="text-[11px] text-grey-400 mt-1">Energy Data Coverage</p>
+              </div>
+              <div className="flex-1 text-center">
+                <p className="text-[13px] font-medium text-grey-950 dark:text-white">0 meters</p>
+                <div className="flex items-center justify-center gap-1 mt-1">
+                  <span className="w-3 h-3 rounded-full bg-success-500 flex items-center justify-center text-white text-[7px]">{'\u2713'}</span>
+                  <p className="text-[11px] text-grey-400">Incomplete data coverage</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Data Collection Tools + Governance row */}
+        <div className="px-5 mt-4 grid grid-cols-2 gap-4">
+          {/* Data Collection Tools */}
+          <div className="rounded-lg border border-grey-100 dark:border-grey-800 p-4">
+            <h3 className="text-[14px] font-semibold text-grey-950 dark:text-white mb-4">Data Collection Tools</h3>
+            <div className="flex flex-col gap-0">
+              {[
+                { icon: ArrowTrendingUpIcon, label: 'Bulk Template:', desc: 'Upload data via spreadsheets', badge: 'No uploads yet', badgeStyle: 'bg-grey-100 text-grey-500' },
+                { icon: PaperAirplaneIcon, label: 'Data requests:', desc: 'Collect data from external stakeholders', badge: '1 sent', badgeStyle: 'bg-blue-100 text-blue-700' },
+                { icon: BoltIcon, label: 'Automations:', desc: 'Automated meter API connections', badge: '0/1 meters mapped', badgeStyle: 'bg-warning-100 text-warning-700' },
+                { icon: DocumentTextIcon, label: 'Bill Scraping:', desc: 'Automated document extraction', badge: 'No bills scraped', badgeStyle: 'bg-grey-100 text-grey-500' },
+              ].map(tool => {
+                const Icon = tool.icon
+                return (
+                  <div key={tool.label} className="flex items-center gap-3 py-2.5 border-t border-grey-100 dark:border-grey-800 first:border-t-0">
+                    <Icon className="w-4 h-4 text-grey-400 shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <span className="text-[13px] text-grey-950 dark:text-white font-medium">{tool.label}</span>
+                      <span className="text-[13px] text-[#505867]"> {tool.desc}</span>
+                    </div>
+                    <span className={clsx('inline-flex items-center h-[20px] px-2 rounded-full text-[11px] font-medium shrink-0', tool.badgeStyle)}>{tool.badge}</span>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Governance */}
+          <div className="rounded-lg border border-grey-100 dark:border-grey-800 p-4">
+            <div className="flex items-center justify-between mb-1">
+              <h3 className="text-[14px] font-semibold text-grey-950 dark:text-white">Governance</h3>
+              <button className="text-[12px] text-[#1258F8] font-medium">View</button>
+            </div>
+            <p className="text-[12px] text-grey-400 mb-3">Document ESG policies and practices for reporting</p>
+            <div className="flex items-center justify-between text-[11px] font-semibold text-grey-400 uppercase tracking-wider pb-2 border-b border-grey-100 dark:border-grey-800">
+              <span>Aspect</span>
+              <span>Data completion</span>
+            </div>
+            {[
+              { aspect: 'Leadership', completion: '0 / 6' },
+              { aspect: 'Policies', completion: '0 / 3' },
+              { aspect: 'Reporting', completion: '0 / 3' },
+              { aspect: 'Risk Management', completion: '0 / 12' },
+              { aspect: 'Stakeholder Engagement', completion: '0 / 11' },
+              { aspect: 'Tenants & Community', completion: '0 / 9' },
+              { aspect: 'Data Monitoring & Review', completion: '0 / 4' },
+            ].map(row => (
+              <div key={row.aspect} className="flex items-center justify-between py-2 border-b border-grey-100 dark:border-grey-800 last:border-b-0">
+                <span className="text-[13px] text-grey-950 dark:text-white">{row.aspect}</span>
+                <span className="text-[13px] text-error-500 font-medium">{row.completion}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Roadmaps + Targets row */}
+        <div className="px-5 mt-4 grid grid-cols-2 gap-4">
+          <div className="rounded-lg border border-grey-100 dark:border-grey-800 p-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-[14px] font-semibold text-grey-950 dark:text-white">Roadmaps</h3>
+              <button className="text-[12px] text-[#1258F8] font-medium">View</button>
+            </div>
+            <p className="text-[12px] text-grey-400 mt-1">Plan retrofits and forecast emissions over time</p>
+          </div>
+          <div className="rounded-lg border border-grey-100 dark:border-grey-800 p-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-[14px] font-semibold text-grey-950 dark:text-white">Targets & Benchmarks</h3>
+              <button className="text-[12px] text-[#1258F8] font-medium">View</button>
+            </div>
+            <p className="text-[12px] text-grey-400 mt-1">Set reduction targets and compare to industry benchmarks</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  )
+}
+
 // ── Page ────────────────────────────────────────────────────────────────────
 
 export default function PlaygroundPage() {
@@ -1509,7 +1702,7 @@ export default function PlaygroundPage() {
       <Sidebar activeItem={activeItem} onItemChange={setActiveItem} collapsed={sidebarCollapsed} onCollapsedChange={setSidebarCollapsed} width={sidebarWidth} onWidthChange={setSidebarWidth} />
       <div className="flex flex-col flex-1 min-w-0 relative">
         <TopBar collapsed={sidebarCollapsed} onToggleSidebar={() => setSidebarCollapsed(false)} />
-        {activeItem === 'welcome' ? <HomeContent /> : activeItem === 'col-asset-list' ? <AssetListContent /> : activeItem === 'rep-overview' ? <ReportsOverviewContent /> : <ContentArea />}
+        {activeItem === 'welcome' ? <HomeContent /> : activeItem === 'col-overview' ? <DataCollectionOverview /> : activeItem === 'col-asset-list' ? <AssetListContent /> : activeItem === 'rep-overview' ? <ReportsOverviewContent /> : <ContentArea />}
       </div>
     </div>
   )
