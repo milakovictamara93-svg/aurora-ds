@@ -1401,84 +1401,95 @@ function ReportsOverviewContent() {
 
 // ── Home / Lumi Content ─────────────────────────────────────────────────
 
-const SUGGESTIONS = [
-  'Which assets have the lowest data coverage?',
-  'Generate a GRESB report summary',
-  'Compare energy intensity YoY across the portfolio',
-  'What are the top 5 assets by GHG emissions?',
+const QUICK_ACTIONS = [
+  { label: 'Improve data coverage', description: 'Find and fix gaps in your portfolio data', icon: CircleStackIcon },
+  { label: 'Generate GRESB report', description: 'Auto-fill your GRESB submission from existing data', icon: DocumentTextIcon },
+  { label: 'Analyze energy trends', description: 'Compare YoY energy intensity across assets', icon: ArrowTrendingUpIcon },
+  { label: 'Plan decarbonization', description: 'Model pathways to net zero for your portfolio', icon: GlobeEuropeAfricaIcon },
 ]
 
 const RECENT_CONVERSATIONS = [
-  { id: '1', title: 'Why did GHG intensity spike in Q3?', time: '2h ago' },
-  { id: '2', title: 'Compare EPRA vs GRI for our portfolio', time: '1d ago' },
-  { id: '3', title: 'Which assets are below 80% coverage?', time: '3d ago' },
-  { id: '4', title: 'EU Taxonomy alignment status', time: '1w ago' },
-  { id: '5', title: 'Missing data for GRESB submission', time: '1w ago' },
+  { id: '1', title: 'Why did GHG intensity spike in Q3?', time: '2 hours ago' },
+  { id: '2', title: 'Compare EPRA vs GRI for our portfolio', time: 'Yesterday' },
+  { id: '3', title: 'Which assets are below 80% data coverage?', time: '3 days ago' },
+  { id: '4', title: 'Summarize EU Taxonomy alignment status', time: 'Last week' },
 ]
-
-function LumiIcon({ size = 32 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path d="M14.7429 9.25714V24H9.1875V18.7865L3.9452 24H0V20.1144L5.36819 14.776H0V9.25714H14.7429Z" fill="#6961E4"/>
-      <path d="M9.25714 9.25714V24H14.8125V18.7865L20.0548 24H24V20.1144L18.6318 14.776H24V9.25714H9.25714Z" fill="#6961E4"/>
-      <path d="M9.25714 14.7429V0H14.8125V5.21351L20.0548 0H24V3.8856L18.6318 9.224H24V14.7429H9.25714Z" fill="#6961E4"/>
-      <path d="M14.7429 14.7429V0H9.1875V5.21351L3.9452 0H0V3.8856L5.36819 9.224H0V14.7429H14.7429Z" fill="#6961E4"/>
-      <path d="M12 5.14285L12.1563 6.87368C12.3948 9.51346 14.4865 11.6052 17.1263 11.8437L18.8571 12L17.1263 12.1563C14.4865 12.3948 12.3948 14.4865 12.1563 17.1263L12 18.8571L11.8437 17.1263C11.6052 14.4865 9.51346 12.3948 6.87368 12.1563L5.14285 12L6.87368 11.8437C9.51346 11.6052 11.6052 9.51346 11.8437 6.87368L12 5.14285Z" fill="#F5F5F5"/>
-    </svg>
-  )
-}
 
 function HomeContent() {
   const [query, setQuery] = useState('')
 
   return (
-    <div className="flex-1 min-w-0 min-h-0 flex flex-col bg-grey-50 dark:bg-[#0c0f14] px-2 pb-2 -mt-px">
-      <div className="bg-white dark:bg-grey-950 rounded-lg border border-grey-100 dark:border-grey-800 flex-1 flex flex-col overflow-hidden">
+    <div className="flex-1 min-w-0 min-h-0 overflow-auto bg-grey-50 dark:bg-[#0c0f14] px-2 pb-2 -mt-px">
+      <div className="bg-white dark:bg-grey-950 rounded-lg border border-grey-100 dark:border-grey-800 min-h-full overflow-hidden pb-2">
 
-        {/* Center content */}
-        <div className="flex-1 flex flex-col items-center justify-center px-5">
-          <LumiIcon size={40} />
-          <h1 className="text-[28px] font-semibold text-grey-950 dark:text-white mt-5 mb-2">What can I help with?</h1>
-          <p className="text-[14px] text-grey-400 mb-8">Ask about your portfolio, reports, assets, or ESG data.</p>
+        <div className="flex flex-col items-center justify-center pt-16 pb-8 px-5">
+          {/* Lumi icon */}
+          <div className="mb-5">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.7429 9.25714V24H9.1875V18.7865L3.9452 24H0V20.1144L5.36819 14.776H0V9.25714H14.7429Z" fill="#6961E4"/>
+              <path d="M9.25714 9.25714V24H14.8125V18.7865L20.0548 24H24V20.1144L18.6318 14.776H24V9.25714H9.25714Z" fill="#6961E4"/>
+              <path d="M9.25714 14.7429V0H14.8125V5.21351L20.0548 0H24V3.8856L18.6318 9.224H24V14.7429H9.25714Z" fill="#6961E4"/>
+              <path d="M14.7429 14.7429V0H9.1875V5.21351L3.9452 0H0V3.8856L5.36819 9.224H0V14.7429H14.7429Z" fill="#6961E4"/>
+              <path d="M12 5.14285L12.1563 6.87368C12.3948 9.51346 14.4865 11.6052 17.1263 11.8437L18.8571 12L17.1263 12.1563C14.4865 12.3948 12.3948 14.4865 12.1563 17.1263L12 18.8571L11.8437 17.1263C11.6052 14.4865 9.51346 12.3948 6.87368 12.1563L5.14285 12L6.87368 11.8437C9.51346 11.6052 11.6052 9.51346 11.8437 6.87368L12 5.14285Z" fill="#F5F5F5"/>
+            </svg>
+          </div>
 
-          {/* Suggestion chips */}
-          <div className="flex flex-wrap gap-2 justify-center max-w-[600px]">
-            {SUGGESTIONS.map(s => (
-              <button key={s} onClick={() => setQuery(s)} className="h-8 px-4 rounded-full border border-grey-200 dark:border-grey-800 text-[13px] text-[#505867] dark:text-grey-400 hover:border-grey-300 hover:bg-grey-50 dark:hover:bg-white/5 transition-colors">
-                {s}
+          <h1 className="text-[22px] font-semibold text-grey-950 dark:text-white mb-1">Good afternoon, Tamara</h1>
+          <p className="text-[14px] text-[#505867] mb-8">Ask Lumi anything about your portfolio, reports, or ESG data.</p>
+
+          {/* Search / prompt input */}
+          <div className="w-full max-w-[640px] relative mb-10">
+            <div className="flex items-center h-11 rounded-xl border border-grey-200 dark:border-grey-800 bg-grey-50 dark:bg-[#0D1117] px-4 gap-3 focus-within:border-ai-400 focus-within:ring-2 focus-within:ring-ai-500/20 transition-all">
+              <SparklesIcon className="w-4 h-4 text-ai-400 shrink-0" />
+              <input
+                type="text"
+                placeholder="Ask Lumi a question..."
+                value={query}
+                onChange={e => setQuery(e.target.value)}
+                className="flex-1 bg-transparent text-[14px] text-grey-950 dark:text-white placeholder-grey-400 outline-none"
+              />
+              <button className={clsx('w-7 h-7 rounded-lg flex items-center justify-center transition-colors', query ? 'bg-ai-500 text-white' : 'bg-grey-100 text-grey-400')}>
+                <PaperAirplaneIcon className="w-3.5 h-3.5" />
               </button>
-            ))}
+            </div>
+          </div>
+
+          {/* Quick actions */}
+          <div className="w-full max-w-[640px]">
+            <p className="text-[11px] font-semibold text-grey-400 uppercase tracking-wider mb-3">Quick actions</p>
+            <div className="grid grid-cols-2 gap-2">
+              {QUICK_ACTIONS.map(action => {
+                const Icon = action.icon
+                return (
+                  <button key={action.label} className="flex items-start gap-3 rounded-lg border border-grey-100 dark:border-grey-800 p-3 text-left hover:border-ai-200 hover:bg-ai-50/30 dark:hover:border-ai-800 transition-colors group">
+                    <div className="w-8 h-8 rounded-lg bg-ai-50 dark:bg-ai-950 flex items-center justify-center shrink-0 group-hover:bg-ai-100 transition-colors">
+                      <Icon className="w-4 h-4 text-ai-500" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-[13px] font-medium text-grey-950 dark:text-white">{action.label}</p>
+                      <p className="text-[12px] text-grey-400 leading-snug">{action.description}</p>
+                    </div>
+                  </button>
+                )
+              })}
+            </div>
           </div>
         </div>
 
-        {/* Recent - horizontal chips above input */}
-        <div className="px-5 pb-2 flex items-center gap-3 max-w-[720px] w-full mx-auto">
-          <span className="text-[11px] text-grey-300 uppercase tracking-wider shrink-0">Recent</span>
-          <div className="flex gap-1.5 overflow-x-auto">
-            {RECENT_CONVERSATIONS.map(c => (
-              <button key={c.id} className="h-7 px-3 rounded-full bg-grey-50 dark:bg-grey-900 text-[12px] text-grey-500 hover:bg-grey-100 dark:hover:bg-grey-800 transition-colors whitespace-nowrap shrink-0">
-                {c.title}
+        {/* Recent conversations */}
+        <div className="w-full max-w-[640px] mx-auto pb-8">
+          <p className="text-[11px] font-semibold text-grey-400 uppercase tracking-wider mb-3">Recent conversations</p>
+          <div className="flex flex-col gap-0.5">
+            {RECENT_CONVERSATIONS.map(convo => (
+              <button key={convo.id} className="flex items-center justify-between h-9 px-3 rounded-md text-left hover:bg-grey-50 dark:hover:bg-white/5 transition-colors group">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <SparklesIcon className="w-3.5 h-3.5 text-ai-400 shrink-0" />
+                  <span className="text-[13px] text-grey-700 dark:text-grey-300 truncate">{convo.title}</span>
+                </div>
+                <span className="text-[11px] text-grey-300 shrink-0 ml-3">{convo.time}</span>
               </button>
             ))}
           </div>
-        </div>
-
-        {/* Input bar - pinned to bottom */}
-        <div className="px-5 pb-5 max-w-[720px] w-full mx-auto">
-          <div className="flex items-end rounded-2xl border border-grey-200 dark:border-grey-800 bg-grey-50 dark:bg-[#0D1117] p-2 focus-within:border-ai-400 focus-within:ring-2 focus-within:ring-ai-500/20 transition-all">
-            <textarea
-              rows={1}
-              placeholder="Message Lumi..."
-              value={query}
-              onChange={e => setQuery(e.target.value)}
-              onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); setQuery('') } }}
-              className="flex-1 bg-transparent text-[14px] text-grey-950 dark:text-white placeholder-grey-400 outline-none resize-none px-2 py-1.5 max-h-[120px]"
-            />
-            <button className={clsx('w-8 h-8 rounded-xl flex items-center justify-center transition-colors shrink-0', query ? 'bg-[#6961E4] text-white' : 'bg-grey-200 dark:bg-grey-800 text-grey-400')}>
-              <ArrowTrendingUpIcon className="w-4 h-4 rotate-45" />
-            </button>
-          </div>
-          <p className="text-[11px] text-grey-300 text-center mt-2">Lumi can make mistakes. Verify important information.</p>
         </div>
 
       </div>
