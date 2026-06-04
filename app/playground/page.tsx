@@ -299,18 +299,50 @@ function ScalerLogo({ className = 'w-5 h-5' }: { className?: string }) {
 // ── Sidebar ────────────────────────────────────────────────────────────────
 
 const ICON_RAIL_W = 48
-const SUBMENU_W = 200
+const SUBMENU_DEFAULT = 200
+const SUBMENU_MIN = 160
+const SUBMENU_MAX = 320
 
-function Sidebar({ activeItem, onItemChange }: {
-  activeItem: string; onItemChange: (id: string) => void
+function Sidebar({ activeItem, onItemChange, submenuWidth, onSubmenuWidthChange }: {
+  activeItem: string; onItemChange: (id: string) => void; submenuWidth: number; onSubmenuWidthChange: (w: number) => void
 }) {
   const activeSectionId = NAV_SECTIONS.find(s => s.entries.some(e => e.type === 'item' && e.id === activeItem))?.id ?? 'analytics'
   const [activeSection, setActiveSection] = useState(activeSectionId)
+  const resizing = useRef(false)
+  const startX = useRef(0)
+  const startW = useRef(0)
+
+  const onResizeMouseDown = useCallback((e: React.MouseEvent) => {
+    e.preventDefault()
+    resizing.current = true
+    startX.current = e.clientX
+    startW.current = submenuWidth
+    document.body.style.cursor = 'col-resize'
+    document.body.style.userSelect = 'none'
+  }, [submenuWidth])
+
+  useEffect(() => {
+    function onMouseMove(e: MouseEvent) {
+      if (!resizing.current) return
+      const delta = e.clientX - startX.current
+      const newW = Math.max(SUBMENU_MIN, Math.min(SUBMENU_MAX, startW.current + delta))
+      onSubmenuWidthChange(newW)
+    }
+    function onMouseUp() {
+      if (!resizing.current) return
+      resizing.current = false
+      document.body.style.cursor = ''
+      document.body.style.userSelect = ''
+    }
+    document.addEventListener('mousemove', onMouseMove)
+    document.addEventListener('mouseup', onMouseUp)
+    return () => { document.removeEventListener('mousemove', onMouseMove); document.removeEventListener('mouseup', onMouseUp) }
+  }, [onSubmenuWidthChange])
 
   const currentSection = NAV_SECTIONS.find(s => s.id === activeSection) ?? NAV_SECTIONS[1]
 
   return (
-    <div className="flex shrink-0 h-full" style={{ width: ICON_RAIL_W + SUBMENU_W }}>
+    <div className="relative flex shrink-0 h-full" style={{ width: ICON_RAIL_W + submenuWidth }}>
       {/* Icon rail -- always visible */}
       <div className="flex flex-col items-center w-12 h-full bg-grey-100 dark:bg-grey-900 border-r border-grey-200 dark:border-grey-800 py-3 gap-1 shrink-0">
         <div className="mb-4">
@@ -342,8 +374,8 @@ function Sidebar({ activeItem, onItemChange }: {
         </div>
       </div>
 
-      {/* Submenu panel -- shows entries for active section */}
-      <div className="flex flex-col h-full overflow-hidden bg-grey-50 dark:bg-grey-950 select-none" style={{ width: SUBMENU_W }}>
+      {/* Submenu panel -- shows entries for active section, resizable */}
+      <div className="flex flex-col h-full overflow-hidden bg-grey-50 dark:bg-grey-950 select-none" style={{ width: submenuWidth, transition: resizing.current ? 'none' : 'width 150ms ease' }}>
         <div className="flex items-center h-11 px-3">
           <span className="text-[13px] font-semibold text-grey-950 dark:text-white truncate">{currentSection.label}</span>
         </div>
@@ -385,6 +417,8 @@ function Sidebar({ activeItem, onItemChange }: {
           </div>
         </div>
       </div>
+      {/* Resize handle */}
+      <div onMouseDown={onResizeMouseDown} className="absolute top-0 right-0 w-1 h-full cursor-col-resize z-10 hover:bg-blue-600/20 active:bg-blue-600/30 transition-colors" />
     </div>
   )
 }
@@ -1650,10 +1684,11 @@ function DataCollectionOverview() {
 
 export default function PlaygroundPage() {
   const [activeItem, setActiveItem] = useState('performance')
+  const [submenuWidth, setSubmenuWidth] = useState(SUBMENU_DEFAULT)
 
   return (
     <div className="flex h-full">
-      <Sidebar activeItem={activeItem} onItemChange={setActiveItem} />
+      <Sidebar activeItem={activeItem} onItemChange={setActiveItem} submenuWidth={submenuWidth} onSubmenuWidthChange={setSubmenuWidth} />
       <div className="flex flex-col flex-1 min-w-0 relative">
         <TopBar collapsed={false} onToggleSidebar={() => {}} />
         {activeItem === 'welcome' ? <HomeContent /> : activeItem === 'col-overview' ? <DataCollectionOverview /> : activeItem === 'col-asset-list' ? <AssetListContent /> : activeItem === 'rep-overview' ? <ReportsOverviewContent /> : <ContentArea />}
