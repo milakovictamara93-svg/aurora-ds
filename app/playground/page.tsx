@@ -298,137 +298,93 @@ function ScalerLogo({ className = 'w-5 h-5' }: { className?: string }) {
 
 // ── Sidebar ────────────────────────────────────────────────────────────────
 
-const SIDEBAR_MIN = 48
-const SIDEBAR_DEFAULT = 240
-const SIDEBAR_MAX = 320
-const SIDEBAR_COLLAPSE_THRESHOLD = 140
+const ICON_RAIL_W = 48
+const SUBMENU_W = 200
 
-function Sidebar({ activeItem, onItemChange, collapsed, onCollapsedChange, width, onWidthChange }: {
-  activeItem: string; onItemChange: (id: string) => void; collapsed: boolean; onCollapsedChange: (v: boolean) => void; width: number; onWidthChange: (w: number) => void
+function Sidebar({ activeItem, onItemChange }: {
+  activeItem: string; onItemChange: (id: string) => void
 }) {
   const activeSectionId = NAV_SECTIONS.find(s => s.entries.some(e => e.type === 'item' && e.id === activeItem))?.id ?? 'analytics'
-  const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({ [activeSectionId]: true })
-  const resizing = useRef(false)
-  const startX = useRef(0)
-  const startW = useRef(0)
+  const [activeSection, setActiveSection] = useState(activeSectionId)
 
-  function toggleGroup(id: string) {
-    if (collapsed) return
-    setExpandedGroups(prev => ({ ...prev, [id]: !prev[id] }))
-  }
-
-  const onMouseDown = useCallback((e: React.MouseEvent) => {
-    e.preventDefault()
-    resizing.current = true
-    startX.current = e.clientX
-    startW.current = collapsed ? SIDEBAR_MIN : width
-    document.body.style.cursor = 'col-resize'
-    document.body.style.userSelect = 'none'
-  }, [collapsed, width])
-
-  useEffect(() => {
-    function onMouseMove(e: MouseEvent) {
-      if (!resizing.current) return
-      const delta = e.clientX - startX.current
-      const newW = Math.max(SIDEBAR_MIN, Math.min(SIDEBAR_MAX, startW.current + delta))
-      if (newW < SIDEBAR_COLLAPSE_THRESHOLD) { onCollapsedChange(true) } else { onCollapsedChange(false); onWidthChange(newW) }
-    }
-    function onMouseUp() {
-      if (!resizing.current) return
-      resizing.current = false
-      document.body.style.cursor = ''
-      document.body.style.userSelect = ''
-    }
-    document.addEventListener('mousemove', onMouseMove)
-    document.addEventListener('mouseup', onMouseUp)
-    return () => { document.removeEventListener('mousemove', onMouseMove); document.removeEventListener('mouseup', onMouseUp) }
-  }, [onCollapsedChange, onWidthChange])
-
-  const sidebarWidth = collapsed ? SIDEBAR_MIN : width
+  const currentSection = NAV_SECTIONS.find(s => s.id === activeSection) ?? NAV_SECTIONS[1]
 
   return (
-    <div className="relative flex shrink-0 h-full group/sidebar" style={{ width: sidebarWidth }}>
-      <div className="flex flex-col h-full overflow-x-hidden bg-grey-50 dark:bg-grey-900 select-none" style={{ width: sidebarWidth, transition: resizing.current ? 'none' : 'width 150ms ease' }}>
-        <div className={clsx('flex items-center shrink-0 h-11', collapsed ? 'justify-center px-0' : 'px-2 gap-1')}>
-          {collapsed ? (
-            <ScalerLogo className="w-4 h-4 text-grey-950 dark:text-white shrink-0" />
-          ) : (
-            <>
-              <div className="flex items-center gap-1.5 h-7 px-1.5 min-w-0">
-                <ScalerLogo className="w-4 h-4 text-grey-950 dark:text-white shrink-0" />
-                <span className="text-[13px] font-semibold text-grey-950 dark:text-white truncate">Scaler</span>
-              </div>
-              <button onClick={() => onCollapsedChange(true)} className="ml-auto w-6 h-6 flex items-center justify-center rounded text-grey-400 hover:text-grey-600 dark:hover:text-grey-300 hover:bg-grey-200/50 dark:hover:bg-white/5 transition-colors">
-                <Bars3BottomLeftIcon className="w-3.5 h-3.5" />
-              </button>
-            </>
-          )}
+    <div className="flex shrink-0 h-full" style={{ width: ICON_RAIL_W + SUBMENU_W }}>
+      {/* Icon rail -- always visible */}
+      <div className="flex flex-col items-center w-12 h-full bg-grey-100 dark:bg-grey-900 border-r border-grey-200 dark:border-grey-800 py-3 gap-1 shrink-0">
+        <div className="mb-4">
+          <ScalerLogo className="w-4 h-4 text-grey-950 dark:text-white" />
         </div>
+        {NAV_SECTIONS.map(section => {
+          const Icon = section.icon
+          const isActive = activeSection === section.id
+          return (
+            <button
+              key={section.id}
+              onClick={() => setActiveSection(section.id)}
+              className={clsx(
+                'w-8 h-8 flex items-center justify-center rounded-md transition-colors',
+                isActive
+                  ? 'text-blue-600 bg-blue-50 dark:bg-blue-600/10'
+                  : 'text-grey-500 dark:text-grey-400 hover:text-grey-700 dark:hover:text-grey-300 hover:bg-grey-200/50 dark:hover:bg-white/5'
+              )}
+              title={section.label}
+            >
+              <Icon className="w-4 h-4" />
+            </button>
+          )
+        })}
+        <div className="mt-auto flex flex-col items-center gap-1">
+          <button className="w-8 h-8 flex items-center justify-center rounded-md text-grey-500 hover:bg-grey-200/40 transition-colors" title="Support"><QuestionMarkCircleIcon className="w-4 h-4" /></button>
+          <button className="w-8 h-8 flex items-center justify-center rounded-md text-grey-500 hover:bg-grey-200/40 transition-colors" title="What's new"><GiftIcon className="w-4 h-4" /></button>
+          <span className="w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center text-[8px] font-semibold text-white mt-1">T</span>
+        </div>
+      </div>
 
-        <div className={clsx('flex-1 overflow-y-auto overflow-x-hidden pb-28 mt-3', collapsed ? 'px-1.5' : 'px-2')}>
-          {NAV_SECTIONS.map((section, si) => {
-            const isExpanded = expandedGroups[section.id] ?? false
-            const hasActiveChild = section.entries.some(e => e.type === 'item' && e.id === activeItem)
-            if (collapsed) {
-              const Icon = section.icon
-              return (
-                <div key={section.id} className={clsx(si > 0 && 'mt-4')}>
-                  <button onClick={() => { onCollapsedChange(false); setExpandedGroups(prev => ({ ...prev, [section.id]: true })); const fi = section.entries.find(e => e.type === 'item'); if (fi && fi.type === 'item') onItemChange(fi.id) }} className={clsx('w-full h-8 flex items-center justify-center rounded-md transition-colors', hasActiveChild ? 'text-blue-600 bg-blue-50 dark:bg-blue-600/10' : 'text-grey-600 dark:text-grey-400 hover:bg-grey-200/50 dark:hover:bg-white/5')} title={section.label}>
-                    <Icon className="w-4 h-4" />
-                  </button>
-                </div>
-              )
-            }
-            return (
-              <div key={section.id} className={clsx(si > 0 && 'mt-4')}>
-                <button onClick={() => toggleGroup(section.id)} className="w-full flex items-center gap-1.5 h-7 px-3 text-[11px] font-medium text-grey-600 dark:text-grey-400 hover:text-grey-950 dark:hover:text-white transition-colors">
-                  <ChevronRightIcon className={clsx('w-2.5 h-2.5 shrink-0 transition-transform duration-150', isExpanded && 'rotate-90')} />
-                  <span className="truncate uppercase tracking-wider">{section.label}</span>
-                </button>
-                {isExpanded && (
-                  <div className="mt-1 flex flex-col gap-0.5">
-                    {section.entries.map((entry, ei) => {
-                      if (entry.type === 'header') return <div key={`h-${ei}`} className="mt-4 mb-1 px-3"><span className="text-[10px] font-semibold text-grey-600 dark:text-grey-400 uppercase tracking-wider">{entry.label}</span></div>
-                      if (entry.type === 'placeholder') return <div key={`p-${ei}`} className="px-3 py-1.5"><span className="text-[12px] text-grey-400 dark:text-grey-500 italic">{entry.label}</span></div>
-                      const active = activeItem === entry.id
-                      const Icon = entry.icon
-                      return (
-                        <button key={entry.id} onClick={() => onItemChange(entry.id)} className={clsx('w-full flex items-center gap-2.5 h-8 px-3 rounded-md text-[13px] transition-colors text-left', active ? 'text-grey-950 dark:text-white bg-blue-50 dark:bg-blue-600/10 font-medium' : 'text-grey-600 dark:text-grey-400 hover:text-grey-950 dark:hover:text-white hover:bg-grey-200/40 dark:hover:bg-white/5')}>
-                          <Icon className={clsx('w-4 h-4 shrink-0', active ? 'text-blue-600' : 'text-grey-600 dark:text-grey-400')} />
-                          <span className="truncate">{entry.label}</span>
-                        </button>
-                      )
-                    })}
+      {/* Submenu panel -- shows entries for active section */}
+      <div className="flex flex-col h-full overflow-hidden bg-grey-50 dark:bg-grey-950 select-none" style={{ width: SUBMENU_W }}>
+        <div className="flex items-center h-11 px-3">
+          <span className="text-[13px] font-semibold text-grey-950 dark:text-white truncate">{currentSection.label}</span>
+        </div>
+        <div className="flex-1 overflow-y-auto px-2 pb-4">
+          <div className="flex flex-col gap-0.5">
+            {currentSection.entries.map((entry, ei) => {
+              if (entry.type === 'header') {
+                return (
+                  <div key={`h-${ei}`} className="mt-4 mb-1 px-2">
+                    <span className="text-[10px] font-semibold text-grey-400 dark:text-grey-500 uppercase tracking-wider">{entry.label}</span>
                   </div>
-                )}
-              </div>
-            )
-          })}
+                )
+              }
+              if (entry.type === 'placeholder') {
+                return (
+                  <div key={`p-${ei}`} className="px-2 py-1.5">
+                    <span className="text-[12px] text-grey-400 dark:text-grey-500 italic">{entry.label}</span>
+                  </div>
+                )
+              }
+              const active = activeItem === entry.id
+              const Icon = entry.icon
+              return (
+                <button
+                  key={entry.id}
+                  onClick={() => onItemChange(entry.id)}
+                  className={clsx(
+                    'w-full flex items-center gap-2.5 h-8 px-2 rounded-md text-[13px] transition-colors text-left',
+                    active
+                      ? 'text-grey-950 dark:text-white bg-blue-50 dark:bg-blue-600/10 font-medium'
+                      : 'text-grey-600 dark:text-grey-400 hover:text-grey-950 dark:hover:text-white hover:bg-grey-200/40 dark:hover:bg-white/5'
+                  )}
+                >
+                  <Icon className={clsx('w-4 h-4 shrink-0', active ? 'text-blue-600' : 'text-grey-400 dark:text-grey-500')} />
+                  <span className="truncate">{entry.label}</span>
+                </button>
+              )
+            })}
+          </div>
         </div>
-
       </div>
-      {/* Bottom: outside overflow container so dropdowns aren't clipped */}
-      <div className={clsx('absolute bottom-0 left-0 right-0 py-2 flex flex-col gap-0.5 bg-grey-50 dark:bg-grey-900 z-20', collapsed ? 'px-1.5 items-center' : 'px-2')}>
-        {collapsed ? (
-          <>
-            <button className="w-8 h-8 flex items-center justify-center rounded-md text-grey-600 hover:bg-grey-200/40 transition-colors" title="Support & tickets"><QuestionMarkCircleIcon className="w-4 h-4" /></button>
-            <button className="w-8 h-8 flex items-center justify-center rounded-md text-grey-600 hover:bg-grey-200/40 transition-colors" title="What's new"><GiftIcon className="w-4 h-4" /></button>
-          </>
-        ) : (
-          <>
-            <button className="w-full flex items-center gap-2.5 h-8 px-3 rounded-md text-[13px] text-grey-600 hover:text-grey-950 hover:bg-grey-200/40 transition-colors text-left min-w-0">
-              <QuestionMarkCircleIcon className="w-4 h-4 shrink-0" />
-              <span className="truncate">Support & tickets</span>
-            </button>
-            <button className="w-full flex items-center gap-2.5 h-8 px-3 rounded-md text-[13px] text-grey-600 hover:text-grey-950 hover:bg-grey-200/40 transition-colors text-left min-w-0">
-              <GiftIcon className="w-4 h-4 shrink-0" />
-              <span className="truncate">What&apos;s new</span>
-            </button>
-          </>
-        )}
-        <AvatarMenu collapsed={collapsed} />
-      </div>
-      <div onMouseDown={onMouseDown} className="absolute top-0 right-0 w-1 h-full cursor-col-resize z-10 hover:bg-blue-600/20 active:bg-blue-600/30 transition-colors" />
     </div>
   )
 }
@@ -1693,15 +1649,13 @@ function DataCollectionOverview() {
 // ── Page ────────────────────────────────────────────────────────────────────
 
 export default function PlaygroundPage() {
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
-  const [sidebarWidth, setSidebarWidth] = useState(SIDEBAR_DEFAULT)
   const [activeItem, setActiveItem] = useState('performance')
 
   return (
     <div className="flex h-full">
-      <Sidebar activeItem={activeItem} onItemChange={setActiveItem} collapsed={sidebarCollapsed} onCollapsedChange={setSidebarCollapsed} width={sidebarWidth} onWidthChange={setSidebarWidth} />
+      <Sidebar activeItem={activeItem} onItemChange={setActiveItem} />
       <div className="flex flex-col flex-1 min-w-0 relative">
-        <TopBar collapsed={sidebarCollapsed} onToggleSidebar={() => setSidebarCollapsed(false)} />
+        <TopBar collapsed={false} onToggleSidebar={() => {}} />
         {activeItem === 'welcome' ? <HomeContent /> : activeItem === 'col-overview' ? <DataCollectionOverview /> : activeItem === 'col-asset-list' ? <AssetListContent /> : activeItem === 'rep-overview' ? <ReportsOverviewContent /> : <ContentArea />}
       </div>
     </div>
