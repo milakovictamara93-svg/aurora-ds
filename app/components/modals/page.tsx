@@ -54,7 +54,7 @@ const TOTAL = '09'
 
 export default function ModalsPage() {
   const [openModal, setOpenModal] = useState<
-    'standard' | 'subtitle' | 'confirm' | 'danger' | null
+    'standard' | 'subtitle' | 'confirm' | 'fullscreen' | null
   >(null)
 
   return (
@@ -137,6 +137,7 @@ export default function ModalsPage() {
             { key: 'standard', label: 'Standard modal' },
             { key: 'subtitle', label: 'With subtitle' },
             { key: 'confirm',  label: 'Confirmation (danger)' },
+            { key: 'fullscreen', label: 'Full-screen' },
           ] as const).map(({ key, label }) => (
             <Button
               key={key}
@@ -156,6 +157,9 @@ export default function ModalsPage() {
 
         <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3 mt-6">Confirmation modal (danger pairing)</h3>
         <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-4">Narrow, no body slot. One question, one consequence, Cancel + destructive button. Always paired with an irreversible action.</p>
+
+        <h3 className="text-[16px] font-semibold text-[#111827] dark:text-white mb-3 mt-6">Full-screen modal</h3>
+        <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-4">Fills the viewport. Use for immersive editors, multi-step wizards, or complex workflows where the page behind would distract.</p>
       </SectionWrapper>
 
       {/* ── 04 Required pairings ────────────────────────────────────────────── */}
@@ -330,6 +334,23 @@ export default function ModalsPage() {
         destructiveAction={() => setOpenModal(null)}
       >
         <p>All saved versions will be permanently removed.</p>
+      </Modal>
+
+      <Modal
+        open={openModal === 'fullscreen'}
+        onClose={() => setOpenModal(null)}
+        type="fullscreen"
+        title="Report builder"
+        subtitle="ESG Annual Report 2024"
+        primaryLabel="Publish"
+        primaryAction={() => setOpenModal(null)}
+        secondaryLabel="Save draft"
+        destructiveLabel="Discard"
+        destructiveAction={() => setOpenModal(null)}
+      >
+        <div className="rounded-lg bg-[#F7F8F8] dark:bg-[#1F2430] flex items-center justify-center h-full min-h-[400px]">
+          <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">Content slot</span>
+        </div>
       </Modal>
     </ComponentPageLayout>
   )

@@ -3,6 +3,15 @@
 import { useEffect, useRef } from 'react'
 import { XMarkIcon } from '@heroicons/react/20/solid'
 
+// Drawer collapse icon (arrow pointing right with left bar)
+function DrawerCollapseIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2.5 4.16669V15.8334M17.5 10H5.83333M12.5 5.00002L17.5 10L12.5 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  )
+}
+
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 export type ModalType = 'standard' | 'confirmation' | 'fullscreen' | 'drawer'
@@ -108,14 +117,14 @@ export default function Modal({
           isFullscreen ? 'px-4 py-3' : 'px-4 pt-4',
         ].join(' ')}>
           <div className="flex flex-col gap-0.5 min-w-0 flex-1">
-            {/* Drawer close icon sits above title */}
+            {/* Drawer collapse icon sits above title */}
             {isDrawer && (
               <button
                 onClick={onClose}
                 aria-label="Close drawer"
                 className="mb-2 w-6 h-6 flex items-center justify-center rounded text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430] transition-colors -ml-1"
               >
-                <XMarkIcon className="w-4 h-4" />
+                <DrawerCollapseIcon className="w-5 h-5" />
               </button>
             )}
             <h2
