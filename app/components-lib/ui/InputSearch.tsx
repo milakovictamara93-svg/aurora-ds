@@ -70,7 +70,7 @@ const InputSearch = forwardRef<HTMLInputElement, InputSearchProps>(function Inpu
   }
 
   const baseInput = clsx(
-    'w-full h-7 text-sm outline-none transition-colors rounded',
+    'w-full h-7 text-sm outline-none transition-colors rounded-full',
     'pl-8 pr-8',
     'bg-white dark:bg-grey-950 text-grey-950 dark:text-white',
     'placeholder-grey-400 dark:placeholder-grey-600',
