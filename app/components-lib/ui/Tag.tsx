@@ -68,10 +68,10 @@ export default function Tag({
   const isDisabled = disabled || system === 'disabled'
 
   // Size tokens
-  // medium: h-[28px] px-[12px] gap-[4px] text-[14px] tracking-[0.21px] icon-20px
+  // medium: h-[24px] px-[12px] gap-[4px] text-[14px] tracking-[0.21px] icon-20px
   // small:  h-[20px] px-[8px]  gap-[4px] text-[12px] tracking-[0.18px] icon-16px
   const sizeClass = size === 'medium'
-    ? 'h-[28px] px-3 gap-1 text-[14px] tracking-[0.21px]'
+    ? 'h-[24px] px-3 gap-1 text-[14px] tracking-[0.21px]'
     : 'h-[20px] px-2 gap-1 text-[12px] tracking-[0.18px]'
   const iconSize = size === 'medium' ? 'w-5 h-5' : 'w-4 h-4'
 

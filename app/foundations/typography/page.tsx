@@ -19,59 +19,39 @@ const PARAGRAPH_WEIGHTS = [
 const HEADINGS = [
   {
     name: 'Heading 1',
-    token: 'text-3xl',
-    size: 28,
-    lineHeight: '140%',
-    letterSpacing: '0%',
-    paraSpacing: '0px',
-    tailwind: 'text-[28px] leading-[140%]',
-    sample: 'Heading H1',
-  },
-  {
-    name: 'Heading 2',
-    token: 'text-2xl',
-    size: 24,
-    lineHeight: '140%',
-    letterSpacing: '0%',
-    paraSpacing: '0px',
-    tailwind: 'text-[24px] leading-[140%]',
-    sample: 'Heading H2',
-  },
-  {
-    name: 'Heading 3',
     token: 'text-xl',
     size: 20,
     lineHeight: '140%',
     letterSpacing: '0%',
     paraSpacing: '0px',
     tailwind: 'text-[20px] leading-[140%]',
+    sample: 'Heading H1',
+  },
+  {
+    name: 'Heading 2',
+    token: 'text-base',
+    size: 16,
+    lineHeight: '140%',
+    letterSpacing: '0%',
+    paraSpacing: '0px',
+    tailwind: 'text-[16px] leading-[140%]',
+    sample: 'Heading H2',
+  },
+  {
+    name: 'Heading 3',
+    token: 'text-sm',
+    size: 14,
+    lineHeight: '140%',
+    letterSpacing: '0%',
+    paraSpacing: '0px',
+    tailwind: 'text-[14px] leading-[140%]',
     sample: 'Heading H3',
   },
 ]
 
 const PARAGRAPHS = [
   {
-    name: 'Paragraph XLarge',
-    token: 'text-xl',
-    size: 21,
-    lineHeight: '145%',
-    letterSpacing: '1.5%',
-    paraSpacing: '0px',
-    tailwind: 'text-[21px] leading-[145%] tracking-[0.015em]',
-    sample: 'Create a design playbook that outlines the department\'s expectations, best practices.',
-  },
-  {
     name: 'Paragraph Large',
-    token: 'text-lg',
-    size: 18,
-    lineHeight: '145%',
-    letterSpacing: '1.5%',
-    paraSpacing: '0px',
-    tailwind: 'text-[18px] leading-[145%] tracking-[0.015em]',
-    sample: 'Create a design playbook that outlines the department\'s expectations, best practices.',
-  },
-  {
-    name: 'Paragraph Medium',
     token: 'text-base',
     size: 16,
     lineHeight: '145%',
@@ -81,7 +61,7 @@ const PARAGRAPHS = [
     sample: 'Create a design playbook that outlines the department\'s expectations, best practices.',
   },
   {
-    name: 'Paragraph Small',
+    name: 'Paragraph Medium',
     token: 'text-sm',
     size: 14,
     lineHeight: '145%',
@@ -91,7 +71,7 @@ const PARAGRAPHS = [
     sample: 'Create a design playbook that outlines the department\'s expectations, best practices.',
   },
   {
-    name: 'Paragraph XSmall',
+    name: 'Paragraph Small',
     token: 'text-xs',
     size: 12,
     lineHeight: '145%',
@@ -101,7 +81,7 @@ const PARAGRAPHS = [
     sample: 'Create a design playbook that outlines the department\'s expectations, best practices.',
   },
   {
-    name: 'Paragraph XXSmall',
+    name: 'Paragraph XSmall',
     token: 'text-[11px]',
     size: 11,
     lineHeight: '145%',
@@ -194,7 +174,7 @@ export default function TypographyPage() {
         <div className="mb-2">
           <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white leading-[1.4]">Paragraphs</h2>
           <p className="text-sm text-token-secondary mt-1">
-            Seven paragraph scales from XLarge (21px) down to Caption (14px). Body text uses 1.5% letter spacing and 145% line height throughout.
+            Four paragraph scales from Large (16px) down to XSmall (11px), plus Caption (14px uppercase). Body text uses 1.5% letter spacing and 145% line height throughout.
           </p>
         </div>
 
@@ -319,7 +299,7 @@ export default function TypographyPage() {
               </li>
               <li className="flex items-start gap-2.5">
                 <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
-                <span>Minimum body text size: <strong className="text-token-primary font-semibold">16px</strong> (Paragraph Medium)</span>
+                <span>Minimum body text size: <strong className="text-token-primary font-semibold">16px</strong> (Paragraph Large)</span>
               </li>
               <li className="flex items-start gap-2.5">
                 <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
@@ -340,7 +320,7 @@ export default function TypographyPage() {
         <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-4 leading-[1.4]">Rules</h2>
         <RequiredPairings rules={[
           <>Font family is Inter only. No other typefaces in the product UI.</>,
-          <>H1: 28px, H2: 24px, H3: 20px. All headings at 140% line-height. Never skip heading levels.</>,
+          <>H1: 20px, H2: 16px, H3: 14px. All headings at 140% line-height. Never skip heading levels.</>,
           <>Body text: 16px minimum, 145% line-height, 1.5% letter-spacing. Grey 600 for body, Grey 900 for headings.</>,
           <>Font weight: Regular (400) for body, Medium (500) for labels, Semibold (600) for headings, Bold (700) for emphasis only.</>,
           <>Sentence case everywhere in UI. No ALL CAPS, no italics, no underlines for emphasis. Bold only.</>,

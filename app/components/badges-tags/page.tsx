@@ -172,7 +172,7 @@ export default function BadgesTagsPage() {
       </SectionWrapper>
 
       {/* ── 05 Sizes ──────────────────────────────────────────────────────── */}
-      <SectionWrapper id="sizes" num="05" total={TOTAL} title="Sizes" description="Medium (28px height, 14px text) and small (20px height, 12px text).">
+      <SectionWrapper id="sizes" num="05" total={TOTAL} title="Sizes" description="Medium (24px height, 14px text) and small (20px height, 12px text).">
         <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-6 flex items-center gap-3 flex-wrap">
           <Tag label="Medium" system="default" style="filled" size="medium" count="24" />
           <Tag label="Small" system="default" style="filled" size="small" count="5" />
