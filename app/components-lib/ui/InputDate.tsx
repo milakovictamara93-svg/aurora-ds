@@ -280,7 +280,7 @@ export default function InputDate({
   )
 
   function triggerCls() {
-    const base = 'w-full h-8 pl-8 text-sm outline-none transition-colors rounded flex items-center gap-1'
+    const base = 'w-full h-7 pl-8 text-sm outline-none transition-colors rounded flex items-center gap-1'
     switch (resolvedState) {
       case 'error':    return clsx(base, 'pr-9 border border-error-600 bg-white dark:bg-grey-950 cursor-pointer')
       case 'warning':  return clsx(base, 'pr-9 border border-missing-info-500 bg-white dark:bg-grey-950 cursor-pointer')
@@ -504,7 +504,7 @@ export default function InputDate({
   if (layout === 'inline') {
     return (
       <div className="flex items-start gap-3">
-        {label && <div className="flex items-center h-8 min-w-[120px]">{labelEl}</div>}
+        {label && <div className="flex items-center h-7 min-w-[120px]">{labelEl}</div>}
         <div className="flex-1 flex flex-col gap-1">{control}{helperEl}</div>
       </div>
     )

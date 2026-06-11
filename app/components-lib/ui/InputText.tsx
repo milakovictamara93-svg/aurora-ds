@@ -57,7 +57,7 @@ function helperColor(state: InputState) {
 // ── Border / focus classes by state ───────────────────────────────────────────
 function inputClasses(state: InputState, hasLeading: boolean, hasTrailing: boolean) {
   const base = clsx(
-    'w-full h-8 text-sm outline-none transition-colors rounded bg-white dark:bg-grey-950',
+    'w-full h-7 text-sm outline-none transition-colors rounded bg-white dark:bg-grey-950',
     'placeholder-grey-400 dark:placeholder-grey-600',
     hasLeading ? 'pl-8' : 'pl-3',
     hasTrailing ? 'pr-8' : 'pr-3',
@@ -179,7 +179,7 @@ const InputText = forwardRef<HTMLInputElement, InputTextProps>(function InputTex
     return (
       <div className={clsx('flex items-start gap-3')}>
         {label && (
-          <div className="flex items-center h-8 min-w-[120px]">
+          <div className="flex items-center h-7 min-w-[120px]">
             {labelEl}
           </div>
         )}

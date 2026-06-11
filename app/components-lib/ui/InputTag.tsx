@@ -25,7 +25,7 @@ export interface InputTagProps {
 
 function containerClasses(state: InputTagProps['state'], focused: boolean) {
   const base = clsx(
-    'w-full min-h-[32px] px-2 py-1 text-sm outline-none transition-colors rounded',
+    'w-full min-h-[28px] px-2 py-1 text-sm outline-none transition-colors rounded',
     'bg-white dark:bg-grey-950 flex flex-wrap items-center gap-1 cursor-text',
   )
   switch (state) {
@@ -155,7 +155,7 @@ export default function InputTag({
   if (layout === 'inline') {
     return (
       <div className="flex items-start gap-3">
-        {label && <div className="flex items-center min-h-[32px] min-w-[120px]">{labelEl}</div>}
+        {label && <div className="flex items-center min-h-[28px] min-w-[120px]">{labelEl}</div>}
         <div className="flex-1 flex flex-col gap-1">{control}{helperEl}</div>
       </div>
     )

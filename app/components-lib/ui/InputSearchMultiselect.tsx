@@ -38,7 +38,7 @@ export interface InputSearchMultiselectProps {
 
 function triggerClasses(state: InputSearchMultiselectProps['state'], open: boolean) {
   const base = clsx(
-    'w-full min-h-[32px] px-3 py-1.5 pl-8 text-sm outline-none transition-colors rounded',
+    'w-full min-h-[28px] px-3 py-1.5 pl-8 text-sm outline-none transition-colors rounded',
     'bg-white dark:bg-grey-950 flex items-center gap-1.5 flex-wrap cursor-text',
   )
   switch (state) {
@@ -221,7 +221,7 @@ export default function InputSearchMultiselect({
   if (layout === 'inline') {
     return (
       <div className="flex items-start gap-3">
-        {label && <div className="flex items-center min-h-[32px] min-w-[120px]">{labelEl}</div>}
+        {label && <div className="flex items-center min-h-[28px] min-w-[120px]">{labelEl}</div>}
         <div className="flex-1 flex flex-col gap-1">{control}{helperEl}</div>
       </div>
     )

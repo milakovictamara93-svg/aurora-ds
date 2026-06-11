@@ -22,7 +22,7 @@ export interface InputPasswordProps
 
 function inputClasses(state: InputPasswordProps['state']) {
   const base = clsx(
-    'w-full h-8 pl-3 pr-9 text-sm outline-none transition-colors rounded',
+    'w-full h-7 pl-3 pr-9 text-sm outline-none transition-colors rounded',
     'bg-white dark:bg-grey-950 text-grey-950 dark:text-white',
     'placeholder-grey-400 dark:placeholder-grey-600',
   )
@@ -108,7 +108,7 @@ const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(function 
   if (layout === 'inline') {
     return (
       <div className="flex items-start gap-3">
-        {label && <div className="flex items-center h-8 min-w-[120px]">{labelEl}</div>}
+        {label && <div className="flex items-center h-7 min-w-[120px]">{labelEl}</div>}
         <div className="flex-1 flex flex-col gap-1">{inputEl}{helperEl}</div>
       </div>
     )
