@@ -307,71 +307,45 @@ function ScalerLogo({ className = 'w-5 h-5' }: { className?: string }) {
 }
 
 // ── Side Nav L1 ──────────────────────────────────────────────────────────────
-// Figma: icon rail (collapsed) or icon+label (expanded). Each section has its own accent color.
+// Figma: narrow icon column (48px). Each section icon gets a colored bg when active.
+// Bottom: What's new, Support, Avatar
 
-const L1_WIDTH_COLLAPSED = 52
-const L1_WIDTH_EXPANDED = 200
-
-function SideNavL1({ activeSection, onSectionChange, expanded, onExpandedChange }: {
-  activeSection: string; onSectionChange: (id: string) => void; expanded: boolean; onExpandedChange: (v: boolean) => void
+function SideNavL1({ activeSection, onSectionChange }: {
+  activeSection: string; onSectionChange: (id: string) => void
 }) {
-  const w = expanded ? L1_WIDTH_EXPANDED : L1_WIDTH_COLLAPSED
-
   return (
-    <div className="flex flex-col h-full bg-[#F7F8F8] dark:bg-grey-900 shrink-0 border-t border-[#EDEEF1] dark:border-grey-800" style={{ width: w, transition: 'width 150ms ease' }}>
-      {/* Logo */}
-      <div className="flex items-center px-4 py-2 shrink-0" style={{ height: 48 }}>
-        <ScalerLogo className={clsx('text-grey-950 dark:text-white shrink-0', expanded ? 'w-[72px] h-8' : 'w-8 h-8')} />
-      </div>
-
-      {/* Main nav items */}
-      <div className="flex-1 flex flex-col gap-1 px-2 pt-2 overflow-y-auto">
+    <div className="flex flex-col items-center w-12 h-full bg-[#F7F8F8] dark:bg-grey-900 shrink-0 py-2 gap-1">
+      {/* Main nav icons */}
+      <div className="flex flex-col items-center gap-1 flex-1">
         {NAV_SECTIONS.map(section => {
           const Icon = section.icon
           const isActive = activeSection === section.id
           return (
             <button
               key={section.id}
-              onClick={() => { onSectionChange(section.id); if (!expanded) onExpandedChange(true) }}
+              onClick={() => onSectionChange(section.id)}
               className={clsx(
-                'flex items-center gap-2 rounded transition-colors text-left',
-                expanded ? 'h-9 px-2' : 'h-9 w-9 justify-center',
+                'w-9 h-9 flex items-center justify-center rounded transition-colors',
                 isActive ? section.activeBg : 'hover:bg-grey-200/50 dark:hover:bg-white/5'
               )}
-              title={expanded ? undefined : section.label}
+              title={section.label}
             >
-              <Icon className={clsx('w-5 h-5 shrink-0', isActive ? 'text-[#111827]' : 'text-[#505867]')} />
-              {expanded && (
-                <span className={clsx('text-[14px] font-medium truncate tracking-[0.21px]', isActive ? 'text-[#111827]' : 'text-[#505867]')}>
-                  {section.label}
-                </span>
-              )}
+              <Icon className={clsx('w-5 h-5', isActive ? 'text-[#111827]' : 'text-[#505867]')} />
             </button>
           )
         })}
       </div>
 
       {/* Bottom utils */}
-      <div className="flex flex-col gap-1 px-2 pb-2 shrink-0">
-        {[
-          { icon: GiftIcon, label: "What's new" },
-          { icon: InformationCircleIcon, label: 'Support' },
-        ].map(({ icon: Icon, label }) => (
-          <button
-            key={label}
-            className={clsx('flex items-center gap-2 rounded text-[#505867] hover:bg-grey-200/50 transition-colors', expanded ? 'h-9 px-2' : 'h-9 w-9 justify-center')}
-            title={expanded ? undefined : label}
-          >
-            <Icon className="w-5 h-5 shrink-0" />
-            {expanded && <span className="text-[14px] font-medium truncate tracking-[0.21px]">{label}</span>}
-          </button>
-        ))}
-        <div className="border-t border-[#EDEEF1] dark:border-grey-800 my-1" />
-        <button
-          className={clsx('flex items-center gap-2 rounded text-[#505867] hover:bg-grey-200/50 transition-colors', expanded ? 'h-9 px-2' : 'h-9 w-9 justify-center')}
-        >
-          <span className="w-4 h-4 rounded-full bg-[#1258F8] flex items-center justify-center text-[10px] font-medium text-white shrink-0">A</span>
-          {expanded && <span className="text-[14px] font-medium truncate tracking-[0.21px]">Profile</span>}
+      <div className="flex flex-col items-center gap-1">
+        <button className="w-9 h-9 flex items-center justify-center rounded text-[#505867] hover:bg-grey-200/50 transition-colors" title="What's new">
+          <GiftIcon className="w-5 h-5" />
+        </button>
+        <button className="w-9 h-9 flex items-center justify-center rounded text-[#505867] hover:bg-grey-200/50 transition-colors" title="Support">
+          <InformationCircleIcon className="w-5 h-5" />
+        </button>
+        <button className="w-5 h-5 rounded-full bg-[#1258F8] flex items-center justify-center text-[10px] font-medium text-white mt-1" title="Profile">
+          A
         </button>
       </div>
     </div>
@@ -379,27 +353,27 @@ function SideNavL1({ activeSection, onSectionChange, expanded, onExpandedChange 
 }
 
 // ── Side Nav L2 (in-page submenu) ────────────────────────────────────────────
-// Shows entries for the active L1 section. Part of the content area, not the sidebar.
+// White bg, border-left, full height. Shows entries for active L1 section.
 
 function SideNavL2({ section, activeItem, onItemChange }: {
   section: NavSection; activeItem: string; onItemChange: (id: string) => void
 }) {
   return (
-    <div className="w-[200px] shrink-0 h-full overflow-y-auto py-2 pr-2">
-      <div className="flex flex-col gap-0.5">
+    <div className="w-[180px] shrink-0 h-full overflow-y-auto border-r border-[#EDEEF1] dark:border-grey-800 bg-white dark:bg-grey-950 py-1.5 px-1.5">
+      <div className="flex flex-col gap-px">
         {section.entries.map((entry, ei) => {
           if (entry.type === 'header') {
             return (
-              <div key={`h-${ei}`} className="mt-3 mb-1 px-2 flex items-center gap-1">
-                <ChevronDownIcon className="w-3 h-3 text-[#505867]" />
-                <span className="text-[11px] font-semibold text-[#505867] uppercase tracking-wider">{entry.label}</span>
+              <div key={`h-${ei}`} className="mt-3 mb-0.5 px-2 flex items-center gap-1">
+                <ChevronDownIcon className="w-2.5 h-2.5 text-[#9CA3AF]" />
+                <span className="text-[10px] font-semibold text-[#9CA3AF] uppercase tracking-wider">{entry.label}</span>
               </div>
             )
           }
           if (entry.type === 'placeholder') {
             return (
-              <div key={`p-${ei}`} className="px-2 py-1.5">
-                <span className="text-[12px] text-grey-400 italic">{entry.label}</span>
+              <div key={`p-${ei}`} className="px-2 py-1">
+                <span className="text-[12px] text-[#9CA3AF] italic">{entry.label}</span>
               </div>
             )
           }
@@ -410,13 +384,13 @@ function SideNavL2({ section, activeItem, onItemChange }: {
               key={entry.id}
               onClick={() => onItemChange(entry.id)}
               className={clsx(
-                'w-full flex items-center gap-2.5 h-8 px-2 rounded text-[14px] transition-colors text-left',
+                'w-full flex items-center gap-2 h-7 px-2 rounded text-[13px] transition-colors text-left',
                 active
                   ? `text-[#111827] font-medium ${section.activeBg}`
-                  : 'text-[#505867] hover:text-[#111827] hover:bg-grey-200/40'
+                  : 'text-[#505867] hover:text-[#111827] hover:bg-[#F7F8F8]'
               )}
             >
-              <Icon className={clsx('w-5 h-5 shrink-0', active ? 'text-[#111827]' : 'text-[#505867]')} />
+              <Icon className={clsx('w-4 h-4 shrink-0', active ? 'text-[#111827]' : 'text-[#9CA3AF]')} />
               <span className="truncate">{entry.label}</span>
             </button>
           )
@@ -533,35 +507,39 @@ function NotifBell() {
 }
 
 // ── Top Bar ────────────────────────────────────────────────────────────────
-// Figma: Company · Portfolio · Type selectors with labels, notification + avatar right
+// Figma: Scaler logo left, Company · Portfolio · Type selectors, notification + avatar right
+// Spans full width including above L1
 
 function TopBar() {
   const [company, setCompany] = useState('Scaler Admin')
   const [portfolio, setPortfolio] = useState('Design')
   const [assetType, setAssetType] = useState('Select')
   return (
-    <div className="h-14 shrink-0 flex items-center justify-between px-4 bg-[#F7F8F8] dark:bg-grey-900 border-b border-[#EDEEF1] dark:border-grey-800">
-      <div className="flex items-center gap-6 min-w-0">
-        {/* Company */}
+    <div className="h-10 shrink-0 flex items-center bg-[#F7F8F8] dark:bg-grey-900 border-b border-[#EDEEF1] dark:border-grey-800">
+      {/* Logo area — aligns with L1 width */}
+      <div className="flex items-center justify-center w-12 shrink-0 h-full">
+        <ScalerLogo className="w-6 h-6 text-grey-950 dark:text-white" />
+      </div>
+      {/* Selectors */}
+      <div className="flex items-center gap-6 px-3 flex-1 min-w-0">
         <div className="flex flex-col">
-          <span className="text-[11px] text-[#505867] leading-tight">Company</span>
+          <span className="text-[10px] text-[#9CA3AF] leading-tight">Company</span>
           <SimpleDropdown value={company} options={['Scaler Admin', 'Scaler Demo LLC', 'Scaler NL']} onChange={setCompany} />
         </div>
-        {/* Portfolio */}
         <div className="flex flex-col">
-          <span className="text-[11px] text-[#505867] leading-tight">Portfolio</span>
+          <span className="text-[10px] text-[#9CA3AF] leading-tight">Portfolio</span>
           <div className="flex items-center gap-1.5">
             <SimpleDropdown value={portfolio} options={['Design', 'Global Portfolio', 'Pacific Portfolio']} onChange={setPortfolio} />
-            <span className="text-[11px] font-medium text-[#DC2626] bg-[#FEF2F2] px-1.5 py-0.5 rounded">87%</span>
+            <span className="text-[10px] font-semibold text-[#DC2626] bg-[#FEF2F2] px-1 py-0.5 rounded">87%</span>
           </div>
         </div>
-        {/* Type */}
         <div className="flex flex-col">
-          <span className="text-[11px] text-[#505867] leading-tight">Type</span>
+          <span className="text-[10px] text-[#9CA3AF] leading-tight">Type</span>
           <SimpleDropdown value={assetType} options={['Select', 'Office', 'Residential', 'Retail', 'Industrial']} onChange={setAssetType} muted={assetType === 'Select'} />
         </div>
       </div>
-      <div className="flex items-center gap-2">
+      {/* Right */}
+      <div className="flex items-center gap-2 px-3 shrink-0">
         <NotifBell />
       </div>
     </div>
@@ -1699,26 +1677,23 @@ function DataCollectionOverview() {
 // Layout: TopBar on top, then SideNavL1 | SideNavL2 + Content below
 
 export default function PlaygroundPage() {
-  const [activeItem, setActiveItem] = useState('performance')
-  const [l1Expanded, setL1Expanded] = useState(true)
+  const [activeItem, setActiveItem] = useState('col-overview')
 
-  const activeSectionId = NAV_SECTIONS.find(s => s.entries.some(e => e.type === 'item' && e.id === activeItem))?.id ?? 'analytics'
+  const activeSectionId = NAV_SECTIONS.find(s => s.entries.some(e => e.type === 'item' && e.id === activeItem))?.id ?? 'collection'
   const [activeSection, setActiveSection] = useState(activeSectionId)
-  const currentSection = NAV_SECTIONS.find(s => s.id === activeSection) ?? NAV_SECTIONS[1]
+  const currentSection = NAV_SECTIONS.find(s => s.id === activeSection) ?? NAV_SECTIONS[2]
 
   return (
     <div className="flex flex-col h-full">
       {/* Top bar — full width */}
       <TopBar />
 
-      {/* Below top bar: L1 sidebar | L2 + Content */}
+      {/* Below top bar: L1 icon rail | L2 submenu | Content */}
       <div className="flex flex-1 min-h-0">
-        {/* L1 — always visible */}
+        {/* L1 — icon-only rail */}
         <SideNavL1
           activeSection={activeSection}
           onSectionChange={setActiveSection}
-          expanded={l1Expanded}
-          onExpandedChange={setL1Expanded}
         />
 
         {/* L2 + Content area */}
