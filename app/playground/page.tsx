@@ -36,6 +36,14 @@ import {
   ChevronUpIcon,
 } from '@heroicons/react/20/solid'
 import { StarIcon as StarIconOutline } from '@heroicons/react/24/outline'
+import {
+  HomeIcon as HomeIconOutline,
+  ChartBarIcon as ChartBarIconOutline,
+  CircleStackIcon as CircleStackIconOutline,
+  DocumentTextIcon as DocumentTextIconOutline,
+  GiftIcon as GiftIconOutline,
+  InformationCircleIcon as InfoIconOutline,
+} from '@heroicons/react/24/outline'
 // Inline tab type (avoid importing Aurora components that break hydration)
 interface TabItem { id: string; label: string }
 
@@ -212,6 +220,8 @@ interface NavSection {
   id: string
   label: string
   icon: React.ElementType
+  /** Outline icon for L1 sidebar */
+  l1Icon: React.ElementType
   entries: NavEntry[]
   /** Active background color for L1 nav */
   activeBg: string
@@ -227,7 +237,7 @@ const SECTION_COLORS: Record<string, string> = {
 
 const NAV_SECTIONS: NavSection[] = [
   {
-    id: 'home', label: 'Home', icon: HomeIcon, activeBg: 'bg-[#EAE8FF]',
+    id: 'home', label: 'Home', icon: HomeIcon, l1Icon: HomeIconOutline, activeBg: 'bg-[#EAE8FF]',
     entries: [
       { type: 'item', id: 'welcome', label: 'Welcome', icon: SparklesIcon },
       { type: 'header', label: 'Recent' },
@@ -238,7 +248,7 @@ const NAV_SECTIONS: NavSection[] = [
     ],
   },
   {
-    id: 'analytics', label: 'Analytics', icon: ChartBarIcon, activeBg: 'bg-[#D9EAFF]',
+    id: 'analytics', label: 'Analytics', icon: ChartBarIcon, l1Icon: ChartBarIconOutline, activeBg: 'bg-[#D9EAFF]',
     entries: [
       { type: 'item', id: 'overview', label: 'Overview', icon: HomeIcon },
       { type: 'item', id: 'asset-list', label: 'Asset List', icon: ListBulletIcon },
@@ -254,7 +264,7 @@ const NAV_SECTIONS: NavSection[] = [
     ],
   },
   {
-    id: 'collection', label: 'Collection', icon: CircleStackIcon, activeBg: 'bg-[#FDF0D7]',
+    id: 'collection', label: 'Collection', icon: CircleStackIcon, l1Icon: CircleStackIconOutline, activeBg: 'bg-[#FDF0D7]',
     entries: [
       { type: 'item', id: 'col-overview', label: 'Overview', icon: HomeIcon },
       { type: 'item', id: 'col-asset-list', label: 'Asset List', icon: ListBulletIcon },
@@ -275,7 +285,7 @@ const NAV_SECTIONS: NavSection[] = [
     ],
   },
   {
-    id: 'reports', label: 'Reporting', icon: DocumentTextIcon, activeBg: 'bg-[#DEEDE4]',
+    id: 'reports', label: 'Reporting', icon: DocumentTextIcon, l1Icon: DocumentTextIconOutline, activeBg: 'bg-[#DEEDE4]',
     entries: [
       { type: 'item', id: 'rep-overview', label: 'Overview', icon: HomeIcon },
       { type: 'item', id: 'rep-data-gaps', label: 'Data Gaps', icon: BoltIcon },
@@ -307,24 +317,24 @@ function ScalerLogo({ className = 'w-5 h-5' }: { className?: string }) {
 }
 
 // ── Side Nav L1 ──────────────────────────────────────────────────────────────
-// Figma: 64px wide, full height, bg #F7F8F8
-// Logo 32px + 4 nav icons (36x36) + bottom utils + avatar
+// Figma: 64px wide, full height, bg #F7F8F8, pb-8
+// Structure: Logo (px-16 py-8) | border-top | nav icons (px-8, gap-4) | flex-1 | bottom utils (px-16) | divider | avatar
 
 function SideNavL1({ activeSection, onSectionChange }: {
   activeSection: string; onSectionChange: (id: string) => void
 }) {
   return (
-    <div className="flex flex-col w-16 h-full bg-[#F7F8F8] dark:bg-grey-900 shrink-0">
-      {/* Top: Logo + nav icons */}
-      <div className="flex-1 flex flex-col items-start">
+    <div className="flex flex-col w-16 h-full bg-[#F7F8F8] shrink-0 pb-2">
+      {/* Top container */}
+      <div className="flex-1 flex flex-col">
         {/* Logo */}
-        <div className="flex items-center px-4 py-2 border-t border-[#EDEEF1]">
-          <ScalerLogo className="w-8 h-8 text-grey-950 dark:text-white" />
+        <div className="flex items-center justify-center px-4 py-2">
+          <ScalerLogo className="w-8 h-8 text-[#111827]" />
         </div>
-        {/* Nav items */}
-        <div className="flex flex-col gap-1 items-center px-2 w-full">
+        {/* Nav icons - border-top, py-2, px-2, gap-1 */}
+        <div className="flex flex-col gap-1 items-center px-[14px] py-2 border-t border-[#EDEEF1]">
           {NAV_SECTIONS.map(section => {
-            const Icon = section.icon
+            const Icon = section.l1Icon
             const isActive = activeSection === section.id
             return (
               <button
@@ -344,17 +354,17 @@ function SideNavL1({ activeSection, onSectionChange }: {
       </div>
 
       {/* Bottom utils */}
-      <div className="flex flex-col gap-1 items-center px-4 pb-2">
+      <div className="flex flex-col gap-1 items-center px-4">
         <button className="w-8 h-9 flex items-center justify-center rounded text-[#505867] hover:bg-black/[0.04] transition-colors" title="What's new">
-          <GiftIcon className="w-5 h-5" />
+          <GiftIconOutline className="w-5 h-5" />
         </button>
         <button className="w-8 h-9 flex items-center justify-center rounded text-[#505867] hover:bg-black/[0.04] transition-colors" title="Support">
-          <InformationCircleIcon className="w-5 h-5" />
+          <InfoIconOutline className="w-5 h-5" />
         </button>
         <div className="border-t border-[#EDEEF1] w-full my-1" />
-        <button className="w-4 h-4 rounded-full bg-[#1258F8] flex items-center justify-center text-[10px] font-medium text-white" title="Profile">
+        <span className="w-4 h-4 rounded-full bg-[#1258F8] flex items-center justify-center text-[10px] font-medium text-white cursor-pointer" title="Profile">
           A
-        </button>
+        </span>
       </div>
     </div>
   )
@@ -523,22 +533,24 @@ function TopBar() {
   const [portfolio, setPortfolio] = useState('Design')
   const [assetType, setAssetType] = useState('Select')
   return (
-    <div className="h-14 shrink-0 flex items-center px-4 bg-white dark:bg-grey-950 border-b border-[#EDEEF1] dark:border-grey-800">
-      {/* Selectors */}
-      <div className="flex items-center gap-6 flex-1 min-w-0">
-        <div className="flex flex-col gap-0.5">
-          <span className="text-[10px] text-[#9CA3AF] leading-none">Company</span>
+    <div className="h-14 shrink-0 flex items-center justify-between px-4 bg-[#F7F8F8]">
+      {/* Selectors with separators */}
+      <div className="flex items-center gap-4 min-w-0">
+        <div className="flex flex-col">
+          <span className="text-[10px] text-[#9CA3AF] leading-tight mb-0.5">Company</span>
           <SimpleDropdown value={company} options={['Scaler Admin', 'Scaler Demo LLC', 'Scaler NL']} onChange={setCompany} />
         </div>
-        <div className="flex flex-col gap-0.5">
-          <span className="text-[10px] text-[#9CA3AF] leading-none">Portfolio</span>
+        <div className="w-px h-6 bg-[#EDEEF1]" />
+        <div className="flex flex-col">
+          <span className="text-[10px] text-[#9CA3AF] leading-tight mb-0.5">Portfolio</span>
           <div className="flex items-center gap-1.5">
             <SimpleDropdown value={portfolio} options={['Design', 'Global Portfolio', 'Pacific Portfolio']} onChange={setPortfolio} />
             <span className="text-[10px] font-semibold text-[#DC2626] bg-[#FEF2F2] px-1.5 py-0.5 rounded-full">87%</span>
           </div>
         </div>
-        <div className="flex flex-col gap-0.5">
-          <span className="text-[10px] text-[#9CA3AF] leading-none">Type</span>
+        <div className="w-px h-6 bg-[#EDEEF1]" />
+        <div className="flex flex-col">
+          <span className="text-[10px] text-[#9CA3AF] leading-tight mb-0.5">Type</span>
           <SimpleDropdown value={assetType} options={['Select', 'Office', 'Residential', 'Retail', 'Industrial']} onChange={setAssetType} muted={assetType === 'Select'} />
         </div>
       </div>
