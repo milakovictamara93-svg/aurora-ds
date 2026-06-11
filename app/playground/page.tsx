@@ -307,44 +307,52 @@ function ScalerLogo({ className = 'w-5 h-5' }: { className?: string }) {
 }
 
 // ── Side Nav L1 ──────────────────────────────────────────────────────────────
-// Figma: narrow icon column (48px). Each section icon gets a colored bg when active.
-// Bottom: What's new, Support, Avatar
+// Figma: 64px wide, full height, bg #F7F8F8
+// Logo 32px + 4 nav icons (36x36) + bottom utils + avatar
 
 function SideNavL1({ activeSection, onSectionChange }: {
   activeSection: string; onSectionChange: (id: string) => void
 }) {
   return (
-    <div className="flex flex-col items-center w-12 h-full bg-[#F7F8F8] dark:bg-grey-900 shrink-0 py-2 gap-1">
-      {/* Main nav icons */}
-      <div className="flex flex-col items-center gap-1 flex-1">
-        {NAV_SECTIONS.map(section => {
-          const Icon = section.icon
-          const isActive = activeSection === section.id
-          return (
-            <button
-              key={section.id}
-              onClick={() => onSectionChange(section.id)}
-              className={clsx(
-                'w-9 h-9 flex items-center justify-center rounded transition-colors',
-                isActive ? section.activeBg : 'hover:bg-grey-200/50 dark:hover:bg-white/5'
-              )}
-              title={section.label}
-            >
-              <Icon className={clsx('w-5 h-5', isActive ? 'text-[#111827]' : 'text-[#505867]')} />
-            </button>
-          )
-        })}
+    <div className="flex flex-col w-16 h-full bg-[#F7F8F8] dark:bg-grey-900 shrink-0">
+      {/* Top: Logo + nav icons */}
+      <div className="flex-1 flex flex-col items-start">
+        {/* Logo */}
+        <div className="flex items-center px-4 py-2 border-t border-[#EDEEF1]">
+          <ScalerLogo className="w-8 h-8 text-grey-950 dark:text-white" />
+        </div>
+        {/* Nav items */}
+        <div className="flex flex-col gap-1 items-center px-2 w-full">
+          {NAV_SECTIONS.map(section => {
+            const Icon = section.icon
+            const isActive = activeSection === section.id
+            return (
+              <button
+                key={section.id}
+                onClick={() => onSectionChange(section.id)}
+                className={clsx(
+                  'w-9 h-9 flex items-center justify-center rounded transition-colors',
+                  isActive ? section.activeBg : 'hover:bg-black/[0.04]'
+                )}
+                title={section.label}
+              >
+                <Icon className={clsx('w-5 h-5', isActive ? 'text-[#111827]' : 'text-[#505867]')} />
+              </button>
+            )
+          })}
+        </div>
       </div>
 
       {/* Bottom utils */}
-      <div className="flex flex-col items-center gap-1">
-        <button className="w-9 h-9 flex items-center justify-center rounded text-[#505867] hover:bg-grey-200/50 transition-colors" title="What's new">
+      <div className="flex flex-col gap-1 items-center px-4 pb-2">
+        <button className="w-8 h-9 flex items-center justify-center rounded text-[#505867] hover:bg-black/[0.04] transition-colors" title="What's new">
           <GiftIcon className="w-5 h-5" />
         </button>
-        <button className="w-9 h-9 flex items-center justify-center rounded text-[#505867] hover:bg-grey-200/50 transition-colors" title="Support">
+        <button className="w-8 h-9 flex items-center justify-center rounded text-[#505867] hover:bg-black/[0.04] transition-colors" title="Support">
           <InformationCircleIcon className="w-5 h-5" />
         </button>
-        <button className="w-5 h-5 rounded-full bg-[#1258F8] flex items-center justify-center text-[10px] font-medium text-white mt-1" title="Profile">
+        <div className="border-t border-[#EDEEF1] w-full my-1" />
+        <button className="w-4 h-4 rounded-full bg-[#1258F8] flex items-center justify-center text-[10px] font-medium text-white" title="Profile">
           A
         </button>
       </div>
@@ -359,8 +367,8 @@ function SideNavL2({ section, activeItem, onItemChange }: {
   section: NavSection; activeItem: string; onItemChange: (id: string) => void
 }) {
   return (
-    <div className="w-[180px] shrink-0 h-full overflow-y-auto border-r border-[#EDEEF1] dark:border-grey-800 bg-white dark:bg-grey-950 py-1.5 px-1.5">
-      <div className="flex flex-col gap-px">
+    <div className="w-[200px] shrink-0 h-full overflow-y-auto bg-white dark:bg-grey-950 py-2 px-2">
+      <div className="flex flex-col gap-0.5">
         {section.entries.map((entry, ei) => {
           if (entry.type === 'header') {
             return (
@@ -515,31 +523,27 @@ function TopBar() {
   const [portfolio, setPortfolio] = useState('Design')
   const [assetType, setAssetType] = useState('Select')
   return (
-    <div className="h-10 shrink-0 flex items-center bg-[#F7F8F8] dark:bg-grey-900 border-b border-[#EDEEF1] dark:border-grey-800">
-      {/* Logo area — aligns with L1 width */}
-      <div className="flex items-center justify-center w-12 shrink-0 h-full">
-        <ScalerLogo className="w-6 h-6 text-grey-950 dark:text-white" />
-      </div>
+    <div className="h-14 shrink-0 flex items-center px-4 bg-white dark:bg-grey-950 border-b border-[#EDEEF1] dark:border-grey-800">
       {/* Selectors */}
-      <div className="flex items-center gap-6 px-3 flex-1 min-w-0">
-        <div className="flex flex-col">
-          <span className="text-[10px] text-[#9CA3AF] leading-tight">Company</span>
+      <div className="flex items-center gap-6 flex-1 min-w-0">
+        <div className="flex flex-col gap-0.5">
+          <span className="text-[10px] text-[#9CA3AF] leading-none">Company</span>
           <SimpleDropdown value={company} options={['Scaler Admin', 'Scaler Demo LLC', 'Scaler NL']} onChange={setCompany} />
         </div>
-        <div className="flex flex-col">
-          <span className="text-[10px] text-[#9CA3AF] leading-tight">Portfolio</span>
+        <div className="flex flex-col gap-0.5">
+          <span className="text-[10px] text-[#9CA3AF] leading-none">Portfolio</span>
           <div className="flex items-center gap-1.5">
             <SimpleDropdown value={portfolio} options={['Design', 'Global Portfolio', 'Pacific Portfolio']} onChange={setPortfolio} />
-            <span className="text-[10px] font-semibold text-[#DC2626] bg-[#FEF2F2] px-1 py-0.5 rounded">87%</span>
+            <span className="text-[10px] font-semibold text-[#DC2626] bg-[#FEF2F2] px-1.5 py-0.5 rounded-full">87%</span>
           </div>
         </div>
-        <div className="flex flex-col">
-          <span className="text-[10px] text-[#9CA3AF] leading-tight">Type</span>
+        <div className="flex flex-col gap-0.5">
+          <span className="text-[10px] text-[#9CA3AF] leading-none">Type</span>
           <SimpleDropdown value={assetType} options={['Select', 'Office', 'Residential', 'Retail', 'Industrial']} onChange={setAssetType} muted={assetType === 'Select'} />
         </div>
       </div>
       {/* Right */}
-      <div className="flex items-center gap-2 px-3 shrink-0">
+      <div className="flex items-center gap-2 shrink-0">
         <NotifBell />
       </div>
     </div>
@@ -1684,24 +1688,21 @@ export default function PlaygroundPage() {
   const currentSection = NAV_SECTIONS.find(s => s.id === activeSection) ?? NAV_SECTIONS[2]
 
   return (
-    <div className="flex flex-col h-full">
-      {/* Top bar — full width */}
-      <TopBar />
+    <div className="flex h-full">
+      {/* L1 — icon rail, full height */}
+      <SideNavL1
+        activeSection={activeSection}
+        onSectionChange={setActiveSection}
+      />
 
-      {/* Below top bar: L1 icon rail | L2 submenu | Content */}
-      <div className="flex flex-1 min-h-0">
-        {/* L1 — icon-only rail */}
-        <SideNavL1
-          activeSection={activeSection}
-          onSectionChange={setActiveSection}
-        />
+      {/* Page content: TopBar on top, then L2 | Content below */}
+      <div className="flex flex-col flex-1 min-w-0">
+        {/* Top bar — sits inside page content, right of L1 */}
+        <TopBar />
 
-        {/* L2 + Content area */}
-        <div className="flex flex-1 min-w-0">
-          {/* L2 submenu — part of the page, not the sidebar */}
+        {/* L2 + Content */}
+        <div className="flex flex-1 min-h-0">
           <SideNavL2 section={currentSection} activeItem={activeItem} onItemChange={setActiveItem} />
-
-          {/* Main content */}
           <div className="flex-1 min-w-0 overflow-y-auto">
             {activeItem === 'welcome' ? <HomeContent /> : activeItem === 'col-overview' ? <DataCollectionOverview /> : activeItem === 'col-asset-list' ? <AssetListContent /> : activeItem === 'rep-overview' ? <ReportsOverviewContent /> : <ContentArea />}
           </div>
