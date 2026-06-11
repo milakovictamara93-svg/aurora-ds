@@ -213,11 +213,21 @@ interface NavSection {
   label: string
   icon: React.ElementType
   entries: NavEntry[]
+  /** Active background color for L1 nav */
+  activeBg: string
+}
+
+// Section accent colors from Figma
+const SECTION_COLORS: Record<string, string> = {
+  home: 'bg-[#EAE8FF]',        // AI purple
+  analytics: 'bg-[#D9EAFF]',   // Blue 100
+  collection: 'bg-[#FDF0D7]',  // Engagement/orange 100
+  reports: 'bg-[#DEEDE4]',     // Waste/green 100
 }
 
 const NAV_SECTIONS: NavSection[] = [
   {
-    id: 'home', label: 'Home', icon: HomeIcon,
+    id: 'home', label: 'Home', icon: HomeIcon, activeBg: 'bg-[#EAE8FF]',
     entries: [
       { type: 'item', id: 'welcome', label: 'Welcome', icon: SparklesIcon },
       { type: 'header', label: 'Recent' },
@@ -228,7 +238,7 @@ const NAV_SECTIONS: NavSection[] = [
     ],
   },
   {
-    id: 'analytics', label: 'Analytics', icon: ChartBarIcon,
+    id: 'analytics', label: 'Analytics', icon: ChartBarIcon, activeBg: 'bg-[#D9EAFF]',
     entries: [
       { type: 'item', id: 'overview', label: 'Overview', icon: HomeIcon },
       { type: 'item', id: 'asset-list', label: 'Asset List', icon: ListBulletIcon },
@@ -244,7 +254,7 @@ const NAV_SECTIONS: NavSection[] = [
     ],
   },
   {
-    id: 'collection', label: 'Data Collection', icon: CircleStackIcon,
+    id: 'collection', label: 'Collection', icon: CircleStackIcon, activeBg: 'bg-[#FDF0D7]',
     entries: [
       { type: 'item', id: 'col-overview', label: 'Overview', icon: HomeIcon },
       { type: 'item', id: 'col-asset-list', label: 'Asset List', icon: ListBulletIcon },
@@ -265,7 +275,7 @@ const NAV_SECTIONS: NavSection[] = [
     ],
   },
   {
-    id: 'reports', label: 'Reports', icon: DocumentTextIcon,
+    id: 'reports', label: 'Reporting', icon: DocumentTextIcon, activeBg: 'bg-[#DEEDE4]',
     entries: [
       { type: 'item', id: 'rep-overview', label: 'Overview', icon: HomeIcon },
       { type: 'item', id: 'rep-data-gaps', label: 'Data Gaps', icon: BoltIcon },
@@ -296,129 +306,122 @@ function ScalerLogo({ className = 'w-5 h-5' }: { className?: string }) {
   )
 }
 
-// ── Sidebar ────────────────────────────────────────────────────────────────
+// ── Side Nav L1 ──────────────────────────────────────────────────────────────
+// Figma: icon rail (collapsed) or icon+label (expanded). Each section has its own accent color.
 
-const ICON_RAIL_W = 48
-const SUBMENU_DEFAULT = 200
-const SUBMENU_MIN = 160
-const SUBMENU_MAX = 320
+const L1_WIDTH_COLLAPSED = 52
+const L1_WIDTH_EXPANDED = 200
 
-function Sidebar({ activeItem, onItemChange, submenuWidth, onSubmenuWidthChange }: {
-  activeItem: string; onItemChange: (id: string) => void; submenuWidth: number; onSubmenuWidthChange: (w: number) => void
+function SideNavL1({ activeSection, onSectionChange, expanded, onExpandedChange }: {
+  activeSection: string; onSectionChange: (id: string) => void; expanded: boolean; onExpandedChange: (v: boolean) => void
 }) {
-  const activeSectionId = NAV_SECTIONS.find(s => s.entries.some(e => e.type === 'item' && e.id === activeItem))?.id ?? 'analytics'
-  const [activeSection, setActiveSection] = useState(activeSectionId)
-  const resizing = useRef(false)
-  const startX = useRef(0)
-  const startW = useRef(0)
-
-  const onResizeMouseDown = useCallback((e: React.MouseEvent) => {
-    e.preventDefault()
-    resizing.current = true
-    startX.current = e.clientX
-    startW.current = submenuWidth
-    document.body.style.cursor = 'col-resize'
-    document.body.style.userSelect = 'none'
-  }, [submenuWidth])
-
-  useEffect(() => {
-    function onMouseMove(e: MouseEvent) {
-      if (!resizing.current) return
-      const delta = e.clientX - startX.current
-      const newW = Math.max(SUBMENU_MIN, Math.min(SUBMENU_MAX, startW.current + delta))
-      onSubmenuWidthChange(newW)
-    }
-    function onMouseUp() {
-      if (!resizing.current) return
-      resizing.current = false
-      document.body.style.cursor = ''
-      document.body.style.userSelect = ''
-    }
-    document.addEventListener('mousemove', onMouseMove)
-    document.addEventListener('mouseup', onMouseUp)
-    return () => { document.removeEventListener('mousemove', onMouseMove); document.removeEventListener('mouseup', onMouseUp) }
-  }, [onSubmenuWidthChange])
-
-  const currentSection = NAV_SECTIONS.find(s => s.id === activeSection) ?? NAV_SECTIONS[1]
+  const w = expanded ? L1_WIDTH_EXPANDED : L1_WIDTH_COLLAPSED
 
   return (
-    <div className="relative flex shrink-0 h-full" style={{ width: ICON_RAIL_W + submenuWidth }}>
-      {/* Icon rail -- always visible */}
-      <div className="flex flex-col items-center w-12 h-full bg-grey-100 dark:bg-grey-900 border-r border-grey-200 dark:border-grey-800 py-3 gap-1 shrink-0">
-        <div className="mb-4">
-          <ScalerLogo className="w-4 h-4 text-grey-950 dark:text-white" />
-        </div>
+    <div className="flex flex-col h-full bg-[#F7F8F8] dark:bg-grey-900 shrink-0 border-t border-[#EDEEF1] dark:border-grey-800" style={{ width: w, transition: 'width 150ms ease' }}>
+      {/* Logo */}
+      <div className="flex items-center px-4 py-2 shrink-0" style={{ height: 48 }}>
+        <ScalerLogo className={clsx('text-grey-950 dark:text-white shrink-0', expanded ? 'w-[72px] h-8' : 'w-8 h-8')} />
+      </div>
+
+      {/* Main nav items */}
+      <div className="flex-1 flex flex-col gap-1 px-2 pt-2 overflow-y-auto">
         {NAV_SECTIONS.map(section => {
           const Icon = section.icon
           const isActive = activeSection === section.id
           return (
             <button
               key={section.id}
-              onClick={() => setActiveSection(section.id)}
+              onClick={() => { onSectionChange(section.id); if (!expanded) onExpandedChange(true) }}
               className={clsx(
-                'w-8 h-8 flex items-center justify-center rounded-md transition-colors',
-                isActive
-                  ? 'text-blue-600 bg-blue-50 dark:bg-blue-600/10'
-                  : 'text-grey-500 dark:text-grey-400 hover:text-grey-700 dark:hover:text-grey-300 hover:bg-grey-200/50 dark:hover:bg-white/5'
+                'flex items-center gap-2 rounded transition-colors text-left',
+                expanded ? 'h-9 px-2' : 'h-9 w-9 justify-center',
+                isActive ? section.activeBg : 'hover:bg-grey-200/50 dark:hover:bg-white/5'
               )}
-              title={section.label}
+              title={expanded ? undefined : section.label}
             >
-              <Icon className="w-4 h-4" />
+              <Icon className={clsx('w-5 h-5 shrink-0', isActive ? 'text-[#111827]' : 'text-[#505867]')} />
+              {expanded && (
+                <span className={clsx('text-[14px] font-medium truncate tracking-[0.21px]', isActive ? 'text-[#111827]' : 'text-[#505867]')}>
+                  {section.label}
+                </span>
+              )}
             </button>
           )
         })}
-        <div className="mt-auto flex flex-col items-center gap-1">
-          <button className="w-8 h-8 flex items-center justify-center rounded-md text-grey-500 hover:bg-grey-200/40 transition-colors" title="Support"><QuestionMarkCircleIcon className="w-4 h-4" /></button>
-          <button className="w-8 h-8 flex items-center justify-center rounded-md text-grey-500 hover:bg-grey-200/40 transition-colors" title="What's new"><GiftIcon className="w-4 h-4" /></button>
-          <span className="w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center text-[8px] font-semibold text-white mt-1">T</span>
-        </div>
       </div>
 
-      {/* Submenu panel -- shows entries for active section, resizable */}
-      <div className="flex flex-col h-full overflow-hidden bg-grey-50 dark:bg-grey-950 select-none" style={{ width: submenuWidth, transition: resizing.current ? 'none' : 'width 150ms ease' }}>
-        <div className="flex items-center h-11 px-3">
-          <span className="text-[13px] font-semibold text-grey-950 dark:text-white truncate">{currentSection.label}</span>
-        </div>
-        <div className="flex-1 overflow-y-auto px-2 pb-4">
-          <div className="flex flex-col gap-0.5">
-            {currentSection.entries.map((entry, ei) => {
-              if (entry.type === 'header') {
-                return (
-                  <div key={`h-${ei}`} className="mt-4 mb-1 px-2">
-                    <span className="text-[10px] font-semibold text-grey-400 dark:text-grey-500 uppercase tracking-wider">{entry.label}</span>
-                  </div>
-                )
-              }
-              if (entry.type === 'placeholder') {
-                return (
-                  <div key={`p-${ei}`} className="px-2 py-1.5">
-                    <span className="text-[12px] text-grey-400 dark:text-grey-500 italic">{entry.label}</span>
-                  </div>
-                )
-              }
-              const active = activeItem === entry.id
-              const Icon = entry.icon
-              return (
-                <button
-                  key={entry.id}
-                  onClick={() => onItemChange(entry.id)}
-                  className={clsx(
-                    'w-full flex items-center gap-2.5 h-8 px-2 rounded-md text-[13px] transition-colors text-left',
-                    active
-                      ? 'text-grey-950 dark:text-white bg-blue-50 dark:bg-blue-600/10 font-medium'
-                      : 'text-grey-600 dark:text-grey-400 hover:text-grey-950 dark:hover:text-white hover:bg-grey-200/40 dark:hover:bg-white/5'
-                  )}
-                >
-                  <Icon className={clsx('w-4 h-4 shrink-0', active ? 'text-blue-600' : 'text-grey-400 dark:text-grey-500')} />
-                  <span className="truncate">{entry.label}</span>
-                </button>
-              )
-            })}
-          </div>
-        </div>
+      {/* Bottom utils */}
+      <div className="flex flex-col gap-1 px-2 pb-2 shrink-0">
+        {[
+          { icon: GiftIcon, label: "What's new" },
+          { icon: InformationCircleIcon, label: 'Support' },
+        ].map(({ icon: Icon, label }) => (
+          <button
+            key={label}
+            className={clsx('flex items-center gap-2 rounded text-[#505867] hover:bg-grey-200/50 transition-colors', expanded ? 'h-9 px-2' : 'h-9 w-9 justify-center')}
+            title={expanded ? undefined : label}
+          >
+            <Icon className="w-5 h-5 shrink-0" />
+            {expanded && <span className="text-[14px] font-medium truncate tracking-[0.21px]">{label}</span>}
+          </button>
+        ))}
+        <div className="border-t border-[#EDEEF1] dark:border-grey-800 my-1" />
+        <button
+          className={clsx('flex items-center gap-2 rounded text-[#505867] hover:bg-grey-200/50 transition-colors', expanded ? 'h-9 px-2' : 'h-9 w-9 justify-center')}
+        >
+          <span className="w-4 h-4 rounded-full bg-[#1258F8] flex items-center justify-center text-[10px] font-medium text-white shrink-0">A</span>
+          {expanded && <span className="text-[14px] font-medium truncate tracking-[0.21px]">Profile</span>}
+        </button>
       </div>
-      {/* Resize handle */}
-      <div onMouseDown={onResizeMouseDown} className="absolute top-0 right-0 w-1 h-full cursor-col-resize z-10 hover:bg-blue-600/20 active:bg-blue-600/30 transition-colors" />
+    </div>
+  )
+}
+
+// ── Side Nav L2 (in-page submenu) ────────────────────────────────────────────
+// Shows entries for the active L1 section. Part of the content area, not the sidebar.
+
+function SideNavL2({ section, activeItem, onItemChange }: {
+  section: NavSection; activeItem: string; onItemChange: (id: string) => void
+}) {
+  return (
+    <div className="w-[200px] shrink-0 h-full overflow-y-auto py-2 pr-2">
+      <div className="flex flex-col gap-0.5">
+        {section.entries.map((entry, ei) => {
+          if (entry.type === 'header') {
+            return (
+              <div key={`h-${ei}`} className="mt-3 mb-1 px-2 flex items-center gap-1">
+                <ChevronDownIcon className="w-3 h-3 text-[#505867]" />
+                <span className="text-[11px] font-semibold text-[#505867] uppercase tracking-wider">{entry.label}</span>
+              </div>
+            )
+          }
+          if (entry.type === 'placeholder') {
+            return (
+              <div key={`p-${ei}`} className="px-2 py-1.5">
+                <span className="text-[12px] text-grey-400 italic">{entry.label}</span>
+              </div>
+            )
+          }
+          const active = activeItem === entry.id
+          const Icon = entry.icon
+          return (
+            <button
+              key={entry.id}
+              onClick={() => onItemChange(entry.id)}
+              className={clsx(
+                'w-full flex items-center gap-2.5 h-8 px-2 rounded text-[14px] transition-colors text-left',
+                active
+                  ? `text-[#111827] font-medium ${section.activeBg}`
+                  : 'text-[#505867] hover:text-[#111827] hover:bg-grey-200/40'
+              )}
+            >
+              <Icon className={clsx('w-5 h-5 shrink-0', active ? 'text-[#111827]' : 'text-[#505867]')} />
+              <span className="truncate">{entry.label}</span>
+            </button>
+          )
+        })}
+      </div>
     </div>
   )
 }
@@ -530,23 +533,35 @@ function NotifBell() {
 }
 
 // ── Top Bar ────────────────────────────────────────────────────────────────
+// Figma: Company · Portfolio · Type selectors with labels, notification + avatar right
 
-function TopBar({ collapsed, onToggleSidebar }: { collapsed: boolean; onToggleSidebar: () => void }) {
+function TopBar() {
   const [company, setCompany] = useState('Scaler Admin')
-  const [portfolio, setPortfolio] = useState('Design Playground 2.0')
-  const [asset, setAsset] = useState('Select')
+  const [portfolio, setPortfolio] = useState('Design')
+  const [assetType, setAssetType] = useState('Select')
   return (
-    <div className="h-11 shrink-0 flex items-center justify-between px-3 bg-grey-50 dark:bg-grey-900">
-      <div className="flex items-center gap-1 min-w-0">
-        {collapsed && <button onClick={onToggleSidebar} className="w-7 h-7 flex items-center justify-center rounded text-grey-400 hover:text-grey-600 hover:bg-grey-100 mr-1"><Bars3BottomLeftIcon className="w-4 h-4" /></button>}
-        <SimpleDropdown value={company} options={['Scaler Admin', 'Scaler Demo LLC', 'Scaler NL']} onChange={setCompany} />
-        <ChevronRightIcon className="w-3 h-3 text-grey-300 shrink-0" />
-        <SimpleDropdown value={portfolio} options={['Design Playground 2.0', 'Global Portfolio', 'Pacific Portfolio']} onChange={setPortfolio} />
-        <ChevronRightIcon className="w-3 h-3 text-grey-300 shrink-0" />
-        <SimpleDropdown value={asset} options={['Select', 'All assets', 'One World Trade Center', 'The Shard']} onChange={setAsset} muted={asset === 'Select'} />
+    <div className="h-14 shrink-0 flex items-center justify-between px-4 bg-[#F7F8F8] dark:bg-grey-900 border-b border-[#EDEEF1] dark:border-grey-800">
+      <div className="flex items-center gap-6 min-w-0">
+        {/* Company */}
+        <div className="flex flex-col">
+          <span className="text-[11px] text-[#505867] leading-tight">Company</span>
+          <SimpleDropdown value={company} options={['Scaler Admin', 'Scaler Demo LLC', 'Scaler NL']} onChange={setCompany} />
+        </div>
+        {/* Portfolio */}
+        <div className="flex flex-col">
+          <span className="text-[11px] text-[#505867] leading-tight">Portfolio</span>
+          <div className="flex items-center gap-1.5">
+            <SimpleDropdown value={portfolio} options={['Design', 'Global Portfolio', 'Pacific Portfolio']} onChange={setPortfolio} />
+            <span className="text-[11px] font-medium text-[#DC2626] bg-[#FEF2F2] px-1.5 py-0.5 rounded">87%</span>
+          </div>
+        </div>
+        {/* Type */}
+        <div className="flex flex-col">
+          <span className="text-[11px] text-[#505867] leading-tight">Type</span>
+          <SimpleDropdown value={assetType} options={['Select', 'Office', 'Residential', 'Retail', 'Industrial']} onChange={setAssetType} muted={assetType === 'Select'} />
+        </div>
       </div>
-      <div className="flex items-center gap-1.5">
-        <YearPicker />
+      <div className="flex items-center gap-2">
         <NotifBell />
       </div>
     </div>
@@ -1681,17 +1696,41 @@ function DataCollectionOverview() {
 }
 
 // ── Page ────────────────────────────────────────────────────────────────────
+// Layout: TopBar on top, then SideNavL1 | SideNavL2 + Content below
 
 export default function PlaygroundPage() {
   const [activeItem, setActiveItem] = useState('performance')
-  const [submenuWidth, setSubmenuWidth] = useState(SUBMENU_DEFAULT)
+  const [l1Expanded, setL1Expanded] = useState(true)
+
+  const activeSectionId = NAV_SECTIONS.find(s => s.entries.some(e => e.type === 'item' && e.id === activeItem))?.id ?? 'analytics'
+  const [activeSection, setActiveSection] = useState(activeSectionId)
+  const currentSection = NAV_SECTIONS.find(s => s.id === activeSection) ?? NAV_SECTIONS[1]
 
   return (
-    <div className="flex h-full">
-      <Sidebar activeItem={activeItem} onItemChange={setActiveItem} submenuWidth={submenuWidth} onSubmenuWidthChange={setSubmenuWidth} />
-      <div className="flex flex-col flex-1 min-w-0 relative">
-        <TopBar collapsed={false} onToggleSidebar={() => {}} />
-        {activeItem === 'welcome' ? <HomeContent /> : activeItem === 'col-overview' ? <DataCollectionOverview /> : activeItem === 'col-asset-list' ? <AssetListContent /> : activeItem === 'rep-overview' ? <ReportsOverviewContent /> : <ContentArea />}
+    <div className="flex flex-col h-full">
+      {/* Top bar — full width */}
+      <TopBar />
+
+      {/* Below top bar: L1 sidebar | L2 + Content */}
+      <div className="flex flex-1 min-h-0">
+        {/* L1 — always visible */}
+        <SideNavL1
+          activeSection={activeSection}
+          onSectionChange={setActiveSection}
+          expanded={l1Expanded}
+          onExpandedChange={setL1Expanded}
+        />
+
+        {/* L2 + Content area */}
+        <div className="flex flex-1 min-w-0">
+          {/* L2 submenu — part of the page, not the sidebar */}
+          <SideNavL2 section={currentSection} activeItem={activeItem} onItemChange={setActiveItem} />
+
+          {/* Main content */}
+          <div className="flex-1 min-w-0 overflow-y-auto">
+            {activeItem === 'welcome' ? <HomeContent /> : activeItem === 'col-overview' ? <DataCollectionOverview /> : activeItem === 'col-asset-list' ? <AssetListContent /> : activeItem === 'rep-overview' ? <ReportsOverviewContent /> : <ContentArea />}
+          </div>
+        </div>
       </div>
     </div>
   )
