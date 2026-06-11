@@ -101,14 +101,14 @@ export default function ModalsPage() {
           <ShapeCard
             name="Standard"
             code="<Modal>"
-            dim="~560px · centered"
+            dim="880px · centered"
             description="Focused tasks. Forms, editing details, reviewing rich content without leaving the page."
             uses={['Edit building details', 'Upload or review a file', 'Configure settings']}
           />
           <ShapeCard
             name="Confirmation"
             code="<ConfirmModal>"
-            dim="~420px · centered"
+            dim="480px · centered"
             description="Irreversible or destructive actions only. One question, one consequence statement, two buttons."
             uses={['Delete a record', 'Submit a report', 'Remove a team member']}
           />
@@ -225,16 +225,16 @@ export default function ModalsPage() {
               <span className="absolute top-3 right-3 w-5 h-5 rounded-full bg-[#111827] text-white text-[10px] font-bold flex items-center justify-center">1</span>
               <span className="absolute top-[22px] right-[22px] w-[5px] h-[5px] rounded-full bg-white" />
 
-              {/* Modal shell */}
-              <div className="w-full max-w-[420px] mx-auto bg-white rounded-lg overflow-visible shadow-xl relative">
+              {/* Modal shell -- condensed: rounded-lg (8px), px-4, 14px bold title */}
+              <div className="w-full max-w-[420px] mx-auto bg-white rounded-lg border border-[#EDEEF1] overflow-visible shadow-xl relative">
                 {/* Header */}
-                <div className="px-5 pt-4 pb-3 relative">
+                <div className="px-4 pt-4 relative">
                   <div className="flex items-start justify-between">
                     <div>
-                      <p className="text-[14px] font-semibold text-[#111827]">Modal title</p>
-                      <p className="text-[12px] text-[#505867] mt-0.5">Optional subtitle</p>
+                      <p className="text-[14px] font-bold text-[#111827]">Modal title</p>
+                      <p className="text-[14px] text-[#505867] mt-0.5">Optional subtitle</p>
                     </div>
-                    <button className="text-[#505867] p-1"><XMarkIcon className="w-4 h-4" /></button>
+                    <button className="absolute top-2 right-3 w-6 h-6 flex items-center justify-center text-[#505867]"><XMarkIcon className="w-4 h-4" /></button>
                   </div>
 
                   {/* Pointer 2: Title -- left side, aligned to title */}
@@ -249,7 +249,7 @@ export default function ModalsPage() {
                 </div>
 
                 {/* Body */}
-                <div className="px-5 py-4 text-[13px] text-[#505867] relative">
+                <div className="px-4 py-4 text-[13px] text-[#505867] relative">
                   Body content lives in ModalContent. Scrolls independently when content overflows.
 
                   {/* Pointer 4: ModalContent -- left side */}
@@ -258,10 +258,10 @@ export default function ModalsPage() {
                   <span className="absolute -left-[18px] top-[11px] w-5 h-5 rounded-full bg-[#111827] text-white text-[10px] font-bold flex items-center justify-center">4</span>
                 </div>
 
-                {/* Footer */}
-                <div className="px-5 py-3 flex items-center justify-end gap-2 relative">
-                  <div className="h-7 px-3 flex items-center rounded border border-[#D7DAE0] text-[12px] font-medium text-[#111827]">Cancel</div>
-                  <div className="h-7 px-3 flex items-center rounded bg-[#1258F8] text-[12px] font-medium text-white">Confirm</div>
+                {/* Footer -- border-top, px-4 py-2, h-8 buttons */}
+                <div className="px-4 py-2 border-t border-[#EDEEF1] flex items-center justify-end gap-2 relative rounded-b-lg">
+                  <div className="h-8 px-3 flex items-center rounded-lg border border-[#D7DAE0] text-[14px] font-medium text-[#111827]">Cancel</div>
+                  <div className="h-8 px-3 flex items-center rounded-lg bg-[#1258F8] text-[14px] font-medium text-white">Confirm</div>
 
                   {/* Pointer 5: ModalFooter -- left side */}
                   <span className="absolute left-[20px] top-[14px] w-[5px] h-[5px] rounded-full bg-[#111827]" />

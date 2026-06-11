@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
+import { XMarkIcon } from '@heroicons/react/20/solid'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -69,13 +69,14 @@ export default function Modal({
   const isConfirm   = type === 'confirmation'
 
   // ── Panel sizing & positioning ──────────────────────────────────────────────
+  // Condensed: rounded-lg (8px), tighter padding throughout
   const panelClass = isDrawer
     ? 'fixed top-0 right-0 h-full w-full max-w-[480px] bg-white dark:bg-[#111827] flex flex-col shadow-level-5'
     : isFullscreen
     ? 'fixed inset-0 bg-white dark:bg-[#111827] flex flex-col'
     : isConfirm
-    ? 'relative w-full max-w-[480px] bg-white dark:bg-[#111827] rounded-xl shadow-level-5 flex flex-col'
-    : 'relative w-full max-w-[880px] bg-white dark:bg-[#111827] rounded-xl shadow-level-5 flex flex-col'
+    ? 'relative w-full max-w-[480px] bg-white dark:bg-[#111827] rounded-lg border border-[#D7DAE0] dark:border-[#374151] shadow-level-5 flex flex-col'
+    : 'relative w-full max-w-[880px] bg-white dark:bg-[#111827] rounded-lg border border-[#D7DAE0] dark:border-[#374151] shadow-level-5 flex flex-col'
 
   const overlayClass = isDrawer
     ? 'fixed inset-0 z-50 flex justify-end'
@@ -101,30 +102,30 @@ export default function Modal({
         tabIndex={-1}
         className={`${panelClass} outline-none`}
       >
-        {/* Header */}
+        {/* Header — condensed: px-4 pt-4, 14px bold title */}
         <div className={[
-          'flex items-start justify-between shrink-0',
-          isFullscreen ? 'px-6 py-4' : 'px-6 pt-5 pb-4',
+          'flex items-start justify-between shrink-0 relative',
+          isFullscreen ? 'px-4 py-3' : 'px-4 pt-4',
         ].join(' ')}>
-          <div className="flex flex-col gap-0.5">
+          <div className="flex flex-col gap-0.5 min-w-0 flex-1">
             {/* Drawer close icon sits above title */}
             {isDrawer && (
               <button
                 onClick={onClose}
                 aria-label="Close drawer"
-                className="mb-3 w-8 h-8 flex items-center justify-center rounded text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430] transition-colors -ml-1"
+                className="mb-2 w-6 h-6 flex items-center justify-center rounded text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430] transition-colors -ml-1"
               >
-                <XMarkIcon className="w-5 h-5" />
+                <XMarkIcon className="w-4 h-4" />
               </button>
             )}
             <h2
               id="modal-title"
-              className="text-[18px] font-bold text-[#111827] dark:text-white leading-[140%]"
+              className="text-[14px] font-bold text-[#111827] dark:text-white leading-[140%]"
             >
               {title}
             </h2>
             {subtitle && (
-              <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">{subtitle}</p>
+              <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-[145%] tracking-[0.21px]">{subtitle}</p>
             )}
           </div>
 
@@ -133,35 +134,35 @@ export default function Modal({
             <button
               onClick={onClose}
               aria-label="Close modal"
-              className="shrink-0 ml-4 w-7 h-7 flex items-center justify-center rounded text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430] transition-colors mt-0.5"
+              className="absolute top-2 right-3 w-6 h-6 flex items-center justify-center rounded text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430] transition-colors"
             >
               <XMarkIcon className="w-4 h-4" />
             </button>
           )}
         </div>
 
-        {/* Body */}
+        {/* Body — condensed: px-4, gap-4 from header */}
         {children !== undefined && (
-          <div className="flex-1 overflow-y-auto px-6 py-5 text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-[145%]">
+          <div className="flex-1 overflow-y-auto px-4 py-4 text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-[145%] tracking-[0.21px]">
             {children}
           </div>
         )}
 
         {/* Confirmation body (no slot, just padding) */}
         {isConfirm && children === undefined && (
-          <div className="px-6 py-4 text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-[145%]">
+          <div className="px-4 pb-4 text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-[145%] tracking-[0.21px]">
             This action cannot be undone.
           </div>
         )}
 
-        {/* Footer */}
-        <div className="shrink-0 flex items-center justify-between px-6 py-4">
+        {/* Footer — condensed: px-4 py-2, border-top, h-8 buttons, rounded-b-lg */}
+        <div className="shrink-0 flex items-center justify-between px-4 py-2 border-t border-[#D7DAE0] dark:border-[#374151] rounded-b-lg">
           {/* Destructive left */}
           <div>
             {destructiveLabel && (
               <button
                 onClick={destructiveAction}
-                className="h-9 px-4 rounded text-[14px] font-medium text-error-600 hover:bg-error-50 dark:hover:bg-error-950/30 transition-colors"
+                className="h-8 px-3 rounded-lg text-[14px] font-medium text-[#DC2626] hover:bg-[#FEF2F2] dark:hover:bg-[#DC2626]/10 transition-colors"
               >
                 {destructiveLabel}
               </button>
@@ -173,7 +174,7 @@ export default function Modal({
             {secondaryLabel && (
               <button
                 onClick={secondaryAction ?? onClose}
-                className="h-9 px-4 rounded border border-[#D7DAE0] dark:border-[#374151] text-[14px] font-medium text-[#111827] dark:text-white bg-white dark:bg-[#111827] hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430] transition-colors"
+                className="h-8 px-3 rounded-lg border border-[#D7DAE0] dark:border-[#374151] text-[14px] font-medium text-[#111827] dark:text-white bg-white dark:bg-[#111827] hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430] transition-colors"
               >
                 {secondaryLabel}
               </button>
@@ -181,7 +182,7 @@ export default function Modal({
             {primaryLabel && (
               <button
                 onClick={primaryAction ?? onClose}
-                className="h-9 px-4 rounded bg-blue-600 text-[14px] font-medium text-white hover:bg-blue-700 transition-colors"
+                className="h-8 px-3 rounded-lg bg-[#1258F8] text-[14px] font-medium text-white hover:bg-[#1146E4] transition-colors"
               >
                 {primaryLabel}
               </button>
