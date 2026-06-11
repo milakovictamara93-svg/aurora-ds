@@ -117,7 +117,7 @@ export default function SearchInputPage() {
             </Section>
             <Section title="Sizing">
               <SpecTable rows={[
-                { property: 'Height',          value: '32px (h-8)', token: '—' },
+                { property: 'Height',          value: '28px (h-7)', token: '—' },
                 { property: 'Left padding',    value: '32px (pl-8)', token: 'Accommodates leading icon' },
                 { property: 'Right padding',   value: '32px (pr-8)', token: 'Accommodates clear button' },
                 { property: 'Border radius',   value: '4px (rounded)', token: '—' },

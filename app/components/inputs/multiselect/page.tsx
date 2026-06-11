@@ -136,7 +136,7 @@ export default function MultiselectPage() {
 
             <Section title="Sizing">
               <SpecTable rows={[
-                { property: 'Trigger min-height',  value: '32 px (min-h-[32px])',    token: 'Grows with chips' },
+                { property: 'Trigger min-height',  value: '28px (min-h-[28px])',    token: 'Grows with chips' },
                 { property: 'Trigger padding',     value: '12 px left, 36 px right', token: 'pl-3 pr-9' },
                 { property: 'Trigger radius',      value: '4 px (rounded)',          token: '—' },
                 { property: 'Chip height',         value: '20 px (py-0.5)',          token: 'Inline with text' },

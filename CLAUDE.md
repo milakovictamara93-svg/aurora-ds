@@ -11,7 +11,7 @@ All content comes from these two files. Read them fully before writing any code:
 ## Tech Stack
 - **Framework:** Next.js (App Router)
 - **Styling:** Tailwind CSS with custom design tokens
-- **Font:** Manrope (load from Google Fonts)
+- **Font:** Inter (load from Google Fonts)
 - **Icons:** Hero Icons (primary), Lucide (secondary)
 - **Deployment-ready for:** Vercel (free tier)
 
@@ -20,7 +20,7 @@ All content comes from these two files. Read them fully before writing any code:
 ### 1. Landing Page `/`
 - Hero section: "Scaler Design System" — bold, minimal, on-brand
 - Live color palette preview (all token swatches with hex values, copyable on click)
-- Typography scale demo (rendered at real sizes using Manrope)
+- Typography scale demo (rendered at real sizes using Inter)
 - Component highlight strip (3–4 key components as live previews)
 - Quick navigation cards to each section
 
@@ -87,9 +87,10 @@ Components to build:
 ## Design Rules (strictly follow these)
 
 **Typography**
-- Font: Manrope only
-- H1: 28px, H2: 24px, H3: 20px — all at 140% line-height
-- Body: 16px minimum, 145% line-height, 1.5% letter-spacing
+- Font: Inter only
+- H1: 20px, H2: 16px, H3: 14px — all at 140% line-height
+- Body: 16px minimum (Paragraph Large), 145% line-height, 1.5% letter-spacing
+- Paragraph scale: Large (16px), Medium (14px), Small (12px), XSmall (11px)
 - NO all caps, NO italics, NO underlines for emphasis — bold only
 - Sentence case everywhere in UI
 
@@ -134,7 +135,7 @@ Use the Figma MCP to:
 
 ## Quality Checklist (run before considering any section complete)
 - [ ] All colors match tokens exactly — no approximations
-- [ ] Font is Manrope throughout
+- [ ] Font is Inter throughout
 - [ ] All spacing uses 4px multiples
 - [ ] Border radius values are from the approved set
 - [ ] WCAG contrast ratio 4.5:1 minimum on all text

@@ -267,8 +267,8 @@ export default function ComboboxPage() {
         <AnatomyBlock
           diagram={
             <div className="bg-[#F7F8F8] dark:bg-[#111827] rounded-lg px-12 py-8 w-full max-w-[460px] mx-auto">
-              {/* Trigger -- matches InputMultiselect: h-8, rounded (4px), border-[#d7dae0], pl-3 pr-9, text-sm */}
-              <div className="relative flex items-center gap-1.5 flex-wrap border border-[#d7dae0] dark:border-[#374151] rounded pl-3 pr-9 py-1 bg-white dark:bg-[#111827] min-h-[32px]">
+              {/* Trigger -- matches InputMultiselect: h-7, rounded (4px), border-[#d7dae0], pl-3 pr-9, text-sm */}
+              <div className="relative flex items-center gap-1.5 flex-wrap border border-[#d7dae0] dark:border-[#374151] rounded pl-3 pr-9 py-1 bg-white dark:bg-[#111827] min-h-[28px]">
                 {/* Pointer 1: ComboboxInput */}
                 <span className="absolute -left-7 top-[10px] w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
                 <span className="absolute -left-[22px] top-[12px] w-[10px] h-px bg-[#111827] dark:bg-white" />

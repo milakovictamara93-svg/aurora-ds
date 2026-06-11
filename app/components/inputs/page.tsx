@@ -100,7 +100,7 @@ export default function InputsIndexPage() {
     <div>
       <PageHeader
         title="Inputs"
-        description="All form input components — 12 types covering text entry, selection, date picking, and binary controls. Each component shares the same 32px height, 4px border radius, and design token set."
+        description="All form input components — 12 types covering text entry, selection, date picking, and binary controls. Each component shares the same 28px height, 4px border radius, and design token set."
         badge="Components"
       />
 

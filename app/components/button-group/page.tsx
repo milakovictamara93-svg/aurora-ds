@@ -122,7 +122,7 @@ export default function SegmentedControlPage() {
       <SectionWrapper id="sizes" num="04" total={TOTAL} title="Sizes" description="md is the default. Use sm inside dense UI -- table rows, sidebars -- where vertical rhythm matters more than tap-target generosity. There is no lg: large segmented controls compete with primary CTAs and the visual hierarchy collapses.">
         <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-8 flex flex-col items-center gap-6">
           <div className="text-center">
-            <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] mb-2">sm / 32px</p>
+            <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] mb-2">sm / 28px</p>
             <SegCtrl options={['Day', 'Week', 'Month']} size="sm" />
           </div>
           <div className="text-center">

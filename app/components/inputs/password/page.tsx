@@ -111,7 +111,7 @@ export default function PasswordInputPage() {
             </Section>
             <Section title="Sizing">
               <SpecTable rows={[
-                { property: 'Height',        value: '32px (h-8)', token: '—' },
+                { property: 'Height',        value: '28px (h-7)', token: '—' },
                 { property: 'Left padding',  value: '12px (pl-3)', token: '—' },
                 { property: 'Right padding', value: '36px (pr-9)', token: 'Eye/error icon space' },
                 { property: 'Icon size',     value: '16px (w-4 h-4)', token: '—' },

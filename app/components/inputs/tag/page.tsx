@@ -118,7 +118,7 @@ export default function TagInputPage() {
             </Section>
             <Section title="Sizing">
               <SpecTable rows={[
-                { property: 'Min height',    value: '32px (min-h-[32px])', token: 'Grows with content' },
+                { property: 'Min height',    value: '28px (min-h-[28px])', token: 'Grows with content' },
                 { property: 'Chip padding',  value: '2px 8px',             token: 'py-0.5 px-2' },
                 { property: 'Border radius', value: '4px (rounded)',        token: 'Container and chips' },
               ]} />

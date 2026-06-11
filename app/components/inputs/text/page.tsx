@@ -70,7 +70,7 @@ export default function TextInputPage() {
       </SectionWrapper>
 
       {/* ── 02 The text input family ───────────────────────────────────────── */}
-      <SectionWrapper id="text-family" num="02" total={TOTAL} title="The text input family" description="One base component, four modes. Designers will find Text, Search, Password, and Textarea as separate components in the design library. All share the same 32px height, 4px radius, and validation states.">
+      <SectionWrapper id="text-family" num="02" total={TOTAL} title="The text input family" description="One base component, four modes. Designers will find Text, Search, Password, and Textarea as separate components in the design library. All share the same 28px height, 4px radius, and validation states.">
         <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden bg-white dark:bg-[#0D1117] mb-4">
           <table className="w-full text-[14px] border-collapse">
             <thead>
@@ -288,7 +288,7 @@ export default function TextInputPage() {
                 </div>
 
                 {/* Input field */}
-                <div className="relative flex items-center h-8 rounded border border-[#EF4444] bg-white dark:bg-[#0D1117]">
+                <div className="relative flex items-center h-7 rounded border border-[#EF4444] bg-white dark:bg-[#0D1117]">
                   <span className="pl-3 text-sm text-[#111827] dark:text-white">name@example</span>
                   {/* Trailing icon area */}
                   <span className="absolute right-2.5">
@@ -323,7 +323,7 @@ export default function TextInputPage() {
           }
           annotations={[
             { num: '1', label: 'Label', description: <>Required visible text above the input. Sentence case, Inter Medium 14px. Asterisk appended when <Code>required=true</Code>. Associated via <Code>htmlFor</Code>.</> },
-            { num: '2', label: 'Input field', description: <>32px height, 4px border-radius, 12px horizontal padding. Border color changes per state (grey default, blue focus, red error, orange warning, green success).</> },
+            { num: '2', label: 'Input field', description: <>28px height, 4px border-radius, 12px horizontal padding. Border color changes per state (grey default, blue focus, red error, orange warning, green success).</> },
             { num: '3', label: 'Trailing icon', description: <>Automatic state icon: exclamation-circle for error, exclamation-triangle for warning, check-circle for success. 16px, positioned 10px from right edge. Can be overridden via <Code>trailingIcon</Code> prop.</> },
             { num: '4', label: 'Helper text', description: <>12px text below the input. Color follows the current state. Linked to the input via <Code>aria-describedby</Code> when <Code>id</Code> is set. Use for instructions, constraints, or validation messages.</> },
           ]}
