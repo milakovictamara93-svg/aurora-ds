@@ -38,11 +38,11 @@ import {
 import { StarIcon as StarIconOutline } from '@heroicons/react/24/outline'
 import {
   HomeIcon as HomeIconOutline,
-  ChartBarIcon as ChartBarIconOutline,
+  ChartBarSquareIcon as ChartBarSquareIconOutline,
   CircleStackIcon as CircleStackIconOutline,
   DocumentTextIcon as DocumentTextIconOutline,
   GiftIcon as GiftIconOutline,
-  InformationCircleIcon as InfoIconOutline,
+  InformationCircleIcon as InformationCircleIconOutline,
 } from '@heroicons/react/24/outline'
 // Inline tab type (avoid importing Aurora components that break hydration)
 interface TabItem { id: string; label: string }
@@ -220,24 +220,12 @@ interface NavSection {
   id: string
   label: string
   icon: React.ElementType
-  /** Outline icon for L1 sidebar */
-  l1Icon: React.ElementType
   entries: NavEntry[]
-  /** Active background color for L1 nav */
-  activeBg: string
-}
-
-// Section accent colors from Figma
-const SECTION_COLORS: Record<string, string> = {
-  home: 'bg-[#EAE8FF]',        // AI purple
-  analytics: 'bg-[#D9EAFF]',   // Blue 100
-  collection: 'bg-[#FDF0D7]',  // Engagement/orange 100
-  reports: 'bg-[#DEEDE4]',     // Waste/green 100
 }
 
 const NAV_SECTIONS: NavSection[] = [
   {
-    id: 'home', label: 'Home', icon: HomeIcon, l1Icon: HomeIconOutline, activeBg: 'bg-[#EAE8FF]',
+    id: 'home', label: 'Home', icon: HomeIcon,
     entries: [
       { type: 'item', id: 'welcome', label: 'Welcome', icon: SparklesIcon },
       { type: 'header', label: 'Recent' },
@@ -248,7 +236,7 @@ const NAV_SECTIONS: NavSection[] = [
     ],
   },
   {
-    id: 'analytics', label: 'Analytics', icon: ChartBarIcon, l1Icon: ChartBarIconOutline, activeBg: 'bg-[#D9EAFF]',
+    id: 'analytics', label: 'Analytics', icon: ChartBarIcon,
     entries: [
       { type: 'item', id: 'overview', label: 'Overview', icon: HomeIcon },
       { type: 'item', id: 'asset-list', label: 'Asset List', icon: ListBulletIcon },
@@ -264,7 +252,7 @@ const NAV_SECTIONS: NavSection[] = [
     ],
   },
   {
-    id: 'collection', label: 'Collection', icon: CircleStackIcon, l1Icon: CircleStackIconOutline, activeBg: 'bg-[#FDF0D7]',
+    id: 'collection', label: 'Data Collection', icon: CircleStackIcon,
     entries: [
       { type: 'item', id: 'col-overview', label: 'Overview', icon: HomeIcon },
       { type: 'item', id: 'col-asset-list', label: 'Asset List', icon: ListBulletIcon },
@@ -285,7 +273,7 @@ const NAV_SECTIONS: NavSection[] = [
     ],
   },
   {
-    id: 'reports', label: 'Reporting', icon: DocumentTextIcon, l1Icon: DocumentTextIconOutline, activeBg: 'bg-[#DEEDE4]',
+    id: 'reports', label: 'Reports', icon: DocumentTextIcon,
     entries: [
       { type: 'item', id: 'rep-overview', label: 'Overview', icon: HomeIcon },
       { type: 'item', id: 'rep-data-gaps', label: 'Data Gaps', icon: BoltIcon },
@@ -316,103 +304,141 @@ function ScalerLogo({ className = 'w-5 h-5' }: { className?: string }) {
   )
 }
 
-// ── Side Nav L1 ──────────────────────────────────────────────────────────────
-// Figma: 64px wide, full height, bg #F7F8F8, pb-8
-// Structure: Logo (px-16 py-8) | border-top | nav icons (px-8, gap-4) | flex-1 | bottom utils (px-16) | divider | avatar
+// ── L1 Nav Items ──────────────────────────────────────────────────────────
 
-function SideNavL1({ activeSection, onSectionChange }: {
-  activeSection: string; onSectionChange: (id: string) => void
-}) {
+const L1_ITEMS = [
+  { id: 'home', label: 'Home', icon: HomeIconOutline, activeBg: '' },
+  { id: 'analytics', label: 'Analytics', icon: ChartBarSquareIconOutline, activeBg: '' },
+  { id: 'collection', label: 'Collection', icon: CircleStackIconOutline, activeBg: 'bg-[#FDF0D7]' },
+  { id: 'reports', label: 'Reporting', icon: DocumentTextIconOutline, activeBg: '' },
+]
+
+// ── SideNavL1 (icon rail, full height) ────────────────────────────────────
+
+function SideNavL1({ activeSection, onSectionChange }: { activeSection: string; onSectionChange: (id: string) => void }) {
   return (
-    <div className="flex flex-col w-16 h-full bg-[#F7F8F8] shrink-0 pb-2">
-      {/* Top container */}
-      <div className="flex-1 flex flex-col">
-        {/* Logo */}
-        <div className="flex items-center justify-center px-4 py-2">
-          <ScalerLogo className="w-8 h-8 text-[#111827]" />
-        </div>
-        {/* Nav icons - border-top, py-2, px-2, gap-1 */}
-        <div className="flex flex-col gap-1 items-center px-[14px] py-2 border-t border-[#EDEEF1]">
-          {NAV_SECTIONS.map(section => {
-            const Icon = section.l1Icon
-            const isActive = activeSection === section.id
+    <div className="w-16 shrink-0 flex flex-col bg-[#F7F8F8] dark:bg-[#111827] border-r border-[#EDEEF1] dark:border-[#1F2430] h-full">
+      {/* Logo */}
+      <div className="px-4 py-2 shrink-0">
+        <ScalerLogo className="w-8 h-8 text-[#111827] dark:text-white" />
+      </div>
+
+      {/* Nav section with border-top */}
+      <div className="flex-1 flex flex-col border-t border-[#EDEEF1] dark:border-[#1F2430] py-2">
+        <div className="flex flex-col items-center gap-1 px-2">
+          {L1_ITEMS.map(item => {
+            const Icon = item.icon
+            const active = activeSection === item.id
             return (
               <button
-                key={section.id}
-                onClick={() => onSectionChange(section.id)}
+                key={item.id}
+                onClick={() => onSectionChange(item.id)}
+                title={item.label}
                 className={clsx(
                   'w-9 h-9 flex items-center justify-center rounded transition-colors',
-                  isActive ? section.activeBg : 'hover:bg-black/[0.04]'
+                  active && item.activeBg ? item.activeBg : active ? 'bg-[#E8EDFB] dark:bg-blue-600/15' : '',
+                  !active && 'text-[#505867] hover:bg-[#EDEEF1] dark:hover:bg-[#1F2430]'
                 )}
-                title={section.label}
               >
-                <Icon className={clsx('w-5 h-5', isActive ? 'text-[#111827]' : 'text-[#505867]')} />
+                <Icon className="w-5 h-5" />
               </button>
             )
           })}
         </div>
-      </div>
 
-      {/* Bottom utils */}
-      <div className="flex flex-col gap-1 items-center px-4">
-        <button className="w-8 h-9 flex items-center justify-center rounded text-[#505867] hover:bg-black/[0.04] transition-colors" title="What's new">
-          <GiftIconOutline className="w-5 h-5" />
-        </button>
-        <button className="w-8 h-9 flex items-center justify-center rounded text-[#505867] hover:bg-black/[0.04] transition-colors" title="Support">
-          <InfoIconOutline className="w-5 h-5" />
-        </button>
-        <div className="border-t border-[#EDEEF1] w-full my-1" />
-        <span className="w-4 h-4 rounded-full bg-[#1258F8] flex items-center justify-center text-[10px] font-medium text-white cursor-pointer" title="Profile">
-          A
-        </span>
+        {/* Spacer */}
+        <div className="flex-1" />
+
+        {/* Bottom icons */}
+        <div className="flex flex-col items-center gap-1 px-4 pb-2">
+          <button className="w-8 h-8 flex items-center justify-center rounded text-[#505867] hover:bg-[#EDEEF1] dark:hover:bg-[#1F2430] transition-colors" title="What's new">
+            <GiftIconOutline className="w-5 h-5" />
+          </button>
+          <button className="w-8 h-8 flex items-center justify-center rounded text-[#505867] hover:bg-[#EDEEF1] dark:hover:bg-[#1F2430] transition-colors" title="Support">
+            <InformationCircleIconOutline className="w-5 h-5" />
+          </button>
+          {/* Divider */}
+          <div className="w-full h-px bg-[#EDEEF1] dark:bg-[#1F2430] my-1" />
+          {/* Avatar */}
+          <div className="w-4 h-4 rounded-full bg-[#1258F8] flex items-center justify-center">
+            <span className="text-[10px] font-medium text-white leading-[1.45] tracking-[0.15px]">A</span>
+          </div>
+        </div>
       </div>
     </div>
   )
 }
 
-// ── Side Nav L2 (in-page submenu) ────────────────────────────────────────────
-// White bg, border-left, full height. Shows entries for active L1 section.
+// ── SideNavL2 (text sidebar for active section) ───────────────────────────
 
-function SideNavL2({ section, activeItem, onItemChange }: {
-  section: NavSection; activeItem: string; onItemChange: (id: string) => void
-}) {
+function SideNavL2({ activeSection, activeItem, onItemChange }: { activeSection: string; activeItem: string; onItemChange: (id: string) => void }) {
+  const section = NAV_SECTIONS.find(s => s.id === activeSection)
+  if (!section) return null
+
+  // Group entries into sections: items before first header go in a default group,
+  // then each header starts a new group
+  const groups: { header?: string; items: (NavEntry & { type: 'item' | 'placeholder' })[] }[] = []
+  let currentGroup: { header?: string; items: (NavEntry & { type: 'item' | 'placeholder' })[] } = { items: [] }
+
+  for (const entry of section.entries) {
+    if (entry.type === 'header') {
+      if (currentGroup.items.length > 0 || currentGroup.header) groups.push(currentGroup)
+      currentGroup = { header: entry.label, items: [] }
+    } else {
+      currentGroup.items.push(entry as NavEntry & { type: 'item' | 'placeholder' })
+    }
+  }
+  if (currentGroup.items.length > 0 || currentGroup.header) groups.push(currentGroup)
+
   return (
-    <div className="w-[200px] shrink-0 h-full overflow-y-auto bg-white dark:bg-grey-950 py-2 px-2">
-      <div className="flex flex-col gap-0.5">
-        {section.entries.map((entry, ei) => {
-          if (entry.type === 'header') {
-            return (
-              <div key={`h-${ei}`} className="mt-3 mb-0.5 px-2 flex items-center gap-1">
-                <ChevronDownIcon className="w-2.5 h-2.5 text-[#9CA3AF]" />
-                <span className="text-[10px] font-semibold text-[#9CA3AF] uppercase tracking-wider">{entry.label}</span>
-              </div>
-            )
-          }
-          if (entry.type === 'placeholder') {
-            return (
-              <div key={`p-${ei}`} className="px-2 py-1">
-                <span className="text-[12px] text-[#9CA3AF] italic">{entry.label}</span>
-              </div>
-            )
-          }
-          const active = activeItem === entry.id
-          const Icon = entry.icon
-          return (
-            <button
-              key={entry.id}
-              onClick={() => onItemChange(entry.id)}
-              className={clsx(
-                'w-full flex items-center gap-2 h-7 px-2 rounded text-[13px] transition-colors text-left',
-                active
-                  ? `text-[#111827] font-medium ${section.activeBg}`
-                  : 'text-[#505867] hover:text-[#111827] hover:bg-[#F7F8F8]'
+    <div className="w-[200px] shrink-0 flex flex-col h-full bg-white dark:bg-[#111827] border-r border-[#EDEEF1] dark:border-[#1F2430]">
+      <div className="flex-1 overflow-y-auto border-t border-[#EDEEF1] dark:border-[#1F2430] py-2">
+        <div className="flex flex-col gap-2">
+          {groups.map((group, gi) => (
+            <div key={gi} className="flex flex-col gap-1 px-2">
+              {group.header && (
+                <div className="flex items-center gap-2 py-1">
+                  <ChevronDownIcon className="w-4 h-4 text-[#8C96A4] shrink-0" />
+                  <span className="text-[10px] font-bold text-[#8C96A4] uppercase tracking-[1.6px] leading-[1.2]">{group.header}</span>
+                </div>
               )}
-            >
-              <Icon className={clsx('w-4 h-4 shrink-0', active ? 'text-[#111827]' : 'text-[#9CA3AF]')} />
-              <span className="truncate">{entry.label}</span>
-            </button>
-          )
-        })}
+              {group.items.map((entry, ei) => {
+                if (entry.type === 'placeholder') {
+                  return (
+                    <div key={`p-${ei}`} className="p-2">
+                      <span className="text-[14px] text-[#9CA3AF] italic tracking-[0.21px]">{entry.label}</span>
+                    </div>
+                  )
+                }
+                const active = activeItem === entry.id
+                const Icon = entry.icon
+                return (
+                  <button
+                    key={entry.id}
+                    onClick={() => onItemChange(entry.id)}
+                    className={clsx(
+                      'w-full flex items-center gap-2 p-2 rounded transition-colors text-left',
+                      active
+                        ? 'bg-[#FDF0D7] text-[#111827] dark:text-white'
+                        : 'text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430]'
+                    )}
+                  >
+                    <Icon className="w-5 h-5 shrink-0" />
+                    <span className="text-[14px] font-medium leading-[1.45] tracking-[0.21px] truncate">{entry.label}</span>
+                  </button>
+                )
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* Bottom: Customize */}
+      <div className="shrink-0 px-2 pb-2">
+        <div className="border-t border-[#EDEEF1] dark:border-[#1F2430]" />
+        <button className="w-full flex items-center gap-2 p-2 rounded text-left text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430] transition-colors mt-1">
+          <PencilIcon className="w-5 h-5 shrink-0" />
+          <span className="text-[14px] font-medium leading-[1.45] tracking-[0.21px] truncate">Customize</span>
+        </button>
       </div>
     </div>
   )
@@ -500,6 +526,16 @@ function SimpleDropdown({ value, options, onChange, muted }: { value: string; op
   )
 }
 
+// ── Breadcrumb slash separator ─────────────────────────────────────────────
+
+function BreadcrumbSlash() {
+  return (
+    <div className="w-[7px] h-[30px] flex items-center justify-center shrink-0">
+      <div className="w-px h-[26px] bg-[#D7DAE0] dark:bg-[#374151] rotate-[12deg]" />
+    </div>
+  )
+}
+
 // ── Notification bell ──────────────────────────────────────────────────────
 
 function NotifBell() {
@@ -508,9 +544,9 @@ function NotifBell() {
   useEffect(() => { if (!open) return; function h(e: MouseEvent) { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false) }; document.addEventListener('mousedown', h); return () => document.removeEventListener('mousedown', h) }, [open])
   return (
     <div className="relative" ref={ref}>
-      <button onClick={() => setOpen(!open)} className="w-7 h-7 flex items-center justify-center rounded-md text-grey-600 hover:text-grey-950 hover:bg-grey-100 transition-colors relative">
+      <button onClick={() => setOpen(!open)} className="w-7 h-7 rounded-[6px] flex items-center justify-center text-[#505867] hover:bg-[#EDEEF1] dark:hover:bg-[#1F2430] transition-colors relative overflow-hidden">
         <BellIcon className="w-4 h-4" />
-        <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-error-500" />
+        <span className="absolute top-1 right-[5px] w-1.5 h-1.5 rounded-full bg-[#DC2626]" />
       </button>
       {open && (
         <div className="absolute top-full right-0 mt-1 z-50 w-[260px] bg-white dark:bg-grey-900 border border-grey-200 dark:border-grey-700 rounded-lg shadow-level-3 py-1">
@@ -524,40 +560,80 @@ function NotifBell() {
   )
 }
 
+// ── Breadcrumb Dropdown ────────────────────────────────────────────────────
+
+function BreadcrumbDropdown({ label, value, options, onChange, selected = true, tag }: {
+  label: string; value: string; options: string[]; onChange: (v: string) => void; selected?: boolean; tag?: string
+}) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+  useEffect(() => { if (!open) return; function h(e: MouseEvent) { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false) }; document.addEventListener('mousedown', h); return () => document.removeEventListener('mousedown', h) }, [open])
+
+  return (
+    <div className="relative min-w-0" ref={ref}>
+      <button onClick={() => setOpen(!open)} className="flex flex-col min-w-0 hover:opacity-80 transition-opacity">
+        <span className="text-[10px] font-medium leading-[1.45] tracking-[0.15px] text-[#8C96A4]">{label}</span>
+        <div className="flex items-center gap-1 h-6">
+          <span className={clsx('leading-[1.45] tracking-[0.21px] truncate', selected ? 'text-[14px] font-bold text-[#111827] dark:text-white' : 'text-[14px] text-[#505867]')}>{value}</span>
+          {tag && (
+            <span className="h-5 px-2 rounded-full bg-[#FEE2E2] text-[12px] font-medium text-[#7F1D1D] leading-[1.45] tracking-[0.18px] flex items-center shrink-0">{tag}</span>
+          )}
+          <div className="w-6 h-6 flex items-center justify-center shrink-0">
+            <ChevronDownIcon className="w-4 h-4 text-[#505867]" />
+          </div>
+        </div>
+      </button>
+      {open && (
+        <div className="absolute top-full left-0 mt-1 z-50 w-[220px] bg-white dark:bg-grey-900 border border-[#D7DAE0] dark:border-[#374151] rounded-lg shadow-level-3 py-1">
+          {options.map(opt => (
+            <button key={opt} onClick={() => { onChange(opt); setOpen(false) }} className={clsx('w-full text-left px-3 py-1.5 text-[13px] transition-colors', opt === value ? 'text-[#1258F8] font-medium bg-[#EBF1FF] dark:bg-blue-600/10' : 'text-[#505867] hover:bg-[#F7F8F8]')}>
+              {opt}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 // ── Top Bar ────────────────────────────────────────────────────────────────
-// Figma: Scaler logo left, Company · Portfolio · Type selectors, notification + avatar right
-// Spans full width including above L1
 
 function TopBar() {
   const [company, setCompany] = useState('Scaler Admin')
   const [portfolio, setPortfolio] = useState('Design')
-  const [assetType, setAssetType] = useState('Select')
+  const [type, setType] = useState('Select')
+
+  const isTypeSelected = type !== 'Select'
+
   return (
-    <div className="h-14 shrink-0 flex items-center justify-between px-4 bg-[#F7F8F8]">
-      {/* Selectors with separators */}
-      <div className="flex items-center gap-4 min-w-0">
-        <div className="flex flex-col">
-          <span className="text-[10px] text-[#9CA3AF] leading-tight mb-0.5">Company</span>
-          <SimpleDropdown value={company} options={['Scaler Admin', 'Scaler Demo LLC', 'Scaler NL']} onChange={setCompany} />
-        </div>
-        <div className="w-px h-6 bg-[#EDEEF1]" />
-        <div className="flex flex-col">
-          <span className="text-[10px] text-[#9CA3AF] leading-tight mb-0.5">Portfolio</span>
-          <div className="flex items-center gap-1.5">
-            <SimpleDropdown value={portfolio} options={['Design', 'Global Portfolio', 'Pacific Portfolio']} onChange={setPortfolio} />
-            <span className="text-[10px] font-semibold text-[#DC2626] bg-[#FEF2F2] px-1.5 py-0.5 rounded-full">87%</span>
-          </div>
-        </div>
-        <div className="w-px h-6 bg-[#EDEEF1]" />
-        <div className="flex flex-col">
-          <span className="text-[10px] text-[#9CA3AF] leading-tight mb-0.5">Type</span>
-          <SimpleDropdown value={assetType} options={['Select', 'Office', 'Residential', 'Retail', 'Industrial']} onChange={setAssetType} muted={assetType === 'Select'} />
-        </div>
+    <div className="h-14 shrink-0 flex items-center gap-10 py-2 px-4 w-full bg-[#F7F8F8] dark:bg-[#111827] border-b border-[#EDEEF1] dark:border-[#1F2430]">
+      <div className="flex items-center gap-2 flex-1 min-w-0 overflow-hidden">
+        <BreadcrumbDropdown
+          label="Company"
+          value={company}
+          options={['Scaler Admin', 'Scaler Demo LLC', 'Scaler NL']}
+          onChange={setCompany}
+          selected
+        />
+        <BreadcrumbSlash />
+        <BreadcrumbDropdown
+          label="Portfolio"
+          value={portfolio}
+          options={['Design', 'Global Portfolio', 'Pacific Portfolio']}
+          onChange={setPortfolio}
+          selected
+          tag="87%"
+        />
+        <BreadcrumbSlash />
+        <BreadcrumbDropdown
+          label="Asset"
+          value={type}
+          options={['Select', 'All assets', 'One World Trade Center', 'The Shard', 'Empire State Building']}
+          onChange={setType}
+          selected={isTypeSelected}
+        />
       </div>
-      {/* Right */}
-      <div className="flex items-center gap-2 shrink-0">
-        <NotifBell />
-      </div>
+      <NotifBell />
     </div>
   )
 }
@@ -1496,228 +1572,29 @@ function HomeContent() {
   )
 }
 
-// ── Data Collection Overview ─────────────────────────────────────────────
-
-function DataCollectionOverview() {
-  const [favorited, setFavorited] = useState(false)
-  const [infoExpanded, setInfoExpanded] = useState(true)
-
-  return (
-    <div className="flex-1 min-w-0 min-h-0 overflow-auto bg-grey-50 dark:bg-[#0c0f14] px-2 pb-2 -mt-px">
-      <div className="bg-white dark:bg-grey-950 rounded-lg border border-grey-100 dark:border-grey-800 min-h-full overflow-hidden pb-4">
-
-        {/* Title */}
-        <div className="px-5 h-11 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <h1 className="text-[14px] font-medium text-grey-950 dark:text-white">Overview - Amsterdam - Newmarkt</h1>
-            <button onClick={() => setFavorited(!favorited)} className="text-grey-300 hover:text-warning-400 transition-colors">
-              {favorited ? <StarIcon className="w-4 h-4 text-warning-400" /> : <StarIconOutline className="w-4 h-4" />}
-            </button>
-            <span className="inline-flex items-center h-[20px] px-2 rounded-full bg-success-100 text-success-700 text-[12px] font-medium">94.73%</span>
-            <span className="inline-flex items-center h-[20px] px-2 rounded-full bg-error-100 text-error-900 text-[12px] font-medium gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-error-500" />1 assets need attention
-            </span>
-            <button className="text-[12px] text-[#1258F8] font-medium">View issues</button>
-          </div>
-        </div>
-
-        <div className="border-b border-grey-100 dark:border-grey-800" />
-
-        {/* Info card - expandable */}
-        <div className="mx-5 mt-4 rounded-lg border border-grey-100 dark:border-grey-800">
-          <div className="flex items-center justify-between px-4 py-3">
-            <p className="text-[13px] text-grey-950 dark:text-white"><span className="font-medium">Amsterdam - Newmarkt</span> <span className="text-grey-400 mx-1">|</span> <span className="text-[#505867]">Europe</span></p>
-            <div className="flex items-center gap-2">
-              <button className="h-7 px-3 rounded border border-grey-200 text-[12px] font-medium text-grey-700 hover:bg-grey-50 transition-colors">Edit</button>
-              <button onClick={() => setInfoExpanded(!infoExpanded)} className="w-6 h-6 flex items-center justify-center rounded text-grey-400 hover:text-grey-600 transition-colors">
-                <ChevronDownIcon className={clsx('w-4 h-4 transition-transform', !infoExpanded && '-rotate-90')} />
-              </button>
-            </div>
-          </div>
-          {infoExpanded && (
-            <div className="px-4 pb-4 grid grid-cols-3 gap-x-8 gap-y-3 border-t border-grey-100 dark:border-grey-800 pt-3">
-              <div>
-                <p className="text-[11px] text-grey-400">Total GFA</p>
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white">0 m2</p>
-              </div>
-              <div>
-                <p className="text-[11px] text-grey-400">Total GAV</p>
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white">-</p>
-              </div>
-              <div>
-                <p className="text-[11px] text-grey-400 mb-1">Assets included in analytics: 1 / 1</p>
-                <div className="h-2 rounded-full bg-grey-100 overflow-hidden"><div className="h-full bg-[#1258F8] rounded-full" style={{ width: '100%' }} /></div>
-              </div>
-              <div>
-                <p className="text-[11px] text-grey-400 mb-1">Assets included in reports: 1 / 1</p>
-                <div className="h-2 rounded-full bg-grey-100 overflow-hidden"><div className="h-full bg-[#1258F8] rounded-full" style={{ width: '100%' }} /></div>
-              </div>
-              <div>
-                <p className="text-[11px] text-grey-400">Default reporting year</p>
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white">N/A</p>
-              </div>
-              <div>
-                <p className="text-[11px] text-grey-400 mb-1">Property type by m2</p>
-                <div className="h-2 rounded-full bg-grey-100 overflow-hidden"><div className="h-full bg-grey-300 rounded-full" style={{ width: '5%' }} /></div>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Asset List + Meters row */}
-        <div className="px-5 mt-4 grid grid-cols-2 gap-4">
-          {/* Asset List */}
-          <div className="rounded-lg border border-grey-100 dark:border-grey-800 p-4">
-            <div className="flex items-center justify-between mb-1">
-              <h3 className="text-[14px] font-semibold text-grey-950 dark:text-white">Asset List</h3>
-              <button className="text-[12px] text-[#1258F8] font-medium">View</button>
-            </div>
-            <p className="text-[12px] text-grey-400 mb-4">Add, edit, and group assets across the portfolio</p>
-            <div className="flex items-center">
-              <div className="flex-1 text-center border-r border-grey-100 dark:border-grey-800">
-                <p className="text-[18px] font-semibold text-grey-950 dark:text-white">1</p>
-                <p className="text-[11px] text-grey-400">Assets</p>
-              </div>
-              <div className="flex-1 text-center">
-                <span className="inline-flex items-center h-[20px] px-2 rounded-full bg-success-100 text-success-700 text-[12px] font-medium">94.74%</span>
-                <p className="text-[11px] text-grey-400 mt-1">Critical Data Completion</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Meters */}
-          <div className="rounded-lg border border-grey-100 dark:border-grey-800 p-4">
-            <div className="flex items-center justify-between mb-1">
-              <h3 className="text-[14px] font-semibold text-grey-950 dark:text-white">Meters</h3>
-              <button className="text-[12px] text-[#1258F8] font-medium">View</button>
-            </div>
-            <p className="text-[12px] text-grey-400 mb-4">Set up meters and resolve coverage gaps</p>
-            <div className="flex items-center">
-              <div className="flex-1 text-center border-r border-grey-100 dark:border-grey-800">
-                <div className="flex items-center justify-center gap-1">
-                  <BoltIcon className="w-3.5 h-3.5 text-warning-500" />
-                  <span className="inline-flex items-center h-[20px] px-2 rounded-full bg-error-100 text-error-700 text-[12px] font-medium">0%</span>
-                </div>
-                <p className="text-[11px] text-grey-400 mt-1">Energy Data Coverage</p>
-              </div>
-              <div className="flex-1 text-center">
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white">0 meters</p>
-                <div className="flex items-center justify-center gap-1 mt-1">
-                  <span className="w-3 h-3 rounded-full bg-success-500 flex items-center justify-center text-white text-[7px]">{'\u2713'}</span>
-                  <p className="text-[11px] text-grey-400">Incomplete data coverage</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Data Collection Tools + Governance row */}
-        <div className="px-5 mt-4 grid grid-cols-2 gap-4">
-          {/* Data Collection Tools */}
-          <div className="rounded-lg border border-grey-100 dark:border-grey-800 p-4">
-            <h3 className="text-[14px] font-semibold text-grey-950 dark:text-white mb-4">Data Collection Tools</h3>
-            <div className="flex flex-col gap-0">
-              {[
-                { icon: ArrowTrendingUpIcon, label: 'Bulk Template:', desc: 'Upload data via spreadsheets', badge: 'No uploads yet', badgeStyle: 'bg-grey-100 text-grey-500' },
-                { icon: PaperAirplaneIcon, label: 'Data requests:', desc: 'Collect data from external stakeholders', badge: '1 sent', badgeStyle: 'bg-blue-100 text-blue-700' },
-                { icon: BoltIcon, label: 'Automations:', desc: 'Automated meter API connections', badge: '0/1 meters mapped', badgeStyle: 'bg-warning-100 text-warning-700' },
-                { icon: DocumentTextIcon, label: 'Bill Scraping:', desc: 'Automated document extraction', badge: 'No bills scraped', badgeStyle: 'bg-grey-100 text-grey-500' },
-              ].map(tool => {
-                const Icon = tool.icon
-                return (
-                  <div key={tool.label} className="flex items-center gap-3 py-2.5 border-t border-grey-100 dark:border-grey-800 first:border-t-0">
-                    <Icon className="w-4 h-4 text-grey-400 shrink-0" />
-                    <div className="flex-1 min-w-0">
-                      <span className="text-[13px] text-grey-950 dark:text-white font-medium">{tool.label}</span>
-                      <span className="text-[13px] text-[#505867]"> {tool.desc}</span>
-                    </div>
-                    <span className={clsx('inline-flex items-center h-[20px] px-2 rounded-full text-[11px] font-medium shrink-0', tool.badgeStyle)}>{tool.badge}</span>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-
-          {/* Governance */}
-          <div className="rounded-lg border border-grey-100 dark:border-grey-800 p-4">
-            <div className="flex items-center justify-between mb-1">
-              <h3 className="text-[14px] font-semibold text-grey-950 dark:text-white">Governance</h3>
-              <button className="text-[12px] text-[#1258F8] font-medium">View</button>
-            </div>
-            <p className="text-[12px] text-grey-400 mb-3">Document ESG policies and practices for reporting</p>
-            <div className="flex items-center justify-between text-[11px] font-semibold text-grey-400 uppercase tracking-wider pb-2 border-b border-grey-100 dark:border-grey-800">
-              <span>Aspect</span>
-              <span>Data completion</span>
-            </div>
-            {[
-              { aspect: 'Leadership', completion: '0 / 6' },
-              { aspect: 'Policies', completion: '0 / 3' },
-              { aspect: 'Reporting', completion: '0 / 3' },
-              { aspect: 'Risk Management', completion: '0 / 12' },
-              { aspect: 'Stakeholder Engagement', completion: '0 / 11' },
-              { aspect: 'Tenants & Community', completion: '0 / 9' },
-              { aspect: 'Data Monitoring & Review', completion: '0 / 4' },
-            ].map(row => (
-              <div key={row.aspect} className="flex items-center justify-between py-2 border-b border-grey-100 dark:border-grey-800 last:border-b-0">
-                <span className="text-[13px] text-grey-950 dark:text-white">{row.aspect}</span>
-                <span className="text-[13px] text-error-500 font-medium">{row.completion}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Roadmaps + Targets row */}
-        <div className="px-5 mt-4 grid grid-cols-2 gap-4">
-          <div className="rounded-lg border border-grey-100 dark:border-grey-800 p-4">
-            <div className="flex items-center justify-between">
-              <h3 className="text-[14px] font-semibold text-grey-950 dark:text-white">Roadmaps</h3>
-              <button className="text-[12px] text-[#1258F8] font-medium">View</button>
-            </div>
-            <p className="text-[12px] text-grey-400 mt-1">Plan retrofits and forecast emissions over time</p>
-          </div>
-          <div className="rounded-lg border border-grey-100 dark:border-grey-800 p-4">
-            <div className="flex items-center justify-between">
-              <h3 className="text-[14px] font-semibold text-grey-950 dark:text-white">Targets & Benchmarks</h3>
-              <button className="text-[12px] text-[#1258F8] font-medium">View</button>
-            </div>
-            <p className="text-[12px] text-grey-400 mt-1">Set reduction targets and compare to industry benchmarks</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  )
-}
-
 // ── Page ────────────────────────────────────────────────────────────────────
-// Layout: TopBar on top, then SideNavL1 | SideNavL2 + Content below
 
 export default function PlaygroundPage() {
+  const [activeSection, setActiveSection] = useState('collection')
   const [activeItem, setActiveItem] = useState('col-overview')
 
-  const activeSectionId = NAV_SECTIONS.find(s => s.entries.some(e => e.type === 'item' && e.id === activeItem))?.id ?? 'collection'
-  const [activeSection, setActiveSection] = useState(activeSectionId)
-  const currentSection = NAV_SECTIONS.find(s => s.id === activeSection) ?? NAV_SECTIONS[2]
+  function handleSectionChange(id: string) {
+    setActiveSection(id)
+    const section = NAV_SECTIONS.find(s => s.id === id)
+    const firstItem = section?.entries.find(e => e.type === 'item')
+    if (firstItem && firstItem.type === 'item') setActiveItem(firstItem.id)
+  }
 
   return (
     <div className="flex h-full">
-      {/* L1 — icon rail, full height */}
-      <SideNavL1
-        activeSection={activeSection}
-        onSectionChange={setActiveSection}
-      />
-
-      {/* Page content: TopBar on top, then L2 | Content below */}
+      {/* L1 icon rail - full height */}
+      <SideNavL1 activeSection={activeSection} onSectionChange={handleSectionChange} />
+      {/* Right side: TopBar above, L2 + Content below */}
       <div className="flex flex-col flex-1 min-w-0">
-        {/* Top bar — sits inside page content, right of L1 */}
         <TopBar />
-
-        {/* L2 + Content */}
         <div className="flex flex-1 min-h-0">
-          <SideNavL2 section={currentSection} activeItem={activeItem} onItemChange={setActiveItem} />
-          <div className="flex-1 min-w-0 overflow-y-auto">
-            {activeItem === 'welcome' ? <HomeContent /> : activeItem === 'col-overview' ? <DataCollectionOverview /> : activeItem === 'col-asset-list' ? <AssetListContent /> : activeItem === 'rep-overview' ? <ReportsOverviewContent /> : <ContentArea />}
-          </div>
+          <SideNavL2 activeSection={activeSection} activeItem={activeItem} onItemChange={setActiveItem} />
+          {activeItem === 'welcome' ? <HomeContent /> : activeItem === 'col-asset-list' ? <AssetListContent /> : activeItem === 'rep-overview' ? <ReportsOverviewContent /> : <ContentArea />}
         </div>
       </div>
     </div>
