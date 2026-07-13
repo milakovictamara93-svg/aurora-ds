@@ -8,13 +8,7 @@ import {
   AccessibilityList, Code,
 } from '@/app/components-lib/ui/ComponentPage'
 import { SpecTable } from '@/app/components-lib/ui/ComponentTabs'
-import {
-  PencilIcon,
-  TrashIcon,
-  EllipsisHorizontalIcon,
-  ArrowDownTrayIcon,
-  ArchiveBoxIcon,
-} from '@heroicons/react/20/solid'
+import Tag from '@/app/components-lib/ui/Tag'
 
 // ── Demo data ─────────────────────────────────────────────────────────────────
 
@@ -94,12 +88,45 @@ const SIMPLE_COLS: ColumnDef<Building>[] = [
   { key: 'energy', label: 'Energy', align: 'right' },
 ]
 
+// ── Demo columns for row action examples ─────────────────────────────────────
+
+const ICON_ONLY_COLS: ColumnDef<Building>[] = [
+  { key: 'name', label: 'Building', sortable: true },
+  { key: 'type', label: 'Type' },
+  {
+    key: 'status', label: 'Status', type: 'badge',
+    accessor: r => r.status,
+    badgeVariant: r => STATUS_BADGE[r.status],
+  },
+  { key: '_toolbar', label: '', type: 'toolbar', width: 'w-24' },
+]
+
+const TEXT_ACTION_COLS: ColumnDef<Building>[] = [
+  { key: 'name', label: 'Building' },
+  { key: 'nabers', label: 'NABERS' },
+  {
+    key: '_action', label: 'Action', type: 'actions', align: 'right',
+    render: () => (
+      <span className="text-[13px] text-[#1258F8] dark:text-[#60A5FA] hover:underline cursor-pointer">
+        Recalculate
+      </span>
+    ),
+  },
+]
+
+const BULK_COLS: ColumnDef<Building>[] = [
+  { key: 'name', label: 'Building' },
+  { key: 'type', label: 'Type' },
+  { key: 'energy', label: 'Energy', align: 'right' },
+]
+
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 const TOTAL = '09'
 
 export default function TablePage() {
   const [selected, setSelected] = useState<(string | number)[]>([])
+  const [bulkSelected, setBulkSelected] = useState<(string | number)[]>([1, 2])
 
   return (
     <ComponentPageLayout>
@@ -276,128 +303,60 @@ export default function TablePage() {
         </p>
 
         {/* ── Visual examples ── */}
-        <div className="space-y-6 mb-8">
+        <div className="space-y-8 mb-8">
 
           {/* Icon-only example */}
           <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="inline-flex items-center h-5 px-2 rounded-full text-[11px] font-semibold bg-[#DCFCE7] text-[#166534] dark:bg-[#22C55E]/20 dark:text-[#22C55E]">Preferred</span>
+            <div className="flex items-center gap-2 mb-3">
+              <Tag system="success" size="small" label="Preferred" showCount={false} showRemove={false} />
               <p className="text-[14px] font-medium text-[#111827] dark:text-white">Icon-only (hover-reveal toolbar)</p>
             </div>
-            <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
-              <table className="w-full text-[13px]">
-                <thead>
-                  <tr className="bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
-                    <th className="text-left px-3 py-2.5 text-[11px] font-semibold tracking-wide uppercase text-[#505867] dark:text-[#9CA3AF]">Building</th>
-                    <th className="text-left px-3 py-2.5 text-[11px] font-semibold tracking-wide uppercase text-[#505867] dark:text-[#9CA3AF]">Type</th>
-                    <th className="text-left px-3 py-2.5 text-[11px] font-semibold tracking-wide uppercase text-[#505867] dark:text-[#9CA3AF]">Status</th>
-                    <th className="w-24 px-3 py-2.5" />
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-b border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117]">
-                    <td className="px-3 py-2.5 text-[#111827] dark:text-white">Scaler HQ</td>
-                    <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Office</td>
-                    <td className="px-3 py-2.5"><span className="inline-flex items-center h-5 px-2 rounded-full text-[11px] font-medium bg-[#DCFCE7] text-[#166534] dark:bg-[#22C55E]/20 dark:text-[#22C55E]">Active</span></td>
-                    <td className="px-3 py-2.5 text-right opacity-40 text-[12px] text-[#9CA3AF] italic">hover to reveal</td>
-                  </tr>
-                  <tr className="border-b border-[#EDEEF1] dark:border-[#1F2430] bg-[#F7F8F8] dark:bg-white/[0.03] group/demo">
-                    <td className="px-3 py-2.5 text-[#111827] dark:text-white">Meridian Tower</td>
-                    <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Office</td>
-                    <td className="px-3 py-2.5"><span className="inline-flex items-center h-5 px-2 rounded-full text-[11px] font-medium bg-[#DCFCE7] text-[#166534] dark:bg-[#22C55E]/20 dark:text-[#22C55E]">Active</span></td>
-                    <td className="px-3 py-2.5">
-                      <div className="flex items-center justify-end gap-0.5">
-                        <span className="w-6 h-6 flex items-center justify-center rounded text-[#505867] dark:text-[#9CA3AF] bg-[#EDEEF1] dark:bg-white/10"><PencilIcon className="w-3.5 h-3.5" /></span>
-                        <span className="w-6 h-6 flex items-center justify-center rounded text-[#F87171] bg-[#FEF2F2] dark:bg-[#7f1d1d]/20"><TrashIcon className="w-3.5 h-3.5" /></span>
-                        <span className="w-6 h-6 flex items-center justify-center rounded text-[#505867] dark:text-[#9CA3AF] bg-[#EDEEF1] dark:bg-white/10"><EllipsisHorizontalIcon className="w-3.5 h-3.5" /></span>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr className="bg-white dark:bg-[#0D1117]">
-                    <td className="px-3 py-2.5 text-[#111827] dark:text-white">West End Plaza</td>
-                    <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Retail</td>
-                    <td className="px-3 py-2.5"><span className="inline-flex items-center h-5 px-2 rounded-full text-[11px] font-medium bg-[#FEF9C3] text-[#854D0E] dark:bg-[#FACC15]/20 dark:text-[#FACC15]">Pending</span></td>
-                    <td className="px-3 py-2.5" />
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <Table
+              columns={ICON_ONLY_COLS}
+              data={BUILDINGS.slice(0, 3)}
+              label="Icon-only row actions demo"
+            />
+            <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mt-2">
+              Hover any row to reveal the edit, delete, and overflow menu icons.
+            </p>
           </div>
 
           {/* Icon + label example */}
           <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="inline-flex items-center h-5 px-2 rounded-full text-[11px] font-semibold bg-[#EEF6FF] text-[#1258F8] dark:bg-[#1258F8]/20 dark:text-[#60A5FA]">Required for bulk</span>
+            <div className="flex items-center gap-2 mb-3">
+              <Tag system="default" size="small" label="Required for bulk" showCount={false} showRemove={false} />
               <p className="text-[14px] font-medium text-[#111827] dark:text-white">Icon + label (floating action bar)</p>
             </div>
-            <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
-              <table className="w-full text-[13px]">
-                <thead>
-                  <tr className="bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
-                    <th className="w-10 px-3 py-2.5"><span className="block w-4 h-4 rounded border-2 border-[#1258F8] bg-[#1258F8] relative"><svg className="w-3 h-3 text-white absolute top-0.5 left-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span></th>
-                    <th className="text-left px-3 py-2.5 text-[11px] font-semibold tracking-wide uppercase text-[#505867] dark:text-[#9CA3AF]">Building</th>
-                    <th className="text-left px-3 py-2.5 text-[11px] font-semibold tracking-wide uppercase text-[#505867] dark:text-[#9CA3AF]">Type</th>
-                    <th className="text-left px-3 py-2.5 text-[11px] font-semibold tracking-wide uppercase text-[#505867] dark:text-[#9CA3AF]">Energy</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-b border-[#EDEEF1] dark:border-[#1F2430] bg-[#EEF6FF] dark:bg-white/5">
-                    <td className="px-3 py-2.5"><span className="block w-4 h-4 rounded border-2 border-[#1258F8] bg-[#1258F8] relative"><svg className="w-3 h-3 text-white absolute top-0.5 left-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span></td>
-                    <td className="px-3 py-2.5 text-[#111827] dark:text-white">Scaler HQ</td>
-                    <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Office</td>
-                    <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">1,240 MWh</td>
-                  </tr>
-                  <tr className="border-b border-[#EDEEF1] dark:border-[#1F2430] bg-[#EEF6FF] dark:bg-white/5">
-                    <td className="px-3 py-2.5"><span className="block w-4 h-4 rounded border-2 border-[#1258F8] bg-[#1258F8] relative"><svg className="w-3 h-3 text-white absolute top-0.5 left-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span></td>
-                    <td className="px-3 py-2.5 text-[#111827] dark:text-white">Meridian Tower</td>
-                    <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Office</td>
-                    <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">2,810 MWh</td>
-                  </tr>
-                </tbody>
-              </table>
-              {/* Floating action bar */}
-              <div className="flex items-center justify-center py-3 border-t border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117]">
-                <div className="inline-flex items-center gap-3 rounded-full bg-[#F7F8F8] dark:bg-[#1F2430] px-4 py-1.5 text-[13px]">
-                  <span className="font-medium text-[#111827] dark:text-white">2 selected</span>
-                  <span className="w-px h-4 bg-[#EDEEF1] dark:bg-[#505867]" />
-                  <button className="flex items-center gap-1.5 font-medium text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827]"><ArrowDownTrayIcon className="w-3.5 h-3.5" />Export</button>
-                  <button className="flex items-center gap-1.5 font-medium text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827]"><ArchiveBoxIcon className="w-3.5 h-3.5" />Archive</button>
-                  <button className="flex items-center gap-1.5 font-medium text-[#F87171] hover:text-[#EF4444]"><TrashIcon className="w-3.5 h-3.5" />Delete</button>
-                </div>
-              </div>
-            </div>
+            <Table
+              columns={BULK_COLS}
+              data={BUILDINGS.slice(0, 3)}
+              selectable
+              selectedIds={bulkSelected}
+              onSelectionChange={setBulkSelected}
+              actions={[
+                { label: 'Export',  onClick: () => {} },
+                { label: 'Archive', onClick: () => {} },
+                { label: 'Delete',  onClick: () => {} },
+              ]}
+              label="Icon + label row actions demo"
+            />
+            <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mt-2">
+              Select rows to trigger the floating action bar with icon + label buttons.
+            </p>
           </div>
 
           {/* Text-only example (discouraged) */}
           <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="inline-flex items-center h-5 px-2 rounded-full text-[11px] font-semibold bg-[#FEF2F2] text-[#991B1B] dark:bg-[#F87171]/20 dark:text-[#F87171]">Discouraged</span>
+            <div className="flex items-center gap-2 mb-3">
+              <Tag system="error" size="small" label="Discouraged" showCount={false} showRemove={false} />
               <p className="text-[14px] font-medium text-[#111827] dark:text-white">Text-only (last resort)</p>
             </div>
-            <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
-              <table className="w-full text-[13px]">
-                <thead>
-                  <tr className="bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
-                    <th className="text-left px-3 py-2.5 text-[11px] font-semibold tracking-wide uppercase text-[#505867] dark:text-[#9CA3AF]">Building</th>
-                    <th className="text-left px-3 py-2.5 text-[11px] font-semibold tracking-wide uppercase text-[#505867] dark:text-[#9CA3AF]">NABERS</th>
-                    <th className="text-right px-3 py-2.5 text-[11px] font-semibold tracking-wide uppercase text-[#505867] dark:text-[#9CA3AF]">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-b border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117]">
-                    <td className="px-3 py-2.5 text-[#111827] dark:text-white">Scaler HQ</td>
-                    <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">5.5 Stars</td>
-                    <td className="px-3 py-2.5 text-right"><span className="text-[#1258F8] dark:text-[#60A5FA] hover:underline cursor-pointer">Recalculate</span></td>
-                  </tr>
-                  <tr className="bg-white dark:bg-[#0D1117]">
-                    <td className="px-3 py-2.5 text-[#111827] dark:text-white">Harbor View</td>
-                    <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">4.0 Stars</td>
-                    <td className="px-3 py-2.5 text-right"><span className="text-[#1258F8] dark:text-[#60A5FA] hover:underline cursor-pointer">Recalculate</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <p className="text-[12px] text-[#9CA3AF] dark:text-[#6B7280] mt-2 italic">
+            <Table
+              columns={TEXT_ACTION_COLS}
+              data={BUILDINGS.slice(0, 2)}
+              label="Text-only row actions demo"
+            />
+            <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mt-2">
               Only use when no recognizable icon exists for the action. Must use brand color link styling.
             </p>
           </div>
@@ -406,9 +365,9 @@ export default function TablePage() {
 
         <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden text-[13px]">
           <div className="grid grid-cols-[140px_1fr_1fr] gap-px bg-[#EDEEF1] dark:bg-[#1F2430]">
-            <div className="bg-[#F7F8F8] dark:bg-[#0D1117] px-3 py-2.5 font-semibold text-[11px] tracking-wide uppercase text-[#505867] dark:text-[#9CA3AF]">Format</div>
-            <div className="bg-[#F7F8F8] dark:bg-[#0D1117] px-3 py-2.5 font-semibold text-[11px] tracking-wide uppercase text-[#505867] dark:text-[#9CA3AF]">When to use</div>
-            <div className="bg-[#F7F8F8] dark:bg-[#0D1117] px-3 py-2.5 font-semibold text-[11px] tracking-wide uppercase text-[#505867] dark:text-[#9CA3AF]">Rules</div>
+            <div className="bg-[#F7F8F8] dark:bg-[#0D1117] px-3 py-2.5 font-semibold text-[11px] text-[#505867] dark:text-[#9CA3AF]">Format</div>
+            <div className="bg-[#F7F8F8] dark:bg-[#0D1117] px-3 py-2.5 font-semibold text-[11px] text-[#505867] dark:text-[#9CA3AF]">When to use</div>
+            <div className="bg-[#F7F8F8] dark:bg-[#0D1117] px-3 py-2.5 font-semibold text-[11px] text-[#505867] dark:text-[#9CA3AF]">Rules</div>
 
             <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 font-medium text-[#1F2430] dark:text-white">Icon-only</div>
             <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Default for individual row actions. Standard operations users perform frequently: edit, delete, view, download.</div>
