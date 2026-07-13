@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useId } from 'react'
+import { useState, useMemo, useId, useRef, useEffect } from 'react'
 import {
   ChevronUpDownIcon,
   ChevronUpIcon,
@@ -9,9 +9,10 @@ import {
   ChevronRightIcon,
   EllipsisVerticalIcon,
 } from '@heroicons/react/20/solid'
-import { PencilIcon } from '@heroicons/react/24/outline'
+import { PencilIcon, EyeIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Tag from './Tag'
+import Tooltip from './Tooltip'
 import type { IndicatorSystem } from './Indicator'
 
 // ── Types ──────────────────────────────────────────────────────────────────────
@@ -97,6 +98,72 @@ function SortIcon({ direction }: { direction: SortDirection }) {
   if (direction === 'asc')  return <ChevronUpIcon   className="w-3.5 h-3.5 text-[#1258F8]" />
   if (direction === 'desc') return <ChevronDownIcon  className="w-3.5 h-3.5 text-[#1258F8]" />
   return <ChevronUpDownIcon className="w-3.5 h-3.5 text-[#C4C9D4] group-hover:text-[#505867]" />
+}
+
+// ── Overflow menu ─────────────────────────────────────────────────────────────
+
+function OverflowMenu() {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+    function close(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    function escape(e: KeyboardEvent) {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('mousedown', close)
+    document.addEventListener('keydown', escape)
+    return () => { document.removeEventListener('mousedown', close); document.removeEventListener('keydown', escape) }
+  }, [open])
+
+  const items = [
+    { label: 'Duplicate', onClick: () => {} },
+    { label: 'Export', onClick: () => {} },
+    { label: 'Archive', onClick: () => {} },
+    { label: 'Delete', onClick: () => {}, danger: true },
+  ]
+
+  return (
+    <div ref={ref} className="relative">
+      <Tooltip content="More actions" placement="top-right">
+        <button
+          onClick={() => setOpen(v => !v)}
+          className="w-6 h-6 flex items-center justify-center rounded-lg text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors"
+          aria-label="More actions"
+          aria-haspopup="menu"
+          aria-expanded={open}
+        >
+          <EllipsisVerticalIcon className="w-4 h-4" />
+        </button>
+      </Tooltip>
+      {open && (
+        <div
+          role="menu"
+          className="absolute right-0 top-full mt-1 z-50 min-w-[160px] bg-white dark:bg-[#111827] border border-[#EDEEF1] dark:border-[#1F2430] rounded-lg shadow-[0px_1px_4px_0px_rgba(12,12,13,0.10),0px_1px_4px_0px_rgba(12,12,13,0.05)] py-1"
+        >
+          {items.map((item, i) => (
+            <button
+              key={item.label}
+              role="menuitem"
+              onClick={() => { item.onClick(); setOpen(false) }}
+              className={clsx(
+                'w-full text-left px-3 py-1.5 text-[13px] transition-colors',
+                item.danger
+                  ? 'text-[#DC2626] hover:bg-[#FEF2F2] dark:hover:bg-[#450a0a]/30'
+                  : 'text-[#1F2430] dark:text-white hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430]',
+                i === items.length - 1 && items[i].danger && 'border-t border-[#EDEEF1] dark:border-[#1F2430] mt-1 pt-1.5',
+              )}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
 }
 
 // ── Skeleton row ──────────────────────────────────────────────────────────────
@@ -312,12 +379,17 @@ function Cell<T extends { id: string | number }>({
     case 'toolbar': {
       return (
         <div className="flex items-center">
-          <button className="w-6 h-6 flex items-center justify-center rounded text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors" aria-label="Edit">
-            <PencilIcon className="w-4 h-4" />
-          </button>
-          <button className="w-6 h-6 flex items-center justify-center rounded-lg text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors" aria-label="More actions">
-            <EllipsisVerticalIcon className="w-4 h-4" />
-          </button>
+          <Tooltip content="Edit" placement="top-right">
+            <button className="w-6 h-6 flex items-center justify-center rounded text-[#1258F8] hover:bg-[#1258F8]/10 transition-colors" aria-label="Edit">
+              <PencilIcon className="w-4 h-4" />
+            </button>
+          </Tooltip>
+          <Tooltip content="View" placement="top-right">
+            <button className="w-6 h-6 flex items-center justify-center rounded text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors" aria-label="View">
+              <EyeIcon className="w-4 h-4" />
+            </button>
+          </Tooltip>
+          <OverflowMenu />
         </div>
       )
     }
