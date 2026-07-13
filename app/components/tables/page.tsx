@@ -103,13 +103,13 @@ const ICON_ONLY_COLS: ColumnDef<Building>[] = [
 
 const TEXT_ACTION_COLS: ColumnDef<Building>[] = [
   { key: 'name', label: 'Building' },
-  { key: 'nabers', label: 'NABERS' },
+  { key: 'type', label: 'Type' },
   {
-    key: '_action', label: 'Action', type: 'actions', align: 'right',
+    key: '_action', label: '', type: 'actions', align: 'right',
     render: () => (
-      <span className="text-[13px] text-[#1258F8] dark:text-[#60A5FA] hover:underline cursor-pointer">
-        Recalculate
-      </span>
+      <a href="#" className="text-[13px] text-[#1258F8] underline underline-offset-2 hover:text-[#1146E4] transition-colors">
+        Reassign audit
+      </a>
     ),
   },
 ]
@@ -378,7 +378,7 @@ export default function TablePage() {
             <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Always pair icon with text label. This is the required format for the floating action bar.</div>
 
             <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 font-medium text-[#1F2430] dark:text-white">Text-only</div>
-            <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Last resort only. Reserved for domain-specific actions where no recognizable icon exists (e.g. "Recalculate NABERS").</div>
+            <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Last resort only. Reserved for domain-specific actions where no recognizable icon exists (e.g. "Reassign audit").</div>
             <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Avoid unless absolutely necessary. One per row maximum. Must use link styling (brand color, underline on hover). Never mix with icon-only toolbar in the same row.</div>
           </div>
         </div>
