@@ -89,7 +89,7 @@ const SIMPLE_COLS: ColumnDef<Building>[] = [
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
-const TOTAL = '08'
+const TOTAL = '09'
 
 export default function TablePage() {
   const [selected, setSelected] = useState<(string | number)[]>([])
@@ -262,8 +262,54 @@ export default function TablePage() {
         ]} />
       </SectionWrapper>
 
-      {/* ── 07 Forbidden and refuse ─────────────────────────────────────────── */}
-      <SectionWrapper id="forbidden" num="07" total={TOTAL} title="Forbidden and refuse">
+      {/* ── 07 Row action formats ────────────────────────────────────────────── */}
+      <SectionWrapper id="row-actions" num="07" total={TOTAL} title="Row action formats">
+        <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-4">
+          Three formats exist for row-level actions. Default to icon-only toolbar. Text-only actions are strongly discouraged.
+        </p>
+
+        <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden text-[13px]">
+          <div className="grid grid-cols-[140px_1fr_1fr] gap-px bg-[#EDEEF1] dark:bg-[#1F2430]">
+            <div className="bg-[#F7F8F8] dark:bg-[#0D1117] px-3 py-2.5 font-semibold text-[11px] tracking-wide uppercase text-[#505867] dark:text-[#9CA3AF]">Format</div>
+            <div className="bg-[#F7F8F8] dark:bg-[#0D1117] px-3 py-2.5 font-semibold text-[11px] tracking-wide uppercase text-[#505867] dark:text-[#9CA3AF]">When to use</div>
+            <div className="bg-[#F7F8F8] dark:bg-[#0D1117] px-3 py-2.5 font-semibold text-[11px] tracking-wide uppercase text-[#505867] dark:text-[#9CA3AF]">Rules</div>
+
+            <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 font-medium text-[#1F2430] dark:text-white">Icon-only</div>
+            <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Default for individual row actions. Standard operations users perform frequently: edit, delete, view, download.</div>
+            <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Max 2-3 visible icons. Hover-reveal with keyboard accessibility (visible on row focus). Must have aria-label. Use 20px icons. Include overflow menu (ellipsis) when 3+ actions exist.</div>
+
+            <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 font-medium text-[#1F2430] dark:text-white">Icon + label</div>
+            <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Bulk actions on selected rows (floating action bar). Also use when an icon alone would be ambiguous for the action.</div>
+            <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Always pair icon with text label. This is the required format for the floating action bar.</div>
+
+            <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 font-medium text-[#1F2430] dark:text-white">Text-only</div>
+            <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Last resort only. Reserved for domain-specific actions where no recognizable icon exists (e.g. "Recalculate NABERS").</div>
+            <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Avoid unless absolutely necessary. One per row maximum. Must use link styling (brand color, underline on hover). Never mix with icon-only toolbar in the same row.</div>
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <RequiredPairings rules={[
+            <>Default to icon-only toolbar for individual row actions.</>,
+            <>Use icon + label in the floating action bar for bulk operations.</>,
+            <>Put destructive actions in overflow menu or behind confirmation.</>,
+            <>Ensure hover-reveal actions are keyboard accessible (visible on focus).</>,
+            <>Provide aria-label on every icon-only button.</>,
+          ]} />
+        </div>
+
+        <div className="mt-6">
+          <ForbiddenRefuse rules={[
+            { rule: <>Use text-only actions when a standard icon exists (edit, delete, view, download, copy, share).</>, response: <>"Use icon-only toolbar. These actions have universally recognized icons."</> },
+            { rule: <>Mix text-only and icon-only actions in the same row.</>, response: <>"Pick one format per row. Mixing creates visual inconsistency."</> },
+            { rule: <>Show more than 3 action icons without an overflow menu.</>, response: <>"Collapse additional actions into an ellipsis overflow menu."</> },
+            { rule: <>Use text-only as a default action format.</>, response: <>"Text-only is a last resort. Default to icon-only toolbar."</> },
+          ]} />
+        </div>
+      </SectionWrapper>
+
+      {/* ── 08 Forbidden and refuse ─────────────────────────────────────────── */}
+      <SectionWrapper id="forbidden" num="08" total={TOTAL} title="Forbidden and refuse">
         <ForbiddenRefuse rules={[
           { rule: <>Render a table without column headers.</>, response: <>"Column headers are required for accessibility and comprehension."</> },
           { rule: <>Use a table for layout purposes.</>, response: <>"Tables are for data. Use CSS grid or flex for layout."</> },
@@ -272,7 +318,7 @@ export default function TablePage() {
       </SectionWrapper>
 
       {/* ── 08 Accessibility ────────────────────────────────────────────────── */}
-      <SectionWrapper id="accessibility" num="08" total={TOTAL} title="Accessibility">
+      <SectionWrapper id="accessibility" num="09" total={TOTAL} title="Accessibility">
         <AccessibilityList items={[
           { key: 'Role', value: <>Native <Code>&lt;table&gt;</Code> with <Code>&lt;thead&gt;</Code>, <Code>&lt;tbody&gt;</Code>, <Code>&lt;th scope="col"&gt;</Code>.</> },
           { key: 'Sorting', value: <><Code>aria-sort="ascending|descending|none"</Code> on sortable column headers.</> },
