@@ -73,7 +73,7 @@ const FULL_COLS: ColumnDef<Building>[] = [
   },
   { key: 'nabers',   label: 'NABERS',  sortable: true, width: 'min-w-[100px]' },
   { key: 'manager',  label: 'Manager', sortable: true, width: 'min-w-[110px]' },
-  { key: '_toolbar', label: '',        type: 'toolbar', width: 'w-24' },
+  { key: '_toolbar', label: 'Actions',  type: 'toolbar', width: 'w-24' },
 ]
 
 const SIMPLE_COLS: ColumnDef<Building>[] = [
@@ -98,14 +98,14 @@ const ICON_ONLY_COLS: ColumnDef<Building>[] = [
     accessor: r => r.status,
     badgeVariant: r => STATUS_BADGE[r.status],
   },
-  { key: '_toolbar', label: '', type: 'toolbar', width: 'w-24' },
+  { key: '_toolbar', label: 'Actions', type: 'toolbar', width: 'w-24' },
 ]
 
 const TEXT_ACTION_COLS: ColumnDef<Building>[] = [
   { key: 'name', label: 'Building' },
   { key: 'type', label: 'Type' },
   {
-    key: '_action', label: '', type: 'actions', align: 'right',
+    key: '_action', label: 'Actions', type: 'actions', align: 'right',
     render: () => (
       <a href="#" className="text-[13px] text-[#1258F8] underline underline-offset-2 hover:text-[#1146E4] transition-colors">
         Reassign audit
