@@ -7,10 +7,9 @@ import {
   ChevronDownIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
-  PencilIcon,
-  TrashIcon,
-  EllipsisHorizontalIcon,
+  EllipsisVerticalIcon,
 } from '@heroicons/react/20/solid'
+import { PencilIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Tag from './Tag'
 import type { IndicatorSystem } from './Indicator'
@@ -312,15 +311,12 @@ function Cell<T extends { id: string | number }>({
     }
     case 'toolbar': {
       return (
-        <div className="flex items-center gap-0.5 opacity-0 group-hover/row:opacity-100 transition-opacity">
-          <button className="w-6 h-6 flex items-center justify-center rounded text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors" aria-label="Edit">
-            <PencilIcon className="w-3.5 h-3.5" />
+        <div className="flex items-center">
+          <button className="w-6 h-6 flex items-center justify-center rounded text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors" aria-label="Edit">
+            <PencilIcon className="w-4 h-4" />
           </button>
-          <button className="w-6 h-6 flex items-center justify-center rounded text-[#9CA3AF] hover:text-[#F87171] hover:bg-[#FEF2F2] dark:hover:bg-[#7f1d1d]/20 transition-colors" aria-label="Delete">
-            <TrashIcon className="w-3.5 h-3.5" />
-          </button>
-          <button className="w-6 h-6 flex items-center justify-center rounded text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors" aria-label="More options">
-            <EllipsisHorizontalIcon className="w-3.5 h-3.5" />
+          <button className="w-6 h-6 flex items-center justify-center rounded-lg text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors" aria-label="More actions">
+            <EllipsisVerticalIcon className="w-4 h-4" />
           </button>
         </div>
       )
