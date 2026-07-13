@@ -325,7 +325,7 @@ function ActionBar({
             onClick={a.onClick}
             className="h-7 px-3 flex items-center gap-1.5 rounded text-[13px] font-medium text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors"
           >
-            <span className="text-[#9785FF] text-[10px]">✦</span>
+            <span className="text-[#505867] dark:text-[#9CA3AF] text-[10px]">✦</span>
             {a.label}
           </button>
         ))}
