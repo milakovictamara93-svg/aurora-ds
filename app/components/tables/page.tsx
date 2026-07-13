@@ -299,17 +299,73 @@ export default function TablePage() {
       {/* ── 07 Row action formats ────────────────────────────────────────────── */}
       <SectionWrapper id="row-actions" num="07" total={TOTAL} title="Row action formats">
         <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed mb-6">
-          Three formats exist for row-level actions. Default to icon-only toolbar. Text-only actions are strongly discouraged.
+          Every row action falls into one of three tiers. The tier determines its visibility, color, and format.
         </p>
 
+        {/* ── Action hierarchy table ── */}
+        <p className="text-[14px] font-medium text-[#111827] dark:text-white mb-3">Action hierarchy</p>
+        <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden text-[13px] mb-8">
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
+                  <th className="text-left px-3 py-2.5 text-[11px] font-semibold text-[#505867] dark:text-[#9CA3AF] w-[140px]" />
+                  <th className="text-left px-3 py-2.5 text-[11px] font-semibold text-[#505867] dark:text-[#9CA3AF]">Primary action</th>
+                  <th className="text-left px-3 py-2.5 text-[11px] font-semibold text-[#505867] dark:text-[#9CA3AF]">Secondary action</th>
+                  <th className="text-left px-3 py-2.5 text-[11px] font-semibold text-[#505867] dark:text-[#9CA3AF]">Additional actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#EDEEF1] dark:divide-[#1F2430]">
+                <tr className="bg-white dark:bg-[#0D1117]">
+                  <td className="px-3 py-2.5 font-medium text-[#1F2430] dark:text-white">Example</td>
+                  <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Edit</td>
+                  <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">View</td>
+                  <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Duplicate, Export, Archive, Delete</td>
+                </tr>
+                <tr className="bg-white dark:bg-[#0D1117]">
+                  <td className="px-3 py-2.5 font-medium text-[#1F2430] dark:text-white">Format</td>
+                  <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Icon-only, always visible</td>
+                  <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Icon-only, always visible</td>
+                  <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Overflow menu (vertical ellipsis)</td>
+                </tr>
+                <tr className="bg-white dark:bg-[#0D1117]">
+                  <td className="px-3 py-2.5 font-medium text-[#1F2430] dark:text-white">Color</td>
+                  <td className="px-3 py-2.5"><span className="inline-flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-[#1258F8]" />Blue 600 <Code>#1258F8</Code></span></td>
+                  <td className="px-3 py-2.5"><span className="inline-flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-[#505867]" />Grey 600 <Code>#505867</Code></span></td>
+                  <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Grey 600 trigger. Menu items default text. Destructive in <span className="inline-flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-[#DC2626]" />Red <Code>#DC2626</Code></span></td>
+                </tr>
+                <tr className="bg-white dark:bg-[#0D1117]">
+                  <td className="px-3 py-2.5 font-medium text-[#1F2430] dark:text-white">Visibility</td>
+                  <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Always visible</td>
+                  <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Always visible</td>
+                  <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Behind ellipsis click</td>
+                </tr>
+                <tr className="bg-white dark:bg-[#0D1117]">
+                  <td className="px-3 py-2.5 font-medium text-[#1F2430] dark:text-white">Tooltip</td>
+                  <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Yes, label on hover</td>
+                  <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Yes, label on hover</td>
+                  <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Not needed (menu has labels)</td>
+                </tr>
+                <tr className="bg-white dark:bg-[#0D1117]">
+                  <td className="px-3 py-2.5 font-medium text-[#1F2430] dark:text-white">Max per row</td>
+                  <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">1</td>
+                  <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">1</td>
+                  <td className="px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">No limit (inside menu)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
         {/* ── Visual examples ── */}
+        <p className="text-[14px] font-medium text-[#111827] dark:text-white mb-3">Individual row actions</p>
         <div className="space-y-8 mb-8">
 
           {/* Icon-only example */}
           <div>
             <div className="flex items-center gap-2 mb-3">
               <Tag system="success" size="small" label="Preferred" showCount={false} showRemove={false} />
-              <p className="text-[14px] font-medium text-[#111827] dark:text-white">Icon-only (hover-reveal toolbar)</p>
+              <p className="text-[14px] font-medium text-[#111827] dark:text-white">Icon-only toolbar</p>
             </div>
             <Table
               columns={ICON_ONLY_COLS}
@@ -317,7 +373,7 @@ export default function TablePage() {
               label="Icon-only row actions demo"
             />
             <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mt-2">
-              Hover any row to reveal the edit, delete, and overflow menu icons.
+              Primary action (edit) in blue, secondary action (view) in grey. Hover each icon to see the tooltip label. Click the ellipsis to open the overflow menu.
             </p>
           </div>
 
@@ -341,7 +397,7 @@ export default function TablePage() {
               label="Icon + label row actions demo"
             />
             <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mt-2">
-              Select rows to trigger the floating action bar with icon + label buttons.
+              Select rows to trigger the floating action bar. Bulk actions always use icon + label format.
             </p>
           </div>
 
@@ -357,48 +413,32 @@ export default function TablePage() {
               label="Text-only row actions demo"
             />
             <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mt-2">
-              Only use when no recognizable icon exists for the action. Must use brand color link styling.
+              Only use when no recognizable icon exists for a domain-specific action. Must use link styling (blue 600, underline on hover). One per row maximum.
             </p>
           </div>
 
         </div>
 
-        <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden text-[13px]">
-          <div className="grid grid-cols-[140px_1fr_1fr] gap-px bg-[#EDEEF1] dark:bg-[#1F2430]">
-            <div className="bg-[#F7F8F8] dark:bg-[#0D1117] px-3 py-2.5 font-semibold text-[11px] text-[#505867] dark:text-[#9CA3AF]">Format</div>
-            <div className="bg-[#F7F8F8] dark:bg-[#0D1117] px-3 py-2.5 font-semibold text-[11px] text-[#505867] dark:text-[#9CA3AF]">When to use</div>
-            <div className="bg-[#F7F8F8] dark:bg-[#0D1117] px-3 py-2.5 font-semibold text-[11px] text-[#505867] dark:text-[#9CA3AF]">Rules</div>
-
-            <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 font-medium text-[#1F2430] dark:text-white">Icon-only</div>
-            <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Default for individual row actions. Standard operations users perform frequently: edit, delete, view, download.</div>
-            <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Max 2-3 visible icons. Hover-reveal with keyboard accessibility (visible on row focus). Must have aria-label. Use 20px icons. Include overflow menu (ellipsis) when 3+ actions exist.</div>
-
-            <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 font-medium text-[#1F2430] dark:text-white">Icon + label</div>
-            <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Bulk actions on selected rows (floating action bar). Also use when an icon alone would be ambiguous for the action.</div>
-            <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Always pair icon with text label. This is the required format for the floating action bar.</div>
-
-            <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 font-medium text-[#1F2430] dark:text-white">Text-only</div>
-            <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Last resort only. Reserved for domain-specific actions where no recognizable icon exists (e.g. "Reassign audit").</div>
-            <div className="bg-white dark:bg-[#0D1117] px-3 py-2.5 text-[#505867] dark:text-[#9CA3AF]">Avoid unless absolutely necessary. One per row maximum. Must use link styling (brand color, underline on hover). Never mix with icon-only toolbar in the same row.</div>
-          </div>
-        </div>
-
+        {/* ── Rules ── */}
         <div className="mt-6">
           <RequiredPairings rules={[
-            <>Default to icon-only toolbar for individual row actions.</>,
-            <>Use icon + label in the floating action bar for bulk operations.</>,
-            <>Put destructive actions in overflow menu or behind confirmation.</>,
-            <>Ensure hover-reveal actions are keyboard accessible (visible on focus).</>,
-            <>Provide aria-label on every icon-only button.</>,
+            <>One primary action max per row. It gets blue <Code>#1258F8</Code> to draw attention.</>,
+            <>One secondary action max per row. Grey <Code>#505867</Code>, visually recedes.</>,
+            <>All other actions go in the overflow menu behind the vertical ellipsis.</>,
+            <>Icons are always visible. Labels appear as tooltips on hover.</>,
+            <>Destructive actions (delete, remove) always in the overflow menu, never as a visible icon. Styled in danger red <Code>#DC2626</Code>.</>,
+            <>Use icon + label format for bulk actions in the floating action bar.</>,
+            <>Every icon button must have an <Code>aria-label</Code>.</>,
           ]} />
         </div>
 
         <div className="mt-6">
           <ForbiddenRefuse rules={[
+            { rule: <>Show more than 1 primary + 1 secondary icon in a row.</>, response: <>"Two visible icons plus the overflow menu is the maximum. Additional actions go in the menu."</> },
             { rule: <>Use text-only actions when a standard icon exists (edit, delete, view, download, copy, share).</>, response: <>"Use icon-only toolbar. These actions have universally recognized icons."</> },
-            { rule: <>Mix text-only and icon-only actions in the same row.</>, response: <>"Pick one format per row. Mixing creates visual inconsistency."</> },
-            { rule: <>Show more than 3 action icons without an overflow menu.</>, response: <>"Collapse additional actions into an ellipsis overflow menu."</> },
+            { rule: <>Show destructive actions as a visible icon button.</>, response: <>"Destructive actions belong in the overflow menu with danger red styling and a separator."</> },
             { rule: <>Use text-only as a default action format.</>, response: <>"Text-only is a last resort. Default to icon-only toolbar."</> },
+            { rule: <>Mix text-only and icon-only actions in the same row.</>, response: <>"Pick one format per row. Mixing creates visual inconsistency."</> },
           ]} />
         </div>
       </SectionWrapper>
