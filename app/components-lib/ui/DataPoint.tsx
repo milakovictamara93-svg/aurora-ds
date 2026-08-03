@@ -183,8 +183,8 @@ export function DataTrend({
 
   const numbersEl = (
     <span className="inline-flex items-baseline leading-none">
-      <span className="text-[10px] font-medium text-grey-950 dark:text-white">{numPart}</span>
-      {hasPercent && <span className="text-[10px] font-normal text-grey-600 dark:text-grey-400">%</span>}
+      <span className="text-[10px] font-data font-medium text-grey-950 dark:text-white">{numPart}</span>
+      {hasPercent && <span className="text-[10px] font-data font-normal text-grey-600 dark:text-grey-400">%</span>}
       {label && <span className="ml-1 text-[10px] font-normal text-grey-500 dark:text-grey-400">{label}</span>}
     </span>
   )
@@ -205,7 +205,7 @@ export function DataConsumption({ state, value, label, className }: DataConsumpt
     <span className={clsx('inline-flex items-center gap-1.5', className)}>
       <DataArrow type="consumption" state={state} size="sm" />
       <span className="flex flex-col leading-tight">
-        <span className="text-xs font-medium text-grey-950 dark:text-white">{value}</span>
+        <span className="text-xs font-data font-medium text-grey-950 dark:text-white">{value}</span>
         {label && <span className="text-[10px] text-grey-500 dark:text-grey-400">{label}</span>}
       </span>
     </span>
@@ -232,11 +232,11 @@ export function DataCompletion({ percentage, count, label, alerts, className }: 
     <div className={clsx('inline-flex flex-col gap-1', className)}>
       {/* Tag pill */}
       <span className={clsx('inline-flex items-center gap-1 h-5 px-2 rounded-full self-start', tagBg, tagText)}>
-        <span className="text-[12px] font-medium">{percentage}%</span>
+        <span className="text-[12px] font-data font-medium">{percentage}%</span>
         {count != null && (
           <span className={clsx(
             'inline-flex items-center justify-center h-4 min-w-[18px] px-1 rounded-full',
-            'text-white text-[10px] font-medium leading-none',
+            'text-white text-[10px] font-data font-medium leading-none',
             badgeBg,
           )}>
             {count}
@@ -276,7 +276,7 @@ export function DataProgress({ current, total, label, alerts, className }: DataP
     <div className={clsx('inline-flex flex-col gap-0.5', className)}>
       {/* Fraction row */}
       <div className="flex items-center gap-1.5">
-        <span className="text-sm font-medium text-grey-950 dark:text-white leading-none">
+        <span className="text-sm font-data font-medium text-grey-950 dark:text-white leading-none">
           {current}
           <span className="text-grey-400 dark:text-grey-500 font-normal">/</span>
           {total}

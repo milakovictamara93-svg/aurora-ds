@@ -132,7 +132,7 @@ function CircularChart({
         const displayColor = active ? active.color : '#111827'
         return (
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-            <span className="text-[20px] font-semibold" style={{ color: displayColor, transition: 'color 200ms ease' }}>{displayValue}</span>
+            <span className="text-[20px] font-data font-semibold" style={{ color: displayColor, transition: 'color 200ms ease' }}>{displayValue}</span>
             <span className="text-[12px] text-[#9CA3AF]" style={{ transition: 'opacity 200ms ease' }}>{displayLabel}</span>
           </div>
         )

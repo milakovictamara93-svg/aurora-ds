@@ -241,7 +241,7 @@ function KpiCard({
     <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-4">
       <p className="text-[12px] font-medium text-[#505867] dark:text-[#9CA3AF] mb-2">{label}</p>
       <div className="flex items-baseline gap-1.5 mb-2">
-        <span className="text-[20px] font-bold text-[#111827] dark:text-white leading-none">{value}</span>
+        <span className="text-[20px] font-data font-bold text-[#111827] dark:text-white leading-none">{value}</span>
         <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF]">{unit}</span>
       </div>
       {trend}

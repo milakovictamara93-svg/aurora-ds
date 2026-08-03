@@ -201,7 +201,7 @@ function DonutChart({ segments, size = 140, strokeWidth = 20, centerValue, cente
       </svg>
       {(centerValue || centerLabel) && (
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          {centerValue && <span className="text-[16px] font-semibold text-grey-950 dark:text-white">{centerValue}</span>}
+          {centerValue && <span className="text-[16px] font-data font-semibold text-grey-950 dark:text-white">{centerValue}</span>}
           {centerLabel && <span className="text-[10px] text-grey-400">{centerLabel}</span>}
         </div>
       )}
@@ -813,7 +813,7 @@ function ContentArea() {
             {[{ label: 'Fuels', pct: '90%', color: 'text-energy-500' }, { label: 'District heating & cooling', pct: '6%', color: 'text-grey-400' }, { label: 'Electricity', pct: '95%', color: 'text-energy-500' }].map(item => (
               <div key={item.label} className="rounded-lg border border-grey-100 dark:border-grey-800 p-4 flex items-center justify-between">
                 <span className="text-[14px] font-medium text-grey-950 dark:text-white">{item.label}</span>
-                <span className={clsx('text-[20px] font-bold', item.color)}>{item.pct}</span>
+                <span className={clsx('text-[20px] font-data font-bold', item.color)}>{item.pct}</span>
               </div>
             ))}
           </div>

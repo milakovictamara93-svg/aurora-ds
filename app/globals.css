@@ -249,3 +249,8 @@ pre, code {
 .animate-shimmer     { animation: aurora-shimmer 1.6s ease-in-out infinite; }
 .animate-aurora-pulse { animation: aurora-pulse   1.4s ease-in-out infinite; }
 .animate-loading-bar  { animation: aurora-loading-bar 1.6s ease-in-out infinite; }
+
+/* ─── Data typography (Geist Mono for numeric values) ─── */
+.font-data {
+  font-family: 'Geist Mono', 'JetBrains Mono', 'Fira Code', monospace;
+}

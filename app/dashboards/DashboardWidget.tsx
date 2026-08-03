@@ -84,7 +84,7 @@ function WidgetChart({ widget }: { widget: WidgetConfig }) {
       return (
         <div className="flex flex-col items-start justify-center h-full gap-1 py-4">
           <div className="flex items-baseline gap-1.5">
-            <span className="text-[20px] font-bold text-[#111827] dark:text-white leading-none">
+            <span className="text-[20px] font-data font-bold text-[#111827] dark:text-white leading-none">
               {cfg.value as string}
             </span>
             {unit ? (

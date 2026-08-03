@@ -236,7 +236,7 @@ export default function Slider({
         }}
       >
         {showValue && (
-          <div className="absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap px-1.5 py-0.5 rounded bg-[#111827] dark:bg-[#1F2430] text-white text-[10px] font-medium pointer-events-none select-none">
+          <div className="absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap px-1.5 py-0.5 rounded bg-[#111827] dark:bg-[#1F2430] text-white text-[10px] font-data font-medium pointer-events-none select-none">
             {value}
           </div>
         )}
@@ -304,13 +304,13 @@ export default function Slider({
   return (
     <div className={clsx('flex items-center gap-3', className)}>
       {showLabels && (
-        <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF] tabular-nums select-none w-6 text-right shrink-0">
+        <span className="text-[12px] font-data text-[#505867] dark:text-[#9CA3AF] select-none w-6 text-right shrink-0">
           {min}
         </span>
       )}
       {trackContainer}
       {showLabels && (
-        <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF] tabular-nums select-none w-8 shrink-0">
+        <span className="text-[12px] font-data text-[#505867] dark:text-[#9CA3AF] select-none w-8 shrink-0">
           {range ? hi : singleVal}
         </span>
       )}

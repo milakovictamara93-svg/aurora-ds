@@ -554,7 +554,7 @@ export function DonutChart({
       </svg>
       {(centerValue || centerLabel) && (
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          {centerValue && <span className="text-[20px] font-semibold text-[#111827] dark:text-white">{centerValue}</span>}
+          {centerValue && <span className="text-[20px] font-data font-semibold text-[#111827] dark:text-white">{centerValue}</span>}
           {centerLabel && <span className="text-[12px] text-[#9CA3AF]">{centerLabel}</span>}
         </div>
       )}

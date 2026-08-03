@@ -83,7 +83,7 @@ export default function Indicator({
   if (style === 'outline') {
     return (
       <span
-        className={`inline-flex items-center justify-center h-4 px-1 rounded-full overflow-hidden text-[10px] font-medium leading-[1.45] tracking-[0.15px] whitespace-nowrap flex-shrink-0 ${NUMBER_OUTLINE_BG[system]} ${NUMBER_OUTLINE_TEXT[system]}${className ? ` ${className}` : ''}`}
+        className={`inline-flex items-center justify-center h-4 px-1 rounded-full overflow-hidden text-[10px] font-data font-medium leading-[1.45] tracking-[0.15px] whitespace-nowrap flex-shrink-0 ${NUMBER_OUTLINE_BG[system]} ${NUMBER_OUTLINE_TEXT[system]}${className ? ` ${className}` : ''}`}
       >
         {label}
       </span>
@@ -92,7 +92,7 @@ export default function Indicator({
 
   return (
     <span
-      className={`inline-flex items-center justify-center h-4 px-1 rounded-full overflow-hidden text-[10px] font-medium leading-[1.45] tracking-[0.15px] whitespace-nowrap flex-shrink-0 text-white ${NUMBER_FILLED_BG[system]}${className ? ` ${className}` : ''}`}
+      className={`inline-flex items-center justify-center h-4 px-1 rounded-full overflow-hidden text-[10px] font-data font-medium leading-[1.45] tracking-[0.15px] whitespace-nowrap flex-shrink-0 text-white ${NUMBER_FILLED_BG[system]}${className ? ` ${className}` : ''}`}
     >
       {label}
     </span>

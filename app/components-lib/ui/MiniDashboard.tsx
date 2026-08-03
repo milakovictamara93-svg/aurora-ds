@@ -41,7 +41,7 @@ export default function MiniDashboard({
             )}
             <div className="flex flex-1 items-center justify-center min-w-0 px-2">
               <div className="flex items-baseline gap-1 min-w-0">
-                <span className="text-[14px] font-medium text-[#111827] dark:text-white tracking-[0.18px] whitespace-nowrap">
+                <span className="text-[14px] font-data font-medium text-[#111827] dark:text-white tracking-[0.18px] whitespace-nowrap">
                   {slot.label}{slot.alert && <span className="inline-block w-1 h-1 rounded-full bg-[#F96416] ml-px align-top" />}
                 </span>
                 <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF] tracking-[0.18px] truncate">
@@ -65,7 +65,7 @@ export default function MiniDashboard({
           )}
           <div className="flex flex-col items-center justify-center flex-1 h-[54px] min-w-0">
             <div className="flex items-start">
-              <span className="text-[14px] font-medium text-[#111827] dark:text-white tracking-[0.21px] text-center">
+              <span className="text-[14px] font-data font-medium text-[#111827] dark:text-white tracking-[0.21px] text-center">
                 {slot.label}
               </span>
               {slot.alert && (
