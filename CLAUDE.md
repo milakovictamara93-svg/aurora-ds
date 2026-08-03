@@ -87,15 +87,19 @@ Components to build:
 ## Design Rules (strictly follow these)
 
 **Typography**
-- Font: Inter only (Geist Mono for data/numbers in indicators)
+- Font: Inter for all UI text. Geist Mono for pure numeric values.
 - Allowed sizes: 10, 12, 14, 16, 20px ONLY. No other sizes permitted.
 - Heading scale (140% line-height, 0 letter-spacing, SemiBold 600):
   H1: 20px, H2: 16px, H3: 14px
 - Paragraph scale (145% line-height, 1.5% letter-spacing):
   Large: 14px, Medium: 14px, Small: 12px, XSmall: 10px
   Weights: Regular (400), Medium (500), Bold (700)
-- Caption scale (120% line-height):
+- Caption scale (120% line-height, uppercase):
   Large: 14px, Small: 12px, XSmall: 10px
+- Data scale (Geist Mono, 145% line-height, 1.5% letter-spacing):
+  Large: 14px, Small: 12px, XSmall: 10px
+  Use for: table numeric cells, KPI values, data points, indicator counts, chart values
+  Keep Inter for: dates, IDs, mixed text+number strings, form inputs
 - NO all caps, NO italics, NO underlines for emphasis — bold only
 - Sentence case everywhere in UI
 - Navigation and titles use Title casing

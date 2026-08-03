@@ -118,6 +118,22 @@ const CAPTIONS = [
 
 const DATA_STYLES = [
   {
+    name: 'Data Large',
+    size: 14,
+    lineHeight: '145%',
+    letterSpacing: '1.5%',
+    tailwind: "text-[14px] font-['Geist_Mono'] leading-[145%] tracking-[0.015em]",
+    sample: '1,240.56',
+  },
+  {
+    name: 'Data Small',
+    size: 12,
+    lineHeight: '145%',
+    letterSpacing: '1.5%',
+    tailwind: "text-[12px] font-['Geist_Mono'] leading-[145%] tracking-[0.015em]",
+    sample: '1,240.56',
+  },
+  {
     name: 'Data XSmall',
     size: 10,
     lineHeight: '145%',
@@ -277,7 +293,7 @@ export default function TypographyPage() {
         <div className="mb-2">
           <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white leading-[1.4]">Data</h2>
           <p className="text-sm text-token-secondary mt-1">
-            Monospace numbers for indicators, badges, and data-dense UI. Uses Geist Mono instead of Inter.
+            Monospace numbers using Geist Mono. Use whenever displaying pure numeric values so digits align vertically in tables and dashboards.
           </p>
         </div>
 
@@ -305,6 +321,60 @@ export default function TypographyPage() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Data usage rules */}
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="rounded-lg border border-success-200 dark:border-success-900 bg-success-50 dark:bg-success-950/30 p-4">
+            <p className="text-[10px] uppercase tracking-widest font-semibold text-success-700 dark:text-success-500 mb-3">Use Geist Mono when</p>
+            <ul className="space-y-2 text-[14px] text-token-secondary">
+              <li className="flex items-start gap-2.5">
+                <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
+                <span>Table cells with numeric values (energy consumption, intensity, area)</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
+                <span>KPI and dashboard metric values</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
+                <span>Data point and data arrow components</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
+                <span>Indicator count badges</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
+                <span>Chart axis values and data labels</span>
+              </li>
+            </ul>
+          </div>
+          <div className="rounded-lg border border-error-200 dark:border-error-900 bg-error-50 dark:bg-error-950/30 p-4">
+            <p className="text-[10px] uppercase tracking-widest font-semibold text-error-700 dark:text-error-500 mb-3">Keep Inter for</p>
+            <ul className="space-y-2 text-[14px] text-token-secondary">
+              <li className="flex items-start gap-2.5">
+                <XMarkIcon className="w-4 h-4 text-error-600 shrink-0 mt-px" />
+                <span>Dates and timestamps (12 Jan 2026, not monospaced)</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <XMarkIcon className="w-4 h-4 text-error-600 shrink-0 mt-px" />
+                <span>IDs and reference codes (SCA0001, text not numeric)</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <XMarkIcon className="w-4 h-4 text-error-600 shrink-0 mt-px" />
+                <span>Mixed text+number strings (labels like "Building 3")</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <XMarkIcon className="w-4 h-4 text-error-600 shrink-0 mt-px" />
+                <span>Form input values (user-entered text)</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <XMarkIcon className="w-4 h-4 text-error-600 shrink-0 mt-px" />
+                <span>Button labels, navigation, headings</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
 
