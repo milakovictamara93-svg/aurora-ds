@@ -350,7 +350,7 @@ function Cell<T extends { id: string | number }>({
       const suffix = col.accessorSecondary?.(row)
       return (
         <div className="flex items-baseline gap-1.5 min-w-0">
-          <span className="truncate text-[#111827] dark:text-white">{value}</span>
+          <span className="truncate font-data text-[#111827] dark:text-white">{value}</span>
           {suffix && <span className="shrink-0 text-[12px] text-[#9CA3AF]">{suffix}</span>}
         </div>
       )
@@ -397,7 +397,7 @@ function Cell<T extends { id: string | number }>({
     case 'custom':
       return <>{col.render ? col.render(row) : value}</>
     default:
-      return <span className="truncate text-[#111827] dark:text-white">{value}</span>
+      return <span className={clsx('truncate text-[#111827] dark:text-white', col.align === 'right' && 'font-data')}>{value}</span>
   }
 }
 
