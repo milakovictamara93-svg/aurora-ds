@@ -53,16 +53,16 @@ const PARAGRAPHS = [
   {
     name: 'Paragraph Large',
     token: 'text-base',
-    size: 16,
+    size: 14,
     lineHeight: '145%',
     letterSpacing: '1.5%',
     paraSpacing: '0px',
-    tailwind: 'text-[16px] leading-[145%] tracking-[0.015em]',
+    tailwind: 'text-[14px] leading-[145%] tracking-[0.015em]',
     sample: 'Create a design playbook that outlines the department\'s expectations, best practices.',
   },
   {
     name: 'Paragraph Medium',
-    token: 'text-sm',
+    token: 'text-base',
     size: 14,
     lineHeight: '145%',
     letterSpacing: '1.5%',
@@ -72,7 +72,7 @@ const PARAGRAPHS = [
   },
   {
     name: 'Paragraph Small',
-    token: 'text-xs',
+    token: 'text-sm',
     size: 12,
     lineHeight: '145%',
     letterSpacing: '1.5%',
@@ -82,24 +82,48 @@ const PARAGRAPHS = [
   },
   {
     name: 'Paragraph XSmall',
-    token: 'text-[10px]',
-    size: 11,
+    token: 'text-xs',
+    size: 10,
     lineHeight: '145%',
-    letterSpacing: '0%',
+    letterSpacing: '1.5%',
     paraSpacing: '0px',
-    tailwind: 'text-[10px] leading-[145%]',
+    tailwind: 'text-[10px] leading-[145%] tracking-[0.015em]',
     sample: 'Create a design playbook that outlines the department\'s expectations, best practices.',
   },
+]
+
+const CAPTIONS = [
   {
-    name: 'Paragraph Caption',
-    token: 'text-sm',
+    name: 'Caption Large',
     size: 14,
-    lineHeight: '100%',
-    letterSpacing: '16%',
-    paraSpacing: '0px',
-    tailwind: 'text-[14px] leading-[100%] tracking-[0.16em] uppercase',
-    sample: 'Create a design playbook that outlines the department\'s expectations, best practices.',
-    uppercase: true,
+    lineHeight: '120%',
+    tailwind: 'text-[14px] leading-[120%] uppercase',
+    sample: 'Caption label',
+  },
+  {
+    name: 'Caption Small',
+    size: 12,
+    lineHeight: '120%',
+    tailwind: 'text-[12px] leading-[120%] uppercase',
+    sample: 'Caption label',
+  },
+  {
+    name: 'Caption XSmall',
+    size: 10,
+    lineHeight: '120%',
+    tailwind: 'text-[10px] leading-[120%] uppercase',
+    sample: 'Caption label',
+  },
+]
+
+const DATA_STYLES = [
+  {
+    name: 'Data XSmall',
+    size: 10,
+    lineHeight: '145%',
+    letterSpacing: '1.5%',
+    tailwind: "text-[10px] font-['Geist_Mono'] leading-[145%] tracking-[0.015em]",
+    sample: '1,240.56',
   },
 ]
 
@@ -174,7 +198,7 @@ export default function TypographyPage() {
         <div className="mb-2">
           <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white leading-[1.4]">Paragraphs</h2>
           <p className="text-sm text-token-secondary mt-1">
-            Four paragraph scales from Large (16px) down to XSmall (11px), plus Caption (14px uppercase). Body text uses 1.5% letter spacing and 145% line height throughout.
+            Four paragraph scales from Large (14px) down to XSmall (10px). Body text uses 1.5% letter spacing and 145% line height throughout.
           </p>
         </div>
 
@@ -206,6 +230,78 @@ export default function TypographyPage() {
                     <p className="text-[10px] text-token-muted mt-2">{w.label} · {w.value}</p>
                   </div>
                 ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Captions ──────────────────────────────────────────────────────── */}
+      <section className="mt-10">
+        <div className="mb-2">
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white leading-[1.4]">Captions</h2>
+          <p className="text-sm text-token-secondary mt-1">
+            Uppercase labels with tighter 120% line height. Used for section labels, table group headers, and small annotations.
+          </p>
+        </div>
+
+        <div className="divide-y divide-token rounded-xl border border-token overflow-hidden bg-token-primary">
+          {CAPTIONS.map(c => (
+            <div key={c.name} className="p-6 flex flex-col gap-5">
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div>
+                  <p className="text-[14px] font-semibold text-token-primary">{c.name}</p>
+                  <div className="flex flex-wrap gap-5 mt-2">
+                    <SpecRow label="Font" value="Inter" />
+                    <SpecRow label="Size" value={`${c.size}px`} />
+                    <SpecRow label="Line height" value={c.lineHeight} />
+                    <SpecRow label="Transform" value="uppercase" />
+                    <SpecRow label="Weight" value="Medium (500)" />
+                  </div>
+                </div>
+                <code className="text-[10px] font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30 px-2 py-1 rounded shrink-0">
+                  {c.tailwind}
+                </code>
+              </div>
+              <div className="rounded-lg border border-token bg-token-secondary p-4">
+                <p className={`${c.tailwind} font-medium text-token-primary`}>{c.sample}</p>
+                <p className="text-[10px] text-token-muted mt-2">Medium · 500</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Data ───────────────────────────────────────────────────────────── */}
+      <section className="mt-10">
+        <div className="mb-2">
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white leading-[1.4]">Data</h2>
+          <p className="text-sm text-token-secondary mt-1">
+            Monospace numbers for indicators, badges, and data-dense UI. Uses Geist Mono instead of Inter.
+          </p>
+        </div>
+
+        <div className="divide-y divide-token rounded-xl border border-token overflow-hidden bg-token-primary">
+          {DATA_STYLES.map(d => (
+            <div key={d.name} className="p-6 flex flex-col gap-5">
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div>
+                  <p className="text-[14px] font-semibold text-token-primary">{d.name}</p>
+                  <div className="flex flex-wrap gap-5 mt-2">
+                    <SpecRow label="Font" value="Geist Mono" />
+                    <SpecRow label="Size" value={`${d.size}px`} />
+                    <SpecRow label="Line height" value={d.lineHeight} />
+                    <SpecRow label="Letter spacing" value={d.letterSpacing} />
+                    <SpecRow label="Weight" value="Medium (500)" />
+                  </div>
+                </div>
+                <code className="text-[10px] font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30 px-2 py-1 rounded shrink-0">
+                  {d.tailwind}
+                </code>
+              </div>
+              <div className="rounded-lg border border-token bg-token-secondary p-4">
+                <p className={`${d.tailwind} font-medium text-token-primary`}>{d.sample}</p>
+                <p className="text-[10px] text-token-muted mt-2">Medium · 500 · Geist Mono</p>
               </div>
             </div>
           ))}
@@ -299,7 +395,7 @@ export default function TypographyPage() {
               </li>
               <li className="flex items-start gap-2.5">
                 <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
-                <span>Minimum body text size: <strong className="text-token-primary font-semibold">16px</strong> (Paragraph Large)</span>
+                <span>Default body text size: <strong className="text-token-primary font-semibold">14px</strong> (Paragraph Medium/Large)</span>
               </li>
               <li className="flex items-start gap-2.5">
                 <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
@@ -319,17 +415,17 @@ export default function TypographyPage() {
       <div className="mt-14">
         <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white mb-4 leading-[1.4]">Rules</h2>
         <RequiredPairings rules={[
-          <>Font family is Inter only. No other typefaces in the product UI.</>,
+          <>Font family is Inter for all UI text. Geist Mono for numeric data in indicators only.</>,
           <>H1: 20px, H2: 16px, H3: 14px. All headings at 140% line-height. Never skip heading levels.</>,
-          <>Body text: 16px minimum, 145% line-height, 1.5% letter-spacing. Grey 600 for body, Grey 900 for headings.</>,
+          <>Body text: 14px default, 145% line-height, 1.5% letter-spacing. Grey 600 for body, Grey 900 for headings.</>,
           <>Font weight: Regular (400) for body, Medium (500) for labels, Semibold (600) for headings, Bold (700) for emphasis only.</>,
           <>Sentence case everywhere in UI. No ALL CAPS, no italics, no underlines for emphasis. Bold only.</>,
         ]} />
         <div className="mt-6">
           <ForbiddenRefuse rules={[
-            { rule: <>Use ALL CAPS for emphasis.</>, response: <>"Use font-weight 600 or 700 for emphasis. ALL CAPS is reserved for tiny labels (10-11px tracking-wide)."</> },
+            { rule: <>Use ALL CAPS for emphasis.</>, response: <>"Use font-weight 600 or 700 for emphasis. ALL CAPS is reserved for caption labels only."</> },
             { rule: <>Use italic or underline for emphasis.</>, response: <>"Bold only. Italic is not used in the system. Underline is reserved for links."</> },
-            { rule: <>Use a font other than Inter.</>, response: <>"Inter is the only typeface. Load it from Google Fonts. No system font fallbacks in production."</> },
+            { rule: <>Use a font other than Inter (or Geist Mono for data).</>, response: <>"Inter is the primary typeface. Geist Mono is used only for numeric data in indicators. No other fonts."</> },
           ]} />
         </div>
       </div>
