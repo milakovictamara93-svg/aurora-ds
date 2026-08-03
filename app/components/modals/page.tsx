@@ -38,7 +38,7 @@ function ShapeCard({
       <p className="text-[12px] font-semibold text-[#C4C9D4] dark:text-[#3F4654] uppercase tracking-[0.06em] mb-1.5">Common uses</p>
       <ul className="flex flex-col gap-0.5">
         {uses.map(u => (
-          <li key={u} className="text-[13px] text-[#505867] dark:text-[#9CA3AF] flex items-center gap-2">
+          <li key={u} className="text-[14px] text-[#505867] dark:text-[#9CA3AF] flex items-center gap-2">
             <span className="w-1 h-1 rounded-full bg-[#D7DAE0] dark:bg-[#374151] shrink-0" />
             {u}
           </li>
@@ -253,7 +253,7 @@ export default function ModalsPage() {
                 </div>
 
                 {/* Body */}
-                <div className="px-4 py-4 text-[13px] text-[#505867] relative">
+                <div className="px-4 py-4 text-[14px] text-[#505867] relative">
                   Body content lives in ModalContent. Scrolls independently when content overflows.
 
                   {/* Pointer 4: ModalContent -- left side */}
@@ -349,7 +349,7 @@ export default function ModalsPage() {
         destructiveAction={() => setOpenModal(null)}
       >
         <div className="rounded-lg bg-[#F7F8F8] dark:bg-[#1F2430] flex items-center justify-center h-full min-h-[400px]">
-          <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">Content slot</span>
+          <span className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">Content slot</span>
         </div>
       </Modal>
     </ComponentPageLayout>

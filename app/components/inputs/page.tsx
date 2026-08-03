@@ -126,7 +126,7 @@ export default function InputsIndexPage() {
               {input.states.map(state => (
                 <span
                   key={state}
-                  className={`text-[11px] px-1.5 py-0.5 rounded font-medium ${STATE_COLORS[state] ?? 'bg-grey-100 text-grey-600'}`}
+                  className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${STATE_COLORS[state] ?? 'bg-grey-100 text-grey-600'}`}
                 >
                   {state}
                 </span>

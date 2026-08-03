@@ -27,7 +27,7 @@ function VariantCard({
       </div>
       <div className="px-3 py-3 border-t border-[#EDEEF1] dark:border-[#1F2430]">
         <p className="font-mono text-[12px] font-medium text-[#111827] dark:text-white mb-1">{name}</p>
-        <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-[1.4]">{tag}</p>
+        <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-[1.4]">{tag}</p>
       </div>
     </div>
   )

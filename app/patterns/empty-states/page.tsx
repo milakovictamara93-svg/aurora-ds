@@ -45,12 +45,12 @@ function EmptyState({
       <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] max-w-xs leading-relaxed mb-5">{description}</p>
       <div className="flex items-center gap-2">
         {primaryAction && (
-          <button className="h-8 px-4 rounded-lg bg-[#1258F8] text-[13px] font-medium text-white hover:bg-[#1146E4] transition-colors">
+          <button className="h-8 px-4 rounded-lg bg-[#1258F8] text-[14px] font-medium text-white hover:bg-[#1146E4] transition-colors">
             {primaryAction}
           </button>
         )}
         {secondaryAction && (
-          <button className="h-8 px-4 rounded-lg border border-[#D7DAE0] dark:border-[#374151] text-[13px] font-medium text-[#505867] dark:text-[#9CA3AF] hover:border-[#1258F8] hover:text-[#1258F8] transition-colors">
+          <button className="h-8 px-4 rounded-lg border border-[#D7DAE0] dark:border-[#374151] text-[14px] font-medium text-[#505867] dark:text-[#9CA3AF] hover:border-[#1258F8] hover:text-[#1258F8] transition-colors">
             {secondaryAction}
           </button>
         )}
@@ -224,8 +224,8 @@ export default function EmptyStatesPage() {
             { label: 'Spacing', value: 'Icon mb-4, title mb-1, description mb-5, buttons gap-2.' },
           ].map((row, i) => (
             <div key={i} className="flex items-start gap-4 px-4 py-3 border-b border-[#EDEEF1] dark:border-[#1F2430] last:border-b-0">
-              <span className="text-[13px] font-medium text-[#111827] dark:text-white w-32 shrink-0">{row.label}</span>
-              <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">{row.value}</span>
+              <span className="text-[14px] font-medium text-[#111827] dark:text-white w-32 shrink-0">{row.label}</span>
+              <span className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">{row.value}</span>
             </div>
           ))}
         </div>

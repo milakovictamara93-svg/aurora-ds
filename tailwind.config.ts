@@ -93,15 +93,18 @@ const config: Config = {
         },
       },
       fontSize: {
-        'xs': ['12px', { lineHeight: '145%', letterSpacing: '0.015em' }],
-        'sm': ['14px', { lineHeight: '145%', letterSpacing: '0.015em' }],
-        'base': ['16px', { lineHeight: '145%', letterSpacing: '0.015em' }],
-        'lg': ['18px', { lineHeight: '145%', letterSpacing: '0.015em' }],
-        'xl': ['21px', { lineHeight: '145%', letterSpacing: '0.015em' }],
-        '2xl': ['24px', { lineHeight: '140%', letterSpacing: '0' }],
-        '3xl': ['28px', { lineHeight: '140%', letterSpacing: '0' }],
-        '4xl': ['32px', { lineHeight: '140%', letterSpacing: '0' }],
-        '5xl': ['40px', { lineHeight: '140%', letterSpacing: '0' }],
+        /* Paragraph scale */
+        'xs': ['10px', { lineHeight: '145%', letterSpacing: '0.015em' }],
+        'sm': ['12px', { lineHeight: '145%', letterSpacing: '0.015em' }],
+        'base': ['14px', { lineHeight: '145%', letterSpacing: '0.015em' }],
+        /* Heading scale */
+        'h3': ['14px', { lineHeight: '140%', letterSpacing: '0' }],
+        'h2': ['16px', { lineHeight: '140%', letterSpacing: '0' }],
+        'h1': ['20px', { lineHeight: '140%', letterSpacing: '0' }],
+        /* Caption scale */
+        'caption-xs': ['10px', { lineHeight: '120%' }],
+        'caption-sm': ['12px', { lineHeight: '120%' }],
+        'caption-md': ['14px', { lineHeight: '120%' }],
       },
       borderRadius: {
         'none': '0',

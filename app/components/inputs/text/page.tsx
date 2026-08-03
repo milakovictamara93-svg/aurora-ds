@@ -31,7 +31,7 @@ function VariantCard({
       </div>
       <div className="px-3 py-3 border-t border-[#EDEEF1] dark:border-[#1F2430]">
         <p className="font-mono text-[12px] font-medium text-[#111827] dark:text-white mb-1">{name}</p>
-        <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-[1.4]">{tag}</p>
+        <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-[1.4]">{tag}</p>
       </div>
     </div>
   )
@@ -75,9 +75,9 @@ export default function TextInputPage() {
           <table className="w-full text-[14px] border-collapse">
             <thead>
               <tr className="bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
-                <th className="text-left px-4 py-2.5 text-[11px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]">Need</th>
-                <th className="text-left px-4 py-2.5 text-[11px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]">Component</th>
-                <th className="text-left px-4 py-2.5 text-[11px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]">Example</th>
+                <th className="text-left px-4 py-2.5 text-[10px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]">Need</th>
+                <th className="text-left px-4 py-2.5 text-[10px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]">Component</th>
+                <th className="text-left px-4 py-2.5 text-[10px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]">Example</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#EDEEF1] dark:divide-[#1F2430]">

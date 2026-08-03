@@ -63,7 +63,7 @@ export default function AssetDetailPage() {
   return (
     <Navigation fullHeight={true} defaultSection="collection" defaultItem="col-asset-list">
       {/* Breadcrumb + context row */}
-      <div className="flex items-center gap-2 text-[13px] text-[#505867] dark:text-[#9CA3AF] mb-3">
+      <div className="flex items-center gap-2 text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-3">
         <span>Portfolio</span>
         <span className="text-[#C4C9D4]">/</span>
         <span>EMEA</span>
@@ -164,7 +164,7 @@ export default function AssetDetailPage() {
                   <button
                     key={t}
                     onClick={() => setPerfTab(t)}
-                    className={`px-3 py-1.5 rounded-md text-[13px] font-medium transition-colors ${
+                    className={`px-3 py-1.5 rounded-md text-[14px] font-medium transition-colors ${
                       perfTab === t
                         ? 'bg-[#EDEEF1] dark:bg-[#1F2430] text-[#111827] dark:text-white'
                         : 'text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5'
@@ -191,7 +191,7 @@ export default function AssetDetailPage() {
             <div className="px-5 pb-5">
               <div className="flex items-center justify-between mb-3">
                 <div>
-                  <p className="text-[13px] font-semibold text-[#111827] dark:text-white">Meters</p>
+                  <p className="text-[14px] font-semibold text-[#111827] dark:text-white">Meters</p>
                   <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF]">5 total · 1 missing data · 1 pending</p>
                 </div>
                 <DataCompletion percentage={86} count={5} label="complete" alerts={1} />
@@ -241,7 +241,7 @@ function KpiCard({
     <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-4">
       <p className="text-[12px] font-medium text-[#505867] dark:text-[#9CA3AF] mb-2">{label}</p>
       <div className="flex items-baseline gap-1.5 mb-2">
-        <span className="text-[24px] font-bold text-[#111827] dark:text-white leading-none">{value}</span>
+        <span className="text-[20px] font-bold text-[#111827] dark:text-white leading-none">{value}</span>
         <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF]">{unit}</span>
       </div>
       {trend}
@@ -273,7 +273,7 @@ function ProgressItem({
   return (
     <div className="rounded-md border border-[#EDEEF1] dark:border-[#1F2430] bg-[#F7F8F8] dark:bg-[#111827] p-3">
       <div className="flex items-center justify-between mb-1.5">
-        <p className="text-[13px] font-semibold text-[#111827] dark:text-white">{title}</p>
+        <p className="text-[14px] font-semibold text-[#111827] dark:text-white">{title}</p>
         <DataArrow type="indicator" state={state} size="sm" />
       </div>
       <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] leading-snug">{hint}</p>

@@ -74,8 +74,8 @@ export default function ToastPage() {
         <div className="flex flex-col gap-8">
           {/* High contrast */}
           <div>
-            <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-1">High contrast</p>
-            <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mb-4">
+            <p className="text-[14px] font-semibold text-[#111827] dark:text-white mb-1">High contrast</p>
+            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-4">
               Colored background matching the variant. Use when the notification needs to stand out clearly.
             </p>
             <div className="flex flex-col gap-3">
@@ -119,8 +119,8 @@ export default function ToastPage() {
 
           {/* Low contrast */}
           <div>
-            <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-1">Low contrast</p>
-            <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mb-4">
+            <p className="text-[14px] font-semibold text-[#111827] dark:text-white mb-1">Low contrast</p>
+            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-4">
               Neutral background with a colored icon. Use for quieter, less urgent notifications.
             </p>
             <div className="flex flex-col gap-3">
@@ -261,11 +261,11 @@ export default function ToastPage() {
                 {/* 2 & 3 - Text content */}
                 <div className="flex-1 min-w-0">
                   <div className="relative">
-                    <p className="text-[13px] font-semibold leading-snug text-blue-900 dark:text-blue-100">Sync in progress</p>
+                    <p className="text-[14px] font-semibold leading-snug text-blue-900 dark:text-blue-100">Sync in progress</p>
                     <span className="absolute -top-3 -left-3 font-mono text-[10px] bg-[#111827] text-white w-4 h-4 rounded-full flex items-center justify-center">2</span>
                   </div>
                   <div className="relative">
-                    <p className="text-[13px] leading-snug mt-0.5 text-blue-700 dark:text-blue-300">Data is being refreshed from the source.</p>
+                    <p className="text-[14px] leading-snug mt-0.5 text-blue-700 dark:text-blue-300">Data is being refreshed from the source.</p>
                     <span className="absolute -top-2 -left-3 font-mono text-[10px] bg-[#111827] text-white w-4 h-4 rounded-full flex items-center justify-center">3</span>
                   </div>
                 </div>

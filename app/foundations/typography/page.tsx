@@ -82,12 +82,12 @@ const PARAGRAPHS = [
   },
   {
     name: 'Paragraph XSmall',
-    token: 'text-[11px]',
+    token: 'text-[10px]',
     size: 11,
     lineHeight: '145%',
     letterSpacing: '0%',
     paraSpacing: '0px',
-    tailwind: 'text-[11px] leading-[145%]',
+    tailwind: 'text-[10px] leading-[145%]',
     sample: 'Create a design playbook that outlines the department\'s expectations, best practices.',
   },
   {
@@ -109,7 +109,7 @@ function SpecRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-col gap-0.5">
       <span className="text-[10px] uppercase tracking-widest font-semibold text-token-muted">{label}</span>
-      <span className="text-[13px] text-token-secondary">{value}</span>
+      <span className="text-[14px] text-token-secondary">{value}</span>
     </div>
   )
 }
@@ -141,7 +141,7 @@ export default function TypographyPage() {
               {/* Specs */}
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
-                  <p className="text-[13px] font-semibold text-token-primary">{h.name}</p>
+                  <p className="text-[14px] font-semibold text-token-primary">{h.name}</p>
                   <div className="flex flex-wrap gap-5 mt-2">
                     <SpecRow label="Font" value="Inter" />
                     <SpecRow label="Size" value={`${h.size}px`} />
@@ -151,7 +151,7 @@ export default function TypographyPage() {
                     <SpecRow label="Weights" value="Regular · Medium · SemiBold · Bold" />
                   </div>
                 </div>
-                <code className="text-[11px] font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30 px-2 py-1 rounded shrink-0">
+                <code className="text-[10px] font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30 px-2 py-1 rounded shrink-0">
                   {h.tailwind}
                 </code>
               </div>
@@ -160,7 +160,7 @@ export default function TypographyPage() {
                 {HEADING_WEIGHTS.map(w => (
                   <div key={w.value} className="rounded-lg border border-token bg-token-secondary p-4">
                     <p className={`${h.tailwind} ${w.class} text-token-primary`}>{h.sample}</p>
-                    <p className="text-[11px] text-token-muted mt-2">{w.label} · {w.value}</p>
+                    <p className="text-[10px] text-token-muted mt-2">{w.label} · {w.value}</p>
                   </div>
                 ))}
               </div>
@@ -184,7 +184,7 @@ export default function TypographyPage() {
               {/* Specs */}
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
-                  <p className="text-[13px] font-semibold text-token-primary">{p.name}</p>
+                  <p className="text-[14px] font-semibold text-token-primary">{p.name}</p>
                   <div className="flex flex-wrap gap-5 mt-2">
                     <SpecRow label="Font" value="Inter" />
                     <SpecRow label="Size" value={`${p.size}px`} />
@@ -194,7 +194,7 @@ export default function TypographyPage() {
                     <SpecRow label="Weights" value="Regular · Medium · Bold" />
                   </div>
                 </div>
-                <code className="text-[11px] font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30 px-2 py-1 rounded shrink-0">
+                <code className="text-[10px] font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30 px-2 py-1 rounded shrink-0">
                   {p.tailwind}
                 </code>
               </div>
@@ -203,7 +203,7 @@ export default function TypographyPage() {
                 {PARAGRAPH_WEIGHTS.map(w => (
                   <div key={w.value} className="rounded-lg border border-token bg-token-secondary p-4">
                     <p className={`${p.tailwind} ${w.class} text-token-primary`}>{p.sample}</p>
-                    <p className="text-[11px] text-token-muted mt-2">{w.label} · {w.value}</p>
+                    <p className="text-[10px] text-token-muted mt-2">{w.label} · {w.value}</p>
                   </div>
                 ))}
               </div>
@@ -225,7 +225,7 @@ export default function TypographyPage() {
             <h3 className="text-[14px] font-semibold text-token-primary mb-4">Capitalization</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <p className="text-[11px] uppercase tracking-widest font-semibold text-token-muted mb-3">By element</p>
+                <p className="text-[10px] uppercase tracking-widest font-semibold text-token-muted mb-3">By element</p>
                 <ul className="space-y-2.5 text-sm text-token-secondary">
                   <li className="flex items-start gap-2.5">
                     <CheckIcon className="w-4 h-4 text-success-600 shrink-0 mt-px" />
@@ -250,7 +250,7 @@ export default function TypographyPage() {
                 </ul>
               </div>
               <div>
-                <p className="text-[11px] uppercase tracking-widest font-semibold text-token-muted mb-3">What to avoid</p>
+                <p className="text-[10px] uppercase tracking-widest font-semibold text-token-muted mb-3">What to avoid</p>
                 <ul className="space-y-2.5 text-sm text-token-secondary">
                   <li className="flex items-start gap-2.5">
                     <XMarkIcon className="w-4 h-4 text-error-600 shrink-0 mt-px" />

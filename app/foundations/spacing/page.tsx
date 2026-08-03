@@ -37,9 +37,9 @@ export default function SpacingPage() {
         <div className="rounded-xl border border-token overflow-hidden bg-token-primary">
           {/* Header */}
           <div className="grid grid-cols-[80px_100px_1fr] gap-4 px-6 py-3 border-b border-token bg-token-secondary">
-            <span className="text-[11px] uppercase tracking-widest font-semibold text-token-muted">Name</span>
-            <span className="text-[11px] uppercase tracking-widest font-semibold text-token-muted">Size</span>
-            <span className="text-[11px] uppercase tracking-widest font-semibold text-token-muted">Visual</span>
+            <span className="text-[10px] uppercase tracking-widest font-semibold text-token-muted">Name</span>
+            <span className="text-[10px] uppercase tracking-widest font-semibold text-token-muted">Size</span>
+            <span className="text-[10px] uppercase tracking-widest font-semibold text-token-muted">Visual</span>
           </div>
 
           {/* Rows */}
@@ -75,7 +75,7 @@ export default function SpacingPage() {
             </p>
             <div className="flex flex-wrap gap-2">
               {SCALE.map(({ size }) => (
-                <span key={size} className="text-[13px] font-mono font-medium px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300">
+                <span key={size} className="text-[14px] font-mono font-medium px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300">
                   {size}px
                 </span>
               ))}
@@ -91,7 +91,7 @@ export default function SpacingPage() {
                 { label: 'Page layout',       values: ['48px', '64px', '80px', '96px'], note: 'Major page-level spacing' },
               ].map(({ label, values, note }) => (
                 <div key={label}>
-                  <p className="text-[13px] font-semibold text-token-primary mb-1">{label}</p>
+                  <p className="text-[14px] font-semibold text-token-primary mb-1">{label}</p>
                   <p className="text-[12px] text-token-muted mb-3">{note}</p>
                   <div className="flex flex-wrap gap-2">
                     {values.map(v => (

@@ -37,7 +37,7 @@ function PreviewCard({ label, children }: { label: string; children: React.React
         {children}
       </div>
       <div className="px-4 py-2.5 border-t border-[#EDEEF1] dark:border-[#1F2430]">
-        <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">{label}</p>
+        <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">{label}</p>
       </div>
     </div>
   )

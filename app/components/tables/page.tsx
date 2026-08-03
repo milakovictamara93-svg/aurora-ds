@@ -107,7 +107,7 @@ const TEXT_ACTION_COLS: ColumnDef<Building>[] = [
   {
     key: '_action', label: 'Actions', type: 'actions', align: 'right',
     render: () => (
-      <a href="#" className="text-[13px] text-[#1258F8] underline underline-offset-2 hover:text-[#1146E4] transition-colors">
+      <a href="#" className="text-[14px] text-[#1258F8] underline underline-offset-2 hover:text-[#1146E4] transition-colors">
         Reassign audit
       </a>
     ),
@@ -304,15 +304,15 @@ export default function TablePage() {
 
         {/* ── Action hierarchy table ── */}
         <p className="text-[14px] font-medium text-[#111827] dark:text-white mb-3">Action hierarchy</p>
-        <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden text-[13px] mb-8">
+        <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden text-[14px] mb-8">
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
                 <tr className="bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
-                  <th className="text-left px-3 py-2.5 text-[11px] font-semibold text-[#505867] dark:text-[#9CA3AF] w-[140px]" />
-                  <th className="text-left px-3 py-2.5 text-[11px] font-semibold text-[#505867] dark:text-[#9CA3AF]">Primary action</th>
-                  <th className="text-left px-3 py-2.5 text-[11px] font-semibold text-[#505867] dark:text-[#9CA3AF]">Secondary action</th>
-                  <th className="text-left px-3 py-2.5 text-[11px] font-semibold text-[#505867] dark:text-[#9CA3AF]">Additional actions</th>
+                  <th className="text-left px-3 py-2.5 text-[10px] font-semibold text-[#505867] dark:text-[#9CA3AF] w-[140px]" />
+                  <th className="text-left px-3 py-2.5 text-[10px] font-semibold text-[#505867] dark:text-[#9CA3AF]">Primary action</th>
+                  <th className="text-left px-3 py-2.5 text-[10px] font-semibold text-[#505867] dark:text-[#9CA3AF]">Secondary action</th>
+                  <th className="text-left px-3 py-2.5 text-[10px] font-semibold text-[#505867] dark:text-[#9CA3AF]">Additional actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#EDEEF1] dark:divide-[#1F2430]">
@@ -372,7 +372,7 @@ export default function TablePage() {
               data={BUILDINGS.slice(0, 3)}
               label="Icon-only row actions demo"
             />
-            <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mt-2">
+            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mt-2">
               Primary action (edit) in blue, secondary action (view) in grey. Hover each icon to see the tooltip label. Click the ellipsis to open the overflow menu.
             </p>
           </div>
@@ -396,7 +396,7 @@ export default function TablePage() {
               ]}
               label="Icon + label row actions demo"
             />
-            <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mt-2">
+            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mt-2">
               Select rows to trigger the floating action bar. Bulk actions always use icon + label format.
             </p>
           </div>
@@ -412,7 +412,7 @@ export default function TablePage() {
               data={BUILDINGS.slice(0, 2)}
               label="Text-only row actions demo"
             />
-            <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mt-2">
+            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mt-2">
               Only use when no recognizable icon exists for a domain-specific action. Must use link styling (blue 600, underline on hover). One per row maximum.
             </p>
           </div>

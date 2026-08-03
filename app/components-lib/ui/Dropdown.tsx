@@ -208,7 +208,7 @@ export default function Dropdown(props: DropdownProps) {
 
       {/* Helper / Error */}
       {(helperText || error) && (
-        <p className={clsx('mt-1.5 text-[13px]', error ? 'text-[#F87171]' : 'text-[#505867] dark:text-[#9CA3AF]')}>
+        <p className={clsx('mt-1.5 text-[14px]', error ? 'text-[#F87171]' : 'text-[#505867] dark:text-[#9CA3AF]')}>
           {error ?? helperText}
         </p>
       )}
@@ -234,7 +234,7 @@ export default function Dropdown(props: DropdownProps) {
 
               {/* Section label */}
               {group.label && (
-                <p className="px-3 pt-2 pb-1 text-[11px] font-bold uppercase tracking-[0.08em] text-[#9CA3AF] dark:text-[#505867]">
+                <p className="px-3 pt-2 pb-1 text-[10px] font-bold uppercase tracking-[0.08em] text-[#9CA3AF] dark:text-[#505867]">
                   {group.label}
                 </p>
               )}

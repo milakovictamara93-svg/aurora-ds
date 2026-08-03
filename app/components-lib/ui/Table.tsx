@@ -150,7 +150,7 @@ function OverflowMenu() {
               role="menuitem"
               onClick={() => { item.onClick(); setOpen(false) }}
               className={clsx(
-                'w-full text-left px-3 py-1.5 text-[13px] transition-colors',
+                'w-full text-left px-3 py-1.5 text-[14px] transition-colors',
                 item.danger
                   ? 'text-[#DC2626] hover:bg-[#FEF2F2] dark:hover:bg-[#450a0a]/30'
                   : 'text-[#1F2430] dark:text-white hover:bg-[#F7F8F8] dark:hover:bg-[#1F2430]',
@@ -214,7 +214,7 @@ function Pagination({
     pages.push(pageCount)
   }
 
-  const btnBase = 'w-7 h-7 flex items-center justify-center rounded text-[13px] font-medium transition-colors'
+  const btnBase = 'w-7 h-7 flex items-center justify-center rounded text-[14px] font-medium transition-colors'
 
   return (
     <div className="flex items-center justify-between px-3 py-2.5 border-t border-[#EDEEF1] dark:border-[#1F2430]">
@@ -223,12 +223,12 @@ function Pagination({
         <select
           value={pageSize}
           onChange={e => { onPageSize(Number(e.target.value)); onPage(1) }}
-          className="h-8 pl-2 pr-6 rounded border border-[#D7DAE0] dark:border-[#374151] text-[13px] text-[#111827] dark:text-white bg-white dark:bg-[#111827] appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#1258F8]"
+          className="h-8 pl-2 pr-6 rounded border border-[#D7DAE0] dark:border-[#374151] text-[14px] text-[#111827] dark:text-white bg-white dark:bg-[#111827] appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#1258F8]"
           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 20 20'%3E%3Cpath fill='%23505867' d='M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06z'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 6px center' }}
         >
           {pageSizeOptions.map(s => <option key={s} value={s}>{s}</option>)}
         </select>
-        <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF] whitespace-nowrap">
+        <span className="text-[14px] text-[#505867] dark:text-[#9CA3AF] whitespace-nowrap">
           {start}–{end} of {total}
         </span>
       </div>
@@ -298,21 +298,21 @@ function ActionBar({
     <div className="flex items-center justify-between px-4 h-10 rounded-lg border border-[#D7DAE0] dark:border-[#374151] bg-white dark:bg-[#111827] shadow-level-3">
       <div className="flex items-center gap-3">
         {allSelected ? (
-          <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">All {total} selected</span>
+          <span className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">All {total} selected</span>
         ) : (
-          <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">{selectedCount} selected</span>
+          <span className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">{selectedCount} selected</span>
         )}
         {!allSelected && (
           <button
             onClick={onSelectAll}
-            className="text-[13px] font-semibold text-[#1258F8] hover:underline"
+            className="text-[14px] font-semibold text-[#1258F8] hover:underline"
           >
             Select all
           </button>
         )}
         <button
           onClick={onClear}
-          className="text-[13px] text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white"
+          className="text-[14px] text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white"
         >
           Clear
         </button>
@@ -323,7 +323,7 @@ function ActionBar({
           <button
             key={a.label}
             onClick={a.onClick}
-            className="h-7 px-3 flex items-center gap-1.5 rounded text-[13px] font-medium text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors"
+            className="h-7 px-3 flex items-center gap-1.5 rounded text-[14px] font-medium text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors"
           >
             <span className="text-[#505867] dark:text-[#9CA3AF] text-[10px]">✦</span>
             {a.label}
@@ -351,7 +351,7 @@ function Cell<T extends { id: string | number }>({
       return (
         <div className="flex items-baseline gap-1.5 min-w-0">
           <span className="truncate text-[#111827] dark:text-white">{value}</span>
-          {suffix && <span className="shrink-0 text-[11px] text-[#9CA3AF]">{suffix}</span>}
+          {suffix && <span className="shrink-0 text-[12px] text-[#9CA3AF]">{suffix}</span>}
         </div>
       )
     }
@@ -360,7 +360,7 @@ function Cell<T extends { id: string | number }>({
       return (
         <div className="flex flex-col min-w-0">
           <span className="truncate text-[#111827] dark:text-white leading-tight">{value}</span>
-          {details && <span className="truncate text-[11px] text-[#9CA3AF] leading-tight">{details}</span>}
+          {details && <span className="truncate text-[12px] text-[#9CA3AF] leading-tight">{details}</span>}
         </div>
       )
     }
@@ -488,7 +488,7 @@ export default function Table<T extends { id: string | number }>({
       <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
         <div className="overflow-x-auto">
           <table
-            className="w-full border-collapse text-[13px]"
+            className="w-full border-collapse text-[14px]"
             aria-label={label}
           >
             {/* Header */}
@@ -513,7 +513,7 @@ export default function Table<T extends { id: string | number }>({
                     scope="col"
                     className={clsx(
                       'px-3 py-2.5 border-b border-[#EDEEF1] dark:border-[#1F2430]',
-                      'text-[11px] font-semibold text-[#505867] dark:text-[#9CA3AF] whitespace-nowrap',
+                      'text-[14px] font-medium text-[#505867] dark:text-[#9CA3AF] whitespace-nowrap',
                       col.width,
                       col.align === 'right'  && 'text-right',
                       col.align === 'center' && 'text-center',
@@ -551,7 +551,7 @@ export default function Table<T extends { id: string | number }>({
                 <tr>
                   <td colSpan={totalCols} className="px-4 py-12 text-center">
                     <p className="text-[14px] font-semibold text-[#111827] dark:text-white mb-1">{emptyTitle}</p>
-                    <p className="text-[13px] text-[#9CA3AF]">{emptyDescription}</p>
+                    <p className="text-[14px] text-[#9CA3AF]">{emptyDescription}</p>
                   </td>
                 </tr>
               ) : (
@@ -582,7 +582,7 @@ export default function Table<T extends { id: string | number }>({
                         <td
                           key={col.key}
                           className={clsx(
-                            'px-3 py-2.5 text-[13px] text-[#505867] dark:text-[#9CA3AF]',
+                            'px-3 py-2.5 text-[14px] text-[#505867] dark:text-[#9CA3AF]',
                             col.width,
                             col.align === 'right'  && 'text-right',
                             col.align === 'center' && 'text-center',

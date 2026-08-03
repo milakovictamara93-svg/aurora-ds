@@ -76,7 +76,7 @@ export default function Checkbox({
         <div>
           {label && (
             <p className={clsx(
-              'text-[13px] font-medium',
+              'text-[14px] font-medium',
               disabled ? 'text-[#C4C9D4] dark:text-[#3F4654]' : 'text-[#111827] dark:text-white'
             )}>
               {label}

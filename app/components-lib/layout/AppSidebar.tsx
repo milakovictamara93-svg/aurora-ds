@@ -175,7 +175,7 @@ function NavSection({
     <div>
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between px-2 py-1.5 rounded-md text-[13px] font-semibold text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors"
+        className="w-full flex items-center justify-between px-2 py-1.5 rounded-md text-[14px] font-semibold text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors"
       >
         <span>{group.label}</span>
         <ChevronDownIcon
@@ -201,7 +201,7 @@ function NavSection({
               return (
                 <span
                   key={href}
-                  className="flex items-center justify-between px-2 py-1.5 rounded-md text-[13px] text-[#C4C9D4] dark:text-[#3F4654] cursor-default select-none"
+                  className="flex items-center justify-between px-2 py-1.5 rounded-md text-[14px] text-[#C4C9D4] dark:text-[#3F4654] cursor-default select-none"
                 >
                   {label}
                   <Tag system="disabled" style="filled" size="small" label="soon" showCount={false} showRemove={false} />
@@ -213,7 +213,7 @@ function NavSection({
                 key={href}
                 href={href}
                 className={clsx(
-                  'px-2 py-1.5 rounded-md text-[13px] transition-colors',
+                  'px-2 py-1.5 rounded-md text-[14px] transition-colors',
                   active
                     ? 'bg-[#D9EAFF] text-[#1146E4] font-medium dark:bg-white/10 dark:text-white'
                     : 'text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white hover:bg-[#F7F8F8] dark:hover:bg-white/5'
@@ -357,7 +357,7 @@ export default function AppSidebar({
         <div className="shrink-0 border-t border-[#EDEEF1] dark:border-[#1F2430] px-4 py-3 bg-white dark:bg-[#0D1117] rounded-b-[8px]">
           <button
             onClick={toggleDark}
-            className="flex items-center gap-2.5 text-[13px] text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white transition-colors w-full"
+            className="flex items-center gap-2.5 text-[14px] text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white transition-colors w-full"
             aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
           >
             <div className="w-8 h-4 rounded-full relative shrink-0 transition-colors duration-200 bg-[#D7DAE0] dark:bg-[#1258F8]">

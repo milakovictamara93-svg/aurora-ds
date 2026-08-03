@@ -41,7 +41,7 @@ function MiniTable({ rows = 4 }: { rows?: number }) {
 
 function MiniButton({ label, variant = 'primary' }: { label: string; variant?: 'primary' | 'secondary' }) {
   return (
-    <span className={`inline-flex items-center h-7 px-3 rounded text-[11px] font-medium ${
+    <span className={`inline-flex items-center h-7 px-3 rounded text-[10px] font-medium ${
       variant === 'primary'
         ? 'bg-[#1258F8] text-white'
         : 'border border-[#D7DAE0] dark:border-[#374151] text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-[#111827]'
@@ -197,7 +197,7 @@ export default function SurfaceLayoutsPage() {
               ].map(({ label, value }) => (
                 <div key={label} className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] px-4 py-3">
                   <p className="text-[10px] text-[#9CA3AF] dark:text-[#505867] mb-1">{label}</p>
-                  <p className="text-[18px] font-bold text-[#111827] dark:text-white">{value}</p>
+                  <p className="text-[16px] font-bold text-[#111827] dark:text-white">{value}</p>
                 </div>
               ))}
             </div>
@@ -213,8 +213,8 @@ export default function SurfaceLayoutsPage() {
             { title: 'Borders are always grey-100', desc: 'All block borders use #EDEEF1 (1px). No shadows, no thicker borders, no colored borders.' },
           ].map((rule, i) => (
             <div key={i} className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] p-4 bg-white dark:bg-[#0D1117]">
-              <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-1">{rule.title}</p>
-              <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{rule.desc}</p>
+              <p className="text-[14px] font-semibold text-[#111827] dark:text-white mb-1">{rule.title}</p>
+              <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{rule.desc}</p>
             </div>
           ))}
         </div>
@@ -254,8 +254,8 @@ export default function SurfaceLayoutsPage() {
             { title: 'No border on the container', desc: 'The white container has no border -- the contrast between white and grey-50 background provides enough visual separation.' },
           ].map((rule, i) => (
             <div key={i} className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] p-4 bg-white dark:bg-[#0D1117]">
-              <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-1">{rule.title}</p>
-              <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{rule.desc}</p>
+              <p className="text-[14px] font-semibold text-[#111827] dark:text-white mb-1">{rule.title}</p>
+              <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{rule.desc}</p>
             </div>
           ))}
         </div>
@@ -370,14 +370,14 @@ export default function SurfaceLayoutsPage() {
                   <div className="flex flex-col gap-1.5">
                     {step.yes && (
                       <div className="flex items-start gap-2">
-                        <span className="text-[13px] font-semibold text-[#22C55E] mt-px w-8 shrink-0">Yes</span>
-                        <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">{step.yes}</span>
+                        <span className="text-[14px] font-semibold text-[#22C55E] mt-px w-8 shrink-0">Yes</span>
+                        <span className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">{step.yes}</span>
                       </div>
                     )}
                     {step.no && (
                       <div className="flex items-start gap-2">
-                        <span className="text-[13px] font-semibold text-[#F87171] mt-px w-8 shrink-0">No</span>
-                        <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">{step.no}</span>
+                        <span className="text-[14px] font-semibold text-[#F87171] mt-px w-8 shrink-0">No</span>
+                        <span className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">{step.no}</span>
                       </div>
                     )}
                   </div>
@@ -396,11 +396,11 @@ export default function SurfaceLayoutsPage() {
         title="Quick reference"
       >
         <div className="overflow-x-auto rounded-lg border border-[#EDEEF1] dark:border-[#1F2430]">
-          <table className="w-full text-[13px]">
+          <table className="w-full text-[14px]">
             <thead className="bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
               <tr>
                 {['Pattern', 'Tabs?', 'Container', 'Inner borders', 'When to use'].map(h => (
-                  <th key={h} className="text-left px-4 py-2.5 font-semibold text-[#505867] dark:text-[#6B7280] text-[11px] tracking-wide">{h}</th>
+                  <th key={h} className="text-left px-4 py-2.5 font-semibold text-[#505867] dark:text-[#6B7280] text-[10px] tracking-wide">{h}</th>
                 ))}
               </tr>
             </thead>
@@ -445,8 +445,8 @@ export default function SurfaceLayoutsPage() {
               <div className="bg-white dark:bg-[#111827] rounded-lg">
                 {/* Table touching left and right edges */}
                 <div className="bg-[#F7F8F8] dark:bg-[#0D1117] h-7 flex items-center px-2">
-                  <span className="text-[9px] text-[#9CA3AF]">Name</span>
-                  <span className="text-[9px] text-[#9CA3AF] ml-auto">Status</span>
+                  <span className="text-[10px] text-[#9CA3AF]">Name</span>
+                  <span className="text-[10px] text-[#9CA3AF] ml-auto">Status</span>
                 </div>
                 <div className="bg-[#EDEEF1] dark:bg-[#1F2430] h-px" />
                 <div className="h-7 flex items-center px-2">
@@ -467,8 +467,8 @@ export default function SurfaceLayoutsPage() {
                 {/* Table with padding on all sides */}
                 <div className="rounded border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
                   <div className="bg-[#F7F8F8] dark:bg-[#0D1117] h-7 flex items-center px-2">
-                    <span className="text-[9px] text-[#9CA3AF]">Name</span>
-                    <span className="text-[9px] text-[#9CA3AF] ml-auto">Status</span>
+                    <span className="text-[10px] text-[#9CA3AF]">Name</span>
+                    <span className="text-[10px] text-[#9CA3AF] ml-auto">Status</span>
                   </div>
                   <div className="h-7 flex items-center px-2">
                     <span className="inline-block rounded bg-[#EDEEF1] dark:bg-[#1F2430] h-2 w-16" />
@@ -492,8 +492,8 @@ export default function SurfaceLayoutsPage() {
             { title: 'Consistent across all tab panels', desc: 'Every tab panel within a single container should use the same padding value. Don\'t mix p-4 and p-5 in sibling panels.' },
           ].map((rule, i) => (
             <div key={i} className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] p-4 bg-white dark:bg-[#0D1117]">
-              <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-1">{rule.title}</p>
-              <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{rule.desc}</p>
+              <p className="text-[14px] font-semibold text-[#111827] dark:text-white mb-1">{rule.title}</p>
+              <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{rule.desc}</p>
             </div>
           ))}
         </div>
@@ -501,8 +501,8 @@ export default function SurfaceLayoutsPage() {
 
       {/* ── Migration notes (unnumbered, kept as trailing content) ──── */}
       <div className="mt-16 pt-8 border-t border-[#EDEEF1] dark:border-[#1F2430]">
-        <h2 className="text-[26px] font-semibold text-[#111827] dark:text-white tracking-[-0.015em] mb-2">Migration notes</h2>
-        <p className="text-[15px] text-[#505867] dark:text-[#9CA3AF] mb-6">
+        <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white tracking-[-0.015em] mb-2">Migration notes</h2>
+        <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-6">
           For pages currently using the floating tabs pattern, here is the migration path:
         </p>
         <div className="flex flex-col gap-3">
@@ -514,8 +514,8 @@ export default function SurfaceLayoutsPage() {
             { title: 'Verify spacing', desc: 'Each section inside the container should have consistent padding (p-5 or px-5 py-4). Check that the gap between tab bar and content is 0px.' },
           ].map((item, i) => (
             <div key={i} className="p-4 rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117]">
-              <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-0.5">{item.title}</p>
-              <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{item.desc}</p>
+              <p className="text-[14px] font-semibold text-[#111827] dark:text-white mb-0.5">{item.title}</p>
+              <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>

@@ -62,7 +62,7 @@ const SECONDARY_FOR_PRIMARY: Record<TabStyleName, TabStyleName> = {
 function SecondaryTabs({ items, activeId, onChange, style = 'underline' }: { items: TabItem[]; activeId: string; onChange: (id: string) => void; style?: TabStyleName }) {
   const styles: Record<TabStyleName, (active: boolean) => string> = {
     pill: (active) => clsx('h-6 px-2.5 rounded-md text-[12px] font-medium transition-colors border', active ? 'border-grey-200 text-grey-950 dark:text-white bg-grey-50 dark:bg-grey-800' : 'border-transparent text-grey-500 hover:text-grey-700'),
-    underline: (active) => clsx('h-7 px-3 text-[13px] font-medium transition-colors border-b-2 -mb-px whitespace-nowrap', active ? 'border-blue-600 text-grey-950 dark:text-white' : 'border-transparent text-grey-500 hover:text-grey-700'),
+    underline: (active) => clsx('h-7 px-3 text-[14px] font-medium transition-colors border-b-2 -mb-px whitespace-nowrap', active ? 'border-blue-600 text-grey-950 dark:text-white' : 'border-transparent text-grey-500 hover:text-grey-700'),
     filled: (active) => clsx('h-6 px-2.5 rounded-md text-[12px] font-medium transition-colors', active ? 'bg-blue-600 text-white' : 'text-grey-500 hover:text-grey-700 hover:bg-grey-100'),
     minimal: (active) => clsx('h-6 px-2.5 text-[12px] transition-colors', active ? 'font-semibold text-grey-950 dark:text-white' : 'text-grey-500 hover:text-grey-700'),
     chip: (active) => clsx('h-6 px-2.5 rounded-full text-[12px] font-medium transition-colors', active ? 'bg-grey-950 dark:bg-white text-white dark:text-grey-950' : 'text-grey-500 hover:text-grey-700 hover:bg-grey-100'),
@@ -201,8 +201,8 @@ function DonutChart({ segments, size = 140, strokeWidth = 20, centerValue, cente
       </svg>
       {(centerValue || centerLabel) && (
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          {centerValue && <span className="text-[18px] font-semibold text-grey-950 dark:text-white">{centerValue}</span>}
-          {centerLabel && <span className="text-[11px] text-grey-400">{centerLabel}</span>}
+          {centerValue && <span className="text-[16px] font-semibold text-grey-950 dark:text-white">{centerValue}</span>}
+          {centerLabel && <span className="text-[10px] text-grey-400">{centerLabel}</span>}
         </div>
       )}
     </div>
@@ -483,8 +483,8 @@ function AvatarMenu({ collapsed }: { collapsed: boolean }) {
   return (
     <div className="relative" ref={ref}>
       <button onClick={() => setOpen(!open)} className={clsx('flex items-center gap-2.5 h-8 rounded-md hover:bg-grey-200/40 transition-colors', collapsed ? 'justify-center w-8' : 'w-full px-3')}>
-        <span className="w-4 h-4 rounded-full bg-blue-600 flex items-center justify-center text-[8px] font-semibold text-white shrink-0">T</span>
-        {!collapsed && <span className="text-[13px] text-grey-600">Profile</span>}
+        <span className="w-4 h-4 rounded-full bg-blue-600 flex items-center justify-center text-[10px] font-semibold text-white shrink-0">T</span>
+        {!collapsed && <span className="text-[14px] text-grey-600">Profile</span>}
       </button>
       {open && (
         <div className={clsx('absolute z-50 w-[180px] bg-white dark:bg-grey-900 border border-grey-200 dark:border-grey-700 rounded-lg shadow-level-3 py-1', collapsed ? 'left-full bottom-0 ml-2' : 'bottom-full left-0 mb-2')}>
@@ -550,7 +550,7 @@ function NotifBell() {
       </button>
       {open && (
         <div className="absolute top-full right-0 mt-1 z-50 w-[260px] bg-white dark:bg-grey-900 border border-grey-200 dark:border-grey-700 rounded-lg shadow-level-3 py-1">
-          <div className="px-3 py-1.5 text-[11px] font-semibold text-grey-950 dark:text-white border-b border-grey-100 dark:border-grey-800">Notifications</div>
+          <div className="px-3 py-1.5 text-[10px] font-semibold text-grey-950 dark:text-white border-b border-grey-100 dark:border-grey-800">Notifications</div>
           {['Data request completed', 'GRESB deadline approaching', 'Coverage alert: 3 assets below 80%'].map(n => (
             <button key={n} onClick={() => setOpen(false)} className="w-full text-left px-3 py-2 text-[12px] text-grey-600 hover:bg-grey-50 transition-colors">{n}</button>
           ))}
@@ -586,7 +586,7 @@ function BreadcrumbDropdown({ label, value, options, onChange, selected = true, 
       {open && (
         <div className="absolute top-full left-0 mt-1 z-50 w-[220px] bg-white dark:bg-grey-900 border border-[#D7DAE0] dark:border-[#374151] rounded-lg shadow-level-3 py-1">
           {options.map(opt => (
-            <button key={opt} onClick={() => { onChange(opt); setOpen(false) }} className={clsx('w-full text-left px-3 py-1.5 text-[13px] transition-colors', opt === value ? 'text-[#1258F8] font-medium bg-[#EBF1FF] dark:bg-blue-600/10' : 'text-[#505867] hover:bg-[#F7F8F8]')}>
+            <button key={opt} onClick={() => { onChange(opt); setOpen(false) }} className={clsx('w-full text-left px-3 py-1.5 text-[14px] transition-colors', opt === value ? 'text-[#1258F8] font-medium bg-[#EBF1FF] dark:bg-blue-600/10' : 'text-[#505867] hover:bg-[#F7F8F8]')}>
               {opt}
             </button>
           ))}
@@ -720,12 +720,12 @@ function ContentArea() {
   const tabStyle: TabStyleName = 'underline'
 
   const tabStyles = {
-    pill: (active: boolean) => clsx('h-7 px-3 rounded-md text-[13px] font-medium transition-colors border', active ? 'border-grey-200 text-grey-950 dark:text-white bg-grey-50 dark:bg-grey-800' : 'border-transparent text-grey-500 hover:text-grey-700'),
-    underline: (active: boolean) => clsx('h-8 px-3 text-[13px] font-medium transition-colors border-b-2 -mb-px', active ? 'border-blue-600 text-grey-950 dark:text-white' : 'border-transparent text-grey-500 hover:text-grey-700'),
-    filled: (active: boolean) => clsx('h-7 px-3 rounded-md text-[13px] font-medium transition-colors', active ? 'bg-blue-600 text-white' : 'text-grey-500 hover:text-grey-700 hover:bg-grey-100'),
-    minimal: (active: boolean) => clsx('h-7 px-3 text-[13px] transition-colors', active ? 'font-semibold text-grey-950 dark:text-white' : 'text-grey-500 hover:text-grey-700'),
-    chip: (active: boolean) => clsx('h-7 px-3 rounded-full text-[13px] font-medium transition-colors', active ? 'bg-grey-950 dark:bg-white text-white dark:text-grey-950' : 'text-grey-500 hover:text-grey-700 hover:bg-grey-100'),
-    segmented: (active: boolean) => clsx('h-7 px-3 text-[13px] font-medium transition-colors', active ? 'text-grey-950 dark:text-white bg-white dark:bg-grey-800 shadow-level-1 rounded-md' : 'text-grey-500 hover:text-grey-700'),
+    pill: (active: boolean) => clsx('h-7 px-3 rounded-md text-[14px] font-medium transition-colors border', active ? 'border-grey-200 text-grey-950 dark:text-white bg-grey-50 dark:bg-grey-800' : 'border-transparent text-grey-500 hover:text-grey-700'),
+    underline: (active: boolean) => clsx('h-8 px-3 text-[14px] font-medium transition-colors border-b-2 -mb-px', active ? 'border-blue-600 text-grey-950 dark:text-white' : 'border-transparent text-grey-500 hover:text-grey-700'),
+    filled: (active: boolean) => clsx('h-7 px-3 rounded-md text-[14px] font-medium transition-colors', active ? 'bg-blue-600 text-white' : 'text-grey-500 hover:text-grey-700 hover:bg-grey-100'),
+    minimal: (active: boolean) => clsx('h-7 px-3 text-[14px] transition-colors', active ? 'font-semibold text-grey-950 dark:text-white' : 'text-grey-500 hover:text-grey-700'),
+    chip: (active: boolean) => clsx('h-7 px-3 rounded-full text-[14px] font-medium transition-colors', active ? 'bg-grey-950 dark:bg-white text-white dark:text-grey-950' : 'text-grey-500 hover:text-grey-700 hover:bg-grey-100'),
+    segmented: (active: boolean) => clsx('h-7 px-3 text-[14px] font-medium transition-colors', active ? 'text-grey-950 dark:text-white bg-white dark:bg-grey-800 shadow-level-1 rounded-md' : 'text-grey-500 hover:text-grey-700'),
   }
 
   return (
@@ -751,8 +751,8 @@ function ContentArea() {
             ))}
           </div>
           <div className="flex items-center gap-2 pb-2">
-            <button className="h-7 px-3 rounded border border-[#1258F8] text-[13px] font-medium text-[#1258F8] hover:bg-[#1258F8]/10 transition-colors flex items-center gap-1.5"><FunnelIcon className="w-3.5 h-3.5" />Filter</button>
-            <button className="h-7 px-3 rounded border border-[#1258F8] text-[13px] font-medium text-[#1258F8] hover:bg-[#1258F8]/10 transition-colors flex items-center gap-1.5">View<ChevronDownIcon className="w-3 h-3" /></button>
+            <button className="h-7 px-3 rounded border border-[#1258F8] text-[14px] font-medium text-[#1258F8] hover:bg-[#1258F8]/10 transition-colors flex items-center gap-1.5"><FunnelIcon className="w-3.5 h-3.5" />Filter</button>
+            <button className="h-7 px-3 rounded border border-[#1258F8] text-[14px] font-medium text-[#1258F8] hover:bg-[#1258F8]/10 transition-colors flex items-center gap-1.5">View<ChevronDownIcon className="w-3 h-3" /></button>
           </div>
         </div>
 
@@ -761,12 +761,12 @@ function ContentArea() {
           <MetricSection noBorderTop title="Energy Use Intensity" unit="kWh/m2/yr" periodValue={annualTab} onPeriodChange={setAnnualTab} toggleTabs={[{ id: 'eui', label: 'Energy use intensity' }, { id: 'esi', label: 'Energy spend intensity' }]} activeToggle={euiToggle} onToggleChange={setEuiToggle} kpis={[{ label: 'Energy use intensity', value: '378.29 kWh/m2/yr' }, { label: 'Total consumption', value: '26,089 MWh' }, { label: 'Active floor area', value: '68,964.67 m2' }, { label: 'Data coverage', value: '88.49 %' }, { label: 'Target comparison', value: 'N/A' }, { label: 'Benchmark comparison', value: 'N/A' }]}>
             <div className="grid grid-cols-4 gap-8 px-5 pb-4 pt-2">
               <div>
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white mb-4">Annual</p>
+                <p className="text-[14px] font-medium text-grey-950 dark:text-white mb-4">Annual</p>
                 <LineChart series={[{ points: [420, 380, 410, 390, 150, 30], color: COLORS.energy }]} />
               </div>
               <div className="col-span-3">
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-[13px] font-medium text-grey-950 dark:text-white">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
+                  <p className="text-[14px] font-medium text-grey-950 dark:text-white">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
                   <a href="#" className="text-[12px] text-blue-600 font-medium">Add target or benchmark</a>
                 </div>
                 <ColumnChart data={[20, 35, 50, 80, 120, 200, 350, 500, 800, 1200, 1800, 2500, 3000, 3800, 4200, 4800, 5000, 4500, 3200, 2000, 1200, 800, 500, 300, 200, 180, 150, 120, 100, 80]} color={COLORS.energy} />
@@ -778,12 +778,12 @@ function ContentArea() {
           <MetricSection title="Total Consumption" unit="MWh" periodValue={annualTab} onPeriodChange={setAnnualTab} toggleTabs={[{ id: 'total', label: 'Total consumption' }, { id: 'spend', label: 'Total energy spend' }]} activeToggle={consumptionToggle} onToggleChange={setConsumptionToggle} kpis={[{ label: 'Total consumption', value: '26,089 MWh' }, { label: 'Fuels', value: '16,366 MWh' }, { label: 'DHC', value: '81 MWh' }, { label: 'Electricity', value: '9,642 MWh' }, { label: 'Active floor area', value: '68,964.67 m2' }, { label: 'Data coverage', value: '88.49 %' }]}>
             <div className="grid grid-cols-4 gap-8 px-5 pb-4 pt-2">
               <div>
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white mb-4">Annual</p>
+                <p className="text-[14px] font-medium text-grey-950 dark:text-white mb-4">Annual</p>
                 <LineChart series={[{ points: [800, 22000, 20000, 18000, 12000, 500], color: COLORS.energy }]} />
               </div>
               <div className="col-span-3">
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-[13px] font-medium text-grey-950 dark:text-white">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
+                  <p className="text-[14px] font-medium text-grey-950 dark:text-white">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
                   <a href="#" className="text-[12px] text-blue-600 font-medium">Add target or benchmark</a>
                 </div>
                 <ColumnChart data={[10, 20, 30, 50, 80, 100, 150, 200, 300, 400, 500, 600, 800, 1000, 1200, 1500, 1800, 2000, 2500, 3000, 3500, 4000, 4500]} color={COLORS.energy} />
@@ -795,12 +795,12 @@ function ContentArea() {
           <MetricSection title="Data Coverage" unit="%" periodValue={annualTab} onPeriodChange={setAnnualTab} kpis={[{ label: 'Data coverage', value: '88.49 %' }, { label: 'Active floor area', value: '68,964.67 m2' }]}>
             <div className="grid grid-cols-4 gap-8 px-5 pb-4 pt-2">
               <div>
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white mb-4">Annual</p>
+                <p className="text-[14px] font-medium text-grey-950 dark:text-white mb-4">Annual</p>
                 <LineChart series={[{ points: [95, 90, 88, 85, 50, 10], color: COLORS.energy }]} />
               </div>
               <div className="col-span-3">
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-[13px] font-medium text-grey-950 dark:text-white">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
+                  <p className="text-[14px] font-medium text-grey-950 dark:text-white">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
                   <a href="#" className="text-[12px] text-blue-600 font-medium">Add target or benchmark</a>
                 </div>
                 <ColumnChart data={[92, 88, 95, 87, 91, 93, 86, 90, 94, 89, 97, 85, 93, 88, 96, 91, 87, 94, 90, 92, 86, 95, 88, 93, 91, 89, 97, 90, 86, 94]} color={COLORS.energy} />
@@ -813,7 +813,7 @@ function ContentArea() {
             {[{ label: 'Fuels', pct: '90%', color: 'text-energy-500' }, { label: 'District heating & cooling', pct: '6%', color: 'text-grey-400' }, { label: 'Electricity', pct: '95%', color: 'text-energy-500' }].map(item => (
               <div key={item.label} className="rounded-lg border border-grey-100 dark:border-grey-800 p-4 flex items-center justify-between">
                 <span className="text-[14px] font-medium text-grey-950 dark:text-white">{item.label}</span>
-                <span className={clsx('text-[24px] font-bold', item.color)}>{item.pct}</span>
+                <span className={clsx('text-[20px] font-bold', item.color)}>{item.pct}</span>
               </div>
             ))}
           </div>
@@ -821,11 +821,11 @@ function ContentArea() {
           <MetricSection title="Like-for-like Change" unit="%" kpis={[{ label: 'Like-for-like change', value: '0.15 %' }, { label: 'Active floor area', value: '68,964.67 m2' }]}>
             <div className="grid grid-cols-4 gap-8 px-5 py-4">
               <div>
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white mb-4">Portfolio YoY</p>
+                <p className="text-[14px] font-medium text-grey-950 dark:text-white mb-4">Portfolio YoY</p>
                 <LineChart series={[{ points: [40, 10, 20, 15, 5, 8], color: COLORS.energy }]} />
               </div>
               <div className="col-span-3">
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white mb-4">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
+                <p className="text-[14px] font-medium text-grey-950 dark:text-white mb-4">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
                 <ColumnChart data={[12, 8, 5, 15, 21, 3, 18, 12, 7, 5, 14, 9, 3, 18, 25, 1, 16, 14, 9, 7, 11, 11, 4, 6, 19, 13, 8, 4, 13, 10]} color={COLORS.energy} />
               </div>
             </div>
@@ -835,11 +835,11 @@ function ContentArea() {
           <MetricSection title="Renewable Energy" unit="%" kpis={[{ label: 'Renewable energy', value: '11.2 %' }, { label: 'Percent off-site Renewable', value: '9.9 %' }, { label: 'Percent on-site Renewable', value: '1.3 %' }]}>
             <div className="grid grid-cols-4 gap-8 px-5 py-4">
               <div>
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white mb-4">Annual</p>
+                <p className="text-[14px] font-medium text-grey-950 dark:text-white mb-4">Annual</p>
                 <LineChart series={[{ points: [5, 8, 12, 240, 80, 50], color: COLORS.energy }]} />
               </div>
               <div className="col-span-3">
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white mb-4">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
+                <p className="text-[14px] font-medium text-grey-950 dark:text-white mb-4">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
                 <ColumnChart data={[82, 75, 95, 78, 88, 71, 93, 84, 76, 91, 87, 73, 96, 80, 89, 74, 92, 85, 77, 90, 83, 72, 94, 81, 86, 79, 97, 88, 74, 91]} color={COLORS.energy} />
               </div>
             </div>
@@ -852,12 +852,12 @@ function ContentArea() {
           <MetricSection noBorderTop title="GHG Emissions Intensity" unit="kg CO2e/m2/yr" periodValue={annualTab} onPeriodChange={setAnnualTab} kpis={[{ label: 'GHG Emissions Intensity', value: '92.42 kg CO2e/m2/yr' }, { label: 'Total GHG emissions', value: '6,375 Tonnes' }, { label: 'Active floor area', value: '68,964.73 m2' }, { label: 'Data coverage', value: '88.49 %' }, { label: 'Target comparison', value: 'N/A' }, { label: 'Benchmark comparison', value: 'N/A' }]}>
             <div className="grid grid-cols-4 gap-8 px-5 pb-4 pt-2">
               <div>
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white mb-4">Annual</p>
+                <p className="text-[14px] font-medium text-grey-950 dark:text-white mb-4">Annual</p>
                 <LineChart series={[{ points: [100, 105, 95, 80, 10, 5], color: COLORS.ghg }]} />
               </div>
               <div className="col-span-3">
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-[13px] font-medium text-grey-950 dark:text-white">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
+                  <p className="text-[14px] font-medium text-grey-950 dark:text-white">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
                   <a href="#" className="text-[12px] text-blue-600 font-medium">Add target or benchmark</a>
                 </div>
                 <ColumnChart data={[5, 10, 20, 40, 80, 150, 300, 500, 800, 1000, 1200, 900, 600, 400, 200, 100, 50, 30, 20, 10]} color={COLORS.ghg} />
@@ -869,12 +869,12 @@ function ContentArea() {
           <MetricSection title="Total GHG Emissions" unit="Tonnes" periodValue={annualTab} onPeriodChange={setAnnualTab} kpis={[{ label: 'Total GHG emissions', value: '6,375 Tonnes' }, { label: 'Scope 1', value: '2,985 Tonnes' }, { label: 'Scope 2', value: '3,084 Tonnes' }, { label: 'Scope 3', value: '305.9 Tonnes' }, { label: 'Active floor area', value: '68,964.73 m2' }, { label: 'Data coverage', value: '88.49 %' }]}>
             <div className="grid grid-cols-4 gap-8 px-5 pb-4 pt-2">
               <div>
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white mb-4">By source</p>
+                <p className="text-[14px] font-medium text-grey-950 dark:text-white mb-4">By source</p>
                 <ColumnChart data={[1000, 5500, 6000, 5800, 4500, 800]} color={COLORS.ghg} />
               </div>
               <div className="col-span-3">
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-[13px] font-medium text-grey-950 dark:text-white">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
+                  <p className="text-[14px] font-medium text-grey-950 dark:text-white">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
                   <a href="#" className="text-[12px] text-blue-600 font-medium">Add target or benchmark</a>
                 </div>
                 <ColumnChart data={[5, 10, 15, 20, 30, 50, 80, 120, 200, 400, 600, 900, 1200, 1500, 1800, 2000, 1800, 1200, 800, 400]} color={COLORS.ghg} />
@@ -889,7 +889,7 @@ function ContentArea() {
             <div className="px-5"><KpiRow items={[{ label: 'Total GHG emissions', value: '6,375 Tonnes' }, { label: 'F-gases', value: '67.88 Tonnes' }, { label: 'Fuels', value: '2,979 Tonnes' }, { label: 'DHC', value: '30.26 Tonnes' }, { label: 'Electricity', value: '3,298 Tonnes' }, { label: 'Active floor area', value: '68,964.73 m2' }, { label: 'Data coverage', value: '88.49 %' }]} /></div>
             <div className="grid grid-cols-2 gap-4 px-5 py-4">
               <div className="flex flex-col items-center">
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white mb-4 self-start">Total emissions</p>
+                <p className="text-[14px] font-medium text-grey-950 dark:text-white mb-4 self-start">Total emissions</p>
                 <DonutChart
                   size={140}
                   strokeWidth={20}
@@ -904,14 +904,14 @@ function ContentArea() {
               </div>
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-[13px] font-medium text-grey-950 dark:text-white">GHG emissions by source <span className="text-grey-400 font-normal">2024</span></p>
+                  <p className="text-[14px] font-medium text-grey-950 dark:text-white">GHG emissions by source <span className="text-grey-400 font-normal">2024</span></p>
                 </div>
                 <div className="flex h-6 rounded overflow-hidden mb-3">
                   <div className="bg-[#FDBA74]" style={{ width: '46.82%' }} />
                   <div style={{ width: '48.38%', backgroundColor: COLORS.ghg }} />
                   <div className="bg-[#FED7AA]" style={{ width: '4.8%' }} />
                 </div>
-                <div className="flex flex-wrap gap-3 text-[11px]">
+                <div className="flex flex-wrap gap-3 text-[10px]">
                   <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-[#FDBA74]" />Scope 1 GHG 46.82%</span>
                   <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm" style={{ backgroundColor: COLORS.ghg }} />Scope 2 GHG 48.38%</span>
                   <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-[#FED7AA]" />Scope 3 GHG 4.80%</span>
@@ -923,12 +923,12 @@ function ContentArea() {
           <MetricSection title="Data Coverage" unit="%" periodValue={annualTab} onPeriodChange={setAnnualTab} kpis={[{ label: 'Data coverage', value: '88.49 %' }, { label: 'Active floor area', value: '68,964.73 m2' }]}>
             <div className="grid grid-cols-4 gap-8 px-5 pb-4 pt-2">
               <div>
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white mb-4">Annual</p>
+                <p className="text-[14px] font-medium text-grey-950 dark:text-white mb-4">Annual</p>
                 <LineChart series={[{ points: [95, 90, 88, 85, 50, 10], color: COLORS.ghg }]} />
               </div>
               <div className="col-span-3">
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-[13px] font-medium text-grey-950 dark:text-white">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
+                  <p className="text-[14px] font-medium text-grey-950 dark:text-white">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
                   <a href="#" className="text-[12px] text-blue-600 font-medium">Add target</a>
                 </div>
                 <ColumnChart data={[92, 88, 95, 87, 91, 93, 86, 90, 94, 89, 97, 85, 93, 88, 96, 91, 87, 94, 90, 92, 86, 95, 88, 93, 91, 89, 97, 90, 86, 94]} color={COLORS.ghg} />
@@ -940,11 +940,11 @@ function ContentArea() {
           <MetricSection title="Like-for-like Change" unit="%" kpis={[{ label: 'Like-for-like change', value: '-1.37 %' }, { label: 'Active floor area', value: '68,964.73 m2' }]}>
             <div className="grid grid-cols-4 gap-8 px-5 py-4">
               <div>
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white mb-4">Portfolio YoY</p>
+                <p className="text-[14px] font-medium text-grey-950 dark:text-white mb-4">Portfolio YoY</p>
                 <LineChart series={[{ points: [45, 5, 8, 5, 3, 2], color: COLORS.ghg }]} />
               </div>
               <div className="col-span-3">
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white mb-4">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
+                <p className="text-[14px] font-medium text-grey-950 dark:text-white mb-4">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
                 <ColumnChart data={[10, 6, 4, 12, 18, 2, 15, 10, 5, 4, 11, 8, 2, 16, 22, 1, 13, 11, 7, 5, 9, 9, 3, 5, 17, 11, 6, 3, 11, 8]} color={COLORS.ghg} />
               </div>
             </div>
@@ -957,12 +957,12 @@ function ContentArea() {
           <MetricSection noBorderTop title="Water Use Intensity" unit="m3/m2/yr" periodValue={annualTab} onPeriodChange={setAnnualTab} kpis={[{ label: 'Water use intensity', value: '2.34 m3/m2/yr' }, { label: 'Total water consumption', value: '183,772.9 m3' }, { label: 'Active floor area', value: '78,390.6 m2' }, { label: 'Data coverage', value: '98.47 %' }, { label: 'Target comparison', value: 'N/A' }, { label: 'Benchmark comparison', value: 'N/A' }]}>
             <div className="grid grid-cols-4 gap-8 px-5 pb-4 pt-2">
               <div>
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white mb-4">Annual</p>
+                <p className="text-[14px] font-medium text-grey-950 dark:text-white mb-4">Annual</p>
                 <LineChart series={[{ points: [5.2, 4.8, 4.2, 3.5, 2.8, 2.3], color: COLORS.water }]} />
               </div>
               <div className="col-span-3">
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-[13px] font-medium text-grey-950 dark:text-white">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
+                  <p className="text-[14px] font-medium text-grey-950 dark:text-white">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
                   <a href="#" className="text-[12px] text-blue-600 font-medium">Add target or benchmark</a>
                 </div>
                 <ColumnChart data={[2, 3, 5, 8, 12, 18, 25, 35, 50, 80, 120, 200, 350, 500, 800, 1200, 2000, 3500, 5000, 8000, 10000, 12000, 13000, 13500]} color={COLORS.water} />
@@ -974,12 +974,12 @@ function ContentArea() {
           <MetricSection title="Total Water Consumption" unit="m3" periodValue={annualTab} onPeriodChange={setAnnualTab} kpis={[{ label: 'Total water consumption', value: '183,772.9 m3' }, { label: 'Active floor area', value: '78,390.6 m2' }, { label: 'Data coverage', value: '98.47 %' }]}>
             <div className="grid grid-cols-4 gap-8 px-5 pb-4 pt-2">
               <div>
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white mb-4">Annual</p>
+                <p className="text-[14px] font-medium text-grey-950 dark:text-white mb-4">Annual</p>
                 <LineChart series={[{ points: [100000, 150000, 180000, 195000, 190000, 183000], color: COLORS.water }]} />
               </div>
               <div className="col-span-3">
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-[13px] font-medium text-grey-950 dark:text-white">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
+                  <p className="text-[14px] font-medium text-grey-950 dark:text-white">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
                   <a href="#" className="text-[12px] text-blue-600 font-medium">Add target or benchmark</a>
                 </div>
                 <ColumnChart data={[100, 200, 400, 800, 1500, 3000, 5000, 8000, 10000, 12000, 13000, 13500, 12000, 10000, 8000, 5000, 3000, 1500, 800, 400]} color={COLORS.water} />
@@ -991,12 +991,12 @@ function ContentArea() {
           <MetricSection title="Data Coverage" unit="%" periodValue={annualTab} onPeriodChange={setAnnualTab} kpis={[{ label: 'Data coverage', value: '98.47 %' }, { label: 'Active floor area', value: '78,390.6 m2' }]}>
             <div className="grid grid-cols-4 gap-8 px-5 pb-4 pt-2">
               <div>
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white mb-4">Annual</p>
+                <p className="text-[14px] font-medium text-grey-950 dark:text-white mb-4">Annual</p>
                 <LineChart series={[{ points: [30, 55, 70, 82, 95, 98], color: COLORS.water }]} />
               </div>
               <div className="col-span-3">
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-[13px] font-medium text-grey-950 dark:text-white">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
+                  <p className="text-[14px] font-medium text-grey-950 dark:text-white">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
                   <a href="#" className="text-[12px] text-blue-600 font-medium">Add target</a>
                 </div>
                 <ColumnChart data={[95, 92, 98, 90, 94, 96, 89, 93, 97, 91, 99, 88, 96, 91, 98, 94, 90, 97, 93, 95, 89, 98, 91, 96, 94, 92, 99, 93, 89, 97]} color={COLORS.water} />
@@ -1008,11 +1008,11 @@ function ContentArea() {
           <MetricSection title="Like-for-like Change" unit="%" kpis={[{ label: 'Like-for-like change', value: '-1.37 %' }, { label: 'Active floor area', value: '78,390.6 m2' }]}>
             <div className="grid grid-cols-4 gap-8 px-5 py-4">
               <div>
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white mb-4">Portfolio YoY</p>
+                <p className="text-[14px] font-medium text-grey-950 dark:text-white mb-4">Portfolio YoY</p>
                 <LineChart series={[{ points: [50, 8, 5, 3, 10, 5], color: COLORS.water }]} />
               </div>
               <div className="col-span-3">
-                <p className="text-[13px] font-medium text-grey-950 dark:text-white mb-4">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
+                <p className="text-[14px] font-medium text-grey-950 dark:text-white mb-4">Asset distribution <span className="text-grey-400 font-normal">2024</span></p>
                 <ColumnChart data={[8, 5, 3, 10, 15, 2, 12, 8, 4, 3, 9, 6, 2, 13, 18, 1, 11, 9, 6, 4, 7, 7, 2, 4, 14, 9, 5, 2, 9, 6]} color={COLORS.water} />
               </div>
             </div>
@@ -1204,7 +1204,7 @@ function AssetListContent() {
         {/* Sub-tabs */}
         <div className="px-5 flex items-end border-b border-grey-100 dark:border-grey-800">
           {ASSET_SUBTABS.map(tab => (
-            <button key={tab.id} onClick={() => setSubTab(tab.id)} className={clsx('h-8 px-3 text-[13px] font-medium transition-colors border-b-2 -mb-px', subTab === tab.id ? 'border-blue-600 text-grey-950 dark:text-white' : 'border-transparent text-grey-500 hover:text-grey-700')}>
+            <button key={tab.id} onClick={() => setSubTab(tab.id)} className={clsx('h-8 px-3 text-[14px] font-medium transition-colors border-b-2 -mb-px', subTab === tab.id ? 'border-blue-600 text-grey-950 dark:text-white' : 'border-transparent text-grey-500 hover:text-grey-700')}>
               {tab.label}
             </button>
           ))}
@@ -1213,7 +1213,7 @@ function AssetListContent() {
         {/* Filter bar */}
         <div className="px-5 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <button className="h-8 px-3 rounded border border-grey-200 dark:border-grey-800 text-[13px] font-medium text-grey-700 dark:text-grey-300 flex items-center gap-2 hover:border-grey-300 transition-colors">
+            <button className="h-8 px-3 rounded border border-grey-200 dark:border-grey-800 text-[14px] font-medium text-grey-700 dark:text-grey-300 flex items-center gap-2 hover:border-grey-300 transition-colors">
               <span className="w-2 h-2 rounded-full bg-blue-600" />
               Data completion: Critical
               <span className="inline-flex items-center h-[20px] px-2 rounded-full bg-success-100 text-success-700 text-[12px] font-medium">99.98%</span>
@@ -1228,7 +1228,7 @@ function AssetListContent() {
                 placeholder="Search assets"
                 value={searchQuery}
                 onChange={e => { setSearchQuery(e.target.value); setPage(1) }}
-                className="w-full h-8 pl-8 pr-3 rounded border border-grey-200 dark:border-grey-800 hover:border-grey-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 bg-white dark:bg-grey-950 text-[13px] text-grey-950 dark:text-white placeholder-grey-400 outline-none transition-colors"
+                className="w-full h-8 pl-8 pr-3 rounded border border-grey-200 dark:border-grey-800 hover:border-grey-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 bg-white dark:bg-grey-950 text-[14px] text-grey-950 dark:text-white placeholder-grey-400 outline-none transition-colors"
               />
             </div>
           </div>
@@ -1257,7 +1257,7 @@ function AssetListContent() {
         <div className="px-5">
           <div className="rounded-lg border border-grey-100 dark:border-grey-800 overflow-hidden">
             <div>
-              <table className="w-full border-collapse text-[13px]">
+              <table className="w-full border-collapse text-[14px]">
                 <thead>
                   <tr className="bg-[#F7F8F8] dark:bg-[#0D1117]">
                     <th className="w-10 px-3 py-2.5 border-b border-grey-100 dark:border-grey-800 text-left">
@@ -1273,7 +1273,7 @@ function AssetListContent() {
                       { label: 'Missing data', key: 'missing', sub: 'Critical' },
                       { label: 'Actions', key: null, sub: null },
                     ].map(h => (
-                      <th key={h.label} className={clsx('px-3 py-1.5 border-b border-grey-100 dark:border-grey-800 text-[11px] font-semibold text-grey-500 dark:text-grey-400 whitespace-nowrap', h.key ? 'text-left cursor-pointer select-none hover:text-grey-700' : 'text-right')} onClick={h.key ? () => handleSort(h.key) : undefined}>
+                      <th key={h.label} className={clsx('px-3 py-1.5 border-b border-grey-100 dark:border-grey-800 text-[10px] font-semibold text-grey-500 dark:text-grey-400 whitespace-nowrap', h.key ? 'text-left cursor-pointer select-none hover:text-grey-700' : 'text-right')} onClick={h.key ? () => handleSort(h.key) : undefined}>
                         <div className={clsx('flex items-center gap-1', !h.key && 'justify-end')}>
                           {h.label}{h.sub && <span className="text-[10px] font-normal text-grey-300">{h.sub}</span>}
                           {h.key && (
@@ -1318,7 +1318,7 @@ function AssetListContent() {
             <div className="flex items-center justify-between px-3 py-2.5 border-t border-grey-100 dark:border-grey-800">
               <div className="flex items-center gap-2">
                 <span className="text-[12px] text-grey-500 border border-grey-200 rounded px-2 py-0.5">{pageSize}</span>
-                <span className="text-[13px] text-grey-500">Showing {(page - 1) * pageSize + 1} - {Math.min(page * pageSize, filtered.length)} of {filtered.length}</span>
+                <span className="text-[14px] text-grey-500">Showing {(page - 1) * pageSize + 1} - {Math.min(page * pageSize, filtered.length)} of {filtered.length}</span>
               </div>
               <div className="flex items-center gap-0.5">
                 <button onClick={() => setPage(1)} disabled={page === 1} className="w-7 h-7 flex items-center justify-center rounded text-grey-500 hover:bg-grey-50 disabled:opacity-30 disabled:cursor-not-allowed text-[12px]">{'\u00AB'}</button>
@@ -1438,7 +1438,7 @@ function ReportsOverviewContent() {
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex items-center gap-2 min-w-0">
                       <ReportStatusIcon status={report.status} />
-                      <span className="text-[13px] font-medium text-grey-950 dark:text-white truncate">{report.name}</span>
+                      <span className="text-[14px] font-medium text-grey-950 dark:text-white truncate">{report.name}</span>
                     </div>
                     <button className="w-5 h-5 flex items-center justify-center rounded text-grey-300 hover:text-grey-600 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
                       <EllipsisHorizontalIcon className="w-4 h-4" />
@@ -1447,14 +1447,14 @@ function ReportsOverviewContent() {
 
                   {/* Meta pills */}
                   <div className="flex items-center gap-1.5 flex-wrap">
-                    <span className={clsx('inline-flex items-center h-[18px] px-1.5 rounded text-[11px] font-medium', completionNum >= 100 ? 'bg-success-100 text-success-700' : 'bg-warning-100 text-warning-700')}>
+                    <span className={clsx('inline-flex items-center h-[18px] px-1.5 rounded text-[10px] font-medium', completionNum >= 100 ? 'bg-success-100 text-success-700' : 'bg-warning-100 text-warning-700')}>
                       {report.completion}
                     </span>
-                    <span className="text-[11px] text-grey-400">Data completion</span>
+                    <span className="text-[10px] text-grey-400">Data completion</span>
                     {report.date && (
                       <>
                         <span className="text-grey-200">{'|'}</span>
-                        <span className="text-[11px] text-grey-400 flex items-center gap-1">
+                        <span className="text-[10px] text-grey-400 flex items-center gap-1">
                           <CalendarIcon className="w-3 h-3" />{report.date}
                         </span>
                       </>
@@ -1509,7 +1509,7 @@ function HomeContent() {
             </svg>
           </div>
 
-          <h1 className="text-[22px] font-semibold text-grey-950 dark:text-white mb-1">Good afternoon, Tamara</h1>
+          <h1 className="text-[20px] font-semibold text-grey-950 dark:text-white mb-1">Good afternoon, Tamara</h1>
           <p className="text-[14px] text-[#505867] mb-8">Ask Lumi anything about your portfolio, reports, or ESG data.</p>
 
           {/* Search / prompt input */}
@@ -1531,7 +1531,7 @@ function HomeContent() {
 
           {/* Quick actions */}
           <div className="w-full max-w-[640px]">
-            <p className="text-[11px] font-semibold text-grey-400 uppercase tracking-wider mb-3">Quick actions</p>
+            <p className="text-[10px] font-semibold text-grey-400 uppercase tracking-wider mb-3">Quick actions</p>
             <div className="grid grid-cols-2 gap-2">
               {QUICK_ACTIONS.map(action => {
                 const Icon = action.icon
@@ -1541,7 +1541,7 @@ function HomeContent() {
                       <Icon className="w-4 h-4 text-ai-500" />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-[13px] font-medium text-grey-950 dark:text-white">{action.label}</p>
+                      <p className="text-[14px] font-medium text-grey-950 dark:text-white">{action.label}</p>
                       <p className="text-[12px] text-grey-400 leading-snug">{action.description}</p>
                     </div>
                   </button>
@@ -1553,15 +1553,15 @@ function HomeContent() {
 
         {/* Recent conversations */}
         <div className="w-full max-w-[640px] mx-auto pb-8">
-          <p className="text-[11px] font-semibold text-grey-400 uppercase tracking-wider mb-3">Recent conversations</p>
+          <p className="text-[10px] font-semibold text-grey-400 uppercase tracking-wider mb-3">Recent conversations</p>
           <div className="flex flex-col gap-0.5">
             {RECENT_CONVERSATIONS.map(convo => (
               <button key={convo.id} className="flex items-center justify-between h-9 px-3 rounded-md text-left hover:bg-grey-50 dark:hover:bg-white/5 transition-colors group">
                 <div className="flex items-center gap-2.5 min-w-0">
                   <SparklesIcon className="w-3.5 h-3.5 text-ai-400 shrink-0" />
-                  <span className="text-[13px] text-grey-700 dark:text-grey-300 truncate">{convo.title}</span>
+                  <span className="text-[14px] text-grey-700 dark:text-grey-300 truncate">{convo.title}</span>
                 </div>
-                <span className="text-[11px] text-grey-300 shrink-0 ml-3">{convo.time}</span>
+                <span className="text-[10px] text-grey-300 shrink-0 ml-3">{convo.time}</span>
               </button>
             ))}
           </div>

@@ -44,8 +44,8 @@ export default function FormattedPage() {
       <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants" description="Four formatting modes. Each wraps the browser Intl API with consistent design-system font styles.">
         <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] overflow-hidden">
           <div className="grid grid-cols-[140px_1fr] divide-y divide-[#EDEEF1] dark:divide-[#1F2430]">
-            <div className="px-4 py-3 bg-[#F7F8F8] dark:bg-[#0D1117] text-[11px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]">Type</div>
-            <div className="px-4 py-3 bg-[#F7F8F8] dark:bg-[#0D1117] text-[11px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]">Output</div>
+            <div className="px-4 py-3 bg-[#F7F8F8] dark:bg-[#0D1117] text-[10px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]">Type</div>
+            <div className="px-4 py-3 bg-[#F7F8F8] dark:bg-[#0D1117] text-[10px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]">Output</div>
             <div className="px-4 py-3 text-[14px] text-[#505867] dark:text-[#9CA3AF]">Number</div>
             <div className="px-4 py-3 text-[14px] font-medium text-[#111827] dark:text-white font-mono">1,248,350</div>
             <div className="px-4 py-3 text-[14px] text-[#505867] dark:text-[#9CA3AF]">Currency (USD)</div>

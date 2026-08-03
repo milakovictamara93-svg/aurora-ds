@@ -69,23 +69,23 @@ export default function BordersShadowsPage() {
         <div className="rounded-xl border border-token overflow-hidden bg-token-primary">
           {/* Header */}
           <div className="grid grid-cols-[120px_100px_160px_1fr] gap-4 px-6 py-3 border-b border-token bg-token-secondary">
-            <span className="text-[11px] uppercase tracking-widest font-semibold text-token-muted">Token</span>
-            <span className="text-[11px] uppercase tracking-widest font-semibold text-token-muted">Value</span>
-            <span className="text-[11px] uppercase tracking-widest font-semibold text-token-muted">Preview</span>
-            <span className="text-[11px] uppercase tracking-widest font-semibold text-token-muted">Usage</span>
+            <span className="text-[10px] uppercase tracking-widest font-semibold text-token-muted">Token</span>
+            <span className="text-[10px] uppercase tracking-widest font-semibold text-token-muted">Value</span>
+            <span className="text-[10px] uppercase tracking-widest font-semibold text-token-muted">Preview</span>
+            <span className="text-[10px] uppercase tracking-widest font-semibold text-token-muted">Usage</span>
           </div>
 
           {/* Rows */}
           <div className="divide-y divide-token">
             {RADII.map(({ token, value, label, usage }) => (
               <div key={token} className="grid grid-cols-[120px_100px_160px_1fr] gap-4 items-center px-6 py-4">
-                <code className="text-[13px] font-mono text-blue-600 dark:text-blue-400">{token}</code>
+                <code className="text-[14px] font-mono text-blue-600 dark:text-blue-400">{token}</code>
                 <span className="text-[14px] font-mono text-token-secondary">{value}</span>
                 <div
                   className="w-12 h-12 bg-blue-100 dark:bg-blue-950/40 border-2 border-blue-300 dark:border-blue-700"
                   style={{ borderRadius: value === '9999px' ? '9999px' : value }}
                 />
-                <span className="text-[13px] text-token-secondary">{usage}</span>
+                <span className="text-[14px] text-token-secondary">{usage}</span>
               </div>
             ))}
           </div>
@@ -101,10 +101,10 @@ export default function BordersShadowsPage() {
         <div className="rounded-xl border border-token overflow-hidden bg-token-primary">
           {/* Header */}
           <div className="grid grid-cols-[80px_100px_180px_1fr] gap-4 px-6 py-3 border-b border-token bg-token-secondary">
-            <span className="text-[11px] uppercase tracking-widest font-semibold text-token-muted">Level</span>
-            <span className="text-[11px] uppercase tracking-widest font-semibold text-token-muted">Name</span>
-            <span className="text-[11px] uppercase tracking-widest font-semibold text-token-muted">Token</span>
-            <span className="text-[11px] uppercase tracking-widest font-semibold text-token-muted">Usage</span>
+            <span className="text-[10px] uppercase tracking-widest font-semibold text-token-muted">Level</span>
+            <span className="text-[10px] uppercase tracking-widest font-semibold text-token-muted">Name</span>
+            <span className="text-[10px] uppercase tracking-widest font-semibold text-token-muted">Token</span>
+            <span className="text-[10px] uppercase tracking-widest font-semibold text-token-muted">Usage</span>
           </div>
 
           {/* Rows */}
@@ -117,8 +117,8 @@ export default function BordersShadowsPage() {
                   style={{ boxShadow: css }}
                 />
                 <span className="text-[14px] font-medium text-token-primary">{label}</span>
-                <code className="text-[13px] font-mono text-blue-600 dark:text-blue-400">{token}</code>
-                <span className="text-[13px] text-token-secondary">{usage}</span>
+                <code className="text-[14px] font-mono text-blue-600 dark:text-blue-400">{token}</code>
+                <span className="text-[14px] text-token-secondary">{usage}</span>
               </div>
             ))}
           </div>
@@ -127,14 +127,14 @@ export default function BordersShadowsPage() {
         {/* CSS value table */}
         <div className="mt-6 rounded-xl border border-token overflow-hidden bg-token-primary">
           <div className="grid grid-cols-[120px_1fr] gap-4 px-6 py-3 border-b border-token bg-token-secondary">
-            <span className="text-[11px] uppercase tracking-widest font-semibold text-token-muted">Token</span>
-            <span className="text-[11px] uppercase tracking-widest font-semibold text-token-muted">CSS value</span>
+            <span className="text-[10px] uppercase tracking-widest font-semibold text-token-muted">Token</span>
+            <span className="text-[10px] uppercase tracking-widest font-semibold text-token-muted">CSS value</span>
           </div>
           <div className="divide-y divide-token">
             {SHADOWS.map(({ token, css }) => (
               <div key={token} className="grid grid-cols-[120px_1fr] gap-4 items-center px-6 py-3">
-                <code className="text-[13px] font-mono text-blue-600 dark:text-blue-400">{token}</code>
-                <code className="text-[13px] font-mono text-token-secondary">{css}</code>
+                <code className="text-[14px] font-mono text-blue-600 dark:text-blue-400">{token}</code>
+                <code className="text-[14px] font-mono text-token-secondary">{css}</code>
               </div>
             ))}
           </div>
@@ -208,7 +208,7 @@ export default function BordersShadowsPage() {
                 { label: 'Avatars', radius: '9999px (rounded-full)', shadow: 'None' },
               ].map(({ label, radius, shadow }) => (
                 <div key={label} className="p-4 rounded-lg bg-token-secondary border border-token">
-                  <p className="text-[13px] font-semibold text-token-primary mb-2">{label}</p>
+                  <p className="text-[14px] font-semibold text-token-primary mb-2">{label}</p>
                   <div className="flex flex-col gap-1">
                     <span className="text-[12px] text-token-secondary">
                       <span className="font-medium text-token-primary">Radius:</span> {radius}

@@ -86,7 +86,7 @@ export default function PageStructurePage() {
             showMoreMenu
           >
             <div className="h-64 rounded-lg bg-[#F7F8F8] dark:bg-[#0D1117] border border-dashed border-[#D7DAE0] dark:border-[#374151] flex items-center justify-center">
-              <p className="text-[13px] text-[#C4C9D4] dark:text-[#3F4654]">Content area -- table, cards, charts</p>
+              <p className="text-[14px] text-[#C4C9D4] dark:text-[#3F4654]">Content area -- table, cards, charts</p>
             </div>
           </PageLayout>
         </div>
@@ -117,7 +117,7 @@ export default function PageStructurePage() {
             ]}
           >
             <div className="h-48 rounded-lg bg-[#F7F8F8] dark:bg-[#0D1117] border border-dashed border-[#D7DAE0] dark:border-[#374151] flex items-center justify-center">
-              <p className="text-[13px] text-[#C4C9D4] dark:text-[#3F4654]">Charts and data tables</p>
+              <p className="text-[14px] text-[#C4C9D4] dark:text-[#3F4654]">Charts and data tables</p>
             </div>
           </PageLayout>
         </div>
@@ -138,7 +138,7 @@ export default function PageStructurePage() {
             actions={[{ label: 'Save', variant: 'primary' }]}
           >
             <div className="h-40 rounded-lg bg-[#F7F8F8] dark:bg-[#0D1117] border border-dashed border-[#D7DAE0] dark:border-[#374151] flex items-center justify-center">
-              <p className="text-[13px] text-[#C4C9D4] dark:text-[#3F4654]">Content area</p>
+              <p className="text-[14px] text-[#C4C9D4] dark:text-[#3F4654]">Content area</p>
             </div>
           </PageLayout>
         </div>
@@ -165,8 +165,8 @@ export default function PageStructurePage() {
             { label: 'Content area',              value: 'White card with rounded-bl + rounded-br + rounded-tr corners. Flexible: tables, charts, forms.' },
           ].map((row, i) => (
             <div key={i} className="flex items-start gap-4 px-4 py-3 border-b border-[#EDEEF1] dark:border-[#1F2430] last:border-b-0">
-              <span className="text-[13px] font-medium text-[#111827] dark:text-white w-40 shrink-0">{row.label}</span>
-              <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">{row.value}</span>
+              <span className="text-[14px] font-medium text-[#111827] dark:text-white w-40 shrink-0">{row.label}</span>
+              <span className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">{row.value}</span>
             </div>
           ))}
         </div>
@@ -248,8 +248,8 @@ export default function PageStructurePage() {
             { title: 'Reporting year is interactive', desc: 'The pill opens a dropdown with reporting type (Calendar/Fiscal) and a scrollable date range list. Changes require "Apply".' },
           ].map((rule, i) => (
             <div key={i} className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] p-4 bg-white dark:bg-[#0D1117]">
-              <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-1">{rule.title}</p>
-              <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{rule.desc}</p>
+              <p className="text-[14px] font-semibold text-[#111827] dark:text-white mb-1">{rule.title}</p>
+              <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{rule.desc}</p>
             </div>
           ))}
         </div>

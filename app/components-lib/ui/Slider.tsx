@@ -236,7 +236,7 @@ export default function Slider({
         }}
       >
         {showValue && (
-          <div className="absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap px-1.5 py-0.5 rounded bg-[#111827] dark:bg-[#1F2430] text-white text-[11px] font-medium pointer-events-none select-none">
+          <div className="absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap px-1.5 py-0.5 rounded bg-[#111827] dark:bg-[#1F2430] text-white text-[10px] font-medium pointer-events-none select-none">
             {value}
           </div>
         )}

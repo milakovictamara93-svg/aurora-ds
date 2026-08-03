@@ -67,11 +67,11 @@ function SkeletonChart() {
 function ButtonLoading() {
   return (
     <div className="flex items-center gap-3">
-      <button className="h-8 px-4 rounded-lg bg-[#1258F8] text-[13px] font-medium text-white flex items-center gap-2 opacity-75 cursor-wait">
+      <button className="h-8 px-4 rounded-lg bg-[#1258F8] text-[14px] font-medium text-white flex items-center gap-2 opacity-75 cursor-wait">
         <Spinner size="sm" />
         Saving...
       </button>
-      <button className="h-8 px-4 rounded-lg border border-[#D7DAE0] dark:border-[#374151] text-[13px] font-medium text-[#505867] flex items-center gap-2 opacity-75 cursor-wait">
+      <button className="h-8 px-4 rounded-lg border border-[#D7DAE0] dark:border-[#374151] text-[14px] font-medium text-[#505867] flex items-center gap-2 opacity-75 cursor-wait">
         <Spinner size="sm" />
         Loading...
       </button>
@@ -89,8 +89,8 @@ function ProgressDemo() {
     <div className="flex flex-col gap-4">
       <div>
         <div className="flex items-center justify-between mb-1">
-          <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">Uploading report...</span>
-          <span className="text-[13px] font-medium text-[#111827] dark:text-white">{progress}%</span>
+          <span className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">Uploading report...</span>
+          <span className="text-[14px] font-medium text-[#111827] dark:text-white">{progress}%</span>
         </div>
         <LoadingBar value={progress} size="md" />
       </div>
@@ -167,7 +167,7 @@ export default function LoadingStatesPage() {
           {([['sm', '16px'], ['md', '24px'], ['lg', '32px']] as const).map(([size, label]) => (
             <div key={size} className="flex flex-col items-center gap-2">
               <Spinner size={size} />
-              <span className="text-[11px] text-[#9CA3AF]">{label}</span>
+              <span className="text-[10px] text-[#9CA3AF]">{label}</span>
             </div>
           ))}
         </div>

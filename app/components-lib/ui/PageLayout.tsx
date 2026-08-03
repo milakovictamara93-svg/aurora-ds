@@ -113,13 +113,13 @@ function ReportingYearPicker({
           <div className="flex">
             {/* Left: reporting type */}
             <div className="w-[160px] border-r border-[#EDEEF1] dark:border-[#1F2430] p-3">
-              <p className="text-[11px] font-semibold text-[#9CA3AF] uppercase tracking-wider mb-2">Reporting type</p>
+              <p className="text-[10px] font-semibold text-[#9CA3AF] uppercase tracking-wider mb-2">Reporting type</p>
               {(['calendar', 'fiscal'] as const).map(type => (
                 <button
                   key={type}
                   onClick={() => setReportType(type)}
                   className={clsx(
-                    'w-full text-left px-2 py-1.5 rounded text-[13px] transition-colors capitalize',
+                    'w-full text-left px-2 py-1.5 rounded text-[14px] transition-colors capitalize',
                     reportType === type
                       ? 'text-[#1258F8] font-medium'
                       : 'text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5'
@@ -132,14 +132,14 @@ function ReportingYearPicker({
 
             {/* Right: date range list */}
             <div className="flex-1 p-3">
-              <p className="text-[11px] font-semibold text-[#9CA3AF] uppercase tracking-wider mb-2">Date range</p>
+              <p className="text-[10px] font-semibold text-[#9CA3AF] uppercase tracking-wider mb-2">Date range</p>
               <div className="flex flex-col gap-0.5 max-h-48 overflow-y-auto">
                 {options.map(opt => (
                   <button
                     key={opt}
                     onClick={() => setSelected(opt)}
                     className={clsx(
-                      'w-full text-left px-2 py-1.5 rounded text-[13px] transition-colors',
+                      'w-full text-left px-2 py-1.5 rounded text-[14px] transition-colors',
                       selected === opt
                         ? 'text-[#1258F8] font-medium bg-[#EEF6FF] dark:bg-[#1258F8]/10'
                         : 'text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5'
@@ -156,7 +156,7 @@ function ReportingYearPicker({
           <div className="flex justify-end gap-2 px-3 py-2 border-t border-[#EDEEF1] dark:border-[#1F2430]">
             <button
               onClick={apply}
-              className="h-7 px-3 rounded text-[13px] font-medium bg-[#1258F8] text-white hover:bg-[#1146E4] transition-colors"
+              className="h-7 px-3 rounded text-[14px] font-medium bg-[#1258F8] text-white hover:bg-[#1146E4] transition-colors"
             >
               Apply
             </button>
@@ -237,7 +237,7 @@ export default function PageLayout({
         {/* Row 1: title + badge | reporting year + actions */}
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 flex-1 min-w-0">
-            <h1 className="text-[24px] font-semibold text-[#111827] dark:text-white leading-[1.4] truncate">
+            <h1 className="text-[20px] font-semibold text-[#111827] dark:text-white leading-[1.4] truncate">
               {title}
             </h1>
             {badge && (

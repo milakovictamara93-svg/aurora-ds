@@ -118,7 +118,7 @@ function IconRail({
       >
         <ScalerLogo className="w-7 h-7 shrink-0" color="#111827" />
         {expanded && (
-          <span className="text-[18px] font-bold text-[#111827] dark:text-white tracking-[-0.2px] whitespace-nowrap animate-[fadeIn_100ms_ease-in]">
+          <span className="text-[16px] font-bold text-[#111827] dark:text-white tracking-[-0.2px] whitespace-nowrap animate-[fadeIn_100ms_ease-in]">
             scaler
           </span>
         )}

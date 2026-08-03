@@ -56,7 +56,7 @@ function MenuDivider() {
 
 function MenuHeader({ label }: { label: string }) {
   return (
-    <div className="px-3 py-1.5 text-[11px] font-semibold text-[#505867] dark:text-[#9CA3AF] uppercase tracking-wider">
+    <div className="px-3 py-1.5 text-[10px] font-semibold text-[#505867] dark:text-[#9CA3AF] uppercase tracking-wider">
       {label}
     </div>
   )

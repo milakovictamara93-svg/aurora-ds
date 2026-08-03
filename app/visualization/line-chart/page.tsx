@@ -115,7 +115,7 @@ export default function LineChartPage() {
             Compact line charts for card slots. Single, multiple, standard and shadow variants.
           </p>
           {/* Standard */}
-          <p className="text-[13px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-2">Standard</p>
+          <p className="text-[14px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-2">Standard</p>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
             <ChartCard label="Single" suffix="standard">
               <LineChart series={[{ points: [110, 95, 90, 130, 145, 80], color: CHART_COLORS.energy }]} labels={["'20", "'21", "'22", "'23", "'24", "'25"]} height={120} />
@@ -125,7 +125,7 @@ export default function LineChartPage() {
             </ChartCard>
           </div>
           {/* Shadow */}
-          <p className="text-[13px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-2">Shadow</p>
+          <p className="text-[14px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-2">Shadow</p>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <ChartCard label="Single" suffix="shadow">
               <LineChart series={[{ points: [110, 95, 90, 130, 145, 80], color: CHART_COLORS.energy }]} labels={["'20", "'21", "'22", "'23", "'24", "'25"]} height={120} showArea />

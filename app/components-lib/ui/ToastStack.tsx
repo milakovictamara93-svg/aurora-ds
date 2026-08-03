@@ -179,7 +179,7 @@ export function ToastStack({ toasts, queued = 0, onDismiss, onDismissAll }: Toas
 
       {/* Queue indicator */}
       {queued > 0 && (
-        <p className="text-center text-[11px] text-[#9CA3AF] select-none">
+        <p className="text-center text-[12px] text-[#9CA3AF] select-none">
           +{queued} more queued
         </p>
       )}
@@ -235,13 +235,13 @@ export function ToastGroupDemo() {
     <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
       {/* Controls */}
       <div className="px-5 py-4 bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
-        <p className="text-[13px] font-semibold text-[#1F2430] dark:text-white mb-3">Add a toast to the group</p>
+        <p className="text-[14px] font-semibold text-[#1F2430] dark:text-white mb-3">Add a toast to the group</p>
         <div className="flex flex-wrap gap-2">
           {BUTTONS.map(b => (
             <button
               key={b.variant}
               onClick={() => fire({ variant: b.variant, label: b.msg, description: b.desc })}
-              className="px-3 py-1.5 rounded-md text-[13px] font-medium bg-white dark:bg-[#111827] border border-[#EDEEF1] dark:border-[#1F2430] text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white hover:border-[#D7DAE0] dark:hover:border-[#3F4654] transition-colors"
+              className="px-3 py-1.5 rounded-md text-[14px] font-medium bg-white dark:bg-[#111827] border border-[#EDEEF1] dark:border-[#1F2430] text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white hover:border-[#D7DAE0] dark:hover:border-[#3F4654] transition-colors"
             >
               {b.label}
             </button>
@@ -253,7 +253,7 @@ export function ToastGroupDemo() {
       <div className="relative bg-white dark:bg-[#111827] min-h-[200px] p-6">
         {toasts.length === 0 ? (
           <div className="flex items-center justify-center h-full min-h-[140px]">
-            <p className="text-[13px] text-[#C4C9D4] dark:text-[#3F4654] select-none">No active toasts — add one above</p>
+            <p className="text-[14px] text-[#C4C9D4] dark:text-[#3F4654] select-none">No active toasts — add one above</p>
           </div>
         ) : (
           <div className="relative flex flex-col gap-2">
@@ -349,13 +349,13 @@ export function ToastStackDemo() {
     <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
       {/* Controls */}
       <div className="px-5 py-4 bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
-        <p className="text-[13px] font-semibold text-[#1F2430] dark:text-white mb-3">Fire a toast</p>
+        <p className="text-[14px] font-semibold text-[#1F2430] dark:text-white mb-3">Fire a toast</p>
         <div className="flex flex-wrap gap-2">
           {BUTTONS.map(b => (
             <button
               key={b.variant}
               onClick={() => fire({ variant: b.variant, label: b.msg, description: b.desc })}
-              className="px-3 py-1.5 rounded-md text-[13px] font-medium bg-white dark:bg-[#111827] border border-[#EDEEF1] dark:border-[#1F2430] text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white hover:border-[#D7DAE0] dark:hover:border-[#3F4654] transition-colors"
+              className="px-3 py-1.5 rounded-md text-[14px] font-medium bg-white dark:bg-[#111827] border border-[#EDEEF1] dark:border-[#1F2430] text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white hover:border-[#D7DAE0] dark:hover:border-[#3F4654] transition-colors"
             >
               {b.label}
             </button>
@@ -370,7 +370,7 @@ export function ToastStackDemo() {
       <div className="relative bg-white dark:bg-[#111827] min-h-[200px] p-6">
         {toasts.length === 0 ? (
           <div className="flex items-center justify-center h-full min-h-[140px]">
-            <p className="text-[13px] text-[#C4C9D4] dark:text-[#3F4654] select-none">No active toasts — fire one above</p>
+            <p className="text-[14px] text-[#C4C9D4] dark:text-[#3F4654] select-none">No active toasts — fire one above</p>
           </div>
         ) : (
           <div className="flex flex-col items-end gap-2">

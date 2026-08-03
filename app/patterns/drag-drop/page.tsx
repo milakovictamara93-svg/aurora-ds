@@ -43,7 +43,7 @@ function StateCard({
 
   return (
     <div className="flex flex-col gap-3">
-      <p className="text-[11px] font-semibold uppercase tracking-widest text-[#9CA3AF]">{label}</p>
+      <p className="text-[10px] font-semibold uppercase tracking-widest text-[#9CA3AF]">{label}</p>
       <div
         className={[
           'flex items-center gap-3 px-4 py-3.5 rounded-lg border transition-all',
@@ -132,7 +132,7 @@ function ListReorderDemo() {
   return (
     <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
       <div className="px-4 py-3 bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
-        <p className="text-[13px] font-semibold text-[#1F2430] dark:text-white">Drag to reorder</p>
+        <p className="text-[14px] font-semibold text-[#1F2430] dark:text-white">Drag to reorder</p>
         <p className="text-[12px] text-[#9CA3AF] mt-0.5">Grab the handle on the left to move items</p>
       </div>
       <div className="p-4 flex flex-col gap-2 bg-white dark:bg-[#111827]">
@@ -237,11 +237,11 @@ function TableColumnReorderDemo() {
   return (
     <div className="rounded-xl border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
       <div className="px-4 py-3 bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
-        <p className="text-[13px] font-semibold text-[#1F2430] dark:text-white">Drag to reorder columns</p>
+        <p className="text-[14px] font-semibold text-[#1F2430] dark:text-white">Drag to reorder columns</p>
         <p className="text-[12px] text-[#9CA3AF] mt-0.5">Grab the handle in a column header to move it</p>
       </div>
       <div className="overflow-x-auto bg-white dark:bg-[#111827]">
-        <table className="w-full text-[13px]">
+        <table className="w-full text-[14px]">
           <thead>
             <tr className="border-b border-[#EDEEF1] dark:border-[#1F2430]">
               {columns.map(col => {
@@ -361,7 +361,7 @@ export default function DragDropPage() {
                 {step}
               </span>
               <div>
-                <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-0.5">{title}</p>
+                <p className="text-[14px] font-semibold text-[#111827] dark:text-white mb-0.5">{title}</p>
                 <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45]">{body}</p>
               </div>
             </div>

@@ -274,7 +274,7 @@ export default function ControlsPage() {
             </Section>
 
             <div className="mb-8">
-              <h3 className="text-[15px] font-semibold text-[#1F2430] dark:text-white mb-3">Variants</h3>
+              <h3 className="text-[14px] font-semibold text-[#1F2430] dark:text-white mb-3">Variants</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
                 <StateCard label="Unchecked"><Checkbox staticState="unchecked" label="Option" size={16} /></StateCard>
                 <StateCard label="Hover"><Checkbox staticState="unchecked" controlState="hover" label="Option" size={16} /></StateCard>
@@ -286,7 +286,7 @@ export default function ControlsPage() {
             </div>
 
             <div className="mb-8">
-              <h3 className="text-[15px] font-semibold text-[#1F2430] dark:text-white mb-3">Checkbox group</h3>
+              <h3 className="text-[14px] font-semibold text-[#1F2430] dark:text-white mb-3">Checkbox group</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
                   <div className="px-4 py-2.5 bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
@@ -319,7 +319,7 @@ export default function ControlsPage() {
             </div>
 
             <div className="mb-12">
-              <h3 className="text-[15px] font-semibold text-[#1F2430] dark:text-white mb-3">Do / Don't</h3>
+              <h3 className="text-[14px] font-semibold text-[#1F2430] dark:text-white mb-3">Do / Don't</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <DoCard>
                   <div className="mb-3 flex flex-col gap-2">
@@ -365,7 +365,7 @@ export default function ControlsPage() {
             </Section>
 
             <div className="mb-8">
-              <h3 className="text-[15px] font-semibold text-[#1F2430] dark:text-white mb-3">Variants</h3>
+              <h3 className="text-[14px] font-semibold text-[#1F2430] dark:text-white mb-3">Variants</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
                 <StateCard label="Inactive"><Radio active={false} label="Option" size={16} staticDisplay /></StateCard>
                 <StateCard label="Hover"><Radio active={false} controlState="hover" label="Option" size={16} staticDisplay /></StateCard>
@@ -376,7 +376,7 @@ export default function ControlsPage() {
             </div>
 
             <div className="mb-8">
-              <h3 className="text-[15px] font-semibold text-[#1F2430] dark:text-white mb-3">Radio group</h3>
+              <h3 className="text-[14px] font-semibold text-[#1F2430] dark:text-white mb-3">Radio group</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
                   <div className="px-4 py-2.5 bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
@@ -407,7 +407,7 @@ export default function ControlsPage() {
             </div>
 
             <div className="mb-12">
-              <h3 className="text-[15px] font-semibold text-[#1F2430] dark:text-white mb-3">Do / Don't</h3>
+              <h3 className="text-[14px] font-semibold text-[#1F2430] dark:text-white mb-3">Do / Don't</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <DoCard>
                   <div className="mb-3">
@@ -455,7 +455,7 @@ export default function ControlsPage() {
             </Section>
 
             <div className="mb-8">
-              <h3 className="text-[15px] font-semibold text-[#1F2430] dark:text-white mb-3">Variants</h3>
+              <h3 className="text-[14px] font-semibold text-[#1F2430] dark:text-white mb-3">Variants</h3>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 <StateCard label="Off"><Toggle staticActive={false} label="Setting" /></StateCard>
                 <StateCard label="On"><Toggle staticActive={true} label="Setting" /></StateCard>
@@ -465,7 +465,7 @@ export default function ControlsPage() {
             </div>
 
             <div className="mb-8">
-              <h3 className="text-[15px] font-semibold text-[#1F2430] dark:text-white mb-3">Toggle list</h3>
+              <h3 className="text-[14px] font-semibold text-[#1F2430] dark:text-white mb-3">Toggle list</h3>
               <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
                 <div className="px-4 py-2.5 bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
                   <span className="text-sm font-semibold text-[#1F2430] dark:text-white">Dashboard preferences</span>
@@ -488,7 +488,7 @@ export default function ControlsPage() {
             </div>
 
             <div className="mb-12">
-              <h3 className="text-[15px] font-semibold text-[#1F2430] dark:text-white mb-3">Do / Don't</h3>
+              <h3 className="text-[14px] font-semibold text-[#1F2430] dark:text-white mb-3">Do / Don't</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <DoCard>
                   <div className="mb-3 flex items-center justify-between p-3 rounded-lg bg-[#F7F8F8] dark:bg-[#0D1117]">
@@ -681,7 +681,7 @@ export default function ControlsPage() {
                   <span className="text-sm font-semibold text-[#1F2430] dark:text-white">Checkbox — base</span>
                   <span className="text-xs text-[#505867] dark:text-[#9CA3AF]">TSX</span>
                 </div>
-                <pre className="p-4 overflow-x-auto text-[13px] text-[#1F2430] dark:text-[#E5E7EB] leading-relaxed bg-white dark:bg-[#111827]"><code>{`<label className="inline-flex items-center gap-2 cursor-pointer select-none">
+                <pre className="p-4 overflow-x-auto text-[14px] text-[#1F2430] dark:text-[#E5E7EB] leading-relaxed bg-white dark:bg-[#111827]"><code>{`<label className="inline-flex items-center gap-2 cursor-pointer select-none">
   <input
     type="checkbox"
     className="sr-only peer"
@@ -716,7 +716,7 @@ export default function ControlsPage() {
                   <span className="text-sm font-semibold text-[#1F2430] dark:text-white">Radio button — group</span>
                   <span className="text-xs text-[#505867] dark:text-[#9CA3AF]">TSX</span>
                 </div>
-                <pre className="p-4 overflow-x-auto text-[13px] text-[#1F2430] dark:text-[#E5E7EB] leading-relaxed bg-white dark:bg-[#111827]"><code>{`{options.map(option => (
+                <pre className="p-4 overflow-x-auto text-[14px] text-[#1F2430] dark:text-[#E5E7EB] leading-relaxed bg-white dark:bg-[#111827]"><code>{`{options.map(option => (
   <label
     key={option.value}
     className="inline-flex items-center gap-2 cursor-pointer select-none"
@@ -759,7 +759,7 @@ export default function ControlsPage() {
                   <span className="text-sm font-semibold text-[#1F2430] dark:text-white">Toggle — controlled</span>
                   <span className="text-xs text-[#505867] dark:text-[#9CA3AF]">TSX</span>
                 </div>
-                <pre className="p-4 overflow-x-auto text-[13px] text-[#1F2430] dark:text-[#E5E7EB] leading-relaxed bg-white dark:bg-[#111827]"><code>{`<label className="inline-flex items-center gap-2 cursor-pointer select-none">
+                <pre className="p-4 overflow-x-auto text-[14px] text-[#1F2430] dark:text-[#E5E7EB] leading-relaxed bg-white dark:bg-[#111827]"><code>{`<label className="inline-flex items-center gap-2 cursor-pointer select-none">
   <span className="text-sm text-[#1F2430]">Dark mode</span>
   <button
     role="switch"

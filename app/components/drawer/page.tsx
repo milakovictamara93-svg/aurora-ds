@@ -172,8 +172,8 @@ export default function DrawerPage() {
 
                 {/* Footer */}
                 <div className="shrink-0 flex items-center justify-end gap-2 px-5 py-3 relative">
-                  <div className="h-6 px-2.5 flex items-center rounded border border-[#D7DAE0] text-[11px] font-medium text-[#111827]">Discard</div>
-                  <div className="h-6 px-2.5 flex items-center rounded bg-[#1258F8] text-[11px] font-medium text-white">Save</div>
+                  <div className="h-6 px-2.5 flex items-center rounded border border-[#D7DAE0] text-[10px] font-medium text-[#111827]">Discard</div>
+                  <div className="h-6 px-2.5 flex items-center rounded bg-[#1258F8] text-[10px] font-medium text-white">Save</div>
 
                   {/* Pointer 4: Footer */}
                   <span className="absolute left-[20px] top-[12px] w-[5px] h-[5px] rounded-full bg-[#111827] dark:bg-white" />
@@ -216,7 +216,7 @@ export default function DrawerPage() {
         secondaryLabel="Discard"
       >
         <div className="rounded-lg bg-[#F7F8F8] dark:bg-[#1F2430] flex items-center justify-center h-48">
-          <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">Content slot</span>
+          <span className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">Content slot</span>
         </div>
       </Modal>
     </ComponentPageLayout>

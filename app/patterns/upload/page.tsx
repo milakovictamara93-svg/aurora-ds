@@ -123,7 +123,7 @@ function UploadZoneDemo() {
               <DocumentIcon className="w-5 h-5 text-[#1258F8]" />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-[13px] font-semibold text-[#111827] dark:text-white truncate">{file.name}</p>
+              <p className="text-[14px] font-semibold text-[#111827] dark:text-white truncate">{file.name}</p>
               <p className="text-[12px] text-[#9CA3AF]">{file.size} · {file.type}</p>
             </div>
             <button onClick={reset} className="text-[#9CA3AF] hover:text-[#505867] dark:hover:text-white transition-colors">
@@ -133,13 +133,13 @@ function UploadZoneDemo() {
           <div className="px-4 pb-4 flex gap-2 border-t border-[#EDEEF1] dark:border-[#1F2430] pt-3">
             <button
               onClick={reset}
-              className="flex-1 py-2 rounded-md text-[13px] font-medium border border-[#D7DAE0] dark:border-[#1F2430] text-[#505867] dark:text-[#9CA3AF] hover:border-[#9CA3AF] bg-white dark:bg-[#111827] transition-colors"
+              className="flex-1 py-2 rounded-md text-[14px] font-medium border border-[#D7DAE0] dark:border-[#1F2430] text-[#505867] dark:text-[#9CA3AF] hover:border-[#9CA3AF] bg-white dark:bg-[#111827] transition-colors"
             >
               Cancel
             </button>
             <button
               onClick={simulateUpload}
-              className="flex-1 py-2 rounded-md text-[13px] font-medium bg-[#1258F8] text-white hover:bg-[#1146E4] transition-colors"
+              className="flex-1 py-2 rounded-md text-[14px] font-medium bg-[#1258F8] text-white hover:bg-[#1146E4] transition-colors"
             >
               Upload
             </button>
@@ -155,7 +155,7 @@ function UploadZoneDemo() {
               <DocumentIcon className="w-5 h-5 text-[#1258F8]" />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-[13px] font-semibold text-[#111827] dark:text-white truncate">{file.name}</p>
+              <p className="text-[14px] font-semibold text-[#111827] dark:text-white truncate">{file.name}</p>
               <p className="text-[12px] text-[#9CA3AF]">Uploading… {progress}%</p>
             </div>
           </div>
@@ -173,7 +173,7 @@ function UploadZoneDemo() {
         <div className="rounded-xl border border-[#22C55E]/40 bg-[#F0FDF5] dark:bg-[#14532B]/10 p-4 flex items-center gap-3">
           <CheckCircleIcon className="w-8 h-8 text-[#22C55E] shrink-0" />
           <div className="min-w-0 flex-1">
-            <p className="text-[13px] font-semibold text-[#111827] dark:text-white">{file.name}</p>
+            <p className="text-[14px] font-semibold text-[#111827] dark:text-white">{file.name}</p>
             <p className="text-[12px] text-[#22C55E]">Upload complete</p>
           </div>
           <button
@@ -190,7 +190,7 @@ function UploadZoneDemo() {
         <div className="rounded-xl border border-[#F87171]/40 bg-[#FEF2F2] dark:bg-[#7F1D1D]/10 p-4 flex items-center gap-3">
           <ExclamationCircleIcon className="w-8 h-8 text-[#F87171] shrink-0" />
           <div className="min-w-0 flex-1">
-            <p className="text-[13px] font-semibold text-[#111827] dark:text-white">{file.name}</p>
+            <p className="text-[14px] font-semibold text-[#111827] dark:text-white">{file.name}</p>
             <p className="text-[12px] text-[#F87171]">Upload failed — check your connection and try again.</p>
           </div>
           <button
@@ -252,10 +252,10 @@ function BulkUploadDemo() {
       <table className="w-full text-left">
         <thead>
           <tr className="bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
-            <th className="px-4 py-2.5 text-[11px] font-bold uppercase tracking-wider text-[#9CA3AF]">File</th>
-            <th className="px-4 py-2.5 text-[11px] font-bold uppercase tracking-wider text-[#9CA3AF]">Size</th>
-            <th className="px-4 py-2.5 text-[11px] font-bold uppercase tracking-wider text-[#9CA3AF]">Status</th>
-            <th className="px-4 py-2.5 text-[11px] font-bold uppercase tracking-wider text-[#9CA3AF] w-8"></th>
+            <th className="px-4 py-2.5 text-[10px] font-bold uppercase tracking-wider text-[#9CA3AF]">File</th>
+            <th className="px-4 py-2.5 text-[10px] font-bold uppercase tracking-wider text-[#9CA3AF]">Size</th>
+            <th className="px-4 py-2.5 text-[10px] font-bold uppercase tracking-wider text-[#9CA3AF]">Status</th>
+            <th className="px-4 py-2.5 text-[10px] font-bold uppercase tracking-wider text-[#9CA3AF] w-8"></th>
           </tr>
         </thead>
         <tbody className="divide-y divide-[#EDEEF1] dark:divide-[#1F2430] bg-white dark:bg-[#0D1117]">
@@ -264,10 +264,10 @@ function BulkUploadDemo() {
               <td className="px-4 py-3">
                 <div className="flex items-center gap-2">
                   <DocumentIcon className="w-4 h-4 text-[#9CA3AF] shrink-0" />
-                  <span className="text-[13px] text-[#111827] dark:text-white">{f.name}</span>
+                  <span className="text-[14px] text-[#111827] dark:text-white">{f.name}</span>
                 </div>
               </td>
-              <td className="px-4 py-3 text-[13px] text-[#505867] dark:text-[#9CA3AF]">{f.size}</td>
+              <td className="px-4 py-3 text-[14px] text-[#505867] dark:text-[#9CA3AF]">{f.size}</td>
               <td className="px-4 py-3"><StatusBadge status={f.status} progress={f.progress} /></td>
               <td className="px-4 py-3">
                 <button
@@ -283,7 +283,7 @@ function BulkUploadDemo() {
         </tbody>
       </table>
       {files.length === 0 && (
-        <div className="py-8 text-center text-[13px] text-[#9CA3AF]">No files in queue.</div>
+        <div className="py-8 text-center text-[14px] text-[#9CA3AF]">No files in queue.</div>
       )}
     </div>
   )
@@ -294,8 +294,8 @@ function BulkUploadDemo() {
 function SpecRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-start gap-4 px-4 py-3 border-b border-[#EDEEF1] dark:border-[#1F2430] last:border-b-0">
-      <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF] w-44 shrink-0">{label}</span>
-      <span className="text-[13px] text-[#111827] dark:text-white">{value}</span>
+      <span className="text-[14px] text-[#505867] dark:text-[#9CA3AF] w-44 shrink-0">{label}</span>
+      <span className="text-[14px] text-[#111827] dark:text-white">{value}</span>
     </div>
   )
 }
@@ -305,8 +305,8 @@ function SpecRow({ label, value }: { label: string; value: string }) {
 function RuleCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] p-4 bg-white dark:bg-[#0D1117]">
-      <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-2">{title}</p>
-      <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{children}</p>
+      <p className="text-[14px] font-semibold text-[#111827] dark:text-white mb-2">{title}</p>
+      <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{children}</p>
     </div>
   )
 }
@@ -375,8 +375,8 @@ export default function UploadPage() {
               <div className="w-10 h-10 rounded-full bg-[#EDEEF1] dark:bg-[#1F2430] flex items-center justify-center">
                 <ArrowUpTrayIcon className="w-5 h-5 text-[#9CA3AF]" />
               </div>
-              <p className="text-[13px] font-semibold text-[#111827] dark:text-white">Drop files here or click to browse</p>
-              <p className="text-[11px] text-[#9CA3AF]">Supports CSV, XLSX, PDF — up to 20 MB</p>
+              <p className="text-[14px] font-semibold text-[#111827] dark:text-white">Drop files here or click to browse</p>
+              <p className="text-[10px] text-[#9CA3AF]">Supports CSV, XLSX, PDF — up to 20 MB</p>
             </div>
           </StatePreview>
           <StatePreview label="Drag over — active">
@@ -384,7 +384,7 @@ export default function UploadPage() {
               <div className="w-10 h-10 rounded-full bg-[#1258F8]/15 flex items-center justify-center">
                 <ArrowUpTrayIcon className="w-5 h-5 text-[#1258F8]" />
               </div>
-              <p className="text-[13px] font-semibold text-[#1258F8]">Drop to upload</p>
+              <p className="text-[14px] font-semibold text-[#1258F8]">Drop to upload</p>
             </div>
           </StatePreview>
           <StatePreview label="File selected — confirm">
@@ -394,13 +394,13 @@ export default function UploadPage() {
                   <DocumentIcon className="w-5 h-5 text-[#1258F8]" />
                 </div>
                 <div>
-                  <p className="text-[13px] font-semibold text-[#111827] dark:text-white">report-2024.xlsx</p>
+                  <p className="text-[14px] font-semibold text-[#111827] dark:text-white">report-2024.xlsx</p>
                   <p className="text-[12px] text-[#9CA3AF]">2.4 MB · application/xlsx</p>
                 </div>
               </div>
               <div className="px-4 pb-4 flex gap-2 border-t border-[#EDEEF1] dark:border-[#1F2430] pt-3">
-                <button className="flex-1 py-2 rounded-md text-[13px] font-medium border border-[#D7DAE0] dark:border-[#1F2430] text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-[#111827]">Cancel</button>
-                <button className="flex-1 py-2 rounded-md text-[13px] font-medium bg-[#1258F8] text-white">Upload</button>
+                <button className="flex-1 py-2 rounded-md text-[14px] font-medium border border-[#D7DAE0] dark:border-[#1F2430] text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-[#111827]">Cancel</button>
+                <button className="flex-1 py-2 rounded-md text-[14px] font-medium bg-[#1258F8] text-white">Upload</button>
               </div>
             </div>
           </StatePreview>
@@ -411,7 +411,7 @@ export default function UploadPage() {
                   <DocumentIcon className="w-5 h-5 text-[#1258F8]" />
                 </div>
                 <div>
-                  <p className="text-[13px] font-semibold text-[#111827] dark:text-white">report-2024.xlsx</p>
+                  <p className="text-[14px] font-semibold text-[#111827] dark:text-white">report-2024.xlsx</p>
                   <p className="text-[12px] text-[#9CA3AF]">Uploading… 62%</p>
                 </div>
               </div>

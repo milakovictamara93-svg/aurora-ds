@@ -379,7 +379,7 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
       <div className="flex flex-col gap-1">
         <span className="text-[10px] font-semibold text-[#1F2430] dark:text-white">Building name</span>
         <div className="h-8 flex items-center px-2.5 rounded border border-[#1258F8] bg-white dark:bg-[#0D1117] ring-2 ring-[#1258F8]/20">
-          <span className="text-[11px] text-[#1F2430] dark:text-white">Scaler HQ</span>
+          <span className="text-[10px] text-[#1F2430] dark:text-white">Scaler HQ</span>
         </div>
         <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">Enter a unique identifier</span>
       </div>
@@ -387,7 +387,7 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
       <div className="flex flex-col gap-1">
         <span className="text-[10px] font-semibold text-[#1F2430] dark:text-white">Email address</span>
         <div className="h-8 flex items-center px-2.5 rounded border border-[#EF4444] bg-white dark:bg-[#0D1117]">
-          <span className="text-[11px] text-[#8C96A4]">name@example</span>
+          <span className="text-[10px] text-[#8C96A4]">name@example</span>
         </div>
         <span className="text-[10px] text-[#EF4444]">Enter a valid email address</span>
       </div>
@@ -400,7 +400,7 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
         <div className="w-8 h-4 rounded-full bg-[#1258F8] relative shrink-0">
           <span className="absolute top-[1px] right-[1.5px] bottom-[1px] w-[14px] rounded-full bg-white shadow-sm" />
         </div>
-        <span className="text-[11px] text-[#1F2430] dark:text-white">Notifications on</span>
+        <span className="text-[10px] text-[#1F2430] dark:text-white">Notifications on</span>
       </div>
       {/* Checkbox checked */}
       <div className="flex items-center gap-2">
@@ -409,21 +409,21 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
             <path d="M2 5L4 7.5L8.5 2.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </span>
-        <span className="text-[11px] text-[#1F2430] dark:text-white">Accept terms</span>
+        <span className="text-[10px] text-[#1F2430] dark:text-white">Accept terms</span>
       </div>
       {/* Radio selected */}
       <div className="flex items-center gap-2">
         <span className="inline-flex items-center justify-center w-4 h-4 rounded-full border-2 border-[#1258F8] bg-white dark:bg-[#111827] shrink-0">
           <span className="w-1.5 h-1.5 rounded-full bg-[#1258F8]" />
         </span>
-        <span className="text-[11px] text-[#1F2430] dark:text-white">Monthly billing</span>
+        <span className="text-[10px] text-[#1F2430] dark:text-white">Monthly billing</span>
       </div>
       {/* Toggle off */}
       <div className="flex items-center gap-2">
         <div className="w-8 h-4 rounded-full bg-[#D7DAE0] dark:bg-[#374151] relative shrink-0">
           <span className="absolute top-[1px] left-[1.5px] bottom-[1px] w-[14px] rounded-full bg-white shadow-sm" />
         </div>
-        <span className="text-[11px] text-[#505867] dark:text-[#9CA3AF]">Dark mode off</span>
+        <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">Dark mode off</span>
       </div>
     </div>
   ),
@@ -444,7 +444,7 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
   '/components/cards': (
     <div className="flex flex-col gap-2 w-full">
       <SimpleCard title="Scaler HQ" subtitle="Sydney · Office" />
-      <div className="flex flex-col gap-1.5 text-[11px] bg-white dark:bg-[#111827] rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] px-3 py-2.5">
+      <div className="flex flex-col gap-1.5 text-[10px] bg-white dark:bg-[#111827] rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] px-3 py-2.5">
         <div className="flex items-center justify-between font-semibold text-[#111827] dark:text-white text-[12px]">
           <span>180 George St</span>
           <Tag label="88%" system="error" style="filled" size="small" showCount={false} showRemove={false} />
@@ -467,7 +467,7 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
         <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#DCFCE7] flex-shrink-0">
           <svg className="w-3 h-3 text-[#16A34A]" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clipRule="evenodd" /></svg>
         </span>
-        <span className="text-[13px] font-bold text-[#16A34A]">+12.4%</span>
+        <span className="text-[14px] font-bold text-[#16A34A]">+12.4%</span>
       </div>
       {/* DataArrow indicator spectrum */}
       <div className="flex gap-1">
@@ -479,9 +479,9 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
       </div>
       {/* DataCompletion */}
       <div className="flex items-baseline gap-1.5">
-        <span className="text-[18px] font-bold" style={{ color: '#EA580C' }}>68%</span>
+        <span className="text-[16px] font-bold" style={{ color: '#EA580C' }}>68%</span>
         <span className="text-[10px] text-[#505867]">Complete</span>
-        <span className="inline-flex items-center h-4 px-1.5 rounded-full text-[9px] font-medium" style={{ background: '#FEF2F2', color: '#B91C1C' }}>2 Alerts</span>
+        <span className="inline-flex items-center h-4 px-1.5 rounded-full text-[10px] font-medium" style={{ background: '#FEF2F2', color: '#B91C1C' }}>2 Alerts</span>
       </div>
     </div>
   ),
@@ -489,7 +489,7 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
     <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
       <div className="grid grid-cols-3 bg-[#F7F8F8] dark:bg-[#1F2430] px-3 py-1.5 border-b border-[#EDEEF1] dark:border-[#1F2430]">
         {['Building', 'Status', 'Score'].map(h => (
-          <span key={h} className="text-[9px] font-semibold text-[#505867] dark:text-[#9CA3AF]">{h}</span>
+          <span key={h} className="text-[10px] font-semibold text-[#505867] dark:text-[#9CA3AF]">{h}</span>
         ))}
       </div>
       {([
@@ -557,12 +557,12 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
     <div className="flex flex-col gap-3">
       {/* Primary tabs */}
       <div>
-        <p className="text-[9px] font-bold uppercase tracking-wide text-[#9CA3AF] dark:text-[#505867] mb-1.5">Primary</p>
+        <p className="text-[10px] font-bold uppercase tracking-wide text-[#9CA3AF] dark:text-[#505867] mb-1.5">Primary</p>
         <div className="flex items-end border-b border-[#EDEEF1] dark:border-[#1F2430]">
           {['Energy', 'GHG', 'Water'].map((label, i) => (
             <div
               key={label}
-              className={`px-2.5 h-7 flex items-center text-[11px] font-medium rounded-tl rounded-tr whitespace-nowrap ${
+              className={`px-2.5 h-7 flex items-center text-[10px] font-medium rounded-tl rounded-tr whitespace-nowrap ${
                 i === 0
                   ? 'bg-white dark:bg-[#111827] text-[#111827] dark:text-white -mb-px border border-[#EDEEF1] dark:border-[#1F2430] border-b-white dark:border-b-[#111827]'
                   : 'text-[#505867] dark:text-[#9CA3AF]'
@@ -575,12 +575,12 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
       </div>
       {/* Secondary tabs */}
       <div>
-        <p className="text-[9px] font-bold uppercase tracking-wide text-[#9CA3AF] dark:text-[#505867] mb-1.5">Secondary</p>
+        <p className="text-[10px] font-bold uppercase tracking-wide text-[#9CA3AF] dark:text-[#505867] mb-1.5">Secondary</p>
         <div className="flex items-center">
           {['YoY', 'MoM', 'YTD', 'Custom'].map((label, i) => (
             <div
               key={label}
-              className={`px-2.5 h-7 flex items-center text-[11px] font-medium rounded-tl rounded-tr border-b-2 whitespace-nowrap ${
+              className={`px-2.5 h-7 flex items-center text-[10px] font-medium rounded-tl rounded-tr border-b-2 whitespace-nowrap ${
                 i === 0
                   ? 'border-[#1258F8] text-[#111827] dark:text-white'
                   : 'border-[#D7DAE0] dark:border-[#374151] text-[#505867] dark:text-[#9CA3AF]'
@@ -599,12 +599,12 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
       <div className="flex items-end justify-center gap-0 relative">
         <div className="relative max-w-[160px] bg-white dark:bg-[#111827] border border-[#D7DAE0] dark:border-[#374151] rounded-lg shadow-md px-3 py-2 mb-6">
           <span className="absolute bottom-[-5px] left-1/2 -translate-x-1/2 w-[10px] h-[10px] rotate-45 bg-white dark:bg-[#111827] border-b border-r border-[#D7DAE0] dark:border-[#374151]" />
-          <p className="text-[11px] font-semibold text-[#111827] dark:text-white mb-0.5">Scope 1</p>
+          <p className="text-[10px] font-semibold text-[#111827] dark:text-white mb-0.5">Scope 1</p>
           <p className="text-[10px] text-[#505867] dark:text-[#9CA3AF] leading-snug">Direct GHG emissions</p>
         </div>
       </div>
       <div className="flex justify-center">
-        <div className="h-7 px-3 rounded border border-[#D7DAE0] dark:border-[#374151] flex items-center gap-1.5 text-[11px] text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-[#111827]">
+        <div className="h-7 px-3 rounded border border-[#D7DAE0] dark:border-[#374151] flex items-center gap-1.5 text-[10px] text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-[#111827]">
           <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z" clipRule="evenodd" /></svg>
           Scope 1
         </div>
@@ -625,7 +625,7 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
         {['Day', 'Week', 'Month'].map((label, i) => (
           <div
             key={label}
-            className={`h-8 px-3 flex items-center text-[11px] font-semibold border-r border-[#D7DAE0] dark:border-[#374151] last:border-0 ${i === 1 ? 'bg-[#1258F8] text-white' : 'text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-[#111827]'}`}
+            className={`h-8 px-3 flex items-center text-[10px] font-semibold border-r border-[#D7DAE0] dark:border-[#374151] last:border-0 ${i === 1 ? 'bg-[#1258F8] text-white' : 'text-[#505867] dark:text-[#9CA3AF] bg-white dark:bg-[#111827]'}`}
           >
             {label}
           </div>
@@ -642,7 +642,7 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
   ),
   '/foundations/typography': (
     <div className="flex flex-col gap-1.5">
-      <span className="text-[18px] font-bold text-[#111827] dark:text-white leading-tight">Display heading</span>
+      <span className="text-[16px] font-bold text-[#111827] dark:text-white leading-tight">Display heading</span>
       <span className="text-[14px] font-semibold text-[#111827] dark:text-white">Section subheading</span>
       <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">Body — 16px, 145% line-height, Inter</span>
       <span className="text-[10px] text-[#8C96A4] tracking-wide">CAPTION · LABEL · 12PX</span>
@@ -677,7 +677,7 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
           <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776" />
         </svg>
       </div>
-      <span className="text-[11px] font-semibold text-[#111827] dark:text-white">No data yet</span>
+      <span className="text-[10px] font-semibold text-[#111827] dark:text-white">No data yet</span>
       <span className="text-[10px] text-[#8C96A4] text-center leading-tight">Add your first item<br/>to get started.</span>
       <div className="h-6 px-3 flex items-center rounded bg-[#1258F8] mt-0.5">
         <span className="text-[10px] font-semibold text-white">Add item</span>
@@ -708,12 +708,12 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
     <div className="flex flex-col gap-2">
       <div className="flex items-center gap-1.5">
         <div className="w-5 h-5 rounded flex items-center justify-center bg-[#111827]">
-          <span className="text-[8px] font-bold text-white">Aa</span>
+          <span className="text-[10px] font-bold text-white">Aa</span>
         </div>
         <div className="flex-1 h-1.5 rounded-full bg-[#EDEEF1] dark:bg-[#1F2430]">
           <div className="h-1.5 rounded-full bg-[#22C55E] w-[90%]" />
         </div>
-        <span className="text-[9px] font-semibold text-[#22C55E]">AAA</span>
+        <span className="text-[10px] font-semibold text-[#22C55E]">AAA</span>
       </div>
       <div className="flex items-center gap-1.5">
         <div className="w-5 h-5 rounded border-2 border-[#1258F8] ring-2 ring-[#1258F8]/30 bg-white dark:bg-[#111827]" />
@@ -758,7 +758,7 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
   '/components/progress-steps': (
     <div className="flex items-center gap-1">
       {[true, true, true, false, false].map((done, i) => (
-        <div key={i} className={`w-5 h-5 rounded-full flex items-center justify-center text-[8px] font-bold ${done ? 'bg-[#1258F8] text-white' : 'border border-[#D7DAE0] dark:border-[#374151] text-[#9CA3AF]'}`}>
+        <div key={i} className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${done ? 'bg-[#1258F8] text-white' : 'border border-[#D7DAE0] dark:border-[#374151] text-[#9CA3AF]'}`}>
           {done ? '✓' : i + 1}
         </div>
       ))}
@@ -769,7 +769,7 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
       <div className="flex items-center gap-1">
         <div className="h-5 px-2 flex items-center rounded border border-[#1258F8] bg-[#EEF6FF] gap-1">
           <svg className="w-3 h-3 text-[#1258F8]" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M2.628 1.601C5.028 1.206 7.49 1 10 1s4.973.206 7.372.601a.75.75 0 01.628.74v2.288a2.25 2.25 0 01-.659 1.59l-4.682 4.683a2.25 2.25 0 00-.659 1.59v3.037c0 .684-.31 1.33-.844 1.757l-1.937 1.55A.75.75 0 018 18.25v-5.757a2.25 2.25 0 00-.659-1.591L2.659 6.22A2.25 2.25 0 012 4.629V2.34a.75.75 0 01.628-.74z" clipRule="evenodd" /></svg>
-          <span className="text-[9px] font-semibold text-[#1258F8]">Filter</span>
+          <span className="text-[10px] font-semibold text-[#1258F8]">Filter</span>
         </div>
         <Tag label="Energy" system="default" style="filled" size="small" showCount={false} showRemove={false} />
         <Tag label="Score 20-80" system="default" style="filled" size="small" showCount={false} showRemove={false} />
@@ -882,7 +882,7 @@ const RELATED_PREVIEWS: Record<string, React.ReactNode> = {
       <div className="min-h-[28px] flex flex-wrap items-center gap-1 px-1.5 py-1 rounded border border-[#D7DAE0] dark:border-[#374151] bg-white dark:bg-[#111827]">
         <Tag label="NABERS" system="default" style="filled" size="small" showCount={false} showRemove={false} />
         <Tag label="GRESB" system="default" style="filled" size="small" showCount={false} showRemove={false} />
-        <span className="text-[9px] text-[#9CA3AF]">+ add</span>
+        <span className="text-[10px] text-[#9CA3AF]">+ add</span>
       </div>
     </div>
   ),

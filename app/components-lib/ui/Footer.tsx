@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="px-8 pt-8 pb-4 flex items-end justify-between">
         <span
           className="font-bold text-[#111827] dark:text-white leading-none select-none"
-          style={{ fontSize: '64px', letterSpacing: '-1px' }}
+          style={{ fontSize: '20px', letterSpacing: '-1px' }}
         >
           Aurora
         </span>

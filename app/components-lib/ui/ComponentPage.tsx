@@ -99,13 +99,13 @@ function TableOfContents() {
                     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
                   }}
                   className={[
-                    'flex items-center gap-2.5 py-1.5 pl-3 border-l-2 text-[13px] transition-colors',
+                    'flex items-center gap-2.5 py-1.5 pl-3 border-l-2 text-[14px] transition-colors',
                     active
                       ? 'border-[#111827] dark:border-white text-[#111827] dark:text-white font-medium'
                       : 'border-transparent text-[#505867] dark:text-[#6B7280] hover:text-[#111827] dark:hover:text-white',
                   ].join(' ')}
                 >
-                  <span className="font-mono text-[11px] text-[#C4C9D4] dark:text-[#3F4654] w-3 shrink-0">
+                  <span className="font-mono text-[10px] text-[#C4C9D4] dark:text-[#3F4654] w-3 shrink-0">
                     {num}
                   </span>
                   <span className="truncate">{label}</span>
@@ -143,10 +143,10 @@ export function TitleBlock({
 
   return (
     <div className="mb-12">
-      <h1 className="text-[40px] font-semibold text-[#111827] dark:text-white leading-[1.1] tracking-[-0.02em] mb-3">
+      <h1 className="text-[20px] font-semibold text-[#111827] dark:text-white leading-[1.1] tracking-[-0.02em] mb-3">
         {title}
       </h1>
-      <p className="text-[18px] text-[#505867] dark:text-[#9CA3AF] leading-[1.5] max-w-[640px]">
+      <p className="text-[16px] text-[#505867] dark:text-[#9CA3AF] leading-[1.5] max-w-[640px]">
         {description}
       </p>
       {covers && (
@@ -210,11 +210,11 @@ export function SectionWrapper({
       <span className="font-mono text-[12px] text-[#C4C9D4] dark:text-[#3F4654] tracking-[0.04em] mb-2 block">
         {num} / {total}
       </span>
-      <h2 className="text-[26px] font-semibold text-[#111827] dark:text-white tracking-[-0.015em] mb-2">
+      <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white tracking-[-0.015em] mb-2">
         {title}
       </h2>
       {description && (
-        <p className="text-[15px] text-[#505867] dark:text-[#9CA3AF] mb-6">
+        <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-6">
           {description}
         </p>
       )}
@@ -274,13 +274,13 @@ export function DecisionTree({
       <table className="w-full text-[14px] border-collapse">
         <thead>
           <tr className="bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
-            <th className="text-left px-4 py-2.5 text-[11px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]" style={{ width: '50%' }}>
+            <th className="text-left px-4 py-2.5 text-[10px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]" style={{ width: '50%' }}>
               If the user wants to...
             </th>
-            <th className="text-left px-4 py-2.5 text-[11px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]">
+            <th className="text-left px-4 py-2.5 text-[10px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]">
               Use
             </th>
-            <th className="text-left px-4 py-2.5 text-[11px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]">
+            <th className="text-left px-4 py-2.5 text-[10px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]">
               Not
             </th>
           </tr>
@@ -353,7 +353,7 @@ export function ForbiddenRefuse({
             <span className="absolute left-0 top-2 text-[#dc2626] font-bold">&#10005;</span>
             <div>
               <span className="text-[#111827] dark:text-[#D1D5DB]">{item.rule}</span>
-              <p className="mt-1.5 text-[13px] italic text-[#505867] dark:text-[#9CA3AF]">
+              <p className="mt-1.5 text-[14px] italic text-[#505867] dark:text-[#9CA3AF]">
                 {item.response}
               </p>
             </div>
@@ -405,8 +405,8 @@ export function AnatomyBlock({
       </div>
       <div className="flex flex-col gap-1">
         {annotations.map(({ num, label, description }) => (
-          <div key={num} className="grid grid-cols-[24px_140px_1fr] gap-3 py-1.5 text-[13px]">
-            <span className="font-mono text-[11px] text-[#C4C9D4] dark:text-[#3F4654] bg-[#F7F8F8] dark:bg-[#1F2430] rounded text-center leading-[18px] h-[18px]">
+          <div key={num} className="grid grid-cols-[24px_140px_1fr] gap-3 py-1.5 text-[14px]">
+            <span className="font-mono text-[10px] text-[#C4C9D4] dark:text-[#3F4654] bg-[#F7F8F8] dark:bg-[#1F2430] rounded text-center leading-[18px] h-[18px]">
               {num}
             </span>
             <span className="font-mono text-[12px] text-[#111827] dark:text-white">{label}</span>
@@ -446,7 +446,7 @@ export function CanonicalExample({
           {copied ? 'Copied' : 'Copy'}
         </button>
       </div>
-      <pre className="bg-white dark:bg-[#111827] border border-[#EDEEF1] dark:border-[#1F2430] rounded-b-lg p-5 overflow-x-auto font-mono text-[13px] leading-[1.6] text-[#111827] dark:text-[#D1D5DB]">
+      <pre className="bg-white dark:bg-[#111827] border border-[#EDEEF1] dark:border-[#1F2430] rounded-b-lg p-5 overflow-x-auto font-mono text-[14px] leading-[1.6] text-[#111827] dark:text-[#D1D5DB]">
         {code}
       </pre>
     </div>
@@ -468,7 +468,7 @@ export function RelatedGrid({
           href={href}
           className="block rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] p-4 hover:border-[#D7DAE0] dark:hover:border-[#374151] transition-colors"
         >
-          <p className="font-mono text-[13px] font-medium text-[#111827] dark:text-white">{name}</p>
+          <p className="font-mono text-[14px] font-medium text-[#111827] dark:text-white">{name}</p>
           <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] mt-0.5">{description}</p>
         </a>
       ))}
@@ -482,7 +482,7 @@ export function RelatedGrid({
 export function TodoSection({ label }: { label?: string }) {
   return (
     <div className="rounded-lg border border-dashed border-[#D7DAE0] dark:border-[#374151] bg-[#F7F8F8] dark:bg-[#0D1117] py-8 px-6 text-center">
-      <p className="text-[13px] text-[#C4C9D4] dark:text-[#3F4654]">
+      <p className="text-[14px] text-[#C4C9D4] dark:text-[#3F4654]">
         {label ?? 'Content coming in a follow-up PR.'}
       </p>
     </div>
@@ -493,7 +493,7 @@ export function TodoSection({ label }: { label?: string }) {
 
 export function Code({ children }: { children: React.ReactNode }) {
   return (
-    <code className="font-mono text-[13px] bg-[#F7F8F8] dark:bg-[#1F2430] text-[#111827] dark:text-white px-1.5 py-0.5 rounded">
+    <code className="font-mono text-[14px] bg-[#F7F8F8] dark:bg-[#1F2430] text-[#111827] dark:text-white px-1.5 py-0.5 rounded">
       {children}
     </code>
   )
@@ -503,7 +503,7 @@ export function Code({ children }: { children: React.ReactNode }) {
 
 export function PageFooter({ lastUpdated, version }: { lastUpdated?: string; version?: string }) {
   return (
-    <div className="mt-24 pt-6 border-t border-[#EDEEF1] dark:border-[#1F2430] flex items-center justify-between text-[13px] text-[#505867] dark:text-[#9CA3AF]">
+    <div className="mt-24 pt-6 border-t border-[#EDEEF1] dark:border-[#1F2430] flex items-center justify-between text-[14px] text-[#505867] dark:text-[#9CA3AF]">
       <div className="flex items-center gap-3">
         <a href="#" className="hover:text-[#111827] dark:hover:text-white underline transition-colors">Edit this page on GitHub</a>
         <span className="text-[#D7DAE0] dark:text-[#374151]">|</span>

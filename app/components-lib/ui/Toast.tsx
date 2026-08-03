@@ -114,9 +114,9 @@ export default function Toast({
       <Icon className={`w-5 h-5 shrink-0 mt-px ${iconClass}`} aria-hidden="true" />
 
       <div className="flex-1 min-w-0">
-        <p className={`text-[13px] font-semibold leading-snug ${labelClass}`}>{label}</p>
+        <p className={`text-[14px] font-semibold leading-snug ${labelClass}`}>{label}</p>
         {description && (
-          <p className={`text-[13px] leading-snug mt-0.5 ${descClass}`}>{description}</p>
+          <p className={`text-[14px] leading-snug mt-0.5 ${descClass}`}>{description}</p>
         )}
       </div>
 

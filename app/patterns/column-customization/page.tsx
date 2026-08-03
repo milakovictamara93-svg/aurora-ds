@@ -119,7 +119,7 @@ function ColumnSection({
         <p className="text-[14px] font-semibold text-[#111827] dark:text-white">{title}</p>
         <button
           onClick={onClear}
-          className="text-[13px] font-medium text-[#1258F8] hover:text-[#1146E4] transition-colors"
+          className="text-[14px] font-medium text-[#1258F8] hover:text-[#1146E4] transition-colors"
         >
           Clear
         </button>
@@ -194,7 +194,7 @@ function ColumnPanelContent({
         </div>
         <button
           onClick={allSelected ? deselectAll : selectAll}
-          className="text-[13px] font-medium text-[#1258F8] hover:text-[#1146E4] transition-colors whitespace-nowrap"
+          className="text-[14px] font-medium text-[#1258F8] hover:text-[#1146E4] transition-colors whitespace-nowrap"
         >
           {allSelected ? 'Deselect all' : 'Select all'}
         </button>
@@ -225,7 +225,7 @@ function ColumnPanelContent({
         ))}
 
         {visibleGroups.length === 0 && (
-          <p className="py-8 text-center text-[13px] text-[#C4C9D4] dark:text-[#3F4654]">No columns match &quot;{search}&quot;</p>
+          <p className="py-8 text-center text-[14px] text-[#C4C9D4] dark:text-[#3F4654]">No columns match &quot;{search}&quot;</p>
         )}
       </div>
     </div>
@@ -270,7 +270,7 @@ function ColumnCustomizerDemo() {
         <div className="p-4 bg-white dark:bg-[#0D1117]">
           {/* Toolbar row */}
           <div className="flex items-center justify-between mb-4">
-            <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">
+            <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">
               {selectedCount} of {TOTAL_COLS} columns visible
               {isCustomised && (
                 <span className="ml-1 text-[#1258F8]">({hiddenCount} hidden)</span>
@@ -279,7 +279,7 @@ function ColumnCustomizerDemo() {
             <button
               onClick={openDrawer}
               className={[
-                'inline-flex items-center gap-1.5 px-3 h-8 rounded-md text-[13px] font-medium border transition-colors',
+                'inline-flex items-center gap-1.5 px-3 h-8 rounded-md text-[14px] font-medium border transition-colors',
                 isCustomised
                   ? 'bg-[#EEF6FF] dark:bg-[#1258F8]/15 border-[#1258F8] text-[#1258F8]'
                   : 'bg-white dark:bg-[#111827] border-[#D7DAE0] dark:border-[#1F2430] text-[#505867] dark:text-[#9CA3AF] hover:border-[#1258F8] hover:text-[#1258F8]',
@@ -354,8 +354,8 @@ function ColumnCustomizerDemo() {
 function SpecRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-start gap-4 px-4 py-3 border-b border-[#EDEEF1] dark:border-[#1F2430] last:border-b-0">
-      <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF] w-44 shrink-0">{label}</span>
-      <span className="text-[13px] text-[#111827] dark:text-white">{value}</span>
+      <span className="text-[14px] text-[#505867] dark:text-[#9CA3AF] w-44 shrink-0">{label}</span>
+      <span className="text-[14px] text-[#111827] dark:text-white">{value}</span>
     </div>
   )
 }
@@ -363,8 +363,8 @@ function SpecRow({ label, value }: { label: string; value: string }) {
 function RuleCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] p-4 bg-white dark:bg-[#0D1117]">
-      <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-2">{title}</p>
-      <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{children}</p>
+      <p className="text-[14px] font-semibold text-[#111827] dark:text-white mb-2">{title}</p>
+      <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{children}</p>
     </div>
   )
 }

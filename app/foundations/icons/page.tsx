@@ -129,7 +129,7 @@ function IconTile({ name, Icon }: { name: string; Icon: React.ComponentType<{ cl
       className="group flex flex-col items-center gap-2 p-3 rounded-lg border border-token bg-token-primary hover:border-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/20 transition-colors text-center"
     >
       <Icon className="w-6 h-6 text-token-secondary group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
-      <span className="text-[11px] text-token-muted group-hover:text-blue-600 dark:group-hover:text-blue-400 leading-tight transition-colors">
+      <span className="text-[10px] text-token-muted group-hover:text-blue-600 dark:group-hover:text-blue-400 leading-tight transition-colors">
         {copied ? 'Copied!' : name}
       </span>
     </button>
@@ -159,16 +159,16 @@ export default function IconsPage() {
         {/* Size variants */}
         <div className="divide-y divide-token rounded-xl border border-token overflow-hidden bg-token-primary mb-8">
           <div className="px-6 py-3 bg-token-secondary">
-            <p className="text-[11px] uppercase tracking-widest font-semibold text-token-muted">Size variants</p>
+            <p className="text-[10px] uppercase tracking-widest font-semibold text-token-muted">Size variants</p>
           </div>
           <div className="p-6 flex flex-wrap items-end gap-10">
             {SIZES.map(({ px, label, usage, token }) => (
               <div key={px} className="flex flex-col items-center gap-3">
                 <CheckCircleIcon style={{ width: px, height: px }} className="text-blue-600 dark:text-blue-400" />
                 <div className="text-center">
-                  <p className="text-[13px] font-semibold text-token-primary">{label}</p>
-                  <code className="text-[11px] font-mono text-token-muted">{token}</code>
-                  <p className="text-[11px] text-token-muted mt-1 max-w-[96px] leading-tight">{usage}</p>
+                  <p className="text-[14px] font-semibold text-token-primary">{label}</p>
+                  <code className="text-[10px] font-mono text-token-muted">{token}</code>
+                  <p className="text-[10px] text-token-muted mt-1 max-w-[96px] leading-tight">{usage}</p>
                 </div>
               </div>
             ))}
@@ -176,13 +176,13 @@ export default function IconsPage() {
               <div className="flex items-center gap-3">
                 <CheckCircleSolid className="w-6 h-6 text-blue-600" />
                 <div>
-                  <p className="text-[13px] font-semibold text-token-primary">Solid — active / selected state only</p>
+                  <p className="text-[14px] font-semibold text-token-primary">Solid — active / selected state only</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <CheckCircleIcon className="w-6 h-6 text-token-secondary" />
                 <div>
-                  <p className="text-[13px] font-semibold text-token-primary">Outline — default for all other states</p>
+                  <p className="text-[14px] font-semibold text-token-primary">Outline — default for all other states</p>
                 </div>
               </div>
             </div>
@@ -193,7 +193,7 @@ export default function IconsPage() {
         <div className="space-y-6">
           {HERO_GROUPS.map(({ title, icons }) => (
             <div key={title}>
-              <p className="text-[11px] uppercase tracking-widest font-semibold text-token-muted mb-3">{title}</p>
+              <p className="text-[10px] uppercase tracking-widest font-semibold text-token-muted mb-3">{title}</p>
               <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-2">
                 {icons.map(({ name, Icon }) => (
                   <IconTile key={name} name={name} Icon={Icon} />
@@ -216,11 +216,11 @@ export default function IconsPage() {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
           {CUSTOM_ICONS.map(({ name, file }) => (
             <div key={file} className="flex items-center gap-3 rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#111827] px-3 py-2.5">
-              <span className="w-8 h-8 rounded-md bg-[#F7F8F8] dark:bg-[#1F2430] flex items-center justify-center shrink-0 text-[11px] font-bold text-[#505867] dark:text-[#9CA3AF]">
+              <span className="w-8 h-8 rounded-md bg-[#F7F8F8] dark:bg-[#1F2430] flex items-center justify-center shrink-0 text-[10px] font-bold text-[#505867] dark:text-[#9CA3AF]">
                 {name.charAt(0).toUpperCase()}
               </span>
               <div>
-                <p className="text-[13px] font-medium text-[#111827] dark:text-white leading-tight">{name}</p>
+                <p className="text-[14px] font-medium text-[#111827] dark:text-white leading-tight">{name}</p>
                 <p className="text-[10px] text-[#505867] dark:text-[#9CA3AF]">4 sizes: 16 / 20 / 24o / 24s</p>
               </div>
             </div>

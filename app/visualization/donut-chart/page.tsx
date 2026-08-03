@@ -132,7 +132,7 @@ function CircularChart({
         const displayColor = active ? active.color : '#111827'
         return (
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-            <span className="text-[24px] font-semibold" style={{ color: displayColor, transition: 'color 200ms ease' }}>{displayValue}</span>
+            <span className="text-[20px] font-semibold" style={{ color: displayColor, transition: 'color 200ms ease' }}>{displayValue}</span>
             <span className="text-[12px] text-[#9CA3AF]" style={{ transition: 'opacity 200ms ease' }}>{displayLabel}</span>
           </div>
         )
@@ -179,7 +179,7 @@ export default function DonutChartPage() {
             Ring chart with center value. Hover fades other segments. Click pulls the selected segment out. Sharp and rounded corner variants.
           </p>
 
-          <p className="text-[13px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-2">Aspects — sharp</p>
+          <p className="text-[14px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-2">Aspects — sharp</p>
           <div className="grid grid-cols-3 gap-4 mb-4">
             <ChartCard label="Default" suffix="">
               <div className="flex justify-center py-2">
@@ -198,7 +198,7 @@ export default function DonutChartPage() {
             </ChartCard>
           </div>
 
-          <p className="text-[13px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-2">Aspects — rounded</p>
+          <p className="text-[14px] font-semibold text-[#505867] dark:text-[#9CA3AF] mb-2">Aspects — rounded</p>
           <div className="grid grid-cols-3 gap-4">
             <ChartCard label="Default" suffix="rounded">
               <div className="flex justify-center py-2">

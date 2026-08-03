@@ -43,17 +43,17 @@ export default function PopperPage() {
       <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants" description="Popper is a positioning utility, not a visual component. It computes placement coordinates and applies them to a floating element.">
         <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-white dark:bg-[#0D1117] overflow-hidden">
           <div className="grid grid-cols-[120px_1fr] divide-y divide-[#EDEEF1] dark:divide-[#1F2430]">
-            <div className="px-4 py-3 bg-[#F7F8F8] dark:bg-[#0D1117] text-[11px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]">Placement</div>
-            <div className="px-4 py-3 bg-[#F7F8F8] dark:bg-[#0D1117] text-[11px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]">Behaviour</div>
-            <div className="px-4 py-3 text-[13px] font-mono text-[#111827] dark:text-white">top / bottom</div>
+            <div className="px-4 py-3 bg-[#F7F8F8] dark:bg-[#0D1117] text-[10px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]">Placement</div>
+            <div className="px-4 py-3 bg-[#F7F8F8] dark:bg-[#0D1117] text-[10px] font-semibold text-[#505867] dark:text-[#6B7280] uppercase tracking-[0.06em]">Behaviour</div>
+            <div className="px-4 py-3 text-[14px] font-mono text-[#111827] dark:text-white">top / bottom</div>
             <div className="px-4 py-3 text-[14px] text-[#505867] dark:text-[#9CA3AF]">Primary vertical placements. Flips to opposite if no room.</div>
-            <div className="px-4 py-3 text-[13px] font-mono text-[#111827] dark:text-white">left / right</div>
+            <div className="px-4 py-3 text-[14px] font-mono text-[#111827] dark:text-white">left / right</div>
             <div className="px-4 py-3 text-[14px] text-[#505867] dark:text-[#9CA3AF]">Horizontal placements. Used for side panels and horizontal menus.</div>
-            <div className="px-4 py-3 text-[13px] font-mono text-[#111827] dark:text-white">*-start / *-end</div>
+            <div className="px-4 py-3 text-[14px] font-mono text-[#111827] dark:text-white">*-start / *-end</div>
             <div className="px-4 py-3 text-[14px] text-[#505867] dark:text-[#9CA3AF]">Alignment modifiers. Anchor to start or end edge of the trigger.</div>
-            <div className="px-4 py-3 text-[13px] font-mono text-[#111827] dark:text-white">flip</div>
+            <div className="px-4 py-3 text-[14px] font-mono text-[#111827] dark:text-white">flip</div>
             <div className="px-4 py-3 text-[14px] text-[#505867] dark:text-[#9CA3AF]">Auto-switches to opposite side when hitting viewport edge.</div>
-            <div className="px-4 py-3 text-[13px] font-mono text-[#111827] dark:text-white">shift</div>
+            <div className="px-4 py-3 text-[14px] font-mono text-[#111827] dark:text-white">shift</div>
             <div className="px-4 py-3 text-[14px] text-[#505867] dark:text-[#9CA3AF]">Slides along the axis to stay within viewport bounds.</div>
           </div>
         </div>

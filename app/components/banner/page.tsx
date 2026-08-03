@@ -86,7 +86,7 @@ export default function BannerPage() {
         <div className="space-y-8">
           {/* System banners */}
           <div>
-            <h3 className="text-[15px] font-semibold text-[#111827] dark:text-white mb-3">System banners</h3>
+            <h3 className="text-[14px] font-semibold text-[#111827] dark:text-white mb-3">System banners</h3>
             <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-4">
               Single-line, fixed-height (40px). For brief, scannable status messages.
             </p>
@@ -138,7 +138,7 @@ export default function BannerPage() {
 
           {/* Regular banners */}
           <div>
-            <h3 className="text-[15px] font-semibold text-[#111827] dark:text-white mb-3">Regular banners</h3>
+            <h3 className="text-[14px] font-semibold text-[#111827] dark:text-white mb-3">Regular banners</h3>
             <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-4">
               Multi-line with label and optional description. For messages that need more context.
             </p>
@@ -198,7 +198,7 @@ export default function BannerPage() {
           {Object.keys(dismissed).length > 0 && (
             <button
               onClick={resetAll}
-              className="text-[13px] text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white underline underline-offset-2 transition-colors"
+              className="text-[14px] text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white underline underline-offset-2 transition-colors"
             >
               Reset dismissed banners
             </button>
@@ -300,34 +300,34 @@ export default function BannerPage() {
                 {/* 1 - Icon */}
                 <div className="relative">
                   <div className="w-5 h-5 rounded bg-blue-200 dark:bg-blue-800 flex items-center justify-center text-[10px] font-mono text-blue-700 dark:text-blue-300">i</div>
-                  <span className="absolute -top-3 -left-2 w-4 h-4 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[9px] font-mono flex items-center justify-center font-bold">1</span>
+                  <span className="absolute -top-3 -left-2 w-4 h-4 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-mono flex items-center justify-center font-bold">1</span>
                 </div>
                 {/* 2 + 3 - Label and description */}
                 <div className="flex-1 min-w-0">
                   <div className="relative">
-                    <div className="text-[13px] font-semibold text-blue-900 dark:text-blue-100">Banner label text</div>
-                    <span className="absolute -top-3 -left-2 w-4 h-4 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[9px] font-mono flex items-center justify-center font-bold">2</span>
+                    <div className="text-[14px] font-semibold text-blue-900 dark:text-blue-100">Banner label text</div>
+                    <span className="absolute -top-3 -left-2 w-4 h-4 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-mono flex items-center justify-center font-bold">2</span>
                   </div>
                   <div className="relative mt-0.5">
-                    <div className="text-[13px] text-blue-700 dark:text-blue-300">Optional description with more context about the message.</div>
-                    <span className="absolute -top-3 -left-2 w-4 h-4 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[9px] font-mono flex items-center justify-center font-bold">3</span>
+                    <div className="text-[14px] text-blue-700 dark:text-blue-300">Optional description with more context about the message.</div>
+                    <span className="absolute -top-3 -left-2 w-4 h-4 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-mono flex items-center justify-center font-bold">3</span>
                   </div>
                 </div>
                 {/* 4 - Action */}
                 <div className="relative shrink-0">
-                  <span className="text-[13px] font-medium underline underline-offset-2 text-blue-700 dark:text-blue-300">Action</span>
-                  <span className="absolute -top-3 -left-2 w-4 h-4 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[9px] font-mono flex items-center justify-center font-bold">4</span>
+                  <span className="text-[14px] font-medium underline underline-offset-2 text-blue-700 dark:text-blue-300">Action</span>
+                  <span className="absolute -top-3 -left-2 w-4 h-4 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-mono flex items-center justify-center font-bold">4</span>
                 </div>
                 {/* 5 - Dismiss */}
                 <div className="relative shrink-0">
                   <div className="w-4 h-4 text-blue-700 dark:text-blue-300 flex items-center justify-center text-[14px] font-bold">&times;</div>
-                  <span className="absolute -top-3 -left-2 w-4 h-4 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[9px] font-mono flex items-center justify-center font-bold">5</span>
+                  <span className="absolute -top-3 -left-2 w-4 h-4 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-mono flex items-center justify-center font-bold">5</span>
                 </div>
               </div>
               {/* Container callout */}
               <div className="relative mt-2 border border-dashed border-[#D7DAE0] dark:border-[#374151] rounded px-3 py-1.5 text-center">
-                <span className="text-[11px] text-[#505867] dark:text-[#9CA3AF] font-mono">full-width container with variant background + border</span>
-                <span className="absolute -top-3 left-2 w-4 h-4 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[9px] font-mono flex items-center justify-center font-bold">6</span>
+                <span className="text-[10px] text-[#505867] dark:text-[#9CA3AF] font-mono">full-width container with variant background + border</span>
+                <span className="absolute -top-3 left-2 w-4 h-4 rounded-full bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-[10px] font-mono flex items-center justify-center font-bold">6</span>
               </div>
             </div>
           }

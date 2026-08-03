@@ -87,12 +87,19 @@ Components to build:
 ## Design Rules (strictly follow these)
 
 **Typography**
-- Font: Inter only
-- H1: 20px, H2: 16px, H3: 14px — all at 140% line-height
-- Body: 16px minimum (Paragraph Large), 145% line-height, 1.5% letter-spacing
-- Paragraph scale: Large (16px), Medium (14px), Small (12px), XSmall (11px)
+- Font: Inter only (Geist Mono for data/numbers in indicators)
+- Allowed sizes: 10, 12, 14, 16, 20px ONLY. No other sizes permitted.
+- Heading scale (140% line-height, 0 letter-spacing, SemiBold 600):
+  H1: 20px, H2: 16px, H3: 14px
+- Paragraph scale (145% line-height, 1.5% letter-spacing):
+  Large: 14px, Medium: 14px, Small: 12px, XSmall: 10px
+  Weights: Regular (400), Medium (500), Bold (700)
+- Caption scale (120% line-height):
+  Large: 14px, Small: 12px, XSmall: 10px
 - NO all caps, NO italics, NO underlines for emphasis — bold only
 - Sentence case everywhere in UI
+- Navigation and titles use Title casing
+- Titles use "&" instead of "and"
 
 **Spacing**
 - Base unit: 4px — all spacing must be multiples of 4

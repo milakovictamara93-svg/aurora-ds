@@ -93,11 +93,11 @@ function TextSectionBlock({ section }: { section: TextSection }) {
           {section.title}
         </p>
       )}
-      <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45]">
+      <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45]">
         {section.description}
       </p>
       {section.badge && (
-        <span className="mt-2 inline-block text-[11px] font-medium text-[#1258F8] dark:text-[#1258F8] bg-[#D9EAFF] dark:bg-[#1258F8]/20 px-2 py-0.5 rounded-full">
+        <span className="mt-2 inline-block text-[12px] font-medium text-[#1258F8] dark:text-[#1258F8] bg-[#D9EAFF] dark:bg-[#1258F8]/20 px-2 py-0.5 rounded-full">
           {section.badge}
         </span>
       )}
@@ -122,20 +122,20 @@ function DetailsSectionBlock({ section }: { section: DetailsSection }) {
           <div key={i} className="border-l-2 border-[#1258F8] pl-2">
             {/* Group header */}
             <div className="flex items-center justify-between py-0.5">
-              <span className="text-[13px] font-semibold text-[#111827] dark:text-white">
+              <span className="text-[14px] font-semibold text-[#111827] dark:text-white">
                 {group.label}
               </span>
-              <span className="text-[13px] font-semibold text-[#111827] dark:text-white">
+              <span className="text-[14px] font-semibold text-[#111827] dark:text-white">
                 {group.value}
               </span>
             </div>
             {/* Sub-rows */}
             {group.rows.map((row, j) => (
               <div key={j} className="flex items-center justify-between pl-1 py-0.5">
-                <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">
+                <span className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">
                   {row.label}
                 </span>
-                <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF]">
+                <span className="text-[14px] text-[#505867] dark:text-[#9CA3AF]">
                   {row.value}
                 </span>
               </div>
@@ -262,7 +262,7 @@ export default function AdvancedTooltip({
                   {secondaryAction && (
                     <button
                       onClick={secondaryAction.onClick}
-                      className="h-8 px-4 rounded border border-[#D7DAE0] dark:border-[#374151] text-[13px] font-medium text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors whitespace-nowrap"
+                      className="h-8 px-4 rounded border border-[#D7DAE0] dark:border-[#374151] text-[14px] font-medium text-[#505867] dark:text-[#9CA3AF] hover:bg-[#F7F8F8] dark:hover:bg-white/5 transition-colors whitespace-nowrap"
                     >
                       {secondaryAction.label}
                     </button>
@@ -270,7 +270,7 @@ export default function AdvancedTooltip({
                   {primaryAction && (
                     <button
                       onClick={primaryAction.onClick}
-                      className="ml-auto h-8 px-4 rounded bg-[#1258F8] text-[13px] font-medium text-white hover:bg-[#0F44D0] transition-colors whitespace-nowrap"
+                      className="ml-auto h-8 px-4 rounded bg-[#1258F8] text-[14px] font-medium text-white hover:bg-[#0F44D0] transition-colors whitespace-nowrap"
                     >
                       {primaryAction.label}
                     </button>
@@ -280,7 +280,7 @@ export default function AdvancedTooltip({
               {expandable && !primaryAction && !secondaryAction && (
                 <button
                   onClick={() => setExpanded(prev => !prev)}
-                  className="ml-auto text-[13px] font-medium text-[#1258F8] dark:text-[#1258F8] hover:underline"
+                  className="ml-auto text-[14px] font-medium text-[#1258F8] dark:text-[#1258F8] hover:underline"
                 >
                   {expanded ? 'Show less' : 'Show more'}
                 </button>

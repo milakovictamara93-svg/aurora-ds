@@ -232,7 +232,7 @@ export function DataCompletion({ percentage, count, label, alerts, className }: 
     <div className={clsx('inline-flex flex-col gap-1', className)}>
       {/* Tag pill */}
       <span className={clsx('inline-flex items-center gap-1 h-5 px-2 rounded-full self-start', tagBg, tagText)}>
-        <span className="text-[11px] font-medium">{percentage}%</span>
+        <span className="text-[12px] font-medium">{percentage}%</span>
         {count != null && (
           <span className={clsx(
             'inline-flex items-center justify-center h-4 min-w-[18px] px-1 rounded-full',

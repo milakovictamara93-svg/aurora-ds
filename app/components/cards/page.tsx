@@ -198,7 +198,7 @@ function DrilldownDemo() {
           <span className="text-[14px] font-semibold text-[#111827] dark:text-white">Energy use intensity</span>
           <span className="text-[12px] text-[#505867] dark:text-[#9CA3AF]">kWh/m2/yr</span>
         </div>
-        <div className="flex items-center gap-3 text-[11px] text-[#505867] dark:text-[#9CA3AF]">
+        <div className="flex items-center gap-3 text-[10px] text-[#505867] dark:text-[#9CA3AF]">
           <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-sm bg-[#1258F8]" />Energy use intensity</div>
           <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-sm bg-[#9CA3AF]" />Missing</div>
         </div>
@@ -264,7 +264,7 @@ function DrilldownDemo() {
       </div>
 
       <div className="px-4 pb-3">
-        <p className="text-[11px] text-[#9CA3AF] dark:text-[#505867]">
+        <p className="text-[10px] text-[#9CA3AF] dark:text-[#505867]">
           {selectedId ? 'Click the same bar again or x to deselect.' : 'Click any bar to reveal that asset\'s card.'}
         </p>
       </div>
@@ -323,7 +323,7 @@ export default function CardPage() {
         {/* Simple card */}
         <div className="mb-8">
           <h4 className="text-[14px] font-semibold text-[#111827] dark:text-white mb-3">Simple card</h4>
-          <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mb-4 leading-[1.45]">
+          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-4 leading-[1.45]">
             Icon + title + optional subtitle. No header label or footer. Use for navigation tiles, feature highlights, or quick-action shortcuts.
           </p>
           <PreviewBox label="Vertical (default)">
@@ -341,7 +341,7 @@ export default function CardPage() {
         {/* Standard card */}
         <div className="mb-8">
           <h4 className="text-[14px] font-semibold text-[#111827] dark:text-white mb-3">Standard card</h4>
-          <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mb-4 leading-[1.45]">
+          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-4 leading-[1.45]">
             Header (label + optional suffix + menu) + arbitrary content slot + optional footer button. Use for dashboard widgets, KPI tiles, and metric panels.
           </p>
           <PreviewBox label="With chart content + footer button">
@@ -357,7 +357,7 @@ export default function CardPage() {
         {/* Form card */}
         <div className="mb-8">
           <h4 className="text-[14px] font-semibold text-[#111827] dark:text-white mb-3">Form card</h4>
-          <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mb-4 leading-[1.45]">
+          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-4 leading-[1.45]">
             Header + radio tab selector + divider + content slot + footer button. Use for forms that switch between two or more modes/variants.
           </p>
           <PreviewBox label="Two-tab form">
@@ -375,7 +375,7 @@ export default function CardPage() {
         {/* Data viz card */}
         <div className="mb-8">
           <h4 className="text-[14px] font-semibold text-[#111827] dark:text-white mb-3">Data viz card</h4>
-          <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mb-4 leading-[1.45]">
+          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-4 leading-[1.45]">
             Header + underline tab bar (optional) + chart/visualization content slot. Omit tabs for a plain chart card.
           </p>
           <PreviewBox label="With underline tab bar">
@@ -399,7 +399,7 @@ export default function CardPage() {
         {/* Overview card */}
         <div className="mb-8">
           <h4 className="text-[14px] font-semibold text-[#111827] dark:text-white mb-3">Overview card</h4>
-          <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mb-4 leading-[1.45]">
+          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-4 leading-[1.45]">
             Horizontal row: metadata header + expandable key-value data row. Use in asset, portfolio, or company list views to show summary data for each entity.
           </p>
           <div className="flex flex-col gap-3">
@@ -452,7 +452,7 @@ export default function CardPage() {
         {/* Asset card */}
         <div className="mb-8">
           <h4 className="text-[14px] font-semibold text-[#111827] dark:text-white mb-3">Asset card</h4>
-          <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mb-4 leading-[1.45]">
+          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-4 leading-[1.45]">
             ESG-specific pattern for showing a single asset's key metrics inline. Name + address header, key-value metric rows, optional data quality section with status tags and Improve actions.
           </p>
           <PreviewBox label="Performance details variant">
@@ -507,7 +507,7 @@ export default function CardPage() {
         {/* Asset card drill-down interaction */}
         <div className="mb-8">
           <h4 className="text-[14px] font-semibold text-[#111827] dark:text-white mb-3">Asset card - drill-down interaction</h4>
-          <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] mb-4 leading-[1.45]">
+          <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] mb-4 leading-[1.45]">
             Place the AssetCard panel to the left of the chart when a bar or data point is clicked. The chart reflows to fill the remaining space.
           </p>
           <DrilldownDemo />
@@ -520,7 +520,7 @@ export default function CardPage() {
               <div key={step} className="flex gap-3 p-4 rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-[#F7F8F8] dark:bg-[#0D1117]">
                 <span className="w-5 h-5 rounded-full bg-[#1258F8] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">{step}</span>
                 <div>
-                  <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-0.5">{title}</p>
+                  <p className="text-[14px] font-semibold text-[#111827] dark:text-white mb-0.5">{title}</p>
                   <p className="text-[12px] text-[#505867] dark:text-[#9CA3AF] leading-[1.45]">{body}</p>
                 </div>
               </div>

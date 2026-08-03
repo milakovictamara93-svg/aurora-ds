@@ -42,12 +42,12 @@ export default function PdfViewerPage() {
       <SectionWrapper id="variants" num="03" total={TOTAL} title="Variants" description="Full-width embedded viewer with toolbar. Typically rendered inside a Modal or Drawer for focused document review.">
         <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] overflow-hidden">
           <div className="flex items-center justify-between px-4 py-2 bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-[#EDEEF1] dark:border-[#1F2430]">
-            <div className="flex items-center gap-3 text-[13px] text-[#505867] dark:text-[#9CA3AF]">
+            <div className="flex items-center gap-3 text-[14px] text-[#505867] dark:text-[#9CA3AF]">
               <button className="hover:text-[#111827] dark:hover:text-white">&#8249;</button>
               <span>Page 1 of 12</span>
               <button className="hover:text-[#111827] dark:hover:text-white">&#8250;</button>
             </div>
-            <div className="flex items-center gap-3 text-[13px] text-[#505867] dark:text-[#9CA3AF]">
+            <div className="flex items-center gap-3 text-[14px] text-[#505867] dark:text-[#9CA3AF]">
               <button className="hover:text-[#111827] dark:hover:text-white">&#8722;</button>
               <span>100%</span>
               <button className="hover:text-[#111827] dark:hover:text-white">+</button>

@@ -405,7 +405,7 @@ export default function InputDate({
               {/* Day headers */}
               <div className="grid grid-cols-7 mb-1">
                 {DAY_HEADERS.map(d => (
-                  <div key={d} className="h-8 flex items-center justify-center text-[11px] font-medium text-grey-950 dark:text-white select-none">
+                  <div key={d} className="h-8 flex items-center justify-center text-[12px] font-medium text-grey-950 dark:text-white select-none">
                     {d}
                   </div>
                 ))}

@@ -110,12 +110,12 @@ export default function Banner({
       {/* Content */}
       <div className="flex-1 min-w-0">
         {isSystem ? (
-          <span className={`text-[13px] font-medium leading-none ${cfg.labelColor}`}>{label}</span>
+          <span className={`text-[14px] font-medium leading-none ${cfg.labelColor}`}>{label}</span>
         ) : (
           <>
-            <p className={`text-[13px] font-semibold leading-tight ${cfg.labelColor}`}>{label}</p>
+            <p className={`text-[14px] font-semibold leading-tight ${cfg.labelColor}`}>{label}</p>
             {description && (
-              <p className={`text-[13px] leading-tight mt-0.5 ${cfg.descColor}`}>{description}</p>
+              <p className={`text-[14px] leading-tight mt-0.5 ${cfg.descColor}`}>{description}</p>
             )}
           </>
         )}
@@ -126,7 +126,7 @@ export default function Banner({
         {action && (
           <button
             onClick={action.onClick}
-            className={`text-[13px] font-medium underline underline-offset-2 transition-colors ${cfg.actionColor}`}
+            className={`text-[14px] font-medium underline underline-offset-2 transition-colors ${cfg.actionColor}`}
           >
             {action.label}
           </button>

@@ -554,7 +554,7 @@ export function DonutChart({
       </svg>
       {(centerValue || centerLabel) && (
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          {centerValue && <span className="text-[24px] font-semibold text-[#111827] dark:text-white">{centerValue}</span>}
+          {centerValue && <span className="text-[20px] font-semibold text-[#111827] dark:text-white">{centerValue}</span>}
           {centerLabel && <span className="text-[12px] text-[#9CA3AF]">{centerLabel}</span>}
         </div>
       )}
@@ -592,7 +592,7 @@ export function ChartEmptyState({ message = 'No assets added', action = 'Add ass
           </div>
         )}
         <p className="text-[14px] font-medium text-[#111827] dark:text-white">{message}</p>
-        <button className="h-8 px-4 rounded-lg bg-[#1258F8] text-[13px] font-medium text-white hover:bg-[#1146E4] transition-colors">{action}</button>
+        <button className="h-8 px-4 rounded-lg bg-[#1258F8] text-[14px] font-medium text-white hover:bg-[#1146E4] transition-colors">{action}</button>
       </div>
     </div>
   )

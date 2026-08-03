@@ -41,7 +41,7 @@ function FilterSection({
         <p className="text-[14px] font-semibold text-[#111827] dark:text-white">{title}</p>
         <button
           onClick={onClear}
-          className="text-[13px] font-medium text-[#1258F8] hover:text-[#1146E4] transition-colors"
+          className="text-[14px] font-medium text-[#1258F8] hover:text-[#1146E4] transition-colors"
         >
           Clear
         </button>
@@ -158,7 +158,7 @@ function FilterPanelContent({
           area:     '',
         }))}
       >
-        <div className="inline-flex rounded-md border border-[#D7DAE0] dark:border-[#1F2430] overflow-hidden mb-3 text-[13px]">
+        <div className="inline-flex rounded-md border border-[#D7DAE0] dark:border-[#1F2430] overflow-hidden mb-3 text-[14px]">
           {(['time', 'both', 'area'] as const).map(m => (
             <button
               key={m}
@@ -307,7 +307,7 @@ function FilterPanelContent({
       <div className="pt-4">
         <button
           onClick={() => setDraft(DEFAULT_STATE)}
-          className="text-[13px] font-medium text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white transition-colors"
+          className="text-[14px] font-medium text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white transition-colors"
         >
           Reset all filters
         </button>
@@ -383,7 +383,7 @@ function FilterBarDemo() {
           <button
             onClick={openDrawer}
             className={[
-              'inline-flex items-center gap-1.5 px-3 h-8 rounded-md text-[13px] font-medium border transition-colors',
+              'inline-flex items-center gap-1.5 px-3 h-8 rounded-md text-[14px] font-medium border transition-colors',
               isActive
                 ? 'bg-[#EEF6FF] dark:bg-[#1258F8]/15 border-[#1258F8] text-[#1258F8]'
                 : 'bg-white dark:bg-[#111827] border-[#D7DAE0] dark:border-[#1F2430] text-[#505867] dark:text-[#9CA3AF] hover:border-[#1258F8] hover:text-[#1258F8]',
@@ -411,7 +411,7 @@ function FilterBarDemo() {
           {chips.length > 0 && (
             <button
               onClick={() => setApplied(DEFAULT_STATE)}
-              className="text-[13px] font-medium text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white transition-colors ml-1"
+              className="text-[14px] font-medium text-[#505867] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white transition-colors ml-1"
             >
               Clear all
             </button>
@@ -441,8 +441,8 @@ function FilterBarDemo() {
 function SpecRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-start gap-4 px-4 py-3 border-b border-[#EDEEF1] dark:border-[#1F2430] last:border-b-0">
-      <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF] w-44 shrink-0">{label}</span>
-      <span className="text-[13px] text-[#111827] dark:text-white">{value}</span>
+      <span className="text-[14px] text-[#505867] dark:text-[#9CA3AF] w-44 shrink-0">{label}</span>
+      <span className="text-[14px] text-[#111827] dark:text-white">{value}</span>
     </div>
   )
 }
@@ -450,8 +450,8 @@ function SpecRow({ label, value }: { label: string; value: string }) {
 function RuleCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] p-4 bg-white dark:bg-[#0D1117]">
-      <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-2">{title}</p>
-      <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{children}</p>
+      <p className="text-[14px] font-semibold text-[#111827] dark:text-white mb-2">{title}</p>
+      <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{children}</p>
     </div>
   )
 }

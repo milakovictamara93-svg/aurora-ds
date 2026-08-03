@@ -29,14 +29,14 @@ export default function PageHeader({ title, description, badge }: PageHeaderProp
       <div className="relative flex flex-col gap-2">
         <h1
           className="font-bold text-white leading-[1.4]"
-          style={{ fontSize: '40px' }}
+          style={{ fontSize: '20px' }}
         >
           {title}
         </h1>
         {description && (
           <p
             className="text-[#EDEEF1] leading-[1.45]"
-            style={{ fontSize: '18px', letterSpacing: '0.27px' }}
+            style={{ fontSize: '16px', letterSpacing: '0.27px' }}
           >
             {description}
           </p>

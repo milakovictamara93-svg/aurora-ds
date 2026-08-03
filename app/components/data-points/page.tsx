@@ -37,7 +37,7 @@ function DemoTable({ children }: { children: React.ReactNode }) {
 function Preview({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="text-[13px] font-medium text-grey-600 dark:text-grey-400 mb-3">{label}</p>
+      <p className="text-[14px] font-medium text-grey-600 dark:text-grey-400 mb-3">{label}</p>
       <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] bg-[#F7F8F8] dark:bg-[#111827] p-6">
         {children}
       </div>
@@ -51,7 +51,7 @@ function ArrowGrid({ items }: { items: { state: string; label: string; type: 'in
       {items.map(({ state, label, type }) => (
         <div key={state} className="flex flex-col items-center gap-1.5">
           <DataArrow type={type} state={state as Parameters<typeof DataArrow>[0]['state']} size="md" />
-          <span className="text-[11px] text-grey-500 dark:text-grey-400 capitalize">{label}</span>
+          <span className="text-[10px] text-grey-500 dark:text-grey-400 capitalize">{label}</span>
         </div>
       ))}
     </div>
@@ -130,7 +130,7 @@ export default function DataPointsPage() {
               {(['sm', 'md'] as const).map(sz => (
                 <div key={sz} className="flex flex-col items-center gap-1.5">
                   <DataArrow type="indicator" state="high" size={sz} />
-                  <span className="text-[11px] text-grey-500">{sz}</span>
+                  <span className="text-[10px] text-grey-500">{sz}</span>
                 </div>
               ))}
             </div>
@@ -174,15 +174,15 @@ export default function DataPointsPage() {
         <Preview label="Completion variants">
           <div className="flex flex-wrap gap-8">
             <div className="flex flex-col gap-1">
-              <span className="text-[11px] text-grey-400 mb-1">50 % + count + alerts</span>
+              <span className="text-[10px] text-grey-400 mb-1">50 % + count + alerts</span>
               <DataCompletion percentage={50} count={12} label="GRESB submission" alerts={3} />
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-[11px] text-grey-400 mb-1">78 % -- no alerts prop</span>
+              <span className="text-[10px] text-grey-400 mb-1">78 % -- no alerts prop</span>
               <DataCompletion percentage={78} label="Energy data" />
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-[11px] text-grey-400 mb-1">100 % complete</span>
+              <span className="text-[10px] text-grey-400 mb-1">100 % complete</span>
               <DataCompletion percentage={100} label="Waste data" alerts={0} />
             </div>
           </div>
@@ -194,15 +194,15 @@ export default function DataPointsPage() {
         <Preview label="Progress variants">
           <div className="flex flex-wrap gap-8">
             <div className="flex flex-col gap-1">
-              <span className="text-[11px] text-grey-400 mb-1">In progress + alert</span>
+              <span className="text-[10px] text-grey-400 mb-1">In progress + alert</span>
               <DataProgress current={2} total={8} label="Steps complete" alerts={1} />
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-[11px] text-grey-400 mb-1">In progress</span>
+              <span className="text-[10px] text-grey-400 mb-1">In progress</span>
               <DataProgress current={5} total={8} label="Steps complete" alerts={0} />
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-[11px] text-grey-400 mb-1">Complete</span>
+              <span className="text-[10px] text-grey-400 mb-1">Complete</span>
               <DataProgress current={8} total={8} label="Steps complete" alerts={0} />
             </div>
           </div>
@@ -213,7 +213,7 @@ export default function DataPointsPage() {
       <SectionWrapper id="api" num="08" total={TOTAL} title="API">
         <div className="flex flex-col gap-8">
           <div>
-            <p className="text-[13px] font-medium text-grey-600 dark:text-grey-400 mb-3">DataArrow</p>
+            <p className="text-[14px] font-medium text-grey-600 dark:text-grey-400 mb-3">DataArrow</p>
             <SpecTable rows={[
               { property: 'type',      value: "'consumption' | 'indicator'",      token: 'Required' },
               { property: 'state',     value: "'very-low' | 'low' | 'medium' | 'high' | 'very-high' | 'n-a' | 'positive-high' | 'positive-low' | 'negative-high' | 'negative-low'", token: 'Required' },
@@ -222,7 +222,7 @@ export default function DataPointsPage() {
             ]} />
           </div>
           <div>
-            <p className="text-[13px] font-medium text-grey-600 dark:text-grey-400 mb-3">DataTrend</p>
+            <p className="text-[14px] font-medium text-grey-600 dark:text-grey-400 mb-3">DataTrend</p>
             <SpecTable rows={[
               { property: 'state',   value: "'positive' | 'negative'",         token: 'Required' },
               { property: 'value',   value: "string (e.g. '+12.4%')",          token: 'Required' },
@@ -231,7 +231,7 @@ export default function DataPointsPage() {
             ]} />
           </div>
           <div>
-            <p className="text-[13px] font-medium text-grey-600 dark:text-grey-400 mb-3">DataConsumption</p>
+            <p className="text-[14px] font-medium text-grey-600 dark:text-grey-400 mb-3">DataConsumption</p>
             <SpecTable rows={[
               { property: 'state',   value: "'positive-high' | 'positive-low' | 'negative-high' | 'negative-low'", token: 'Required' },
               { property: 'value',   value: 'string (metric value with unit)',  token: 'Required' },
@@ -239,7 +239,7 @@ export default function DataPointsPage() {
             ]} />
           </div>
           <div>
-            <p className="text-[13px] font-medium text-grey-600 dark:text-grey-400 mb-3">DataCompletion</p>
+            <p className="text-[14px] font-medium text-grey-600 dark:text-grey-400 mb-3">DataCompletion</p>
             <SpecTable rows={[
               { property: 'percentage', value: 'number',  token: 'Required (0-100+)' },
               { property: 'count',      value: 'number',  token: 'Optional badge inside pill' },
@@ -248,7 +248,7 @@ export default function DataPointsPage() {
             ]} />
           </div>
           <div>
-            <p className="text-[13px] font-medium text-grey-600 dark:text-grey-400 mb-3">DataProgress</p>
+            <p className="text-[14px] font-medium text-grey-600 dark:text-grey-400 mb-3">DataProgress</p>
             <SpecTable rows={[
               { property: 'current', value: 'number', token: 'Required' },
               { property: 'total',   value: 'number', token: 'Required' },

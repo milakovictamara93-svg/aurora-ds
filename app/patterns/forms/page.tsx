@@ -77,7 +77,7 @@ function Field({
 function SectionLabel({ title, children }: { title: string; children?: React.ReactNode }) {
   return (
     <div className="mb-4">
-      <p className="text-[13px] font-bold text-[#111827] dark:text-white uppercase tracking-wide">{title}</p>
+      <p className="text-[14px] font-bold text-[#111827] dark:text-white uppercase tracking-wide">{title}</p>
       {children && <p className="text-[12px] text-[#9CA3AF] mt-0.5">{children}</p>}
     </div>
   )
@@ -103,8 +103,8 @@ function PreviewBox({ label, children }: { label: string; children: React.ReactN
 function SpecRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-start gap-4 px-4 py-3 border-b border-[#EDEEF1] dark:border-[#1F2430] last:border-b-0">
-      <span className="text-[13px] text-[#505867] dark:text-[#9CA3AF] w-44 shrink-0">{label}</span>
-      <span className="text-[13px] text-[#111827] dark:text-white">{value}</span>
+      <span className="text-[14px] text-[#505867] dark:text-[#9CA3AF] w-44 shrink-0">{label}</span>
+      <span className="text-[14px] text-[#111827] dark:text-white">{value}</span>
     </div>
   )
 }
@@ -114,8 +114,8 @@ function SpecRow({ label, value }: { label: string; value: string }) {
 function RuleCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="rounded-lg border border-[#EDEEF1] dark:border-[#1F2430] p-4 bg-white dark:bg-[#0D1117]">
-      <p className="text-[13px] font-semibold text-[#111827] dark:text-white mb-2">{title}</p>
-      <p className="text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{children}</p>
+      <p className="text-[14px] font-semibold text-[#111827] dark:text-white mb-2">{title}</p>
+      <p className="text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">{children}</p>
     </div>
   )
 }
@@ -140,7 +140,7 @@ function InlineFormDemo() {
         <CheckCircleIcon className="w-10 h-10 text-[#22C55E]" />
         <p className="text-[14px] font-semibold text-[#111827] dark:text-white">Submitted successfully</p>
         <button onClick={() => { setSubmitted(false); setName(''); setEmail('') }}
-          className="text-[13px] text-[#1258F8] hover:text-[#1146E4] font-medium">
+          className="text-[14px] text-[#1258F8] hover:text-[#1146E4] font-medium">
           Reset
         </button>
       </div>
@@ -171,14 +171,14 @@ function InlineFormDemo() {
       <div className="flex justify-end gap-2 pt-2 border-t border-[#EDEEF1] dark:border-[#1F2430]">
         <button
           type="button"
-          className="px-4 py-2 rounded-md text-[13px] font-medium border border-[#D7DAE0] dark:border-[#1F2430] text-[#505867] dark:text-[#9CA3AF] hover:border-[#9CA3AF] bg-white dark:bg-[#111827] transition-colors"
+          className="px-4 py-2 rounded-md text-[14px] font-medium border border-[#D7DAE0] dark:border-[#1F2430] text-[#505867] dark:text-[#9CA3AF] hover:border-[#9CA3AF] bg-white dark:bg-[#111827] transition-colors"
         >
           Cancel
         </button>
         <button
           type="button"
           onClick={handleSubmit}
-          className="px-4 py-2 rounded-md text-[13px] font-medium bg-[#1258F8] text-white hover:bg-[#1146E4] transition-colors"
+          className="px-4 py-2 rounded-md text-[14px] font-medium bg-[#1258F8] text-white hover:bg-[#1146E4] transition-colors"
         >
           Save changes
         </button>
@@ -232,10 +232,10 @@ function SectionGroupDemo() {
       </div>
 
       <div className="flex justify-end gap-2 pt-2 border-t border-[#EDEEF1] dark:border-[#1F2430]">
-        <button className="px-4 py-2 rounded-md text-[13px] font-medium border border-[#D7DAE0] dark:border-[#1F2430] text-[#505867] dark:text-[#9CA3AF] hover:border-[#9CA3AF] bg-white dark:bg-[#111827] transition-colors">
+        <button className="px-4 py-2 rounded-md text-[14px] font-medium border border-[#D7DAE0] dark:border-[#1F2430] text-[#505867] dark:text-[#9CA3AF] hover:border-[#9CA3AF] bg-white dark:bg-[#111827] transition-colors">
           Cancel
         </button>
-        <button className="px-4 py-2 rounded-md text-[13px] font-medium bg-[#1258F8] text-white hover:bg-[#1146E4] transition-colors">
+        <button className="px-4 py-2 rounded-md text-[14px] font-medium bg-[#1258F8] text-white hover:bg-[#1146E4] transition-colors">
           Save
         </button>
       </div>

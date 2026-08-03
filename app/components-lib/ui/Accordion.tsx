@@ -69,7 +69,7 @@ function AccordionPanel({
         )}
 
         {/* Label */}
-        <span className="flex-1 text-[13px] font-medium text-[#111827] dark:text-white truncate">
+        <span className="flex-1 text-[14px] font-medium text-[#111827] dark:text-white truncate">
           {item.label}
         </span>
       </button>
@@ -85,7 +85,7 @@ function AccordionPanel({
         )}
       >
         {/* ml-5 = chevron(14px) + gap(6px) ≈ 20px, aligns content with label */}
-        <div className="ml-5 pt-1 pb-2 text-[13px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">
+        <div className="ml-5 pt-1 pb-2 text-[14px] text-[#505867] dark:text-[#9CA3AF] leading-relaxed">
           {item.content}
         </div>
       </div>
