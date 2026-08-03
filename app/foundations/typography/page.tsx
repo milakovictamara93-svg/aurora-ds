@@ -161,8 +161,8 @@ export default function TypographyPage() {
     <div>
       <TitleBlock
         title="Typography"
-        description="Inter is the sole typeface across all Aurora interfaces. All sizes, weights, and spacing values below are the single source of truth — pulled directly from Figma."
-       
+        description="Aurora provides four categories of typography utilities: headings, paragraphs, captions, and data. All typography classes inherit text-primary by default."
+
       />
 
       {/* ── Headings ─────────────────────────────────────────────────────── */}
@@ -171,7 +171,7 @@ export default function TypographyPage() {
           <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white leading-[1.4]">Headings</h2>
           <p className="text-sm text-token-secondary mt-1">
             Three heading levels — each available in Regular, Medium, SemiBold, and Bold.
-            Letter spacing is always 0% for headings.
+            Letter spacing is always 0% for headings. All headings inherit <code className="text-[12px] font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">text-primary</code> by default.
           </p>
         </div>
 
@@ -207,6 +207,10 @@ export default function TypographyPage() {
             </div>
           ))}
         </div>
+
+        <pre className="mt-4 bg-[#0D1117] text-[#E2E8F0] text-[12px] font-mono rounded-lg p-4 overflow-x-auto leading-relaxed whitespace-pre">{`<h1 class="text-[20px] font-semibold leading-[140%]">Page title</h1>
+<h2 class="text-[16px] font-semibold leading-[140%]">Section title</h2>
+<h3 class="text-[14px] font-semibold leading-[140%]">Subsection</h3>`}</pre>
       </section>
 
       {/* ── Paragraphs ───────────────────────────────────────────────────── */}
@@ -250,6 +254,11 @@ export default function TypographyPage() {
             </div>
           ))}
         </div>
+
+        <pre className="mt-4 bg-[#0D1117] text-[#E2E8F0] text-[12px] font-mono rounded-lg p-4 overflow-x-auto leading-relaxed whitespace-pre">{`<p class="text-[14px] leading-[145%] tracking-[0.015em]">Body text (Large/Medium)</p>
+<p class="text-[14px] font-medium leading-[145%] tracking-[0.015em]">Medium weight label</p>
+<p class="text-[12px] leading-[145%] tracking-[0.015em]">Small helper text</p>
+<p class="text-[10px] leading-[145%] tracking-[0.015em]">XSmall annotation</p>`}</pre>
       </section>
 
       {/* ── Captions ──────────────────────────────────────────────────────── */}
@@ -286,6 +295,9 @@ export default function TypographyPage() {
             </div>
           ))}
         </div>
+
+        <pre className="mt-4 bg-[#0D1117] text-[#E2E8F0] text-[12px] font-mono rounded-lg p-4 overflow-x-auto leading-relaxed whitespace-pre">{`<span class="text-[12px] leading-[120%] uppercase font-medium">Last updated</span>
+<span class="text-[10px] leading-[120%] uppercase font-medium">Section label</span>`}</pre>
       </section>
 
       {/* ── Data ───────────────────────────────────────────────────────────── */}
@@ -322,6 +334,10 @@ export default function TypographyPage() {
             </div>
           ))}
         </div>
+
+        <pre className="mt-4 bg-[#0D1117] text-[#E2E8F0] text-[12px] font-mono rounded-lg p-4 overflow-x-auto leading-relaxed whitespace-pre">{`<span class="text-[14px] font-data font-medium">1,240.56</span>
+<td class="font-data">2,810 MWh</td>
+<span class="text-[10px] font-data font-medium">##</span>`}</pre>
 
         {/* Data usage rules */}
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -375,6 +391,40 @@ export default function TypographyPage() {
               </li>
             </ul>
           </div>
+        </div>
+      </section>
+
+      {/* ── Font families ─────────────────────────────────────────────────── */}
+      <section className="mt-10">
+        <div className="mb-2">
+          <h2 className="text-[20px] font-semibold text-[#111827] dark:text-white leading-[1.4]">Font families</h2>
+          <p className="text-sm text-token-secondary mt-1">
+            The typography utilities bake in the right font family. You usually only need to add <code className="text-[12px] font-mono bg-[#F7F8F8] dark:bg-[#1F2430] px-1 py-0.5 rounded">font-data</code> for numeric values.
+          </p>
+        </div>
+
+        <div className="rounded-xl border border-token overflow-hidden bg-token-primary">
+          <table className="w-full text-[14px]">
+            <thead>
+              <tr className="bg-[#F7F8F8] dark:bg-[#0D1117] border-b border-token">
+                <th className="text-left px-4 py-3 text-[14px] font-medium text-token-secondary">Family</th>
+                <th className="text-left px-4 py-3 text-[14px] font-medium text-token-secondary">CSS class</th>
+                <th className="text-left px-4 py-3 text-[14px] font-medium text-token-secondary">Usage</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-token">
+              <tr>
+                <td className="px-4 py-3 font-medium text-token-primary">Inter</td>
+                <td className="px-4 py-3 font-mono text-[12px] text-token-secondary">font-sans (default)</td>
+                <td className="px-4 py-3 text-token-secondary">Headings, paragraphs, captions, buttons, navigation, labels</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-data font-medium text-token-primary">Geist Mono</td>
+                <td className="px-4 py-3 font-mono text-[12px] text-token-secondary">font-data</td>
+                <td className="px-4 py-3 text-token-secondary">Numeric values: table cells, KPIs, data points, indicators, chart values</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
